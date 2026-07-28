@@ -279,6 +279,52 @@ ul.lista li::before { content: "▸ "; color: var(--teal); font-weight: 800; }
 
 input[type="range"] { accent-color: var(--teal); width: min(60vw, 420px); height: 2.2em; }
 
+/* ---------- fotos estilo polaroid ---------- */
+
+figure.figura {
+  background: var(--blanco);
+  border: 3px solid var(--teal-suave);
+  border-radius: 14px;
+  padding: .55em .55em .35em;
+  box-shadow: 0 10px 24px rgba(20, 54, 66, .18);
+  transform: rotate(-1.5deg);
+  max-width: min(80vw, 22em);
+}
+figure.figura:nth-of-type(even) { transform: rotate(1.5deg); }
+figure.figura img {
+  display: block;
+  width: 100%;
+  max-height: 42vh;
+  object-fit: cover;
+  border-radius: 8px;
+}
+figure.figura figcaption {
+  font-size: .78rem;
+  font-weight: 700;
+  color: var(--gris);
+  padding-top: .4em;
+}
+figure.figura figcaption .credito {
+  display: block;
+  font-size: .82em;
+  font-weight: 400;
+  opacity: .75;
+}
+.fila-cuento {
+  display: flex;
+  gap: 1.6em;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.fila-cuento .texto {
+  max-width: 20em;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: .7em;
+}
+
 /* ---------- "¿Saber más?" : popups que no cortan el flujo ---------- */
 
 .sm {

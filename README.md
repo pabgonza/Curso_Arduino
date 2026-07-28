@@ -9,8 +9,13 @@ proyectos sencillos y progresivos. 10 sesiones presenciales de ~90 minutos.
 docs/        Brief, decisiones de diseño e investigación
 slides/      Presentaciones HTML interactivas (una por sesión)
 sketches/    Código Arduino de cada lección y proyecto
-recursos/    Diagramas, imágenes, material imprimible
+recursos/    Imágenes, diagramas, material imprimible
 ```
+
+Las imágenes de las slides viven en `recursos/img/` (descargadas de Wikimedia
+Commons con licencias libres; ver `recursos/img/CREDITOS.md`). Así las
+presentaciones funcionan sin internet. Para agregar más, usar
+`recursos/bajar_imagenes.ps1` editando la lista de temas.
 
 ## Presentaciones
 
