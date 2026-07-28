@@ -176,19 +176,58 @@
       <button class="boton secundario" id="tuto-reset">↺ Empezar de nuevo</button>
     </aside>
   </div>
+  <p class="nota">En el IDE de verdad se ve así: el botón de subir <button class="sm" data-sm="f-subir">📷</button> y el mensaje de éxito <button class="sm" data-sm="f-exito">📷</button></p>
 </section>
 
-<!-- 8 · Ahora en la placa de verdad -->
+<!-- 8 · El programa, línea por línea -->
 <section class="slide">
-  <p class="eyebrow">Paso 6 · ¡Ahora de verdad!</p>
-  <h2>Tu turno con la placa 🎯</h2>
-  <p class="grande">Los mismos clics que acabas de hacer, pero en el IDE real.</p>
-  <div style="display:flex; flex-direction:column; gap:.6em; width:min(92vw,640px)">
-    <div class="check" tabindex="0"><span class="caja"></span><span class="txt"><strong>Archivo → Ejemplos → 01.Basics → Blink</strong></span></div>
-    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Apretar el botón <strong>→ Subir</strong> <button class="sm" data-sm="f-subir">📷</button></span></div>
-    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Esperar el mensaje <strong>«Done uploading»</strong> <button class="sm" data-sm="f-exito">📷</button></span></div>
-    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">¡Mirar la placa! El LED <strong>«L»</strong> está parpadeando 🎉</span></div>
-    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Cambiar un <strong>delay</strong> por otro número y volver a subir: ¿qué pasó?</span></div>
+  <p class="eyebrow">Paso 6 · ¿Qué dice tu programa?</p>
+  <h2>Leámoslo línea por línea 🔎</h2>
+  <div class="tuto">
+    <div class="sim-ide">
+      <div class="sim-titulo"><span class="sim-punto"></span>Blink | Arduino IDE 2</div>
+      <div class="sim-barra">
+        <span class="sim-btn apagado">✓</span><span class="sim-btn apagado">→</span>
+        <span class="sim-sel">Arduino UNO en COM3 ▾</span>
+      </div>
+      <div class="sim-editor lineas">
+        <div class="ln"><span class="n">1</span><code class="cm">// Blink: prende y apaga el LED de la placa</code></div>
+        <div class="ln" data-paso="0"><span class="n">2</span><code><span class="kw">void</span> <span class="fn">setup</span>() {</code></div>
+        <div class="ln" data-paso="1"><span class="n">3</span><code>  <span class="fn">pinMode</span>(<span class="kw">LED_BUILTIN</span>, <span class="kw">OUTPUT</span>);</code></div>
+        <div class="ln"><span class="n">4</span><code>}</code></div>
+        <div class="ln"><span class="n">5</span><code> </code></div>
+        <div class="ln" data-paso="2"><span class="n">6</span><code><span class="kw">void</span> <span class="fn">loop</span>() {</code></div>
+        <div class="ln" data-paso="3"><span class="n">7</span><code>  <span class="fn">digitalWrite</span>(<span class="kw">LED_BUILTIN</span>, <span class="kw">HIGH</span>);</code></div>
+        <div class="ln" data-paso="4"><span class="n">8</span><code>  <span class="fn">delay</span>(<span class="num" id="ln-d1">1000</span>);</code></div>
+        <div class="ln" data-paso="5"><span class="n">9</span><code>  <span class="fn">digitalWrite</span>(<span class="kw">LED_BUILTIN</span>, <span class="kw">LOW</span>);</code></div>
+        <div class="ln" data-paso="6"><span class="n">10</span><code>  <span class="fn">delay</span>(<span class="num" id="ln-d2">1000</span>);</code></div>
+        <div class="ln" data-paso="7"><span class="n">11</span><code>}</code></div>
+      </div>
+    </div>
+
+    <aside class="tuto-panel">
+      <p class="tuto-num" id="ln-num">Línea 2</p>
+      <p class="tuto-texto" id="ln-txt"></p>
+      <div class="tuto-placa">
+        <span class="mini-placa grande">
+          <span class="mini-led" id="ln-led"></span>
+          <span class="mini-etiq">L</span>
+        </span>
+        <span class="nota" id="ln-estado">LED apagado</span>
+      </div>
+      <div id="ln-reto" hidden>
+        <p class="nota" style="margin-bottom:.4em">⭐ ¿Y si cambias la espera?</p>
+        <div class="fila" style="gap:.4em">
+          <button class="boton" data-ms="1000">1000</button>
+          <button class="boton" data-ms="200">200</button>
+          <button class="boton" data-ms="60">60</button>
+        </div>
+      </div>
+      <div class="fila" style="gap:.5em">
+        <button class="boton" id="ln-sig">Siguiente ▶</button>
+        <button class="boton secundario" id="ln-reset">↺</button>
+      </div>
+    </aside>
   </div>
 </section>
 
@@ -520,6 +559,17 @@
   .mini-led { width: .85em; height: .85em; border-radius: 3px; background: #8a6a20; display: inline-block; transition: background .06s, box-shadow .06s; }
   .mini-led.on { background: var(--ambar); box-shadow: 0 0 .55em .18em rgba(255,182,39,.85); }
   .mini-etiq { color: #fff; font-family: var(--f-codigo); font-size: .7em; }
+  .mini-placa.grande { font-size: 1.5em; }
+
+  /* ---------- lectura del código línea por línea ---------- */
+  .sim-editor.lineas { height: auto; }   /* el código completo siempre visible */
+  .lineas { font-family: var(--f-codigo); font-size: .92em; line-height: 1.6; padding: .5em 0; }
+  #ln-reto .boton { font-size: .85rem; padding: .3em .8em; }
+  .ln { display: flex; gap: .9em; padding: 0 .9em; border-left: 4px solid transparent; white-space: pre; }
+  .ln .n { color: #b9c7cb; width: 1.4em; text-align: right; flex: none; }
+  .ln.aqui { background: #FFF6E3; border-left-color: var(--ambar); }
+  .ln.aqui .n { color: #B37D00; font-weight: 700; }
+  .ln.aqui code { font-weight: 700; }
 </style>
 
 <script src="assets/slides.js"></script>
@@ -687,6 +737,85 @@
     });
 
     $("sim-consola").innerHTML = CONSOLA_VACIA;
+    pintar();
+  })();
+
+  /* ---- lectura del Blink línea por línea ---- */
+  (function () {
+    const $ = id => document.getElementById(id);
+    const lineas = [...document.querySelectorAll(".ln[data-paso]")];
+    const led = $("ln-led"), estado = $("ln-estado"), reto = $("ln-reto");
+
+    const PASOS = [
+      { ln: 2,  txt: "Todo lo que va dentro de <strong>setup</strong> se hace <strong>una sola vez</strong>, apenas la placa se enciende. Es la preparación." },
+      { ln: 3,  txt: "Le avisamos al cerebrito que el pin del LED va a ser una <strong>salida</strong>: por ahí mandará electricidad hacia afuera." },
+      { ln: 6,  txt: "Lo que va dentro de <strong>loop</strong> se repite <strong>para siempre</strong>, hasta que desenchufes la placa." },
+      { ln: 7,  txt: "<strong>HIGH</strong> = ¡electricidad! El LED se <strong>prende</strong>. 💡", led: true },
+      { ln: 8,  txt: "<strong>delay(1000)</strong>: esperar 1000 milésimas de segundo, o sea <strong>1 segundo</strong>. Durante toda la espera el LED sigue prendido. ⏳", led: true },
+      { ln: 9,  txt: "<strong>LOW</strong> = sin electricidad. El LED se <strong>apaga</strong>. 🌑", led: false },
+      { ln: 10, txt: "Otro segundo de espera… pero ahora con el LED apagado. ⏳", led: false },
+      { ln: 11, txt: "🔁 Se terminó el <strong>loop</strong>… ¡y vuelve solito a la línea 7! Por eso el LED parpadea sin parar. Aprieta «Siguiente» y lo ves." }
+    ];
+
+    let i = 0, libre = null;
+
+    const prender = on => {
+      led.classList.toggle("on", on);
+      estado.textContent = on ? "LED prendido 💡" : "LED apagado";
+    };
+
+    function marcar(n) {
+      lineas.forEach(l => l.classList.toggle("aqui", +l.dataset.paso === n));
+    }
+
+    function pintar() {
+      const p = PASOS[i];
+      marcar(i);
+      $("ln-num").textContent = "Línea " + p.ln;
+      $("ln-txt").innerHTML = p.txt;
+      if (p.led !== undefined) prender(p.led);
+      if (i === PASOS.length - 1) reto.hidden = false;
+    }
+
+    function parar() { clearTimeout(libre); libre = null; }
+
+    function correr(ms) {
+      parar();
+      $("ln-d1").textContent = ms;
+      $("ln-d2").textContent = ms;
+      $("ln-num").textContent = "¡Corriendo solo!";
+      $("ln-txt").innerHTML = ms === 1000
+        ? "Un segundo prendido, un segundo apagado: el parpadeo tranquilo del principio."
+        : "<strong>delay(" + ms + ")</strong>: ahora espera solo " + ms + " milésimas de segundo. ¡Mucho más rápido! ⚡";
+      const ciclo = [[3, 150, true], [4, ms, true], [5, 150, false], [6, ms, false]];
+      let k = 0;
+      (function paso() {
+        const [n, t, on] = ciclo[k];
+        marcar(n);
+        prender(on);
+        libre = setTimeout(() => { k = (k + 1) % ciclo.length; paso(); }, t);
+      })();
+    }
+
+    $("ln-sig").addEventListener("click", () => {
+      if (libre) { parar(); i = 3; }              // veníamos corriendo solos: seguimos a mano
+      else i = i === PASOS.length - 1 ? 3 : i + 1; // tras la llave final, de vuelta al loop
+      pintar();
+    });
+
+    $("ln-reset").addEventListener("click", () => {
+      parar();
+      $("ln-d1").textContent = 1000;
+      $("ln-d2").textContent = 1000;
+      reto.hidden = true;
+      i = 0;
+      prender(false);
+      pintar();
+    });
+
+    reto.querySelectorAll("[data-ms]").forEach(b =>
+      b.addEventListener("click", () => correr(+b.dataset.ms)));
+
     pintar();
   })();
 
