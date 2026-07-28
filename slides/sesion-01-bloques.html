@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sesión 1 · ¡Hola Arduino! (variante Bloques + Código)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/slides.css">
+</head>
+<body>
+
+<!-- 1 · Portada -->
+<section class="slide portada">
+  <span class="sesion-num">Sesión 1 · Variante Bloques + Código</span>
+  <h1>¡Hola, Arduino! 🚀</h1>
+  <p class="grande">Hoy vas a darle órdenes a un cerebrito electrónico…<br>¡y te va a obedecer!</p>
+  <div class="semaforo-vivo" aria-hidden="true">
+    <span class="led" id="pled-r" style="--c:var(--rojo)"></span>
+    <span class="led" id="pled-a" style="--c:var(--ambar)"></span>
+    <span class="led" id="pled-v" style="--c:var(--verde)"></span>
+  </div>
+</section>
+
+<!-- 2 · Qué es Arduino -->
+<section class="slide">
+  <p class="eyebrow">¿Qué es esto?</p>
+  <h2>Arduino es un cerebrito que sigue instrucciones</h2>
+  <div class="fila">
+    <div class="tarjeta"><h3>🧠 Piensa</h3><p>Ejecuta las instrucciones que tú le escribes, una por una, millones por segundo.</p></div>
+    <div class="tarjeta"><h3>👀 Siente</h3><p>Con <strong>sensores</strong> puede ver distancias, medir temperatura, escuchar…</p></div>
+    <div class="tarjeta"><h3>💪 Actúa</h3><p>Con <strong>actuadores</strong> enciende luces, hace sonidos y mueve motores.</p></div>
+  </div>
+  <p class="nota">Está dentro de lavadoras, ascensores, drones y hasta robots de verdad.</p>
+</section>
+
+<!-- 3 · Conoce la placa (hotspots) -->
+<section class="slide">
+  <p class="eyebrow">Conócela por dentro</p>
+  <h2>Toca los círculos ámbar 👇</h2>
+  <div style="position:relative; width:min(88vw,560px)">
+    <svg viewBox="0 0 560 400" style="width:100%; filter:drop-shadow(0 8px 16px rgba(20,54,66,.2))" aria-label="Dibujo de la placa Arduino UNO">
+      <rect x="30" y="30" width="500" height="340" rx="18" fill="#00878F"/>
+      <rect x="60" y="42" width="300" height="26" rx="4" fill="#0b6e75"/>
+      <g fill="#143642"><rect x="70" y="46" width="280" height="18" rx="3"/></g>
+      <g fill="#fff" font-family="monospace" font-size="13"><text x="76" y="60">13 12 11 10 9 8</text><text x="230" y="60">7 6 5 4 3 2 1 0</text></g>
+      <rect x="180" y="330" width="200" height="26" rx="4" fill="#0b6e75"/>
+      <rect x="188" y="334" width="184" height="18" rx="3" fill="#143642"/>
+      <text x="196" y="348" fill="#fff" font-family="monospace" font-size="13">A0 A1 A2 A3 A4 A5</text>
+      <rect x="8" y="80" width="70" height="56" rx="6" fill="#B0BEC5"/>
+      <rect x="8" y="250" width="52" height="60" rx="8" fill="#263238"/>
+      <circle cx="470" cy="90" r="16" fill="#CFD8DC"/>
+      <rect x="452" y="60" width="36" height="12" rx="3" fill="#ECEFF1"/>
+      <rect x="150" y="150" width="150" height="150" rx="8" fill="#263238"/>
+      <text x="188" y="235" fill="#78909C" font-family="monospace" font-size="16">ATmega</text>
+      <rect x="118" y="96" width="16" height="9" rx="2" fill="#FFB627" id="svg-led13"/>
+      <text x="138" y="105" fill="#fff" font-family="monospace" font-size="12">L</text>
+    </svg>
+    <button class="hot" style="left:12%; top:26%" data-hot="usb">1</button>
+    <button class="hot" style="left:36%; top:12%" data-hot="dig">2</button>
+    <button class="hot" style="left:56%; top:86%" data-hot="ana">3</button>
+    <button class="hot" style="left:24%; top:24%" data-hot="led">4</button>
+    <button class="hot" style="left:84%; top:20%" data-hot="reset">5</button>
+  </div>
+  <p id="hot-info" class="grande" style="min-height:2.4em">💡 Cada parte tiene un superpoder.</p>
+</section>
+
+<!-- 4 · Entrar a Tinkercad -->
+<section class="slide">
+  <p class="eyebrow">Nuestro laboratorio virtual</p>
+  <h2>Entremos a Tinkercad 🧪</h2>
+  <div style="display:flex; flex-direction:column; gap:.6em; width:min(92vw,620px)">
+    <button class="check"><span class="caja"></span>Abrir <strong>&nbsp;tinkercad.com/joinclass&nbsp;</strong></button>
+    <button class="check"><span class="caja"></span>Escribir el <strong>&nbsp;código de la clase&nbsp;</strong> (está en la pizarra)</button>
+    <button class="check"><span class="caja"></span>Entrar con tu <strong>&nbsp;apodo&nbsp;</strong> (sin correo, sin contraseña)</button>
+    <button class="check"><span class="caja"></span>Crear un <strong>&nbsp;Circuito nuevo&nbsp;</strong> y arrastrar un Arduino UNO</button>
+  </div>
+  <p class="nota">En Tinkercad puedes equivocarte mil veces: ¡nada se quema!</p>
+</section>
+
+<!-- 5 · Primer programa con bloques -->
+<section class="slide">
+  <p class="eyebrow">Tu primer programa</p>
+  <h2>Blink con bloques 🧩</h2>
+  <div class="pila-bloques" aria-label="Programa de bloques: encender LED, esperar, apagar, esperar">
+    <div class="bloque b-salida">poner LED integrado en <span class="chip">ALTO</span></div>
+    <div class="bloque b-control">esperar <span class="chip">0.5</span> segundos</div>
+    <div class="bloque b-salida">poner LED integrado en <span class="chip">BAJO</span></div>
+    <div class="bloque b-control">esperar <span class="chip">0.5</span> segundos</div>
+  </div>
+  <p class="grande">Los bloques se leen de arriba hacia abajo…<br>y al terminar, <strong>vuelven a empezar</strong>. 🔁</p>
+</section>
+
+<!-- 6 · Los bloques escriben código -->
+<section class="slide">
+  <p class="eyebrow">El secreto de los bloques</p>
+  <h2>Cada bloque escribe código por ti 🪄</h2>
+  <div style="display:flex; gap:1.5em; align-items:center; flex-wrap:wrap; justify-content:center">
+    <div class="pila-bloques">
+      <div class="bloque b-salida">poner LED integrado en <span class="chip">ALTO</span></div>
+      <div class="bloque b-control">esperar <span class="chip">0.5</span> segundos</div>
+    </div>
+    <div style="font-size:2em">➡️</div>
+    <div class="ide">
+      <div class="ide-barra"><span class="boton-ide">✓</span><span class="boton-ide">→</span><span class="ide-nombre">lo que Tinkercad genera</span></div>
+      <pre><span class="fn">digitalWrite</span>(<span class="num">13</span>, <span class="kw">HIGH</span>);
+<span class="fn">delay</span>(<span class="num">500</span>);</pre>
+    </div>
+  </div>
+  <p class="grande">En Tinkercad, elige la vista <strong>«Bloques + Texto»</strong> para ver los dos a la vez.<br>Muy pronto escribiremos ese código nosotros mismos. 💪</p>
+</section>
+
+<!-- 7 · Patio de juegos -->
+<section class="slide">
+  <p class="eyebrow">Patio de juegos</p>
+  <h2>¿Qué pasa si cambias el número? 🎛️</h2>
+  <div style="display:flex; gap:1.5em; align-items:center; flex-wrap:wrap; justify-content:center">
+    <span class="led-cuerpo"><span class="led led-grande" id="led-juego" style="--c:var(--ambar)"></span></span>
+    <div class="pila-bloques">
+      <div class="bloque b-control">esperar <span class="chip" id="b-seg">0.5</span> segundos</div>
+    </div>
+    <div class="ide">
+      <div class="ide-barra"><span class="ide-nombre">código generado</span></div>
+      <pre><span class="fn">delay</span>(<span class="num-vivo" id="v1">500</span>);</pre>
+    </div>
+  </div>
+  <input type="range" id="slider-delay" min="60" max="1200" step="20" value="500" aria-label="Velocidad del parpadeo">
+  <div class="fila">
+    <button class="boton" data-vel="1000">🐢 Tortuga</button>
+    <button class="boton" data-vel="400">🐇 Conejo</button>
+    <button class="boton secundario" data-vel="80">🐦 ¡Colibrí!</button>
+  </div>
+</section>
+
+<!-- 8 · Ahora en la placa real -->
+<section class="slide">
+  <p class="eyebrow">Del simulador al mundo real</p>
+  <h2>¡Ahora en un Arduino de verdad! 🔌</h2>
+  <div style="display:flex; flex-direction:column; gap:.6em; width:min(92vw,620px)">
+    <button class="check"><span class="caja"></span>Abrir el <strong>&nbsp;Arduino IDE&nbsp;</strong> (ya está instalado)</button>
+    <button class="check"><span class="caja"></span>Conectar el cable USB y ver la lucecita <strong>&nbsp;ON&nbsp;</strong></button>
+    <button class="check"><span class="caja"></span>Elegir placa <strong>&nbsp;Arduino UNO&nbsp;</strong> y su puerto <strong>&nbsp;COM&nbsp;</strong></button>
+    <button class="check"><span class="caja"></span>Abrir <strong>&nbsp;Archivo → Ejemplos → Basics → Blink&nbsp;</strong></button>
+    <button class="check"><span class="caja"></span>Apretar <strong>&nbsp;→ Subir&nbsp;</strong> y ver parpadear el LED «L»</button>
+  </div>
+  <p class="nota">¿Reconoces el código Blink? ¡Es el mismo que generaban tus bloques!</p>
+</section>
+
+<!-- 9 · Reto -->
+<section class="slide">
+  <div class="reto">
+    <p class="eyebrow">⭐ Reto de la sesión</p>
+    <h2>Haz latir un corazón ❤️</h2>
+    <p class="grande">Un corazón no parpadea parejo: hace <strong>tum-tum… pausa… tum-tum… pausa</strong>.</p>
+    <p>Pista: necesitas <strong>varios</strong> bloques de <strong>esperar</strong> con números <strong>distintos</strong>.</p>
+  </div>
+  <p>Así debería verse: <span class="led" id="led-corazon" style="--c:var(--rojo); font-size:2em"></span></p>
+</section>
+
+<!-- 10 · Seguridad -->
+<section class="slide">
+  <p class="eyebrow">Reglas de electricista profesional</p>
+  <h2>Seguridad primero ⚡</h2>
+  <div class="fila">
+    <div class="tarjeta"><h3>🔌 Regla 1</h3><p>Para cambiar cables, primero <strong>desconecta el USB</strong>. Siempre.</p></div>
+    <div class="tarjeta"><h3>👀 Regla 2</h3><p>Antes de conectar, tu compañero <strong>revisa tu circuito</strong> (y tú el suyo).</p></div>
+    <div class="tarjeta"><h3>🖐️ Regla 3</h3><p>¿Algo huele raro o se calienta? <strong>Desconecta y avisa</strong>.</p></div>
+  </div>
+  <p class="nota">Arduino usa 5 voltios: no puede hacerte daño, pero un cable mal puesto sí puede dañar la placa.</p>
+</section>
+
+<!-- 11 · Quiz -->
+<section class="slide">
+  <p class="eyebrow">Duelo de cerebritos</p>
+  <h2>¿Cuánto aprendiste? Toca para voltear</h2>
+  <div class="fila">
+    <div class="quiz" tabindex="0"><div class="quiz-caras">
+      <div class="quiz-cara quiz-frente">¿Qué hace el programa al llegar al último bloque?</div>
+      <div class="quiz-cara quiz-atras">¡Vuelve a empezar! 🔁</div>
+    </div></div>
+    <div class="quiz" tabindex="0"><div class="quiz-caras">
+      <div class="quiz-cara quiz-frente">El bloque «esperar 0.5 segundos» genera el código…</div>
+      <div class="quiz-cara quiz-atras">delay(500) ⏱️</div>
+    </div></div>
+    <div class="quiz" tabindex="0"><div class="quiz-caras">
+      <div class="quiz-cara quiz-frente">En Tinkercad, ¿qué pasa si conectas algo mal?</div>
+      <div class="quiz-cara quiz-atras">¡Nada se quema! Es un simulador 🧪</div>
+    </div></div>
+  </div>
+</section>
+
+<!-- 12 · Cierre -->
+<section class="slide portada">
+  <p class="eyebrow">Lo lograste</p>
+  <h1>¡Ya programas! 🎉</h1>
+  <p class="grande">Hoy: programaste con bloques, descubriste el código que generan,<br>y lo subiste a un Arduino de verdad.</p>
+  <div class="tarjeta" style="max-width:24em">
+    <h3>Próxima sesión 🚦</h3>
+    <p>Armaremos un <strong>semáforo de verdad</strong> con 3 LEDs y una protoboard.</p>
+  </div>
+  <div class="semaforo-vivo" aria-hidden="true">
+    <span class="led on" style="--c:var(--verde)"></span>
+  </div>
+</section>
+
+<style>
+  .hot {
+    position: absolute;
+    width: 2em; height: 2em;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    background: var(--ambar);
+    color: #5C4000;
+    font-family: var(--f-titulo);
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 0 0 4px rgba(255,182,39,.35);
+    animation: pulso 1.6s infinite;
+  }
+  @keyframes pulso { 50% { box-shadow: 0 0 0 10px rgba(255,182,39,0); } }
+  @media (prefers-reduced-motion: reduce) { .hot { animation: none; } }
+
+  /* bloques estilo Tinkercad/Scratch */
+  .pila-bloques {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .bloque {
+    position: relative;
+    font-family: var(--f-cuerpo);
+    font-weight: 900;
+    font-size: clamp(.95rem, 2.6vh, 1.3rem);
+    color: #fff;
+    padding: .5em 1em .5em .9em;
+    border-radius: 10px;
+    margin-bottom: 3px;
+    box-shadow: 0 3px 0 rgba(0,0,0,.22);
+  }
+  /* pestañita de encaje tipo puzzle */
+  .bloque::before {
+    content: "";
+    position: absolute;
+    top: -6px; left: 16px;
+    width: 22px; height: 6px;
+    background: inherit;
+    border-radius: 4px 4px 0 0;
+  }
+  .pila-bloques .bloque:first-child::before { display: none; }
+  .b-salida  { background: #4C97FF; }
+  .b-control { background: #FFAB19; color: #5C4000; }
+  .chip {
+    background: #fff;
+    color: #143642;
+    border-radius: 999px;
+    padding: .05em .55em;
+    font-family: var(--f-codigo);
+    font-weight: 700;
+  }
+</style>
+
+<script src="assets/slides.js"></script>
+<script>
+  const pleds = ["pled-r", "pled-a", "pled-v"].map(id => document.getElementById(id));
+  let pi = 0;
+  setInterval(() => {
+    pleds.forEach((l, i) => l.classList.toggle("on", i === pi));
+    pi = (pi + 1) % 3;
+  }, 700);
+
+  const infoHot = {
+    usb: "🔌 Puerto USB: por aquí llegan las instrucciones… ¡y la energía!",
+    dig: "🕹️ Pines digitales (0-13): las manos del Arduino. Aquí se conectan LEDs, buzzers…",
+    ana: "📈 Pines analógicos (A0-A5): oídos finos para sensores que miden cosas.",
+    led: "💡 LED «L»: una lucecita integrada conectada al pin 13. ¡Hoy la haremos parpadear!",
+    reset: "🔄 Botón RESET: reinicia el programa desde el principio."
+  };
+  document.querySelectorAll(".hot").forEach(b =>
+    b.addEventListener("click", () => {
+      document.getElementById("hot-info").textContent = infoHot[b.dataset.hot];
+      if (b.dataset.hot === "led") document.getElementById("svg-led13").setAttribute("fill", "#FFE082");
+    }));
+
+  document.querySelectorAll(".check").forEach(c =>
+    c.addEventListener("click", () => c.classList.toggle("hecho")));
+
+  // patio de juegos: bloque y código se actualizan juntos
+  let delayMs = 500;
+  const slider = document.getElementById("slider-delay");
+  function ponerDelay(v) {
+    delayMs = v;
+    slider.value = v;
+    document.getElementById("v1").textContent = v;
+    document.getElementById("b-seg").textContent = (v / 1000).toLocaleString("es", { maximumFractionDigits: 2 });
+  }
+  slider.addEventListener("input", () => ponerDelay(+slider.value));
+  document.querySelectorAll("[data-vel]").forEach(b =>
+    b.addEventListener("click", () => ponerDelay(+b.dataset.vel)));
+  parpadear(document.getElementById("led-juego"), () => delayMs, () => delayMs);
+
+  const corazon = document.getElementById("led-corazon");
+  const patron = [120, 120, 120, 640];
+  let ci = 0;
+  (function late() {
+    corazon.classList.toggle("on", ci % 2 === 0);
+    setTimeout(late, patron[ci]);
+    ci = (ci + 1) % patron.length;
+  })();
+
+  document.querySelectorAll(".quiz").forEach(q => {
+    const voltear = () => q.classList.toggle("volteada");
+    q.addEventListener("click", voltear);
+    q.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { voltear(); e.preventDefault(); } });
+  });
+</script>
+</body>
+</html>

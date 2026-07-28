@@ -1,0 +1,354 @@
+/* ============================================================
+   Motor de slides — Curso de Arduino para niños (9-12)
+   Mundo visual: protoboard y PCB. Papel blanco menta, teal
+   Arduino, LEDs rojo/ámbar/verde como acentos funcionales.
+   ============================================================ */
+
+:root {
+  --papel: #F3FAF7;        /* blanco menta, como protoboard nueva */
+  --tinta: #143642;        /* petróleo oscuro, texto principal */
+  --teal: #00878F;         /* teal Arduino, color primario */
+  --teal-osc: #005F66;
+  --teal-suave: #DCF0EF;
+  --rojo: #E84855;         /* LED rojo */
+  --ambar: #FFB627;        /* LED ámbar */
+  --verde: #35CE8D;        /* LED verde */
+  --gris: #5E7480;
+  --blanco: #FFFFFF;
+
+  /* colores de sintaxis, imitando el IDE de Arduino */
+  --ide-funcion: #D35400;
+  --ide-clave: #00979C;
+  --ide-num: #8A5CF5;
+  --ide-comentario: #95A5A6;
+
+  --f-titulo: "Baloo 2", "Segoe UI Black", system-ui, sans-serif;
+  --f-cuerpo: "Nunito", "Segoe UI", system-ui, sans-serif;
+  --f-codigo: "JetBrains Mono", Consolas, "Courier New", monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  font-family: var(--f-cuerpo);
+  font-size: clamp(16px, 2.2vh, 24px);
+  background: var(--papel);
+  color: var(--tinta);
+  overflow: hidden;
+}
+
+/* ---------- estructura de slides ---------- */
+
+.slide {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2em;
+  padding: 4vh 6vw 10vh;
+  text-align: center;
+}
+.slide.activa { display: flex; }
+
+/* entrada animada escalonada */
+.slide.activa > * {
+  animation: entrar .45s cubic-bezier(.2,.8,.3,1) both;
+}
+.slide.activa > *:nth-child(2) { animation-delay: .08s; }
+.slide.activa > *:nth-child(3) { animation-delay: .16s; }
+.slide.activa > *:nth-child(4) { animation-delay: .24s; }
+.slide.activa > *:nth-child(5) { animation-delay: .32s; }
+@keyframes entrar {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .slide.activa > * { animation: none; }
+  * { transition: none !important; }
+}
+
+/* ---------- tipografía ---------- */
+
+h1, h2 {
+  font-family: var(--f-titulo);
+  line-height: 1.05;
+  color: var(--teal-osc);
+}
+h1 { font-size: clamp(2.2rem, 9vh, 5rem); }
+h2 { font-size: clamp(1.6rem, 6vh, 3.2rem); }
+
+.eyebrow {
+  font-family: var(--f-titulo);
+  font-size: .95rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--gris);
+}
+
+p, li { font-size: clamp(1rem, 2.8vh, 1.5rem); line-height: 1.45; }
+.grande { font-size: clamp(1.2rem, 3.6vh, 1.9rem); }
+.nota { color: var(--gris); font-size: .85em; }
+strong { color: var(--teal-osc); }
+
+ul.lista {
+  text-align: left;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: .55em;
+}
+ul.lista li::before { content: "▸ "; color: var(--teal); font-weight: 800; }
+
+/* ---------- mini ventana IDE de Arduino (firma visual) ---------- */
+
+.ide {
+  background: var(--blanco);
+  border: 3px solid var(--teal);
+  border-radius: 14px;
+  box-shadow: 0 10px 28px rgba(20, 54, 66, .16);
+  text-align: left;
+  max-width: min(92vw, 720px);
+  overflow: hidden;
+}
+.ide-barra {
+  display: flex;
+  align-items: center;
+  gap: .5em;
+  background: var(--teal);
+  color: #fff;
+  padding: .45em .8em;
+  font-family: var(--f-titulo);
+  font-size: .85rem;
+}
+.ide-barra .boton-ide {
+  width: 1.5em; height: 1.5em;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--teal-osc);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: .8em;
+}
+.ide-nombre { margin-left: auto; opacity: .85; font-weight: 400; }
+.ide pre {
+  font-family: var(--f-codigo);
+  font-size: clamp(.85rem, 2.4vh, 1.25rem);
+  line-height: 1.55;
+  padding: .9em 1.2em;
+  overflow-x: auto;
+}
+.fn  { color: var(--ide-funcion); font-weight: 600; }
+.kw  { color: var(--ide-clave); font-weight: 600; }
+.num { color: var(--ide-num); font-weight: 700; }
+.cm  { color: var(--ide-comentario); font-style: italic; }
+
+/* número editable: el valor con el que se juega */
+.num-vivo {
+  color: var(--ide-num);
+  font-weight: 800;
+  background: #F0EAFF;
+  border-radius: 6px;
+  padding: 0 .25em;
+  outline: 2px dashed var(--ide-num);
+}
+
+/* ---------- LED CSS que parpadea de verdad ---------- */
+
+.led {
+  display: inline-block;
+  width: 1em; height: 1em;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--c, var(--rojo)) 30%, #cfd8dc);
+  box-shadow: inset 0 -2px 3px rgba(0,0,0,.25);
+  vertical-align: middle;
+  transition: background .06s, box-shadow .06s;
+}
+.led.on {
+  background: var(--c, var(--rojo));
+  box-shadow: 0 0 .45em .12em color-mix(in srgb, var(--c, var(--rojo)) 70%, transparent),
+              inset 0 -2px 3px rgba(0,0,0,.15);
+}
+.led-grande { font-size: 3.2em; }
+
+/* patita del LED (decorativa, para LEDs grandes) */
+.led-cuerpo {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+.led-cuerpo::after {
+  content: "";
+  width: .5em; height: 1.4em;
+  background: linear-gradient(90deg, #9aa7ad 45%, #cfd8dc 45%, #cfd8dc 55%, #9aa7ad 55%);
+}
+
+/* ---------- tarjetas y retos ---------- */
+
+.fila { display: flex; gap: 1.2em; flex-wrap: wrap; justify-content: center; }
+
+.tarjeta {
+  background: var(--blanco);
+  border: 3px solid var(--teal-suave);
+  border-radius: 16px;
+  padding: 1em 1.2em;
+  max-width: 18em;
+  box-shadow: 0 6px 18px rgba(20, 54, 66, .08);
+}
+.tarjeta h3 { font-family: var(--f-titulo); color: var(--teal-osc); margin-bottom: .3em; }
+
+.reto {
+  background: linear-gradient(135deg, #FFF6E3, #FFEFC9);
+  border: 3px solid var(--ambar);
+  border-radius: 16px;
+  padding: 1em 1.4em;
+  max-width: min(92vw, 680px);
+}
+.reto .eyebrow { color: #B37D00; }
+
+/* tarjeta-quiz que se voltea al hacer clic */
+.quiz {
+  perspective: 900px;
+  cursor: pointer;
+  width: 15em; height: 9em;
+}
+.quiz-caras {
+  position: relative;
+  width: 100%; height: 100%;
+  transform-style: preserve-3d;
+  transition: transform .5s;
+}
+.quiz.volteada .quiz-caras { transform: rotateY(180deg); }
+.quiz-cara {
+  position: absolute; inset: 0;
+  backface-visibility: hidden;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 16px;
+  padding: .8em;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+.quiz-frente { background: var(--blanco); border: 3px solid var(--teal); color: var(--tinta); }
+.quiz-atras  { background: var(--verde); border: 3px solid var(--verde); color: #073B27; transform: rotateY(180deg); }
+
+/* checklist interactiva */
+.check {
+  display: flex; align-items: center; gap: .6em;
+  background: var(--blanco);
+  border: 3px solid var(--teal-suave);
+  border-radius: 14px;
+  padding: .55em 1em;
+  cursor: pointer;
+  text-align: left;
+  font-size: clamp(1rem, 2.8vh, 1.4rem);
+  transition: border-color .2s, background .2s;
+}
+.check .caja {
+  width: 1.3em; height: 1.3em;
+  border: 3px solid var(--teal);
+  border-radius: 8px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-weight: 900; color: #fff;
+  flex: none;
+}
+.check.hecho { border-color: var(--verde); background: #EDFBF4; }
+.check.hecho .caja { background: var(--verde); border-color: var(--verde); }
+.check.hecho .caja::after { content: "✓"; }
+
+/* botones */
+.boton {
+  font-family: var(--f-titulo);
+  font-size: 1.05rem;
+  background: var(--teal);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: .55em 1.4em;
+  cursor: pointer;
+  box-shadow: 0 4px 0 var(--teal-osc);
+  transition: transform .08s, box-shadow .08s;
+}
+.boton:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--teal-osc); }
+.boton.secundario { background: var(--ambar); color: #5C4000; box-shadow: 0 4px 0 #C98F14; }
+
+input[type="range"] { accent-color: var(--teal); width: min(60vw, 420px); height: 2.2em; }
+
+/* ---------- barra de navegación tipo protoboard ---------- */
+
+.nav-slides {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  height: 7vh; min-height: 44px;
+  background: var(--blanco);
+  border-top: 3px solid var(--teal-suave);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2em;
+  z-index: 10;
+}
+.puntos { display: flex; gap: .55em; }
+.punto {
+  width: .8em; height: .8em;
+  border-radius: 50%;
+  border: none;
+  background: #D6E4E1;           /* agujero de protoboard vacío */
+  box-shadow: inset 0 2px 2px rgba(0,0,0,.18);
+  cursor: pointer;
+  padding: 0;
+}
+.punto.actual { background: var(--teal); box-shadow: 0 0 .35em var(--teal); }
+.flecha {
+  font-family: var(--f-titulo);
+  font-size: 1.2rem;
+  background: none;
+  border: none;
+  color: var(--teal-osc);
+  cursor: pointer;
+  padding: .2em .6em;
+}
+.flecha:focus-visible, .punto:focus-visible, .boton:focus-visible,
+.check:focus-visible, .quiz:focus-visible {
+  outline: 3px solid var(--ambar);
+  outline-offset: 2px;
+}
+.contador { font-family: var(--f-titulo); color: var(--gris); font-size: .9rem; min-width: 4em; }
+
+/* ---------- portada ---------- */
+
+.portada { background: linear-gradient(160deg, var(--papel) 60%, var(--teal-suave)); }
+.portada .sesion-num {
+  font-family: var(--f-titulo);
+  background: var(--teal);
+  color: #fff;
+  border-radius: 999px;
+  padding: .3em 1.1em;
+  font-size: 1.1rem;
+}
+
+/* fila de LEDs decorativa de la portada */
+.semaforo-vivo { display: flex; gap: 1em; font-size: 2.2em; }
+
+/* ---------- utilidades ---------- */
+
+.oculto { visibility: hidden; }
+.pista {
+  position: fixed;
+  right: 1em; bottom: 8.5vh;
+  font-size: .8rem;
+  color: var(--gris);
+  background: var(--blanco);
+  border-radius: 8px;
+  padding: .3em .7em;
+  border: 2px solid var(--teal-suave);
+}
+@media (max-width: 700px) {
+  .pista { display: none; }
+  .slide { padding: 3vh 4vw 12vh; }
+}

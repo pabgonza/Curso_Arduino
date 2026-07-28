@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Curso de Arduino para niños · Índice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/slides.css">
+<style>
+  body { overflow: auto; }
+  main {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 6vh 5vw 8vh;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2em;
+    text-align: center;
+  }
+  ol.sesiones {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: .6em;
+    text-align: left;
+  }
+  .sesion {
+    display: flex;
+    align-items: center;
+    gap: .9em;
+    background: var(--blanco);
+    border: 3px solid var(--teal-suave);
+    border-radius: 16px;
+    padding: .7em 1em;
+    color: var(--tinta);
+    text-decoration: none;
+    transition: border-color .15s, transform .15s;
+  }
+  a.sesion:hover { border-color: var(--teal); transform: translateX(4px); }
+  .sesion .n {
+    font-family: var(--f-titulo);
+    background: var(--teal);
+    color: #fff;
+    border-radius: 12px;
+    width: 2em; height: 2em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+  }
+  .sesion.pendiente { opacity: .55; }
+  .sesion.pendiente .n { background: var(--gris); }
+  .variantes { margin-left: auto; display: flex; gap: .4em; flex: none; }
+  .variantes a {
+    font-family: var(--f-titulo);
+    font-size: .8rem;
+    color: var(--teal-osc);
+    background: var(--teal-suave);
+    border-radius: 999px;
+    padding: .25em .8em;
+    text-decoration: none;
+  }
+  .variantes a:hover { background: var(--teal); color: #fff; }
+</style>
+</head>
+<body>
+<main>
+  <span class="semaforo-vivo" style="justify-content:center" aria-hidden="true">
+    <span class="led on" style="--c:var(--rojo)"></span>
+    <span class="led on" style="--c:var(--ambar)"></span>
+    <span class="led on" style="--c:var(--verde)"></span>
+  </span>
+  <h1>Curso de Arduino 🤖</h1>
+  <p class="grande">Para niños y niñas de 9 a 12 años · 8 sesiones</p>
+  <ol class="sesiones">
+    <li class="sesion"><span class="n">1</span>¡Hola Arduino! — IDE y primer Blink
+      <span class="variantes"><a href="sesion-01-cpp.html">C++</a><a href="sesion-01-bloques.html">Bloques</a></span></li>
+    <li class="sesion pendiente"><span class="n">2</span>Semáforo de LEDs 🚦 <span class="variantes">pronto</span></li>
+    <li class="sesion pendiente"><span class="n">3</span>Música con el buzzer 🎵 <span class="variantes">pronto</span></li>
+    <li class="sesion pendiente"><span class="n">4</span>El servo: cosas que se mueven 🦾 <span class="variantes">pronto</span></li>
+    <li class="sesion pendiente"><span class="n">5</span>Sensor de distancia: el murciélago 🦇 <span class="variantes">pronto</span></li>
+    <li class="sesion pendiente"><span class="n">6</span>Termómetro y sensores 🌡️ <span class="variantes">pronto</span></li>
+    <li class="sesion pendiente"><span class="n">7</span>Colores locos: LED RGB 🌈 <span class="variantes">pronto</span></li>
+    <li class="sesion pendiente"><span class="n">8</span>Gran final: el paso a nivel 🚂 <span class="variantes">pronto</span></li>
+  </ol>
+  <p class="nota">Navegación en las slides: flechas ◀ ▶, espacio, o toca los puntos. Tecla F = pantalla completa.</p>
+</main>
+</body>
+</html>
