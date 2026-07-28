@@ -107,3 +107,38 @@ Fuentes: [Make-It](https://make-it.ai/blog/arduino-projects-with-kids), [Create 
 3. Legalmente, Tinkercad es la única plataforma web con vía explícita para menores de 13 (aulas COPPA); Wokwi exige 13+ en sus ToS aunque no pida cuenta.
 4. Ambos simuladores web se pueden embeber en páginas HTML propias (relevante para las slides interactivas).
 5. El Elegoo Super Starter (~40 USD) cubre todos los componentes del brief y es el estándar de facto.
+
+## Cómo explicar electricidad a niños: el modelo del agua
+
+Fuentes consultadas para la sesión 3 (todas coinciden en el mismo modelo,
+con variantes de detalle):
+
+- **SparkFun — Voltage, Current, Resistance and Ohm's Law**
+  ([inglés](https://learn.sparkfun.com/tutorials/voltage-current-resistance-and-ohms-law/all),
+  [español en MCI](https://cursos.mcielectronics.cl/2019/06/18/voltaje-corriente-resistencia-y-ley-de-ohm/)):
+  el estanque **a cierta altura** con una manguera abajo. Más agua acumulada
+  y más altura = más presión = más voltaje. El ancho de la manguera es la
+  resistencia.
+- **Clean Energy Institute, U. de Washington — Water Model of Electricity**
+  ([lesson plan](https://www.cei.washington.edu/lesson-plans-resources/water-model-for-electricity/)):
+  experimento real con mangueras de distinto diámetro y largo, y el estanque
+  subiendo por un soporte. Mide cuánto tarda en llenarse un vaso.
+  Incluye extensión con turbina de agua.
+- **Analogía de la cascada** (voltaje = altura de la caída): útil para
+  explicar que **cada componente se "come" un poco de altura** y que al
+  llegar abajo (tierra) ya no queda nada. Es la base de la slide "¿cuántas
+  cosas puede mover?".
+
+Decisiones para el curso:
+
+- El voltaje se presenta como **altura del estanque**, no como "presión" a
+  secas: la altura se puede dibujar, y hace evidente que la tierra (GND) es
+  "altura cero".
+- La resistencia se presenta como **doblar la manguera** (o usarla más
+  fina), que es una acción que los niños han hecho con una manguera real.
+- El estanque **se vacía mientras corre el agua**: así se explica sin
+  esfuerzo por qué las pilas se gastan, y por qué se gastan más rápido si
+  el circuito consume más.
+- Los dibujos de protoboard siguen las convenciones de **Tinkercad**
+  (línea roja con +, línea negra con −, columnas numeradas, filas A-J) para
+  que lo que ven en la slide sea igual a lo que verán en el simulador.
