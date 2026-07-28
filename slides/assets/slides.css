@@ -48,9 +48,11 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  justify-content: safe center;   /* si el contenido no cabe, ancla arriba en vez de recortar */
   gap: 1.2em;
   padding: 4vh 6vw 10vh;
   text-align: center;
+  overflow-y: auto;
 }
 .slide.activa { display: flex; }
 
@@ -287,14 +289,14 @@ figure.figura {
   border-radius: 14px;
   padding: .55em .55em .35em;
   box-shadow: 0 10px 24px rgba(20, 54, 66, .18);
-  transform: rotate(-1.5deg);
-  max-width: min(80vw, 22em);
+  transform: rotate(-1deg);
+  max-width: min(84vw, 19em);
 }
-figure.figura:nth-of-type(even) { transform: rotate(1.5deg); }
+figure.figura:nth-of-type(even) { transform: rotate(1deg); }
 figure.figura img {
   display: block;
   width: 100%;
-  max-height: 42vh;
+  max-height: 30vh;
   object-fit: cover;
   border-radius: 8px;
 }
@@ -312,18 +314,24 @@ figure.figura figcaption .credito {
 }
 .fila-cuento {
   display: flex;
-  gap: 1.6em;
+  gap: 1.8em;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+  width: 100%;
+  max-width: 60em;
 }
+.fila-cuento figure.figura { flex: 0 1 auto; }
 .fila-cuento .texto {
-  max-width: 20em;
+  flex: 1 1 18em;
+  max-width: 28em;
   text-align: left;
   display: flex;
   flex-direction: column;
   gap: .7em;
 }
+/* dentro del cuento el texto respira: un pelo más chico que .grande suelto */
+.fila-cuento .texto p.grande { font-size: clamp(1.05rem, 2.9vh, 1.55rem); }
 
 /* ---------- "¿Saber más?" : popups que no cortan el flujo ---------- */
 

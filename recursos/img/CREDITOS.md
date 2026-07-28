@@ -5,6 +5,7 @@ Imagenes descargadas de Wikimedia Commons. Uso educativo con atribucion.
 - `ivrea.jpg` -- Ivrea Panorama 3.jpg | Autor: Zairon | Licencia: CC BY-SA 4.0 | [fuente](https://commons.wikimedia.org/wiki/File:Ivrea_Panorama_3.jpg)
 - `rey-arduino.jpg` -- Arduin of Ivrea.jpg | Autor: Unknown authorUnknown author | Licencia: Public domain | [fuente](https://commons.wikimedia.org/wiki/File:Arduin_of_Ivrea.jpg)
 - `massimo-banzi.jpg` -- Massimo banzi.jpg | Autor: David Cuartielles | Licencia: CC BY-SA 2.0 | [fuente](https://commons.wikimedia.org/wiki/File:Massimo_banzi.jpg)
+- `equipo-arduino.jpg` -- Arduino team Arduino Summit 2008.jpg (Mellis, Igoe, Martino, Cuartielles, Banzi) | Autor: David Cuartielles, Arduino SA | Licencia: CC BY-SA 3.0 | [fuente](https://commons.wikimedia.org/wiki/File:Arduino_team_Arduino_Summit_2008.jpg)
 - `primer-arduino.jpg` -- Arduino Diecimila.jpg (placa temprana, 2007) | Autor: Franky47 | Licencia: CC BY-SA 3.0 | [fuente](https://commons.wikimedia.org/wiki/File:Arduino_Diecimila.jpg)
 - `arduino-uno.jpg` -- Arduino Uno - R3.jpg | Autor: SparkFun Electronics from Boulder, USA | Licencia: CC BY 2.0 | [fuente](https://commons.wikimedia.org/wiki/File:Arduino_Uno_-_R3.jpg)
 - `protoboard.jpg` -- Arduino Breadboard ATmega328P USB2Serial.jpg | Autor: Dolicom | Licencia: CC BY-SA 3.0 | [fuente](https://commons.wikimedia.org/wiki/File:Arduino_Breadboard_ATmega328P_USB2Serial.jpg)
