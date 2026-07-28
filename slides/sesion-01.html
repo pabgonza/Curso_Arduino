@@ -60,8 +60,8 @@
     <p class="grande">¿Y Arduino? Arduino es la <strong>placa de desarrollo</strong><button class="sm" data-sm="placa-dev">?</button>:
     la <strong>nave espacial del cerebrito</strong> 🚀 — le da energía, enchufes
     para los cables y conexión con el computador, para que usarlo sea facilísimo.</p>
+    <p style="margin-top:.5em">Y son un gran equipo: el computador <strong>escribe las órdenes</strong>, el microcontrolador <strong>las cumple</strong> desde su placa.</p>
   </div>
-  <p class="grande">Son un gran equipo: el computador <strong>escribe las órdenes</strong><br>y el microcontrolador <strong>las cumple</strong> desde su placa.</p>
 </section>
 
 <!-- 4 · La receta de un robot -->
@@ -126,9 +126,9 @@
   <h2>La receta que regalaron al mundo 🎁</h2>
   <div class="fila-cuento">
     <figure class="figura">
-      <img src="../recursos/img/primer-arduino-proto.jpg" alt="El primer prototipo de Arduino: una placa amarilla soldada a mano con cables sueltos y un chip ATmega8">
-      <figcaption>El primer Arduino: ¡soldado a mano, con sus cables y todo! 🛠️
-        <span class="credito">Foto: Phillip Torrone · CC BY-SA 3.0</span></figcaption>
+      <img src="../recursos/img/arduino-serial.jpg" alt="El primer Arduino a la venta: placa azul con conector serial, sostenida en una mano">
+      <figcaption>El primer Arduino a la venta (2005): ¡cabía en una mano! 📸
+        <span class="credito">Foto: arduino.cc · CC BY-SA</span></figcaption>
     </figure>
     <div class="texto">
       <p class="grande">Cuando un invento es un éxito, lo normal es guardar la receta
@@ -138,6 +138,7 @@
       <p class="grande">A eso se le llama <strong>hardware abierto</strong><button class="sm" data-sm="abierto">?</button>.
       Por eso hoy hay <strong>millones</strong> de Arduinos en el mundo…
       ¡y por eso el tuyo cuesta poquito! 🌍</p>
+      <button class="sm-grande" data-sm="proto">¿Saber más? El prototipo hecho a mano 🛠️</button>
     </div>
   </div>
 </section>
@@ -149,9 +150,14 @@
   <p>Como los planos son libres, hay placas de <strong>todos los tamaños y superpoderes</strong>. Cada misión tiene su placa:</p>
   <div class="placas">
     <div class="placa-card">
-      <img src="../recursos/img/placa-nano.jpg" alt="Placa Arduino Nano, muy pequeña">
+      <img src="../recursos/img/arduino-uno.jpg" alt="Placa Arduino UNO">
+      <h3>UNO 🏆</h3>
+      <p>El favorito para aprender: ni muy grande ni muy chico. ¡El nuestro!</p>
+    </div>
+    <div class="placa-card">
+      <img src="../recursos/img/placa-nano.jpg" alt="Placa Arduino Nano completa, pequeña y con sus patitas de conexión">
       <h3>Nano 🤏</h3>
-      <p>Chiquitito: cabe en un dedo. Para inventos con poco espacio.</p>
+      <p>¡Mide 4,5 cm! Cabe en un dedo: para inventos con poquito espacio.</p>
     </div>
     <div class="placa-card">
       <img src="../recursos/img/placa-mega.jpg" alt="Placa Arduino Mega, grande y con muchos pines">
@@ -159,7 +165,7 @@
       <p>Grandote y con un montón de pines: para robots con muchos cables.</p>
     </div>
     <div class="placa-card">
-      <img src="../recursos/img/placa-esp32.jpg" alt="Placa ESP32 con antena WiFi integrada" style="object-position: top">
+      <img src="../recursos/img/placa-esp32.jpg" alt="Placa ESP32 negra con su módulo WiFi metálico">
       <h3>ESP32 📶</h3>
       <p>¡Tiene WiFi! Puede mandar datos por internet: clima, alarmas…</p>
     </div>
@@ -168,13 +174,8 @@
       <h3>LilyPad 👕</h3>
       <p>Redondita y plana: ¡se cose en la ropa con hilo conductor!</p>
     </div>
-    <div class="placa-card">
-      <img src="../recursos/img/placa-raspberry.jpg" alt="Placa Raspberry Pi 4">
-      <h3>Raspberry Pi 🖥️</h3>
-      <p>Tan poderosa que es un mini computador: se conecta hasta a la tele.</p>
-    </div>
   </div>
-  <p class="nota">Nosotros usaremos el <strong>Arduino UNO</strong>: el favorito para aprender. 🏆</p>
+  <p class="nota">Distintas placas para distintas misiones… y todas se programan igual que tu UNO. 😉</p>
 </section>
 
 <!-- 9 · Quiz -->
@@ -297,6 +298,10 @@
     micro: {
       t: "Microcontrolador",
       d: "<p>Es un <strong>computador completo del tamaño de una uña</strong> 💅: tiene cerebro, memoria y manitos (los pines), todo en un solo chip negro. No puede jugar videojuegos, pero es campeón en <strong>repetir una tarea sin equivocarse jamás</strong>. El del Arduino se llama <em>ATmega328</em>.</p>"
+    },
+    proto: {
+      t: "El primer prototipo (2005)",
+      d: "<p>Antes de la placa azul, los profesores probaron su idea <strong>soldando todo a mano</strong>: un chip, cables de colores y mucha paciencia. Así de rústicos empiezan los grandes inventos. 🛠️</p><img src='../recursos/img/primer-arduino-proto.jpg' alt='Prototipo del primer Arduino soldado a mano'><p class='nota' style='font-size:.75em'>Foto: Phillip Torrone · CC BY-SA 3.0</p>"
     },
     "placa-dev": {
       t: "Placa de desarrollo",

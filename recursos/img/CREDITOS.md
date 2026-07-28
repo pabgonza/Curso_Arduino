@@ -8,9 +8,10 @@ Imagenes descargadas de Wikimedia Commons. Uso educativo con atribucion.
 - `equipo-arduino.jpg` -- Arduino team Arduino Summit 2008.jpg (Mellis, Igoe, Martino, Cuartielles, Banzi) | Autor: David Cuartielles, Arduino SA | Licencia: CC BY-SA 3.0 | [fuente](https://commons.wikimedia.org/wiki/File:Arduino_team_Arduino_Summit_2008.jpg)
 - `primer-arduino.jpg` -- Arduino Diecimila.jpg (placa temprana, 2007) | Autor: Franky47 | Licencia: CC BY-SA 3.0 | [fuente](https://commons.wikimedia.org/wiki/File:Arduino_Diecimila.jpg)
 - `primer-arduino-proto.jpg` -- The first Arduino.jpeg (prototipo soldado a mano) | Autor: Philliptorrone | Licencia: CC BY-SA 3.0 | [fuente](https://commons.wikimedia.org/wiki/File:The_first_Arduino.jpeg)
-- `placa-nano.jpg` -- Arduino Nano.jpg | Autor: David Mellis | Licencia: CC BY 2.0 | [fuente](https://commons.wikimedia.org/wiki/File:Arduino_Nano.jpg)
+- `placa-nano.jpg` -- Arduino nano isometr.jpg | Autor: MakeMagazinDE | Licencia: CC BY-SA 4.0 | [fuente](https://commons.wikimedia.org/wiki/File:Arduino_nano_isometr.jpg)
 - `placa-mega.jpg` -- Arduino MEGA 2560 R3, front side.jpg | Autor: Dsimic | Licencia: CC BY-SA 4.0 | [fuente](https://commons.wikimedia.org/wiki/File:Arduino_MEGA_2560_R3,_front_side.jpg)
-- `placa-esp32.jpg` -- ESP32 Dev Board.jpg | Autor: Edwiyanto | Licencia: CC BY-SA 4.0 | [fuente](https://commons.wikimedia.org/wiki/File:ESP32_Dev_Board.jpg)
+- `placa-esp32.jpg` -- ESP32.jpg | Autor: Edwiyanto | Licencia: CC BY-SA 4.0 | [fuente](https://commons.wikimedia.org/wiki/File:ESP32.jpg)
+- `arduino-serial.jpg` -- Primera placa Arduino a la venta (Arduino Serial, 2005) | Origen: arduino.cc, CC BY-SA (obtenida vía microkontroller.ru)
 - `placa-lilypad.jpg` -- LilyPad Arduino Main Board.JPG | Autor: Leah Buechley | Licencia: CC BY-SA 2.0 | [fuente](https://commons.wikimedia.org/wiki/File:LilyPad_Arduino_Main_Board.JPG)
 - `placa-raspberry.jpg` -- Raspberry Pi 4 Model B - Top.jpg | Autor: Laserlicht | Licencia: CC BY-SA 4.0 | [fuente](https://commons.wikimedia.org/wiki/File:Raspberry_Pi_4_Model_B_-_Top.jpg)
 - `arduino-uno.jpg` -- Arduino Uno - R3.jpg | Autor: SparkFun Electronics from Boulder, USA | Licencia: CC BY 2.0 | [fuente](https://commons.wikimedia.org/wiki/File:Arduino_Uno_-_R3.jpg)
@@ -23,3 +24,10 @@ Imagenes descargadas de Wikimedia Commons. Uso educativo con atribucion.
 - `dht11.jpg` -- Dht11.jpg | Autor: Edwiyanto | Licencia: CC BY-SA 4.0 | [fuente](https://commons.wikimedia.org/wiki/File:Dht11.jpg)
 - `potenciometro.jpg` -- Potentiometer.jpg | Autor: Iainf | Licencia: CC BY 2.5 | [fuente](https://commons.wikimedia.org/wiki/File:Potentiometer.jpg)
 - `leds.jpg` -- Verschiedene LEDs.jpg | Autor: Afrank99 | Licencia: CC BY-SA 2.0 | [fuente](https://commons.wikimedia.org/wiki/File:Verschiedene_LEDs.jpg)
+
+## Pantallazos (`pantallazos/`)
+
+Todos provienen de la documentación oficial de Arduino
+([docs.arduino.cc](https://docs.arduino.cc), repo
+[arduino/docs-content](https://github.com/arduino/docs-content)), licencia CC BY-SA 4.0:
+tutoriales "Downloading and installing the Arduino IDE 2" y "Uploading a sketch".
