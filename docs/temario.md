@@ -40,6 +40,8 @@
 **Objetivo**: electrónica muy básica con la analogía del agua, y dominar la protoboard.
 - La electricidad como agua: voltaje = presión, corriente = caudal,
   resistencia = tubería angosta; el circuito debe ser un "circuito cerrado".
+- Reglas de electricista: desconectar antes de cablear, revisión entre compañeros
+  (van aquí, justo antes de tocar cables por primera vez).
 - La protoboard por dentro: cómo se conectan sus agujeritos (filas y rieles).
 - LED + resistencia ("el casco del LED"): primer circuito propio.
 - **Proyecto**: semáforo de 3 LEDs.

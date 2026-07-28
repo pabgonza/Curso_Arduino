@@ -484,3 +484,121 @@ dialog.saber-mas .cerrar {
   .pista { display: none; }
   .slide { padding: 3vh 4vw 12vh; }
 }
+
+/* ============================================================
+   Tutoriales guiados: IDE de Arduino simulado, panel de pasos y
+   lectura de codigo linea por linea. Se usan de la sesion 2 en
+   adelante.
+   ============================================================ */
+
+/* ---------- tutorial interactivo dentro del IDE ---------- */
+.tuto { display: flex; gap: 1.2em; align-items: flex-start; justify-content: center; flex-wrap: wrap; width: 100%; max-width: 66em; }
+
+.sim-ide {
+  flex: 1 1 30em;
+  max-width: min(92vw, 40em);
+  position: relative;
+  background: #fff;
+  border: 3px solid var(--teal);
+  border-radius: 12px;
+  box-shadow: 0 10px 28px rgba(20,54,66,.18);
+  text-align: left;
+  font-size: clamp(.7rem, 1.85vh, 1rem);
+}
+.sim-titulo {
+  background: #e9eff0; color: #33525c; font-weight: 700; font-size: .85em;
+  padding: .3em .7em; border-radius: 9px 9px 0 0;
+  display: flex; align-items: center; gap: .5em;
+}
+.sim-punto {
+  width: .7em; height: .7em; border-radius: 50%; background: var(--rojo);
+  box-shadow: 1.1em 0 0 var(--ambar), 2.2em 0 0 var(--verde);
+  margin-right: 2.4em; flex: none;
+}
+.sim-menu { position: relative; display: flex; gap: .1em; background: #f5f8f8; border-bottom: 1px solid #dbe5e6; padding: .2em .4em; }
+.sim-m {
+  font-family: var(--f-cuerpo); font-size: .9em; font-weight: 700;
+  background: none; border: none; color: var(--tinta);
+  padding: .2em .6em; border-radius: 5px; cursor: pointer;
+}
+.sim-m.abierto { background: var(--teal); color: #fff; }
+.sim-m.apagado, .sim-op.apagado, .sim-btn.apagado { color: #9fb0b5; cursor: default; font-weight: 400; }
+.sim-btn.apagado { opacity: .5; color: var(--teal-osc); }
+
+.sim-desp {
+  position: absolute; z-index: 5; top: 100%; left: .3em;
+  min-width: 12em;
+  display: flex; flex-direction: column;
+  background: #fff; border: 1px solid #c9d6d8; border-radius: 8px;
+  box-shadow: 0 12px 26px rgba(20,54,66,.28);
+  padding: .25em;
+}
+.sim-desp[hidden] { display: none; }
+.sim-desp.sub { top: 1.9em; left: 100%; }
+.sim-desp.placa { top: calc(100% + .2em); left: 5.5em; }
+.sim-op {
+  font-family: var(--f-cuerpo); font-size: .9em; text-align: left;
+  background: none; border: none; color: var(--tinta);
+  padding: .28em .6em; border-radius: 5px; cursor: pointer;
+  display: flex; justify-content: space-between; gap: 1.2em; white-space: nowrap;
+}
+button.sim-op:hover { background: var(--teal-suave); }
+.fl { opacity: .55; }
+
+.sim-barra { position: relative; display: flex; align-items: center; gap: .5em; background: var(--teal); padding: .4em .7em; }
+.sim-btn {
+  width: 1.9em; height: 1.9em; border-radius: 50%; border: none;
+  background: #fff; color: var(--teal-osc);
+  font-family: var(--f-titulo); font-size: .95em; font-weight: 900;
+  display: inline-flex; align-items: center; justify-content: center; cursor: pointer; flex: none;
+}
+.sim-sel {
+  font-family: var(--f-cuerpo); font-size: .85em;
+  background: #fff; border: none; border-radius: 6px;
+  padding: .25em .8em; color: #33525c; cursor: pointer;
+  min-width: 13em; text-align: left;
+}
+.sim-editor { height: 16.5em; overflow: auto; background: #fff; }
+.sim-editor pre { font-family: var(--f-codigo); font-size: .9em; line-height: 1.5; padding: .6em .9em; }
+.sim-consola {
+  background: #143642; color: #cfe8e6;
+  font-family: var(--f-codigo); font-size: .78em; line-height: 1.6;
+  padding: .5em .9em; min-height: 4.4em; border-radius: 0 0 9px 9px;
+}
+.sim-consola .ok { color: var(--verde); font-weight: 700; }
+.sim-consola .tenue { opacity: .5; font-style: italic; }
+
+/* la manito que indica dónde hacer clic */
+.objetivo { position: relative; z-index: 6; outline: 3px solid var(--ambar); outline-offset: 2px; animation: latir 1.3s infinite; }
+.objetivo::after {
+  content: "👆"; position: absolute; right: -.7em; bottom: -1.1em;
+  font-size: 1.5em; pointer-events: none; animation: tocando 1s infinite;
+}
+@keyframes latir { 50% { outline-color: #FFE3AC; } }
+@keyframes tocando { 50% { transform: translateY(-.28em); } }
+@media (prefers-reduced-motion: reduce) { .objetivo, .objetivo::after { animation: none; } }
+
+.tuto-panel {
+  flex: 0 1 16em; min-width: 13em;
+  background: linear-gradient(135deg, #FFF6E3, #FFEFC9);
+  border: 3px solid var(--ambar); border-radius: 16px;
+  padding: .9em 1em; text-align: left;
+  display: flex; flex-direction: column; gap: .7em;
+}
+.tuto-num { font-family: var(--f-titulo); color: #B37D00; font-size: .9rem !important; letter-spacing: .08em; }
+.tuto-texto { font-size: clamp(.95rem, 2.3vh, 1.15rem) !important; line-height: 1.4; min-height: 5.5em; }
+.tuto-placa { display: flex; align-items: center; gap: .6em; }
+.mini-placa { display: inline-flex; align-items: center; gap: .35em; background: var(--teal); border-radius: 6px; padding: .4em .7em; }
+.mini-led { width: .85em; height: .85em; border-radius: 3px; background: #8a6a20; display: inline-block; transition: background .06s, box-shadow .06s; }
+.mini-led.on { background: var(--ambar); box-shadow: 0 0 .55em .18em rgba(255,182,39,.85); }
+.mini-etiq { color: #fff; font-family: var(--f-codigo); font-size: .7em; }
+.mini-placa.grande { font-size: 1.5em; }
+
+/* ---------- lectura del código línea por línea ---------- */
+.sim-editor.lineas { height: auto; }   /* el código completo siempre visible */
+.lineas { font-family: var(--f-codigo); font-size: .92em; line-height: 1.6; padding: .5em 0; }
+.ln { display: flex; gap: .9em; padding: 0 .9em; border-left: 4px solid transparent; white-space: pre; }
+.ln .n { color: #b9c7cb; width: 1.4em; text-align: right; flex: none; }
+.ln.aqui { background: #FFF6E3; border-left-color: var(--ambar); }
+.ln.aqui .n { color: #B37D00; font-weight: 700; }
+.ln.aqui code { font-weight: 700; }

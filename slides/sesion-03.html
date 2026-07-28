@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sesión 3 · Electricidad y protoboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/slides.css">
+</head>
+<body>
+
+<!-- 1 · Portada -->
+<section class="slide portada">
+  <span class="sesion-num">Sesión 3</span>
+  <h1>La electricidad es como el agua 💧⚡</h1>
+  <p class="grande">Hoy dejas de usar el LED que viene de regalo…<br>¡y armas tu propio circuito con cables de verdad!</p>
+  <div class="semaforo-vivo" aria-hidden="true">
+    <span class="led" id="pled-r" style="--c:var(--rojo)"></span>
+    <span class="led" id="pled-a" style="--c:var(--ambar)"></span>
+    <span class="led" id="pled-v" style="--c:var(--verde)"></span>
+  </div>
+</section>
+
+<!-- 2 · La analogía del agua (interactiva) -->
+<section class="slide">
+  <p class="eyebrow">La idea más importante de hoy</p>
+  <h2>Una cañería con agua 🚰</h2>
+  <div class="agua">
+    <div class="agua-fila">
+      <div class="pieza">
+        <span class="icono">🔋</span>
+        <span class="etiq">bomba<br><strong>la pila</strong></span>
+      </div>
+      <div class="tubo-caja">
+        <div class="tubo" id="tubo"></div>
+        <div class="angosto" id="angosto" title="tubería angosta = resistencia"></div>
+      </div>
+      <div class="pieza">
+        <span class="led led-brillo" id="agua-led" style="--c:var(--ambar); font-size:3.4em"></span>
+        <span class="etiq">molinito<br><strong>el LED</strong></span>
+      </div>
+    </div>
+    <p class="caudal" id="caudal">Caudal: normal 💧</p>
+  </div>
+  <div class="controles">
+    <label>Presión (voltaje) <input type="range" id="presion" min="1" max="9" value="5"></label>
+    <div class="fila" style="gap:.5em">
+      <button class="boton" data-tubo="ancho">Tubería ancha</button>
+      <button class="boton secundario" data-tubo="angosto">Tubería angosta</button>
+    </div>
+  </div>
+  <p class="nota">Más presión = más agua. Tubería más angosta = menos agua. ¡Igualito que la electricidad!</p>
+</section>
+
+<!-- 3 · Las tres palabras -->
+<section class="slide">
+  <p class="eyebrow">Tres palabras de electricista</p>
+  <h2>Del agua a la electricidad 🔁</h2>
+  <div class="fila">
+    <div class="tarjeta">
+      <h3>💪 Voltaje</h3>
+      <p>La <strong>presión</strong> del agua. En tu Arduino son <strong>5 voltios</strong>: poquita presión, no te puede hacer daño.</p>
+      <p class="nota">Se mide en voltios (V)<button class="sm" data-sm="volta">?</button></p>
+    </div>
+    <div class="tarjeta">
+      <h3>🌊 Corriente</h3>
+      <p>El <strong>caudal</strong>: cuánta agua pasa. Si pasa demasiada, las cosas se calientan… y se queman.</p>
+      <p class="nota">Se mide en amperios (A)<button class="sm" data-sm="ampere">?</button></p>
+    </div>
+    <div class="tarjeta">
+      <h3>🚧 Resistencia</h3>
+      <p>La <strong>tubería angosta</strong> que frena el agua. Sirve para cuidar a los componentes delicados.</p>
+      <p class="nota">Se mide en ohmios (Ω)<button class="sm" data-sm="ohm">?</button></p>
+    </div>
+  </div>
+</section>
+
+<!-- 4 · Circuito cerrado (interactivo) -->
+<section class="slide">
+  <p class="eyebrow">La regla número uno</p>
+  <h2>El agua tiene que dar la vuelta completa 🔄</h2>
+  <div class="circuito">
+    <svg viewBox="0 0 520 270" id="svg-circuito" aria-label="Circuito con un interruptor que se abre y se cierra">
+      <!-- cables: el de arriba con el hueco del interruptor, el resto de una vez -->
+      <path d="M70 60 H 190" class="cable"/>
+      <path d="M310 60 H 450 V 210 H 70 V 155" class="cable"/>
+      <path d="M70 105 V 60" class="cable"/>
+
+      <!-- pila, metida dentro del cable de la izquierda -->
+      <rect x="44" y="103" width="52" height="54" rx="8" fill="#546E7A"/>
+      <rect x="60" y="96" width="20" height="9" rx="3" fill="#90A4AE"/>
+      <text x="70" y="140" text-anchor="middle" font-size="26">🔋</text>
+      <text x="112" y="136" class="rotulo">la pila</text>
+
+      <!-- interruptor -->
+      <circle cx="190" cy="60" r="7" fill="#37474F"/>
+      <circle cx="310" cy="60" r="7" fill="#37474F"/>
+      <line x1="190" y1="60" x2="310" y2="60" id="palanca" stroke="#37474F" stroke-width="9" stroke-linecap="round"/>
+      <text x="250" y="32" text-anchor="middle" class="rotulo" id="rotulo-sw">interruptor abierto</text>
+
+      <!-- LED, montado sobre el cable de abajo -->
+      <g id="rayos" stroke="#FFB627" stroke-width="5" stroke-linecap="round">
+        <line x1="260" y1="160" x2="260" y2="146"/>
+        <line x1="308" y1="178" x2="319" y2="167"/>
+        <line x1="212" y1="178" x2="201" y2="167"/>
+      </g>
+      <circle cx="260" cy="210" r="34" id="c-led" fill="#7a6a3a"/>
+      <circle cx="250" cy="200" r="9" fill="#fff" opacity=".35"/>
+      <text x="260" y="266" text-anchor="middle" class="rotulo">el LED</text>
+    </svg>
+    <button class="boton" id="btn-interruptor">Cerrar el interruptor 🔘</button>
+  </div>
+  <p class="grande" id="txt-circuito" style="max-width:30em">Con el camino cortado, el agua no puede dar la vuelta… y el LED no se enciende.</p>
+  <button class="sm-grande" data-sm="gnd">¿Saber más? ¿Qué es el GND?</button>
+</section>
+
+<!-- 5 · La resistencia, el casco del LED -->
+<section class="slide">
+  <p class="eyebrow">Cuidando a los delicados</p>
+  <h2>La resistencia es el casco del LED 🪖</h2>
+  <div class="fila" style="align-items:center; gap:3em">
+    <div class="banco">
+      <span class="led led-brillo" id="led-casco" style="--c:var(--rojo); font-size:4.2em"></span>
+      <span class="humo" id="humo" hidden>💨</span>
+      <p class="etiq" id="estado-casco">Esperando…</p>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:.6em">
+      <button class="boton" data-casco="con">Con resistencia 🪖</button>
+      <button class="boton secundario" data-casco="sin">Sin resistencia 😬</button>
+    </div>
+  </div>
+  <p class="grande" id="txt-casco" style="max-width:30em">Un LED aguanta poquita corriente. ¿Qué pasa si le damos toda la del Arduino?</p>
+  <p class="nota">Con el LED siempre va una resistencia de <strong>220 Ω</strong>.</p>
+  <button class="sm-grande" data-sm="colores">🎨 ¿Cómo se lee una resistencia?</button>
+</section>
+
+<!-- 6 · Seguridad -->
+<section class="slide">
+  <p class="eyebrow">Reglas de electricista profesional</p>
+  <h2>Seguridad primero ⚡</h2>
+  <div class="fila">
+    <div class="tarjeta"><h3>🔌 Regla 1</h3><p>Para poner o cambiar cables, primero <strong>desconecta el USB</strong>. Siempre.</p></div>
+    <div class="tarjeta"><h3>👀 Regla 2</h3><p>Antes de enchufar, tu compañero <strong>revisa tu circuito</strong> (y tú el suyo).</p></div>
+    <div class="tarjeta"><h3>🖐️ Regla 3</h3><p>¿Algo huele raro o se calienta? <strong>Desconecta y avisa</strong>.</p></div>
+  </div>
+  <p class="nota">Arduino usa 5 voltios: no puede hacerte daño, pero un cable mal puesto sí puede dañar la placa.</p>
+</section>
+
+<!-- 7 · Qué es la protoboard -->
+<section class="slide">
+  <p class="eyebrow">Tu nueva mejor amiga</p>
+  <h2>La protoboard 🏙️</h2>
+  <div class="fila-cuento">
+    <figure class="figura">
+      <img src="../recursos/img/protoboard.jpg" alt="Protoboard con componentes y cables de colores">
+      <figcaption>Un tablero lleno de agujeritos <span class="credito">Foto: Dolicom · CC BY-SA 3.0</span></figcaption>
+    </figure>
+    <div class="texto">
+      <p class="grande">Antes, para unir dos cables había que <strong>soldarlos</strong><button class="sm" data-sm="soldar">?</button> con estaño derretido: lento, caliente y sin vuelta atrás.</p>
+      <p class="grande">La protoboard<button class="sm" data-sm="protoboard">?</button> deja armar circuitos <strong>enchufando y desenchufando</strong>, como piezas de Lego. Si te equivocas, sacas el cable y listo. 🧱</p>
+    </div>
+  </div>
+</section>
+
+<!-- 8 · La protoboard por dentro (interactiva) -->
+<section class="slide">
+  <p class="eyebrow">El secreto de los agujeritos</p>
+  <h2>Toca un agujerito y mira qué pasa 👇</h2>
+  <div class="tuto">
+    <div class="proto-caja">
+      <svg viewBox="0 0 620 340" id="proto" aria-label="Protoboard interactiva"></svg>
+    </div>
+    <aside class="tuto-panel">
+      <p class="tuto-num" id="pb-num">Los agujeritos</p>
+      <p class="tuto-texto" id="pb-txt">Por dentro, algunos agujeritos están unidos con una lámina de metal escondida. ¡Toca uno para descubrir a quiénes se lleva de la mano!</p>
+      <button class="boton" id="pb-ver">👀 Ver los cables escondidos</button>
+      <button class="sm-grande" data-sm="pb-foto">📷 Cómo es por dentro</button>
+    </aside>
+  </div>
+</section>
+
+<!-- 9 · Regla de oro -->
+<section class="slide">
+  <p class="eyebrow">Regla de oro</p>
+  <h2>¿Estos dos están conectados? 🤔</h2>
+  <p class="grande">Toca cada tarjeta para ver la respuesta.</p>
+  <div class="fila">
+    <div class="quiz" tabindex="0"><div class="quiz-caras">
+      <div class="quiz-cara quiz-frente">Dos patitas en la <strong>misma columna</strong>, del mismo lado</div>
+      <div class="quiz-cara quiz-atras">✅ ¡Sí! Están unidas por dentro</div>
+    </div></div>
+    <div class="quiz" tabindex="0"><div class="quiz-caras">
+      <div class="quiz-cara quiz-frente">Dos patitas <strong>a cada lado del canal</strong> del medio</div>
+      <div class="quiz-cara quiz-atras">❌ No. El canal separa los dos lados</div>
+    </div></div>
+    <div class="quiz" tabindex="0"><div class="quiz-caras">
+      <div class="quiz-cara quiz-frente">Dos cables en el <strong>riel rojo</strong>, uno en cada punta</div>
+      <div class="quiz-cara quiz-atras">✅ ¡Sí! El riel va unido de punta a punta</div>
+    </div></div>
+  </div>
+  <p class="nota">Por eso el canal del medio existe: para poder poner chips con patitas a los dos lados sin que se toquen.</p>
+</section>
+
+<!-- 10 · Armemos el circuito (paso a paso) -->
+<section class="slide">
+  <p class="eyebrow">¡Manos a la obra!</p>
+  <h2>Armemos tu primer circuito 🔧</h2>
+  <div class="tuto">
+    <div class="proto-caja">
+      <svg viewBox="0 0 620 330" id="armado" aria-label="Circuito con LED y resistencia en la protoboard">
+        <!-- Arduino -->
+        <rect x="10" y="95" width="120" height="185" rx="12" fill="#00878F"/>
+        <text x="70" y="122" text-anchor="middle" fill="#fff" font-family="monospace" font-size="14">ARDUINO</text>
+        <rect x="18" y="138" width="104" height="24" rx="4" fill="#143642"/>
+        <text x="70" y="155" text-anchor="middle" fill="#fff" font-family="monospace" font-size="13">pin 13</text>
+        <rect x="18" y="238" width="104" height="24" rx="4" fill="#143642"/>
+        <text x="70" y="255" text-anchor="middle" fill="#fff" font-family="monospace" font-size="13">GND</text>
+
+        <!-- protoboard (los agujeritos los dibuja el script) -->
+        <rect x="180" y="72" width="420" height="240" rx="10" fill="#EFF4F3" stroke="#C7D6D4" stroke-width="3"/>
+        <rect x="180" y="186" width="420" height="22" fill="#DDE7E6"/>
+        <g id="agujeros-armado"></g>
+
+        <!-- piezas que van apareciendo -->
+        <g id="pieza-led" class="oculta">
+          <line x1="300" y1="46" x2="300" y2="104" stroke="#9aa7ad" stroke-width="4"/>
+          <line x1="348" y1="52" x2="348" y2="104" stroke="#9aa7ad" stroke-width="4"/>
+          <circle cx="324" cy="36" r="22" id="led-armado" fill="#7a3a3a"/>
+          <circle cx="316" cy="29" r="6" fill="#fff" opacity=".3"/>
+          <text x="252" y="70" text-anchor="end" font-size="13" fill="#5E7480">patita larga (+)</text>
+          <path d="M256 66 L 294 76" stroke="#9aa7ad" stroke-width="2" fill="none"/>
+        </g>
+        <g id="pieza-res" class="oculta">
+          <line x1="348" y1="136" x2="444" y2="136" stroke="#9aa7ad" stroke-width="4"/>
+          <rect x="374" y="127" width="44" height="18" rx="4" fill="#D7B899" stroke="#8D6E63" stroke-width="2"/>
+          <rect x="382" y="127" width="4" height="18" fill="#8D3B0B"/>
+          <rect x="390" y="127" width="4" height="18" fill="#8D3B0B"/>
+          <rect x="404" y="127" width="4" height="18" fill="#E84855"/>
+          <text x="396" y="167" text-anchor="middle" font-size="13" fill="#5E7480">220 Ω</text>
+        </g>
+        <path id="pieza-gnd" class="oculta cable-w" d="M126 250 C 180 250, 400 240, 444 152" stroke="#4C7CFF"/>
+        <path id="pieza-13" class="oculta cable-w" d="M126 150 C 190 150, 240 120, 300 120" stroke="#E84855"/>
+      </svg>
+    </div>
+    <aside class="tuto-panel">
+      <p class="tuto-num" id="ar-num">Paso 1 de 5</p>
+      <p class="tuto-texto" id="ar-txt"></p>
+      <div class="fila" style="gap:.5em">
+        <button class="boton" id="ar-sig">Siguiente ▶</button>
+        <button class="boton secundario" id="ar-reset">↺</button>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- 11 · El código es el mismo -->
+<section class="slide">
+  <p class="eyebrow">La mejor parte</p>
+  <h2>¡El código es el mismo! 🤯</h2>
+  <div class="ide">
+    <div class="ide-barra"><span class="boton-ide">✓</span><span class="boton-ide">→</span><span class="ide-nombre">Blink, ahora con tu LED</span></div>
+    <pre><span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">pinMode</span>(<span class="num">13</span>, <span class="kw">OUTPUT</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="fn">digitalWrite</span>(<span class="num">13</span>, <span class="kw">HIGH</span>);
+  <span class="fn">delay</span>(<span class="num">500</span>);
+  <span class="fn">digitalWrite</span>(<span class="num">13</span>, <span class="kw">LOW</span>);
+  <span class="fn">delay</span>(<span class="num">500</span>);
+}</pre>
+  </div>
+  <p class="grande" style="max-width:32em">Antes el pin 13 prendía la lucecita <strong>de adentro</strong>.<br>Ahora prende <strong>tu</strong> LED, el que armaste con tus manos. 💪</p>
+</section>
+
+<!-- 12 · Proyecto: semáforo -->
+<section class="slide">
+  <p class="eyebrow">⭐ Proyecto de la sesión</p>
+  <h2>El semáforo 🚦</h2>
+  <div class="fila" style="align-items:center; gap:2em">
+    <div class="semaforo">
+      <span class="led" id="sem-r" style="--c:var(--rojo)"></span>
+      <span class="led" id="sem-a" style="--c:var(--ambar)"></span>
+      <span class="led" id="sem-v" style="--c:var(--verde)"></span>
+    </div>
+    <div class="ide" style="max-width:22em">
+      <div class="ide-barra"><span class="ide-nombre">semaforo.ino</span></div>
+      <pre><span class="cm">// luz roja: 3 segundos</span>
+<span class="fn">digitalWrite</span>(<span class="num">13</span>, <span class="kw">HIGH</span>);
+<span class="fn">delay</span>(<span class="num">3000</span>);
+<span class="fn">digitalWrite</span>(<span class="num">13</span>, <span class="kw">LOW</span>);
+<span class="cm">// luz verde: 3 segundos</span>
+<span class="fn">digitalWrite</span>(<span class="num">12</span>, <span class="kw">HIGH</span>);
+<span class="fn">delay</span>(<span class="num">3000</span>);
+<span class="fn">digitalWrite</span>(<span class="num">12</span>, <span class="kw">LOW</span>);
+<span class="cm">// amarilla: 1 segundo</span>
+<span class="fn">digitalWrite</span>(<span class="num">11</span>, <span class="kw">HIGH</span>);
+<span class="fn">delay</span>(<span class="num">1000</span>);
+<span class="fn">digitalWrite</span>(<span class="num">11</span>, <span class="kw">LOW</span>);</pre>
+    </div>
+  </div>
+  <button class="boton" id="btn-sem">▶ Probar el semáforo</button>
+  <p class="nota">Tres LEDs, tres resistencias, tres pines: 13, 12 y 11. ¡Y todos comparten el mismo GND!</p>
+</section>
+
+<!-- 13 · Reto -->
+<section class="slide">
+  <div class="reto">
+    <p class="eyebrow">⭐ Reto de la sesión</p>
+    <h2>Tu propia coreografía de luces 💃</h2>
+    <p class="grande">Ya sabes prender, apagar y esperar. ¡Eso es todo lo que necesita un show de luces!</p>
+    <ul class="lista">
+      <li>Que las 3 luces se prendan <strong>una detrás de otra</strong>, como una ola 🌊</li>
+      <li>Que parpadeen <strong>las tres juntas</strong>, tipo alarma 🚨</li>
+      <li>Nivel experto: un <strong>auto fantástico</strong>, con la luz que va y vuelve 🚗</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 14 · Quiz -->
+<section class="slide">
+  <p class="eyebrow">Duelo de cerebritos</p>
+  <h2>¿Cuánto aprendiste? Toca para voltear</h2>
+  <div class="fila">
+    <div class="quiz" tabindex="0"><div class="quiz-caras">
+      <div class="quiz-cara quiz-frente">Si el voltaje es la presión del agua… ¿qué es la corriente?</div>
+      <div class="quiz-cara quiz-atras">El caudal: cuánta agua pasa 🌊</div>
+    </div></div>
+    <div class="quiz" tabindex="0"><div class="quiz-caras">
+      <div class="quiz-cara quiz-frente">¿Por qué el LED necesita una resistencia?</div>
+      <div class="quiz-cara quiz-atras">Es su casco: le frena la corriente para que no se queme 🪖</div>
+    </div></div>
+    <div class="quiz" tabindex="0"><div class="quiz-caras">
+      <div class="quiz-cara quiz-frente">¿Qué pasa si el circuito queda abierto?</div>
+      <div class="quiz-cara quiz-atras">No pasa nada: el agua no puede dar la vuelta 🔄</div>
+    </div></div>
+    <div class="quiz" tabindex="0"><div class="quiz-caras">
+      <div class="quiz-cara quiz-frente">En la protoboard, ¿qué agujeritos van unidos?</div>
+      <div class="quiz-cara quiz-atras">Los de la misma columna (y los rieles, de punta a punta)</div>
+    </div></div>
+    <div class="quiz" tabindex="0"><div class="quiz-caras">
+      <div class="quiz-cara quiz-frente">La patita larga del LED es la…</div>
+      <div class="quiz-cara quiz-atras">¡La positiva! (+) Va del lado del pin 💡</div>
+    </div></div>
+  </div>
+</section>
+
+<!-- 15 · Cierre -->
+<section class="slide portada">
+  <p class="eyebrow">Lo lograste</p>
+  <h1>¡Ya eres electricista! ⚡</h1>
+  <p class="grande">Hoy entendiste la electricidad, domaste la protoboard<br>y armaste un circuito con tus propias manos.</p>
+  <div class="tarjeta" style="max-width:24em">
+    <h3>Próxima sesión 🕹️</h3>
+    <p>Hasta ahora tu Arduino solo <strong>actúa</strong>. La próxima le daremos <strong>sentidos</strong>: sensores, botones… ¡y decisiones!</p>
+  </div>
+  <div class="semaforo-vivo" aria-hidden="true">
+    <span class="led on" style="--c:var(--verde)"></span>
+  </div>
+</section>
+
+<style>
+  /* ---------- analogía del agua ---------- */
+  .agua { display: flex; flex-direction: column; align-items: center; gap: .6em; }
+  .agua-fila { display: flex; align-items: center; gap: 1em; flex-wrap: wrap; justify-content: center; }
+  .pieza { display: flex; flex-direction: column; align-items: center; gap: .2em; }
+  .pieza .icono { font-size: 3.6em; }
+  .etiq { font-size: .8rem; color: var(--gris); line-height: 1.2; text-align: center; }
+  .tubo-caja { position: relative; width: min(48vw, 380px); }
+  .tubo {
+    height: 2.2em; border-radius: 999px; border: 3px solid #90A4AE;
+    background: repeating-linear-gradient(90deg, #4FC3F7 0 14px, #B3E5FC 14px 28px);
+    background-size: 28px 100%;
+    animation: fluir 1.2s linear infinite;
+  }
+  @keyframes fluir { to { background-position: -28px 0; } }
+  .angosto {
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+    width: 3em; height: 2.2em; border-radius: 6px;
+    background: #78909C; opacity: 0; transition: opacity .2s;
+  }
+  .angosto::after {
+    content: ""; position: absolute; inset: .5em .2em;
+    background: #4FC3F7; border-radius: 3px;
+  }
+  .angosto.visible { opacity: 1; }
+  .caudal { font-family: var(--f-titulo); color: var(--teal-osc); }
+  .controles { display: flex; flex-direction: column; align-items: center; gap: .5em; }
+  .controles label { font-size: .95rem; color: var(--gris); display: flex; align-items: center; gap: .6em; }
+
+  /* LED con brillo variable (0 a 1) */
+  .led-brillo {
+    background: color-mix(in srgb, var(--c) calc(25% + var(--b, 0) * 75%), #cfd8dc);
+    box-shadow: 0 0 calc(var(--b, 0) * 1.4em) calc(var(--b, 0) * .4em) color-mix(in srgb, var(--c) 75%, transparent),
+                inset 0 -2px 3px rgba(0,0,0,.2);
+  }
+
+  /* ---------- circuito cerrado ---------- */
+  .circuito { display: flex; flex-direction: column; align-items: center; gap: .6em; }
+  #svg-circuito { width: min(88vw, 540px); }
+  .cable { fill: none; stroke: #37474F; stroke-width: 8; stroke-linecap: round; }
+  #palanca { transform-origin: 190px 60px; transform: rotate(-28deg); transition: transform .3s; }
+  #svg-circuito.cerrado #palanca { transform: rotate(0deg); }
+  .rotulo { font-family: var(--f-cuerpo); font-size: 15px; fill: var(--gris); }
+  #rayos { opacity: 0; transition: opacity .25s; }
+  #svg-circuito.cerrado #rayos { opacity: 1; }
+
+  /* ---------- banco de pruebas del LED ---------- */
+  .banco { position: relative; display: flex; flex-direction: column; align-items: center; gap: .4em; min-width: 8em; }
+  .humo { position: absolute; top: -.6em; font-size: 2.2em; animation: subir 1.2s ease-out infinite; }
+  @keyframes subir { from { opacity: .9; transform: translateY(0); } to { opacity: 0; transform: translateY(-1.2em); } }
+
+  /* ---------- protoboard ---------- */
+  .proto-caja { flex: 1 1 30em; max-width: min(92vw, 40em); }
+  .proto-caja svg { width: 100%; }
+  .hoyo { fill: #fff; stroke: #B9CAC8; stroke-width: 2; cursor: pointer; }
+  .hoyo:hover { stroke: var(--teal); }
+  .hoyo.activo { fill: var(--ambar); stroke: #B37D00; }
+  .tira { fill: var(--teal); opacity: 0; transition: opacity .25s; }
+  .tira.visible { opacity: .28; }
+  .tira.activa { opacity: .55; }
+
+  /* ---------- armado paso a paso ---------- */
+  .oculta { opacity: 0; transition: opacity .35s; }
+  .visible-paso { opacity: 1; }
+  .cable-w { fill: none; stroke-width: 7; stroke-linecap: round; }
+
+  /* ---------- semáforo ---------- */
+  .semaforo {
+    display: flex; flex-direction: column; gap: .5em;
+    background: #263238; border-radius: 16px; padding: .8em;
+    font-size: 2.4em; box-shadow: 0 8px 20px rgba(20,54,66,.3);
+  }
+</style>
+
+<script src="assets/slides.js"></script>
+<script>
+  /* portada: LEDs que se van turnando */
+  const pleds = ["pled-r", "pled-a", "pled-v"].map(id => document.getElementById(id));
+  let pi = 0;
+  setInterval(() => {
+    pleds.forEach((l, i) => l.classList.toggle("on", i === pi));
+    pi = (pi + 1) % 3;
+  }, 700);
+
+  /* ---- 2 · la cañería ---- */
+  (function () {
+    const tubo = document.getElementById("tubo");
+    const angosto = document.getElementById("angosto");
+    const led = document.getElementById("agua-led");
+    const caudal = document.getElementById("caudal");
+    let presion = 5, estrecho = false;
+
+    function actualizar() {
+      const flujo = Math.max(0, presion / 9) * (estrecho ? .35 : 1);   // 0 a 1
+      tubo.style.animationDuration = (2.4 - flujo * 2.1).toFixed(2) + "s";
+      led.style.setProperty("--b", flujo.toFixed(2));
+      angosto.classList.toggle("visible", estrecho);
+      caudal.textContent = "Caudal: " +
+        (flujo < .2 ? "un gotereo 💧" : flujo < .5 ? "tranquilo 💧💧" : flujo < .8 ? "fuerte 💧💧💧" : "¡un chorro! 🌊");
+    }
+    document.getElementById("presion").addEventListener("input", e => { presion = +e.target.value; actualizar(); });
+    document.querySelectorAll("[data-tubo]").forEach(b =>
+      b.addEventListener("click", () => { estrecho = b.dataset.tubo === "angosto"; actualizar(); }));
+    actualizar();
+  })();
+
+  /* ---- 4 · circuito cerrado ---- */
+  (function () {
+    const svg = document.getElementById("svg-circuito");
+    const boton = document.getElementById("btn-interruptor");
+    const txt = document.getElementById("txt-circuito");
+    let cerrado = false;
+    boton.addEventListener("click", () => {
+      cerrado = !cerrado;
+      svg.classList.toggle("cerrado", cerrado);
+      document.getElementById("c-led").setAttribute("fill", cerrado ? "#FFD54F" : "#7a6a3a");
+      document.getElementById("rotulo-sw").textContent = cerrado ? "interruptor cerrado" : "interruptor abierto";
+      boton.textContent = cerrado ? "Abrir el interruptor 🔘" : "Cerrar el interruptor 🔘";
+      txt.innerHTML = cerrado
+        ? "¡Circuito <strong>cerrado</strong>! El agua da la vuelta completa: sale de la pila, pasa por el LED y vuelve a casa. 💡"
+        : "Con el camino cortado, el agua no puede dar la vuelta… y el LED no se enciende.";
+    });
+  })();
+
+  /* ---- 5 · con o sin resistencia ---- */
+  (function () {
+    const led = document.getElementById("led-casco");
+    const humo = document.getElementById("humo");
+    const estado = document.getElementById("estado-casco");
+    const txt = document.getElementById("txt-casco");
+    let parar = null, temporizadores = [];
+
+    function limpiar() {
+      if (parar) { parar(); parar = null; }
+      temporizadores.forEach(clearTimeout);
+      temporizadores = [];
+      humo.hidden = true;
+      led.style.setProperty("--b", 0);
+    }
+
+    document.querySelectorAll("[data-casco]").forEach(b => b.addEventListener("click", () => {
+      limpiar();
+      if (b.dataset.casco === "con") {
+        estado.textContent = "Feliz y sano 😊";
+        txt.innerHTML = "Con su casco puesto, al LED le llega <strong>justo la corriente que aguanta</strong>. Puede brillar toda la clase sin despeinarse.";
+        let on = false;
+        (function late() {
+          on = !on;
+          led.style.setProperty("--b", on ? 1 : 0);
+          temporizadores.push(setTimeout(late, 500));
+        })();
+      } else {
+        estado.textContent = "😵 se quemó";
+        txt.innerHTML = "Sin resistencia le entra <strong>toda la corriente de golpe</strong>: brilla un segundo… y se quema para siempre. 💥";
+        led.style.setProperty("--b", 1);
+        temporizadores.push(setTimeout(() => {
+          led.style.setProperty("--b", 0);
+          led.style.setProperty("--c", "#5a5a5a");
+          humo.hidden = false;
+        }, 900));
+        temporizadores.push(setTimeout(() => { led.style.setProperty("--c", "var(--rojo)"); }, 5000));
+      }
+    }));
+  })();
+
+  /* ---- 8 · protoboard interactiva ---- */
+  (function () {
+    const NS = "http://www.w3.org/2000/svg";
+    const svg = document.getElementById("proto");
+    const txt = document.getElementById("pb-txt");
+    const num = document.getElementById("pb-num");
+    const COLS = 20, X0 = 40, PASO = 28, R = 5.5, FILA = 16;
+    const grupos = {};
+
+    function crear(tag, attrs) {
+      const e = document.createElementNS(NS, tag);
+      for (const k in attrs) e.setAttribute(k, attrs[k]);
+      svg.appendChild(e);
+      return e;
+    }
+
+    // cuerpo de la protoboard
+    crear("rect", { x: 10, y: 10, width: 600, height: 320, rx: 10, fill: "#EFF4F3", stroke: "#C7D6D4", "stroke-width": 3 });
+    crear("rect", { x: 10, y: 158, width: 600, height: 26, fill: "#DDE7E6" });
+    crear("text", { x: 310, y: 176, "text-anchor": "middle", "font-size": 13, fill: "#8FA5A2" }).textContent = "el canal separa los dos lados";
+
+    // láminas escondidas (se dibujan primero, quedan detrás)
+    const tiras = [];
+    function tira(x, y, w, h, id) {
+      const t = crear("rect", { x, y, width: w, height: h, rx: 6, class: "tira" });
+      tiras.push(t);
+      grupos[id] = { tira: t, hoyos: [] };
+    }
+    tira(24, 30, 572, 22, "riel+");
+    tira(24, 288, 572, 22, "riel-");
+    for (let c = 0; c < COLS; c++) {
+      tira(X0 + c * PASO - 9, 70, 18, 92, "arriba" + c);
+      tira(X0 + c * PASO - 9, 190, 18, 92, "abajo" + c);
+    }
+
+    // agujeritos
+    function hoyo(cx, cy, id) {
+      const h = crear("circle", { cx, cy, r: R, class: "hoyo", "data-g": id });
+      grupos[id].hoyos.push(h);
+    }
+    for (let c = 0; c < COLS; c++) {
+      hoyo(X0 + c * PASO, 41, "riel+");
+      hoyo(X0 + c * PASO, 299, "riel-");
+      for (let f = 0; f < 5; f++) hoyo(X0 + c * PASO, 80 + f * FILA, "arriba" + c);
+      for (let f = 0; f < 5; f++) hoyo(X0 + c * PASO, 200 + f * FILA, "abajo" + c);
+    }
+    crear("text", { x: 18, y: 47, "font-size": 17, fill: "#E84855" }).textContent = "+";
+    crear("text", { x: 18, y: 305, "font-size": 19, fill: "#4C7CFF" }).textContent = "−";
+
+    const TEXTOS = {
+      riel: "🔴🔵 Estos son los <strong>rieles</strong>: van unidos de <strong>punta a punta</strong>, a lo largo de toda la protoboard. Sirven para repartir la energía a todo el circuito.",
+      col: "Estos <strong>5 agujeritos</strong> están unidos por dentro, como si fueran un solo cable. Si metes la patita de un LED en uno y un cable en otro… ¡ya están conectados!"
+    };
+
+    svg.addEventListener("click", e => {
+      const h = e.target.closest(".hoyo");
+      if (!h) return;
+      const id = h.dataset.g;
+      Object.values(grupos).forEach(g => {
+        g.tira.classList.remove("activa");
+        g.hoyos.forEach(x => x.classList.remove("activo"));
+      });
+      grupos[id].tira.classList.add("activa");
+      grupos[id].hoyos.forEach(x => x.classList.add("activo"));
+      const esRiel = id.startsWith("riel");
+      num.textContent = esRiel ? "Un riel de energía" : "Una columna";
+      txt.innerHTML = esRiel ? TEXTOS.riel : TEXTOS.col;
+    });
+
+    let viendo = false;
+    document.getElementById("pb-ver").addEventListener("click", e => {
+      viendo = !viendo;
+      tiras.forEach(t => t.classList.toggle("visible", viendo));
+      e.target.textContent = viendo ? "🙈 Esconder los cables" : "👀 Ver los cables escondidos";
+    });
+  })();
+
+  /* ---- 10 · armado paso a paso ---- */
+  (function () {
+    const $ = id => document.getElementById(id);
+
+    // agujeritos de la protoboard del diagrama
+    const NS = "http://www.w3.org/2000/svg";
+    const g = $("agujeros-armado");
+    [104, 120, 136, 152, 224, 240, 256, 272].forEach(cy => {
+      for (let c = 0; c < 16; c++) {
+        const h = document.createElementNS(NS, "circle");
+        h.setAttribute("cx", 204 + c * 24);
+        h.setAttribute("cy", cy);
+        h.setAttribute("r", 5);
+        h.setAttribute("fill", "#fff");
+        h.setAttribute("stroke", "#C7D6D4");
+        h.setAttribute("stroke-width", 2);
+        g.appendChild(h);
+      }
+    });
+
+    const PASOS = [
+      { pieza: null, txt: "Con el Arduino <strong>desenchufado</strong> (regla 1 🔌), preparamos la protoboard. Recuerda: cada columna es un cable escondido." },
+      { pieza: "pieza-led", txt: "Ponemos el LED con cada patita en una <strong>columna distinta</strong> (si comparten columna, se tocan y no pasa nada). La <strong>patita larga es la positiva</strong>." },
+      { pieza: "pieza-res", txt: "Desde la columna de la patita corta, la <strong>resistencia de 220 Ω</strong> salta a otra columna libre. Es el casco del LED. 🪖" },
+      { pieza: "pieza-gnd", txt: "Un cable desde esa columna hasta el <strong>GND</strong> del Arduino: el camino de vuelta a casa." },
+      { pieza: "pieza-13", txt: "Y por fin, un cable del <strong>pin 13</strong> a la columna de la patita larga. ¡Circuito cerrado! 🎉" }
+    ];
+    const FINAL = "🎉 Ahora sí: enchufa el USB y sube el Blink. Tu LED debería parpadear… ¡y es todo tuyo!";
+    let i = 0, latido = null;
+
+    function pintar() {
+      $("ar-num").textContent = i < PASOS.length ? "Paso " + (i + 1) + " de " + PASOS.length : "¡Listo!";
+      $("ar-txt").innerHTML = i < PASOS.length ? PASOS[i].txt : FINAL;
+      PASOS.forEach((p, n) => {
+        if (p.pieza) $(p.pieza).classList.toggle("visible-paso", n <= i);
+      });
+      if (i >= PASOS.length - 1 && !latido) {
+        let on = false;
+        (function late() {
+          on = !on;
+          $("led-armado").setAttribute("fill", on ? "#FFD54F" : "#7a3a3a");
+          latido = setTimeout(late, 500);
+        })();
+      }
+    }
+
+    $("ar-sig").addEventListener("click", () => { if (i < PASOS.length) i++; pintar(); });
+    $("ar-reset").addEventListener("click", () => {
+      clearTimeout(latido); latido = null;
+      $("led-armado").setAttribute("fill", "#7a3a3a");
+      i = 0;
+      pintar();
+    });
+    pintar();
+  })();
+
+  /* ---- 12 · semáforo ---- */
+  (function () {
+    const luces = { r: document.getElementById("sem-r"), a: document.getElementById("sem-a"), v: document.getElementById("sem-v") };
+    const boton = document.getElementById("btn-sem");
+    const CICLO = [["r", 3000], ["v", 3000], ["a", 1000]];
+    let t = null, k = 0, andando = false;
+
+    function paso() {
+      Object.values(luces).forEach(l => l.classList.remove("on"));
+      const [luz, ms] = CICLO[k];
+      luces[luz].classList.add("on");
+      t = setTimeout(() => { k = (k + 1) % CICLO.length; paso(); }, ms);
+    }
+    boton.addEventListener("click", () => {
+      andando = !andando;
+      boton.textContent = andando ? "⏸ Detener" : "▶ Probar el semáforo";
+      if (andando) { k = 0; paso(); }
+      else { clearTimeout(t); Object.values(luces).forEach(l => l.classList.remove("on")); }
+    });
+  })();
+
+  /* quiz */
+  document.querySelectorAll(".quiz").forEach(q => {
+    const voltear = () => q.classList.toggle("volteada");
+    q.addEventListener("click", voltear);
+    q.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { voltear(); e.preventDefault(); } });
+  });
+
+  saberMas({
+    volta: {
+      t: "Voltio — por Alessandro Volta",
+      d: "<p>Un señor italiano que en <strong>1800</strong> inventó la primera <strong>pila</strong> de la historia, apilando monedas de cobre y zinc con cartón mojado 🥞. Por eso la unidad de la presión eléctrica lleva su nombre… ¡y por eso decimos «pila»!</p>"
+    },
+    ampere: {
+      t: "Amperio — por André-Marie Ampère",
+      d: "<p>Un matemático francés que descubrió que <strong>dos cables con corriente se atraen o se repelen</strong>, como imanes 🧲. La unidad del caudal eléctrico lleva su apellido. Tu Arduino entrega miliamperios: milésimas de amperio.</p>"
+    },
+    ohm: {
+      t: "Ohmio — por Georg Ohm",
+      d: "<p>Un profesor alemán que midió con paciencia cuánto frena cada material el paso de la electricidad ⏱️. Descubrió que <strong>más presión = más caudal</strong>, y <strong>más resistencia = menos caudal</strong>. Se ríe con el símbolo Ω (una letra griega).</p>"
+    },
+    gnd: {
+      t: "GND — el camino de vuelta",
+      d: "<p>Viene del inglés <em>ground</em>: <strong>tierra</strong> 🌍. Es el pin por donde la electricidad <strong>vuelve a casa</strong> después de hacer su trabajo.</p><p>Regla práctica: <strong>todo circuito necesita tocar el GND</strong>. Si tu LED no prende, lo primero que hay que revisar es si le falta el camino de vuelta.</p>"
+    },
+    colores: {
+      t: "Las bandas de colores 🎨",
+      d: "<p>Las resistencias no traen el número escrito: lo dicen con <strong>bandas de colores</strong>, como un código secreto.</p><p>La de <strong>220 Ω</strong> que usamos es <strong>rojo · rojo · marrón</strong> (y una banda dorada al final). ¡Búscala en tu kit y compárala!</p>"
+    },
+    soldar: {
+      t: "Soldar",
+      d: "<p>Es pegar dos cables derritiendo un metal blandito (el <strong>estaño</strong>) con una herramienta muy caliente 🔥. Queda firme para siempre… pero para probar ideas es lentísimo, y no es para niños sin un adulto al lado.</p>"
+    },
+    protoboard: {
+      t: "Protoboard",
+      d: "<p>En inglés <em>breadboard</em>: ¡<strong>tabla de pan</strong>! 🍞 Hace muchos años los inventores clavaban clavitos en una tabla de cortar pan de verdad para armar sus circuitos.</p><p>El nombre quedó. En español le decimos <strong>protoboard</strong>: la tabla de los <strong>prototipos</strong>, o sea, de las cosas que todavía se están probando.</p>"
+    },
+    "pb-foto": {
+      t: "📷 La protoboard por dentro",
+      d: "<p>Si le sacas la tapa de plástico, aparecen las <strong>láminas de metal</strong> que unen cada grupo de agujeritos. Son como pincitas que aprietan la patita del componente:</p><img src='../recursos/img/protoboard-interior.jpg' alt='Contactos metálicos dentro de una protoboard'><p class='nota' style='font-size:.75em'>Foto: Zeroping · CC BY 4.0</p>"
+    }
+  });
+</script>
+</body>
+</html>
