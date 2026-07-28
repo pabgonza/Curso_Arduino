@@ -43,7 +43,7 @@
 <!-- 3 · Computador vs Arduino -->
 <section class="slide">
   <p class="eyebrow">Parientes cercanos</p>
-  <h2>Computador vs Arduino 🥊</h2>
+  <h2>Computador vs microcontrolador 🥊</h2>
   <div class="fila">
     <div class="tarjeta">
       <h3>💻 Computador</h3>
@@ -51,12 +51,17 @@
       <p class="nota">Tiene pantalla, teclado y cuesta caro.</p>
     </div>
     <div class="tarjeta">
-      <h3>🧠 Arduino</h3>
+      <h3>🧠 Microcontrolador</h3>
       <p>Un <strong>cerebrito con una misión</strong>: repite SU programa una y otra vez, sin cansarse jamás.</p>
-      <p class="nota">No tiene pantalla ni teclado… ¡tiene pines para sentir y actuar!</p>
+      <p class="nota">Es solo un chip negro chiquitito… ¡y no puede trabajar solo!</p>
     </div>
   </div>
-  <p class="grande">¿Quién gana? ¡Ninguno! Son un gran equipo:<br>el computador <strong>escribe las órdenes</strong> y el Arduino <strong>las cumple</strong>.</p>
+  <div class="reto" style="max-width:min(92vw,40em)">
+    <p class="grande">¿Y Arduino? Arduino es la <strong>placa de desarrollo</strong><button class="sm" data-sm="placa-dev">?</button>:
+    la <strong>nave espacial del cerebrito</strong> 🚀 — le da energía, enchufes
+    para los cables y conexión con el computador, para que usarlo sea facilísimo.</p>
+  </div>
+  <p class="grande">Son un gran equipo: el computador <strong>escribe las órdenes</strong><br>y el microcontrolador <strong>las cumple</strong> desde su placa.</p>
 </section>
 
 <!-- 4 · La receta de un robot -->
@@ -121,9 +126,9 @@
   <h2>La receta que regalaron al mundo 🎁</h2>
   <div class="fila-cuento">
     <figure class="figura">
-      <img src="../recursos/img/primer-arduino.jpg" alt="Arduino Diecimila, una de las primeras placas Arduino, con la leyenda Made in Italy">
-      <figcaption>Uno de los primeros Arduinos (2007): "Made in Italy" 🇮🇹
-        <span class="credito">Foto: Franky47 · CC BY-SA 3.0</span></figcaption>
+      <img src="../recursos/img/primer-arduino-proto.jpg" alt="El primer prototipo de Arduino: una placa amarilla soldada a mano con cables sueltos y un chip ATmega8">
+      <figcaption>El primer Arduino: ¡soldado a mano, con sus cables y todo! 🛠️
+        <span class="credito">Foto: Phillip Torrone · CC BY-SA 3.0</span></figcaption>
     </figure>
     <div class="texto">
       <p class="grande">Cuando un invento es un éxito, lo normal es guardar la receta
@@ -137,7 +142,42 @@
   </div>
 </section>
 
-<!-- 8 · Quiz -->
+<!-- 8 · La familia de placas -->
+<section class="slide">
+  <p class="eyebrow">Hoy, veinte años después…</p>
+  <h2>¡Toda una familia de placas! 👨‍👩‍👧‍👦</h2>
+  <p>Como los planos son libres, hay placas de <strong>todos los tamaños y superpoderes</strong>. Cada misión tiene su placa:</p>
+  <div class="placas">
+    <div class="placa-card">
+      <img src="../recursos/img/placa-nano.jpg" alt="Placa Arduino Nano, muy pequeña">
+      <h3>Nano 🤏</h3>
+      <p>Chiquitito: cabe en un dedo. Para inventos con poco espacio.</p>
+    </div>
+    <div class="placa-card">
+      <img src="../recursos/img/placa-mega.jpg" alt="Placa Arduino Mega, grande y con muchos pines">
+      <h3>Mega 💪</h3>
+      <p>Grandote y con un montón de pines: para robots con muchos cables.</p>
+    </div>
+    <div class="placa-card">
+      <img src="../recursos/img/placa-esp32.jpg" alt="Placa ESP32 con antena WiFi integrada" style="object-position: top">
+      <h3>ESP32 📶</h3>
+      <p>¡Tiene WiFi! Puede mandar datos por internet: clima, alarmas…</p>
+    </div>
+    <div class="placa-card">
+      <img src="../recursos/img/placa-lilypad.jpg" alt="Placa LilyPad Arduino, redonda, sostenida entre dos dedos">
+      <h3>LilyPad 👕</h3>
+      <p>Redondita y plana: ¡se cose en la ropa con hilo conductor!</p>
+    </div>
+    <div class="placa-card">
+      <img src="../recursos/img/placa-raspberry.jpg" alt="Placa Raspberry Pi 4">
+      <h3>Raspberry Pi 🖥️</h3>
+      <p>Tan poderosa que es un mini computador: se conecta hasta a la tele.</p>
+    </div>
+  </div>
+  <p class="nota">Nosotros usaremos el <strong>Arduino UNO</strong>: el favorito para aprender. 🏆</p>
+</section>
+
+<!-- 9 · Quiz -->
 <section class="slide">
   <p class="eyebrow">Duelo de cerebritos</p>
   <h2>¿Cuánto aprendiste? Toca para voltear</h2>
@@ -157,6 +197,10 @@
     <div class="quiz" tabindex="0"><div class="quiz-caras">
       <div class="quiz-cara quiz-frente">¿Tu lavadora tiene un microcontrolador?</div>
       <div class="quiz-cara quiz-atras">¡Sí! Controla el agua, los giros y los tiempos 🧺</div>
+    </div></div>
+    <div class="quiz" tabindex="0"><div class="quiz-caras">
+      <div class="quiz-cara quiz-frente">¿Arduino es un microcontrolador?</div>
+      <div class="quiz-cara quiz-atras">Es la placa: la nave 🚀 del microcontrolador (el chip negro)</div>
     </div></div>
   </div>
 </section>
@@ -193,6 +237,31 @@
   .obj.si { border-color: var(--verde); background: #EDFBF4; }
   .obj.no { border-color: var(--gris); opacity: .65; }
   .cuento p { max-width: 22em; }
+
+  /* galería de la familia de placas */
+  .placas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9.5em, 1fr));
+    gap: .8em;
+    width: min(94vw, 62em);
+  }
+  .placa-card {
+    background: var(--blanco);
+    border: 3px solid var(--teal-suave);
+    border-radius: 14px;
+    padding: .5em;
+    display: flex;
+    flex-direction: column;
+    gap: .25em;
+  }
+  .placa-card img {
+    width: 100%;
+    height: 16vh;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  .placa-card h3 { font-family: var(--f-titulo); color: var(--teal-osc); font-size: 1.05rem; }
+  .placa-card p { font-size: .85rem; line-height: 1.3; }
 </style>
 
 <script src="assets/slides.js"></script>
@@ -228,6 +297,10 @@
     micro: {
       t: "Microcontrolador",
       d: "<p>Es un <strong>computador completo del tamaño de una uña</strong> 💅: tiene cerebro, memoria y manitos (los pines), todo en un solo chip negro. No puede jugar videojuegos, pero es campeón en <strong>repetir una tarea sin equivocarse jamás</strong>. El del Arduino se llama <em>ATmega328</em>.</p>"
+    },
+    "placa-dev": {
+      t: "Placa de desarrollo",
+      d: "<p>El microcontrolador solito es un chip con patitas: difícil de conectar y fácil de romper. La <strong>placa de desarrollo</strong> es su <strong>nave equipada</strong> 🚀: le agrega el enchufe USB, la energía, luces de aviso y pines cómodos donde conectar cables sin soldar nada. Arduino UNO = chip ATmega328 + su nave.</p>"
     },
     abierto: {
       t: "Hardware abierto (open source)",
