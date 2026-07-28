@@ -39,11 +39,11 @@
   <p class="eyebrow">Paso 2 · Montar el taller</p>
   <h2>Instalemos el IDE 📥</h2>
   <div style="display:flex; flex-direction:column; gap:.5em; width:min(92vw,640px)">
-    <button class="check"><span class="caja"></span>Entrar a <strong>&nbsp;arduino.cc/en/software&nbsp;</strong> y bajar la versión de <strong>&nbsp;Windows&nbsp;</strong> <button class="sm" data-sm="f-descarga">📷</button></button>
-    <button class="check"><span class="caja"></span>Abrir el instalador desde la carpeta <strong>&nbsp;Descargas&nbsp;</strong> <button class="sm" data-sm="f-instalador">📷</button></button>
-    <button class="check"><span class="caja"></span>Aceptar, siguiente, siguiente… <strong>&nbsp;Instalar&nbsp;</strong> <button class="sm" data-sm="f-pasos">📷</button></button>
-    <button class="check"><span class="caja"></span>Abrirlo: buscar <strong>&nbsp;arduino&nbsp;</strong> en el menú <strong>&nbsp;Inicio&nbsp;</strong> <button class="sm" data-sm="f-inicio">📷</button></button>
-    <button class="check"><span class="caja"></span>¡Listo! Se abre el taller, con <strong>&nbsp;setup&nbsp;</strong> y <strong>&nbsp;loop&nbsp;</strong> esperando <button class="sm" data-sm="f-abierto">📷</button></button>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Entrar a <strong>arduino.cc/en/software</strong> y bajar la versión de <strong>Windows</strong> <button class="sm" data-sm="f-descarga">📷</button></span></div>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Abrir el instalador desde la carpeta <strong>Descargas</strong> <button class="sm" data-sm="f-instalador">📷</button></span></div>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Aceptar, siguiente, siguiente… <strong>Instalar</strong> <button class="sm" data-sm="f-pasos">📷</button></span></div>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Abrirlo: buscar <strong>arduino</strong> en el menú <strong>Inicio</strong> <button class="sm" data-sm="f-inicio">📷</button></span></div>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">¡Listo! Se abre el taller, con <strong>setup</strong> y <strong>loop</strong> esperando <button class="sm" data-sm="f-abierto">📷</button></span></div>
   </div>
   <p class="nota">Toca el 📷 de cada paso para ver cómo se ve en pantalla. En el taller ya está instalado: este paso a paso es para hacerlo en tu casa 🏠</p>
 </section>
@@ -63,7 +63,6 @@
       <div class="mock-botones"><span class="mock-si">✓ Instalar</span><span class="mock-no">No instalar</span></div>
     </div>
   </div>
-  <button class="check" style="width:min(92vw,640px)"><span class="caja"></span>Cuando Windows pregunte por el driver: <strong>&nbsp;¡Instalar!&nbsp;</strong></button>
   <p class="nota" style="max-width:34em">Esto pasa <strong>mientras se instala el IDE</strong>, con el Arduino todavía desenchufado: así, cuando lo conectes, Windows ya sabrá quién es. (Algunas placas más baratas necesitan otro traductor llamado CH340: avísale al profe.)</p>
   <p class="grande">Traductor listo ✅ … ¡ahora sí, <strong>conectemos el cable USB</strong>! 🔌 <button class="sm" data-sm="f-cable">📷</button></p>
 </section>
@@ -72,7 +71,7 @@
 <section class="slide">
   <p class="eyebrow">Paso 4 · Conocer al cerebrito</p>
   <h2>Toca los círculos ámbar 👇</h2>
-  <div style="position:relative; width:min(80vw,505px)">
+  <div style="position:relative; width:min(78vw,470px)">
     <svg viewBox="0 0 560 400" style="width:100%; filter:drop-shadow(0 8px 16px rgba(20,54,66,.2))" aria-label="Dibujo de la placa Arduino UNO">
       <rect x="30" y="30" width="500" height="340" rx="18" fill="#00878F"/>
       <rect x="60" y="42" width="300" height="26" rx="4" fill="#0b6e75"/>
@@ -95,11 +94,11 @@
     <button class="hot" style="left:12%; top:26%" data-hot="usb">1</button>
     <button class="hot" style="left:36%; top:12%" data-hot="dig">2</button>
     <button class="hot" style="left:56%; top:86%" data-hot="ana">3</button>
-    <button class="hot" style="left:24%; top:24%" data-hot="led">4</button>
+    <button class="hot" style="left:19%; top:32%" data-hot="led">4</button>
     <button class="hot" style="left:84%; top:20%" data-hot="reset">5</button>
-    <button class="hot" style="left:73%; top:37%" data-hot="on">6</button>
+    <button class="hot" style="left:78%; top:44%" data-hot="on">6</button>
   </div>
-  <p id="hot-info" class="grande" style="min-height:2.4em">💡 Cada parte tiene un superpoder.</p>
+  <p id="hot-info" class="grande" style="min-height:2.4em; max-width:32em">💡 Cada parte tiene un superpoder.</p>
   <button class="sm-grande" data-sm="placa">¿Saber más? ¿Qué es una "placa"?</button>
 </section>
 
@@ -108,9 +107,9 @@
   <p class="eyebrow">Paso 5 · ¡A conectar!</p>
   <h2>Conectemos el cerebrito 🔌</h2>
   <div style="display:flex; flex-direction:column; gap:.6em; width:min(92vw,640px)">
-    <button class="check"><span class="caja"></span>Conectar el cable <strong>&nbsp;USB&nbsp;</strong><button class="sm" data-sm="usb">?</button> al Arduino y al computador <button class="sm" data-sm="f-cable">📷</button></button>
-    <button class="check"><span class="caja"></span>Ver que se enciende la lucecita <strong>&nbsp;ON&nbsp;</strong> verde (la número 6 de la placa 🟢)</button>
-    <button class="check"><span class="caja"></span>En el IDE, elegir <strong>&nbsp;Arduino UNO&nbsp;</strong> y su puerto <strong>&nbsp;COM&nbsp;</strong><button class="sm" data-sm="com">?</button> <button class="sm" data-sm="f-puerto">📷</button></button>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Conectar el cable <strong>USB</strong><button class="sm" data-sm="usb">?</button> al Arduino y al computador <button class="sm" data-sm="f-cable">📷</button></span></div>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Ver que se enciende la lucecita <strong>ON</strong> verde (la número 6 de la placa 🟢)</span></div>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">En el IDE, elegir <strong>Arduino UNO</strong> y su puerto <strong>COM</strong><button class="sm" data-sm="com">?</button> <button class="sm" data-sm="f-puerto">📷</button></span></div>
   </div>
   <p class="nota">¿No aparece ningún puerto? Revisa el cable (algunos solo cargan, no llevan datos) o llama al profe.</p>
 </section>
@@ -185,11 +184,11 @@
   <h2>Tu turno con la placa 🎯</h2>
   <p class="grande">Los mismos clics que acabas de hacer, pero en el IDE real.</p>
   <div style="display:flex; flex-direction:column; gap:.6em; width:min(92vw,640px)">
-    <button class="check"><span class="caja"></span><strong>&nbsp;Archivo → Ejemplos → 01.Basics → Blink&nbsp;</strong></button>
-    <button class="check"><span class="caja"></span>Apretar el botón <strong>&nbsp;→ Subir&nbsp;</strong> <button class="sm" data-sm="f-subir">📷</button></button>
-    <button class="check"><span class="caja"></span>Esperar el mensaje <strong>&nbsp;«Done uploading»&nbsp;</strong> <button class="sm" data-sm="f-exito">📷</button></button>
-    <button class="check"><span class="caja"></span>¡Mirar la placa! El LED <strong>&nbsp;«L»&nbsp;</strong> está parpadeando 🎉</button>
-    <button class="check"><span class="caja"></span>Cambiar un <strong>&nbsp;delay&nbsp;</strong> por otro número y volver a subir: ¿qué pasó?</button>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt"><strong>Archivo → Ejemplos → 01.Basics → Blink</strong></span></div>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Apretar el botón <strong>→ Subir</strong> <button class="sm" data-sm="f-subir">📷</button></span></div>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Esperar el mensaje <strong>«Done uploading»</strong> <button class="sm" data-sm="f-exito">📷</button></span></div>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">¡Mirar la placa! El LED <strong>«L»</strong> está parpadeando 🎉</span></div>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Cambiar un <strong>delay</strong> por otro número y volver a subir: ¿qué pasó?</span></div>
   </div>
 </section>
 
@@ -200,10 +199,10 @@
   <p class="grande" style="max-width:26em">¡No hay problema! <strong>Tinkercad</strong> es un laboratorio
   virtual gratis: tiene Arduinos infinitos y nada se puede quemar.</p>
   <div style="display:flex; flex-direction:column; gap:.6em; width:min(92vw,640px)">
-    <button class="check"><span class="caja"></span>Abrir <strong>&nbsp;tinkercad.com/joinclass&nbsp;</strong></button>
-    <button class="check"><span class="caja"></span>Escribir el <strong>&nbsp;código de la clase&nbsp;</strong> (está en la pizarra)</button>
-    <button class="check"><span class="caja"></span>Entrar con tu <strong>&nbsp;apodo&nbsp;</strong> (sin correo, sin contraseña)</button>
-    <button class="check"><span class="caja"></span>Crear un <strong>&nbsp;Circuito nuevo&nbsp;</strong> y arrastrar un Arduino UNO</button>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Abrir <strong>tinkercad.com/joinclass</strong></span></div>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Escribir el <strong>código de la clase</strong> (está en la pizarra)</span></div>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Entrar con tu <strong>apodo</strong> (sin correo, sin contraseña)</span></div>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Crear un <strong>Circuito nuevo</strong> y arrastrar un Arduino UNO</span></div>
   </div>
 </section>
 
@@ -401,6 +400,9 @@
   }
   .mock-no { border: 1px solid #bbb; border-radius: 6px; padding: .2em 1em; color: #555; }
 
+  /* los botones de pantallazo llevan emoji: necesitan más aire que el "?" */
+  .sm[data-sm^="f-"] { width: 1.6em; height: 1.6em; font-size: .9em; }
+
   /* menú Inicio de Windows simulado */
   .mock-inicio {
     width: 100%; max-width: 24em;
@@ -484,7 +486,7 @@
     padding: .25em .8em; color: #33525c; cursor: pointer;
     min-width: 13em; text-align: left;
   }
-  .sim-editor { height: 10.5em; overflow: auto; background: #fff; }
+  .sim-editor { height: 16.5em; overflow: auto; background: #fff; }
   .sim-editor pre { font-family: var(--f-codigo); font-size: .9em; line-height: 1.5; padding: .6em .9em; }
   .sim-consola {
     background: #143642; color: #cfe8e6;
@@ -495,10 +497,10 @@
   .sim-consola .tenue { opacity: .5; font-style: italic; }
 
   /* la manito que indica dónde hacer clic */
-  .objetivo { position: relative; outline: 3px solid var(--ambar); outline-offset: 2px; animation: latir 1.3s infinite; }
+  .objetivo { position: relative; z-index: 6; outline: 3px solid var(--ambar); outline-offset: 2px; animation: latir 1.3s infinite; }
   .objetivo::after {
     content: "👆"; position: absolute; right: -.7em; bottom: -1.1em;
-    font-size: 1.15em; pointer-events: none; animation: tocando 1s infinite;
+    font-size: 1.5em; pointer-events: none; animation: tocando 1s infinite;
   }
   @keyframes latir { 50% { outline-color: #FFE3AC; } }
   @keyframes tocando { 50% { transform: translateY(-.28em); } }
@@ -545,11 +547,15 @@
       if (l) document.getElementById(l[0]).setAttribute("fill", l[1]);
     }));
 
-  document.querySelectorAll(".check").forEach(c =>
+  document.querySelectorAll(".check").forEach(c => {
     c.addEventListener("click", e => {
       if (e.target.closest(".sm")) return;   // el "?" y el 📷 no marcan el paso
       c.classList.toggle("hecho");
-    }));
+    });
+    c.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") { c.classList.toggle("hecho"); e.preventDefault(); }
+    });
+  });
 
   let delayMs = 500;
   const slider = document.getElementById("slider-delay");

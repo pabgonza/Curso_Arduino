@@ -55,6 +55,9 @@ body {
   overflow-y: auto;
 }
 .slide.activa { display: flex; }
+/* nada se aplasta: si no cabe, la slide hace scroll en vez de recortar
+   el contenido de las cajas con overflow:hidden */
+.slide > * { flex-shrink: 0; }
 
 /* entrada animada escalonada */
 .slide.activa > * {
@@ -251,6 +254,7 @@ ul.lista li::before { content: "▸ "; color: var(--teal); font-weight: 800; }
   font-size: clamp(1rem, 2.8vh, 1.4rem);
   transition: border-color .2s, background .2s;
 }
+.check .txt { flex: 1; }   /* el texto es un solo item flex: envuelve como párrafo */
 .check .caja {
   width: 1.3em; height: 1.3em;
   border: 3px solid var(--teal);
@@ -349,6 +353,7 @@ figure.figura figcaption .credito {
   font-weight: 800;
   cursor: pointer;
   vertical-align: super;
+  margin-left: .15em;
   box-shadow: 0 2px 0 #C98F14;
 }
 .sm:hover { transform: scale(1.15); }
@@ -366,6 +371,7 @@ figure.figura figcaption .credito {
 .sm-grande:hover { background: #FFF6E3; }
 
 dialog.saber-mas {
+  margin: auto;              /* el reset "* { margin:0 }" le quitaba el centrado propio del <dialog> */
   border: 4px solid var(--ambar);
   border-radius: 20px;
   padding: 1.4em 1.6em;
@@ -387,7 +393,7 @@ dialog.saber-mas p { line-height: 1.5; }
 dialog.saber-mas img {
   width: 100%;
   height: auto;
-  max-height: 55vh;
+  max-height: 45vh;
   object-fit: contain;
   border-radius: 10px;
   border: 2px solid var(--teal-suave);

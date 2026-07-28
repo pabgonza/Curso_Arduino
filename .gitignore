@@ -4,6 +4,9 @@ build/
 *.elf
 *.bin
 
+# Pantallazos de revisión (Playwright)
+.playwright-mcp/
+
 # OS
 Thumbs.db
 Desktop.ini
