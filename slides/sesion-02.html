@@ -38,15 +38,14 @@
 <section class="slide">
   <p class="eyebrow">Paso 2 · Montar el taller</p>
   <h2>Instalemos el IDE 📥</h2>
-  <p class="nota">Toca el 📷 de cada paso para ver cómo se ve en pantalla.</p>
-  <div style="display:flex; flex-direction:column; gap:.6em; width:min(92vw,640px)">
-    <button class="check"><span class="caja"></span>Entrar a <strong>&nbsp;arduino.cc/en/software&nbsp;</strong> y buscar la descarga <button class="sm" data-sm="f-descarga">📷</button></button>
-    <button class="check"><span class="caja"></span>Descargar la versión para <strong>&nbsp;Windows&nbsp;</strong></button>
+  <div style="display:flex; flex-direction:column; gap:.5em; width:min(92vw,640px)">
+    <button class="check"><span class="caja"></span>Entrar a <strong>&nbsp;arduino.cc/en/software&nbsp;</strong> y bajar la versión de <strong>&nbsp;Windows&nbsp;</strong> <button class="sm" data-sm="f-descarga">📷</button></button>
     <button class="check"><span class="caja"></span>Abrir el instalador desde la carpeta <strong>&nbsp;Descargas&nbsp;</strong> <button class="sm" data-sm="f-instalador">📷</button></button>
     <button class="check"><span class="caja"></span>Aceptar, siguiente, siguiente… <strong>&nbsp;Instalar&nbsp;</strong> <button class="sm" data-sm="f-pasos">📷</button></button>
-    <button class="check"><span class="caja"></span>Abrirlo: aparece un programa casi vacío con <strong>&nbsp;setup&nbsp;</strong> y <strong>&nbsp;loop&nbsp;</strong></button>
+    <button class="check"><span class="caja"></span>Abrirlo: buscar <strong>&nbsp;arduino&nbsp;</strong> en el menú <strong>&nbsp;Inicio&nbsp;</strong> <button class="sm" data-sm="f-inicio">📷</button></button>
+    <button class="check"><span class="caja"></span>¡Listo! Se abre el taller, con <strong>&nbsp;setup&nbsp;</strong> y <strong>&nbsp;loop&nbsp;</strong> esperando <button class="sm" data-sm="f-abierto">📷</button></button>
   </div>
-  <p class="nota">En el taller ya está instalado — este paso a paso es para hacerlo en tu casa. 🏠</p>
+  <p class="nota">Toca el 📷 de cada paso para ver cómo se ve en pantalla. En el taller ya está instalado: este paso a paso es para hacerlo en tu casa 🏠</p>
 </section>
 
 <!-- 4 · Drivers -->
@@ -65,14 +64,15 @@
     </div>
   </div>
   <button class="check" style="width:min(92vw,640px)"><span class="caja"></span>Cuando Windows pregunte por el driver: <strong>&nbsp;¡Instalar!&nbsp;</strong></button>
-  <p class="nota">¿La placa no aparece ni así? Avísale al profe (algunas placas necesitan otro traductor llamado CH340).</p>
+  <p class="nota" style="max-width:34em">Esto pasa <strong>mientras se instala el IDE</strong>, con el Arduino todavía desenchufado: así, cuando lo conectes, Windows ya sabrá quién es. (Algunas placas más baratas necesitan otro traductor llamado CH340: avísale al profe.)</p>
+  <p class="grande">Traductor listo ✅ … ¡ahora sí, <strong>conectemos el cable USB</strong>! 🔌 <button class="sm" data-sm="f-cable">📷</button></p>
 </section>
 
 <!-- 5 · Conoce la placa -->
 <section class="slide">
   <p class="eyebrow">Paso 4 · Conocer al cerebrito</p>
   <h2>Toca los círculos ámbar 👇</h2>
-  <div style="position:relative; width:min(88vw,560px)">
+  <div style="position:relative; width:min(80vw,505px)">
     <svg viewBox="0 0 560 400" style="width:100%; filter:drop-shadow(0 8px 16px rgba(20,54,66,.2))" aria-label="Dibujo de la placa Arduino UNO">
       <rect x="30" y="30" width="500" height="340" rx="18" fill="#00878F"/>
       <rect x="60" y="42" width="300" height="26" rx="4" fill="#0b6e75"/>
@@ -87,14 +87,17 @@
       <rect x="452" y="60" width="36" height="12" rx="3" fill="#ECEFF1"/>
       <rect x="150" y="150" width="150" height="150" rx="8" fill="#263238"/>
       <text x="188" y="235" fill="#78909C" font-family="monospace" font-size="16">ATmega</text>
-      <rect x="118" y="96" width="16" height="9" rx="2" fill="#FFB627" id="svg-led13"/>
+      <rect x="118" y="96" width="16" height="9" rx="2" fill="#8a6a20" id="svg-led13"/>
       <text x="138" y="105" fill="#fff" font-family="monospace" font-size="12">L</text>
+      <rect x="404" y="150" width="16" height="9" rx="2" fill="#1f6b46" id="svg-ledon"/>
+      <text x="426" y="159" fill="#fff" font-family="monospace" font-size="12">ON</text>
     </svg>
     <button class="hot" style="left:12%; top:26%" data-hot="usb">1</button>
     <button class="hot" style="left:36%; top:12%" data-hot="dig">2</button>
     <button class="hot" style="left:56%; top:86%" data-hot="ana">3</button>
     <button class="hot" style="left:24%; top:24%" data-hot="led">4</button>
     <button class="hot" style="left:84%; top:20%" data-hot="reset">5</button>
+    <button class="hot" style="left:73%; top:37%" data-hot="on">6</button>
   </div>
   <p id="hot-info" class="grande" style="min-height:2.4em">💡 Cada parte tiene un superpoder.</p>
   <button class="sm-grande" data-sm="placa">¿Saber más? ¿Qué es una "placa"?</button>
@@ -105,22 +108,86 @@
   <p class="eyebrow">Paso 5 · ¡A conectar!</p>
   <h2>Conectemos el cerebrito 🔌</h2>
   <div style="display:flex; flex-direction:column; gap:.6em; width:min(92vw,640px)">
-    <button class="check"><span class="caja"></span>Conectar el cable <strong>&nbsp;USB&nbsp;</strong><button class="sm" data-sm="usb">?</button> al Arduino y al computador</button>
-    <button class="check"><span class="caja"></span>Ver que se enciende la lucecita <strong>&nbsp;ON&nbsp;</strong> verde</button>
+    <button class="check"><span class="caja"></span>Conectar el cable <strong>&nbsp;USB&nbsp;</strong><button class="sm" data-sm="usb">?</button> al Arduino y al computador <button class="sm" data-sm="f-cable">📷</button></button>
+    <button class="check"><span class="caja"></span>Ver que se enciende la lucecita <strong>&nbsp;ON&nbsp;</strong> verde (la número 6 de la placa 🟢)</button>
     <button class="check"><span class="caja"></span>En el IDE, elegir <strong>&nbsp;Arduino UNO&nbsp;</strong> y su puerto <strong>&nbsp;COM&nbsp;</strong><button class="sm" data-sm="com">?</button> <button class="sm" data-sm="f-puerto">📷</button></button>
   </div>
   <p class="nota">¿No aparece ningún puerto? Revisa el cable (algunos solo cargan, no llevan datos) o llama al profe.</p>
 </section>
 
-<!-- 7 · Probar en el Arduino -->
+<!-- 7 · Tutorial interactivo dentro del IDE -->
 <section class="slide">
   <p class="eyebrow">Paso 6 · La prueba de fuego</p>
-  <h2>¡Tu primera orden de verdad! ⚡</h2>
+  <h2>Sigue la manito: clic a clic 👆</h2>
+  <div class="tuto">
+    <div class="sim-ide">
+      <div class="sim-titulo"><span class="sim-punto"></span>Arduino IDE 2</div>
+
+      <div class="sim-menu">
+        <button class="sim-m" id="t-archivo">Archivo</button>
+        <span class="sim-m apagado">Editar</span>
+        <span class="sim-m apagado">Sketch</span>
+        <span class="sim-m apagado">Herramientas</span>
+        <span class="sim-m apagado">Ayuda</span>
+        <div class="sim-desp" id="d-archivo" hidden>
+          <span class="sim-op apagado">Nuevo sketch</span>
+          <span class="sim-op apagado">Abrir…</span>
+          <button class="sim-op" id="t-ejemplos">Ejemplos <span class="fl">▸</span></button>
+          <span class="sim-op apagado">Guardar</span>
+          <div class="sim-desp sub" id="d-ejemplos" hidden>
+            <button class="sim-op" id="t-basics">01.Basics <span class="fl">▸</span></button>
+            <span class="sim-op apagado">02.Digital <span class="fl">▸</span></span>
+            <span class="sim-op apagado">03.Analog <span class="fl">▸</span></span>
+            <span class="sim-op apagado">06.Sensors <span class="fl">▸</span></span>
+            <div class="sim-desp sub" id="d-basics" hidden>
+              <span class="sim-op apagado">AnalogReadSerial</span>
+              <span class="sim-op apagado">BareMinimum</span>
+              <button class="sim-op" id="t-blink">Blink</button>
+              <span class="sim-op apagado">DigitalReadSerial</span>
+              <span class="sim-op apagado">Fade</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sim-barra">
+        <span class="sim-btn apagado">✓</span>
+        <button class="sim-btn" id="t-subir">→</button>
+        <button class="sim-sel" id="t-placa"><span id="sim-sel-txt">Selecciona una placa</span> ▾</button>
+        <div class="sim-desp placa" id="d-placa" hidden>
+          <button class="sim-op" id="t-uno">Arduino UNO — COM3</button>
+          <span class="sim-op apagado">Arduino Mega — sin conectar</span>
+        </div>
+      </div>
+
+      <div class="sim-editor"><pre id="sim-code"><span class="cm">// Tu programa va a aparecer aquí…</span></pre></div>
+      <div class="sim-consola" id="sim-consola"></div>
+    </div>
+
+    <aside class="tuto-panel">
+      <p class="tuto-num" id="tuto-num">Paso 1 de 7</p>
+      <p class="tuto-texto" id="tuto-texto"></p>
+      <div class="tuto-placa">
+        <span class="mini-placa">
+          <span class="mini-led" id="sim-led"></span>
+          <span class="mini-etiq">L</span>
+        </span>
+        <span class="nota">tu placa</span>
+      </div>
+      <button class="boton secundario" id="tuto-reset">↺ Empezar de nuevo</button>
+    </aside>
+  </div>
+</section>
+
+<!-- 8 · Ahora en la placa de verdad -->
+<section class="slide">
+  <p class="eyebrow">Paso 6 · ¡Ahora de verdad!</p>
+  <h2>Tu turno con la placa 🎯</h2>
+  <p class="grande">Los mismos clics que acabas de hacer, pero en el IDE real.</p>
   <div style="display:flex; flex-direction:column; gap:.6em; width:min(92vw,640px)">
-    <button class="check"><span class="caja"></span>Abrir <strong>&nbsp;Archivo → Ejemplos → 01.Basics → Blink&nbsp;</strong></button>
-    <button class="check"><span class="caja"></span>Mirar el código: tiene <strong>&nbsp;setup&nbsp;</strong> (se hace 1 vez) y <strong>&nbsp;loop&nbsp;</strong> (se repite ∞)</button>
+    <button class="check"><span class="caja"></span><strong>&nbsp;Archivo → Ejemplos → 01.Basics → Blink&nbsp;</strong></button>
     <button class="check"><span class="caja"></span>Apretar el botón <strong>&nbsp;→ Subir&nbsp;</strong> <button class="sm" data-sm="f-subir">📷</button></button>
-    <button class="check"><span class="caja"></span>Esperar el mensaje <strong>&nbsp;"Done uploading"&nbsp;</strong> <button class="sm" data-sm="f-exito">📷</button></button>
+    <button class="check"><span class="caja"></span>Esperar el mensaje <strong>&nbsp;«Done uploading»&nbsp;</strong> <button class="sm" data-sm="f-exito">📷</button></button>
     <button class="check"><span class="caja"></span>¡Mirar la placa! El LED <strong>&nbsp;«L»&nbsp;</strong> está parpadeando 🎉</button>
     <button class="check"><span class="caja"></span>Cambiar un <strong>&nbsp;delay&nbsp;</strong> por otro número y volver a subir: ¿qué pasó?</button>
   </div>
@@ -333,6 +400,124 @@
     background: #E8F0FE; font-weight: 800; color: #1a63d6;
   }
   .mock-no { border: 1px solid #bbb; border-radius: 6px; padding: .2em 1em; color: #555; }
+
+  /* menú Inicio de Windows simulado */
+  .mock-inicio {
+    width: 100%; max-width: 24em;
+    margin: .7em auto .2em;
+    border: 2px solid #9aa7ad; border-radius: 10px;
+    overflow: hidden; text-align: left; background: #fff;
+    box-shadow: 0 10px 26px rgba(20,54,66,.2);
+    font-size: .9em;
+  }
+  .mi-barra { background: #f2f5f7; padding: .45em .7em; display: flex; align-items: center; gap: .5em; border-bottom: 1px solid #dde4e8; }
+  .mi-campo { flex: 1; background: #fff; border: 1px solid #c9d6d8; border-radius: 999px; padding: .15em .8em; color: #223; }
+  .mi-seccion { font-size: .72em; color: #667; padding: .6em .8em .1em; letter-spacing: .05em; }
+  .mi-item { display: flex; align-items: center; gap: .7em; padding: .5em .8em .8em; background: #E8F0FE; color: #223; }
+  .mi-logo { width: 1.9em; height: 1.9em; border-radius: 50%; background: var(--teal); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-weight: 900; flex: none; }
+  .mi-sub { font-size: .75em; color: #667; }
+
+  /* ---------- tutorial interactivo dentro del IDE ---------- */
+  .tuto { display: flex; gap: 1.2em; align-items: flex-start; justify-content: center; flex-wrap: wrap; width: 100%; max-width: 66em; }
+
+  .sim-ide {
+    flex: 1 1 30em;
+    max-width: min(92vw, 40em);
+    position: relative;
+    background: #fff;
+    border: 3px solid var(--teal);
+    border-radius: 12px;
+    box-shadow: 0 10px 28px rgba(20,54,66,.18);
+    text-align: left;
+    font-size: clamp(.7rem, 1.85vh, 1rem);
+  }
+  .sim-titulo {
+    background: #e9eff0; color: #33525c; font-weight: 700; font-size: .85em;
+    padding: .3em .7em; border-radius: 9px 9px 0 0;
+    display: flex; align-items: center; gap: .5em;
+  }
+  .sim-punto {
+    width: .7em; height: .7em; border-radius: 50%; background: var(--rojo);
+    box-shadow: 1.1em 0 0 var(--ambar), 2.2em 0 0 var(--verde);
+    margin-right: 2.4em; flex: none;
+  }
+  .sim-menu { position: relative; display: flex; gap: .1em; background: #f5f8f8; border-bottom: 1px solid #dbe5e6; padding: .2em .4em; }
+  .sim-m {
+    font-family: var(--f-cuerpo); font-size: .9em; font-weight: 700;
+    background: none; border: none; color: var(--tinta);
+    padding: .2em .6em; border-radius: 5px; cursor: pointer;
+  }
+  .sim-m.abierto { background: var(--teal); color: #fff; }
+  .sim-m.apagado, .sim-op.apagado, .sim-btn.apagado { color: #9fb0b5; cursor: default; font-weight: 400; }
+  .sim-btn.apagado { opacity: .5; color: var(--teal-osc); }
+
+  .sim-desp {
+    position: absolute; z-index: 5; top: 100%; left: .3em;
+    min-width: 12em;
+    display: flex; flex-direction: column;
+    background: #fff; border: 1px solid #c9d6d8; border-radius: 8px;
+    box-shadow: 0 12px 26px rgba(20,54,66,.28);
+    padding: .25em;
+  }
+  .sim-desp[hidden] { display: none; }
+  .sim-desp.sub { top: 1.9em; left: 100%; }
+  .sim-desp.placa { top: calc(100% + .2em); left: 5.5em; }
+  .sim-op {
+    font-family: var(--f-cuerpo); font-size: .9em; text-align: left;
+    background: none; border: none; color: var(--tinta);
+    padding: .28em .6em; border-radius: 5px; cursor: pointer;
+    display: flex; justify-content: space-between; gap: 1.2em; white-space: nowrap;
+  }
+  button.sim-op:hover { background: var(--teal-suave); }
+  .fl { opacity: .55; }
+
+  .sim-barra { position: relative; display: flex; align-items: center; gap: .5em; background: var(--teal); padding: .4em .7em; }
+  .sim-btn {
+    width: 1.9em; height: 1.9em; border-radius: 50%; border: none;
+    background: #fff; color: var(--teal-osc);
+    font-family: var(--f-titulo); font-size: .95em; font-weight: 900;
+    display: inline-flex; align-items: center; justify-content: center; cursor: pointer; flex: none;
+  }
+  .sim-sel {
+    font-family: var(--f-cuerpo); font-size: .85em;
+    background: #fff; border: none; border-radius: 6px;
+    padding: .25em .8em; color: #33525c; cursor: pointer;
+    min-width: 13em; text-align: left;
+  }
+  .sim-editor { height: 10.5em; overflow: auto; background: #fff; }
+  .sim-editor pre { font-family: var(--f-codigo); font-size: .9em; line-height: 1.5; padding: .6em .9em; }
+  .sim-consola {
+    background: #143642; color: #cfe8e6;
+    font-family: var(--f-codigo); font-size: .78em; line-height: 1.6;
+    padding: .5em .9em; min-height: 4.4em; border-radius: 0 0 9px 9px;
+  }
+  .sim-consola .ok { color: var(--verde); font-weight: 700; }
+  .sim-consola .tenue { opacity: .5; font-style: italic; }
+
+  /* la manito que indica dónde hacer clic */
+  .objetivo { position: relative; outline: 3px solid var(--ambar); outline-offset: 2px; animation: latir 1.3s infinite; }
+  .objetivo::after {
+    content: "👆"; position: absolute; right: -.7em; bottom: -1.1em;
+    font-size: 1.15em; pointer-events: none; animation: tocando 1s infinite;
+  }
+  @keyframes latir { 50% { outline-color: #FFE3AC; } }
+  @keyframes tocando { 50% { transform: translateY(-.28em); } }
+  @media (prefers-reduced-motion: reduce) { .objetivo, .objetivo::after { animation: none; } }
+
+  .tuto-panel {
+    flex: 0 1 16em; min-width: 13em;
+    background: linear-gradient(135deg, #FFF6E3, #FFEFC9);
+    border: 3px solid var(--ambar); border-radius: 16px;
+    padding: .9em 1em; text-align: left;
+    display: flex; flex-direction: column; gap: .7em;
+  }
+  .tuto-num { font-family: var(--f-titulo); color: #B37D00; font-size: .9rem !important; letter-spacing: .08em; }
+  .tuto-texto { font-size: clamp(.95rem, 2.3vh, 1.15rem) !important; line-height: 1.4; min-height: 5.5em; }
+  .tuto-placa { display: flex; align-items: center; gap: .6em; }
+  .mini-placa { display: inline-flex; align-items: center; gap: .35em; background: var(--teal); border-radius: 6px; padding: .4em .7em; }
+  .mini-led { width: .85em; height: .85em; border-radius: 3px; background: #8a6a20; display: inline-block; transition: background .06s, box-shadow .06s; }
+  .mini-led.on { background: var(--ambar); box-shadow: 0 0 .55em .18em rgba(255,182,39,.85); }
+  .mini-etiq { color: #fff; font-family: var(--f-codigo); font-size: .7em; }
 </style>
 
 <script src="assets/slides.js"></script>
@@ -349,12 +534,15 @@
     dig: "🕹️ Pines digitales (0-13): las manos del Arduino. Aquí se conectan LEDs, buzzers…",
     ana: "📈 Pines analógicos (A0-A5): oídos finos para sensores que miden cosas.",
     led: "💡 LED «L»: una lucecita integrada conectada al pin 13. ¡Hoy la haremos parpadear!",
-    reset: "🔄 Botón RESET: reinicia el programa desde el principio."
+    reset: "🔄 Botón RESET: reinicia el programa desde el principio.",
+    on: "🟢 LED «ON»: se enciende solito apenas la placa recibe energía. Si está prendido, ¡el cerebrito está vivo!"
   };
+  const ledsPlaca = { led: ["svg-led13", "#FFB627"], on: ["svg-ledon", "#35CE8D"] };
   document.querySelectorAll(".hot").forEach(b =>
     b.addEventListener("click", () => {
       document.getElementById("hot-info").textContent = infoHot[b.dataset.hot];
-      if (b.dataset.hot === "led") document.getElementById("svg-led13").setAttribute("fill", "#FFE082");
+      const l = ledsPlaca[b.dataset.hot];
+      if (l) document.getElementById(l[0]).setAttribute("fill", l[1]);
     }));
 
   document.querySelectorAll(".check").forEach(c =>
@@ -390,6 +578,111 @@
     q.addEventListener("click", voltear);
     q.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { voltear(); e.preventDefault(); } });
   });
+
+  /* ---- tutorial guiado dentro del IDE simulado ---- */
+  (function () {
+    const $ = id => document.getElementById(id);
+    const CODIGO = `<span class="cm">// Blink: prende y apaga el LED de la placa</span>
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">pinMode</span>(<span class="kw">LED_BUILTIN</span>, <span class="kw">OUTPUT</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="fn">digitalWrite</span>(<span class="kw">LED_BUILTIN</span>, <span class="kw">HIGH</span>);
+  <span class="fn">delay</span>(<span class="num">1000</span>);
+  <span class="fn">digitalWrite</span>(<span class="kw">LED_BUILTIN</span>, <span class="kw">LOW</span>);
+  <span class="fn">delay</span>(<span class="num">1000</span>);
+}`;
+    const VACIO = '<span class="cm">// Tu programa va a aparecer aquí…</span>';
+    const CONSOLA_VACIA = '<div class="tenue">Aquí el IDE te cuenta lo que va pasando…</div>';
+    const FINAL = "🎉 <strong>¡Lo lograste!</strong> El LED «L» de la placa ya está parpadeando: 1 segundo prendido, 1 segundo apagado… para siempre.";
+
+    const menus = ["d-archivo", "d-ejemplos", "d-basics", "d-placa"];
+    const abrir = id => $(id).hidden = false;
+    function cerrarMenus() {
+      menus.forEach(m => $(m).hidden = true);
+      $("t-archivo").classList.remove("abierto");
+    }
+
+    let i = 0, subiendo = false, apagarLed = null, timers = [];
+
+    function subir() {
+      subiendo = true;
+      const c = $("sim-consola");
+      c.innerHTML = "";
+      const linea = (t, cls) => {
+        const d = document.createElement("div");
+        if (cls) d.className = cls;
+        d.textContent = t;
+        c.appendChild(d);
+      };
+      linea("Compilando sketch...");
+      $("tuto-texto").innerHTML = "El IDE está <strong>traduciendo</strong> tu programa al idioma del cerebrito…";
+      timers.push(setTimeout(() => {
+        linea("Subiendo...");
+        $("tuto-texto").innerHTML = "Ahora tu programa viaja por el cable USB 🔌…";
+      }, 1100));
+      timers.push(setTimeout(() => {
+        linea("Done uploading.", "ok");
+        apagarLed = parpadear($("sim-led"), () => 1000, () => 1000);
+        subiendo = false;
+        $("tuto-num").textContent = "¡Completado!";
+        $("tuto-texto").innerHTML = FINAL;
+      }, 2300));
+    }
+
+    const pasos = [
+      { obj: "t-archivo", txt: "Los ejemplos ya vienen guardados dentro del IDE. Abre el menú <strong>Archivo</strong>.",
+        al: () => { abrir("d-archivo"); $("t-archivo").classList.add("abierto"); } },
+      { obj: "t-ejemplos", txt: "Ahí está: <strong>Ejemplos</strong>. Son programas de regalo, listos para probar.",
+        al: () => abrir("d-ejemplos") },
+      { obj: "t-basics", txt: "Los más sencillos viven en <strong>01.Basics</strong> (los básicos).",
+        al: () => abrir("d-basics") },
+      { obj: "t-blink", txt: "<strong>Blink</strong> quiere decir «parpadear». ¡Es el primer programa de todos los arduineros del mundo!",
+        al: () => { cerrarMenus(); $("sim-code").innerHTML = CODIGO; } },
+      { obj: "t-placa", txt: "Mira el código: <strong>setup</strong> se hace una vez y <strong>loop</strong> se repite para siempre. Ahora el IDE necesita saber <strong>dónde</strong> está tu placa: abre el selector.",
+        al: () => abrir("d-placa") },
+      { obj: "t-uno", txt: "La tuya es la <strong>Arduino UNO</strong>, enchufada en el puerto <strong>COM3</strong>.",
+        al: () => { cerrarMenus(); $("sim-sel-txt").textContent = "Arduino UNO en COM3"; } },
+      { obj: "t-subir", txt: "¡Llegó el momento! El botón <strong>→</strong> manda el programa por el cable hasta el cerebrito.",
+        al: subir }
+    ];
+
+    function pintar() {
+      document.querySelectorAll(".objetivo").forEach(e => e.classList.remove("objetivo"));
+      if (i < pasos.length) {
+        $("tuto-num").textContent = "Paso " + (i + 1) + " de " + pasos.length;
+        $("tuto-texto").innerHTML = pasos[i].txt;
+        $(pasos[i].obj).classList.add("objetivo");
+      } else if (!subiendo) {
+        $("tuto-num").textContent = "¡Completado!";
+        $("tuto-texto").innerHTML = FINAL;
+      }
+    }
+
+    pasos.forEach((p, n) => $(p.obj).addEventListener("click", () => {
+      if (n !== i) return;            // solo responde el paso que toca
+      p.al();
+      i++;
+      pintar();
+    }));
+
+    $("tuto-reset").addEventListener("click", () => {
+      timers.forEach(clearTimeout);
+      timers = [];
+      if (apagarLed) { apagarLed(); apagarLed = null; }
+      subiendo = false;
+      cerrarMenus();
+      $("sim-code").innerHTML = VACIO;
+      $("sim-consola").innerHTML = CONSOLA_VACIA;
+      $("sim-sel-txt").textContent = "Selecciona una placa";
+      i = 0;
+      pintar();
+    });
+
+    $("sim-consola").innerHTML = CONSOLA_VACIA;
+    pintar();
+  })();
 
   const CREDITO_DOCS = "<p class='nota' style='font-size:.75em'>Pantallazo: docs.arduino.cc · CC BY-SA 4.0</p>";
   saberMas({
@@ -428,6 +721,62 @@
     "f-pasos": {
       t: "📷 Siguiente, siguiente… ¡Instalar!",
       d: "<p>El instalador hace casi todo solo. Acepta la licencia y avanza hasta el final:</p><img src='../recursos/img/pantallazos/ide-instalar-2.png' alt='Secuencia de ventanas del instalador de Arduino IDE en Windows'>" + CREDITO_DOCS
+    },
+    "f-inicio": {
+      t: "📷 ¿Dónde quedó el IDE?",
+      d: `<p>Al terminar la instalación, el Arduino IDE queda guardado en el <strong>menú Inicio</strong> 🪟
+          (y casi siempre también deja un ícono en el escritorio).</p>
+          <p>Aprieta el botón de Inicio, escribe <strong>arduino</strong> y aparecerá así:</p>
+          <div class="mock-inicio">
+            <div class="mi-barra"><span>🔍</span><span class="mi-campo">arduino</span></div>
+            <div class="mi-seccion">Mejor coincidencia</div>
+            <div class="mi-item">
+              <span class="mi-logo">∞</span>
+              <span><strong>Arduino IDE</strong><br><span class="mi-sub">Aplicación</span></span>
+            </div>
+          </div>
+          <p class="nota">Truco: haz clic derecho sobre él y elige «Anclar a la barra de tareas» para tenerlo siempre a mano.</p>`
+    },
+    "f-abierto": {
+      t: "📷 Así se ve el taller recién abierto",
+      d: `<p>Un programa casi vacío, con las dos partes que siempre están:
+          <strong>setup</strong> (se hace una vez) y <strong>loop</strong> (se repite para siempre).</p>
+          <div class="sim-ide" style="max-width:100%; margin:.7em 0 .3em">
+            <div class="sim-titulo"><span class="sim-punto"></span>sketch_jul28a | Arduino IDE 2</div>
+            <div class="sim-menu">
+              <span class="sim-m apagado">Archivo</span><span class="sim-m apagado">Editar</span>
+              <span class="sim-m apagado">Sketch</span><span class="sim-m apagado">Herramientas</span>
+              <span class="sim-m apagado">Ayuda</span>
+            </div>
+            <div class="sim-barra">
+              <span class="sim-btn apagado">✓</span><span class="sim-btn apagado">→</span>
+              <span class="sim-sel">Selecciona una placa ▾</span>
+            </div>
+            <div class="sim-editor" style="height:auto"><pre><span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="cm">// se ejecuta una vez, al empezar</span>
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="cm">// se repite para siempre</span>
+}</pre></div>
+          </div>
+          <p class="nota">Si se ve así, ¡el taller quedó montado! 🛠️</p>`
+    },
+    "f-cable": {
+      t: "📷 El cable USB tiene dos puntas distintas",
+      d: `<p>No se puede equivocar: cada punta entra en un solo lado.</p>
+          <svg viewBox="0 0 520 200" style="width:100%; height:auto" role="img" aria-label="Cable USB con la punta plana hacia el computador y la punta cuadrada hacia el Arduino">
+            <path d="M128 92 C 220 30, 320 160, 396 96" stroke="#143642" stroke-width="11" fill="none" stroke-linecap="round"/>
+            <rect x="58" y="76" width="72" height="32" rx="4" fill="#9aa7ad"/>
+            <rect x="64" y="83" width="52" height="18" rx="2" fill="#DDE4E8"/>
+            <path d="M394 80 l10 -10 h44 l10 10 v34 h-64 z" fill="#9aa7ad"/>
+            <rect x="404" y="82" width="44" height="22" rx="3" fill="#DDE4E8"/>
+            <text x="94" y="140" text-anchor="middle" font-family="Nunito, sans-serif" font-weight="700" font-size="19" fill="#143642">punta plana</text>
+            <text x="94" y="164" text-anchor="middle" font-family="Nunito, sans-serif" font-size="17" fill="#5E7480">al computador 💻</text>
+            <text x="436" y="150" text-anchor="middle" font-family="Nunito, sans-serif" font-weight="700" font-size="19" fill="#143642">punta cuadrada</text>
+            <text x="436" y="174" text-anchor="middle" font-family="Nunito, sans-serif" font-size="17" fill="#5E7480">al Arduino 🔌</text>
+          </svg>
+          <p>Apenas lo enchufas, se enciende la lucecita verde <strong>ON</strong> de la placa: ¡el cerebrito despertó! 🟢</p>`
     },
     "f-puerto": {
       t: "📷 Elegir placa y puerto",
