@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sesión 1 · ¿Qué es Arduino?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/slides.css">
+</head>
+<body>
+
+<!-- 1 · Portada -->
+<section class="slide portada">
+  <span class="sesion-num">Sesión 1</span>
+  <h1>¿Qué es Arduino? 🤖</h1>
+  <p class="grande">La historia de un cerebrito que cambió el mundo…<br>y que muy pronto vas a mandar tú.</p>
+  <div class="semaforo-vivo" aria-hidden="true">
+    <span class="led" id="pled-r" style="--c:var(--rojo)"></span>
+    <span class="led" id="pled-a" style="--c:var(--ambar)"></span>
+    <span class="led" id="pled-v" style="--c:var(--verde)"></span>
+  </div>
+</section>
+
+<!-- 2 · Cerebritos escondidos -->
+<section class="slide">
+  <p class="eyebrow">Misión detective</p>
+  <h2>¿Dónde se esconden los cerebritos? 🔍</h2>
+  <p class="grande">Toca cada objeto y descubre si tiene un <strong>microcontrolador</strong><button class="sm" data-sm="micro">?</button> adentro.</p>
+  <div class="fila" id="objetos">
+    <button class="obj" data-si="1">🧺<span>Lavadora</span></button>
+    <button class="obj" data-si="1">🎮<span>Control de juegos</span></button>
+    <button class="obj" data-si="0">🪑<span>Silla</span></button>
+    <button class="obj" data-si="1">🚦<span>Semáforo</span></button>
+    <button class="obj" data-si="1">🚁<span>Dron</span></button>
+    <button class="obj" data-si="0">🥄<span>Cuchara</span></button>
+    <button class="obj" data-si="1">⏰<span>Despertador</span></button>
+    <button class="obj" data-si="1">🛗<span>Ascensor</span></button>
+  </div>
+  <p id="obj-info" class="nota" style="min-height:1.6em">Los cerebritos están por todas partes…</p>
+</section>
+
+<!-- 3 · Computador vs Arduino -->
+<section class="slide">
+  <p class="eyebrow">Parientes cercanos</p>
+  <h2>Computador vs Arduino 🥊</h2>
+  <div class="fila">
+    <div class="tarjeta">
+      <h3>💻 Computador</h3>
+      <p>Un <strong>cerebro gigante</strong>: hace mil cosas a la vez — juegos, videos, tareas…</p>
+      <p class="nota">Tiene pantalla, teclado y cuesta caro.</p>
+    </div>
+    <div class="tarjeta">
+      <h3>🧠 Arduino</h3>
+      <p>Un <strong>cerebrito con una misión</strong>: repite SU programa una y otra vez, sin cansarse jamás.</p>
+      <p class="nota">No tiene pantalla ni teclado… ¡tiene pines para sentir y actuar!</p>
+    </div>
+  </div>
+  <p class="grande">¿Quién gana? ¡Ninguno! Son un gran equipo:<br>el computador <strong>escribe las órdenes</strong> y el Arduino <strong>las cumple</strong>.</p>
+</section>
+
+<!-- 4 · La receta de un robot -->
+<section class="slide">
+  <p class="eyebrow">La receta secreta de todos los robots</p>
+  <h2>Sentir → Pensar → Actuar 🔁</h2>
+  <div class="fila">
+    <div class="tarjeta"><h3>👀 Sentir</h3><p>Los <strong>sensores</strong> son sus sentidos: ven distancias, miden calor, escuchan.</p></div>
+    <div class="tarjeta"><h3>🧠 Pensar</h3><p>El <strong>cerebrito</strong> decide con las reglas que TÚ le programaste.</p></div>
+    <div class="tarjeta"><h3>💪 Actuar</h3><p>Los <strong>actuadores</strong> son sus músculos: luces, sonidos, motores.</p></div>
+  </div>
+  <p class="grande">Una puerta de supermercado 🚪 <strong>siente</strong> que llegas,<br><strong>piensa</strong> "¡alguien viene!" y <strong>actúa</strong> abriéndose. ¡Es un mini robot!</p>
+</section>
+
+<!-- 5 · Historia parte 1 -->
+<section class="slide cuento">
+  <p class="eyebrow">📖 La historia · capítulo 1</p>
+  <h2>La escuela de inventores</h2>
+  <p class="grande">Érase una vez, en un pueblito de Italia llamado <strong>Ivrea</strong> 🇮🇹,
+  una escuela donde los estudiantes inventaban cosas locas: lámparas que
+  respondían, máquinas que saludaban…</p>
+  <p class="grande">Pero había un problema: los cerebritos para sus inventos eran
+  <strong>carísimos</strong> 💸 — ¡costaban como 100 dólares! — y si se quemaba uno…
+  adiós mesada del mes.</p>
+  <p class="nota">Año 2005. Sus profesores decidieron hacer algo al respecto…</p>
+</section>
+
+<!-- 6 · Historia parte 2 -->
+<section class="slide cuento">
+  <p class="eyebrow">📖 La historia · capítulo 2</p>
+  <h2>El bar del rey 🍕👑</h2>
+  <p class="grande">Los profesores se juntaban en su bar favorito del pueblo:
+  el <strong>Bar del Rey Arduino</strong>, llamado así por un rey que vivió ahí
+  hace más de ¡mil años!</p>
+  <p class="grande">Ahí, entre pizzas y servilletas con dibujos, diseñaron una placa
+  <strong>barata</strong>, <strong>resistente</strong> y <strong>fácil de usar</strong>
+  para sus estudiantes.</p>
+  <p class="grande">¿Y el nombre? Fácil: la bautizaron como el bar…<br><strong>¡Arduino!</strong> 🎉</p>
+</section>
+
+<!-- 7 · Historia parte 3 -->
+<section class="slide cuento">
+  <p class="eyebrow">📖 La historia · capítulo 3</p>
+  <h2>La receta que regalaron al mundo 🎁</h2>
+  <p class="grande">Cuando un invento es un éxito, lo normal es guardar la receta
+  en secreto y hacerse rico. Pero ellos hicieron lo contrario:
+  <strong>publicaron los planos gratis en internet</strong>, para que cualquier
+  persona pudiera copiarla, fabricarla y mejorarla.</p>
+  <p class="grande">A eso se le llama <strong>hardware abierto</strong><button class="sm" data-sm="abierto">?</button>.
+  Por eso hoy hay <strong>millones</strong> de Arduinos en el mundo…
+  ¡y por eso el tuyo cuesta poquito! 🌍</p>
+</section>
+
+<!-- 8 · Quiz -->
+<section class="slide">
+  <p class="eyebrow">Duelo de cerebritos</p>
+  <h2>¿Cuánto aprendiste? Toca para voltear</h2>
+  <div class="fila">
+    <div class="quiz" tabindex="0"><div class="quiz-caras">
+      <div class="quiz-cara quiz-frente">¿De dónde viene el nombre "Arduino"?</div>
+      <div class="quiz-cara quiz-atras">Del bar del rey Arduino, en Ivrea 🍕👑</div>
+    </div></div>
+    <div class="quiz" tabindex="0"><div class="quiz-caras">
+      <div class="quiz-cara quiz-frente">Un robot siempre hace tres cosas: sentir, ¿y qué más?</div>
+      <div class="quiz-cara quiz-atras">Pensar y actuar 🧠💪</div>
+    </div></div>
+    <div class="quiz" tabindex="0"><div class="quiz-caras">
+      <div class="quiz-cara quiz-frente">¿Por qué regalaron los planos de Arduino?</div>
+      <div class="quiz-cara quiz-atras">Para que todos pudieran copiarla y mejorarla 🎁</div>
+    </div></div>
+    <div class="quiz" tabindex="0"><div class="quiz-caras">
+      <div class="quiz-cara quiz-frente">¿Tu lavadora tiene un microcontrolador?</div>
+      <div class="quiz-cara quiz-atras">¡Sí! Controla el agua, los giros y los tiempos 🧺</div>
+    </div></div>
+  </div>
+</section>
+
+<!-- 9 · Cierre -->
+<section class="slide portada">
+  <p class="eyebrow">Fin del capítulo 1</p>
+  <h1>La próxima… ¡manos a la placa! 🔌</h1>
+  <p class="grande">Ya sabes qué es Arduino y de dónde viene.<br>
+  En la próxima sesión vas a <strong>conectar uno de verdad</strong><br>
+  y darle tu primera orden.</p>
+  <div class="semaforo-vivo" aria-hidden="true">
+    <span class="led on" style="--c:var(--verde)"></span>
+  </div>
+</section>
+
+<style>
+  .obj {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .15em;
+    font-size: 2.2em;
+    background: var(--blanco);
+    border: 3px solid var(--teal-suave);
+    border-radius: 16px;
+    padding: .35em .5em;
+    cursor: pointer;
+    font-family: var(--f-cuerpo);
+    transition: transform .12s, border-color .12s;
+  }
+  .obj span { font-size: .42em; font-weight: 900; color: var(--tinta); }
+  .obj:hover { transform: translateY(-4px); }
+  .obj.si { border-color: var(--verde); background: #EDFBF4; }
+  .obj.no { border-color: var(--gris); opacity: .65; }
+  .cuento p { max-width: 22em; }
+</style>
+
+<script src="assets/slides.js"></script>
+<script>
+  // portada: semáforo que se turna
+  const pleds = ["pled-r", "pled-a", "pled-v"].map(id => document.getElementById(id));
+  let pi = 0;
+  setInterval(() => {
+    pleds.forEach((l, i) => l.classList.toggle("on", i === pi));
+    pi = (pi + 1) % 3;
+  }, 700);
+
+  // detective de cerebritos
+  const info = document.getElementById("obj-info");
+  document.querySelectorAll(".obj").forEach(o =>
+    o.addEventListener("click", () => {
+      const tiene = o.dataset.si === "1";
+      o.classList.add(tiene ? "si" : "no");
+      info.textContent = tiene
+        ? "✅ ¡Sí! " + o.querySelector("span").textContent + " tiene un cerebrito que sigue instrucciones."
+        : "❌ Nop… " + o.querySelector("span").textContent.toLowerCase() + " no necesita pensar nada.";
+    }));
+
+  // quiz
+  document.querySelectorAll(".quiz").forEach(q => {
+    const voltear = () => q.classList.toggle("volteada");
+    q.addEventListener("click", voltear);
+    q.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { voltear(); e.preventDefault(); } });
+  });
+
+  // ¿saber más?
+  saberMas({
+    micro: {
+      t: "Microcontrolador",
+      d: "<p>Es un <strong>computador completo del tamaño de una uña</strong> 💅: tiene cerebro, memoria y manitos (los pines), todo en un solo chip negro. No puede jugar videojuegos, pero es campeón en <strong>repetir una tarea sin equivocarse jamás</strong>. El del Arduino se llama <em>ATmega328</em>.</p>"
+    },
+    abierto: {
+      t: "Hardware abierto (open source)",
+      d: "<p>Es como una <strong>receta de cocina publicada</strong> 📖: cualquiera puede leerla, cocinarla en su casa y hasta inventarle mejoras, con una sola regla de oro: <strong>compartir también sus mejoras</strong>. Así, en vez de una empresa mejorando la placa, ¡hay millones de personas haciéndolo juntas!</p>"
+    }
+  });
+</script>
+</body>
+</html>

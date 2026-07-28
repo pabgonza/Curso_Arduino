@@ -73,6 +73,28 @@
   ir((parseInt(location.hash.slice(1), 10) || 1) - 1);
 })();
 
+/* "¿Saber más?": popups opcionales que no cortan el flujo de la clase.
+   Uso: saberMas({ ide: { t: "IDE", d: "Texto…" } }) y en el HTML
+   <button class="sm" data-sm="ide">?</button> (o .sm-grande). */
+function saberMas(defs) {
+  const dlg = document.createElement("dialog");
+  dlg.className = "saber-mas";
+  dlg.innerHTML = `<h3></h3><div class="sm-cuerpo"></div>
+    <button class="cerrar">¡Entendido! 👍</button>`;
+  document.body.appendChild(dlg);
+  dlg.querySelector(".cerrar").addEventListener("click", () => dlg.close());
+  dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
+
+  document.querySelectorAll("[data-sm]").forEach(b =>
+    b.addEventListener("click", () => {
+      const def = defs[b.dataset.sm];
+      if (!def) return;
+      dlg.querySelector("h3").textContent = def.t;
+      dlg.querySelector(".sm-cuerpo").innerHTML = def.d;
+      dlg.showModal();
+    }));
+}
+
 /* Utilidad compartida: hace parpadear un elemento .led con tiempos dados.
    Devuelve una función para detener el parpadeo. */
 function parpadear(led, msOn, msOff) {
