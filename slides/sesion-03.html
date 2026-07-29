@@ -343,18 +343,6 @@
   <button class="sm-grande" data-sm="colores">🎨 ¿Cómo se lee una resistencia?</button>
 </section>
 
-<!-- 6 · Seguridad -->
-<section class="slide">
-  <p class="eyebrow">Reglas de electricista profesional</p>
-  <h2>Seguridad primero ⚡</h2>
-  <div class="fila">
-    <div class="tarjeta"><h3>🔌 Regla 1</h3><p>Para poner o cambiar cables, primero <strong>desconecta el USB</strong>. Siempre.</p></div>
-    <div class="tarjeta"><h3>👀 Regla 2</h3><p>Antes de enchufar, tu compañero <strong>revisa tu circuito</strong> (y tú el suyo).</p></div>
-    <div class="tarjeta"><h3>🖐️ Regla 3</h3><p>¿Algo huele raro o se calienta? <strong>Desconecta y avisa</strong>.</p></div>
-  </div>
-  <p class="nota">Arduino usa 5 voltios: no puede hacerte daño, pero un cable mal puesto sí puede dañar la placa.</p>
-</section>
-
 <!-- 7 · Qué es la protoboard -->
 <section class="slide">
   <p class="eyebrow">Tu nueva mejor amiga</p>
@@ -408,6 +396,18 @@
     </div></div>
   </div>
   <p class="nota">Por eso el canal del medio existe: para poder poner chips con patitas a los dos lados sin que se toquen.</p>
+</section>
+
+<!-- Seguridad: justo antes de tocar cables -->
+<section class="slide">
+  <p class="eyebrow">Reglas de electricista profesional</p>
+  <h2>Seguridad primero ⚡</h2>
+  <div class="fila">
+    <div class="tarjeta"><h3>🔌 Regla 1</h3><p>Para poner o cambiar cables, primero <strong>desconecta el USB</strong>. Siempre.</p></div>
+    <div class="tarjeta"><h3>👀 Regla 2</h3><p>Antes de enchufar, tu compañero <strong>revisa tu circuito</strong> (y tú el suyo).</p></div>
+    <div class="tarjeta"><h3>🖐️ Regla 3</h3><p>¿Algo huele raro o se calienta? <strong>Desconecta y avisa</strong>.</p></div>
+  </div>
+  <p class="nota">Arduino usa 5 voltios: no puede hacerte daño, pero un cable mal puesto sí puede dañar la placa.</p>
 </section>
 
 <!-- 10 · Armemos el circuito (paso a paso) -->
@@ -494,6 +494,7 @@
 }</pre>
   </div>
   <p class="grande" style="max-width:32em">Antes el pin 13 prendía la lucecita <strong>de adentro</strong>.<br>Ahora prende <strong>tu</strong> LED, el que armaste con tus manos. 💪</p>
+  <p class="nota" style="max-width:36em">El secreto: la lucecita de la placa está unida por un caminito escondido <strong>al mismo pin 13</strong>. Tu LED ahora vive en ese pin también, así que el código sirve igualito — sin cambiar ni una letra.</p>
 </section>
 
 <!-- 12 · Proyecto: semáforo -->
@@ -551,7 +552,7 @@
     </div></div>
     <div class="quiz" tabindex="0"><div class="quiz-caras">
       <div class="quiz-cara quiz-frente">¿Por qué el LED necesita una resistencia?</div>
-      <div class="quiz-cara quiz-atras">Es su casco: le frena la corriente para que no se queme 🪖</div>
+      <div class="quiz-cara quiz-atras">Le limita la corriente para que no se queme 💡</div>
     </div></div>
     <div class="quiz" tabindex="0"><div class="quiz-caras">
       <div class="quiz-cara quiz-frente">¿Qué pasa si el circuito queda abierto?</div>
@@ -890,7 +891,7 @@
       limpiar();
       if (b.dataset.casco === "con") {
         estado.textContent = "Feliz y sano 😊";
-        txt.innerHTML = "Con su casco puesto, al LED le llega <strong>justo la corriente que aguanta</strong>. Puede brillar toda la clase sin despeinarse.";
+        txt.innerHTML = "Con la resistencia, al LED le llega <strong>justo la corriente que aguanta</strong>. Puede brillar toda la clase sin despeinarse.";
         let on = false;
         (function late() {
           on = !on;
@@ -1046,7 +1047,7 @@
     const PASOS = [
       { pieza: null, txt: "Con el Arduino <strong>desenchufado</strong> (regla 1 🔌), preparamos la protoboard. Recuerda: cada columna es un cable escondido." },
       { pieza: "pieza-led", txt: "Ponemos el LED con cada patita en una <strong>columna distinta</strong> (si comparten columna, se tocan y no pasa nada). La <strong>patita larga es la positiva</strong>. El cartelito muestra cómo se dibuja en los planos. ✏️" },
-      { pieza: "pieza-res", txt: "Desde la columna de la patita corta, la <strong>resistencia de 220 Ω</strong> salta a otra columna libre. Es el casco del LED 🪖 — y en los planos es la sierrita que ya conoces." },
+      { pieza: "pieza-res", txt: "Desde la columna de la patita corta, la <strong>resistencia de 220 Ω</strong> salta a otra columna libre. Limita la corriente para cuidar al LED — y en los planos es la sierrita que ya conoces." },
       { pieza: "pieza-gnd", txt: "Un cable desde esa columna hasta el <strong>GND</strong> del Arduino: el camino de vuelta a casa." },
       { pieza: "pieza-13", txt: "Y por fin, un cable del <strong>pin 13</strong> a la columna de la patita larga. ¡Circuito cerrado! 🎉" }
     ];

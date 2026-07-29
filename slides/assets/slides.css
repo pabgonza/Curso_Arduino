@@ -233,7 +233,10 @@ ul.lista li::before { content: "▸ "; color: var(--teal); font-weight: 800; }
 .quiz-cara {
   position: absolute; inset: 0;
   backface-visibility: hidden;
-  display: flex; align-items: center; justify-content: center;
+  /* block + align-content evita que el texto con negritas se parta en columnas (flex) */
+  display: block;
+  align-content: center;
+  text-align: center;
   border-radius: 16px;
   padding: .8em;
   font-size: 1.05rem;
