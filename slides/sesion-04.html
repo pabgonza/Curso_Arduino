@@ -79,7 +79,7 @@
   <p class="eyebrow">Los músculos del cerebrito</p>
   <h2>Actuadores 💪</h2>
   <p class="grande" style="max-width:36em">Un actuador hace el camino contrario: recibe <strong>electricidad</strong> del Arduino y la convierte en <strong>algo que pasa en el mundo</strong> —luz, sonido, movimiento, palabras—. Se parecen a las cosas que tu cuerpo sabe hacer:</p>
-  <div class="fila fila-piezas">
+  <div class="fila fila-piezas fila-ancha">
     <figure class="figura tarjeta-foto">
       <img src="../recursos/img/leds.jpg" alt="LEDs de varios colores">
       <figcaption><strong>LED</strong> · hace luz<button class="sm" data-sm="led-int">?</button>
@@ -373,6 +373,10 @@
   .fila-piezas .tarjeta-foto { max-width: min(44vw, 12.4em); }
   .fila-piezas .tarjeta-foto img { max-height: 17vh; }
   .fila-piezas .tarjeta-foto figcaption { font-size: .82rem; }
+  /* los actuadores son 4: caben más anchos */
+  .fila-ancha .tarjeta-foto { max-width: min(44vw, 14.5em); }
+  .fila-ancha .tarjeta-foto img { max-height: 20vh; }
+  .fila-ancha .tarjeta-foto figcaption { font-size: .88rem; }
 
   /* pastilla con el sentido humano equivalente */
   .paralelo {
