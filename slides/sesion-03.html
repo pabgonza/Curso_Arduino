@@ -22,45 +22,127 @@
   </div>
 </section>
 
-<!-- 2 · El estanque en lo alto (interactivo) -->
-<section class="slide">
+<!-- 2 · El estanque en lo alto (interactivo, se transforma en circuito) -->
+<section class="slide" id="sl-estanque">
   <p class="eyebrow">La idea más importante de hoy</p>
   <h2>Un estanque allá arriba 💧</h2>
-  <div class="fuente" id="fuente">
-    <div class="regla" id="regla"><span class="regla-v" id="regla-v">5 V</span></div>
-    <div class="torre" id="torre">
-      <div class="estanque"><div class="nivel" id="nivel"></div></div>
-      <span class="etiq">la pila</span>
-    </div>
-    <div class="manguera" id="manguera"><div class="chorro" id="chorro"></div></div>
-    <div class="rueda-caja">
-      <svg viewBox="0 0 100 100" class="rueda-svg" aria-label="Ruedita de agua que hace de LED">
-        <g id="rueda-giro">
-          <circle cx="50" cy="50" r="36" fill="none" stroke="#0F8B93" stroke-width="5"/>
-          <g stroke="#0F8B93" stroke-width="4">
-            <line x1="50" y1="14" x2="50" y2="86"/><line x1="14" y1="50" x2="86" y2="50"/>
-            <line x1="24" y1="24" x2="76" y2="76"/><line x1="76" y1="24" x2="24" y2="76"/>
-          </g>
-          <g fill="#4FC3F7">
-            <rect x="44" y="8" width="12" height="16" rx="2"/><rect x="44" y="76" width="12" height="16" rx="2"/>
-            <rect x="8" y="44" width="16" height="12" rx="2"/><rect x="76" y="44" width="16" height="12" rx="2"/>
-          </g>
+  <div class="fuente">
+    <svg id="escena" viewBox="0 -14 720 356" class="escena-svg" aria-label="Estanque de agua sobre una torre que se transforma en el esquema de un circuito">
+      <defs>
+        <linearGradient id="grad-agua" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#7FD4F7"/><stop offset="1" stop-color="#29B6F6"/>
+        </linearGradient>
+        <pattern id="pat-tierra" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+          <rect width="8" height="16" fill="#C8B79A"/><rect x="8" width="8" height="16" fill="#B9A585"/>
+        </pattern>
+        <clipPath id="clip-tq"><rect id="tq-clip" x="62" y="0" width="106" height="64" rx="8"/></clipPath>
+        <marker id="flecha" markerWidth="6" markerHeight="6" refX="4.5" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="#37474F"/>
+        </marker>
+      </defs>
+
+      <!-- == mundo agua == -->
+      <g class="par agua" style="--d:.72s">
+        <rect x="0" y="302" width="720" height="36" rx="8" fill="url(#pat-tierra)"/>
+        <text x="360" y="325" text-anchor="middle" class="rot-suelo">TIERRA (GND) · aquí el agua ya no tiene altura: 0 V</text>
+      </g>
+
+      <g class="par agua" style="--d:0s">
+        <line id="regla-l" x1="36" y1="302" x2="36" y2="130" class="regla-l"/>
+        <rect id="regla-caja" x="10" width="52" height="24" rx="12" fill="var(--teal)"/>
+        <text id="regla-txt" x="36" text-anchor="middle" class="regla-txt">5 V</text>
+        <g class="madera">
+          <line id="pata1" x1="64" x2="64" y2="304"/>
+          <line id="pata2" x1="166" x2="166" y2="304"/>
+          <line id="cruz1" x1="64" x2="166" y2="304"/>
+          <line id="cruz2" x1="166" x2="64" y2="304"/>
         </g>
-        <circle cx="50" cy="50" r="13" id="rueda-luz" fill="#8a6a20"/>
-      </svg>
-    </div>
-    <span class="rueda-etiq">el LED<br><strong>gira y se enciende</strong><button class="sm" data-sm="salto">?</button></span>
-    <div class="suelo"><span>TIERRA (GND) · aquí el agua ya no tiene altura: 0 V</span></div>
+        <rect id="tabla" x="48" width="134" height="10" rx="4" fill="#8D6E63"/>
+        <rect id="tq-cuerpo" x="62" width="106" height="64" rx="8" fill="#ECEFF1" stroke="#78909C" stroke-width="4"/>
+        <g clip-path="url(#clip-tq)"><rect id="nivel" x="62" width="106" fill="url(#grad-agua)"/></g>
+        <ellipse id="nivel-boca" cx="115" rx="47" ry="6" fill="#B3E5FC" stroke="#4FC3F7" stroke-width="2"/>
+        <ellipse id="tq-boca" cx="115" rx="53" ry="9" fill="none" stroke="#78909C" stroke-width="4"/>
+        <text id="etiq-pila" x="115" text-anchor="middle" class="rotulo">el estanque = la pila 🔋</text>
+      </g>
+
+      <g class="par agua" style="--d:.18s">
+        <path id="mang-a" class="mang"/>
+        <path id="mang-k" class="mang" d="M610,200 V222"/>
+        <path id="mang-b" class="mang" d="M610,222 V230"/>
+        <text id="pinza" x="630" y="220" font-size="24" visibility="hidden">🤏</text>
+        <path id="chorro"/>
+        <path id="chorro-caida" d="M610,230 V250"/>
+      </g>
+
+      <g class="par agua" style="--d:.54s">
+        <g transform="translate(610,272)">
+          <g id="rueda-giro">
+            <circle r="22" fill="none" stroke="#0F8B93" stroke-width="4.5"/>
+            <g stroke="#0F8B93" stroke-width="3.5">
+              <line y1="-22" y2="22"/><line x1="-22" x2="22"/>
+              <line x1="-16" y1="-16" x2="16" y2="16"/><line x1="16" y1="-16" x2="-16" y2="16"/>
+            </g>
+            <g fill="#4FC3F7">
+              <rect x="-5" y="-27" width="10" height="12" rx="2"/><rect x="-5" y="15" width="10" height="12" rx="2"/>
+              <rect x="-27" y="-5" width="12" height="10" rx="2"/><rect x="15" y="-5" width="12" height="10" rx="2"/>
+            </g>
+          </g>
+          <circle id="rueda-luz" r="9" fill="#8a6a20"/>
+        </g>
+        <text x="582" y="256" text-anchor="end" class="rotulo">la ruedita</text>
+        <text x="582" y="274" text-anchor="end" class="rotulo">= el LED ✨</text>
+      </g>
+
+      <!-- == mundo circuito (mismas posiciones) == -->
+      <g class="par circ" style="--d:.18s"><path id="c-cables" class="c-cable"/></g>
+
+      <g class="par circ" style="--d:0s">
+        <line id="bat-l1" x1="115" x2="115" class="c-cable"/>
+        <line id="bat-p1" x1="90" x2="140" stroke="#37474F" stroke-width="5" stroke-linecap="round"/>
+        <line id="bat-p2" x1="102" x2="128" stroke="#37474F" stroke-width="9" stroke-linecap="round"/>
+        <line id="bat-l2" x1="115" x2="115" y2="280" class="c-cable"/>
+        <text id="bat-mas" x="76" class="c-signo">+</text>
+        <text id="bat-menos" x="76" class="c-signo">−</text>
+        <text id="bat-rot" x="148" class="rotulo-c">la pila (V)</text>
+      </g>
+
+      <g class="par circ" style="--d:.36s">
+        <path d="M610,200 L599,204 L621,210 L599,216 L621,222 L610,224" fill="none" stroke="#37474F" stroke-width="4" stroke-linejoin="round"/>
+        <text x="582" y="216" text-anchor="end" class="rotulo-c">la resistencia (R)</text>
+      </g>
+
+      <g class="par circ" style="--d:.54s">
+        <line x1="610" y1="246" x2="610" y2="248" class="c-cable"/>
+        <path d="M596,248 L624,248 L610,268 Z" fill="none" stroke="#37474F" stroke-width="4" stroke-linejoin="round"/>
+        <line x1="596" y1="268" x2="624" y2="268" stroke="#37474F" stroke-width="4" stroke-linecap="round"/>
+        <line x1="628" y1="251" x2="641" y2="243" stroke="#37474F" stroke-width="2.2" marker-end="url(#flecha)"/>
+        <line x1="633" y1="260" x2="646" y2="252" stroke="#37474F" stroke-width="2.2" marker-end="url(#flecha)"/>
+        <line x1="610" y1="268" x2="610" y2="280" class="c-cable"/>
+        <text x="582" y="262" text-anchor="end" class="rotulo-c">el LED</text>
+      </g>
+
+      <g class="par circ" style="--d:.72s">
+        <line x1="360" y1="280" x2="360" y2="292" class="c-cable"/>
+        <line x1="342" y1="292" x2="378" y2="292" stroke="#37474F" stroke-width="4" stroke-linecap="round"/>
+        <line x1="349" y1="299" x2="371" y2="299" stroke="#37474F" stroke-width="4" stroke-linecap="round"/>
+        <line x1="356" y1="306" x2="364" y2="306" stroke="#37474F" stroke-width="4" stroke-linecap="round"/>
+        <text x="360" y="326" text-anchor="middle" class="rotulo-c">GND · 0 V</text>
+      </g>
+    </svg>
+    <button class="sm sm-flot" data-sm="salto">?</button>
   </div>
   <div class="controles">
-    <label>Altura del estanque <input type="range" id="altura" min="1" max="9" value="5"></label>
+    <label class="ctrl-agua">Altura del estanque <input type="range" id="altura" min="1" max="9" value="5"></label>
     <div class="fila" style="gap:.5em">
-      <button class="boton" data-manguera="libre">Manguera libre</button>
-      <button class="boton secundario" data-manguera="doblada">Manguera doblada 🤏</button>
-      <button class="boton" id="recargar">🔋 Recargar</button>
+      <span class="fila ctrl-agua" style="gap:.5em">
+        <button class="boton" data-manguera="libre">Manguera libre</button>
+        <button class="boton secundario" data-manguera="doblada">Manguera doblada 🤏</button>
+        <button class="boton" id="recargar">🔋 Recargar</button>
+      </span>
+      <button class="boton" id="ver-circuito">🔬 Verlo como circuito</button>
     </div>
   </div>
-  <p class="grande" id="txt-fuente" style="max-width:34em">Mientras más alto está el estanque, con más fuerza cae el agua… y más rápido gira la ruedita.</p>
+  <p class="grande" id="txt-fuente" style="max-width:36em">Mientras más alto está el estanque, con más fuerza cae el agua… y más rápido gira la ruedita.</p>
 </section>
 
 <!-- 3 · Las tres palabras -->
@@ -404,59 +486,41 @@
   .controles { display: flex; flex-direction: column; align-items: center; gap: .5em; }
   .controles label { font-size: .95rem; color: var(--gris); display: flex; align-items: center; gap: .6em; }
 
-  .fuente { position: relative; width: min(92vw, 520px); height: 310px; }
+  .fuente { position: relative; width: min(92vw, 680px); }
+  .escena-svg { display: block; width: 100%; }
 
-  .torre { position: absolute; left: 50%; transform: translateX(-50%); transition: bottom .35s; display: flex; flex-direction: column; align-items: center; }
-  .estanque {
-    position: relative; width: 6em; height: 3.6em;
-    border: 4px solid #78909C; border-radius: 5px 5px 12px 12px;
-    background: #ECEFF1; overflow: hidden;
-  }
-  .nivel {
-    position: absolute; left: 0; right: 0; bottom: 0; height: 100%;
-    background: linear-gradient(#7FD4F7, #29B6F6);
-    transition: height .2s linear;
-  }
+  /* los dos mundos se funden por parejas, con un pequeño desfase cada una */
+  .escena-svg .par { transition: opacity .55s ease; transition-delay: var(--d, 0s); }
+  .escena-svg .circ { opacity: 0; pointer-events: none; }
+  .escena-svg.circuito .agua { opacity: 0; }
+  .escena-svg.circuito .circ { opacity: 1; }
 
-  .manguera {
-    position: absolute; left: 50%; transform: translateX(-50%);
-    width: 16px; border-radius: 0 0 4px 4px;
-    background: #B0BEC5; overflow: hidden;
-    transition: bottom .35s, height .35s, width .25s;
+  .madera line { stroke: #A1785C; stroke-width: 7; stroke-linecap: round; }
+  .mang { fill: none; stroke: #90A4AE; stroke-width: 14; stroke-linecap: round; stroke-linejoin: round; transition: stroke-width .25s; }
+  #chorro, #chorro-caida {
+    fill: none; stroke: #4FC3F7; stroke-linecap: round;
+    stroke-dasharray: 14 10; animation: fluir 1.2s linear infinite;
   }
-  .manguera.doblada { width: 8px; }
-  .chorro {
-    position: absolute; inset: 2px;
-    background: repeating-linear-gradient(180deg, #4FC3F7 0 12px, #B3E5FC 12px 24px);
-    background-size: 100% 24px;
-    animation: caer 1.2s linear infinite;
-  }
-  @keyframes caer { to { background-position: 0 24px; } }
-  .fuente.seca .chorro { opacity: .15; animation-play-state: paused; }
+  @keyframes fluir { to { stroke-dashoffset: -48; } }
+  .escena-svg.seca #chorro, .escena-svg.seca #chorro-caida { opacity: .12; animation-play-state: paused; }
 
-  .rueda-caja { position: absolute; left: 50%; transform: translateX(-50%); bottom: 26px; }
-  .rueda-svg { display: block; width: 94px; height: 94px; }
-  .rueda-etiq { position: absolute; left: calc(50% + 58px); bottom: 44px; font-size: .8rem; color: var(--gris); line-height: 1.25; text-align: left; }
-  #rueda-giro { transform-origin: 50px 50px; animation: girar 1.4s linear infinite; }
+  #rueda-giro { animation: girar 1.4s linear infinite; transform-box: fill-box; transform-origin: center; }
   @keyframes girar { to { transform: rotate(360deg); } }
-  .fuente.seca #rueda-giro { animation-play-state: paused; }
+  .escena-svg.seca #rueda-giro { animation-play-state: paused; }
 
-  .suelo {
-    position: absolute; left: 0; right: 0; bottom: 0; height: 26px;
-    background: repeating-linear-gradient(45deg, #C8B79A 0 8px, #B9A585 8px 16px);
-    border-radius: 4px; display: flex; align-items: center; justify-content: center;
-  }
-  .suelo span { font-size: .72rem; color: #4E4232; font-weight: 700; }
+  .rotulo { font-family: var(--f-cuerpo); font-size: 14.5px; font-weight: 700; fill: var(--gris); }
+  .rot-suelo { font-family: var(--f-cuerpo); font-size: 13px; font-weight: 800; fill: #4E4232; }
+  .regla-l { stroke: var(--teal); stroke-width: 3; stroke-dasharray: 7 6; }
+  .regla-txt { font-family: var(--f-titulo); font-size: 15px; fill: #fff; }
 
-  .regla {
-    position: absolute; left: 27%; bottom: 26px;
-    border-left: 3px dashed var(--teal); transition: height .35s;
-    display: flex; align-items: center;
-  }
-  .regla-v {
-    background: var(--teal); color: #fff; font-family: var(--f-titulo);
-    border-radius: 999px; padding: .1em .7em; font-size: .9rem; margin-left: -1.6em;
-  }
+  .c-cable { fill: none; stroke: #37474F; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+  .c-signo { font-family: var(--f-titulo); font-size: 20px; fill: #37474F; }
+  .rotulo-c { font-family: var(--f-cuerpo); font-size: 14.5px; font-weight: 700; fill: var(--teal-osc); }
+
+  .sm-flot { position: absolute; left: 88.5%; top: 76%; }
+  .slide.circuito .ctrl-agua { opacity: .35; pointer-events: none; }
+  .slide.circuito .sm-flot { opacity: 0; pointer-events: none; }
+  .sm-flot, .ctrl-agua { transition: opacity .4s; }
 
   /* ---------- ruedas en serie ---------- */
   .serie { display: flex; flex-direction: column; gap: .25em; width: min(92vw, 480px); }
@@ -534,9 +598,8 @@
   /* ---- 2 · el estanque en lo alto ---- */
   (function () {
     const $ = id => document.getElementById(id);
-    const SUELO = 26, MANGUERA_ABAJO = 100;
-    const fuente = $("fuente"), torre = $("torre"), manguera = $("manguera");
-    let altura = 5, doblada = false, agua = 100;
+    const sl = $("sl-estanque"), escena = $("escena");
+    let altura = 5, doblada = false, agua = 100, enCircuito = false;
 
     function flujo() {
       if (agua <= 0) return 0;
@@ -544,6 +607,7 @@
     }
 
     function mensaje(f) {
+      if (enCircuito) return "¡Es el <strong>mismo dibujo</strong>! Así lo dibujan los electricistas: el estanque es la <strong>pila</strong>, el doblez es la <strong>resistencia</strong> y la ruedita es el <strong>LED</strong>. 🔬";
       if (agua <= 0) return "¡El estanque se quedó <strong>vacío</strong>! Eso mismo le pasa a una pila cuando se gasta: se le acabó la altura. 🔋";
       if (doblada) return "Con la manguera doblada pasa <strong>menos agua</strong>: la ruedita gira despacito… pero así el LED está protegido. 🤏";
       if (f < .3) return "Con el estanque bajito, el agua casi no tiene ganas de bajar: la ruedita apenas se mueve.";
@@ -553,26 +617,67 @@
 
     function pintar() {
       const f = flujo();
-      const abajoTorre = 118 + (altura - 1) * 14;
-      torre.style.bottom = abajoTorre + "px";
-      manguera.style.bottom = MANGUERA_ABAJO + "px";
-      manguera.style.height = Math.max(0, abajoTorre - MANGUERA_ABAJO) + "px";
-      manguera.classList.toggle("doblada", doblada);
-      $("regla").style.height = (abajoTorre - SUELO) + "px";
-      $("regla-v").textContent = altura + " V";
-      $("nivel").style.height = agua + "%";
-      fuente.classList.toggle("seca", f === 0);
-      $("chorro").style.animationDuration = (2 - f * 1.6).toFixed(2) + "s";
+      const yP = 300 - (70 + altura * 14);   // borde superior de la tabla de la torre
+      const yE = yP - 16;                    // altura a la que sale la manguera
+
+      /* torre y estanque */
+      $("tabla").setAttribute("y", yP);
+      ["pata1", "pata2", "cruz1", "cruz2"].forEach(id => $(id).setAttribute("y1", yP + 8));
+      const yT = yP - 64;
+      $("tq-cuerpo").setAttribute("y", yT);
+      $("tq-clip").setAttribute("y", yT);
+      $("tq-boca").setAttribute("cy", yT);
+      $("etiq-pila").setAttribute("y", yT - 16);
+      const hAgua = 52 * agua / 100, yA = yP - 6 - hAgua;
+      $("nivel").setAttribute("y", yA);
+      $("nivel").setAttribute("height", hAgua + 6);
+      $("nivel-boca").setAttribute("cy", yA);
+      $("nivel-boca").style.opacity = agua > 3 ? 1 : 0;
+
+      /* regla de voltios */
+      $("regla-l").setAttribute("y2", yE);
+      const yR = (302 + yE) / 2;
+      $("regla-caja").setAttribute("y", yR - 12);
+      $("regla-txt").setAttribute("y", yR + 5);
+      $("regla-txt").textContent = altura + " V";
+
+      /* manguera y chorro (recorren el rectángulo del circuito) */
+      $("mang-a").setAttribute("d", "M168," + yE + " H610 V200");
+      $("mang-k").setAttribute("stroke-width", doblada ? 5 : 14);
+      $("pinza").setAttribute("visibility", doblada ? "visible" : "hidden");
+      $("chorro").setAttribute("d", "M168," + yE + " H610 V230");
+      const wCh = doblada ? 3 : 8;
+      $("chorro").setAttribute("stroke-width", wCh);
+      $("chorro-caida").setAttribute("stroke-width", wCh);
+      const dur = (2 - f * 1.6).toFixed(2) + "s";
+      $("chorro").style.animationDuration = dur;
+      $("chorro-caida").style.animationDuration = dur;
+      escena.classList.toggle("seca", f === 0);
+
+      /* ruedita-LED */
       $("rueda-giro").style.animationDuration = (2.6 - f * 2.2).toFixed(2) + "s";
       const luz = $("rueda-luz");
       luz.setAttribute("fill", "hsl(43, " + (20 + 70 * f) + "%, " + (24 + 46 * f) + "%)");
       luz.style.filter = f > .15 ? "drop-shadow(0 0 " + (f * 10).toFixed(1) + "px #FFB627)" : "none";
+
+      /* el circuito calca la geometría actual del agua */
+      $("c-cables").setAttribute("d",
+        "M115," + yE + " H610 " + (yE < 200 ? "V200 " : "") + "M610,224 V246 M610,280 H115");
+      const bM = Math.round((yE + 280) / 2);
+      $("bat-l1").setAttribute("y1", yE); $("bat-l1").setAttribute("y2", bM - 9);
+      $("bat-p1").setAttribute("y1", bM - 9); $("bat-p1").setAttribute("y2", bM - 9);
+      $("bat-p2").setAttribute("y1", bM + 9); $("bat-p2").setAttribute("y2", bM + 9);
+      $("bat-l2").setAttribute("y1", bM + 9);
+      $("bat-mas").setAttribute("y", bM - 16);
+      $("bat-menos").setAttribute("y", bM + 30);
+      $("bat-rot").setAttribute("y", bM + 5);
+
       $("txt-fuente").innerHTML = mensaje(f);
     }
 
     setInterval(() => {                      // el estanque se va gastando
       const f = flujo();
-      if (f === 0) return;
+      if (enCircuito || f === 0) return;
       agua = Math.max(0, agua - f * 0.9);
       pintar();
     }, 200);
@@ -581,6 +686,14 @@
     document.querySelectorAll("[data-manguera]").forEach(b =>
       b.addEventListener("click", () => { doblada = b.dataset.manguera === "doblada"; pintar(); }));
     $("recargar").addEventListener("click", () => { agua = 100; pintar(); });
+
+    $("ver-circuito").addEventListener("click", () => {
+      enCircuito = !enCircuito;
+      escena.classList.toggle("circuito", enCircuito);
+      sl.classList.toggle("circuito", enCircuito);
+      $("ver-circuito").textContent = enCircuito ? "💧 Volver al agua" : "🔬 Verlo como circuito";
+      pintar();
+    });
     pintar();
   })();
 
