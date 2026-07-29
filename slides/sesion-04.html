@@ -38,20 +38,36 @@
 <section class="slide">
   <p class="eyebrow">Los sentidos del cerebrito</p>
   <h2>Sensores 👀</h2>
-  <div class="fila">
+  <p class="grande" style="max-width:36em">Un sensor <strong>mide algo del mundo</strong> —un toque, una distancia, el calor— y lo convierte en <strong>electricidad</strong> que el Arduino sabe leer. Muchos se parecen a tus sentidos… aunque otros sienten cosas que tú no puedes:</p>
+  <div class="fila fila-piezas">
+    <figure class="figura tarjeta-foto">
+      <img src="../recursos/img/boton.jpg" alt="Dos pulsadores sobre una protoboard">
+      <figcaption><strong>Botón</strong> · siente tu dedo<button class="sm" data-sm="boton-s">?</button>
+        <span class="paralelo">👆 como tu piel</span>
+        <span class="credito">Kszapsza · CC BY-SA 4.0</span></figcaption>
+    </figure>
     <figure class="figura tarjeta-foto">
       <img src="../recursos/img/hc-sr04.jpg" alt="Sensor de ultrasonido HC-SR04">
       <figcaption><strong>Ultrasonido</strong> · el oído de murciélago<button class="sm" data-sm="ultra">?</button>
+        <span class="paralelo">👂 como tu oreja</span>
         <span class="credito">SparkFun · CC BY 2.0</span></figcaption>
     </figure>
     <figure class="figura tarjeta-foto">
       <img src="../recursos/img/dht11.jpg" alt="Sensor de temperatura y humedad DHT11">
       <figcaption><strong>Temperatura</strong> · siente el calor<button class="sm" data-sm="temp">?</button>
+        <span class="paralelo">🖐️ como tu mano</span>
         <span class="credito">Edwiyanto · CC BY-SA 4.0</span></figcaption>
+    </figure>
+    <figure class="figura tarjeta-foto">
+      <img src="../recursos/img/esp32-cam.jpg" alt="Placa ESP32-CAM con su cámara" style="object-position:50% 18%">
+      <figcaption><strong>Cámara</strong> · mira de verdad<button class="sm" data-sm="camara">?</button>
+        <span class="paralelo">👁️ como tu ojo</span>
+        <span class="credito">Nowforever · CC BY-SA 4.0</span></figcaption>
     </figure>
     <figure class="figura tarjeta-foto">
       <img src="../recursos/img/potenciometro.jpg" alt="Potenciómetro">
       <figcaption><strong>Potenciómetro</strong> · sabe cuánto lo giraste<button class="sm" data-sm="poten">?</button>
+        <span class="paralelo">🤷 tú no tienes nada así</span>
         <span class="credito">Iainf · CC BY 2.5</span></figcaption>
     </figure>
   </div>
@@ -62,21 +78,31 @@
 <section class="slide">
   <p class="eyebrow">Los músculos del cerebrito</p>
   <h2>Actuadores 💪</h2>
-  <div class="fila">
+  <p class="grande" style="max-width:36em">Un actuador hace el camino contrario: recibe <strong>electricidad</strong> del Arduino y la convierte en <strong>algo que pasa en el mundo</strong> —luz, sonido, movimiento, palabras—. Se parecen a las cosas que tu cuerpo sabe hacer:</p>
+  <div class="fila fila-piezas">
     <figure class="figura tarjeta-foto">
       <img src="../recursos/img/leds.jpg" alt="LEDs de varios colores">
       <figcaption><strong>LED</strong> · hace luz<button class="sm" data-sm="led-int">?</button>
+        <span class="paralelo">😁 como tu sonrisa: avisa sin hablar</span>
         <span class="credito">Afrank99 · CC BY-SA 2.0</span></figcaption>
     </figure>
     <figure class="figura tarjeta-foto">
       <img src="../recursos/img/buzzer.jpg" alt="Buzzer piezoeléctrico">
       <figcaption><strong>Buzzer</strong> · hace sonido<button class="sm" data-sm="buzzer">?</button>
+        <span class="paralelo">🗣️ como tu voz</span>
         <span class="credito">R. Spekking · CC BY-SA 4.0</span></figcaption>
     </figure>
     <figure class="figura tarjeta-foto">
       <img src="../recursos/img/servo-sg90.jpg" alt="Servomotor SG90">
       <figcaption><strong>Servo</strong> · hace movimiento<button class="sm" data-sm="servo">?</button>
+        <span class="paralelo">💪 como tu brazo</span>
         <span class="credito">S. Dwivedi · CC BY-SA 4.0</span></figcaption>
+    </figure>
+    <figure class="figura tarjeta-foto">
+      <img src="../recursos/img/lcd.jpg" alt="Pantalla LCD de 16x2 caracteres">
+      <figcaption><strong>Pantalla</strong> · escribe mensajes<button class="sm" data-sm="lcd">?</button>
+        <span class="paralelo">💬 como tus palabras</span>
+        <span class="credito">Designermadsen · CC BY-SA 4.0</span></figcaption>
     </figure>
   </div>
   <p class="grande">Los conocerás uno por uno en las próximas sesiones. ¡Hoy empezamos por el más simple de todos! 🔘</p>
@@ -342,6 +368,20 @@
   .tarjeta-foto img { max-height: 24vh; }
   .tarjeta-foto figcaption { font-size: .85rem; color: var(--tinta); }
 
+  /* con 4-5 piezas por fila, las tarjetas van más compactas */
+  .fila-piezas { gap: .7em; }
+  .fila-piezas .tarjeta-foto { max-width: min(44vw, 12.4em); }
+  .fila-piezas .tarjeta-foto img { max-height: 17vh; }
+  .fila-piezas .tarjeta-foto figcaption { font-size: .82rem; }
+
+  /* pastilla con el sentido humano equivalente */
+  .paralelo {
+    display: block; width: fit-content; margin: .35em auto 0;
+    background: #E8F7F3; border: 2px solid var(--teal-suave);
+    border-radius: 999px; padding: .05em .7em;
+    font-weight: 700; color: var(--teal-osc);
+  }
+
   /* el código de ejemplo dentro de una tarjeta va más chico, para que quepa */
   .tarjeta .ide pre { font-size: clamp(.72rem, 1.9vh, .95rem); padding: .6em .8em; }
 
@@ -580,6 +620,14 @@
   });
 
   saberMas({
+    "boton-s": {
+      t: "El botón: el sensor más simple 🔘",
+      d: "<p>Solo sabe avisar dos cosas: <strong>«me están apretando»</strong> o <strong>«no»</strong>. Nada más… ¡y con eso alcanza para un montón de inventos!</p><p>En un ratito más lo vas a ver <strong>por dentro</strong>. 👀</p>"
+    },
+    camara: {
+      t: "La cámara: un millón de ojitos 📷",
+      d: "<p>Una cámara es en verdad <strong>millones de sensores de luz</strong> chiquititos formados en filas. Cada uno avisa cuánta luz le llegó, y juntando todos los avisos se arma la foto.</p><p>Es demasiada información para nuestro Arduino UNO, pero su primo el <strong>ESP32-CAM</strong> trae cámara de fábrica… ¡y hasta manda el video por WiFi! 📶</p>"
+    },
     ultra: {
       t: "Ultrasonido: el oído de murciélago 🦇",
       d: "<p>Manda un <strong>chillido tan agudo</strong> que nosotros no lo escuchamos, y después mide <strong>cuánto tarda en volver el eco</strong>. Con ese tiempo calcula la distancia, igual que un murciélago en la oscuridad.</p><p>Lo usaremos para el sensor de retroceso de la bici. 🚲</p>"
@@ -599,6 +647,10 @@
     buzzer: {
       t: "El buzzer por dentro 🔊",
       d: "<p>Tiene un disco de un material especial que <strong>se dobla apenas le llega electricidad</strong>. Si lo hacemos doblarse y volver <strong>cientos de veces por segundo</strong>, empuja el aire… y eso es el sonido.</p><p>Mientras más rápido vibre, más <strong>agudo</strong> suena. ¡Con eso haremos música! 🎵</p>"
+    },
+    lcd: {
+      t: "La pantalla LCD 💬",
+      d: "<p>Tiene <strong>dos filas de 16 casilleros</strong>, y cada casillero es una rejilla de puntitos. Adentro hay unos <strong>cristales líquidos</strong> que, cuando les llega electricidad, se giran y tapan la luz: puntito oscuro. Combinando puntitos se dibujan las letras.</p><p>Con ella tu Arduino puede <strong>escribirte mensajes</strong>: la temperatura, un puntaje, o un «¡hola!». 📟</p>"
     },
     servo: {
       t: "El servo por dentro 🦾",

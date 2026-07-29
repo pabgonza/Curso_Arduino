@@ -23,7 +23,10 @@ Imagenes descargadas de Wikimedia Commons. Uso educativo con atribucion.
 - `led-rgb.jpg` -- RGB LED 5mm.jpg | Autor: Mister rf | Licencia: CC BY-SA 4.0 | [fuente](https://commons.wikimedia.org/wiki/File:RGB_LED_5mm.jpg)
 - `dht11.jpg` -- Dht11.jpg | Autor: Edwiyanto | Licencia: CC BY-SA 4.0 | [fuente](https://commons.wikimedia.org/wiki/File:Dht11.jpg)
 - `potenciometro.jpg` -- Potentiometer.jpg | Autor: Iainf | Licencia: CC BY 2.5 | [fuente](https://commons.wikimedia.org/wiki/File:Potentiometer.jpg)
+- `boton.jpg` -- Tact switches.JPG (pulsadores sobre protoboard) | Autor: Kszapsza | Licencia: CC BY-SA 4.0 | [fuente](https://commons.wikimedia.org/wiki/File:Tact_switches.JPG)
+- `esp32-cam.jpg` -- ESP32-CAM.jpg | Autor: Nowforever | Licencia: CC BY-SA 4.0 | [fuente](https://commons.wikimedia.org/wiki/File:ESP32-CAM.jpg)
 - `leds.jpg` -- Verschiedene LEDs.jpg | Autor: Afrank99 | Licencia: CC BY-SA 2.0 | [fuente](https://commons.wikimedia.org/wiki/File:Verschiedene_LEDs.jpg)
+- `lcd.jpg` -- HelloWorldByDesignermadsen-001.jpg (recorte de la pantalla) | Autor: Designermadsen | Licencia: CC BY-SA 4.0 | [fuente](https://commons.wikimedia.org/wiki/File:HelloWorldByDesignermadsen-001.jpg)
 
 ## Pantallazos (`pantallazos/`)
 
