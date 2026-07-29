@@ -654,13 +654,14 @@
       const wCh = doblada ? 4 : 8;
       $("chorro").setAttribute("stroke-width", wCh);
       $("chorro-caida").setAttribute("stroke-width", wCh);
-      const dur = (2 - f * 1.6).toFixed(2) + "s";
-      $("chorro").style.animationDuration = dur;
-      $("chorro-caida").style.animationDuration = dur;
+      /* velocidad proporcional al flujo (duracion = K/f), con tope para flujos minimos */
+      const durCh = Math.min(0.5 / Math.max(f, .01), 4).toFixed(2) + "s";
+      $("chorro").style.animationDuration = durCh;
+      $("chorro-caida").style.animationDuration = durCh;
       escena.classList.toggle("seca", f === 0);
 
       /* ruedita-LED */
-      $("rueda-giro").style.animationDuration = (2.6 - f * 2.2).toFixed(2) + "s";
+      $("rueda-giro").style.animationDuration = Math.min(0.45 / Math.max(f, .01), 5).toFixed(2) + "s";
       const luz = $("rueda-luz");
       luz.setAttribute("fill", "hsl(43, " + (20 + 70 * f) + "%, " + (24 + 46 * f) + "%)");
       luz.style.filter = f > .15 ? "drop-shadow(0 0 " + (f * 10).toFixed(1) + "px #FFB627)" : "none";
