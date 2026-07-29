@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sesión 5 · Música con el buzzer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/slides.css">
+</head>
+<body>
+
+<!-- 1 · Portada -->
+<section class="slide portada">
+  <span class="sesion-num">Sesión 5</span>
+  <h1>Música con el buzzer 🎵</h1>
+  <p class="grande">Tu Arduino ya sabe ver y decidir…<br>¡hoy le damos <strong>voz</strong>!</p>
+  <p class="nota">🔊 Sube el volumen del computador: hoy las slides suenan.</p>
+  <div class="semaforo-vivo" aria-hidden="true">
+    <span class="led" id="pled-r" style="--c:var(--rojo)"></span>
+    <span class="led" id="pled-a" style="--c:var(--ambar)"></span>
+    <span class="led" id="pled-v" style="--c:var(--verde)"></span>
+  </div>
+</section>
+
+<!-- 2 · ¿Qué es el sonido? -->
+<section class="slide">
+  <p class="eyebrow">Antes de hacer ruido</p>
+  <h2>El sonido es aire que tiembla 🌬️</h2>
+  <div class="onda-caja">
+    <svg viewBox="0 0 600 140" id="svg-onda" aria-label="Onda de sonido">
+      <line x1="0" y1="70" x2="600" y2="70" stroke="#C7D6D4" stroke-width="2"/>
+      <path id="onda" d="" fill="none" stroke="#00878F" stroke-width="5" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <div class="controles">
+    <label>Vibraciones por segundo <input type="range" id="frec" min="120" max="1200" step="10" value="440"></label>
+    <p class="grande"><strong id="hz">440</strong> veces por segundo<button class="sm" data-sm="hertz">?</button> · <span id="agudez">un sonido normalito</span></p>
+    <button class="boton" id="oir">🔊 Escuchar</button>
+  </div>
+  <p class="nota">Pocas vibraciones = sonido <strong>grave</strong> (como un tambor). Muchas = <strong>agudo</strong> (como un pajarito).</p>
+</section>
+
+<!-- 3 · El buzzer por dentro -->
+<section class="slide">
+  <p class="eyebrow">¿Y cómo hace temblar el aire?</p>
+  <h2>El buzzer por dentro 🔎</h2>
+  <div class="fila" style="align-items:center; gap:2em">
+    <svg viewBox="0 0 260 180" class="buzzer-svg" aria-label="Disco del buzzer vibrando">
+      <ellipse cx="130" cy="120" rx="90" ry="26" fill="#B0BEC5"/>
+      <rect x="40" y="70" width="180" height="50" fill="#CFD8DC"/>
+      <ellipse cx="130" cy="70" rx="90" ry="26" fill="#ECEFF1" stroke="#B0BEC5" stroke-width="3"/>
+      <ellipse cx="130" cy="70" rx="52" ry="15" fill="#E0C36A" id="disco"/>
+      <g id="ondas-aire" opacity="0">
+        <path d="M130 34 q 30 -14 60 0" fill="none" stroke="#4FC3F7" stroke-width="4" stroke-linecap="round"/>
+        <path d="M130 20 q 40 -18 80 0" fill="none" stroke="#4FC3F7" stroke-width="4" stroke-linecap="round" opacity=".7"/>
+        <path d="M130 34 q -30 -14 -60 0" fill="none" stroke="#4FC3F7" stroke-width="4" stroke-linecap="round"/>
+        <path d="M130 20 q -40 -18 -80 0" fill="none" stroke="#4FC3F7" stroke-width="4" stroke-linecap="round" opacity=".7"/>
+      </g>
+    </svg>
+    <div style="max-width:22em; text-align:left; display:flex; flex-direction:column; gap:.6em">
+      <p class="grande">Adentro tiene un <strong>discofinito</strong> que se <strong>dobla apenas le llega electricidad</strong>.</p>
+      <p class="grande">Si lo hacemos doblarse y volver <strong>cientos de veces por segundo</strong>, empuja el aire… y eso es el sonido. 🎶</p>
+      <button class="boton" id="vibrar">▶ Hacerlo vibrar</button>
+    </div>
+  </div>
+  <button class="sm-grande" data-sm="piezo">¿Saber más? ¿Por qué se dobla?</button>
+</section>
+
+<!-- 4 · Activo vs pasivo -->
+<section class="slide">
+  <p class="eyebrow">Ojo con esto</p>
+  <h2>Hay dos buzzers en tu kit 👀</h2>
+  <div class="fila">
+    <div class="tarjeta">
+      <h3>🔇 El activo</h3>
+      <p>Trae su propio ritmo adentro: le das electricidad y hace <strong>«biiip»</strong>. Siempre el mismo tono.</p>
+      <p class="nota">Se reconoce porque abajo está <strong>tapado</strong> con una calcomanía.</p>
+    </div>
+    <div class="tarjeta">
+      <h3>🎵 El pasivo</h3>
+      <p>No sabe hacer nada solo: hay que <strong>decirle a qué velocidad vibrar</strong>. Por eso puede tocar <strong>notas</strong>.</p>
+      <p class="nota">Se reconoce porque abajo se le ve el <strong>circuito verde</strong>.</p>
+    </div>
+  </div>
+  <p class="grande" style="max-width:32em">Hoy usamos el <strong>pasivo</strong>: es el único que puede hacer música. 🎹</p>
+</section>
+
+<!-- 5 · La orden nueva: tone -->
+<section class="slide">
+  <p class="eyebrow">Una orden nueva</p>
+  <h2>tone(): «vibra así de rápido» 🎚️</h2>
+  <div class="ide">
+    <div class="ide-barra"><span class="boton-ide">✓</span><span class="boton-ide">→</span><span class="ide-nombre">las dos órdenes de hoy</span></div>
+    <pre><span class="fn">tone</span>(<span class="num">8</span>, <span class="num">440</span>);   <span class="cm">// pin 8, 440 vibraciones por segundo</span>
+<span class="fn">delay</span>(<span class="num">500</span>);      <span class="cm">// deja que suene medio segundo</span>
+<span class="fn">noTone</span>(<span class="num">8</span>);       <span class="cm">// ¡silencio!</span></pre>
+  </div>
+  <div class="fila">
+    <div class="tarjeta"><h3>🎚️ El número</h3><p>Es la <strong>velocidad de la vibración</strong>. Más grande = más agudo.</p></div>
+    <div class="tarjeta"><h3>⏱️ El delay</h3><p><code>tone</code> no espera: sigue sonando <strong>mientras</strong> el programa avanza. El <code>delay</code> es lo que le da su duración.</p></div>
+    <div class="tarjeta"><h3>🤫 noTone</h3><p>Apaga el sonido. Sin él, ¡la última nota queda sonando para siempre!</p></div>
+  </div>
+</section>
+
+<!-- 6 · Piano interactivo -->
+<section class="slide">
+  <p class="eyebrow">Pruébalo tú</p>
+  <h2>Toca el piano 🎹</h2>
+  <div class="piano" id="piano"></div>
+  <div class="ide" style="max-width:24em">
+    <div class="ide-barra"><span class="ide-nombre">lo que suena por dentro</span></div>
+    <pre><span class="fn">tone</span>(<span class="num">8</span>, <span class="num-vivo" id="piano-hz">262</span>);</pre>
+  </div>
+  <p class="grande" id="piano-txt">Cada nota tiene su número. ¡Toca las teclas y escucha!</p>
+</section>
+
+<!-- 7 · El circuito -->
+<section class="slide">
+  <p class="eyebrow">¡Manos a la obra!</p>
+  <h2>El circuito del buzzer 🔧</h2>
+  <div class="tuto">
+    <div class="proto-caja">
+      <svg viewBox="0 0 620 400" id="armado" aria-label="Buzzer conectado a la protoboard">
+        <rect x="6" y="120" width="120" height="180" rx="12" fill="#00878F"/>
+        <text x="66" y="147" text-anchor="middle" fill="#fff" font-family="monospace" font-size="14">ARDUINO</text>
+        <rect x="14" y="168" width="104" height="24" rx="4" fill="#143642"/>
+        <text x="66" y="185" text-anchor="middle" fill="#fff" font-family="monospace" font-size="13">pin 8</text>
+        <rect x="14" y="252" width="104" height="24" rx="4" fill="#143642"/>
+        <text x="66" y="269" text-anchor="middle" fill="#fff" font-family="monospace" font-size="13">GND</text>
+
+        <rect x="150" y="30" width="460" height="340" rx="10" fill="#FAFAFA" stroke="#D8DEDD" stroke-width="3"/>
+        <rect x="150" y="192" width="460" height="22" fill="#EFF2F1"/>
+        <g id="agujeros-armado"></g>
+
+        <g id="pieza-buzzer" class="oculta">
+          <line x1="282" y1="118" x2="282" y2="150" stroke="#B0BEC5" stroke-width="5"/>
+          <line x1="334" y1="118" x2="334" y2="150" stroke="#B0BEC5" stroke-width="5"/>
+          <circle cx="308" cy="96" r="34" fill="#37474F"/>
+          <circle cx="308" cy="96" r="10" fill="#546E7A"/>
+          <text x="308" y="101" text-anchor="middle" font-size="12" fill="#CFD8DC" font-family="monospace">+</text>
+        </g>
+        <path id="pieza-pin" class="oculta cable-w" d="M122 180 C 190 180, 240 160, 282 166" stroke="#E84855"/>
+        <path id="pieza-gnd" class="oculta cable-w" d="M122 264 C 200 300, 300 260, 334 182" stroke="#37474F"/>
+      </svg>
+    </div>
+    <aside class="tuto-panel">
+      <p class="tuto-num" id="ar-num">Paso 1 de 3</p>
+      <p class="tuto-texto" id="ar-txt"></p>
+      <div class="fila" style="gap:.5em">
+        <button class="boton" id="ar-sig">Siguiente ▶</button>
+        <button class="boton secundario" id="ar-reset">↺</button>
+      </div>
+    </aside>
+  </div>
+  <p class="nota">El buzzer tiene un lado marcado con <strong>+</strong>: ese va al pin. El otro, a tierra.</p>
+</section>
+
+<!-- 8 · Tu primera canción -->
+<section class="slide">
+  <p class="eyebrow">¡A tocar!</p>
+  <h2>Tu primera canción 🎼</h2>
+  <div class="tuto">
+    <div class="sim-ide">
+      <div class="sim-titulo"><span class="sim-punto"></span>estrellita.ino | Arduino IDE 2</div>
+      <div class="sim-editor lineas">
+        <div class="ln"><span class="n">1</span><code><span class="kw">void</span> <span class="fn">loop</span>() {</code></div>
+        <div class="ln" data-nota="0"><span class="n">2</span><code>  <span class="fn">tone</span>(<span class="num">8</span>, <span class="num">262</span>);  <span class="cm">// do</span></code></div>
+        <div class="ln" data-nota="0"><span class="n">3</span><code>  <span class="fn">delay</span>(<span class="num">400</span>);</code></div>
+        <div class="ln" data-nota="1"><span class="n">4</span><code>  <span class="fn">tone</span>(<span class="num">8</span>, <span class="num">262</span>);  <span class="cm">// do</span></code></div>
+        <div class="ln" data-nota="1"><span class="n">5</span><code>  <span class="fn">delay</span>(<span class="num">400</span>);</code></div>
+        <div class="ln" data-nota="2"><span class="n">6</span><code>  <span class="fn">tone</span>(<span class="num">8</span>, <span class="num">392</span>);  <span class="cm">// sol</span></code></div>
+        <div class="ln" data-nota="2"><span class="n">7</span><code>  <span class="fn">delay</span>(<span class="num">400</span>);</code></div>
+        <div class="ln" data-nota="3"><span class="n">8</span><code>  <span class="fn">tone</span>(<span class="num">8</span>, <span class="num">392</span>);  <span class="cm">// sol</span></code></div>
+        <div class="ln" data-nota="3"><span class="n">9</span><code>  <span class="fn">delay</span>(<span class="num">400</span>);</code></div>
+        <div class="ln"><span class="n">10</span><code>  <span class="cm">// … y siguen: la la sol</span></code></div>
+        <div class="ln"><span class="n">11</span><code>  <span class="fn">noTone</span>(<span class="num">8</span>);</code></div>
+        <div class="ln"><span class="n">12</span><code>  <span class="fn">delay</span>(<span class="num">1000</span>);</code></div>
+        <div class="ln"><span class="n">13</span><code>}</code></div>
+      </div>
+    </div>
+    <aside class="tuto-panel">
+      <p class="tuto-num">Estrellita, ¿dónde estás?</p>
+      <p class="tuto-texto" id="cancion-txt">La primera frase son siete notas. Aprieta ▶ y mira cómo el programa va bajando línea por línea.</p>
+      <div class="partitura" id="partitura"></div>
+      <button class="boton" id="tocar">▶ Tocar la canción</button>
+    </aside>
+  </div>
+</section>
+
+<!-- 9 · Sirena -->
+<section class="slide">
+  <p class="eyebrow">Práctica rápida</p>
+  <h2>La sirena de policía 🚓</h2>
+  <div class="fila" style="align-items:center; gap:2em">
+    <div class="ide" style="max-width:24em">
+      <div class="ide-barra"><span class="ide-nombre">sirena.ino</span></div>
+      <pre><span class="fn">tone</span>(<span class="num">8</span>, <span class="num">440</span>);
+<span class="fn">delay</span>(<span class="num">300</span>);
+<span class="fn">tone</span>(<span class="num">8</span>, <span class="num">660</span>);
+<span class="fn">delay</span>(<span class="num">300</span>);</pre>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:.7em; max-width:20em">
+      <p class="grande">Dos notas que se turnan, rapidito. ¡Eso es todo!</p>
+      <button class="boton" id="sirena">🚓 Probar la sirena</button>
+      <p class="nota">¿Y si cambias el 300 por 80? ¿Y por 800?</p>
+    </div>
+  </div>
+</section>
+
+<!-- 10 · Proyecto -->
+<section class="slide">
+  <p class="eyebrow">⭐ Proyecto de la sesión</p>
+  <h2>El timbre de tu pieza 🔔</h2>
+  <p class="grande">Junta lo de hoy con lo de la sesión pasada: <strong>si</strong> aprietan el botón… <strong>suena</strong> la melodía.</p>
+  <div class="ide">
+    <div class="ide-barra"><span class="ide-nombre">timbre.ino</span></div>
+    <pre><span class="kw">if</span> (<span class="fn">digitalRead</span>(<span class="num">2</span>) == <span class="kw">HIGH</span>) {
+  <span class="fn">tone</span>(<span class="num">8</span>, <span class="num">523</span>);
+  <span class="fn">delay</span>(<span class="num">200</span>);
+  <span class="fn">tone</span>(<span class="num">8</span>, <span class="num">392</span>);
+  <span class="fn">delay</span>(<span class="num">400</span>);
+  <span class="fn">noTone</span>(<span class="num">8</span>);
+}</pre>
+  </div>
+  <button class="boton" id="ding">🔔 Escuchar el «ding-dong»</button>
+</section>
+
+<!-- 11 · Reto -->
+<section class="slide">
+  <div class="reto">
+    <p class="eyebrow">⭐ Reto de la sesión</p>
+    <h2>Tu caja de ruidos 🎛️</h2>
+    <p class="grande">Con tres botones y un buzzer puedes armar un <strong>mini piano</strong>: cada botón, una nota distinta.</p>
+    <ul class="lista">
+      <li>Nivel 1: tres botones, tres notas 🎹</li>
+      <li>Nivel 2: que cada botón toque una <strong>melodía</strong> corta</li>
+      <li>Nivel experto: inventar una canción y anotarla en papel para tocarla</li>
+    </ul>
+  </div>
+  <p class="nota">Pista: cada botón necesita su propia resistencia de 10 kΩ, igual que el de la sesión pasada.</p>
+</section>
+
+<!-- 12 · Quiz -->
+<section class="slide">
+  <p class="eyebrow">Duelo de cerebritos</p>
+  <h2>¿Cuánto aprendiste? Toca para voltear</h2>
+  <div class="fila">
+    <div class="quiz" tabindex="0"><div class="quiz-caras">
+      <div class="quiz-cara quiz-frente">¿Qué es el sonido?</div>
+      <div class="quiz-cara quiz-atras">Aire que tiembla, empujado por algo que vibra 🌬️</div>
+    </div></div>
+    <div class="quiz" tabindex="0"><div class="quiz-caras">
+      <div class="quiz-cara quiz-frente">Un número grande en <code>tone()</code> suena…</div>
+      <div class="quiz-cara quiz-atras">¡Agudo! Vibra más veces por segundo 🐦</div>
+    </div></div>
+    <div class="quiz" tabindex="0"><div class="quiz-caras">
+      <div class="quiz-cara quiz-frente">¿Cuál de los dos buzzers toca notas?</div>
+      <div class="quiz-cara quiz-atras">El pasivo: al activo hay que dejarlo hacer «biip» 🔇</div>
+    </div></div>
+    <div class="quiz" tabindex="0"><div class="quiz-caras">
+      <div class="quiz-cara quiz-frente">¿Qué pasa si olvidas el <code>noTone</code>?</div>
+      <div class="quiz-cara quiz-atras">La última nota queda sonando… para siempre 😵</div>
+    </div></div>
+    <div class="quiz" tabindex="0"><div class="quiz-caras">
+      <div class="quiz-cara quiz-frente">¿Quién decide cuánto dura una nota?</div>
+      <div class="quiz-cara quiz-atras">El <code>delay</code> que va después del tone ⏱️</div>
+    </div></div>
+  </div>
+</section>
+
+<!-- 13 · Cierre -->
+<section class="slide portada">
+  <p class="eyebrow">Lo lograste</p>
+  <h1>¡Tu Arduino canta! 🎉</h1>
+  <p class="grande">Hoy le diste voz: notas, melodías y hasta una sirena.<br>Y lo mejor: lo juntaste con el botón. 🔔</p>
+  <div class="tarjeta" style="max-width:24em">
+    <h3>Próxima sesión 🦾</h3>
+    <p>Cosas que <strong>se mueven</strong>: el servomotor, el músculo de verdad. ¡Empezamos a construir el paso a nivel!</p>
+  </div>
+  <div class="semaforo-vivo" aria-hidden="true">
+    <span class="led on" style="--c:var(--verde)"></span>
+  </div>
+</section>
+
+<style>
+  .controles { display: flex; flex-direction: column; align-items: center; gap: .5em; }
+  .controles label { font-size: .95rem; color: var(--gris); display: flex; align-items: center; gap: .6em; }
+  .onda-caja { width: min(92vw, 600px); }
+  #svg-onda { width: 100%; }
+
+  .buzzer-svg { width: min(70vw, 240px); }
+  #disco { transform-origin: 130px 70px; }
+  #disco.vibrando { animation: latir-disco .12s linear infinite; }
+  @keyframes latir-disco { 50% { transform: scaleY(.55); } }
+  #ondas-aire { transition: opacity .2s; }
+  #ondas-aire.sonando { opacity: 1; animation: expandir .6s linear infinite; }
+  @keyframes expandir { from { transform: scale(.9); opacity: .9; } to { transform: scale(1.15); opacity: 0; } }
+
+  /* ---------- piano ---------- */
+  .piano { display: flex; gap: .3em; justify-content: center; flex-wrap: wrap; }
+  .tecla {
+    width: 3.4em; height: 8em;
+    background: #fff; border: 3px solid var(--teal-osc);
+    border-radius: 0 0 10px 10px;
+    display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+    gap: .2em; padding-bottom: .5em; cursor: pointer;
+    font-family: var(--f-titulo); color: var(--teal-osc);
+    box-shadow: 0 5px 0 var(--teal-osc);
+    transition: transform .05s, box-shadow .05s, background .05s;
+  }
+  .tecla .hz { font-family: var(--f-codigo); font-size: .7em; color: var(--gris); font-weight: 400; }
+  .tecla.abajo { transform: translateY(4px); box-shadow: 0 1px 0 var(--teal-osc); background: #FFF3D1; }
+
+  /* ---------- partitura ---------- */
+  .partitura { display: flex; gap: .3em; flex-wrap: wrap; }
+  .nota-chip {
+    font-family: var(--f-titulo); font-size: .85rem;
+    background: var(--blanco); border: 2px solid var(--teal-suave);
+    border-radius: 8px; padding: .2em .5em; color: var(--teal-osc);
+  }
+  .nota-chip.sonando { background: var(--ambar); border-color: #B37D00; color: #5C4000; transform: scale(1.12); }
+
+  /* piezas del armado */
+  .oculta { opacity: 0; transition: opacity .35s; }
+  .visible-paso { opacity: 1; }
+  .cable-w { fill: none; stroke-width: 7; stroke-linecap: round; }
+  .proto-caja { flex: 1 1 30em; max-width: min(92vw, 40em); }
+  .proto-caja svg { width: 100%; }
+</style>
+
+<script src="assets/slides.js"></script>
+<script>
+  const pleds = ["pled-r", "pled-a", "pled-v"].map(id => document.getElementById(id));
+  let pi = 0;
+  setInterval(() => {
+    pleds.forEach((l, i) => l.classList.toggle("on", i === pi));
+    pi = (pi + 1) % 3;
+  }, 700);
+
+  /* ---- el "buzzer" del navegador: onda cuadrada, igual que el de verdad ---- */
+  let audio = null;
+  function sonar(hz, ms) {
+    try {
+      audio = audio || new (window.AudioContext || window.webkitAudioContext)();
+      if (audio.state === "suspended") audio.resume();
+      const osc = audio.createOscillator(), vol = audio.createGain();
+      osc.type = "square";
+      osc.frequency.value = hz;
+      const t = audio.currentTime;
+      vol.gain.setValueAtTime(0.0001, t);
+      vol.gain.exponentialRampToValueAtTime(0.06, t + 0.01);
+      vol.gain.setValueAtTime(0.06, t + ms / 1000 - 0.03);
+      vol.gain.exponentialRampToValueAtTime(0.0001, t + ms / 1000);
+      osc.connect(vol).connect(audio.destination);
+      osc.start(t);
+      osc.stop(t + ms / 1000);
+    } catch (e) { /* si el navegador no deja sonar, la slide igual funciona */ }
+  }
+
+  /* ---- 2 · la onda ---- */
+  (function () {
+    const $ = id => document.getElementById(id);
+    function dibujar(hz) {
+      const ciclos = Math.max(1, Math.round(hz / 90));
+      let d = "M0 70";
+      for (let x = 0; x <= 600; x += 4) {
+        const y = 70 - 45 * Math.sin((x / 600) * ciclos * 2 * Math.PI);
+        d += " L" + x + " " + y.toFixed(1);
+      }
+      $("onda").setAttribute("d", d);
+      $("hz").textContent = hz;
+      $("agudez").textContent = hz < 250 ? "grave, como un tambor 🥁"
+        : hz < 600 ? "un sonido normalito 🎵" : "agudo, como un pajarito 🐦";
+    }
+    $("frec").addEventListener("input", e => dibujar(+e.target.value));
+    $("oir").addEventListener("click", () => sonar(+$("frec").value, 700));
+    dibujar(440);
+  })();
+
+  /* ---- 3 · el disco que vibra ---- */
+  document.getElementById("vibrar").addEventListener("click", () => {
+    const disco = document.getElementById("disco");
+    const aire = document.getElementById("ondas-aire");
+    disco.classList.add("vibrando");
+    aire.classList.add("sonando");
+    sonar(330, 1500);
+    setTimeout(() => { disco.classList.remove("vibrando"); aire.classList.remove("sonando"); }, 1500);
+  });
+
+  /* ---- 6 · piano ---- */
+  (function () {
+    const NOTAS = [
+      { n: "do", hz: 262 }, { n: "re", hz: 294 }, { n: "mi", hz: 330 }, { n: "fa", hz: 349 },
+      { n: "sol", hz: 392 }, { n: "la", hz: 440 }, { n: "si", hz: 494 }, { n: "do↑", hz: 523 }
+    ];
+    const piano = document.getElementById("piano");
+    NOTAS.forEach(nt => {
+      const t = document.createElement("button");
+      t.className = "tecla";
+      t.innerHTML = nt.n + '<span class="hz">' + nt.hz + '</span>';
+      t.addEventListener("pointerdown", () => {
+        t.classList.add("abajo");
+        sonar(nt.hz, 500);
+        document.getElementById("piano-hz").textContent = nt.hz;
+        document.getElementById("piano-txt").innerHTML =
+          "Estás tocando <strong>" + nt.n + "</strong>: el buzzer vibra <strong>" + nt.hz + "</strong> veces por segundo.";
+      });
+      ["pointerup", "pointerleave", "pointercancel"].forEach(ev =>
+        t.addEventListener(ev, () => t.classList.remove("abajo")));
+      piano.appendChild(t);
+    });
+  })();
+
+  /* ---- 7 · armado del buzzer ---- */
+  (function () {
+    const $ = id => document.getElementById(id);
+    const NS = "http://www.w3.org/2000/svg";
+    const g = $("agujeros-armado");
+    const poner = (tag, attrs, texto) => {
+      const e = document.createElementNS(NS, tag);
+      for (const k in attrs) e.setAttribute(k, attrs[k]);
+      if (texto !== undefined) e.textContent = texto;
+      g.appendChild(e);
+    };
+    const colX = c => 178 + c * 26;
+    [56, 74, 118, 134, 150, 166, 182, 224, 240, 256, 272, 288, 328, 346].forEach(cy => {
+      for (let c = 0; c < 16; c++)
+        poner("rect", { x: colX(c) - 5, y: cy - 5, width: 10, height: 10, rx: 2, fill: "#E9EDEC", stroke: "#C2CBCA", "stroke-width": 2 });
+    });
+    [[44, "#E84855"], [86, "#37474F"], [316, "#37474F"], [358, "#E84855"]].forEach(([y, col]) =>
+      poner("line", { x1: 168, y1: y, x2: 592, y2: y, stroke: col, "stroke-width": 3 }));
+    [[160, 60, "+", "#E84855"], [160, 79, "−", "#37474F"], [160, 333, "−", "#37474F"], [160, 351, "+", "#E84855"],
+     [600, 60, "+", "#E84855"], [600, 79, "−", "#37474F"], [600, 333, "−", "#37474F"], [600, 351, "+", "#E84855"]]
+      .forEach(([x, y, t, col]) => poner("text", { x, y, "font-size": 12, fill: col, "text-anchor": "middle", "font-family": "monospace" }, t));
+    ["J", "I", "H", "G", "F"].forEach((L, f) => poner("text", { x: 162, y: 122 + f * 16, "font-size": 11, fill: "#98A6A4", "text-anchor": "middle", "font-family": "monospace" }, L));
+    ["E", "D", "C", "B", "A"].forEach((L, f) => poner("text", { x: 162, y: 228 + f * 16, "font-size": 11, fill: "#98A6A4", "text-anchor": "middle", "font-family": "monospace" }, L));
+    [0, 4, 9, 14].forEach(c => poner("text", { x: colX(c), y: 104, "font-size": 11, fill: "#98A6A4", "text-anchor": "middle", "font-family": "monospace" }, c + 1));
+
+    const PASOS = [
+      { pieza: "pieza-buzzer", txt: "El buzzer va en la protoboard con cada patita en una <strong>columna distinta</strong>. Fíjate en la marca <strong>+</strong> de arriba." },
+      { pieza: "pieza-pin", txt: "Un cable desde la columna del <strong>+</strong> hasta el <strong>pin 8</strong>: por ahí llegarán las vibraciones." },
+      { pieza: "pieza-gnd", txt: "Y el otro lado al <strong>GND</strong>, para cerrar el camino hasta el suelo. ¡Listo para sonar! 🎵" }
+    ];
+    let i = 0;
+    function pintar() {
+      $("ar-num").textContent = i < PASOS.length ? "Paso " + (i + 1) + " de " + PASOS.length : "¡Listo!";
+      $("ar-txt").innerHTML = i < PASOS.length ? PASOS[i].txt : "Tres piezas y ya tienes un instrumento musical. El buzzer no necesita resistencia: no es delicado como el LED. 💪";
+      PASOS.forEach((p, n) => $(p.pieza).classList.toggle("visible-paso", n <= i));
+    }
+    $("ar-sig").addEventListener("click", () => { if (i < PASOS.length) i++; pintar(); });
+    $("ar-reset").addEventListener("click", () => { i = 0; pintar(); });
+    pintar();
+  })();
+
+  /* ---- 8 · la canción ---- */
+  (function () {
+    const $ = id => document.getElementById(id);
+    const MELODIA = [
+      { n: "do", hz: 262 }, { n: "do", hz: 262 }, { n: "sol", hz: 392 }, { n: "sol", hz: 392 },
+      { n: "la", hz: 440 }, { n: "la", hz: 440 }, { n: "sol", hz: 392, largo: true }
+    ];
+    const part = $("partitura");
+    MELODIA.forEach(nt => {
+      const c = document.createElement("span");
+      c.className = "nota-chip";
+      c.textContent = nt.n;
+      part.appendChild(c);
+    });
+    const chips = [...part.children];
+    let tocando = false, timers = [];
+
+    $("tocar").addEventListener("click", () => {
+      if (tocando) return;
+      tocando = true;
+      $("tocar").textContent = "🎵 sonando…";
+      let t = 0;
+      MELODIA.forEach((nt, k) => {
+        timers.push(setTimeout(() => {
+          chips.forEach(c => c.classList.remove("sonando"));
+          chips[k].classList.add("sonando");
+          document.querySelectorAll(".ln[data-nota]").forEach(l =>
+            l.classList.toggle("aqui", +l.dataset.nota === k));
+          sonar(nt.hz, nt.largo ? 750 : 380);
+        }, t));
+        t += nt.largo ? 800 : 420;
+      });
+      timers.push(setTimeout(() => {
+        chips.forEach(c => c.classList.remove("sonando"));
+        document.querySelectorAll(".ln[data-nota]").forEach(l => l.classList.remove("aqui"));
+        tocando = false;
+        $("tocar").textContent = "▶ Tocar de nuevo";
+        $("cancion-txt").innerHTML = "¿La reconociste? Es <strong>Estrellita, ¿dónde estás?</strong> Las primeras cuatro notas están en el código; las otras tres son tu tarea. 😉";
+      }, t + 200));
+    });
+  })();
+
+  /* ---- 9 y 10 · sirena y timbre ---- */
+  document.getElementById("sirena").addEventListener("click", () => {
+    for (let k = 0; k < 4; k++) {
+      setTimeout(() => sonar(440, 280), k * 600);
+      setTimeout(() => sonar(660, 280), k * 600 + 300);
+    }
+  });
+  document.getElementById("ding").addEventListener("click", () => {
+    sonar(523, 200);
+    setTimeout(() => sonar(392, 400), 220);
+  });
+
+  document.querySelectorAll(".quiz").forEach(q => {
+    const voltear = () => q.classList.toggle("volteada");
+    q.addEventListener("click", voltear);
+    q.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { voltear(); e.preventDefault(); } });
+  });
+
+  saberMas({
+    hertz: {
+      t: "Hertz (Hz): las vibraciones por segundo",
+      d: "<p>Cuando algo vibra <strong>440 veces en un segundo</strong>, decimos que suena a <strong>440 hertz</strong>. Es solo una forma corta de decirlo.</p><p>El nombre viene de <strong>Heinrich Hertz</strong>, un científico alemán que estudió estas vibraciones hace más de 100 años 📻. Nosotros escuchamos desde unos 20 Hz (grave grave) hasta 20.000 Hz (agudísimo)… ¡los perros escuchan mucho más arriba! 🐕</p>"
+    },
+    piezo: {
+      t: "¿Por qué se dobla el disco? ⚡",
+      d: "<p>El disco tiene un material <strong>piezoeléctrico</strong>: una palabra larga para algo simple. Son cristales que <strong>cambian de forma cuando les llega electricidad</strong>.</p><p>Y funciona al revés también: si los aprietas, ellos <strong>fabrican</strong> un poquito de electricidad. Ese es el truco de los encendedores de cocina que hacen «clic» y sacan chispa. 🔥</p>"
+    }
+  });
+</script>
+</body>
+</html>
