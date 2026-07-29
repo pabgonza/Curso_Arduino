@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sesión 4 · Sentir y actuar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/slides.css">
+</head>
+<body>
+
+<!-- 1 · Portada -->
+<section class="slide portada">
+  <span class="sesion-num">Sesión 4</span>
+  <h1>Sentir y actuar 🕹️</h1>
+  <p class="grande">Hasta ahora tu Arduino solo sabía <strong>hacer</strong> cosas.<br>Hoy le damos <strong>sentidos</strong>… ¡y le enseñamos a decidir!</p>
+  <div class="semaforo-vivo" aria-hidden="true">
+    <span class="led" id="pled-r" style="--c:var(--rojo)"></span>
+    <span class="led" id="pled-a" style="--c:var(--ambar)"></span>
+    <span class="led" id="pled-v" style="--c:var(--verde)"></span>
+  </div>
+</section>
+
+<!-- 2 · El ciclo -->
+<section class="slide">
+  <p class="eyebrow">¿Te acuerdas de la sesión 1?</p>
+  <h2>Sentir → Pensar → Actuar 🔁</h2>
+  <div class="fila">
+    <div class="tarjeta"><h3>👀 Sentir</h3><p>Los <strong>sensores</strong> le cuentan al cerebrito lo que pasa afuera.</p></div>
+    <div class="tarjeta"><h3>🧠 Pensar</h3><p>Tu <strong>programa</strong> decide qué hacer con esa información.</p></div>
+    <div class="tarjeta"><h3>💪 Actuar</h3><p>Los <strong>actuadores</strong> cambian algo del mundo real.</p></div>
+  </div>
+  <p class="grande" style="max-width:32em">En las sesiones anteriores solo usamos la tercera parte: prender un LED.<br>Hoy completamos el círculo. 🎯</p>
+</section>
+
+<!-- 3 · Sensores -->
+<section class="slide">
+  <p class="eyebrow">Los sentidos del cerebrito</p>
+  <h2>Sensores 👀</h2>
+  <div class="fila">
+    <figure class="figura tarjeta-foto">
+      <img src="../recursos/img/hc-sr04.jpg" alt="Sensor de ultrasonido HC-SR04">
+      <figcaption><strong>Ultrasonido</strong> · el oído de murciélago<button class="sm" data-sm="ultra">?</button>
+        <span class="credito">SparkFun · CC BY 2.0</span></figcaption>
+    </figure>
+    <figure class="figura tarjeta-foto">
+      <img src="../recursos/img/dht11.jpg" alt="Sensor de temperatura y humedad DHT11">
+      <figcaption><strong>Temperatura</strong> · siente el calor<button class="sm" data-sm="temp">?</button>
+        <span class="credito">Edwiyanto · CC BY-SA 4.0</span></figcaption>
+    </figure>
+    <figure class="figura tarjeta-foto">
+      <img src="../recursos/img/potenciometro.jpg" alt="Potenciómetro">
+      <figcaption><strong>Potenciómetro</strong> · sabe cuánto lo giraste<button class="sm" data-sm="poten">?</button>
+        <span class="credito">Iainf · CC BY 2.5</span></figcaption>
+    </figure>
+  </div>
+  <p class="grande">Un sensor no decide nada: solo <strong>avisa</strong>. Es el programa el que decide qué hacer.</p>
+</section>
+
+<!-- 4 · Actuadores -->
+<section class="slide">
+  <p class="eyebrow">Los músculos del cerebrito</p>
+  <h2>Actuadores 💪</h2>
+  <div class="fila">
+    <figure class="figura tarjeta-foto">
+      <img src="../recursos/img/leds.jpg" alt="LEDs de varios colores">
+      <figcaption><strong>LED</strong> · hace luz<button class="sm" data-sm="led-int">?</button>
+        <span class="credito">Afrank99 · CC BY-SA 2.0</span></figcaption>
+    </figure>
+    <figure class="figura tarjeta-foto">
+      <img src="../recursos/img/buzzer.jpg" alt="Buzzer piezoeléctrico">
+      <figcaption><strong>Buzzer</strong> · hace sonido<button class="sm" data-sm="buzzer">?</button>
+        <span class="credito">R. Spekking · CC BY-SA 4.0</span></figcaption>
+    </figure>
+    <figure class="figura tarjeta-foto">
+      <img src="../recursos/img/servo-sg90.jpg" alt="Servomotor SG90">
+      <figcaption><strong>Servo</strong> · hace movimiento<button class="sm" data-sm="servo">?</button>
+        <span class="credito">S. Dwivedi · CC BY-SA 4.0</span></figcaption>
+    </figure>
+  </div>
+  <p class="grande">Los conocerás uno por uno en las próximas sesiones. ¡Hoy empezamos por el más simple de todos! 🔘</p>
+</section>
+
+<!-- 5 · El juego -->
+<section class="slide">
+  <p class="eyebrow">Duelo de cerebritos</p>
+  <h2>¿Sensor o actuador? 🎮</h2>
+  <div class="juego">
+    <div class="objeto" id="objeto">
+      <span class="obj-emoji" id="obj-emoji">👁️</span>
+      <span class="obj-nombre" id="obj-nombre">Cargando…</span>
+    </div>
+    <div class="fila" style="gap:.8em">
+      <button class="boton" data-r="sensor">👀 Sensor</button>
+      <button class="boton secundario" data-r="actuador">💪 Actuador</button>
+    </div>
+    <p class="grande" id="juego-fb" style="min-height:2.6em">Toca el botón que corresponda.</p>
+    <p class="nota">Puntaje: <strong id="puntaje">0</strong> · Van <span id="ronda">1</span> de <span id="total">8</span></p>
+    <button class="boton secundario" id="juego-otra" hidden>↺ Jugar de nuevo</button>
+  </div>
+</section>
+
+<!-- 6 · El botón por dentro -->
+<section class="slide">
+  <p class="eyebrow">Tu primer sensor</p>
+  <h2>El botón por dentro 🔘</h2>
+  <div class="tuto">
+    <div class="proto-caja">
+      <svg viewBox="0 0 420 300" id="svg-boton" aria-label="Botón de 4 patitas visto por dentro">
+        <rect x="110" y="70" width="200" height="160" rx="10" fill="#2E3B41"/>
+        <g id="patitas" stroke="#B0BEC5" stroke-width="10" stroke-linecap="round">
+          <line x1="110" y1="110" x2="60" y2="110"/><line x1="110" y1="190" x2="60" y2="190"/>
+          <line x1="310" y1="110" x2="360" y2="110"/><line x1="310" y1="190" x2="360" y2="190"/>
+        </g>
+        <g id="puentes-fijos" stroke="#FFB627" stroke-width="9" stroke-linecap="round" opacity="0">
+          <line x1="140" y1="110" x2="140" y2="190"/>
+          <line x1="280" y1="110" x2="280" y2="190"/>
+          <line x1="110" y1="110" x2="140" y2="110"/><line x1="110" y1="190" x2="140" y2="190"/>
+          <line x1="280" y1="110" x2="310" y2="110"/><line x1="280" y1="190" x2="310" y2="190"/>
+        </g>
+        <line id="puente-movil" x1="140" y1="150" x2="280" y2="150" stroke="#35CE8D" stroke-width="10" stroke-linecap="round" opacity="0"/>
+        <circle cx="210" cy="150" r="46" id="tapa" fill="#E84855" stroke="#B03744" stroke-width="5"/>
+        <text x="210" y="158" text-anchor="middle" font-size="20" fill="#fff" font-family="Nunito, sans-serif" font-weight="700" id="tapa-txt">apriétame</text>
+        <text x="55" y="100" text-anchor="end" font-size="14" fill="#5E7480" font-family="Nunito, sans-serif">1</text>
+        <text x="55" y="180" text-anchor="end" font-size="14" fill="#5E7480" font-family="Nunito, sans-serif">2</text>
+        <text x="368" y="100" font-size="14" fill="#5E7480" font-family="Nunito, sans-serif">3</text>
+        <text x="368" y="180" font-size="14" fill="#5E7480" font-family="Nunito, sans-serif">4</text>
+      </svg>
+    </div>
+    <aside class="tuto-panel">
+      <p class="tuto-num" id="bt-num">Un botón, 4 patitas</p>
+      <p class="tuto-texto" id="bt-txt">Casi todos los botones de los kits tienen <strong>cuatro patitas</strong>… y eso confunde a todo el mundo. Aprieta la tapa roja para ver qué pasa por dentro.</p>
+      <button class="boton" id="bt-ver">🔍 Ver los puentes de adentro</button>
+    </aside>
+  </div>
+</section>
+
+<!-- 7 · Entradas y salidas -->
+<section class="slide">
+  <p class="eyebrow">Una palabra nueva</p>
+  <h2>Entradas y salidas ↔️</h2>
+  <div class="fila">
+    <div class="tarjeta">
+      <h3>→ OUTPUT (salida)</h3>
+      <p>El pin <strong>manda</strong> electricidad hacia afuera. Así prendimos el LED.</p>
+      <div class="ide" style="margin-top:.6em">
+        <pre><span class="fn">pinMode</span>(<span class="num">13</span>, <span class="kw">OUTPUT</span>);</pre>
+      </div>
+    </div>
+    <div class="tarjeta">
+      <h3>← INPUT (entrada)</h3>
+      <p>El pin <strong>escucha</strong>: se queda esperando a ver si le llega electricidad.</p>
+      <div class="ide" style="margin-top:.6em">
+        <pre><span class="fn">pinMode</span>(<span class="num">2</span>, <span class="kw">INPUT</span>);</pre>
+      </div>
+    </div>
+  </div>
+  <p class="grande" style="max-width:32em">Un mismo pin puede ser <strong>boca</strong> o <strong>oreja</strong>: se lo decimos una vez en el <strong>setup</strong> y listo.</p>
+</section>
+
+<!-- 8 · El circuito del botón -->
+<section class="slide">
+  <p class="eyebrow">¡Manos a la obra!</p>
+  <h2>El circuito del botón 🔧</h2>
+  <div class="tuto">
+    <div class="proto-caja">
+      <svg viewBox="0 0 620 400" id="armado" aria-label="Botón conectado a la protoboard">
+        <rect x="6" y="120" width="120" height="210" rx="12" fill="#00878F"/>
+        <text x="66" y="147" text-anchor="middle" fill="#fff" font-family="monospace" font-size="14">ARDUINO</text>
+        <rect x="14" y="162" width="104" height="24" rx="4" fill="#143642"/>
+        <text x="66" y="179" text-anchor="middle" fill="#fff" font-family="monospace" font-size="13">5V</text>
+        <rect x="14" y="228" width="104" height="24" rx="4" fill="#143642"/>
+        <text x="66" y="245" text-anchor="middle" fill="#fff" font-family="monospace" font-size="13">pin 2</text>
+        <rect x="14" y="294" width="104" height="24" rx="4" fill="#143642"/>
+        <text x="66" y="311" text-anchor="middle" fill="#fff" font-family="monospace" font-size="13">GND</text>
+
+        <rect x="150" y="30" width="460" height="340" rx="10" fill="#FAFAFA" stroke="#D8DEDD" stroke-width="3"/>
+        <rect x="150" y="192" width="460" height="22" fill="#EFF2F1"/>
+        <g id="agujeros-armado"></g>
+
+        <!-- botón a caballo del canal -->
+        <g id="pieza-boton" class="oculta">
+          <g stroke="#B0BEC5" stroke-width="5" stroke-linecap="round">
+            <line x1="292" y1="188" x2="282" y2="180"/><line x1="324" y1="188" x2="334" y2="180"/>
+            <line x1="292" y1="218" x2="282" y2="226"/><line x1="324" y1="218" x2="334" y2="226"/>
+          </g>
+          <rect x="286" y="185" width="44" height="36" rx="6" fill="#2E3B41"/>
+          <circle cx="308" cy="203" r="13" fill="#E84855" stroke="#B03744" stroke-width="3"/>
+        </g>
+        <!-- resistencia de 10k al riel negativo -->
+        <g id="pieza-res" class="oculta">
+          <line x1="334" y1="272" x2="334" y2="328" stroke="#9aa7ad" stroke-width="4"/>
+          <rect x="325" y="284" width="18" height="34" rx="4" fill="#D7B899" stroke="#8D6E63" stroke-width="2"/>
+          <rect x="325" y="290" width="18" height="4" fill="#8D3B0B"/>
+          <rect x="325" y="298" width="18" height="4" fill="#000"/>
+          <rect x="325" y="306" width="18" height="4" fill="#E8A33D"/>
+          <text x="352" y="306" font-size="13" fill="#5E7480" font-family="Nunito, sans-serif">10 kΩ</text>
+        </g>
+        <path id="pieza-5v" class="oculta cable-w" d="M122 174 C 190 174, 240 150, 282 150" stroke="#E84855"/>
+        <path id="pieza-gnd" class="oculta cable-w" d="M122 306 C 180 330, 240 328, 282 328" stroke="#37474F"/>
+        <path id="pieza-pin" class="oculta cable-w" d="M122 240 C 190 250, 250 256, 334 256" stroke="#4C7CFF"/>
+      </svg>
+    </div>
+    <aside class="tuto-panel">
+      <p class="tuto-num" id="ar-num">Paso 1 de 4</p>
+      <p class="tuto-texto" id="ar-txt"></p>
+      <div class="fila" style="gap:.5em">
+        <button class="boton" id="ar-sig">Siguiente ▶</button>
+        <button class="boton secundario" id="ar-reset">↺</button>
+      </div>
+    </aside>
+  </div>
+  <p class="nota">¿Y para qué la resistencia de 10 kΩ? <button class="sm" data-sm="pulldown">?</button> No es el casco del LED: esta tiene otro trabajo.</p>
+</section>
+
+<!-- 9 · El if, con el botón de verdad -->
+<section class="slide">
+  <p class="eyebrow">Enseñarle a decidir</p>
+  <h2>El <code>if</code>: si pasa esto… haz esto otro 🤔</h2>
+  <div class="tuto">
+    <div class="sim-ide">
+      <div class="sim-titulo"><span class="sim-punto"></span>boton.ino | Arduino IDE 2</div>
+      <div class="sim-editor lineas">
+        <div class="ln"><span class="n">1</span><code><span class="kw">void</span> <span class="fn">setup</span>() {</code></div>
+        <div class="ln"><span class="n">2</span><code>  <span class="fn">pinMode</span>(<span class="num">2</span>, <span class="kw">INPUT</span>);</code></div>
+        <div class="ln"><span class="n">3</span><code>  <span class="fn">pinMode</span>(<span class="num">13</span>, <span class="kw">OUTPUT</span>);</code></div>
+        <div class="ln"><span class="n">4</span><code>}</code></div>
+        <div class="ln"><span class="n">5</span><code> </code></div>
+        <div class="ln"><span class="n">6</span><code><span class="kw">void</span> <span class="fn">loop</span>() {</code></div>
+        <div class="ln" data-si="1"><span class="n">7</span><code>  <span class="kw">if</span> (<span class="fn">digitalRead</span>(<span class="num">2</span>) == <span class="kw">HIGH</span>) {</code></div>
+        <div class="ln" data-si="1"><span class="n">8</span><code>    <span class="fn">digitalWrite</span>(<span class="num">13</span>, <span class="kw">HIGH</span>);</code></div>
+        <div class="ln" data-si="0"><span class="n">9</span><code>  } <span class="kw">else</span> {</code></div>
+        <div class="ln" data-si="0"><span class="n">10</span><code>    <span class="fn">digitalWrite</span>(<span class="num">13</span>, <span class="kw">LOW</span>);</code></div>
+        <div class="ln"><span class="n">11</span><code>  }</code></div>
+        <div class="ln"><span class="n">12</span><code>}</code></div>
+      </div>
+    </div>
+    <aside class="tuto-panel">
+      <p class="tuto-num">Pruébalo tú</p>
+      <p class="tuto-texto" id="if-txt">Mantén apretado el botón y mira qué línea se ilumina.</p>
+      <button class="boton-fisico" id="boton-sim">🔘 Mantén apretado</button>
+      <p class="lectura"><code>digitalRead(2)</code> = <strong id="lectura">LOW</strong></p>
+      <div class="tuto-placa">
+        <span class="mini-placa grande"><span class="mini-led" id="if-led"></span><span class="mini-etiq">L</span></span>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- 10 · Proyecto -->
+<section class="slide">
+  <p class="eyebrow">⭐ Proyecto de la sesión</p>
+  <h2>Tu propio interruptor de luz 💡</h2>
+  <p class="grande">Ya tienes todo: un sensor que avisa, un programa que decide y un actuador que obedece.</p>
+  <div style="display:flex; flex-direction:column; gap:.5em; width:min(92vw,640px)">
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Armar el circuito del botón <strong>y</strong> el del LED en la misma protoboard</span></div>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Subir el programa del <strong>if</strong> y probarlo</span></div>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Cambiar el <strong>HIGH</strong> por <strong>LOW</strong> en el if: ¿qué pasa ahora?</span></div>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Hacer que el botón encienda <strong>tres</strong> LEDs de una vez</span></div>
+  </div>
+  <p class="nota">Truco de profe: si el LED parpadea solo cuando pasas la mano cerca, seguramente falta la resistencia de 10 kΩ. 👻</p>
+</section>
+
+<!-- 11 · Reto -->
+<section class="slide">
+  <div class="reto">
+    <p class="eyebrow">⭐ Reto de la sesión</p>
+    <h2>La luz que se queda encendida 🔒</h2>
+    <p class="grande">Nuestro interruptor solo alumbra <strong>mientras</strong> aprietas. Los de tu casa no son así: aprietas una vez y la luz se queda.</p>
+    <p>Pista: el Arduino necesita <strong>acordarse</strong> de si la luz estaba prendida o apagada. Una <strong>variable</strong> es justamente una cajita para acordarse de cosas. 🧠</p>
+  </div>
+  <p class="nota">Este reto es difícil: si lo logras, ya estás programando como grande. 💪</p>
+</section>
+
+<!-- 12 · Quiz -->
+<section class="slide">
+  <p class="eyebrow">Duelo de cerebritos</p>
+  <h2>¿Cuánto aprendiste? Toca para voltear</h2>
+  <div class="fila">
+    <div class="quiz" tabindex="0"><div class="quiz-caras">
+      <div class="quiz-cara quiz-frente">¿Qué hace un sensor?</div>
+      <div class="quiz-cara quiz-atras">Avisarle al cerebrito lo que pasa afuera 👀</div>
+    </div></div>
+    <div class="quiz" tabindex="0"><div class="quiz-caras">
+      <div class="quiz-cara quiz-frente">¿Y un actuador?</div>
+      <div class="quiz-cara quiz-atras">Cambiar algo del mundo real: luz, sonido, movimiento 💪</div>
+    </div></div>
+    <div class="quiz" tabindex="0"><div class="quiz-caras">
+      <div class="quiz-cara quiz-frente">¿Qué le dice <code>pinMode(2, INPUT)</code> al Arduino?</div>
+      <div class="quiz-cara quiz-atras">Que ese pin va a escuchar, no a mandar 👂</div>
+    </div></div>
+    <div class="quiz" tabindex="0"><div class="quiz-caras">
+      <div class="quiz-cara quiz-frente">¿Cuántas patitas del botón están siempre unidas?</div>
+      <div class="quiz-cara quiz-atras">De a dos: 1 con 2, y 3 con 4 🔘</div>
+    </div></div>
+    <div class="quiz" tabindex="0"><div class="quiz-caras">
+      <div class="quiz-cara quiz-frente">¿Qué hace el <code>else</code>?</div>
+      <div class="quiz-cara quiz-atras">Lo que se hace cuando la pregunta del if es «no» 🙅</div>
+    </div></div>
+  </div>
+</section>
+
+<!-- 13 · Cierre -->
+<section class="slide portada">
+  <p class="eyebrow">Lo lograste</p>
+  <h1>¡Tu Arduino ya siente! 🎉</h1>
+  <p class="grande">Hoy cerraste el círculo completo: sentir, pensar y actuar.<br>Tu programa <strong>toma decisiones</strong> solito.</p>
+  <div class="tarjeta" style="max-width:24em">
+    <h3>Próxima sesión 🎵</h3>
+    <p>Le vamos a dar <strong>voz</strong>: el buzzer, las notas musicales… ¡y tu primera canción programada!</p>
+  </div>
+  <div class="semaforo-vivo" aria-hidden="true">
+    <span class="led on" style="--c:var(--verde)"></span>
+  </div>
+</section>
+
+<style>
+  /* fotos dentro de tarjeta, para sensores y actuadores */
+  .tarjeta-foto { max-width: min(84vw, 15em); }
+  .tarjeta-foto img { max-height: 24vh; }
+  .tarjeta-foto figcaption { font-size: .85rem; color: var(--tinta); }
+
+  /* el código de ejemplo dentro de una tarjeta va más chico, para que quepa */
+  .tarjeta .ide pre { font-size: clamp(.72rem, 1.9vh, .95rem); padding: .6em .8em; }
+
+  /* ---------- juego sensor o actuador ---------- */
+  .juego { display: flex; flex-direction: column; align-items: center; gap: .8em; }
+  .objeto {
+    display: flex; flex-direction: column; align-items: center; gap: .3em;
+    background: var(--blanco); border: 3px solid var(--teal);
+    border-radius: 18px; padding: .8em 1.4em; width: min(92vw, 26em);
+    box-shadow: 0 8px 22px rgba(20,54,66,.12);
+  }
+  .obj-emoji { font-size: 3.4em; line-height: 1; }
+  .obj-nombre { font-size: clamp(1rem, 2.8vh, 1.35rem); font-weight: 700; }
+  .objeto.bien { border-color: var(--verde); background: #EDFBF4; }
+  .objeto.mal { border-color: var(--rojo); background: #FFF0F1; }
+
+  /* ---------- botón por dentro ---------- */
+  #svg-boton { width: 100%; }
+  #tapa { cursor: pointer; transition: r .1s, fill .1s; }
+  #svg-boton.apretado #tapa { r: 40; fill: #C43D48; }
+  #puentes-fijos, #puente-movil { transition: opacity .25s; }
+  #svg-boton.viendo #puentes-fijos { opacity: 1; }
+  #svg-boton.viendo.apretado #puente-movil { opacity: 1; }
+
+  /* ---------- botón físico del simulador ---------- */
+  .boton-fisico {
+    font-family: var(--f-titulo); font-size: 1.05rem;
+    background: var(--rojo); color: #fff; border: none;
+    border-radius: 14px; padding: .7em 1em; cursor: pointer;
+    box-shadow: 0 5px 0 #B03744; user-select: none; touch-action: none;
+  }
+  .boton-fisico.abajo { transform: translateY(4px); box-shadow: 0 1px 0 #B03744; }
+  .lectura { font-size: .9rem !important; color: var(--gris); }
+  .lectura strong { font-family: var(--f-codigo); color: var(--teal-osc); }
+
+  /* piezas del armado que van apareciendo */
+  .oculta { opacity: 0; transition: opacity .35s; }
+  .visible-paso { opacity: 1; }
+  .cable-w { fill: none; stroke-width: 7; stroke-linecap: round; }
+  .proto-caja { flex: 1 1 30em; max-width: min(92vw, 40em); }
+  .proto-caja svg { width: 100%; }
+</style>
+
+<script src="assets/slides.js"></script>
+<script>
+  const pleds = ["pled-r", "pled-a", "pled-v"].map(id => document.getElementById(id));
+  let pi = 0;
+  setInterval(() => {
+    pleds.forEach((l, i) => l.classList.toggle("on", i === pi));
+    pi = (pi + 1) % 3;
+  }, 700);
+
+  /* ---- 5 · juego: ¿sensor o actuador? ---- */
+  (function () {
+    const $ = id => document.getElementById(id);
+    const COSAS = [
+      { e: "👁️", n: "El ojito que detecta que te acercas a la puerta del súper", r: "sensor" },
+      { e: "⚙️", n: "El motor que abre esa misma puerta", r: "actuador" },
+      { e: "🔘", n: "El botón del timbre que aprietas con el dedo", r: "sensor" },
+      { e: "🔔", n: "El parlante del timbre que hace «ding dong»", r: "actuador" },
+      { e: "🌡️", n: "El termómetro que mide si tienes fiebre", r: "sensor" },
+      { e: "💡", n: "La ampolleta que ilumina tu pieza", r: "actuador" },
+      { e: "👂", n: "El micrófono que escucha tu voz", r: "sensor" },
+      { e: "💦", n: "El aspersor que riega el pasto", r: "actuador" },
+      { e: "📱", n: "La pantalla que siente tu dedo", r: "sensor" },
+      { e: "🪟", n: "El limpiaparabrisas que se mueve solo", r: "actuador" }
+    ];
+    const TOTAL = 8;
+    let orden = [], i = 0, puntos = 0, bloqueado = false;
+
+    function barajar() {
+      orden = COSAS.map(c => c).sort(() => Math.random() - 0.5).slice(0, TOTAL);
+    }
+    function mostrar() {
+      const c = orden[i];
+      $("obj-emoji").textContent = c.e;
+      $("obj-nombre").textContent = c.n;
+      $("ronda").textContent = i + 1;
+      $("objeto").classList.remove("bien", "mal");
+      $("juego-fb").textContent = "Toca el botón que corresponda.";
+      bloqueado = false;
+    }
+    function empezar() {
+      barajar(); i = 0; puntos = 0;
+      $("puntaje").textContent = 0;
+      $("total").textContent = TOTAL;
+      $("juego-fb").textContent = "Toca el botón que corresponda.";
+      $("juego-otra").hidden = true;
+      mostrar();
+    }
+    document.querySelectorAll("[data-r]").forEach(b => b.addEventListener("click", () => {
+      if (bloqueado) return;
+      bloqueado = true;
+      const c = orden[i];
+      const acerto = b.dataset.r === c.r;
+      if (acerto) puntos++;
+      $("puntaje").textContent = puntos;
+      $("objeto").classList.add(acerto ? "bien" : "mal");
+      $("juego-fb").innerHTML = acerto
+        ? (c.r === "sensor" ? "¡Sí! Es un <strong>sensor</strong>: le cuenta al cerebrito lo que pasa. 👀" : "¡Sí! Es un <strong>actuador</strong>: cambia algo del mundo. 💪")
+        : (c.r === "sensor" ? "Casi: es un <strong>sensor</strong>, porque su trabajo es <em>avisar</em>. 👀" : "Casi: es un <strong>actuador</strong>, porque su trabajo es <em>hacer</em>. 💪");
+      setTimeout(() => {
+        i++;
+        if (i < orden.length) mostrar();
+        else {
+          $("juego-fb").innerHTML = puntos === TOTAL
+            ? "🏆 ¡" + puntos + " de " + TOTAL + "! Ya distingues sensores de actuadores como un experto."
+            : "Terminaste con <strong>" + puntos + " de " + TOTAL + "</strong>. ¿Otra vuelta?";
+          $("juego-otra").hidden = false;
+        }
+      }, 1400);
+    }));
+    $("juego-otra").addEventListener("click", empezar);
+    empezar();
+  })();
+
+  /* ---- 6 · el botón por dentro ---- */
+  (function () {
+    const svg = document.getElementById("svg-boton");
+    const txt = document.getElementById("bt-txt");
+    const num = document.getElementById("bt-num");
+    let viendo = false, apretado = false;
+
+    function contar() {
+      if (!viendo) {
+        num.textContent = "Un botón, 4 patitas";
+        txt.innerHTML = "Casi todos los botones de los kits tienen <strong>cuatro patitas</strong>… y eso confunde a todo el mundo. Aprieta la tapa roja para ver qué pasa por dentro.";
+      } else if (!apretado) {
+        num.textContent = "Suelto";
+        txt.innerHTML = "Mira los puentes amarillos: la <strong>1 y la 2 siempre están unidas</strong>, y la <strong>3 con la 4</strong> también. Pero los dos lados <strong>no se tocan</strong>: el camino está cortado.";
+      } else {
+        num.textContent = "¡Apretado!";
+        txt.innerHTML = "Al apretar aparece el <strong>puente verde</strong>: recién ahí los dos lados quedan unidos y la electricidad puede pasar. ¡Eso es todo lo que hace un botón! 🔘";
+      }
+    }
+    const apretar = v => {
+      apretado = v;
+      svg.classList.toggle("apretado", v);
+      document.getElementById("tapa-txt").textContent = v ? "¡así!" : "apriétame";
+      contar();
+    };
+    const tapa = document.getElementById("tapa");
+    tapa.addEventListener("pointerdown", () => apretar(true));
+    ["pointerup", "pointerleave", "pointercancel"].forEach(ev => tapa.addEventListener(ev, () => apretar(false)));
+    document.getElementById("bt-ver").addEventListener("click", e => {
+      viendo = !viendo;
+      svg.classList.toggle("viendo", viendo);
+      e.target.textContent = viendo ? "🙈 Esconder los puentes" : "🔍 Ver los puentes de adentro";
+      contar();
+    });
+    contar();
+  })();
+
+  /* ---- 8 · armado del circuito del botón ---- */
+  (function () {
+    const $ = id => document.getElementById(id);
+    const NS = "http://www.w3.org/2000/svg";
+    const g = $("agujeros-armado");
+    const poner = (tag, attrs, texto) => {
+      const e = document.createElementNS(NS, tag);
+      for (const k in attrs) e.setAttribute(k, attrs[k]);
+      if (texto !== undefined) e.textContent = texto;
+      g.appendChild(e);
+    };
+    const colX = c => 178 + c * 26;
+    [56, 74, 118, 134, 150, 166, 182, 224, 240, 256, 272, 288, 328, 346].forEach(cy => {
+      for (let c = 0; c < 16; c++)
+        poner("rect", { x: colX(c) - 5, y: cy - 5, width: 10, height: 10, rx: 2, fill: "#E9EDEC", stroke: "#C2CBCA", "stroke-width": 2 });
+    });
+    [[44, "#E84855"], [86, "#37474F"], [316, "#37474F"], [358, "#E84855"]].forEach(([y, col]) =>
+      poner("line", { x1: 168, y1: y, x2: 592, y2: y, stroke: col, "stroke-width": 3 }));
+    [[160, 60, "+", "#E84855"], [160, 79, "−", "#37474F"], [160, 333, "−", "#37474F"], [160, 351, "+", "#E84855"],
+     [600, 60, "+", "#E84855"], [600, 79, "−", "#37474F"], [600, 333, "−", "#37474F"], [600, 351, "+", "#E84855"]]
+      .forEach(([x, y, t, col]) => poner("text", { x, y, "font-size": 12, fill: col, "text-anchor": "middle", "font-family": "monospace" }, t));
+    ["J", "I", "H", "G", "F"].forEach((L, f) => poner("text", { x: 162, y: 122 + f * 16, "font-size": 11, fill: "#98A6A4", "text-anchor": "middle", "font-family": "monospace" }, L));
+    ["E", "D", "C", "B", "A"].forEach((L, f) => poner("text", { x: 162, y: 228 + f * 16, "font-size": 11, fill: "#98A6A4", "text-anchor": "middle", "font-family": "monospace" }, L));
+    [0, 4, 9, 14].forEach(c => poner("text", { x: colX(c), y: 104, "font-size": 11, fill: "#98A6A4", "text-anchor": "middle", "font-family": "monospace" }, c + 1));
+
+    const PASOS = [
+      { pieza: "pieza-boton", txt: "El botón se pone <strong>a caballo del canal</strong>: dos patitas de un lado y dos del otro. Así sus dos mitades caen en columnas distintas." },
+      { pieza: "pieza-5v", txt: "Un cable desde <strong>5V</strong> hasta la columna de la izquierda del botón: por ahí llega la electricidad, esperando." },
+      { pieza: "pieza-pin", txt: "Otro cable desde la columna de la derecha al <strong>pin 2</strong>: esa es la oreja del Arduino." },
+      { pieza: "pieza-res", txt: "Y la <strong>resistencia de 10 kΩ</strong> desde esa misma columna al riel negro (−). Mientras el botón está suelto, ella mantiene al pin 2 <strong>amarrado al suelo</strong>." },
+      { pieza: "pieza-gnd", txt: "Falta cerrar: un cable del riel negro al <strong>GND</strong>. ¡Listo! Al apretar, los 5 V llegan al pin 2 y el Arduino lo nota. 🎉" }
+    ];
+    let i = 0;
+    function pintar() {
+      $("ar-num").textContent = i < PASOS.length ? "Paso " + (i + 1) + " de " + PASOS.length : "¡Listo!";
+      $("ar-txt").innerHTML = i < PASOS.length ? PASOS[i].txt : "Circuito terminado: el botón le cuenta al pin 2 si está apretado o no. Ahora hay que enseñarle al programa a hacerle caso. 👉";
+      PASOS.forEach((p, n) => $(p.pieza).classList.toggle("visible-paso", n <= i));
+    }
+    $("ar-sig").addEventListener("click", () => { if (i < PASOS.length) i++; pintar(); });
+    $("ar-reset").addEventListener("click", () => { i = 0; pintar(); });
+    pintar();
+  })();
+
+  /* ---- 9 · el if con el botón ---- */
+  (function () {
+    const $ = id => document.getElementById(id);
+    const boton = $("boton-sim"), led = $("if-led");
+    function pintar(apretado) {
+      document.querySelectorAll(".ln[data-si]").forEach(l =>
+        l.classList.toggle("aqui", (l.dataset.si === "1") === apretado));
+      boton.classList.toggle("abajo", apretado);
+      led.classList.toggle("on", apretado);
+      $("lectura").textContent = apretado ? "HIGH" : "LOW";
+      $("if-txt").innerHTML = apretado
+        ? "El botón deja pasar los 5 V, así que <code>digitalRead</code> devuelve <strong>HIGH</strong>: se cumple la pregunta del <strong>if</strong> y el LED se prende. 💡"
+        : "Sin apretar, la resistencia mantiene el pin en <strong>LOW</strong>: la pregunta del if es «no», así que se hace lo del <strong>else</strong> y el LED queda apagado.";
+    }
+    boton.addEventListener("pointerdown", () => pintar(true));
+    ["pointerup", "pointerleave", "pointercancel"].forEach(ev => boton.addEventListener(ev, () => pintar(false)));
+    boton.addEventListener("keydown", e => { if (e.key === " " || e.key === "Enter") { pintar(true); e.preventDefault(); } });
+    boton.addEventListener("keyup", () => pintar(false));
+    pintar(false);
+  })();
+
+  /* checklists y quiz */
+  document.querySelectorAll(".check").forEach(c => {
+    c.addEventListener("click", e => { if (e.target.closest(".sm")) return; c.classList.toggle("hecho"); });
+    c.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") { c.classList.toggle("hecho"); e.preventDefault(); }
+    });
+  });
+  document.querySelectorAll(".quiz").forEach(q => {
+    const voltear = () => q.classList.toggle("volteada");
+    q.addEventListener("click", voltear);
+    q.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { voltear(); e.preventDefault(); } });
+  });
+
+  saberMas({
+    ultra: {
+      t: "Ultrasonido: el oído de murciélago 🦇",
+      d: "<p>Manda un <strong>chillido tan agudo</strong> que nosotros no lo escuchamos, y después mide <strong>cuánto tarda en volver el eco</strong>. Con ese tiempo calcula la distancia, igual que un murciélago en la oscuridad.</p><p>Lo usaremos para el sensor de retroceso de la bici. 🚲</p>"
+    },
+    temp: {
+      t: "¿Cómo se siente el calor? 🌡️",
+      d: "<p>Adentro tiene un material al que <strong>le cuesta más o menos dejar pasar la electricidad según la temperatura</strong>. Midiendo ese cambio, el sensor sabe cuántos grados hay.</p><p>El DHT11 además mide la <strong>humedad</strong>: cuánta agua flota en el aire.</p>"
+    },
+    poten: {
+      t: "El potenciómetro 🎛️",
+      d: "<p>Es una <strong>resistencia que puedes cambiar girando</strong> una perilla: como doblar más o menos la manguera del agua. 💧</p><p>El Arduino lee esa posición y sabe exactamente cuánto lo giraste. Es el mismo truco del control de volumen de un parlante.</p>"
+    },
+    "led-int": {
+      t: "El LED por dentro 💡",
+      d: "<p>Los electrones llegan con energía y <strong>saltan un escalón</strong> dentro del material; en ese salto sueltan lo que les sobra en forma de <strong>luz</strong>.</p><p>Como no gasta casi nada en calor, un LED dura años y usa muy poquita electricidad.</p>"
+    },
+    buzzer: {
+      t: "El buzzer por dentro 🔊",
+      d: "<p>Tiene un disco de un material especial que <strong>se dobla apenas le llega electricidad</strong>. Si lo hacemos doblarse y volver <strong>cientos de veces por segundo</strong>, empuja el aire… y eso es el sonido.</p><p>Mientras más rápido vibre, más <strong>agudo</strong> suena. ¡Con eso haremos música! 🎵</p>"
+    },
+    servo: {
+      t: "El servo por dentro 🦾",
+      d: "<p>Es un motor con <strong>engranajes</strong> y un pequeño espía adentro que le avisa en qué ángulo está. Así puede obedecer órdenes como «ponte en 90 grados» y quedarse justo ahí.</p><p>Con uno haremos la barrera del paso a nivel del tren. 🚂</p>"
+    },
+    pulldown: {
+      t: "La resistencia de 10 kΩ (pull-down)",
+      d: "<p>Cuando el botón está suelto, el pin 2 <strong>no está conectado a nada</strong>: queda «al aire» y lee cualquier cosa, como una antena. Puede prenderse solo si le pasas la mano cerca. 👻</p><p>La resistencia lo mantiene <strong>amarrado al suelo</strong> (GND) mientras nadie aprieta: así lee <strong>LOW</strong> tranquilo. Al apretar el botón, llegan los 5 V y gana el HIGH.</p><p>En inglés se llama <em>pull-down</em>: «que tira hacia abajo».</p>"
+    }
+  });
+</script>
+</body>
+</html>
