@@ -234,11 +234,16 @@
       <g class="par agua" style="--d:.18s">
         <path class="mang" d="M243,116 H345"/>
         <g transform="translate(345,116)"><path class="mang palanca5" d="M0,0 H60"/></g>
-        <path class="mang" d="M405,116 H560 V230"/>
+        <path class="mang" d="M405,116 H560 V186"/>
+        <path class="mang" stroke-width="10" d="M560,186 L542,192 L578,199 L542,206 L578,213 L560,218"/>
+        <path class="mang" d="M560,218 V230"/>
         <path class="aguaflujo" stroke-width="8" d="M243,116 H345"/>
         <g transform="translate(345,116)"><path class="aguaflujo palanca5" stroke-width="8" d="M0,0 H60"/></g>
-        <path class="aguaflujo" stroke-width="8" d="M405,116 H560 V230"/>
+        <path class="aguaflujo" stroke-width="8" d="M405,116 H560 V186"/>
+        <path class="aguaflujo" stroke-width="6" d="M560,186 L542,192 L578,199 L542,206 L578,213 L560,218"/>
+        <path class="aguaflujo" stroke-width="8" d="M560,218 V230"/>
         <path class="aguaflujo" stroke-width="8" d="M560,230 V250"/>
+        <text x="530" y="204" text-anchor="end" class="rotulo">el doblez = la resistencia 🤏</text>
       </g>
 
       <g class="par agua" style="--d:.54s">
@@ -430,6 +435,15 @@
           <circle cx="300" cy="101" r="6" fill="#fff" opacity=".3"/>
           <text x="269" y="126" text-anchor="middle" font-size="16" fill="#E84855" font-weight="bold">+</text>
           <text x="348" y="126" text-anchor="middle" font-size="16" fill="#37474F" font-weight="bold">−</text>
+          <!-- cartelito con su simbolo -->
+          <rect x="196" y="72" width="62" height="62" rx="9" fill="#fff" stroke="#0F8B93" stroke-width="2"/>
+          <line x1="227" y1="80" x2="227" y2="88" stroke="#37474F" stroke-width="3"/>
+          <path d="M219,88 L235,88 L227,100 Z" fill="none" stroke="#37474F" stroke-width="3" stroke-linejoin="round"/>
+          <line x1="219" y1="100" x2="235" y2="100" stroke="#37474F" stroke-width="3"/>
+          <line x1="227" y1="100" x2="227" y2="108" stroke="#37474F" stroke-width="3"/>
+          <line x1="237" y1="86" x2="245" y2="80" stroke="#37474F" stroke-width="2"/>
+          <line x1="239" y1="94" x2="247" y2="88" stroke="#37474F" stroke-width="2"/>
+          <text x="227" y="126" text-anchor="middle" font-size="10" fill="#5E7480">en el plano</text>
         </g>
         <g id="pieza-res" class="oculta">
           <line x1="334" y1="166" x2="438" y2="166" stroke="#9aa7ad" stroke-width="4"/>
@@ -438,6 +452,10 @@
           <rect x="380" y="157" width="4" height="18" fill="#8D3B0B"/>
           <rect x="394" y="157" width="4" height="18" fill="#E84855"/>
           <text x="386" y="145" text-anchor="middle" font-size="13" fill="#5E7480">220 Ω</text>
+          <!-- cartelito con su simbolo -->
+          <rect x="448" y="134" width="66" height="58" rx="9" fill="#fff" stroke="#0F8B93" stroke-width="2"/>
+          <path d="M454,158 H459 L463,150 L471,166 L479,150 L487,166 L495,150 L499,158 H508" fill="none" stroke="#37474F" stroke-width="3" stroke-linejoin="round"/>
+          <text x="481" y="182" text-anchor="middle" font-size="10" fill="#5E7480">en el plano</text>
         </g>
         <path id="pieza-gnd" class="oculta cable-w" d="M122 274 C 200 274, 420 240, 438 182" stroke="#37474F"/>
         <path id="pieza-13" class="oculta cable-w" d="M122 184 C 180 184, 230 166, 282 166" stroke="#E84855"/>
@@ -1019,8 +1037,8 @@
 
     const PASOS = [
       { pieza: null, txt: "Con el Arduino <strong>desenchufado</strong> (regla 1 🔌), preparamos la protoboard. Recuerda: cada columna es un cable escondido." },
-      { pieza: "pieza-led", txt: "Ponemos el LED con cada patita en una <strong>columna distinta</strong> (si comparten columna, se tocan y no pasa nada). La <strong>patita larga es la positiva</strong>." },
-      { pieza: "pieza-res", txt: "Desde la columna de la patita corta, la <strong>resistencia de 220 Ω</strong> salta a otra columna libre. Es el casco del LED. 🪖" },
+      { pieza: "pieza-led", txt: "Ponemos el LED con cada patita en una <strong>columna distinta</strong> (si comparten columna, se tocan y no pasa nada). La <strong>patita larga es la positiva</strong>. El cartelito muestra cómo se dibuja en los planos. ✏️" },
+      { pieza: "pieza-res", txt: "Desde la columna de la patita corta, la <strong>resistencia de 220 Ω</strong> salta a otra columna libre. Es el casco del LED 🪖 — y en los planos es la sierrita que ya conoces." },
       { pieza: "pieza-gnd", txt: "Un cable desde esa columna hasta el <strong>GND</strong> del Arduino: el camino de vuelta a casa." },
       { pieza: "pieza-13", txt: "Y por fin, un cable del <strong>pin 13</strong> a la columna de la patita larga. ¡Circuito cerrado! 🎉" }
     ];

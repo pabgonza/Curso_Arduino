@@ -106,7 +106,7 @@
   <p class="eyebrow">Tu primer sensor</p>
   <h2>El botón por dentro 🔘</h2>
   <div class="tuto">
-    <div class="proto-caja">
+    <div class="proto-caja" style="max-width:380px">
       <svg viewBox="0 0 420 300" id="svg-boton" aria-label="Botón de 4 patitas visto por dentro">
         <rect x="110" y="70" width="200" height="160" rx="10" fill="#2E3B41"/>
         <g id="patitas" stroke="#B0BEC5" stroke-width="10" stroke-linecap="round">
@@ -133,6 +133,27 @@
       <p class="tuto-texto" id="bt-txt">Casi todos los botones de los kits tienen <strong>cuatro patitas</strong>… y eso confunde a todo el mundo. Aprieta la tapa roja para ver qué pasa por dentro.</p>
       <button class="boton" id="bt-ver">🔍 Ver los puentes de adentro</button>
     </aside>
+  </div>
+  <div class="fila" style="gap:.8em">
+    <div class="mini-simb">
+      <svg viewBox="0 0 90 34" width="82" aria-label="Símbolo del interruptor">
+        <line x1="4" y1="26" x2="14" y2="26" stroke="#37474F" stroke-width="4" stroke-linecap="round"/>
+        <line x1="76" y1="26" x2="86" y2="26" stroke="#37474F" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="18" cy="26" r="4" fill="#37474F"/><circle cx="72" cy="26" r="4" fill="#37474F"/>
+        <line x1="18" y1="26" x2="66" y2="8" stroke="#37474F" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+      <span>El <strong>interruptor</strong> de la sesión 3 tiene <strong>dos posiciones</strong>: prende o corta la energía de todo el circuito.</span>
+    </div>
+    <div class="mini-simb">
+      <svg viewBox="0 0 90 34" width="82" aria-label="Símbolo del pulsador">
+        <line x1="4" y1="26" x2="14" y2="26" stroke="#37474F" stroke-width="4" stroke-linecap="round"/>
+        <line x1="76" y1="26" x2="86" y2="26" stroke="#37474F" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="18" cy="26" r="4" fill="#37474F"/><circle cx="72" cy="26" r="4" fill="#37474F"/>
+        <line x1="12" y1="12" x2="78" y2="12" stroke="#37474F" stroke-width="4" stroke-linecap="round"/>
+        <line x1="45" y1="12" x2="45" y2="3" stroke="#37474F" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+      <span>El <strong>pulsador</strong> se cierra solo <strong>mientras lo aprietas</strong> y vuelve solo: por eso el Arduino lo lee como <strong>sensor</strong>.</span>
+    </div>
   </div>
 </section>
 
@@ -344,6 +365,13 @@
   #puentes-fijos, #puente-movil { transition: opacity .25s; }
   #svg-boton.viendo #puentes-fijos { opacity: 1; }
   #svg-boton.viendo.apretado #puente-movil { opacity: 1; }
+  .mini-simb {
+    display: flex; align-items: center; gap: .7em;
+    background: var(--blanco); border: 3px solid var(--teal-suave);
+    border-radius: 14px; padding: .5em .8em;
+    max-width: 21em; text-align: left; font-size: .85rem; color: var(--gris);
+  }
+  .mini-simb svg { flex: none; }
 
   /* ---------- botón físico del simulador ---------- */
   .boton-fisico {
