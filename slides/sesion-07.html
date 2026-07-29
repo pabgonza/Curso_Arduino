@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sesión 7 · El murciélago: medir distancias</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/slides.css">
+</head>
+<body>
+
+<!-- 1 · Portada -->
+<section class="slide portada">
+  <span class="sesion-num">Sesión 7</span>
+  <h1>El murciélago 🦇</h1>
+  <p class="grande">Tu Arduino ya hace luz, sonido y movimiento.<br>Hoy aprende a <strong>ver con los oídos</strong>… ¡hasta en plena oscuridad!</p>
+  <div class="semaforo-vivo" aria-hidden="true">
+    <span class="led" id="pled-r" style="--c:var(--rojo)"></span>
+    <span class="led" id="pled-a" style="--c:var(--ambar)"></span>
+    <span class="led" id="pled-v" style="--c:var(--verde)"></span>
+  </div>
+</section>
+
+<!-- 2 · Cómo ve un murciélago -->
+<section class="slide">
+  <p class="eyebrow">Un superpoder de verdad</p>
+  <h2>¿Cómo ve un murciélago de noche? 🌙</h2>
+  <svg viewBox="0 0 640 210" class="cueva-svg" aria-label="Murciélago que grita y escucha el eco">
+    <text x="70" y="125" font-size="60" text-anchor="middle">🦇</text>
+    <text x="575" y="122" font-size="46" text-anchor="middle">🦋</text>
+    <line x1="110" y1="150" x2="540" y2="150" stroke="#DCF0EF" stroke-width="4" stroke-dasharray="2 10" stroke-linecap="round"/>
+    <text id="onda" x="110" y="118" font-size="26" text-anchor="middle" opacity="0">📣</text>
+    <text id="cueva-txt" x="325" y="196" font-size="17" text-anchor="middle" fill="#5E7480" font-family="Nunito, sans-serif" font-weight="700">El murciélago no ve casi nada… pero no choca nunca.</text>
+  </svg>
+  <button class="boton" id="btn-grito">▶ ¡Gritar!</button>
+  <p class="grande" style="max-width:34em">Grita un sonido <strong>tan agudo que no lo escuchamos</strong><button class="sm" data-sm="ultra7">?</button> y espera el <strong>eco</strong>. Si el eco vuelve rápido, la polilla está cerca; si tarda, está lejos.</p>
+</section>
+
+<!-- 3 · El HC-SR04 -->
+<section class="slide">
+  <p class="eyebrow">Nuestro murciélago electrónico</p>
+  <h2>El sensor HC-SR04 👀</h2>
+  <div class="fila" style="align-items:center; gap:2em">
+    <figure class="figura">
+      <img src="../recursos/img/hc-sr04.jpg" alt="Sensor de ultrasonido HC-SR04 con sus dos cilindros">
+      <figcaption>Parecen dos ojos… ¡pero son una boca y una oreja! <span class="credito">Foto: SparkFun · CC BY 2.0</span></figcaption>
+    </figure>
+    <div style="max-width:24em; text-align:left; display:flex; flex-direction:column; gap:.5em">
+      <ul class="lista">
+        <li>📣 <strong>TRIG</strong>: la <strong>boca</strong>. Por aquí sale el grito.</li>
+        <li>👂 <strong>ECHO</strong>: la <strong>oreja</strong>. Aquí llega el eco.<button class="sm" data-sm="dos-ojos">?</button></li>
+        <li>🔴 <strong>VCC</strong>: su comida, los 5 V.</li>
+        <li>⚫ <strong>GND</strong>: el suelo de siempre.</li>
+      </ul>
+      <p class="nota">Su chillido vibra <strong>40&nbsp;000 veces por segundo</strong>: ni tú ni tu perro pueden oírlo. 🤫</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4 · La cuenta del eco -->
+<section class="slide">
+  <p class="eyebrow">La matemática del murciélago</p>
+  <h2>La cuenta del eco ⏱️</h2>
+  <div class="eco-caja">
+    <div class="eco-visual">
+      <span class="eco-emoji">📡</span>
+      <div class="eco-barra">
+        <div class="eco-ida">grito ➡</div>
+        <div class="eco-vuelta">⬅ eco</div>
+      </div>
+      <span class="eco-emoji">🧱</span>
+    </div>
+    <input type="range" id="eco-dist" min="5" max="100" value="30" aria-label="Distancia hasta la pared">
+    <p class="nota" style="margin:0">acerca o aleja la pared</p>
+  </div>
+  <div class="ide" style="max-width:30em">
+    <div class="ide-barra"><span class="ide-nombre">la cuenta</span></div>
+    <pre>eco tardó <span class="num-vivo" id="eco-us">1749</span> microsegundos<button class="sm sm-ide" data-sm="microseg">?</button>
+distancia = <span class="num-vivo" id="eco-us2">1749</span> × 0.034 / 2 = <span class="num-vivo" id="eco-cm">30</span> cm</pre>
+  </div>
+  <p class="grande" style="max-width:32em">¿Por qué <strong>dividir entre 2</strong>? Porque el grito hace el viaje <strong>ida y vuelta</strong>: a la pared… ¡y de regreso! ↔️</p>
+</section>
+
+<!-- 5 · Conexión -->
+<section class="slide">
+  <p class="eyebrow">¡Manos a la obra!</p>
+  <h2>Los cuatro cables del murciélago 🔌</h2>
+  <div class="tuto">
+    <div class="proto-caja">
+      <svg viewBox="0 0 620 330" aria-label="HC-SR04 conectado al Arduino con cuatro cables">
+        <rect x="20" y="30" width="150" height="240" rx="12" fill="#00878F"/>
+        <text x="95" y="60" text-anchor="middle" fill="#fff" font-family="monospace" font-size="15">ARDUINO</text>
+        <rect x="32" y="78" width="126" height="26" rx="4" fill="#143642"/>
+        <text x="95" y="96" text-anchor="middle" fill="#fff" font-family="monospace" font-size="13">5V</text>
+        <rect x="32" y="126" width="126" height="26" rx="4" fill="#143642"/>
+        <text x="95" y="144" text-anchor="middle" fill="#fff" font-family="monospace" font-size="13">pin 9</text>
+        <rect x="32" y="174" width="126" height="26" rx="4" fill="#143642"/>
+        <text x="95" y="192" text-anchor="middle" fill="#fff" font-family="monospace" font-size="13">pin 10</text>
+        <rect x="32" y="222" width="126" height="26" rx="4" fill="#143642"/>
+        <text x="95" y="240" text-anchor="middle" fill="#fff" font-family="monospace" font-size="13">GND</text>
+
+        <text x="510" y="56" text-anchor="middle" font-size="14" fill="#5E7480" font-family="Nunito, sans-serif" font-weight="700">HC-SR04</text>
+        <rect x="420" y="68" width="180" height="112" rx="10" fill="#1A6FBF"/>
+        <circle cx="468" cy="112" r="27" fill="#B0BEC5" stroke="#78909C" stroke-width="5"/>
+        <circle cx="552" cy="112" r="27" fill="#B0BEC5" stroke="#78909C" stroke-width="5"/>
+        <text x="468" y="164" text-anchor="middle" font-size="12" fill="#BBDEFB" font-family="monospace">TRIG 📣</text>
+        <text x="552" y="164" text-anchor="middle" font-size="12" fill="#BBDEFB" font-family="monospace">ECHO 👂</text>
+        <g stroke="#90A4AE" stroke-width="5" stroke-linecap="round">
+          <line x1="445" y1="180" x2="445" y2="202"/>
+          <line x1="485" y1="180" x2="485" y2="202"/>
+          <line x1="525" y1="180" x2="525" y2="202"/>
+          <line x1="565" y1="180" x2="565" y2="202"/>
+        </g>
+        <text x="445" y="224" text-anchor="middle" font-size="11" fill="#5E7480" font-family="monospace">VCC</text>
+        <text x="485" y="224" text-anchor="middle" font-size="11" fill="#5E7480" font-family="monospace">TRIG</text>
+        <text x="525" y="224" text-anchor="middle" font-size="11" fill="#5E7480" font-family="monospace">ECHO</text>
+        <text x="565" y="224" text-anchor="middle" font-size="11" fill="#5E7480" font-family="monospace">GND</text>
+
+        <path class="cable-w" d="M164 91 L 339 91 Q 355 91 355 107 L 355 242 Q 355 258 371 258 L 429 258 Q 445 258 445 242 L 445 204" stroke="#E84855"/>
+        <path class="cable-w" d="M164 139 L 359 139 Q 375 139 375 155 L 375 256 Q 375 272 391 272 L 469 272 Q 485 272 485 256 L 485 204" stroke="#FB8C00"/>
+        <path class="cable-w" d="M164 187 L 379 187 Q 395 187 395 203 L 395 270 Q 395 286 411 286 L 509 286 Q 525 286 525 270 L 525 204" stroke="#4C7CFF"/>
+        <path class="cable-w" d="M164 235 L 399 235 Q 415 235 415 251 L 415 284 Q 415 300 431 300 L 549 300 Q 565 300 565 284 L 565 204" stroke="#37474F"/>
+      </svg>
+    </div>
+    <aside class="tuto-panel">
+      <p class="tuto-num">Regla de colores</p>
+      <p class="tuto-texto">
+      🔴 <strong>VCC → 5V</strong>: la energía.<br>
+      🟠 <strong>TRIG → pin 9</strong>: por aquí el Arduino le ordena gritar.<br>
+      🔵 <strong>ECHO → pin 10</strong>: por aquí el sensor avisa cuánto tardó el eco.<br>
+      ⚫ <strong>GND → GND</strong>: el suelo.</p>
+      <p class="nota">¿TRIG y ECHO al revés? No se rompe, pero mide puro cero. ¡Revisa antes de reclamar! 😄</p>
+    </aside>
+  </div>
+</section>
+
+<!-- 6 · El código que mide -->
+<section class="slide">
+  <p class="eyebrow">Cópialo: va igual en todos tus proyectos</p>
+  <h2>El código del murciélago 📋</h2>
+  <div class="tuto">
+    <div class="sim-ide">
+      <div class="sim-titulo"><span class="sim-punto"></span>murcielago.ino</div>
+      <div class="sim-editor lineas">
+        <div class="ln"><span class="n">1</span><code><span class="kw">void</span> <span class="fn">loop</span>() {</code></div>
+        <div class="ln" data-paso="0"><span class="n">2</span><code>  <span class="fn">digitalWrite</span>(<span class="num">9</span>, <span class="kw">HIGH</span>);   <span class="cm">// ¡grita!</span></code></div>
+        <div class="ln" data-paso="0"><span class="n">3</span><code>  <span class="fn">delayMicroseconds</span>(<span class="num">10</span>);</code></div>
+        <div class="ln" data-paso="0"><span class="n">4</span><code>  <span class="fn">digitalWrite</span>(<span class="num">9</span>, <span class="kw">LOW</span>);</code></div>
+        <div class="ln" data-paso="1"><span class="n">5</span><code>  <span class="kw">long</span> tiempo = <span class="fn">pulseIn</span>(<span class="num">10</span>, <span class="kw">HIGH</span>);</code></div>
+        <div class="ln" data-paso="2"><span class="n">6</span><code>  <span class="kw">int</span> distancia = tiempo * <span class="num">0.034</span> / <span class="num">2</span>;</code></div>
+        <div class="ln"><span class="n">7</span><code>}</code></div>
+      </div>
+    </div>
+    <aside class="tuto-panel">
+      <p class="tuto-num" id="cod-num">Tres pasos, siempre iguales</p>
+      <p class="tuto-texto" id="cod-txt">Toca cada paso para ver qué líneas hacen el trabajo. Este pedacito se <strong>copia tal cual</strong> en todos los proyectos con el murciélago.</p>
+      <div class="fila" style="gap:.5em">
+        <button class="boton secundario" data-cp="0">📣 gritar</button>
+        <button class="boton secundario" data-cp="1">👂 escuchar</button>
+        <button class="boton secundario" data-cp="2">🧮 la cuenta</button>
+      </div>
+    </aside>
+  </div>
+  <p class="nota"><code>pulseIn</code><button class="sm" data-sm="pulsein">?</button> es un cronómetro: espera el eco y devuelve cuántos microsegundos tardó.</p>
+</section>
+
+<!-- 7 · Práctica: alarma de intrusos -->
+<section class="slide">
+  <p class="eyebrow">Práctica</p>
+  <h2>La alarma de intrusos 🚨</h2>
+  <div class="tuto">
+    <div class="sim-ide">
+      <div class="sim-titulo"><span class="sim-punto"></span>alarma.ino</div>
+      <div class="sim-editor lineas">
+        <div class="ln" data-si="1"><span class="n">1</span><code><span class="kw">if</span> (distancia &lt; <span class="num">20</span>) {</code></div>
+        <div class="ln" data-si="1"><span class="n">2</span><code>  <span class="fn">digitalWrite</span>(<span class="num">13</span>, <span class="kw">HIGH</span>);  <span class="cm">// ¡luz!</span></code></div>
+        <div class="ln" data-si="1"><span class="n">3</span><code>  <span class="fn">tone</span>(<span class="num">8</span>, <span class="num">880</span>);           <span class="cm">// ¡alarma!</span></code></div>
+        <div class="ln" data-si="0"><span class="n">4</span><code>} <span class="kw">else</span> {</code></div>
+        <div class="ln" data-si="0"><span class="n">5</span><code>  <span class="fn">digitalWrite</span>(<span class="num">13</span>, <span class="kw">LOW</span>);</code></div>
+        <div class="ln" data-si="0"><span class="n">6</span><code>  <span class="fn">noTone</span>(<span class="num">8</span>);</code></div>
+        <div class="ln"><span class="n">7</span><code>}</code></div>
+      </div>
+    </div>
+    <aside class="tuto-panel">
+      <p class="tuto-num">Pruébala tú</p>
+      <p class="tuto-texto" id="al-txt">Mueve la mano: si se acerca a <strong>menos de 20 cm</strong>, ¡se arma el escándalo!</p>
+      <div class="mano-caja">
+        <span id="al-mano">🖐️</span>
+        <span class="mano-sensor">📡</span>
+      </div>
+      <input type="range" id="al-dist" min="5" max="80" value="60" aria-label="Distancia de la mano al sensor">
+      <p class="lectura">distancia = <strong id="al-val">60</strong> cm</p>
+      <div class="tuto-placa">
+        <span class="mini-placa grande"><span class="mini-led" id="al-led"></span><span class="mini-etiq">13</span></span>
+        <span id="al-son" class="al-son">🔇</span>
+      </div>
+    </aside>
+  </div>
+  <p class="nota">El LED va en el <strong>pin 13</strong> igual que en la sesión 3, y el buzzer en el <strong>pin 8</strong> igual que en la sesión 5. ¡Ya sabes armar los dos!</p>
+</section>
+
+<!-- 8 · Proyecto: retroceso de bici -->
+<section class="slide">
+  <p class="eyebrow">⭐ Proyecto estrella</p>
+  <h2>Sensor de retroceso para tu bici 🚲</h2>
+  <div class="fila" style="align-items:center; gap:2em">
+    <div class="bici-caja">
+      <svg viewBox="0 0 460 150" class="bici-svg" aria-label="Bicicleta retrocediendo hacia una pared">
+        <text id="bici" x="120" y="92" font-size="56" text-anchor="middle">🚲</text>
+        <rect x="415" y="18" width="18" height="114" rx="4" fill="#B08968"/>
+        <text id="pip" x="380" y="55" font-size="26" text-anchor="middle" opacity="0">🔊</text>
+        <line x1="170" y1="120" x2="410" y2="120" stroke="#DCF0EF" stroke-width="4" stroke-dasharray="2 10" stroke-linecap="round"/>
+      </svg>
+      <input type="range" id="bici-dist" min="10" max="120" value="100" aria-label="Distancia a la pared">
+      <p class="nota" style="margin:0">retrocede… con cuidado</p>
+      <button class="boton" id="btn-bici">🔈 Encender el sensor</button>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:.6em; max-width:22em">
+      <p class="grande">Mientras <strong>más cerca</strong> de la pared, <strong>más seguido</strong> pita. Igual que los autos de verdad.<button class="sm" data-sm="autos">?</button></p>
+      <div class="ide">
+        <div class="ide-barra"><span class="ide-nombre">el truco</span></div>
+        <pre><span class="kw">int</span> pausa = distancia * <span class="num">8</span>;
+<span class="fn">tone</span>(<span class="num">8</span>, <span class="num">880</span>);
+<span class="fn">delay</span>(<span class="num">60</span>);
+<span class="fn">noTone</span>(<span class="num">8</span>);
+<span class="fn">delay</span>(pausa);  <span class="cm">// ¡pip pip pip!</span></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9 · Reto -->
+<section class="slide">
+  <div class="reto">
+    <p class="eyebrow">⭐ Reto de la sesión</p>
+    <h2>Elige tu aventura 🎯</h2>
+    <ul class="lista">
+      <li>Nivel 1: <strong>semáforo de estacionamiento</strong> 🚦 — verde lejos, amarillo cerca, rojo ¡FRENA!</li>
+      <li>Nivel 2: que al llegar al rojo el buzzer haga un pitido <strong>largo y seguido</strong>, como los autos</li>
+      <li>Nivel experto: el <strong>theremin fantasma</strong> 👻 — <code>tone(8, distancia * 10)</code>: ¡música moviendo la mano en el aire!</li>
+    </ul>
+  </div>
+  <p class="nota">El murciélago mide bien entre 2 cm y 4 m. Ojo: las cosas <strong>blanditas</strong> (peluches, cortinas) se tragan el eco y lo confunden. 🧸</p>
+</section>
+
+<!-- 10 · Quiz -->
+<section class="slide">
+  <p class="eyebrow">Duelo de cerebritos</p>
+  <h2>¿Cuánto aprendiste? Toca para voltear</h2>
+  <div class="fila">
+    <div class="quiz" tabindex="0"><div class="quiz-caras">
+      <div class="quiz-cara quiz-frente">¿Cómo sabe el murciélago dónde está la polilla?</div>
+      <div class="quiz-cara quiz-atras">Grita y mide cuánto tarda el eco en volver 🦇</div>
+    </div></div>
+    <div class="quiz" tabindex="0"><div class="quiz-caras">
+      <div class="quiz-cara quiz-frente">¿Quién es TRIG y quién es ECHO?</div>
+      <div class="quiz-cara quiz-atras">TRIG es la boca que grita, ECHO la oreja que escucha 📣👂</div>
+    </div></div>
+    <div class="quiz" tabindex="0"><div class="quiz-caras">
+      <div class="quiz-cara quiz-frente">¿Por qué la cuenta divide entre 2?</div>
+      <div class="quiz-cara quiz-atras">Porque el grito va a la pared y vuelve: dos viajes ↔️</div>
+    </div></div>
+    <div class="quiz" tabindex="0"><div class="quiz-caras">
+      <div class="quiz-cara quiz-frente">¿Qué nos regala <code>pulseIn</code>?</div>
+      <div class="quiz-cara quiz-atras">El tiempo que tardó el eco, en microsegundos ⏱️</div>
+    </div></div>
+    <div class="quiz" tabindex="0"><div class="quiz-caras">
+      <div class="quiz-cara quiz-frente">La alarma suena si distancia &lt; 20. ¿Y a 50 cm?</div>
+      <div class="quiz-cara quiz-atras">Nada: la pregunta del if da «no» y manda el else 🤫</div>
+    </div></div>
+  </div>
+</section>
+
+<!-- 11 · Cierre -->
+<section class="slide portada">
+  <p class="eyebrow">Lo lograste</p>
+  <h1>¡Tu Arduino ve en la oscuridad! 🎉</h1>
+  <p class="grande">Hoy tu cerebrito aprendió el truco del murciélago…<br>y tu bici ya tiene <strong>sensor de retroceso</strong>, como un auto. 🚲</p>
+  <div class="tarjeta" style="max-width:24em">
+    <h3>Próxima sesión 🌡️</h3>
+    <p>El <strong>termómetro</strong>: medir el calor y el frío… ¡y por primera vez el Arduino <strong>nos va a hablar</strong> por escrito!</p>
+  </div>
+  <div class="semaforo-vivo" aria-hidden="true">
+    <span class="led on" style="--c:var(--verde)"></span>
+  </div>
+</section>
+
+<style>
+  /* ---------- 2 · la cueva ---------- */
+  .cueva-svg { width: min(92vw, 620px); }
+  #onda { transition: none; }
+
+  /* ---------- 4 · la cuenta del eco ---------- */
+  .eco-caja { display: flex; flex-direction: column; align-items: center; gap: .4em; }
+  .eco-visual { display: flex; align-items: center; gap: .6em; }
+  .eco-emoji { font-size: 2.2em; }
+  .eco-barra {
+    width: min(56vw, 420px); display: flex; flex-direction: column; gap: .25em;
+  }
+  .eco-ida, .eco-vuelta {
+    font-family: var(--f-titulo); font-size: .85rem; color: #fff;
+    border-radius: 999px; padding: .15em .8em; white-space: nowrap; overflow: hidden;
+    transition: width .15s;
+  }
+  .eco-ida { background: var(--teal); width: 60%; }
+  .eco-vuelta { background: #FFB627; color: #6b4d00; width: 60%; text-align: right; align-self: flex-end; }
+  .sm-ide { vertical-align: super; }
+
+  /* ---------- 7 · alarma ---------- */
+  .mano-caja {
+    display: flex; align-items: center; justify-content: space-between;
+    width: 100%; font-size: 2em; padding: 0 .2em;
+  }
+  #al-mano { transition: transform .15s; }
+  .al-son { font-size: 1.5em; }
+  .lectura { font-size: .9rem !important; color: var(--gris); }
+  .lectura strong { font-family: var(--f-codigo); color: var(--teal-osc); }
+
+  /* ---------- 8 · bici ---------- */
+  .bici-caja { display: flex; flex-direction: column; align-items: center; gap: .5em; }
+  .bici-svg { width: min(88vw, 460px); }
+  #bici { transition: x .15s; }
+
+  .proto-caja { flex: 1 1 30em; max-width: min(92vw, 40em); }
+  .proto-caja svg { width: 100%; }
+  .cable-w { fill: none; stroke-width: 7; stroke-linecap: round; }
+</style>
+
+<script src="assets/slides.js"></script>
+<script>
+  const pleds = ["pled-r", "pled-a", "pled-v"].map(id => document.getElementById(id));
+  let pi = 0;
+  setInterval(() => {
+    pleds.forEach((l, i) => l.classList.toggle("on", i === pi));
+    pi = (pi + 1) % 3;
+  }, 700);
+
+  /* ---- el "buzzer" del navegador (igual que en la sesión 5) ---- */
+  let audio = null;
+  function sonar(hz, ms) {
+    try {
+      audio = audio || new (window.AudioContext || window.webkitAudioContext)();
+      if (audio.state === "suspended") audio.resume();
+      const osc = audio.createOscillator(), vol = audio.createGain();
+      osc.type = "square";
+      osc.frequency.value = hz;
+      const t = audio.currentTime;
+      vol.gain.setValueAtTime(0.0001, t);
+      vol.gain.exponentialRampToValueAtTime(0.06, t + 0.01);
+      vol.gain.setValueAtTime(0.06, t + ms / 1000 - 0.03);
+      vol.gain.exponentialRampToValueAtTime(0.0001, t + ms / 1000);
+      osc.connect(vol).connect(audio.destination);
+      osc.start(t);
+      osc.stop(t + ms / 1000);
+    } catch (e) { /* si el navegador no deja sonar, la slide igual funciona */ }
+  }
+
+  /* ---- 2 · el grito del murciélago ---- */
+  (function () {
+    const onda = document.getElementById("onda");
+    const txt = document.getElementById("cueva-txt");
+    const boton = document.getElementById("btn-grito");
+    let animando = false;
+    boton.addEventListener("click", () => {
+      if (animando) return;
+      animando = true;
+      txt.textContent = "el grito viaja… 📣";
+      const ini = performance.now(), IDA = 900, VUELTA = 900;
+      onda.setAttribute("opacity", "1");
+      function paso(t) {
+        const dt = t - ini;
+        if (dt < IDA) {
+          onda.setAttribute("x", 110 + (dt / IDA) * 430);
+          onda.textContent = "📣";
+        } else if (dt < IDA + VUELTA) {
+          if (txt.textContent !== "…¡y el eco vuelve! 👂") txt.textContent = "…¡y el eco vuelve! 👂";
+          onda.setAttribute("x", 540 - ((dt - IDA) / VUELTA) * 430);
+          onda.textContent = "〰️";
+        } else {
+          onda.setAttribute("opacity", "0");
+          onda.setAttribute("x", 110);
+          txt.textContent = "Tardó poquito: ¡la polilla está cerca! 😋";
+          animando = false;
+          return;
+        }
+        requestAnimationFrame(paso);
+      }
+      requestAnimationFrame(paso);
+    });
+  })();
+
+  /* ---- 4 · la cuenta del eco ---- */
+  (function () {
+    const $ = id => document.getElementById(id);
+    function pintar(cm) {
+      const us = Math.round(cm * 2 / 0.034);
+      $("eco-us").textContent = us;
+      $("eco-us2").textContent = us;
+      $("eco-cm").textContent = cm;
+      const w = 18 + (cm / 100) * 82;
+      document.querySelector(".eco-ida").style.width = w + "%";
+      document.querySelector(".eco-vuelta").style.width = w + "%";
+    }
+    $("eco-dist").addEventListener("input", e => pintar(+e.target.value));
+    pintar(30);
+  })();
+
+  /* ---- 6 · los tres pasos del código ---- */
+  (function () {
+    const TXT = [
+      ["📣 Gritar", "El pin 9 se prende <strong>10 microsegundos</strong>: es la orden «¡grita!». El sensor lanza su chillido ultrasónico."],
+      ["👂 Escuchar", "<code>pulseIn</code> se queda esperando en el pin 10 y <strong>cronometra el eco</strong>: devuelve cuántos microsegundos tardó en volver."],
+      ["🧮 La cuenta", "La misma de la slide anterior: tiempo por la velocidad del sonido, <strong>dividido entre 2</strong> porque el viaje es ida y vuelta."]
+    ];
+    document.querySelectorAll("[data-cp]").forEach(b => b.addEventListener("click", () => {
+      const k = +b.dataset.cp;
+      document.getElementById("cod-num").textContent = TXT[k][0];
+      document.getElementById("cod-txt").innerHTML = TXT[k][1];
+      document.querySelectorAll(".ln[data-paso]").forEach(l =>
+        l.classList.toggle("aqui", l.dataset.paso === String(k)));
+    }));
+  })();
+
+  /* ---- 7 · alarma de intrusos ---- */
+  (function () {
+    const $ = id => document.getElementById(id);
+    let cerca = false;
+    function pintar(d) {
+      $("al-val").textContent = d;
+      $("al-mano").style.transform = "translateX(" + ((80 - d) / 75 * 190) + "px)";
+      const ahora = d < 20;
+      document.querySelectorAll(".ln[data-si]").forEach(l =>
+        l.classList.toggle("aqui", (l.dataset.si === "1") === ahora));
+      $("al-led").classList.toggle("on", ahora);
+      $("al-son").textContent = ahora ? "🔊" : "🔇";
+      $("al-txt").innerHTML = ahora
+        ? "¡Menos de 20! La pregunta del <strong>if</strong> da «sí»: luz y alarma. 🚨"
+        : "Mueve la mano: si se acerca a <strong>menos de 20 cm</strong>, ¡se arma el escándalo!";
+      if (ahora && !cerca) sonar(880, 150);
+      cerca = ahora;
+    }
+    $("al-dist").addEventListener("input", e => pintar(+e.target.value));
+    pintar(60);
+  })();
+
+  /* ---- 8 · la bici que retrocede ---- */
+  (function () {
+    const $ = id => document.getElementById(id);
+    let encendido = false, timer = null, visible = false;
+    function programar() {
+      clearTimeout(timer);
+      if (!encendido) { $("pip").setAttribute("opacity", "0"); return; }
+      const d = +$("bici-dist").value;
+      const pausa = d * 8;
+      sonar(880, 60);
+      visible = true;
+      $("pip").setAttribute("opacity", "1");
+      setTimeout(() => { $("pip").setAttribute("opacity", "0"); visible = false; }, 90);
+      timer = setTimeout(programar, 60 + pausa);
+    }
+    $("bici-dist").addEventListener("input", e => {
+      const d = +e.target.value;
+      $("bici").setAttribute("x", 120 + (120 - d) * 2.3);
+    });
+    $("btn-bici").addEventListener("click", () => {
+      encendido = !encendido;
+      document.getElementById("btn-bici").textContent = encendido ? "🔇 Apagar el sensor" : "🔈 Encender el sensor";
+      programar();
+    });
+  })();
+
+  document.querySelectorAll(".quiz").forEach(q => {
+    const voltear = () => q.classList.toggle("volteada");
+    q.addEventListener("click", voltear);
+    q.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { voltear(); e.preventDefault(); } });
+  });
+
+  saberMas({
+    ultra7: {
+      t: "El ultrasonido 🔊",
+      d: "<p>Los sonidos <strong>muy agudos</strong> vibran tan rápido que nuestros oídos no los captan: eso es el <strong>ultrasonido</strong>.</p><p>Los murciélagos y los delfines lo usan para «ver» con ecos. Los submarinos copian el truco con el <strong>sonar</strong>… ¡y los doctores lo usan en las <strong>ecografías</strong> para ver a los bebés dentro de la pancita! 👶</p>"
+    },
+    "dos-ojos": {
+      t: "¿Por qué tiene dos cilindros? 👀",
+      d: "<p>Uno es un mini parlante que <strong>solo grita</strong> (TRIG) y el otro un mini micrófono que <strong>solo escucha</strong> (ECHO).</p><p>Se reparten el trabajo porque gritar y escuchar <strong>al mismo tiempo</strong> con la misma pieza confunde el eco: sería como intentar oír a un amigo mientras gritas tú. 🙉</p>"
+    },
+    microseg: {
+      t: "¿Micro… qué? ⏱️",
+      d: "<p>Un <strong>microsegundo</strong> es una <strong>millonésima</strong> de segundo: en un solo parpadeo tuyo caben como 300&nbsp;000 microsegundos.</p><p>El sonido viaja a unos <strong>343 metros por segundo</strong> (¡una cuadra en un suspiro!), así que para distancias chicas el eco vuelve en muy poquitos microsegundos. Por eso el Arduino, que es velocísimo, es perfecto para cronometrarlo.</p>"
+    },
+    pulsein: {
+      t: "pulseIn: el cronómetro paciente ⏲️",
+      d: "<p><code>pulseIn(10, HIGH)</code> significa: «quédate mirando el pin 10 y <strong>cronometra</strong> cuánto rato estuvo encendido».</p><p>El sensor mantiene el pin ECHO encendido <strong>exactamente el tiempo que tardó el eco</strong>. Así que ese cronómetro nos regala justo el número que necesitamos para la cuenta. 🎁</p>"
+    },
+    autos: {
+      t: "El sensor de retroceso de los autos 🚗",
+      d: "<p>Esos puntitos redondos en el parachoques de los autos son <strong>primos del HC-SR04</strong>: también gritan ultrasonido y escuchan el eco.</p><p>El computador del auto hace la misma cuenta que tu Arduino y pita más seguido cuanto más cerca está el poste. ¡Hoy construiste tecnología de auto de verdad! 😎</p>"
+    }
+  });
+</script>
+</body>
+</html>
