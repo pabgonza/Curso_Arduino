@@ -198,7 +198,7 @@
   <p class="eyebrow">La regla número uno</p>
   <h2>Si el camino se corta, no baja nada 🚧</h2>
   <div class="fuente" style="width:min(92vw, 560px)">
-    <svg id="q-escena" viewBox="0 -14 720 356" class="escena-svg abierto" aria-label="El mismo estanque, ahora con una compuerta que corta el camino; en modo circuito es el interruptor">
+    <svg id="q-escena" viewBox="0 -14 720 356" class="escena-svg abierto" aria-label="El mismo estanque, ahora con una llave de dos posiciones que corta el agua; en modo circuito es el interruptor">
       <defs>
         <clipPath id="q-clip"><rect x="137" y="68" width="106" height="64" rx="8"/></clipPath>
         <linearGradient id="q-grad" x1="0" y1="0" x2="0" y2="1">
@@ -232,17 +232,20 @@
       </g>
 
       <g class="par agua" style="--d:.18s">
-        <path class="mang" d="M243,116 H345"/>
-        <g transform="translate(345,116)"><path class="mang palanca5" d="M0,0 H60"/></g>
-        <path class="mang" d="M405,116 H560 V186"/>
+        <path class="mang" d="M243,116 H560 V186"/>
         <path class="mang" stroke-width="10" d="M560,186 L542,192 L578,199 L542,206 L578,213 L560,218"/>
         <path class="mang" d="M560,218 V230"/>
-        <path class="aguaflujo" stroke-width="8" d="M243,116 H345"/>
-        <g transform="translate(345,116)"><path class="aguaflujo palanca5" stroke-width="8" d="M0,0 H60"/></g>
-        <path class="aguaflujo" stroke-width="8" d="M405,116 H560 V186"/>
-        <path class="aguaflujo" stroke-width="6" d="M560,186 L542,192 L578,199 L542,206 L578,213 L560,218"/>
-        <path class="aguaflujo" stroke-width="8" d="M560,218 V230"/>
-        <path class="aguaflujo" stroke-width="8" d="M560,230 V250"/>
+        <path class="aguaflujo agua-antes" stroke-width="8" d="M243,116 H362"/>
+        <path class="aguaflujo agua-despues" stroke-width="8" d="M388,116 H560 V186"/>
+        <path class="aguaflujo agua-despues" stroke-width="6" d="M560,186 L542,192 L578,199 L542,206 L578,213 L560,218"/>
+        <path class="aguaflujo agua-despues" stroke-width="8" d="M560,218 V230"/>
+        <path class="aguaflujo agua-despues" stroke-width="8" d="M560,230 V250"/>
+        <!-- llave de paso de dos posiciones -->
+        <rect x="359" y="104" width="32" height="24" rx="6" fill="#607D8B"/>
+        <g class="llave-mango">
+          <line x1="375" y1="116" x2="375" y2="102" stroke="#E84855" stroke-width="5" stroke-linecap="round"/>
+          <line x1="357" y1="102" x2="393" y2="102" stroke="#E84855" stroke-width="6" stroke-linecap="round"/>
+        </g>
         <text x="530" y="204" text-anchor="end" class="rotulo">el doblez = la resistencia 🤏</text>
       </g>
 
@@ -306,7 +309,7 @@
         <text x="375" y="326" text-anchor="middle" class="rotulo-c">GND · 0 V</text>
       </g>
 
-      <text id="q-sw-rot" x="375" y="84" text-anchor="middle" class="rotulo">¡camino cortado!</text>
+      <text id="q-sw-rot" x="375" y="76" text-anchor="middle" class="rotulo">llave cerrada 🚫</text>
       <rect id="q-hit" x="330" y="76" width="92" height="56" fill="#000" fill-opacity="0"/>
     </svg>
   </div>
@@ -649,7 +652,10 @@
   /* ---------- circuito cerrado (misma escena, con interruptor) ---------- */
   .palanca5 { transform-box: fill-box; transform-origin: left center; transition: transform .35s; }
   #q-escena.abierto .palanca5 { transform: rotate(-28deg); }
-  #q-escena.abierto .aguaflujo { display: none; }
+  .llave-mango { transform-box: fill-box; transform-origin: center; transition: transform .35s; }
+  #q-escena.abierto .llave-mango { transform: rotate(90deg); }
+  #q-escena.abierto .agua-antes { animation-play-state: paused; }
+  #q-escena.abierto .agua-despues { display: none; }
   #q-escena.abierto .rueda-giro { animation-play-state: paused; }
   #q-led-tri { transition: fill .3s; }
   #q-escena.cerrado #q-led-tri { fill: #FFB627; filter: drop-shadow(0 0 8px #FFB627); }
@@ -839,11 +845,13 @@
       esc.classList.toggle("cerrado", cerrado);
       esc.classList.toggle("abierto", !cerrado);
       esc.classList.toggle("circuito", enCirc);
-      $("btn-interruptor").textContent = cerrado ? "Abrir el interruptor 🔓" : "Cerrar el interruptor 🔘";
+      $("btn-interruptor").textContent = enCirc
+        ? (cerrado ? "Abrir el interruptor 🔓" : "Cerrar el interruptor 🔘")
+        : (cerrado ? "Cerrar la llave 🚫" : "Abrir la llave 🚰");
       $("q-ver-circuito").textContent = enCirc ? "💧 Volver al agua" : "🔬 Verlo como circuito";
       $("q-sw-rot").textContent = enCirc
         ? (cerrado ? "interruptor cerrado" : "interruptor abierto")
-        : (cerrado ? "camino completo" : "¡camino cortado!");
+        : (cerrado ? "llave abierta" : "llave cerrada 🚫");
       const luz = $("q-luz");
       luz.setAttribute("fill", cerrado ? "hsl(43, 85%, 60%)" : "#8a6a20");
       luz.style.filter = cerrado ? "drop-shadow(0 0 8px #FFB627)" : "none";
@@ -852,8 +860,8 @@
           ? "¡<strong>Circuito cerrado</strong>! La corriente recorre el camino completo y el LED se enciende. 💡"
           : "Interruptor <strong>abierto</strong> = camino cortado: la corriente no puede pasar y el LED queda apagado.")
         : (cerrado
-          ? "¡<strong>Camino completo</strong>! El agua da la vuelta entera: baja, mueve la ruedita y llega a TIERRA."
-          : "Con el camino <strong>cortado</strong>, el agua se queda esperando arriba: no puede bajar hasta la tierra, y la ruedita no gira.");
+          ? "¡<strong>Llave abierta</strong>! El agua pasa, da la vuelta entera y mueve la ruedita hasta llegar a TIERRA."
+          : "La llave tiene <strong>dos posiciones</strong>. Ahora está <strong>cerrada</strong>: corta el agua, que se queda esperando en la manguera… y la ruedita no gira.");
     }
 
     $("btn-interruptor").addEventListener("click", () => { cerrado = !cerrado; pintar(); });
