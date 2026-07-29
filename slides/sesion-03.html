@@ -60,8 +60,6 @@
         <rect id="tabla" x="123" width="134" height="10" rx="4" fill="#8D6E63"/>
         <rect id="tq-cuerpo" x="137" width="106" height="64" rx="8" fill="#ECEFF1" stroke="#78909C" stroke-width="4"/>
         <g clip-path="url(#clip-tq)"><rect id="nivel" x="137" width="106" fill="url(#grad-agua)"/></g>
-        <ellipse id="nivel-boca" cx="190" rx="47" ry="6" fill="#B3E5FC" stroke="#4FC3F7" stroke-width="2"/>
-        <ellipse id="tq-boca" cx="190" rx="53" ry="9" fill="none" stroke="#78909C" stroke-width="4"/>
         <text id="etiq-pila" x="190" text-anchor="middle" class="rotulo">el estanque = la pila 🔋</text>
       </g>
 
@@ -70,13 +68,13 @@
         <path id="mang-k" class="mang"/>
         <path id="mang-b" class="mang" d="M560,218 V230"/>
         <text id="pinza" x="590" y="210" font-size="24" visibility="hidden">🤏</text>
-        <path id="chorro"/>
-        <path id="chorro-caida" d="M560,230 V250"/>
+        <path id="chorro" class="aguaflujo"/>
+        <path id="chorro-caida" class="aguaflujo" d="M560,230 V250"/>
       </g>
 
       <g class="par agua" style="--d:.54s">
         <g transform="translate(560,272)">
-          <g id="rueda-giro">
+          <g id="rueda-giro" class="rueda-giro">
             <circle r="22" fill="none" stroke="#0F8B93" stroke-width="4.5"/>
             <g stroke="#0F8B93" stroke-width="3.5">
               <line y1="-22" y2="22"/><line x1="-22" x2="22"/>
@@ -195,42 +193,125 @@
   <p class="nota" id="txt-serie">Con 3 V alcanza justo para una ruedita: al pasar por ella, el agua ya llegó al suelo.</p>
 </section>
 
-<!-- 5 · Circuito cerrado (interactivo) -->
+<!-- 5 · Circuito cerrado (misma escena, ahora con interruptor) -->
 <section class="slide">
   <p class="eyebrow">La regla número uno</p>
   <h2>Si el camino se corta, no baja nada 🚧</h2>
-  <div class="circuito">
-    <svg viewBox="0 0 520 270" id="svg-circuito" aria-label="Circuito con un interruptor que se abre y se cierra">
-      <!-- cables: el de arriba con el hueco del interruptor, el resto de una vez -->
-      <path d="M70 60 H 190" class="cable"/>
-      <path d="M310 60 H 450 V 210 H 70 V 155" class="cable"/>
-      <path d="M70 105 V 60" class="cable"/>
+  <div class="fuente" style="width:min(92vw, 560px)">
+    <svg id="q-escena" viewBox="0 -14 720 356" class="escena-svg abierto" aria-label="El mismo estanque, ahora con una compuerta que corta el camino; en modo circuito es el interruptor">
+      <defs>
+        <clipPath id="q-clip"><rect x="137" y="68" width="106" height="64" rx="8"/></clipPath>
+        <linearGradient id="q-grad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#7FD4F7"/><stop offset="1" stop-color="#29B6F6"/>
+        </linearGradient>
+        <pattern id="q-pat" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+          <rect width="8" height="16" fill="#C8B79A"/><rect x="8" width="8" height="16" fill="#B9A585"/>
+        </pattern>
+        <marker id="q-flecha" markerWidth="6" markerHeight="6" refX="4.5" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="#37474F"/>
+        </marker>
+      </defs>
 
-      <!-- pila, metida dentro del cable de la izquierda -->
-      <rect x="44" y="103" width="52" height="54" rx="8" fill="#546E7A"/>
-      <rect x="60" y="96" width="20" height="9" rx="3" fill="#90A4AE"/>
-      <text x="70" y="140" text-anchor="middle" font-size="26">🔋</text>
-      <text x="112" y="136" class="rotulo">la pila</text>
-
-      <!-- interruptor -->
-      <circle cx="190" cy="60" r="7" fill="#37474F"/>
-      <circle cx="310" cy="60" r="7" fill="#37474F"/>
-      <line x1="190" y1="60" x2="310" y2="60" id="palanca" stroke="#37474F" stroke-width="9" stroke-linecap="round"/>
-      <text x="250" y="32" text-anchor="middle" class="rotulo" id="rotulo-sw">interruptor abierto</text>
-
-      <!-- LED, montado sobre el cable de abajo -->
-      <g id="rayos" stroke="#FFB627" stroke-width="5" stroke-linecap="round">
-        <line x1="260" y1="160" x2="260" y2="146"/>
-        <line x1="308" y1="178" x2="319" y2="167"/>
-        <line x1="212" y1="178" x2="201" y2="167"/>
+      <!-- mundo agua -->
+      <g class="par agua" style="--d:.72s">
+        <rect x="0" y="302" width="720" height="36" rx="8" fill="url(#q-pat)"/>
+        <text x="360" y="325" text-anchor="middle" class="rot-suelo">TIERRA (GND) · aquí el agua ya no tiene altura: 0 V</text>
       </g>
-      <circle cx="260" cy="210" r="34" id="c-led" fill="#7a6a3a"/>
-      <circle cx="250" cy="200" r="9" fill="#fff" opacity=".35"/>
-      <text x="260" y="266" text-anchor="middle" class="rotulo">el LED</text>
+
+      <g class="par agua" style="--d:0s">
+        <g class="madera">
+          <line x1="139" y1="140" x2="139" y2="304"/>
+          <line x1="241" y1="140" x2="241" y2="304"/>
+          <line x1="139" y1="140" x2="241" y2="304"/>
+          <line x1="241" y1="140" x2="139" y2="304"/>
+        </g>
+        <rect x="123" y="132" width="134" height="10" rx="4" fill="#8D6E63"/>
+        <rect x="137" y="68" width="106" height="64" rx="8" fill="#ECEFF1" stroke="#78909C" stroke-width="4"/>
+        <g clip-path="url(#q-clip)"><rect x="137" y="80" width="106" height="52" fill="url(#q-grad)"/></g>
+        <text x="190" y="50" text-anchor="middle" class="rotulo">el estanque 🔋</text>
+      </g>
+
+      <g class="par agua" style="--d:.18s">
+        <path class="mang" d="M243,116 H345"/>
+        <g transform="translate(345,116)"><path class="mang palanca5" d="M0,0 H60"/></g>
+        <path class="mang" d="M405,116 H560 V230"/>
+        <path class="aguaflujo" stroke-width="8" d="M243,116 H345"/>
+        <g transform="translate(345,116)"><path class="aguaflujo palanca5" stroke-width="8" d="M0,0 H60"/></g>
+        <path class="aguaflujo" stroke-width="8" d="M405,116 H560 V230"/>
+        <path class="aguaflujo" stroke-width="8" d="M560,230 V250"/>
+      </g>
+
+      <g class="par agua" style="--d:.54s">
+        <g transform="translate(560,272)">
+          <g class="rueda-giro">
+            <circle r="22" fill="none" stroke="#0F8B93" stroke-width="4.5"/>
+            <g stroke="#0F8B93" stroke-width="3.5">
+              <line y1="-22" y2="22"/><line x1="-22" x2="22"/>
+              <line x1="-16" y1="-16" x2="16" y2="16"/><line x1="16" y1="-16" x2="-16" y2="16"/>
+            </g>
+            <g fill="#4FC3F7">
+              <rect x="-5" y="-27" width="10" height="12" rx="2"/><rect x="-5" y="15" width="10" height="12" rx="2"/>
+              <rect x="-27" y="-5" width="12" height="10" rx="2"/><rect x="15" y="-5" width="12" height="10" rx="2"/>
+            </g>
+          </g>
+          <circle id="q-luz" r="9" fill="#8a6a20"/>
+        </g>
+        <text x="530" y="256" text-anchor="end" class="rotulo">la ruedita</text>
+        <text x="530" y="274" text-anchor="end" class="rotulo">= el LED ✨</text>
+      </g>
+
+      <!-- mundo circuito (mismas posiciones) -->
+      <g class="par circ" style="--d:.18s">
+        <path class="c-cable" d="M190,116 H345 M405,116 H560 V186 M560,218 V246 M560,280 H190"/>
+        <circle cx="345" cy="116" r="6" fill="#37474F"/>
+        <circle cx="405" cy="116" r="6" fill="#37474F"/>
+        <g transform="translate(345,116)"><line class="c-cable palanca5" x1="0" y1="0" x2="60" y2="0"/></g>
+      </g>
+
+      <g class="par circ" style="--d:0s">
+        <line x1="190" y1="116" x2="190" y2="189" class="c-cable"/>
+        <line x1="165" y1="189" x2="215" y2="189" stroke="#37474F" stroke-width="5" stroke-linecap="round"/>
+        <line x1="177" y1="207" x2="203" y2="207" stroke="#37474F" stroke-width="9" stroke-linecap="round"/>
+        <line x1="190" y1="207" x2="190" y2="280" class="c-cable"/>
+        <text x="151" y="182" class="c-signo">+</text>
+        <text x="151" y="232" class="c-signo">−</text>
+        <text x="223" y="203" class="rotulo-c">la pila (V)</text>
+      </g>
+
+      <g class="par circ" style="--d:.36s">
+        <path d="M560,186 L549,192 L571,198 L549,204 L571,210 L560,216 V218" fill="none" stroke="#37474F" stroke-width="4" stroke-linejoin="round"/>
+        <text x="530" y="204" text-anchor="end" class="rotulo-c">la resistencia (R)</text>
+      </g>
+
+      <g class="par circ" style="--d:.54s">
+        <line x1="560" y1="246" x2="560" y2="248" class="c-cable"/>
+        <path id="q-led-tri" d="M546,248 L574,248 L560,268 Z" fill="none" stroke="#37474F" stroke-width="4" stroke-linejoin="round"/>
+        <line x1="546" y1="268" x2="574" y2="268" stroke="#37474F" stroke-width="4" stroke-linecap="round"/>
+        <line class="q-rayo" x1="578" y1="251" x2="591" y2="243" stroke="#37474F" stroke-width="2.2" marker-end="url(#q-flecha)"/>
+        <line class="q-rayo" x1="583" y1="260" x2="596" y2="252" stroke="#37474F" stroke-width="2.2" marker-end="url(#q-flecha)"/>
+        <line x1="560" y1="268" x2="560" y2="280" class="c-cable"/>
+        <text x="530" y="262" text-anchor="end" class="rotulo-c">el LED</text>
+      </g>
+
+      <g class="par circ" style="--d:.72s">
+        <line x1="375" y1="280" x2="375" y2="292" class="c-cable"/>
+        <line x1="357" y1="292" x2="393" y2="292" stroke="#37474F" stroke-width="4" stroke-linecap="round"/>
+        <line x1="364" y1="299" x2="386" y2="299" stroke="#37474F" stroke-width="4" stroke-linecap="round"/>
+        <line x1="371" y1="306" x2="379" y2="306" stroke="#37474F" stroke-width="4" stroke-linecap="round"/>
+        <text x="375" y="326" text-anchor="middle" class="rotulo-c">GND · 0 V</text>
+      </g>
+
+      <text id="q-sw-rot" x="375" y="84" text-anchor="middle" class="rotulo">¡camino cortado!</text>
+      <rect id="q-hit" x="330" y="76" width="92" height="56" fill="#000" fill-opacity="0"/>
     </svg>
-    <button class="boton" id="btn-interruptor">Cerrar el interruptor 🔘</button>
   </div>
-  <p class="grande" id="txt-circuito" style="max-width:32em">Con el camino cortado, el agua se queda arriba: no puede bajar hasta la tierra, y el LED no se enciende.</p>
+  <div class="controles">
+    <div class="fila" style="gap:.5em">
+      <button class="boton" id="btn-interruptor">Cerrar el interruptor 🔘</button>
+      <button class="boton" id="q-ver-circuito">🔬 Verlo como circuito</button>
+    </div>
+  </div>
+  <p class="grande" id="txt-circuito" style="max-width:34em">Con el camino <strong>cortado</strong>, el agua se queda esperando arriba: no puede bajar hasta la tierra, y la ruedita no gira.</p>
   <button class="sm-grande" data-sm="gnd">¿Saber más? ¿Qué es el GND?</button>
 </section>
 
@@ -497,18 +578,18 @@
 
   .madera line { stroke: #A1785C; stroke-width: 7; stroke-linecap: round; }
   .mang { fill: none; stroke: #90A4AE; stroke-width: 14; stroke-linecap: round; stroke-linejoin: round; transition: stroke-width .25s; }
-  #chorro, #chorro-caida {
+  .aguaflujo {
     fill: none; stroke: #4FC3F7; stroke-linecap: round;
     stroke-dasharray: 14 10; animation: fluir 1.2s linear infinite;
   }
   @keyframes fluir { to { stroke-dashoffset: -48; } }
-  .escena-svg.seca #chorro, .escena-svg.seca #chorro-caida { opacity: .12; animation-play-state: paused; }
+  .escena-svg.seca .aguaflujo { opacity: .12; animation-play-state: paused; }
 
-  #rueda-giro { animation: girar 1.4s linear infinite; transform-box: fill-box; transform-origin: center; }
+  .rueda-giro { animation: girar 1.4s linear infinite; transform-box: fill-box; transform-origin: center; }
   @keyframes girar { to { transform: rotate(360deg); } }
-  .escena-svg.seca #rueda-giro { animation-play-state: paused; }
+  .escena-svg.seca .rueda-giro { animation-play-state: paused; }
 
-  .rotulo { font-family: var(--f-cuerpo); font-size: 14.5px; font-weight: 700; fill: var(--gris); }
+  .rotulo { font-family: var(--f-cuerpo); font-size: 15px; fill: var(--gris); }
   .rot-suelo { font-family: var(--f-cuerpo); font-size: 13px; font-weight: 800; fill: #4E4232; }
   .regla-l { stroke: var(--teal); stroke-width: 3; stroke-dasharray: 7 6; }
   .regla-txt { font-family: var(--f-titulo); font-size: 15px; fill: #fff; }
@@ -547,15 +628,15 @@
                 inset 0 -2px 3px rgba(0,0,0,.2);
   }
 
-  /* ---------- circuito cerrado ---------- */
-  .circuito { display: flex; flex-direction: column; align-items: center; gap: .6em; }
-  #svg-circuito { width: min(88vw, 540px); }
-  .cable { fill: none; stroke: #37474F; stroke-width: 8; stroke-linecap: round; }
-  #palanca { transform-origin: 190px 60px; transform: rotate(-28deg); transition: transform .3s; }
-  #svg-circuito.cerrado #palanca { transform: rotate(0deg); }
-  .rotulo { font-family: var(--f-cuerpo); font-size: 15px; fill: var(--gris); }
-  #rayos { opacity: 0; transition: opacity .25s; }
-  #svg-circuito.cerrado #rayos { opacity: 1; }
+  /* ---------- circuito cerrado (misma escena, con interruptor) ---------- */
+  .palanca5 { transform-box: fill-box; transform-origin: left center; transition: transform .35s; }
+  #q-escena.abierto .palanca5 { transform: rotate(-28deg); }
+  #q-escena.abierto .aguaflujo { display: none; }
+  #q-escena.abierto .rueda-giro { animation-play-state: paused; }
+  #q-led-tri { transition: fill .3s; }
+  #q-escena.cerrado #q-led-tri { fill: #FFB627; filter: drop-shadow(0 0 8px #FFB627); }
+  #q-escena.cerrado .q-rayo { stroke: #FFB627; }
+  #q-hit { cursor: pointer; }
 
   /* ---------- banco de pruebas del LED ---------- */
   .banco { position: relative; display: flex; flex-direction: column; align-items: center; gap: .4em; min-width: 8em; }
@@ -629,13 +710,10 @@
       const yT = yP - 64;
       $("tq-cuerpo").setAttribute("y", yT);
       $("tq-clip").setAttribute("y", yT);
-      $("tq-boca").setAttribute("cy", yT);
       $("etiq-pila").setAttribute("y", yT - 16);
       const hAgua = 52 * agua / 100, yA = yP - 6 - hAgua;
       $("nivel").setAttribute("y", yA);
       $("nivel").setAttribute("height", hAgua + 6);
-      $("nivel-boca").setAttribute("cy", yA);
-      $("nivel-boca").style.opacity = agua > 3 ? 1 : 0;
 
       /* regla de voltios */
       $("regla-l").setAttribute("y2", yE);
@@ -733,22 +811,37 @@
     poner(3);
   })();
 
-  /* ---- 4 · circuito cerrado ---- */
+  /* ---- 5 · circuito cerrado con la misma escena ---- */
   (function () {
-    const svg = document.getElementById("svg-circuito");
-    const boton = document.getElementById("btn-interruptor");
-    const txt = document.getElementById("txt-circuito");
-    let cerrado = false;
-    boton.addEventListener("click", () => {
-      cerrado = !cerrado;
-      svg.classList.toggle("cerrado", cerrado);
-      document.getElementById("c-led").setAttribute("fill", cerrado ? "#FFD54F" : "#7a6a3a");
-      document.getElementById("rotulo-sw").textContent = cerrado ? "interruptor cerrado" : "interruptor abierto";
-      boton.textContent = cerrado ? "Abrir el interruptor 🔘" : "Cerrar el interruptor 🔘";
-      txt.innerHTML = cerrado
-        ? "¡Camino <strong>completo</strong>! El agua sale de la pila, pasa por el LED entregándole su altura y termina en la tierra. 💡"
-        : "Con el camino cortado, el agua se queda arriba: no puede bajar hasta la tierra, y el LED no se enciende.";
-    });
+    const $ = id => document.getElementById(id);
+    const esc = $("q-escena");
+    let cerrado = false, enCirc = false;
+
+    function pintar() {
+      esc.classList.toggle("cerrado", cerrado);
+      esc.classList.toggle("abierto", !cerrado);
+      esc.classList.toggle("circuito", enCirc);
+      $("btn-interruptor").textContent = cerrado ? "Abrir el interruptor 🔓" : "Cerrar el interruptor 🔘";
+      $("q-ver-circuito").textContent = enCirc ? "💧 Volver al agua" : "🔬 Verlo como circuito";
+      $("q-sw-rot").textContent = enCirc
+        ? (cerrado ? "interruptor cerrado" : "interruptor abierto")
+        : (cerrado ? "camino completo" : "¡camino cortado!");
+      const luz = $("q-luz");
+      luz.setAttribute("fill", cerrado ? "hsl(43, 85%, 60%)" : "#8a6a20");
+      luz.style.filter = cerrado ? "drop-shadow(0 0 8px #FFB627)" : "none";
+      $("txt-circuito").innerHTML = enCirc
+        ? (cerrado
+          ? "¡<strong>Circuito cerrado</strong>! La corriente recorre el camino completo y el LED se enciende. 💡"
+          : "Interruptor <strong>abierto</strong> = camino cortado: la corriente no puede pasar y el LED queda apagado.")
+        : (cerrado
+          ? "¡<strong>Camino completo</strong>! El agua da la vuelta entera: baja, mueve la ruedita y llega a TIERRA."
+          : "Con el camino <strong>cortado</strong>, el agua se queda esperando arriba: no puede bajar hasta la tierra, y la ruedita no gira.");
+    }
+
+    $("btn-interruptor").addEventListener("click", () => { cerrado = !cerrado; pintar(); });
+    $("q-hit").addEventListener("click", () => { cerrado = !cerrado; pintar(); });
+    $("q-ver-circuito").addEventListener("click", () => { enCirc = !enCirc; pintar(); });
+    pintar();
   })();
 
   /* ---- 5 · con o sin resistencia ---- */
