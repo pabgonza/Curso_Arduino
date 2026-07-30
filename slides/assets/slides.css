@@ -152,6 +152,7 @@ ul.lista li::before { content: "▸ "; color: var(--teal); font-weight: 800; }
 .kw  { color: var(--ide-clave); font-weight: 600; }
 .num { color: var(--ide-num); font-weight: 700; }
 .cm  { color: var(--ide-comentario); font-style: italic; }
+.st  { color: #2E7D32; } /* textos entre comillas */
 
 /* número editable: el valor con el que se juega */
 .num-vivo {
