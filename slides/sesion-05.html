@@ -164,19 +164,21 @@
     <div class="sim-ide">
       <div class="sim-titulo"><span class="sim-punto"></span>estrellita.ino | Arduino IDE 2</div>
       <div class="sim-editor lineas">
-        <div class="ln"><span class="n">1</span><code><span class="kw">void</span> <span class="fn">loop</span>() {</code></div>
-        <div class="ln" data-nota="0"><span class="n">2</span><code>  <span class="fn">tone</span>(<span class="num">8</span>, <span class="num">262</span>);  <span class="cm">// do</span></code></div>
-        <div class="ln" data-nota="0"><span class="n">3</span><code>  <span class="fn">delay</span>(<span class="num">400</span>);</code></div>
-        <div class="ln" data-nota="1"><span class="n">4</span><code>  <span class="fn">tone</span>(<span class="num">8</span>, <span class="num">262</span>);  <span class="cm">// do</span></code></div>
-        <div class="ln" data-nota="1"><span class="n">5</span><code>  <span class="fn">delay</span>(<span class="num">400</span>);</code></div>
-        <div class="ln" data-nota="2"><span class="n">6</span><code>  <span class="fn">tone</span>(<span class="num">8</span>, <span class="num">392</span>);  <span class="cm">// sol</span></code></div>
-        <div class="ln" data-nota="2"><span class="n">7</span><code>  <span class="fn">delay</span>(<span class="num">400</span>);</code></div>
-        <div class="ln" data-nota="3"><span class="n">8</span><code>  <span class="fn">tone</span>(<span class="num">8</span>, <span class="num">392</span>);  <span class="cm">// sol</span></code></div>
-        <div class="ln" data-nota="3"><span class="n">9</span><code>  <span class="fn">delay</span>(<span class="num">400</span>);</code></div>
-        <div class="ln"><span class="n">10</span><code>  <span class="cm">// … y siguen: la la sol</span></code></div>
-        <div class="ln"><span class="n">11</span><code>  <span class="fn">noTone</span>(<span class="num">8</span>);</code></div>
-        <div class="ln"><span class="n">12</span><code>  <span class="fn">delay</span>(<span class="num">1000</span>);</code></div>
-        <div class="ln"><span class="n">13</span><code>}</code></div>
+        <div class="ln"><span class="n">1</span><code><span class="kw">void</span> <span class="fn">setup</span>() { }  <span class="cm">// nada que preparar</span></code></div>
+        <div class="ln"><span class="n">2</span><code></code></div>
+        <div class="ln"><span class="n">3</span><code><span class="kw">void</span> <span class="fn">loop</span>() {</code></div>
+        <div class="ln" data-nota="0"><span class="n">4</span><code>  <span class="fn">tone</span>(<span class="num">8</span>, <span class="num">262</span>);  <span class="cm">// do</span></code></div>
+        <div class="ln" data-nota="0"><span class="n">5</span><code>  <span class="fn">delay</span>(<span class="num">400</span>);</code></div>
+        <div class="ln" data-nota="1"><span class="n">6</span><code>  <span class="fn">tone</span>(<span class="num">8</span>, <span class="num">262</span>);  <span class="cm">// do</span></code></div>
+        <div class="ln" data-nota="1"><span class="n">7</span><code>  <span class="fn">delay</span>(<span class="num">400</span>);</code></div>
+        <div class="ln" data-nota="2"><span class="n">8</span><code>  <span class="fn">tone</span>(<span class="num">8</span>, <span class="num">392</span>);  <span class="cm">// sol</span></code></div>
+        <div class="ln" data-nota="2"><span class="n">9</span><code>  <span class="fn">delay</span>(<span class="num">400</span>);</code></div>
+        <div class="ln" data-nota="3"><span class="n">10</span><code>  <span class="fn">tone</span>(<span class="num">8</span>, <span class="num">392</span>);  <span class="cm">// sol</span></code></div>
+        <div class="ln" data-nota="3"><span class="n">11</span><code>  <span class="fn">delay</span>(<span class="num">400</span>);</code></div>
+        <div class="ln"><span class="n">12</span><code>  <span class="cm">// … y siguen: la la sol</span></code></div>
+        <div class="ln"><span class="n">13</span><code>  <span class="fn">noTone</span>(<span class="num">8</span>);</code></div>
+        <div class="ln"><span class="n">14</span><code>  <span class="fn">delay</span>(<span class="num">1000</span>);</code></div>
+        <div class="ln"><span class="n">15</span><code>}</code></div>
       </div>
     </div>
     <aside class="tuto-panel">
@@ -184,6 +186,7 @@
       <p class="tuto-texto" id="cancion-txt">La primera frase son siete notas. Aprieta ▶ y mira cómo el programa va bajando línea por línea.</p>
       <div class="partitura" id="partitura"></div>
       <button class="boton" id="tocar">▶ Tocar la canción</button>
+      <p class="nota">Para probarlo de verdad: carga <code>sketches/sesion-05/estrellita</code> en el IDE.</p>
     </aside>
   </div>
 </section>
@@ -203,7 +206,7 @@
     <div style="display:flex; flex-direction:column; gap:.7em; max-width:20em">
       <p class="grande">Dos notas que se turnan, rapidito. ¡Eso es todo!</p>
       <button class="boton" id="sirena">🚓 Probar la sirena</button>
-      <p class="nota">¿Y si cambias el 300 por 80? ¿Y por 800?</p>
+      <p class="nota">¿Y si cambias el 300 por 80? ¿Y por 800?<br>Programa completo: <code>sketches/sesion-05/sirena</code>.</p>
     </div>
   </div>
 </section>
@@ -224,6 +227,7 @@
 }</pre>
   </div>
   <button class="boton" id="ding">🔔 Escuchar el «ding-dong»</button>
+  <p class="nota">Programa completo, con su <code>setup()</code> y todo: <code>sketches/sesion-05/timbre</code>.</p>
 </section>
 
 <!-- 11 · Reto -->

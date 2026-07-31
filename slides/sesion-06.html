@@ -116,7 +116,7 @@
   <h2>Las librerías: código regalado 🎁</h2>
   <p class="grande" style="max-width:34em">Mover un servo es complicadísimo por dentro. Pero alguien ya lo resolvió… <strong>y lo regaló</strong>. Eso es una <strong>librería</strong><button class="sm" data-sm="libreria">?</button>.</p>
   <div class="ide">
-    <div class="ide-barra"><span class="boton-ide">✓</span><span class="boton-ide">→</span><span class="ide-nombre">servo.ino</span></div>
+    <div class="ide-barra"><span class="boton-ide">✓</span><span class="boton-ide">→</span><span class="ide-nombre">servo.ino — completo en sketches/sesion-06/servo</span></div>
     <pre><span class="cm">#include &lt;Servo.h&gt;</span>        <span class="cm">// pido la caja de herramientas</span>
 Servo miServo;           <span class="cm">// le pongo nombre a mi servo</span>
 <span class="kw">void</span> <span class="fn">setup</span>() {
@@ -178,7 +178,7 @@ Servo miServo;           <span class="cm">// le pongo nombre a mi servo</span>
   <h2>El barrido: contar mientras se mueve 🔢</h2>
   <div class="tuto">
     <div class="sim-ide">
-      <div class="sim-titulo"><span class="sim-punto"></span>barrido.ino</div>
+      <div class="sim-titulo"><span class="sim-punto"></span>barrido.ino — completo en sketches/sesion-06/barrido</div>
       <div class="sim-editor lineas">
         <div class="ln"><span class="n">1</span><code><span class="kw">void</span> <span class="fn">loop</span>() {</code></div>
         <div class="ln" id="ln-for"><span class="n">2</span><code>  <span class="kw">for</span> (<span class="kw">int</span> a = <span class="num">0</span>; a &lt;= <span class="num">180</span>; a++) {</code></div>
@@ -257,6 +257,7 @@ Servo miServo;           <span class="cm">// le pongo nombre a mi servo</span>
 <span class="kw">int</span> angulo = <span class="fn">map</span>(valor, <span class="num">0</span>, <span class="num">1023</span>, <span class="num">0</span>, <span class="num">180</span>);
 miServo.<span class="fn">write</span>(angulo);</pre>
   </div>
+  <p class="nota">Programa completo: <code>sketches/sesion-06/perilla</code>.</p>
 </section>
 
 <!-- 10 · Proyecto: la barrera -->
