@@ -14,7 +14,7 @@
 <section class="slide portada">
   <span class="sesion-num">Sesión 8</span>
   <h1>El termómetro 🌡️</h1>
-  <p class="grande">Tu Arduino ya ve en la oscuridad.<br>Hoy aprende a <strong>sentir el calor</strong>… ¡y por primera vez te va a <strong>hablar por escrito</strong>!</p>
+  <p class="grande">Tu Arduino ya ve en la oscuridad.<br>Hoy aprende a <strong>sentir el calor</strong>… y te lo cuenta por su viejo amigo, el <strong>monitor serie</strong>. 💬</p>
   <div class="semaforo-vivo" aria-hidden="true">
     <span class="led" id="pled-r" style="--c:var(--rojo)"></span>
     <span class="led" id="pled-a" style="--c:var(--ambar)"></span>
@@ -44,7 +44,7 @@
 
 <!-- 3 · El monitor serie -->
 <section class="slide">
-  <p class="eyebrow">¡Por fin nos habla!</p>
+  <p class="eyebrow">Un viejo conocido</p>
   <h2>El monitor serie 💬</h2>
   <div class="tuto">
     <div class="serial">
@@ -55,7 +55,7 @@
     </div>
     <aside class="tuto-panel">
       <p class="tuto-num">El Arduino te escribe</p>
-      <p class="tuto-texto">Con <code>Serial.println</code> el Arduino manda frases por el cable USB, y el IDE las muestra en una ventana llamada <strong>monitor serie</strong> (la lupita 🔍 de arriba a la derecha).</p>
+      <p class="tuto-texto">Lo conociste en la sesión 4, espiando el botón. Con <code>Serial.println</code> el Arduino manda frases por el cable USB al <strong>monitor serie</strong> (la lupita 🔍)… y hoy las frases traen <strong>grados</strong>.</p>
       <button class="boton" id="btn-serial">▶ Abrir el monitor serie</button>
       <p class="nota">Antes hay que decirle la velocidad en el setup: <code>Serial.begin(9600)</code>. Si el monitor usa otra, ¡se leen puros jeroglíficos! 🗿</p>
     </aside>
@@ -98,7 +98,7 @@
 </section>
 
 <!-- 5 · Umbrales -->
-<section class="slide">
+<section class="slide slide-concepto">
   <p class="eyebrow">Frío, templado o caluroso</p>
   <h2>Los umbrales: ¿dónde está la raya? 📏</h2>
   <div class="tuto">
@@ -262,27 +262,6 @@
 </section>
 
 <style>
-  /* ---------- 3 · monitor serie ---------- */
-  .serial {
-    flex: 1 1 26em; max-width: min(92vw, 34em);
-    background: #143642; border-radius: 14px; overflow: hidden;
-    box-shadow: 0 10px 26px rgba(20,54,66,.25);
-    text-align: left;
-  }
-  .serial-barra {
-    background: #0d2731; color: #B7D2D8; font-size: .85rem;
-    padding: .5em .9em; font-family: var(--f-cuerpo);
-  }
-  .serial-barra strong { color: #fff; }
-  .serial-lineas {
-    min-height: 11em; max-height: 11em; overflow: hidden;
-    padding: .7em 1em; font-family: var(--f-codigo);
-    font-size: clamp(.8rem, 2vh, 1rem); color: #8FE3B4;
-    display: flex; flex-direction: column; justify-content: flex-end;
-  }
-  .serial-lineas p { margin: 0; line-height: 1.5; }
-  .serial-apagado { color: #5E7480 !important; font-style: italic; }
-
   /* ---------- 5 · umbrales ---------- */
   .led-u {
     width: 2em; height: 2em; border-radius: 50%;

@@ -94,6 +94,22 @@ h2 { font-size: clamp(1.6rem, 6vh, 3.2rem); }
   color: var(--gris);
 }
 
+/* ---------- slides de conceptos de programación ----------
+   distintivo: chip { } en el eyebrow + borde lateral y llaves de agua */
+.slide-concepto { border-left: 12px solid var(--teal-suave); }
+.slide-concepto::after {
+  content: "{ }";
+  position: absolute; right: 4vw; bottom: 9vh;
+  font-family: var(--f-codigo); font-size: 7.5rem; font-weight: 700;
+  color: var(--teal); opacity: .09; pointer-events: none;
+}
+.slide-concepto .eyebrow {
+  background: #DFF2EE; border: 2px solid var(--teal); color: var(--teal-osc);
+  border-radius: 999px; padding: .35em 1.1em;
+  font-family: var(--f-codigo); letter-spacing: .05em;
+}
+.slide-concepto .eyebrow::before { content: "{ } "; font-weight: 700; }
+
 p, li { font-size: clamp(1rem, 2.8vh, 1.5rem); line-height: 1.45; }
 .grande { font-size: clamp(1.2rem, 3.6vh, 1.9rem); }
 .nota { color: var(--gris); font-size: .85em; }
@@ -376,6 +392,8 @@ figure.figura figcaption .credito {
 
 dialog.saber-mas {
   margin: auto;              /* el reset "* { margin:0 }" le quitaba el centrado propio del <dialog> */
+  max-height: 88vh;          /* los popups largos hacen scroll en vez de recortarse */
+  overflow-y: auto;
   border: 4px solid var(--ambar);
   border-radius: 20px;
   padding: 1.4em 1.6em;
@@ -562,6 +580,27 @@ button.sim-op:hover { background: var(--teal-suave); }
   padding: .25em .8em; color: #33525c; cursor: pointer;
   min-width: 13em; text-align: left;
 }
+/* ---------- monitor serie simulado (sesiones 4 y 8) ---------- */
+.serial {
+  flex: 1 1 26em; max-width: min(92vw, 34em);
+  background: #143642; border-radius: 14px; overflow: hidden;
+  box-shadow: 0 10px 26px rgba(20,54,66,.25);
+  text-align: left;
+}
+.serial-barra {
+  background: #0d2731; color: #B7D2D8; font-size: .85rem;
+  padding: .5em .9em; font-family: var(--f-cuerpo);
+}
+.serial-barra strong { color: #fff; }
+.serial-lineas {
+  min-height: 11em; max-height: 11em; overflow: hidden;
+  padding: .7em 1em; font-family: var(--f-codigo);
+  font-size: clamp(.8rem, 2vh, 1rem); color: #8FE3B4;
+  display: flex; flex-direction: column; justify-content: flex-end;
+}
+.serial-lineas p { margin: 0; line-height: 1.5; }
+.serial-apagado { color: #5E7480 !important; font-style: italic; }
+
 .sim-editor { height: 16.5em; overflow: auto; background: #fff; }
 .sim-editor pre { font-family: var(--f-codigo); font-size: .9em; line-height: 1.5; padding: .6em .9em; }
 .sim-consola {

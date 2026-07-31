@@ -184,7 +184,7 @@
 </section>
 
 <!-- 7 · Entradas y salidas -->
-<section class="slide">
+<section class="slide slide-concepto">
   <p class="eyebrow">Una palabra nueva</p>
   <h2>Entradas y salidas ↔️</h2>
   <div class="fila">
@@ -258,13 +258,101 @@
       </div>
     </aside>
   </div>
-  <p class="nota">¿Y para qué la resistencia de 10 kΩ? <button class="sm" data-sm="pulldown">?</button> No es el casco del LED: esta tiene otro trabajo.</p>
+  <p class="nota">¿Y para qué la resistencia de 10 kΩ? <button class="sm" data-sm="pulldown">?</button> No es como la del LED: esta tiene otro trabajo… y un atajo secreto. 🤫</p>
 </section>
 
-<!-- 9 · El if, con el botón de verdad -->
+<!-- 9 · El if/else: la pregunta con dos caminos -->
+<section class="slide slide-concepto">
+  <p class="eyebrow">Una idea nueva de programación</p>
+  <h2>El <code>if</code> y el <code>else</code>: dos caminos 🛤️</h2>
+  <div class="fila" style="align-items:center; gap:2.5em">
+    <svg viewBox="0 0 300 240" class="rutas-svg" aria-label="Diagrama de la pregunta con dos caminos">
+      <polygon points="150,10 265,60 150,110 35,60" fill="#FFF4D6" stroke="#FFB627" stroke-width="4"/>
+      <text x="150" y="52" text-anchor="middle" font-size="15" font-weight="700" fill="#6b4d00" font-family="Nunito, sans-serif">¿está lloviendo?</text>
+      <text id="rt-clima" x="150" y="84" text-anchor="middle" font-size="26">🌧️</text>
+      <path d="M92 88 C 60 120, 60 140, 72 162" fill="none" stroke="#35CE8D" stroke-width="5" stroke-linecap="round"/>
+      <path d="M208 88 C 240 120, 240 140, 228 162" fill="none" stroke="#E84855" stroke-width="5" stroke-linecap="round"/>
+      <text x="52" y="132" font-size="14" font-weight="900" fill="#1d9e66" font-family="Nunito, sans-serif">SÍ</text>
+      <text x="236" y="132" font-size="14" font-weight="900" fill="#B03744" font-family="Nunito, sans-serif">NO</text>
+      <g id="rt-si"><rect x="30" y="166" width="90" height="60" rx="12" fill="#EDFBF4" stroke="#35CE8D" stroke-width="4"/><text x="75" y="205" text-anchor="middle" font-size="28">☔</text></g>
+      <g id="rt-no"><rect x="180" y="166" width="90" height="60" rx="12" fill="#FFF0F1" stroke="#E84855" stroke-width="4"/><text x="225" y="205" text-anchor="middle" font-size="28">😎</text></g>
+    </svg>
+    <div style="display:flex; flex-direction:column; gap:.7em; align-items:center">
+      <div class="sim-ide" style="min-width:330px; flex:none">
+        <div class="sim-titulo"><span class="sim-punto"></span>mi mañana.ino</div>
+        <div class="sim-editor lineas" style="height:auto">
+          <div class="ln" data-cl="1"><span class="n">1</span><code><span class="kw">if</span> (está lloviendo) {</code></div>
+          <div class="ln" data-cl="1"><span class="n">2</span><code>  tomo el paraguas ☔</code></div>
+          <div class="ln" data-cl="0"><span class="n">3</span><code>} <span class="kw">else</span> {</code></div>
+          <div class="ln" data-cl="0"><span class="n">4</span><code>  tomo los lentes 😎</code></div>
+          <div class="ln"><span class="n">5</span><code>}</code></div>
+        </div>
+      </div>
+      <button class="boton" id="btn-clima">🌦️ Cambiar el clima</button>
+    </div>
+  </div>
+  <p class="grande" style="max-width:34em">La pregunta va entre <strong>paréntesis ( )</strong> y cada camino entre <strong>llaves { }</strong>. Pase lo que pase, se toma <strong>uno y solo uno</strong> de los dos.</p>
+</section>
+
+<!-- 10 · El cable que conversa -->
+<section class="slide slide-concepto">
+  <p class="eyebrow">Una idea nueva de programación</p>
+  <h2>El cable USB: no solo da energía 🔌</h2>
+  <svg viewBox="0 0 640 230" class="usb-svg" aria-label="El computador y el Arduino conversando por el cable USB">
+    <text x="105" y="135" font-size="72" text-anchor="middle">💻</text>
+    <rect x="455" y="75" width="145" height="95" rx="12" fill="#00878F"/>
+    <text x="527" y="112" text-anchor="middle" fill="#fff" font-family="monospace" font-size="15">ARDUINO</text>
+    <rect x="455" y="128" width="30" height="22" fill="#90A4AE"/>
+    <path id="usb-cable" d="M168 140 C 280 175, 350 175, 455 140" fill="none" stroke="#546E7A" stroke-width="9" stroke-linecap="round"/>
+    <path class="usb-energia" d="M168 140 C 280 175, 350 175, 455 140" fill="none" stroke="#FFB627" stroke-width="4" stroke-linecap="round" stroke-dasharray="3 14"/>
+    <text x="312" y="205" text-anchor="middle" font-size="13" fill="#B37D00" font-family="Nunito, sans-serif" font-weight="700">⚡ la energía, como siempre</text>
+    <text id="usb-msj" x="168" y="120" font-size="17" text-anchor="middle" font-family="Nunito, sans-serif" font-weight="900" fill="var(--teal-osc)" opacity="0">«¡hola!»</text>
+    <text id="usb-estado" x="312" y="34" text-anchor="middle" font-size="15" fill="#5E7480" font-family="Nunito, sans-serif" font-weight="700">Se conocen desde la sesión 2… pero casi no han conversado.</text>
+  </svg>
+  <button class="boton" id="usb-btn">💬 Mandar un saludo</button>
+  <p class="grande" style="max-width:36em">El cable USB también es un <strong>teléfono</strong>: por adentro viajan mensajes <strong>en los dos sentidos</strong>. Ese camino de conversación es el <strong>puerto serial</strong><button class="sm" data-sm="serie-nombre">?</button> — ya lo usabas sin saberlo: ¡tus programas viajan por ahí!</p>
+</section>
+
+<!-- 11 · El monitor serie: ver lo que siente -->
+<section class="slide slide-concepto">
+  <p class="eyebrow">Una idea nueva de programación</p>
+  <h2>¿Qué siente? ¡Que nos lo cuente! 💬</h2>
+  <div class="tuto">
+    <div class="sim-ide">
+      <div class="sim-titulo"><span class="sim-punto"></span>espia.ino</div>
+      <div class="sim-editor lineas" style="height:auto">
+        <div class="ln"><span class="n">1</span><code><span class="kw">void</span> <span class="fn">setup</span>() {</code></div>
+        <div class="ln"><span class="n">2</span><code>  <span class="fn">pinMode</span>(<span class="num">2</span>, <span class="kw">INPUT</span>);</code></div>
+        <div class="ln"><span class="n">3</span><code>  Serial.<span class="fn">begin</span>(<span class="num">9600</span>);</code></div>
+        <div class="ln"><span class="n">4</span><code>}</code></div>
+        <div class="ln"><span class="n">5</span><code><span class="kw">void</span> <span class="fn">loop</span>() {</code></div>
+        <div class="ln" data-ser="1"><span class="n">6</span><code>  <span class="kw">if</span> (<span class="fn">digitalRead</span>(<span class="num">2</span>) == <span class="kw">HIGH</span>) {</code></div>
+        <div class="ln" data-ser="1"><span class="n">7</span><code>    Serial.<span class="fn">println</span>(<span class="st">"¡Apretado!"</span>);</code></div>
+        <div class="ln" data-ser="0"><span class="n">8</span><code>  } <span class="kw">else</span> {</code></div>
+        <div class="ln" data-ser="0"><span class="n">9</span><code>    Serial.<span class="fn">println</span>(<span class="st">"suelto..."</span>);</code></div>
+        <div class="ln"><span class="n">10</span><code>  }</code></div>
+        <div class="ln"><span class="n">11</span><code>  <span class="fn">delay</span>(<span class="num">200</span>);</code></div>
+        <div class="ln"><span class="n">12</span><code>}</code></div>
+      </div>
+    </div>
+    <aside class="tuto-panel">
+      <p class="tuto-num">El Arduino te escribe</p>
+      <p class="tuto-texto">Todavía no hay LED: el que mira eres <strong>tú</strong>. Con <code>Serial.println</code> el Arduino manda frases por el cable USB al <strong>monitor serie</strong><button class="sm" data-sm="serial4">?</button> del IDE.</p>
+      <button class="boton-fisico" id="ser4-btn">🔘 Mantén apretado</button>
+      <div class="serial" style="flex:none; width:100%; max-width:100%">
+        <div class="serial-barra">🔍 Monitor serie · 9600</div>
+        <div class="serial-lineas" id="ser4-lineas" style="min-height:6.5em; max-height:6.5em"></div>
+      </div>
+    </aside>
+  </div>
+  <p class="nota">¡Nuestro primer if/else de verdad! Y el <code>delay(200)</code> es para que no escriba mil veces por segundo y llene la pantalla. 😅</p>
+</section>
+
+<!-- 12 · El if, con el botón y el LED -->
 <section class="slide">
-  <p class="eyebrow">Enseñarle a decidir</p>
-  <h2>El <code>if</code>: si pasa esto… haz esto otro 🤔</h2>
+  <p class="eyebrow">Sentir → pensar → actuar</p>
+  <h2>Ahora sí: un actuador que obedece 💪</h2>
+  <p class="grande" style="max-width:36em">Ya vimos en el monitor que el cerebrito <strong>siente</strong> tu dedo. Ahora su respuesta va a pasar <strong>en el mundo real</strong>: cambiamos el <code>Serial.println</code> por su primer <strong>actuador</strong> — el LED del pin 13 — para que <strong>obedezca</strong> al botón.</p>
   <div class="tuto">
     <div class="sim-ide">
       <div class="sim-titulo"><span class="sim-punto"></span>boton.ino | Arduino IDE 2</div>
@@ -295,21 +383,119 @@
   </div>
 </section>
 
-<!-- 10 · Proyecto -->
+<!-- 13 · Proyecto -->
 <section class="slide">
   <p class="eyebrow">⭐ Proyecto de la sesión</p>
   <h2>Tu propio interruptor de luz 💡</h2>
   <p class="grande">Ya tienes todo: un sensor que avisa, un programa que decide y un actuador que obedece.</p>
   <div style="display:flex; flex-direction:column; gap:.5em; width:min(92vw,640px)">
-    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Armar el circuito del botón <strong>y</strong> el del LED en la misma protoboard</span></div>
-    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Subir el programa del <strong>if</strong> y probarlo</span></div>
-    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Cambiar el <strong>HIGH</strong> por <strong>LOW</strong> en el if: ¿qué pasa ahora?</span></div>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Armar el circuito del botón <strong>y</strong> el del LED en la misma protoboard <button class="sm" data-sm="p-circuito">?</button></span></div>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Subir el programa del <strong>if</strong> y probarlo <button class="sm" data-sm="p-codigo">?</button></span></div>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Cambiar el <strong>HIGH</strong> por <strong>LOW</strong> en el if: ¿qué pasa ahora? <button class="sm" data-sm="p-low">?</button></span></div>
     <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Hacer que el botón encienda <strong>tres</strong> LEDs de una vez</span></div>
   </div>
   <p class="nota">Truco de profe: si el LED parpadea solo cuando pasas la mano cerca, seguramente falta la resistencia de 10 kΩ. 👻</p>
 </section>
 
-<!-- 11 · Reto -->
+<!-- 14 · Las variables -->
+<section class="slide slide-concepto">
+  <p class="eyebrow">Una idea nueva de programación</p>
+  <h2>Las variables: cajitas con nombre 📦</h2>
+  <p class="grande" style="max-width:34em">Una <strong>variable</strong> es una cajita donde el cerebrito <strong>guarda un número para acordarse</strong>. Tiene nombre, y puedes mirarla o cambiarla cuando quieras.</p>
+  <div class="fila" style="align-items:center; gap:2.5em">
+    <div class="caja-var">
+      <span class="caja-var-nombre">puntos</span>
+      <span class="caja-var-valor" id="var-valor">0</span>
+      <button class="boton" id="btn-punto">⭐ ¡Un punto más!</button>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:.6em; max-width:24em">
+      <div class="sim-ide" style="flex:none">
+        <div class="sim-titulo"><span class="sim-punto"></span>puntaje.ino</div>
+        <div class="sim-editor lineas" style="height:auto">
+          <div class="ln"><span class="n">1</span><code><span class="kw">int</span> puntos = <span class="num">0</span>;  <span class="cm">// nace la cajita</span></code></div>
+          <div class="ln" id="ln-suma"><span class="n">2</span><code>puntos = puntos + <span class="num">1</span>;</code></div>
+        </div>
+      </div>
+      <div class="fila" style="gap:.5em; justify-content:center">
+        <span class="anat anat-tipo"><code>int</code><br>qué guarda: enteros</span>
+        <span class="anat anat-nombre"><code>puntos</code><br>su nombre</span>
+        <span class="anat anat-valor"><code>= 0</code><br>con cuánto parte</span>
+      </div>
+    </div>
+  </div>
+  <p class="nota">Más cajitas: <code>int edad = 10;</code> · <code>int pinLed = 13;</code> — y sirven para ponerle <strong>nombre a los pines</strong> <button class="sm" data-sm="var-nombres">?</button>. Ojo: la línea 2 no es una ecuación, significa «guarda lo que había <strong>más uno</strong>». 🤯</p>
+</section>
+
+<!-- 15 · Actividad: el contador de apretones -->
+<section class="slide">
+  <p class="eyebrow">Experimento misterioso 🕵️</p>
+  <h2>El contador de apretones 🔢</h2>
+  <div class="tuto">
+    <div class="sim-ide">
+      <div class="sim-titulo"><span class="sim-punto"></span>contador.ino</div>
+      <div class="sim-editor lineas" style="height:auto">
+        <div class="ln"><span class="n">1</span><code><span class="kw">int</span> contador = <span class="num">0</span>;</code></div>
+        <div class="ln"><span class="n">2</span><code><span class="kw">int</span> antes = <span class="kw">LOW</span>;</code></div>
+        <div class="ln"><span class="n">3</span><code><span class="kw">void</span> <span class="fn">setup</span>() {</code></div>
+        <div class="ln"><span class="n">4</span><code>  <span class="fn">pinMode</span>(<span class="num">2</span>, <span class="kw">INPUT</span>);</code></div>
+        <div class="ln"><span class="n">5</span><code>  Serial.<span class="fn">begin</span>(<span class="num">9600</span>);</code></div>
+        <div class="ln"><span class="n">6</span><code>}</code></div>
+        <div class="ln"><span class="n">7</span><code><span class="kw">void</span> <span class="fn">loop</span>() {</code></div>
+        <div class="ln"><span class="n">8</span><code>  <span class="kw">int</span> ahora = <span class="fn">digitalRead</span>(<span class="num">2</span>);</code></div>
+        <div class="ln"><span class="n">9</span><code>  <span class="kw">if</span> (ahora == <span class="kw">HIGH</span> &amp;&amp; antes == <span class="kw">LOW</span>) {</code></div>
+        <div class="ln"><span class="n">10</span><code>    contador = contador + <span class="num">1</span>;</code></div>
+        <div class="ln"><span class="n">11</span><code>    Serial.<span class="fn">println</span>(contador);</code></div>
+        <div class="ln"><span class="n">12</span><code>  }</code></div>
+        <div class="ln"><span class="n">13</span><code>  antes = ahora;</code></div>
+        <div class="ln"><span class="n">14</span><code>}</code></div>
+      </div>
+    </div>
+    <aside class="tuto-panel">
+      <p class="tuto-num">Actividad: ponlo a prueba</p>
+      <p class="tuto-texto">Con tu circuito del botón ya armado:<br><br>
+      1️⃣ Sube este código<br>
+      2️⃣ Abre el monitor serie 🔍<br>
+      3️⃣ Aprieta <strong>10 veces</strong>, contando en voz alta<br>
+      4️⃣ ¿El monitor llegó justo a 10… o se pasó? 🤨</p>
+      <p class="nota">Si contó de más, tu circuito no está malo: acabas de descubrir algo. ➡️</p>
+    </aside>
+  </div>
+  <p class="nota">Las cajitas <code>antes</code> y <code>ahora</code> guardan cómo estaba el botón: cuenta solo cuando pasa de suelto a apretado. (El <code>&amp;&amp;</code> significa «y también».)</p>
+</section>
+
+<!-- 16 · El rebote -->
+<section class="slide">
+  <p class="eyebrow">Un secreto de los botones</p>
+  <h2>El rebote: ¿por qué cuenta de más? 🏀</h2>
+  <div class="tuto">
+    <div class="proto-caja" style="max-width:460px">
+      <svg viewBox="0 0 420 210" id="svg-rebote" aria-label="Señal del botón vista por el Arduino">
+        <text x="14" y="56" font-size="12" fill="#5E7480" font-family="monospace">HIGH</text>
+        <text x="14" y="164" font-size="12" fill="#5E7480" font-family="monospace">LOW</text>
+        <line x1="52" y1="50" x2="408" y2="50" stroke="#DCF0EF" stroke-width="2" stroke-dasharray="4 6"/>
+        <line x1="52" y1="160" x2="408" y2="160" stroke="#DCF0EF" stroke-width="2" stroke-dasharray="4 6"/>
+        <rect id="reb-zona" x="150" y="36" width="80" height="140" rx="8" fill="#FFF4D6" opacity="0"/>
+        <text id="reb-zona-txt" x="190" y="196" text-anchor="middle" font-size="12" fill="#B37D00" font-family="Nunito, sans-serif" font-weight="700" opacity="0">delay(50): no miro 🙈</text>
+        <path id="reb-traza" d="M52 160 H408" fill="none" stroke="var(--teal)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="150" y="26" text-anchor="middle" font-size="13" fill="#5E7480" font-family="Nunito, sans-serif">↓ tu único clic</text>
+      </svg>
+    </div>
+    <aside class="tuto-panel" style="flex:1 1 20em; max-width:24em">
+      <p class="tuto-num">Pruébalo tú</p>
+      <p class="tuto-texto" id="reb-txt">¿Contó de más, cierto? 😏 La culpa es de las laminitas de adentro: <strong>rebotan como una pelota</strong> al chocar. Aquí está en cámara lenta: aprieta y compara. 👇</p>
+      <button class="boton-fisico" id="reb-btn">🔘 Apretar</button>
+      <p class="lectura">tú: <strong id="reb-tuyos">0</strong> · él contó: <strong id="reb-cuenta">0</strong></p>
+      <div class="serial" style="flex:none; width:100%; max-width:100%">
+        <div class="serial-barra">🔍 Monitor serie</div>
+        <div class="serial-lineas" id="reb-serial" style="min-height:5em; max-height:5em"></div>
+      </div>
+      <button class="boton secundario" id="reb-filtro">🧹 Poner el filtro delay(50)</button>
+    </aside>
+  </div>
+  <p class="nota">El truco: un <code>delay(50);</code> que deje a las laminitas dejar de vibrar. Mira dónde ponerlo <button class="sm" data-sm="reb-arreglo">?</button> ¡y prueba de nuevo en tu circuito! (El IDE trae el ejemplo <strong>Debounce</strong>, y existen librerías anti-rebote.)</p>
+</section>
+
+<!-- 17 · Reto -->
 <section class="slide">
   <div class="reto">
     <p class="eyebrow">⭐ Reto de la sesión</p>
@@ -317,10 +503,10 @@
     <p class="grande">Nuestro interruptor solo alumbra <strong>mientras</strong> aprietas. Los de tu casa no son así: aprietas una vez y la luz se queda.</p>
     <p>Pista: el Arduino necesita <strong>acordarse</strong> de si la luz estaba prendida o apagada. Una <strong>variable</strong> es justamente una cajita para acordarse de cosas. 🧠</p>
   </div>
-  <p class="nota">Este reto es difícil: si lo logras, ya estás programando como grande. 💪</p>
+  <p class="nota">Este reto es difícil: si lo logras, ya estás programando como grande. 💪 ¿La luz se cambia sola dos veces con un solo clic? No estás loco: es el <strong>rebote</strong>. 🏀</p>
 </section>
 
-<!-- 12 · Quiz -->
+<!-- 18 · Quiz -->
 <section class="slide">
   <p class="eyebrow">Duelo de cerebritos</p>
   <h2>¿Cuánto aprendiste? Toca para voltear</h2>
@@ -348,7 +534,7 @@
   </div>
 </section>
 
-<!-- 13 · Cierre -->
+<!-- 19 · Cierre -->
 <section class="slide portada">
   <p class="eyebrow">Lo lograste</p>
   <h1>¡Tu Arduino ya siente! 🎉</h1>
@@ -427,6 +613,40 @@
   .boton-fisico.abajo { transform: translateY(4px); box-shadow: 0 1px 0 #B03744; }
   .lectura { font-size: .9rem !important; color: var(--gris); }
   .lectura strong { font-family: var(--f-codigo); color: var(--teal-osc); }
+
+  /* ---------- el cable que conversa ---------- */
+  .usb-svg { width: min(92vw, 620px); }
+  .usb-energia { animation: usb-flujo 1s linear infinite; }
+  @keyframes usb-flujo { to { stroke-dashoffset: -17; } }
+
+  /* ---------- if/else: dos caminos ---------- */
+  .rutas-svg { width: min(72vw, 300px); }
+  #rt-si, #rt-no { transition: opacity .25s, transform .25s; }
+  .rutas-svg .apagado { opacity: .3; transform: scale(.94); transform-box: fill-box; transform-origin: center; }
+
+  /* ---------- variables: la cajita ---------- */
+  .caja-var {
+    display: flex; flex-direction: column; align-items: center; gap: .5em;
+    background: var(--blanco); border: 4px solid var(--teal);
+    border-radius: 18px; padding: 1em 1.6em;
+    box-shadow: 0 8px 22px rgba(20,54,66,.12);
+  }
+  .caja-var-nombre {
+    font-family: var(--f-codigo); font-weight: 700; font-size: 1rem;
+    background: var(--teal); color: #fff; border-radius: 999px; padding: .15em 1em;
+  }
+  .caja-var-valor {
+    font-family: var(--f-titulo); font-size: 3.2rem; color: var(--teal-osc);
+    line-height: 1.2; min-width: 2em;
+  }
+  .caja-var-valor.salto { animation: salto-var .3s; }
+  @keyframes salto-var { 50% { transform: scale(1.25); } }
+  .anat {
+    font-size: .78rem; color: var(--gris); text-align: center;
+    background: var(--blanco); border: 2px solid var(--teal-suave);
+    border-radius: 10px; padding: .35em .6em; line-height: 1.35;
+  }
+  .anat code { color: var(--teal-osc); font-weight: 700; }
 
   /* piezas del armado que van apareciendo */
   .oculta { opacity: 0; transition: opacity .35s; }
@@ -549,27 +769,7 @@
   /* ---- 8 · armado del circuito del botón ---- */
   (function () {
     const $ = id => document.getElementById(id);
-    const NS = "http://www.w3.org/2000/svg";
-    const g = $("agujeros-armado");
-    const poner = (tag, attrs, texto) => {
-      const e = document.createElementNS(NS, tag);
-      for (const k in attrs) e.setAttribute(k, attrs[k]);
-      if (texto !== undefined) e.textContent = texto;
-      g.appendChild(e);
-    };
-    const colX = c => 178 + c * 26;
-    [56, 74, 118, 134, 150, 166, 182, 224, 240, 256, 272, 288, 328, 346].forEach(cy => {
-      for (let c = 0; c < 16; c++)
-        poner("rect", { x: colX(c) - 5, y: cy - 5, width: 10, height: 10, rx: 2, fill: "#E9EDEC", stroke: "#C2CBCA", "stroke-width": 2 });
-    });
-    [[44, "#E84855"], [86, "#37474F"], [316, "#37474F"], [358, "#E84855"]].forEach(([y, col]) =>
-      poner("line", { x1: 168, y1: y, x2: 592, y2: y, stroke: col, "stroke-width": 3 }));
-    [[160, 60, "+", "#E84855"], [160, 79, "−", "#37474F"], [160, 333, "−", "#37474F"], [160, 351, "+", "#E84855"],
-     [600, 60, "+", "#E84855"], [600, 79, "−", "#37474F"], [600, 333, "−", "#37474F"], [600, 351, "+", "#E84855"]]
-      .forEach(([x, y, t, col]) => poner("text", { x, y, "font-size": 12, fill: col, "text-anchor": "middle", "font-family": "monospace" }, t));
-    ["J", "I", "H", "G", "F"].forEach((L, f) => poner("text", { x: 162, y: 122 + f * 16, "font-size": 11, fill: "#98A6A4", "text-anchor": "middle", "font-family": "monospace" }, L));
-    ["E", "D", "C", "B", "A"].forEach((L, f) => poner("text", { x: 162, y: 228 + f * 16, "font-size": 11, fill: "#98A6A4", "text-anchor": "middle", "font-family": "monospace" }, L));
-    [0, 4, 9, 14].forEach(c => poner("text", { x: colX(c), y: 104, "font-size": 11, fill: "#98A6A4", "text-anchor": "middle", "font-family": "monospace" }, c + 1));
+    protoboardArmado($("agujeros-armado"));
 
     const PASOS = [
       { pieza: "pieza-boton", txt: "El botón se pone <strong>a caballo del canal</strong>: dos patitas de un lado y dos del otro. Así sus dos mitades caen en columnas distintas." },
@@ -589,7 +789,150 @@
     pintar();
   })();
 
-  /* ---- 9 · el if con el botón ---- */
+  /* ---- 9 · if/else: dos caminos ---- */
+  (function () {
+    const $ = id => document.getElementById(id);
+    let lloviendo = true;
+    function pintar() {
+      $("rt-clima").textContent = lloviendo ? "🌧️" : "☀️";
+      $("rt-si").classList.toggle("apagado", !lloviendo);
+      $("rt-no").classList.toggle("apagado", lloviendo);
+      document.querySelectorAll(".ln[data-cl]").forEach(l =>
+        l.classList.toggle("aqui", (l.dataset.cl === "1") === lloviendo));
+    }
+    $("btn-clima").addEventListener("click", () => { lloviendo = !lloviendo; pintar(); });
+    pintar();
+  })();
+
+  /* ---- 12 · las variables ---- */
+  (function () {
+    const $ = id => document.getElementById(id);
+    let puntos = 0;
+    $("btn-punto").addEventListener("click", () => {
+      puntos++;
+      const v = $("var-valor");
+      v.textContent = puntos;
+      v.classList.remove("salto");
+      void v.offsetWidth;
+      v.classList.add("salto");
+      const ln = $("ln-suma");
+      ln.classList.add("aqui");
+      setTimeout(() => ln.classList.remove("aqui"), 350);
+    });
+  })();
+
+  /* ---- 15 · el rebote ---- */
+  (function () {
+    const $ = id => document.getElementById(id);
+    // trazas según cuántos "apretones" vio el Arduino en un solo clic
+    const TRAZAS = {
+      1: "M52 160 H150 V50 H340 V160 H408",
+      2: "M52 160 H150 V50 H166 V160 H178 V50 H340 V160 H408",
+      3: "M52 160 H150 V50 H162 V160 H172 V50 H182 V160 H190 V50 H340 V160 H408"
+    };
+    let filtro = false, tuyos = 0, contados = 0;
+    function reiniciar() {
+      tuyos = 0; contados = 0;
+      $("reb-tuyos").textContent = "0";
+      $("reb-cuenta").textContent = "0";
+      $("reb-serial").innerHTML = "";
+      $("reb-traza").setAttribute("d", "M52 160 H408");
+      $("reb-zona").setAttribute("opacity", filtro ? ".8" : "0");
+      $("reb-zona-txt").setAttribute("opacity", filtro ? "1" : "0");
+    }
+    $("reb-btn").addEventListener("click", () => {
+      tuyos++;
+      const r = Math.random();
+      const vistos = filtro ? 1 : (r < 0.3 ? 1 : r < 0.85 ? 2 : 3);
+      $("reb-traza").setAttribute("d", TRAZAS[vistos]);
+      const caja = $("reb-serial");
+      for (let k = 0; k < vistos; k++) {
+        contados++;
+        const p = document.createElement("p");
+        p.textContent = "van " + contados;
+        caja.appendChild(p);
+      }
+      while (caja.children.length > 4) caja.removeChild(caja.firstChild);
+      $("reb-tuyos").textContent = tuyos;
+      $("reb-cuenta").textContent = contados;
+      if (filtro) {
+        $("reb-txt").innerHTML = "Con el filtro van <strong>iguales</strong>: tú " + tuyos + ", él " + contados + ". ✅ Durante el delay ni mira el pin.";
+      } else if (vistos > 1) {
+        $("reb-txt").innerHTML = "¡Ese clic le sonó como <strong>" + vistos + "</strong>! Tú vas en " + tuyos + " y él en <strong>" + contados + "</strong>. 😵 Mira los saltos de la señal. 👈";
+      } else if (contados > tuyos) {
+        $("reb-txt").innerHTML = "Ese clic salió limpio, pero la cuenta sigue chueca: tú " + tuyos + ", él <strong>" + contados + "</strong>. 😬";
+      } else {
+        $("reb-txt").innerHTML = "Van iguales… por ahora. Sigue apretando: en algún momento van a rebotar. 🏀";
+      }
+    });
+    $("reb-filtro").addEventListener("click", e => {
+      filtro = !filtro;
+      e.target.textContent = filtro ? "🧹 Quitar el filtro" : "🧹 Poner el filtro delay(50)";
+      $("reb-txt").innerHTML = filtro
+        ? "Filtro puesto: tras el primer cambio, espera <strong>50 milésimas</strong> sin mirar. Aprieta varias veces y compara."
+        : "Sin filtro otra vez. Aprieta varias veces y compara las cuentas.";
+      reiniciar();
+    });
+    reiniciar();
+  })();
+
+  /* ---- 10 · el cable que conversa ---- */
+  (function () {
+    const $ = id => document.getElementById(id);
+    const msj = $("usb-msj"), estado = $("usb-estado"), btn = $("usb-btn");
+    let animando = false;
+    btn.addEventListener("click", () => {
+      if (animando) return;
+      animando = true;
+      const ini = performance.now(), IDA = 1000, PAUSA = 350, VUELTA = 1000;
+      msj.textContent = "«¡hola!»";
+      msj.setAttribute("opacity", "1");
+      estado.textContent = "Tu mensaje viaja al Arduino… 💬";
+      function paso(t) {
+        const dt = t - ini;
+        if (dt < IDA) {
+          msj.setAttribute("x", 168 + (dt / IDA) * 287);
+        } else if (dt < IDA + PAUSA) {
+          msj.setAttribute("x", 455);
+        } else if (dt < IDA + PAUSA + VUELTA) {
+          if (msj.textContent !== "«¡hola humano!»") {
+            msj.textContent = "«¡hola humano!»";
+            estado.textContent = "…¡y el Arduino contesta! 🤖";
+          }
+          msj.setAttribute("x", 455 - ((dt - IDA - PAUSA) / VUELTA) * 287);
+        } else {
+          msj.setAttribute("opacity", "0");
+          estado.textContent = "Conversan por el mismo cable de siempre: ese camino es el puerto serial. 🎉";
+          animando = false;
+          return;
+        }
+        requestAnimationFrame(paso);
+      }
+      requestAnimationFrame(paso);
+    });
+  })();
+
+  /* ---- 11 · el monitor serie espiando el botón ---- */
+  (function () {
+    const caja = document.getElementById("ser4-lineas");
+    const btn = document.getElementById("ser4-btn");
+    let apretado = false;
+    setInterval(() => {
+      const p = document.createElement("p");
+      p.textContent = apretado ? "¡Apretado!" : "suelto...";
+      caja.appendChild(p);
+      while (caja.children.length > 5) caja.removeChild(caja.firstChild);
+      document.querySelectorAll(".ln[data-ser]").forEach(l =>
+        l.classList.toggle("aqui", (l.dataset.ser === "1") === apretado));
+    }, 400);
+    const poner = v => { apretado = v; btn.classList.toggle("abajo", v); };
+    btn.addEventListener("pointerdown", () => poner(true));
+    ["pointerup", "pointerleave", "pointercancel"].forEach(ev => btn.addEventListener(ev, () => poner(false)));
+    btn.addEventListener("keydown", e => { if (e.key === " " || e.key === "Enter") { poner(true); e.preventDefault(); } });
+    btn.addEventListener("keyup", () => poner(false));
+  })();
+
+  /* ---- 11 · el if con el botón ---- */
   (function () {
     const $ = id => document.getElementById(id);
     const boton = $("boton-sim"), led = $("if-led");
@@ -660,9 +1003,39 @@
       t: "El servo por dentro 🦾",
       d: "<p>Es un motor con <strong>engranajes</strong> y un pequeño espía adentro que le avisa en qué ángulo está. Así puede obedecer órdenes como «ponte en 90 grados» y quedarse justo ahí.</p><p>Con uno haremos la barrera del paso a nivel del tren. 🚂</p>"
     },
+    "serie-nombre": {
+      t: "¿Por qué se llama «puerto serial»? 🚂",
+      d: "<p><strong>Puerto</strong> es la puerta por donde entran y salen los mensajes. Y <strong>serial</strong> (o «en serie») es por cómo viajan: <strong>en fila india</strong>, un pedacito tras otro por el mismo cablecito, como los vagones de un tren. 🚂</p><p>¿Te acuerdas del <strong>puerto COM</strong> que elegiste en la sesión 2 para subir tu programa? ¡Es este mismo camino, con el nombre que le pone el computador!</p>"
+    },
+    serial4: {
+      t: "El monitor serie 🔍",
+      d: "<p>Es una ventanita del IDE donde aparece todo lo que el Arduino escribe: se abre con la <strong>lupita</strong> de arriba a la derecha.</p><p>El <strong>9600</strong> es la velocidad de la conversación. El Arduino y el computador deben usar <strong>la misma</strong>: si no, se leen puros jeroglíficos 🗿. Por eso va en el setup: <code>Serial.begin(9600)</code>.</p><p>Es el mejor amigo del inventor: cuando algo no funciona, le pides al Arduino que te <strong>cuente</strong> qué está sintiendo. En la sesión 8 nos dirá cuántos grados hace. 🌡️</p>"
+    },
+    "p-circuito": {
+      t: "Así se ve armado completo 🔧",
+      d: "<svg viewBox='0 0 640 340' style='width:100%' aria-label='Boton y LED juntos en la protoboard'><rect x='6' y='60' width='120' height='250' rx='12' fill='#00878F'/><text x='66' y='87' text-anchor='middle' fill='#fff' font-family='monospace' font-size='14'>ARDUINO</text><rect x='14' y='100' width='104' height='24' rx='4' fill='#143642'/><text x='66' y='117' text-anchor='middle' fill='#fff' font-family='monospace' font-size='13'>5V</text><rect x='14' y='148' width='104' height='24' rx='4' fill='#143642'/><text x='66' y='165' text-anchor='middle' fill='#fff' font-family='monospace' font-size='13'>pin 2</text><rect x='14' y='196' width='104' height='24' rx='4' fill='#143642'/><text x='66' y='213' text-anchor='middle' fill='#fff' font-family='monospace' font-size='13'>pin 13</text><rect x='14' y='244' width='104' height='24' rx='4' fill='#143642'/><text x='66' y='261' text-anchor='middle' fill='#fff' font-family='monospace' font-size='13'>GND</text>"
+        + protoboardSVG({ x: 150, y: 30, w: 480, h: 300 })
+        + "<text x='304' y='90' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif' font-weight='700'>el botón (hoy)</text><text x='500' y='90' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif' font-weight='700'>el LED (sesión 3)</text><g stroke='#B0BEC5' stroke-width='5' stroke-linecap='round'><line x1='288' y1='164' x2='278' y2='156'/><line x1='320' y1='164' x2='330' y2='156'/><line x1='288' y1='194' x2='278' y2='202'/><line x1='320' y1='194' x2='330' y2='202'/></g><rect x='282' y='161' width='44' height='36' rx='6' fill='#2E3B41'/><circle cx='304' cy='179' r='13' fill='#E84855' stroke='#B03744' stroke-width='3'/><path d='M122 112 C 200 112, 240 126, 278 148' fill='none' stroke='#E84855' stroke-width='6' stroke-linecap='round'/><path d='M122 160 C 210 170, 280 205, 330 212' fill='none' stroke='#4C7CFF' stroke-width='6' stroke-linecap='round'/><line x1='330' y1='222' x2='330' y2='294' stroke='#9aa7ad' stroke-width='4'/><rect x='321' y='240' width='18' height='34' rx='4' fill='#D7B899' stroke='#8D6E63' stroke-width='2'/><rect x='321' y='246' width='18' height='4' fill='#8D3B0B'/><rect x='321' y='253' width='18' height='4' fill='#000'/><rect x='321' y='260' width='18' height='4' fill='#E8A33D'/><text x='348' y='262' font-size='12' fill='#5E7480' font-family='Nunito, sans-serif'>10 kΩ</text><circle cx='500' cy='210' r='13' fill='#E84855' stroke='#B03744' stroke-width='3'/><line x1='494' y1='222' x2='487' y2='248' stroke='#B03744' stroke-width='4' stroke-linecap='round'/><line x1='506' y1='222' x2='512' y2='244' stroke='#B03744' stroke-width='4' stroke-linecap='round'/><path d='M122 208 C 260 208, 400 250, 484 248' fill='none' stroke='#FB8C00' stroke-width='6' stroke-linecap='round'/><line x1='512' y1='248' x2='512' y2='294' stroke='#9aa7ad' stroke-width='4'/><rect x='503' y='254' width='18' height='32' rx='4' fill='#D7B899' stroke='#8D6E63' stroke-width='2'/><rect x='503' y='260' width='18' height='4' fill='#D32F2F'/><rect x='503' y='267' width='18' height='4' fill='#D32F2F'/><rect x='503' y='274' width='18' height='4' fill='#795548'/><text x='530' y='276' font-size='12' fill='#5E7480' font-family='Nunito, sans-serif'>220 Ω</text><path d='M122 256 C 150 276, 158 288, 170 292' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/></svg><p>Izquierda: el circuito del botón de hoy (5V → botón → pin 2, con su 10 kΩ al riel −). Derecha: el LED de la sesión 3 (pin 13 → patita larga, y la corta con su 220 Ω al riel −). <strong>Comparten el riel negro</strong>, que vuelve a GND.</p><p class='nota'>Los colores de las resistencias son su nombre: café-negro-naranjo = 10 kΩ · rojo-rojo-café = 220 Ω. 🎨</p>"
+    },
+    "p-codigo": {
+      t: "El programa completo 📋",
+      d: "<pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.85em;line-height:1.5'><code>void setup() {\n  pinMode(2, INPUT);      // la oreja\n  pinMode(13, OUTPUT);    // el músculo\n}\n\nvoid loop() {\n  if (digitalRead(2) == HIGH) {\n    digitalWrite(13, HIGH);   // ¡luz!\n  } else {\n    digitalWrite(13, LOW);\n  }\n}</code></pre><p>Es el mismo if/else del espía… pero ahora, en vez de <code>Serial.println</code>, la respuesta es un <strong>actuador</strong>. 💪</p>"
+    },
+    "p-low": {
+      t: "HIGH por LOW: el mundo al revés 🙃",
+      d: "<pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.85em;line-height:1.5'><code>if (digitalRead(2) == LOW) {   // ¡al revés!\n  digitalWrite(13, HIGH);\n} else {\n  digitalWrite(13, LOW);\n}</code></pre><p>Ahora la pregunta da «sí» cuando el botón está <strong>suelto</strong>: la luz vive encendida y se apaga al apretar.</p><p>¿Dónde has visto eso? ¡En el <strong>refrigerador</strong>! Su botón se aprieta al cerrar la puerta… y la luz se apaga. 🧊</p>"
+    },
+    "reb-arreglo": {
+      t: "Dónde va el filtro anti-rebote 🧹",
+      d: "<p>Es el mismo contador de la actividad, con <strong>una sola línea nueva</strong> — justo después de contar:</p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>void loop() {\n  int ahora = digitalRead(2);\n  if (ahora == HIGH &amp;&amp; antes == LOW) {\n    contador = contador + 1;\n    Serial.println(contador);\n<b style='background:#FFF6E3;display:inline-block;width:100%'>    delay(50);   // ← ¡el filtro va AQUÍ!</b>\n  }\n  antes = ahora;\n}</code></pre><p>¿Por qué ahí adentro? Porque recién detectó el apretón: esas 50 milésimas de «no mirar» dejan pasar las vibraciones sin contarlas. El setup y las cajitas de arriba quedan igualitos.</p><p>Súbelo, aprieta 10 veces contando en voz alta… ¡y ahora sí deberían llegar juntos a 10! ✅</p>"
+    },
+    "var-nombres": {
+      t: "Ponerle nombre a los pines 🏷️",
+      d: "<p>¿Te acuerdas del semáforo? El código estaba lleno de números misteriosos:</p><pre style='background:#F4FAF9;border-radius:10px;padding:.6em .9em;font-size:.85em'><code>digitalWrite(13, HIGH);  // ¿cuál era el 13? 🤔</code></pre><p>Con variables, el programa se lee <strong>como un cuento</strong>:</p><pre style='background:#F4FAF9;border-radius:10px;padding:.6em .9em;font-size:.85em'><code>int luzRoja = 13;\nint luzVerde = 12;\n\ndigitalWrite(luzRoja, HIGH);  // ¡ah, la roja!</code></pre><p>Al Arduino le da igual… pero a los humanos no. Y de regalo: si un día cambias el LED de pin, corriges <strong>una sola línea</strong> y todo el programa sigue funcionando. 🎁</p>"
+    },
     pulldown: {
       t: "La resistencia de 10 kΩ (pull-down)",
-      d: "<p>Cuando el botón está suelto, el pin 2 <strong>no está conectado a nada</strong>: queda «al aire» y lee cualquier cosa, como una antena. Puede prenderse solo si le pasas la mano cerca. 👻</p><p>La resistencia lo mantiene <strong>amarrado al suelo</strong> (GND) mientras nadie aprieta: así lee <strong>LOW</strong> tranquilo. Al apretar el botón, llegan los 5 V y gana el HIGH.</p><p>En inglés se llama <em>pull-down</em>: «que tira hacia abajo».</p>"
+      d: "<p>Cuando el botón está suelto, el pin 2 <strong>no está conectado a nada</strong>: queda «al aire» y lee cualquier cosa, como una antena. Puede prenderse solo si le pasas la mano cerca. 👻</p><p>La resistencia lo mantiene <strong>amarrado al suelo</strong> (GND) mientras nadie aprieta: así lee <strong>LOW</strong> tranquilo. Al apretar el botón, llegan los 5 V y gana el HIGH.</p><p>En inglés se llama <em>pull-down</em>: «que tira hacia abajo».</p><p><strong>El atajo secreto 🤫:</strong> el Arduino trae una resistencia de estas <strong>escondida adentro</strong>. Si en el setup escribes <code>pinMode(2, INPUT_PULLUP)</code>, se enciende sola y te ahorras la de 10 kΩ. Eso sí, es de las que «tiran hacia arriba»: el botón se conecta a <strong>GND</strong> en vez de 5 V, y todo queda al revés — apretado se lee <strong>LOW</strong>.</p><p>El UNO solo trae la versión hacia arriba (<code>INPUT_PULLUP</code>); otras placas, como el ESP32, también traen <code>INPUT_PULLDOWN</code>. Hoy usamos la resistencia de verdad, que se ve y se entiende mejor. 😉</p>"
     }
   });
 </script>
