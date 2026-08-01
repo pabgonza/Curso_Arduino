@@ -240,6 +240,7 @@
       <li>Nivel 1: tres botones, tres notas 🎹</li>
       <li>Nivel 2: que cada botón toque una <strong>melodía</strong> corta</li>
       <li>Nivel experto: inventar una canción y anotarla en papel para tocarla</li>
+      <li>Nivel secreto 🎁: tocar <strong>Mario Bros</strong> o <strong>Star Wars</strong> de verdad, con un regalo llamado <strong>librería</strong> <button class="sm" data-sm="libreria5">?</button></li>
     </ul>
   </div>
   <p class="nota">Pista: cada botón necesita su propia resistencia de 10 kΩ, igual que el de la sesión pasada.</p>
@@ -505,6 +506,10 @@
     piezo: {
       t: "¿Por qué se dobla el disco? ⚡",
       d: "<p>El disco tiene un material <strong>piezoeléctrico</strong>: una palabra larga para algo simple. Son cristales que <strong>cambian de forma cuando les llega electricidad</strong>.</p><p>Y funciona al revés también: si los aprietas, ellos <strong>fabrican</strong> un poquito de electricidad. Ese es el truco de los encendedores de cocina que hacen «clic» y sacan chispa. 🔥</p>"
+    },
+    libreria5: {
+      t: "El regalo: la librería BuzzerMusic 🎁",
+      d: "<p>Escribir Estrellita nota por nota fue trabajo… ¿te imaginas escribir <strong>toda</strong> la canción de Mario Bros? Alguien ya lo hizo — y la regaló. Eso es una <strong>librería</strong>: código listo que otra persona comparte para que tú lo uses. (En la próxima sesión las conoceremos en serio.)</p><p><strong>Instalarla</strong> (una sola vez): copia la carpeta <code>sketches/librerias/BuzzerMusic</code> del curso dentro de <code>Documentos → Arduino → libraries</code>, y vuelve a abrir el IDE.</p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.85em'><code>#include &lt;BuzzerMusic.h&gt;\n\nBuzzerMusic musica(8);\n\nvoid setup() {\n  musica.marioBros();\n}\n\nvoid loop() { }</code></pre><p>Trae cuatro canciones: <code>marioBros()</code>, <code>imperialMarch()</code> (Star Wars), <code>happyBirthday()</code> y <code>odeToJoy()</code>. El programa listo está en <code>sketches/sesion-05/cancion</code>.</p><p>¿Y agregar la tuya? Cada canción es una lista de pares (nota, duración). El README de la librería explica cómo — misión para valientes, con ayuda del profe. 😎</p>"
     }
   });
 </script>
