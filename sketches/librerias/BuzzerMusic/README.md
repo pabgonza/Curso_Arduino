@@ -31,6 +31,39 @@ y vuelve a abrir el IDE.
 | `odeToJoy()` | Himno de la Alegría | 114 |
 
 Todas aceptan un tempo distinto: `musica.marioBros(250);` la toca más rápido.
+Las melodías viven en la memoria flash (`PROGMEM`), así que no gastan RAM.
+
+## Tocar sin bloquear
+
+Los métodos de arriba son **bloqueantes**: el Arduino no hace nada más hasta
+que la canción termina. Para tocar música y seguir atendiendo botones,
+sensores o luces al mismo tiempo, usa la versión no bloqueante:
+
+```cpp
+BuzzerMusic musica(8);
+
+void setup() {
+  pinMode(2, INPUT);
+  musica.start(BuzzerMusic::MARIO_BROS);   // deja la canción lista
+}
+
+void loop() {
+  musica.update();   // avanza la canción cuando corresponde; no espera
+
+  if (digitalRead(2) == HIGH) {
+    // esto corre miles de veces por segundo, con la música sonando
+  }
+}
+```
+
+| Método | Qué hace |
+|---|---|
+| `start(cancion, tempo = 0)` | Empieza una canción (`BuzzerMusic::IMPERIAL_MARCH`, `HAPPY_BIRTHDAY`, `MARIO_BROS`, `ODE_TO_JOY`); tempo 0 = el de la partitura |
+| `update()` | Llamar seguido en el `loop()`: toca la nota siguiente cuando es su momento |
+| `stop()` | Corta la música |
+| `isPlaying()` | `true` mientras la canción no termina |
+
+El ejemplo `MusicaSinBloquear` trae esto funcionando con un botón y un LED.
 
 ## Agregar canciones
 

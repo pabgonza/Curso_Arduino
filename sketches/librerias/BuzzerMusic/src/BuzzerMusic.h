@@ -10,22 +10,42 @@
 class BuzzerMusic
 {
 public:
+    enum Song { IMPERIAL_MARCH, HAPPY_BIRTHDAY, MARIO_BROS, ODE_TO_JOY };
+
     BuzzerMusic(int buzzerPin);
 
-    // Canciones incluidas. El tempo por defecto es el de la partitura;
-    // pasa otro para tocarlas mas rapido o mas lento.
-    void imperialMarch(int tempo = 120);
-    void happyBirthday(int tempo = 140);
-    void marioBros(int tempo = 200);
-    void odeToJoy(int tempo = 114);
+    // --- Version bloqueante: toca la cancion completa y recien ahi vuelve ---
+    // El tempo por defecto (0) es el de la partitura; pasa otro para
+    // tocarla mas rapido o mas lento.
+    void imperialMarch(int tempo = 0);
+    void happyBirthday(int tempo = 0);
+    void marioBros(int tempo = 0);
+    void odeToJoy(int tempo = 0);
 
-    // Toca cualquier melodia: pares {nota, duracion}, donde duracion es
-    // 4 = negra, 8 = corchea, etc. Negativa = nota con puntillo (dura 1.5x).
+    // Toca cualquier melodia (bloqueante): pares {nota, duracion}, donde
+    // duracion es 4 = negra, 8 = corchea, etc. Negativa = con puntillo (1.5x).
     // nNotes es la cantidad de pares.
     void play(const int melody[], int nNotes, int tempo = 120);
 
+    // --- Version no bloqueante: la musica avanza mientras el loop sigue ---
+    // start() solo deja la cancion lista; hay que llamar a update() seguido
+    // (en cada vuelta del loop) para que las notas vayan sonando.
+    void start(Song song, int tempo = 0);
+    void update();
+    void stop();
+    bool isPlaying();
+
 private:
     int _buzzerPin;
+    const int *_melody;          // melodia actual, en PROGMEM
+    int _nNotes;
+    int _index;                  // posicion dentro del arreglo (avanza de a 2)
+    long _wholenote;             // duracion de una redonda en ms
+    unsigned long _noteStart;    // millis() cuando empezo la nota actual
+    unsigned long _noteDuration;
+    bool _playing;
+
+    void playBlocking(Song song, int tempo);
 };
 
 #endif
