@@ -361,20 +361,20 @@
       t: "Así se ve armado completo 🔧",
       d: "<svg viewBox='0 0 640 470' style='width:100%' aria-label='DHT11 y tres LEDs montados en la protoboard'>"
         + arduinoSVG({ x: 6, y: 10, pads: ["pin 2", "5V", "pin 13", "pin 11", "pin 12", "GND"] }).svg
-        + protoboardSVG({ x: 150, y: 120, w: 480, h: 300 })
-        + "<g stroke='#B0BEC5' stroke-width='5' stroke-linecap='round'><line x1='382' y1='168' x2='382' y2='197'/><line x1='408' y1='168' x2='408' y2='197'/><line x1='434' y1='168' x2='434' y2='197'/></g>"
-        + "<rect x='369' y='60' width='78' height='110' rx='8' fill='#64B5F6' stroke='#1E88E5' stroke-width='3'/><text x='408' y='100' text-anchor='middle' font-size='13' fill='#fff' font-family='monospace'>DHT11</text>"
-        + "<text x='382' y='163' text-anchor='middle' font-size='10' fill='#fff' font-family='monospace'>+</text><text x='408' y='163' text-anchor='middle' font-size='8' fill='#fff' font-family='monospace'>datos</text><text x='434' y='163' text-anchor='middle' font-size='10' fill='#fff' font-family='monospace'>−</text>"
-        + ledSVG(265, 294, 393, "#46B450", "#2E7D32")
-        + ledSVG(395, 294, 393, "#F5B301", "#C78F00")
-        + ledSVG(525, 294, 393)
-        + "<path d='M128 62 C 250 60, 340 130, 406 208' fill='none' stroke='#FB8C00' stroke-width='6' stroke-linecap='round'/>"
-        + "<path d='M128 110 C 240 125, 330 190, 380 224' fill='none' stroke='#E84855' stroke-width='6' stroke-linecap='round'/>"
-        + "<path d='M434 214 C 560 235, 610 320, 572 391' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>"
-        + "<path d='M128 158 C 280 215, 430 245, 510 292' fill='none' stroke='#AB47BC' stroke-width='6' stroke-linecap='round'/>"
-        + "<path d='M128 206 C 260 250, 330 285, 380 294' fill='none' stroke='#F5B301' stroke-width='6' stroke-linecap='round'/>"
-        + "<path d='M128 254 C 175 275, 220 290, 250 294' fill='none' stroke='#46B450' stroke-width='6' stroke-linecap='round'/>"
-        + "<path d='M128 302 C 148 350, 160 382, 172 391' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>"
+        + protoboardSVG({ x: 150, y: 90 })
+        + "<g stroke='#B0BEC5' stroke-width='5' stroke-linecap='round'><line x1='386' y1='142' x2='386' y2='183'/><line x1='412' y1='142' x2='412' y2='183'/><line x1='438' y1='142' x2='438' y2='183'/></g>"
+        + "<rect x='373' y='30' width='78' height='112' rx='8' fill='#64B5F6' stroke='#1E88E5' stroke-width='3'/><text x='412' y='72' text-anchor='middle' font-size='13' fill='#fff' font-family='monospace'>DHT11</text>"
+        + "<text x='386' y='135' text-anchor='middle' font-size='10' fill='#fff' font-family='monospace'>+</text><text x='412' y='135' text-anchor='middle' font-size='8' fill='#fff' font-family='monospace'>datos</text><text x='438' y='135' text-anchor='middle' font-size='10' fill='#fff' font-family='monospace'>−</text>"
+        + ledSVG(269, 292, 388, "#46B450", "#2E7D32")
+        + ledSVG(399, 292, 388, "#F5B301", "#C78F00")
+        + ledSVG(529, 292, 388)
+        + "<path d='M128 62 C 250 60, 340 130, 410 191' fill='none' stroke='#FB8C00' stroke-width='6' stroke-linecap='round'/>"
+        + "<path d='M128 110 C 240 122, 330 180, 384 207' fill='none' stroke='#E84855' stroke-width='6' stroke-linecap='round'/>"
+        + "<path d='M438 196 C 560 220, 618 310, 572 386' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>"
+        + "<path d='M128 158 C 280 225, 430 265, 514 312' fill='none' stroke='#AB47BC' stroke-width='6' stroke-linecap='round'/>"
+        + "<path d='M128 206 C 260 255, 330 300, 384 313' fill='none' stroke='#F5B301' stroke-width='6' stroke-linecap='round'/>"
+        + "<path d='M128 254 C 175 285, 220 308, 254 314' fill='none' stroke='#46B450' stroke-width='6' stroke-linecap='round'/>"
+        + "<path d='M128 302 C 148 345, 160 378, 175 385' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>"
         + "</svg><p>Todo en la protoboard. El DHT11 se para con sus tres patitas en una fila, y los cables llegan a la <strong>misma columna</strong> de cada una (+ → 5V, datos → pin 2). El semáforo térmico: verde en el pin 12, amarillo en el 11 y rojo en el 13 — el cable de cada pin llega a la columna de la patita <strong>+</strong> de su LED, y la patita <strong>−</strong> (el lado plano) baja con su <strong>220 Ω</strong> al riel −. Ahí se juntan <strong>todos los GND</strong>: los tres LEDs, el − del sensor y el cable que vuelve al Arduino.</p>"
     },
     "p-codigo": {

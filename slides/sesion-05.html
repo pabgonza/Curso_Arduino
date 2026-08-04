@@ -504,21 +504,21 @@
   saberMas({
     "p-circuito": {
       t: "Así se ve armado completo 🔧",
-      d: "<svg viewBox='0 0 640 340' style='width:100%' aria-label='Botón y buzzer juntos en la protoboard'>"
-        + arduinoSVG({ x: 6, y: 60, pads: ["pin 8", "5V", "pin 2", "GND"] }).svg
-        + protoboardSVG({ x: 150, y: 30, w: 480, h: 300 })
-        + "<text x='304' y='90' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif' font-weight='700'>el botón (sesión 4)</text><text x='500' y='90' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif' font-weight='700'>el buzzer (hoy)</text>"
-        + botonSVG(304, 180)
-        + "<path d='M122 112 C 300 98, 470 100, 562 150 C 588 168, 570 218, 516 225' fill='none' stroke='#FB8C00' stroke-width='6' stroke-linecap='round'/>"
-        + "<path d='M122 160 C 200 155, 250 145, 278 138' fill='none' stroke='#E84855' stroke-width='6' stroke-linecap='round'/>"
-        + "<path d='M122 208 C 210 214, 290 222, 330 225' fill='none' stroke='#4C7CFF' stroke-width='6' stroke-linecap='round'/>"
-        + "<line x1='330' y1='231' x2='330' y2='303' stroke='#9aa7ad' stroke-width='4'/>"
-        + resistencia10kSVG(321, 246)
-        + "<text x='348' y='268' font-size='12' fill='#5E7480' font-family='Nunito, sans-serif'>10 kΩ</text>"
-        + "<line x1='486' y1='202' x2='486' y2='213' stroke='#B0BEC5' stroke-width='5' stroke-linecap='round'/><line x1='512' y1='202' x2='512' y2='213' stroke='#B0BEC5' stroke-width='5' stroke-linecap='round'/>"
-        + "<circle cx='499' cy='175' r='30' fill='#37474F'/><circle cx='499' cy='175' r='9' fill='#546E7A'/><text x='512' y='199' text-anchor='middle' font-size='12' fill='#CFD8DC' font-family='monospace'>+</text>"
-        + "<path d='M486 226 C 481 250, 481 280, 486 302' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>"
-        + "<path d='M122 256 C 140 280, 155 295, 172 302' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>"
+      d: "<svg viewBox='0 0 640 400' style='width:100%' aria-label='Botón y buzzer juntos en la protoboard'>"
+        + arduinoSVG({ x: 6, y: 70, pads: ["pin 8", "5V", "pin 2", "GND"] }).svg
+        + protoboardSVG({ x: 150, y: 30 })
+        + "<text x='308' y='105' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif' font-weight='700'>el botón (sesión 4)</text><text x='503' y='105' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif' font-weight='700'>el buzzer (hoy)</text>"
+        + botonSVG(308, 203)
+        + "<path d='M128 122 C 300 105, 480 108, 568 160 C 592 182, 575 240, 466 255' fill='none' stroke='#FB8C00' stroke-width='6' stroke-linecap='round'/>"
+        + "<path d='M128 170 C 190 168, 240 166, 280 166' fill='none' stroke='#E84855' stroke-width='6' stroke-linecap='round'/>"
+        + "<path d='M128 218 C 210 228, 290 237, 332 240' fill='none' stroke='#4C7CFF' stroke-width='6' stroke-linecap='round'/>"
+        + "<line x1='334' y1='246' x2='334' y2='328' stroke='#9aa7ad' stroke-width='4'/>"
+        + resistencia10kSVG(325, 254)
+        + "<text x='352' y='276' font-size='12' fill='#5E7480' font-family='Nunito, sans-serif'>10 kΩ</text>"
+        + "<line x1='434' y1='228' x2='434' y2='242' stroke='#B0BEC5' stroke-width='5' stroke-linecap='round'/><line x1='460' y1='228' x2='460' y2='242' stroke='#B0BEC5' stroke-width='5' stroke-linecap='round'/>"
+        + "<circle cx='447' cy='196' r='30' fill='#37474F'/><circle cx='447' cy='196' r='9' fill='#546E7A'/><text x='460' y='222' text-anchor='middle' font-size='12' fill='#CFD8DC' font-family='monospace'>+</text>"
+        + "<path d='M434 258 C 429 282, 429 306, 434 326' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>"
+        + "<path d='M128 266 C 148 296, 160 318, 175 326' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>"
         + "</svg><p>Izquierda: el botón de la sesión pasada (5V → botón → pin 2, con su 10 kΩ al riel −). Derecha: el buzzer de hoy, pinchado a caballito del canal — el cable del pin 8 llega por fuera hasta la <strong>misma columna</strong> que su patita <strong>+</strong>, y un cablecito lleva la otra columna al riel −, que vuelve a GND. Sin resistencia: el buzzer no la necesita.</p>"
     },
     "p-codigo": {

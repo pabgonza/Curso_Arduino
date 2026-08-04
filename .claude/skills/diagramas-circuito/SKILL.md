@@ -15,11 +15,15 @@ Nunca dibujar a mano lo que ya existe en `slides/assets/slides.js`:
 
 - `arduinoSVG({x, y, pads})` — placa con pads etiquetados. `padY(i)` da el
   centro vertical del pad i; `right` el borde derecho (los cables salen de ahí).
-- `protoboardSVG({x, y, w, h})` — tablero genérico para popups. Columnas en
-  `x+24 + k·26`; con el tablero estándar de los popups (`{x:150, y:30, w:480,
-  h:300}`): filas superiores con centros en 103/121/139/157, canal 169-191,
-  filas inferiores 208/226/244/262/280, hoyitos del riel − inferior en 303.
-  Para LEDs con resistencia se necesita `h ≥ 300`.
+- `protoboardSVG({x, y})` — tablero para popups, tamaño fijo 460×340: la
+  MISMA matriz que `protoboardArmado` (los rieles llevan su línea Y su fila
+  de hoyitos POR CADA polo — nunca una sola fila compartida). Centros
+  (relativos a y): riel superior + y+26 y − y+44; filas superiores
+  y+88…y+152 (paso 16); canal y+162…y+184 (centro y+173); filas inferiores
+  y+194…y+258; riel inferior − y+298 y + y+316. Columnas: x+28 + c·26
+  (16 columnas). Con el tablero típico en (150,30): filas sup. 118…182,
+  canal centro 203, filas inf. 224…288, riel − inferior 328. LED estándar:
+  `ledSVG(col+13, 232, 328)`; botón: `botonSVG(colCentro, 203)`.
 - `ledSVG(cx, cy, rielY, color, borde)` — LED estilo Tinkercad: patita +
   (ánodo) a la izquierda, **lado plano y patita − a la derecha**, rótulos +/−,
   y su 220 Ω (rojo-rojo-café) bajando al riel −. `cx = columna + 13`,

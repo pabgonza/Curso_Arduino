@@ -107,25 +107,28 @@ function saberMas(defs) {
     }));
 }
 
-/* Protoboard genérica reutilizable: tablero con rieles de energía (líneas,
-   hoyitos y signos +/−), canal central y matriz de hoyitos.
-   Retorna un string SVG para incrustar en popups o diagramas.
-   o = {x, y, w, h} en coordenadas del viewBox del SVG que la recibe. */
+/* Protoboard genérica para popups y diagramas: la MISMA matriz que la de los
+   tutoriales de armado (protoboardArmado): 16 columnas cada 26 px, rieles de
+   energía con su línea y su fila de hoyitos POR CADA polo, canal central y
+   5+5 filas. Tamaño fijo 460×340; o = {x, y}.
+   Centros útiles (relativos): columnas x+28+c·26; hoyitos riel superior
+   + y+26 y − y+44; filas superiores y+88…y+152 (paso 16); canal y+162…y+184
+   (centro y+173); filas inferiores y+194…y+258; riel inferior − y+298 y
+   + y+316 (líneas − y+286 y + y+328). */
 function protoboardSVG(o) {
-  const colIni = o.x + 24, colFin = o.x + o.w - 24;
-  const canalY = o.y + o.h / 2 - 11;
-  const negroInf = o.y + o.h - 36;
-  const hoyo = (cx, cy) => `<rect x='${cx - 5}' y='${cy}' width='10' height='10' rx='2' fill='#E9EDEC' stroke='#C2CBCA' stroke-width='2'/>`;
-  const fila = cy => { let f = ""; for (let cx = colIni; cx <= colFin; cx += 26) f += hoyo(cx, cy); return f; };
-  const riel = (yl, color, signo) =>
-    `<line x1='${o.x + 16}' y1='${yl}' x2='${o.x + o.w - 16}' y2='${yl}' stroke='${color}' stroke-width='3'/>` +
-    `<text x='${o.x + 7}' y='${yl + 5}' font-size='12' fill='${color}' font-family='monospace'>${signo}</text>`;
-  let s = `<rect x='${o.x}' y='${o.y}' width='${o.w}' height='${o.h}' rx='10' fill='#FAFAFA' stroke='#D8DEDD' stroke-width='3'/>`;
-  s += `<rect x='${o.x}' y='${canalY}' width='${o.w}' height='22' fill='#EFF2F1'/>`;
-  s += riel(o.y + 22, "#E84855", "+") + fila(o.y + 26) + riel(o.y + 44, "#37474F", "−");
-  for (let cy = o.y + 68; cy + 10 <= canalY - 6; cy += 18) s += fila(cy);
-  for (let cy = canalY + 34; cy + 10 <= negroInf - 8; cy += 18) s += fila(cy);
-  s += riel(negroInf, "#37474F", "−") + fila(negroInf + 4) + riel(o.y + o.h - 14, "#E84855", "+");
+  const colX = c => o.x + 28 + c * 26;
+  const hoyo = (cx, cy) => `<rect x='${cx - 5}' y='${cy - 5}' width='10' height='10' rx='2' fill='#E9EDEC' stroke='#C2CBCA' stroke-width='2'/>`;
+  const fila = cy => { let f = ""; for (let c = 0; c < 16; c++) f += hoyo(colX(c), cy); return f; };
+  const linea = (yl, color) => `<line x1='${o.x + 18}' y1='${yl}' x2='${o.x + 442}' y2='${yl}' stroke='${color}' stroke-width='3'/>`;
+  const signo = (yl, t, color) => `<text x='${o.x + 10}' y='${yl + 4}' font-size='12' fill='${color}' text-anchor='middle' font-family='monospace'>${t}</text>`;
+  let s = `<rect x='${o.x}' y='${o.y}' width='460' height='340' rx='10' fill='#FAFAFA' stroke='#D8DEDD' stroke-width='3'/>`;
+  s += `<rect x='${o.x}' y='${o.y + 162}' width='460' height='22' fill='#EFF2F1'/>`;
+  s += linea(o.y + 14, "#E84855") + signo(o.y + 14, "+", "#E84855") + fila(o.y + 26);
+  s += fila(o.y + 44) + linea(o.y + 56, "#37474F") + signo(o.y + 56, "−", "#37474F");
+  for (let f = 0; f < 5; f++) s += fila(o.y + 88 + f * 16);
+  for (let f = 0; f < 5; f++) s += fila(o.y + 194 + f * 16);
+  s += linea(o.y + 286, "#37474F") + signo(o.y + 286, "−", "#37474F") + fila(o.y + 298);
+  s += fila(o.y + 316) + linea(o.y + 328, "#E84855") + signo(o.y + 328, "+", "#E84855");
   return s;
 }
 
@@ -165,12 +168,12 @@ function ledSVG(cx, cy, rielY, color = "#E84855", borde = "#B03744") {
 }
 
 /* Pulsador de 4 patitas con tapa roja, centrado en (cx, cy) sobre el canal.
-   Las patitas caen en cx ± 26 (columnas vecinas de a dos), arriba en cy − 22
-   y abajo en cy + 29: con cy = centroDelCanal quedan en los hoyitos de las
-   filas que rodean el canal de la protoboard estándar. */
+   Las patitas caen en cx ± 26 (columnas vecinas de a dos) y en cy ± 21:
+   con cy = centro del canal (y+173) quedan justo en las filas que lo rodean
+   (y+152 y y+194). Las dos patitas de un mismo lado son el mismo nodo. */
 function botonSVG(cx, cy) {
   let s = `<g stroke='#B0BEC5' stroke-width='5' stroke-linecap='round'>`;
-  [[-16, -15, -26, -22], [16, -15, 26, -22], [-16, 15, -26, 29], [16, 15, 26, 29]]
+  [[-16, -15, -26, -21], [16, -15, 26, -21], [-16, 15, -26, 21], [16, 15, 26, 21]]
     .forEach(([a, b, c, d]) => s += `<line x1='${cx + a}' y1='${cy + b}' x2='${cx + c}' y2='${cy + d}'/>`);
   s += `</g><rect x='${cx - 22}' y='${cy - 18}' width='44' height='36' rx='6' fill='#2E3B41'/>` +
     `<circle cx='${cx}' cy='${cy}' r='13' fill='#E84855' stroke='#B03744' stroke-width='3'/>`;
@@ -189,21 +192,21 @@ function resistencia10kSVG(x, y) {
    compartiendo protoboard — el del proyecto de S4, reusado en S6.
    Las etiquetas nombran cada mitad del circuito. */
 function circuitoBotonLedSVG(etiqBoton, etiqLed) {
-  return "<svg viewBox='0 0 640 340' style='width:100%' aria-label='Botón y LED juntos en la protoboard'>"
-    + arduinoSVG({ x: 6, y: 60, pads: ["pin 13", "5V", "pin 2", "GND"] }).svg
-    + protoboardSVG({ x: 150, y: 30, w: 480, h: 300 })
-    + `<text x='304' y='90' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif' font-weight='700'>${etiqBoton}</text>`
-    + `<text x='500' y='90' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif' font-weight='700'>${etiqLed}</text>`
-    + botonSVG(304, 180)
-    + "<path d='M122 112 C 300 118, 430 150, 486 222' fill='none' stroke='#FB8C00' stroke-width='6' stroke-linecap='round'/>"
-    + "<path d='M122 160 C 200 155, 250 145, 278 138' fill='none' stroke='#E84855' stroke-width='6' stroke-linecap='round'/>"
-    + "<path d='M122 208 C 210 214, 290 222, 330 225' fill='none' stroke='#4C7CFF' stroke-width='6' stroke-linecap='round'/>"
-    + "<line x1='330' y1='231' x2='330' y2='303' stroke='#9aa7ad' stroke-width='4'/>"
-    + resistencia10kSVG(321, 246)
-    + "<text x='348' y='268' font-size='12' fill='#5E7480' font-family='Nunito, sans-serif'>10 kΩ</text>"
-    + ledSVG(499, 209, 303)
-    + "<text x='534' y='280' font-size='12' fill='#5E7480' font-family='Nunito, sans-serif'>220 Ω</text>"
-    + "<path d='M122 256 C 140 280, 155 295, 172 302' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>"
+  return "<svg viewBox='0 0 640 400' style='width:100%' aria-label='Botón y LED juntos en la protoboard'>"
+    + arduinoSVG({ x: 6, y: 70, pads: ["pin 13", "5V", "pin 2", "GND"] }).svg
+    + protoboardSVG({ x: 150, y: 30 })
+    + `<text x='308' y='105' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif' font-weight='700'>${etiqBoton}</text>`
+    + `<text x='503' y='105' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif' font-weight='700'>${etiqLed}</text>`
+    + botonSVG(308, 203)
+    + "<path d='M128 122 C 300 126, 430 170, 490 250' fill='none' stroke='#FB8C00' stroke-width='6' stroke-linecap='round'/>"
+    + "<path d='M128 170 C 190 168, 240 166, 280 166' fill='none' stroke='#E84855' stroke-width='6' stroke-linecap='round'/>"
+    + "<path d='M128 218 C 210 228, 290 237, 332 240' fill='none' stroke='#4C7CFF' stroke-width='6' stroke-linecap='round'/>"
+    + "<line x1='334' y1='246' x2='334' y2='328' stroke='#9aa7ad' stroke-width='4'/>"
+    + resistencia10kSVG(325, 254)
+    + "<text x='352' y='276' font-size='12' fill='#5E7480' font-family='Nunito, sans-serif'>10 kΩ</text>"
+    + ledSVG(503, 232, 328)
+    + "<text x='538' y='300' font-size='12' fill='#5E7480' font-family='Nunito, sans-serif'>220 Ω</text>"
+    + "<path d='M128 266 C 148 296, 160 318, 175 326' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>"
     + "</svg>";
 }
 
