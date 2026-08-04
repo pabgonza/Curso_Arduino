@@ -475,16 +475,6 @@
       if (l) document.getElementById(l[0]).setAttribute("fill", l[1]);
     }));
 
-  document.querySelectorAll(".check").forEach(c => {
-    c.addEventListener("click", e => {
-      if (e.target.closest(".sm")) return;   // el "?" y el 📷 no marcan el paso
-      c.classList.toggle("hecho");
-    });
-    c.addEventListener("keydown", e => {
-      if (e.key === "Enter" || e.key === " ") { c.classList.toggle("hecho"); e.preventDefault(); }
-    });
-  });
-
   let delayMs = 500;
   const slider = document.getElementById("slider-delay");
   function ponerDelay(v) {

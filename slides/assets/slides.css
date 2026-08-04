@@ -601,6 +601,14 @@ button.sim-op:hover { background: var(--teal-suave); }
 .serial-lineas p { margin: 0; line-height: 1.5; }
 .serial-apagado { color: #5E7480 !important; font-style: italic; }
 
+/* chips de anatomía de una línea de código (variables S4, for S6) */
+.anat {
+  font-size: .78rem; color: var(--gris); text-align: center;
+  background: var(--blanco); border: 2px solid var(--teal-suave);
+  border-radius: 10px; padding: .35em .6em; line-height: 1.35;
+}
+.anat code { color: var(--teal-osc); font-weight: 700; }
+
 .sim-editor { height: 16.5em; overflow: auto; background: #fff; }
 .sim-editor pre { font-family: var(--f-codigo); font-size: .9em; line-height: 1.5; padding: .6em .9em; }
 .sim-consola {

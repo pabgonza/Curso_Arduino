@@ -227,7 +227,10 @@
 }</pre>
   </div>
   <button class="boton" id="ding">🔔 Escuchar el «ding-dong»</button>
-  <p class="nota">Programa completo, con su <code>setup()</code> y todo: <code>sketches/sesion-05/timbre</code>.</p>
+  <div class="fila" style="gap:.6em; margin-top:.3em">
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Armar el circuito: botón + buzzer <button class="sm" data-sm="p-circuito">?</button></span></div>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Subir el programa completo <button class="sm" data-sm="p-codigo">?</button></span></div>
+  </div>
 </section>
 
 <!-- 11 · Reto -->
@@ -499,6 +502,29 @@
   });
 
   saberMas({
+    "p-circuito": {
+      t: "Así se ve armado completo 🔧",
+      d: "<svg viewBox='0 0 640 340' style='width:100%' aria-label='Botón y buzzer juntos en la protoboard'>"
+        + arduinoSVG({ x: 6, y: 60, pads: ["pin 8", "5V", "pin 2", "GND"] }).svg
+        + protoboardSVG({ x: 150, y: 30, w: 480, h: 300 })
+        + "<text x='304' y='90' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif' font-weight='700'>el botón (sesión 4)</text><text x='500' y='90' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif' font-weight='700'>el buzzer (hoy)</text>"
+        + botonSVG(304, 180)
+        + "<path d='M122 112 C 300 98, 470 100, 562 150 C 588 168, 570 218, 516 225' fill='none' stroke='#FB8C00' stroke-width='6' stroke-linecap='round'/>"
+        + "<path d='M122 160 C 200 155, 250 145, 278 138' fill='none' stroke='#E84855' stroke-width='6' stroke-linecap='round'/>"
+        + "<path d='M122 208 C 210 214, 290 222, 330 225' fill='none' stroke='#4C7CFF' stroke-width='6' stroke-linecap='round'/>"
+        + "<line x1='330' y1='231' x2='330' y2='303' stroke='#9aa7ad' stroke-width='4'/>"
+        + resistencia10kSVG(321, 246)
+        + "<text x='348' y='268' font-size='12' fill='#5E7480' font-family='Nunito, sans-serif'>10 kΩ</text>"
+        + "<line x1='486' y1='202' x2='486' y2='213' stroke='#B0BEC5' stroke-width='5' stroke-linecap='round'/><line x1='512' y1='202' x2='512' y2='213' stroke='#B0BEC5' stroke-width='5' stroke-linecap='round'/>"
+        + "<circle cx='499' cy='175' r='30' fill='#37474F'/><circle cx='499' cy='175' r='9' fill='#546E7A'/><text x='512' y='199' text-anchor='middle' font-size='12' fill='#CFD8DC' font-family='monospace'>+</text>"
+        + "<path d='M486 226 C 481 250, 481 280, 486 302' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>"
+        + "<path d='M122 256 C 140 280, 155 295, 172 302' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>"
+        + "</svg><p>Izquierda: el botón de la sesión pasada (5V → botón → pin 2, con su 10 kΩ al riel −). Derecha: el buzzer de hoy, pinchado a caballito del canal — el cable del pin 8 llega por fuera hasta la <strong>misma columna</strong> que su patita <strong>+</strong>, y un cablecito lleva la otra columna al riel −, que vuelve a GND. Sin resistencia: el buzzer no la necesita.</p>"
+    },
+    "p-codigo": {
+      t: "El programa completo 📋",
+      d: "<pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.85em;line-height:1.5'><code>void setup() {\n  pinMode(2, INPUT);   // el botón avisa\n}\n\nvoid loop() {\n  if (digitalRead(2) == HIGH) {\n    tone(8, 523);   // ding\n    delay(200);\n    tone(8, 392);   // dong\n    delay(400);\n    noTone(8);\n  }\n}</code></pre><p>El buzzer no necesita <code>pinMode</code>: <code>tone()</code> se encarga solito. También está en <code>sketches/sesion-05/timbre</code>.</p>"
+    },
     hertz: {
       t: "Hertz (Hz): las vibraciones por segundo",
       d: "<p>Cuando algo vibra <strong>440 veces en un segundo</strong>, decimos que suena a <strong>440 hertz</strong>. Es solo una forma corta de decirlo.</p><p>El nombre viene de <strong>Heinrich Hertz</strong>, un científico alemán que estudió estas vibraciones hace más de 100 años 📻. Nosotros escuchamos desde unos 20 Hz (grave grave) hasta 20.000 Hz (agudísimo)… ¡los perros escuchan mucho más arriba! 🐕</p>"

@@ -73,6 +73,17 @@
   ir((parseInt(location.hash.slice(1), 10) || 1) - 1);
 })();
 
+/* Checklists de pasos (.check): clic o Enter/espacio marcan el paso.
+   Los botones "?" (.sm) dentro del texto no marcan. */
+addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".check").forEach(c => {
+    c.addEventListener("click", e => { if (e.target.closest(".sm")) return; c.classList.toggle("hecho"); });
+    c.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") { c.classList.toggle("hecho"); e.preventDefault(); }
+    });
+  });
+});
+
 /* "¿Saber más?": popups opcionales que no cortan el flujo de la clase.
    Uso: saberMas({ ide: { t: "IDE", d: "Texto…" } }) y en el HTML
    <button class="sm" data-sm="ide">?</button> (o .sm-grande). */
@@ -116,6 +127,84 @@ function protoboardSVG(o) {
   for (let cy = canalY + 34; cy + 10 <= negroInf - 8; cy += 18) s += fila(cy);
   s += riel(negroInf, "#37474F", "−") + fila(negroInf + 4) + riel(o.y + o.h - 14, "#E84855", "+");
   return s;
+}
+
+/* Piezas sueltas para los diagramas de circuito de los popups de proyecto.
+   Todas retornan strings SVG en las coordenadas del viewBox receptor. */
+
+/* Placa Arduino esquemática: caja teal con pads etiquetados.
+   o = {x, y, pads: ["5V", "pin 2", …]}. Retorna {svg, padY(i), right}. */
+function arduinoSVG(o) {
+  const alto = 50 + o.pads.length * 48;
+  let s = `<rect x='${o.x}' y='${o.y}' width='120' height='${alto}' rx='12' fill='#00878F'/>` +
+    `<text x='${o.x + 60}' y='${o.y + 27}' text-anchor='middle' fill='#fff' font-family='monospace' font-size='14'>ARDUINO</text>`;
+  o.pads.forEach((p, i) => {
+    const y = o.y + 40 + i * 48;
+    s += `<rect x='${o.x + 8}' y='${y}' width='104' height='24' rx='4' fill='#143642'/>` +
+      `<text x='${o.x + 60}' y='${y + 17}' text-anchor='middle' fill='#fff' font-family='monospace' font-size='13'>${p}</text>`;
+  });
+  return { svg: s, padY: i => o.y + 52 + i * 48, right: o.x + 122 };
+}
+
+/* LED en la protoboard, estilo Tinkercad: patita + (ánodo) a la izquierda,
+   lado plano y patita − (cátodo) a la derecha, con su resistencia de 220 Ω
+   (rojo-rojo-café) bajando al riel −. cx debe ser columna + 13 para que las
+   dos patitas caigan en columnas vecinas; las puntas quedan en cy+40, así
+   que usa cy = centroDeFila − 40. rielY = centro de los hoyitos del riel −. */
+function ledSVG(cx, cy, rielY, color = "#E84855", borde = "#B03744") {
+  return `<line x1='${cx - 8}' y1='${cy + 10}' x2='${cx - 13}' y2='${cy + 40}' stroke='${borde}' stroke-width='4' stroke-linecap='round'/>` +
+    `<line x1='${cx + 8}' y1='${cy + 10}' x2='${cx + 13}' y2='${cy + 36}' stroke='${borde}' stroke-width='4' stroke-linecap='round'/>` +
+    `<line x1='${cx + 13}' y1='${cy + 36}' x2='${cx + 13}' y2='${rielY}' stroke='#9aa7ad' stroke-width='4'/>` +
+    `<path d='M ${cx + 9} ${cy - 9} A 13 13 0 1 0 ${cx + 9} ${cy + 9} Z' fill='${color}' stroke='${borde}' stroke-width='3'/>` +
+    `<text x='${cx - 17}' y='${cy - 14}' text-anchor='middle' font-size='12' font-weight='700' fill='#5E7480' font-family='monospace'>+</text>` +
+    `<text x='${cx + 19}' y='${cy - 14}' text-anchor='middle' font-size='12' font-weight='700' fill='#5E7480' font-family='monospace'>−</text>` +
+    `<rect x='${cx + 4}' y='${cy + 44}' width='18' height='32' rx='4' fill='#D7B899' stroke='#8D6E63' stroke-width='2'/>` +
+    `<rect x='${cx + 4}' y='${cy + 50}' width='18' height='4' fill='#D32F2F'/>` +
+    `<rect x='${cx + 4}' y='${cy + 57}' width='18' height='4' fill='#D32F2F'/>` +
+    `<rect x='${cx + 4}' y='${cy + 64}' width='18' height='4' fill='#795548'/>`;
+}
+
+/* Pulsador de 4 patitas con tapa roja, centrado en (cx, cy) sobre el canal.
+   Las patitas caen en cx ± 26 (columnas vecinas de a dos), arriba en cy − 22
+   y abajo en cy + 29: con cy = centroDelCanal quedan en los hoyitos de las
+   filas que rodean el canal de la protoboard estándar. */
+function botonSVG(cx, cy) {
+  let s = `<g stroke='#B0BEC5' stroke-width='5' stroke-linecap='round'>`;
+  [[-16, -15, -26, -22], [16, -15, 26, -22], [-16, 15, -26, 29], [16, 15, 26, 29]]
+    .forEach(([a, b, c, d]) => s += `<line x1='${cx + a}' y1='${cy + b}' x2='${cx + c}' y2='${cy + d}'/>`);
+  s += `</g><rect x='${cx - 22}' y='${cy - 18}' width='44' height='36' rx='6' fill='#2E3B41'/>` +
+    `<circle cx='${cx}' cy='${cy}' r='13' fill='#E84855' stroke='#B03744' stroke-width='3'/>`;
+  return s;
+}
+
+/* Resistencia de 10 kΩ vertical (café-negro-naranjo) desde (x, y). */
+function resistencia10kSVG(x, y) {
+  return `<rect x='${x}' y='${y}' width='18' height='34' rx='4' fill='#D7B899' stroke='#8D6E63' stroke-width='2'/>` +
+    `<rect x='${x}' y='${y + 6}' width='18' height='4' fill='#8D3B0B'/>` +
+    `<rect x='${x}' y='${y + 13}' width='18' height='4' fill='#000'/>` +
+    `<rect x='${x}' y='${y + 20}' width='18' height='4' fill='#E8A33D'/>`;
+}
+
+/* Circuito completo botón (pin 2, con 10 kΩ) + LED (pin 13, con 220 Ω)
+   compartiendo protoboard — el del proyecto de S4, reusado en S6.
+   Las etiquetas nombran cada mitad del circuito. */
+function circuitoBotonLedSVG(etiqBoton, etiqLed) {
+  return "<svg viewBox='0 0 640 340' style='width:100%' aria-label='Botón y LED juntos en la protoboard'>"
+    + arduinoSVG({ x: 6, y: 60, pads: ["pin 13", "5V", "pin 2", "GND"] }).svg
+    + protoboardSVG({ x: 150, y: 30, w: 480, h: 300 })
+    + `<text x='304' y='90' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif' font-weight='700'>${etiqBoton}</text>`
+    + `<text x='500' y='90' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif' font-weight='700'>${etiqLed}</text>`
+    + botonSVG(304, 180)
+    + "<path d='M122 112 C 300 118, 430 150, 486 222' fill='none' stroke='#FB8C00' stroke-width='6' stroke-linecap='round'/>"
+    + "<path d='M122 160 C 200 155, 250 145, 278 138' fill='none' stroke='#E84855' stroke-width='6' stroke-linecap='round'/>"
+    + "<path d='M122 208 C 210 214, 290 222, 330 225' fill='none' stroke='#4C7CFF' stroke-width='6' stroke-linecap='round'/>"
+    + "<line x1='330' y1='231' x2='330' y2='303' stroke='#9aa7ad' stroke-width='4'/>"
+    + resistencia10kSVG(321, 246)
+    + "<text x='348' y='268' font-size='12' fill='#5E7480' font-family='Nunito, sans-serif'>10 kΩ</text>"
+    + ledSVG(499, 209, 303)
+    + "<text x='534' y='280' font-size='12' fill='#5E7480' font-family='Nunito, sans-serif'>220 Ω</text>"
+    + "<path d='M122 256 C 140 280, 155 295, 172 302' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>"
+    + "</svg>";
 }
 
 /* Matriz de la protoboard de los tutoriales de armado paso a paso (S3-S5):

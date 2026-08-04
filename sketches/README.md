@@ -13,8 +13,8 @@ archivo.
   y `contador` (el experimento del rebote).
 - `sesion-05/` — el buzzer: `estrellita` (con las tres notas de tarea),
   `sirena`, `timbre` y `cancion` (usa la librería BuzzerMusic, ver abajo).
-- `sesion-06/` — el servo: `servo`, `barrido` y `perilla` (usa la librería
-  Servo, que ya viene con el IDE).
+- `sesion-06/` — el servo: `servo`, `barrido`, `perilla` y `barrera` (el
+  proyecto de la sesión). Usan la librería Servo, que ya viene con el IDE.
 - `sesion-07/` — el murciélago HC-SR04: `murcielago`, `alarma` y `retroceso`.
 - `sesion-08/` — el DHT11: `termometro` y `semaforo_termico` (necesitan la
   librería "DHT sensor library" de Adafruit, del gestor de librerías).

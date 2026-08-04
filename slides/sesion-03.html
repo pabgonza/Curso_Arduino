@@ -522,9 +522,12 @@
 <span class="fn">delay</span>(<span class="num">1000</span>);
 <span class="fn">digitalWrite</span>(<span class="num">11</span>, <span class="kw">LOW</span>);</pre>
     </div>
+    <div style="display:flex; flex-direction:column; gap:.5em; max-width:17em">
+      <button class="boton" id="btn-sem">▶ Probar el semáforo</button>
+      <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Armar el circuito: 3 LEDs con sus resistencias <button class="sm" data-sm="p-circuito">?</button></span></div>
+      <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Subir el programa completo y ver el show <button class="sm" data-sm="p-codigo">?</button></span></div>
+    </div>
   </div>
-  <button class="boton" id="btn-sem">▶ Probar el semáforo</button>
-  <p class="nota">Tres LEDs, tres resistencias, tres pines: 13, 12 y 11. ¡Y todos comparten el mismo GND! Programa completo: <code>sketches/sesion-03/semaforo</code>.</p>
 </section>
 
 <!-- 13 · Reto -->
@@ -1089,6 +1092,26 @@
   });
 
   saberMas({
+    "p-circuito": {
+      t: "Así se ve armado completo 🔧",
+      d: "<svg viewBox='0 0 640 340' style='width:100%' aria-label='Tres LEDs con sus resistencias en la protoboard'>"
+        + arduinoSVG({ x: 6, y: 60, pads: ["pin 12", "pin 11", "pin 13", "GND"] }).svg
+        + protoboardSVG({ x: 150, y: 30, w: 480, h: 300 })
+        + "<text x='265' y='90' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif' font-weight='700'>rojo</text><text x='395' y='90' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif' font-weight='700'>amarillo</text><text x='525' y='90' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif' font-weight='700'>verde</text>"
+        + ledSVG(265, 209, 303)
+        + ledSVG(395, 209, 303, "#F5B301", "#C78F00")
+        + ledSVG(525, 209, 303, "#46B450", "#2E7D32")
+        + "<path d='M122 112 C 300 110, 450 140, 508 220' fill='none' stroke='#46B450' stroke-width='6' stroke-linecap='round'/>"
+        + "<path d='M122 160 C 260 158, 340 195, 380 222' fill='none' stroke='#F5B301' stroke-width='6' stroke-linecap='round'/>"
+        + "<path d='M122 208 C 175 214, 230 222, 250 224' fill='none' stroke='#AB47BC' stroke-width='6' stroke-linecap='round'/>"
+        + "<path d='M122 256 C 145 282, 158 297, 172 302' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>"
+        + "<text x='250' y='290' text-anchor='end' font-size='12' fill='#5E7480' font-family='Nunito, sans-serif'>220 Ω</text></svg>"
+        + "<p>Cada LED es una copia del de hoy: pin → patita larga, y la corta con su <strong>220 Ω</strong> (rojo-rojo-café) al riel −. Ojo con el orden: <strong>pin 13 → LED rojo, pin 12 → verde, pin 11 → amarillo</strong>, igual que en el programa. Los tres <strong>comparten el riel negro</strong>, que vuelve a GND con un solo cable. 🎨</p>"
+    },
+    "p-codigo": {
+      t: "El programa completo 📋",
+      d: "<pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>void setup() {\n  pinMode(13, OUTPUT);\n  pinMode(12, OUTPUT);\n  pinMode(11, OUTPUT);\n}\n\nvoid loop() {\n  // luz roja: 3 segundos\n  digitalWrite(13, HIGH);\n  delay(3000);\n  digitalWrite(13, LOW);\n  // luz verde: 3 segundos\n  digitalWrite(12, HIGH);\n  delay(3000);\n  digitalWrite(12, LOW);\n  // amarilla: 1 segundo\n  digitalWrite(11, HIGH);\n  delay(1000);\n  digitalWrite(11, LOW);\n}</code></pre><p>El loop es el ciclo del semáforo que ya viste; el setup solo avisa que los tres pines son salidas. También está en <code>sketches/sesion-03/semaforo</code>.</p>"
+    },
     volta: {
       t: "Voltio — por Alessandro Volta",
       d: "<p>Un señor italiano que en <strong>1800</strong> inventó la primera <strong>pila</strong> de la historia, apilando monedas de cobre y zinc con cartón mojado 🥞. Por eso la unidad que mide «la altura del estanque» lleva su nombre… ¡y por eso decimos «pila»!</p>"

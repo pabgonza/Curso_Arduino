@@ -226,7 +226,8 @@ distancia = <span class="num-vivo" id="eco-us2">1749</span> × 0.034 / 2 = <span
 <span class="fn">noTone</span>(<span class="num">8</span>);
 <span class="fn">delay</span>(pausa);  <span class="cm">// ¡pip pip pip!</span></pre>
       </div>
-      <p class="nota" style="margin:0">Programa completo: <code>sketches/sesion-07/retroceso</code>.</p>
+      <div class="check" tabindex="0" style="font-size:.95rem"><span class="caja"></span><span class="txt">Armar el circuito: murciélago + buzzer <button class="sm" data-sm="p-circuito">?</button></span></div>
+      <div class="check" tabindex="0" style="font-size:.95rem"><span class="caja"></span><span class="txt">Subir el programa completo <button class="sm" data-sm="p-codigo">?</button></span></div>
     </div>
   </div>
 </section>
@@ -478,6 +479,30 @@ distancia = <span class="num-vivo" id="eco-us2">1749</span> × 0.034 / 2 = <span
   });
 
   saberMas({
+    "p-circuito": {
+      t: "Así se ve armado completo 🔧",
+      d: "<svg viewBox='0 0 640 410' style='width:100%' aria-label='HC-SR04 y buzzer montados en la protoboard'>"
+        + arduinoSVG({ x: 6, y: 40, pads: ["pin 9", "5V", "pin 10", "pin 8", "GND"] }).svg
+        + protoboardSVG({ x: 150, y: 84, w: 480, h: 300 })
+        + "<g stroke='#B0BEC5' stroke-width='5' stroke-linecap='round'><line x1='382' y1='98' x2='382' y2='161'/><line x1='408' y1='98' x2='408' y2='161'/><line x1='434' y1='98' x2='434' y2='161'/><line x1='460' y1='98' x2='460' y2='161'/></g>"
+        + "<rect x='356' y='14' width='170' height='84' rx='8' fill='#1B2A4A'/><circle cx='398' cy='50' r='24' fill='#9FB4C8' stroke='#5E7480' stroke-width='4'/><circle cx='484' cy='50' r='24' fill='#9FB4C8' stroke='#5E7480' stroke-width='4'/><text x='441' y='54' text-anchor='middle' font-size='11' fill='#BBD3E6' font-family='monospace'>HC-SR04</text>"
+        + "<text x='382' y='92' text-anchor='middle' font-size='9' fill='#9FB4C8' font-family='monospace'>VCC</text><text x='408' y='92' text-anchor='middle' font-size='9' fill='#9FB4C8' font-family='monospace'>TRIG</text><text x='434' y='92' text-anchor='middle' font-size='9' fill='#9FB4C8' font-family='monospace'>ECHO</text><text x='460' y='92' text-anchor='middle' font-size='9' fill='#9FB4C8' font-family='monospace'>GND</text>"
+        + "<path d='M128 92 C 250 85, 340 130, 406 172' fill='none' stroke='#FB8C00' stroke-width='6' stroke-linecap='round'/>"
+        + "<path d='M128 140 C 250 140, 330 165, 380 190' fill='none' stroke='#E84855' stroke-width='6' stroke-linecap='round'/>"
+        + "<path d='M128 188 C 280 188, 380 200, 432 209' fill='none' stroke='#4C7CFF' stroke-width='6' stroke-linecap='round'/>"
+        + "<path d='M460 177 C 570 200, 615 280, 590 355' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>"
+        + "<line x1='226' y1='255' x2='226' y2='266' stroke='#B0BEC5' stroke-width='5' stroke-linecap='round'/><line x1='252' y1='255' x2='252' y2='266' stroke='#B0BEC5' stroke-width='5' stroke-linecap='round'/>"
+        + "<circle cx='239' cy='229' r='30' fill='#37474F'/><circle cx='239' cy='229' r='9' fill='#546E7A'/><text x='226' y='252' text-anchor='middle' font-size='12' fill='#CFD8DC' font-family='monospace'>+</text>"
+        + "<path d='M128 236 C 180 258, 210 274, 224 279' fill='none' stroke='#E8A33D' stroke-width='6' stroke-linecap='round'/>"
+        + "<path d='M252 281 C 257 305, 257 332, 252 355' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>"
+        + "<path d='M128 284 C 145 320, 158 348, 172 355' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>"
+        + "<text x='239' y='400' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif'>el buzzer (sesión 5)</text><text x='441' y='400' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif'>el murciélago, parado en la protoboard</text>"
+        + "</svg><p>Todo pinchado en la protoboard. El murciélago se para con sus 4 patitas en una fila: los cables llegan a la <strong>misma columna</strong> de cada patita (VCC → 5V, TRIG → pin 9, ECHO → pin 10). El buzzer va a caballito del canal, con su <strong>+</strong> al pin 8. Y todos los GND se juntan en el <strong>riel −</strong>: el del sensor, el del buzzer y el cable que vuelve al Arduino.</p>"
+    },
+    "p-codigo": {
+      t: "El programa completo 📋",
+      d: "<pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>void setup() {\n  pinMode(9, OUTPUT);    // TRIG: por aquí grita\n  pinMode(10, INPUT);    // ECHO: por aquí escucha\n}\n\nvoid loop() {\n  digitalWrite(9, HIGH);\n  delayMicroseconds(10);\n  digitalWrite(9, LOW);\n  long tiempo = pulseIn(10, HIGH);\n  int distancia = tiempo * 0.034 / 2;\n\n  if (distancia &lt; 100) {         // a menos de un metro, avisa\n    int pausa = distancia * 8;   // cerca = ¡pip pip pip!\n    tone(8, 880);\n    delay(60);\n    noTone(8);\n    delay(pausa);\n  }\n}</code></pre><p>Arriba, el bloque del murciélago que se copia tal cual; abajo, el truco de la pausa que crece con la distancia. También está en <code>sketches/sesion-07/retroceso</code>.</p>"
+    },
     ultra7: {
       t: "El ultrasonido 🔊",
       d: "<p>Los sonidos <strong>muy agudos</strong> vibran tan rápido que nuestros oídos no los captan: eso es el <strong>ultrasonido</strong>.</p><p>Los murciélagos y los delfines lo usan para «ver» con ecos. Los submarinos copian el truco con el <strong>sonar</strong>… ¡y los doctores lo usan en las <strong>ecografías</strong> para ver a los bebés dentro de la pancita! 👶</p>"

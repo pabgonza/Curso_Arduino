@@ -125,9 +125,9 @@ Servo miServo;           <span class="cm">// le pongo nombre a mi servo</span>
 
 <span class="kw">void</span> <span class="fn">loop</span>() {
   miServo.<span class="fn">write</span>(<span class="num">0</span>);       <span class="cm">// ¡al ángulo 0!</span>
-  <span class="fn">delay</span>(<span class="num">1000</span>);
+  <b style="background:#FFF6E3; font-weight:normal"><span class="fn">delay</span>(<span class="num">1000</span>);            <span class="cm">// ¡espera! dale tiempo de llegar</span></b>
   miServo.<span class="fn">write</span>(<span class="num">180</span>);     <span class="cm">// ¡ahora al 180!</span>
-  <span class="fn">delay</span>(<span class="num">1000</span>);
+  <b style="background:#FFF6E3; font-weight:normal"><span class="fn">delay</span>(<span class="num">1000</span>);            <span class="cm">// y tiempo de volver</span></b>
 }</pre>
   </div>
 </section>
@@ -157,7 +157,7 @@ Servo miServo;           <span class="cm">// le pongo nombre a mi servo</span>
         <path class="cable-w" d="M164 173 C 280 173, 320 160, 428 158" stroke="#6D4C41"/>
         <path class="cable-w" d="M164 223 C 300 223, 340 180, 428 176" stroke="#FB8C00"/>
         <text x="300" y="112" text-anchor="middle" font-size="13" fill="#E84855" font-family="Nunito, sans-serif">rojo → 5V</text>
-        <text x="300" y="205" text-anchor="middle" font-size="13" fill="#6D4C41" font-family="Nunito, sans-serif">café → GND</text>
+        <text x="300" y="160" text-anchor="middle" font-size="13" fill="#6D4C41" font-family="Nunito, sans-serif">café → GND</text>
         <text x="300" y="248" text-anchor="middle" font-size="13" fill="#FB8C00" font-family="Nunito, sans-serif">naranjo → pin 9</text>
       </svg>
     </div>
@@ -165,14 +165,46 @@ Servo miServo;           <span class="cm">// le pongo nombre a mi servo</span>
       <p class="tuto-num">Regla de colores</p>
       <p class="tuto-texto">El servo no va a la protoboard: trae <strong>tres cables pegados</strong>.<br><br>
       🟤 <strong>Café</strong> (o negro): el suelo, GND.<br>
-      🔴 <strong>Rojo</strong>: la energía, 5V.<br>
+      🔴 <strong>Rojo</strong>: la energía, 5V.<button class="sm" data-sm="servo5v">?</button><br>
       🟠 <strong>Naranjo</strong> (o amarillo): las <strong>órdenes</strong>, a un pin.</p>
       <p class="nota">Si lo conectas al revés no se rompe, pero no se mueve. ¡Revisa los colores!</p>
     </aside>
   </div>
 </section>
 
-<!-- 7 · El barrido -->
+<!-- 7 · El for (concepto) -->
+<section class="slide slide-concepto">
+  <p class="eyebrow">Una idea nueva de programación</p>
+  <h2>El for: repetir contando 🔁</h2>
+  <p class="grande" style="max-width:36em">Para mover el servo pasito a pasito habría que escribir <strong>181 líneas casi iguales</strong>. Mejor: decirle al cerebrito que <strong>repita él</strong>, contando. Esa orden es el <code>for</code>.</p>
+  <div class="tuto">
+    <div style="display:flex; flex-direction:column; gap:.7em; align-items:center">
+      <div class="sim-ide" style="flex:none; min-width:330px">
+        <div class="sim-titulo"><span class="sim-punto"></span>conteo.ino</div>
+        <div class="sim-editor lineas" style="height:auto">
+          <div class="ln"><span class="n">1</span><code><span class="kw">for</span> (<span class="kw">int</span> a = <span class="num">1</span>; a &lt;= <span class="num">5</span>; a++) {</code></div>
+          <div class="ln" id="for-cuerpo"><span class="n">2</span><code>  Serial.<span class="fn">println</span>(a);</code></div>
+          <div class="ln"><span class="n">3</span><code>}</code></div>
+        </div>
+      </div>
+      <div class="fila" style="gap:.5em; justify-content:center">
+        <span class="anat"><code>int a = 1</code><br>parte en 1</span>
+        <span class="anat"><code>a &lt;= 5</code><br>¿sigo? hasta el 5</span>
+        <span class="anat"><code>a++</code><br>y suma 1</span>
+      </div>
+    </div>
+    <aside class="tuto-panel">
+      <button class="boton" id="for-btn">▶ Ejecutar</button>
+      <div class="serial" style="flex:none; width:100%; max-width:100%">
+        <div class="serial-barra">🔍 Monitor serie · 9600</div>
+        <div class="serial-lineas" id="for-serial" style="min-height:11em; max-height:11em"></div>
+      </div>
+    </aside>
+  </div>
+  <p class="nota">La <code>a</code> es una cajita como las de la sesión 4: parte en 1 y el <code>a++</code> le suma uno en cada vuelta. Dos líneas de código… ¡y el cerebrito escribe cinco!</p>
+</section>
+
+<!-- 8 · El barrido -->
 <section class="slide">
   <p class="eyebrow">Práctica</p>
   <h2>El barrido: contar mientras se mueve 🔢</h2>
@@ -180,17 +212,26 @@ Servo miServo;           <span class="cm">// le pongo nombre a mi servo</span>
     <div class="sim-ide">
       <div class="sim-titulo"><span class="sim-punto"></span>barrido.ino — completo en sketches/sesion-06/barrido</div>
       <div class="sim-editor lineas">
-        <div class="ln"><span class="n">1</span><code><span class="kw">void</span> <span class="fn">loop</span>() {</code></div>
-        <div class="ln" id="ln-for"><span class="n">2</span><code>  <span class="kw">for</span> (<span class="kw">int</span> a = <span class="num">0</span>; a &lt;= <span class="num">180</span>; a++) {</code></div>
-        <div class="ln" id="ln-write"><span class="n">3</span><code>    miServo.<span class="fn">write</span>(a);</code></div>
-        <div class="ln"><span class="n">4</span><code>    <span class="fn">delay</span>(<span class="num">15</span>);</code></div>
-        <div class="ln"><span class="n">5</span><code>  }</code></div>
-        <div class="ln"><span class="n">6</span><code>}</code></div>
+        <div class="ln"><span class="n">1</span><code><span class="kw">void</span> <span class="fn">setup</span>() {</code></div>
+        <div class="ln"><span class="n">2</span><code>  miServo.<span class="fn">attach</span>(<span class="num">9</span>);</code></div>
+        <div class="ln"><span class="n">3</span><code>  miServo.<span class="fn">write</span>(<span class="num">0</span>);    <span class="cm">// a la partida…</span></code></div>
+        <div class="ln"><span class="n">4</span><code>  <span class="fn">delay</span>(<span class="num">500</span>);         <span class="cm">// …y llega antes de barrer</span></code></div>
+        <div class="ln"><span class="n">5</span><code>}</code></div>
+        <div class="ln"><span class="n">6</span><code><span class="kw">void</span> <span class="fn">loop</span>() {</code></div>
+        <div class="ln" id="ln-for"><span class="n">7</span><code>  <span class="kw">for</span> (<span class="kw">int</span> a = <span class="num">0</span>; a &lt;= <span class="num">180</span>; a++) {   <span class="cm">// de ida…</span></code></div>
+        <div class="ln" id="ln-write"><span class="n">8</span><code>    miServo.<span class="fn">write</span>(a);</code></div>
+        <div class="ln"><span class="n">9</span><code>    <span class="fn">delay</span>(<span class="num">15</span>);</code></div>
+        <div class="ln"><span class="n">10</span><code>  }</code></div>
+        <div class="ln" id="ln-for2"><span class="n">11</span><code>  <span class="kw">for</span> (<span class="kw">int</span> a = <span class="num">180</span>; a &gt;= <span class="num">0</span>; a--) {  <span class="cm">// …y de vuelta</span></code></div>
+        <div class="ln" id="ln-write2"><span class="n">12</span><code>    miServo.<span class="fn">write</span>(a);</code></div>
+        <div class="ln"><span class="n">13</span><code>    <span class="fn">delay</span>(<span class="num">15</span>);</code></div>
+        <div class="ln"><span class="n">14</span><code>  }</code></div>
+        <div class="ln"><span class="n">15</span><code>}</code></div>
       </div>
     </div>
     <aside class="tuto-panel">
-      <p class="tuto-num">El <code>for</code>: repetir contando</p>
-      <p class="tuto-texto">Es como decir: «empieza en 0, sube de a uno hasta 180, y en cada número manda el servo ahí».</p>
+      <p class="tuto-num">Dos <code>for</code>: ida y vuelta</p>
+      <p class="tuto-texto">Es como decir: «empieza en 0, sube de a uno hasta 180, y en cada número manda el servo ahí». El segundo <code>for</code> cuenta al revés: el viaje de vuelta también necesita su tiempo.</p>
       <p class="grande">a = <strong id="contador">0</strong></p>
       <svg viewBox="0 0 200 120" class="servo-mini" aria-label="Servo barriendo">
         <rect x="70" y="80" width="60" height="34" rx="6" fill="#1565C0"/>
@@ -204,7 +245,7 @@ Servo miServo;           <span class="cm">// le pongo nombre a mi servo</span>
   </div>
 </section>
 
-<!-- 8 · La perilla mágica -->
+<!-- 9 · La perilla mágica -->
 <section class="slide">
   <p class="eyebrow">Un sensor nuevo</p>
   <h2>La perilla mágica 🎛️</h2>
@@ -233,7 +274,7 @@ Servo miServo;           <span class="cm">// le pongo nombre a mi servo</span>
   <p class="nota">¿Te acuerdas del <strong>espía</strong> que el servo lleva adentro para saber su ángulo? ¡Es justamente una de estas perillas! 🕵️</p>
 </section>
 
-<!-- 9 · map -->
+<!-- 10 · map -->
 <section class="slide slide-concepto">
   <p class="eyebrow">El traductor de números</p>
   <h2>map(): del 0-1023 al 0-180 🔀</h2>
@@ -260,32 +301,36 @@ miServo.<span class="fn">write</span>(angulo);</pre>
   <p class="nota">Programa completo: <code>sketches/sesion-06/perilla</code>.</p>
 </section>
 
-<!-- 10 · Proyecto: la barrera -->
+<!-- 11 · Proyecto: la barrera -->
 <section class="slide">
   <p class="eyebrow">⭐ Proyecto de la sesión</p>
   <h2>La barrera del paso a nivel 🚂</h2>
   <div class="fila" style="align-items:center; gap:2em">
-    <svg viewBox="0 0 320 200" class="barrera-svg" aria-label="Barrera que sube y baja">
-      <rect x="0" y="160" width="320" height="40" fill="#C8B79A"/>
-      <rect x="40" y="70" width="18" height="95" rx="4" fill="#546E7A"/>
-      <g id="barrera" style="transform-origin:49px 78px">
-        <rect x="49" y="70" width="230" height="16" rx="6" fill="#fff" stroke="#B03744" stroke-width="3"/>
-        <rect x="79" y="70" width="34" height="16" fill="#E84855"/>
-        <rect x="147" y="70" width="34" height="16" fill="#E84855"/>
-        <rect x="215" y="70" width="34" height="16" fill="#E84855"/>
-      </g>
-      <circle cx="49" cy="78" r="9" fill="#37474F"/>
-      <circle cx="250" cy="130" r="12" id="luz-barrera" fill="#7a3a3a"/>
-    </svg>
-    <div style="display:flex; flex-direction:column; gap:.7em; max-width:22em">
-      <p class="grande">Un botón, un servo y una luz: <strong>si</strong> aprietas, la barrera baja y la luz parpadea.</p>
+    <div style="display:flex; flex-direction:column; gap:.5em; align-items:center">
+      <svg viewBox="0 0 320 200" class="barrera-svg" aria-label="Barrera que sube y baja">
+        <rect x="0" y="160" width="320" height="40" fill="#C8B79A"/>
+        <rect x="40" y="70" width="18" height="95" rx="4" fill="#546E7A"/>
+        <g id="barrera" style="transform-origin:49px 78px">
+          <rect x="49" y="70" width="230" height="16" rx="6" fill="#fff" stroke="#B03744" stroke-width="3"/>
+          <rect x="79" y="70" width="34" height="16" fill="#E84855"/>
+          <rect x="147" y="70" width="34" height="16" fill="#E84855"/>
+          <rect x="215" y="70" width="34" height="16" fill="#E84855"/>
+        </g>
+        <circle cx="49" cy="78" r="9" fill="#37474F"/>
+        <circle cx="250" cy="130" r="12" id="luz-barrera" fill="#7a3a3a"/>
+      </svg>
       <button class="boton" id="btn-barrera">🔘 Apretar el botón</button>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:.5em; max-width:26em">
+      <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Armar el circuito: botón, luz y el servo aparte <button class="sm" data-sm="p-circuito">?</button></span></div>
+      <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Subir el programa de la barrera <button class="sm" data-sm="p-codigo">?</button></span></div>
+      <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Probar: apretar → baja y parpadea; soltar → sube</span></div>
       <p class="nota">Es el corazón del proyecto final de la sesión 10. ¡Hoy ya lo tienes funcionando!</p>
     </div>
   </div>
 </section>
 
-<!-- 11 · Reto -->
+<!-- 12 · Reto -->
 <section class="slide">
   <div class="reto">
     <p class="eyebrow">⭐ Reto de la sesión</p>
@@ -300,7 +345,7 @@ miServo.<span class="fn">write</span>(angulo);</pre>
   <p class="nota">Cuidado: nunca fuerces el brazo del servo con la mano. Los engranajes son de plástico y se saltan. 🦷</p>
 </section>
 
-<!-- 12 · Quiz -->
+<!-- 13 · Quiz -->
 <section class="slide">
   <p class="eyebrow">Duelo de cerebritos</p>
   <h2>¿Cuánto aprendiste? Toca para voltear</h2>
@@ -328,7 +373,7 @@ miServo.<span class="fn">write</span>(angulo);</pre>
   </div>
 </section>
 
-<!-- 13 · Cierre -->
+<!-- 14 · Cierre -->
 <section class="slide portada">
   <p class="eyebrow">Lo lograste</p>
   <h1>¡Tu Arduino se mueve! 🎉</h1>
@@ -425,7 +470,34 @@ miServo.<span class="fn">write</span>(angulo);</pre>
     poner(90);
   })();
 
-  /* ---- 7 · el barrido ---- */
+  /* ---- 7 · el for ---- */
+  (function () {
+    const btn = document.getElementById("for-btn");
+    const ser = document.getElementById("for-serial");
+    const cuerpo = document.getElementById("for-cuerpo");
+    let corriendo = false;
+    btn.addEventListener("click", () => {
+      if (corriendo) return;
+      corriendo = true;
+      ser.innerHTML = "";
+      let k = 1;
+      const t = setInterval(() => {
+        cuerpo.classList.add("aqui");
+        setTimeout(() => cuerpo.classList.remove("aqui"), 250);
+        const p = document.createElement("p");
+        p.textContent = k;
+        ser.appendChild(p);
+        k++;
+        if (k > 5) {
+          clearInterval(t);
+          corriendo = false;
+          btn.textContent = "▶ Ejecutar de nuevo";
+        }
+      }, 500);
+    });
+  })();
+
+  /* ---- 8 · el barrido ---- */
   (function () {
     const brazo = document.getElementById("brazo-barrido");
     const cont = document.getElementById("contador");
@@ -441,12 +513,15 @@ miServo.<span class="fn">write</span>(angulo);</pre>
         if (a <= 0) { a = 0; subiendo = true; }
         cont.textContent = a;
         brazo.style.transform = "rotate(" + (a - 90) + "deg)";
-        document.getElementById("ln-write").classList.toggle("aqui", a % 8 === 0);
+        document.getElementById("ln-for").classList.toggle("aqui", subiendo);
+        document.getElementById("ln-for2").classList.toggle("aqui", !subiendo);
+        document.getElementById("ln-write").classList.toggle("aqui", subiendo && a % 8 === 0);
+        document.getElementById("ln-write2").classList.toggle("aqui", !subiendo && a % 8 === 0);
       }, 60);
     });
   })();
 
-  /* ---- 8 y 9 · la perilla y el map ---- */
+  /* ---- 9 y 10 · la perilla y el map ---- */
   (function () {
     const girar = (el, v) => el.style.transform = "rotate(" + (v / 1023 * 270 - 135) + "deg)";
     const pot = document.getElementById("pot");
@@ -469,7 +544,7 @@ miServo.<span class="fn">write</span>(angulo);</pre>
     mapear(512);
   })();
 
-  /* ---- 10 · la barrera ---- */
+  /* ---- 11 · la barrera ---- */
   (function () {
     const barrera = document.getElementById("barrera");
     const luz = document.getElementById("luz-barrera");
@@ -505,6 +580,20 @@ miServo.<span class="fn">write</span>(angulo);</pre>
     libreria: {
       t: "¿Qué es una librería?",
       d: "<p>Es un <strong>paquete de código que alguien ya escribió</strong> y dejó disponible para todos. Al poner <code>#include &lt;Servo.h&gt;</code> le dices al IDE: «tráeme esa caja de herramientas».</p><p>Desde ese momento puedes usar órdenes nuevas como <code>attach</code> y <code>write</code>, sin saber cómo funcionan por dentro. Es como usar el microondas sin saber construir uno. 🍿</p><p>Hay librerías para casi todo: pantallas, sensores, tarjetas de memoria… y casi todas son <strong>gratis</strong>, igual que el propio Arduino.</p>"
+    },
+    "p-circuito": {
+      t: "Así se arma la barrera 🔧",
+      d: "<p>La protoboard va <strong>igualita al proyecto de la sesión 4</strong>: el botón al pin 2 (con su 10 kΩ) y la luz de la barrera al pin 13 (con su 220 Ω).</p>"
+        + circuitoBotonLedSVG("el botón", "la luz de la barrera")
+        + "<p>Y el servo aparte, con sus tres cables de siempre — él no necesita protoboard:</p><svg viewBox='0 0 620 300' style='width:100%; max-width:26em; display:block; margin:0 auto' aria-label='Servo conectado al Arduino con tres cables'><rect x='20' y='60' width='150' height='200' rx='12' fill='#00878F'/><text x='95' y='90' text-anchor='middle' fill='#fff' font-family='monospace' font-size='15'>ARDUINO</text><rect x='32' y='110' width='126' height='26' rx='4' fill='#143642'/><text x='95' y='128' text-anchor='middle' fill='#fff' font-family='monospace' font-size='13'>5V</text><rect x='32' y='160' width='126' height='26' rx='4' fill='#143642'/><text x='95' y='178' text-anchor='middle' fill='#fff' font-family='monospace' font-size='13'>GND</text><rect x='32' y='210' width='126' height='26' rx='4' fill='#143642'/><text x='95' y='228' text-anchor='middle' fill='#fff' font-family='monospace' font-size='13'>pin 9</text><rect x='430' y='110' width='120' height='90' rx='10' fill='#1565C0'/><circle cx='490' cy='110' r='18' fill='#90A4AE'/><rect x='484' y='55' width='12' height='56' rx='6' fill='#ECEFF1' stroke='#90A4AE' stroke-width='2'/><text x='490' y='225' text-anchor='middle' font-size='14' fill='#5E7480' font-family='Nunito, sans-serif'>servo SG90</text><path class='cable-w' d='M164 123 C 280 123, 320 140, 428 140' stroke='#E84855'/><path class='cable-w' d='M164 173 C 280 173, 320 160, 428 158' stroke='#6D4C41'/><path class='cable-w' d='M164 223 C 300 223, 340 180, 428 176' stroke='#FB8C00'/><text x='300' y='112' text-anchor='middle' font-size='13' fill='#E84855' font-family='Nunito, sans-serif'>rojo → 5V</text><text x='300' y='160' text-anchor='middle' font-size='13' fill='#6D4C41' font-family='Nunito, sans-serif'>café → GND</text><text x='300' y='248' text-anchor='middle' font-size='13' fill='#FB8C00' font-family='Nunito, sans-serif'>naranjo → pin 9</text></svg><p class='nota'>Truco: si los pines 5V y GND del Arduino ya están ocupados, el rojo y el café del servo pueden salir de los rieles + y − de la protoboard. 😉</p>"
+    },
+    "p-codigo": {
+      t: "El programa completo 📋",
+      d: "<pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>#include &lt;Servo.h&gt;\nServo barrera;\n\nvoid setup() {\n  pinMode(2, INPUT);\n  pinMode(13, OUTPUT);\n  barrera.attach(9);\n  barrera.write(90);   // barrera arriba al partir...\n  delay(500);          // ...y tiempo de llegar\n}\n\nvoid loop() {\n  if (digitalRead(2) == HIGH) {\n    barrera.write(0);          // barrera abajo\n    digitalWrite(13, HIGH);    // y la luz parpadea\n    delay(300);\n    digitalWrite(13, LOW);\n    delay(300);\n  } else {\n    barrera.write(90);         // barrera arriba\n    delay(300);                // esperamos que llegue\n    digitalWrite(13, LOW);\n  }\n}</code></pre><p>Junta todo lo de hoy: el if/else de la sesión 4, la librería Servo y los delay que le dan su tiempo al servo. También está en <code>sketches/sesion-06/barrera</code>.</p>"
+    },
+    servo5v: {
+      t: "¿No es mucho pedirle energía al Arduino? 🔋",
+      d: "<p>Buena pregunta: el servo come mucha más energía que un LED. Quieto casi no pide nada, moviéndose usa unos <strong>100-250 mA</strong>… y si alguien le sujeta el brazo, ¡hasta <strong>650 mA</strong>!</p><p>El Arduino viene preparado: por USB tiene un <strong>fusible de 500 mA</strong> que se corta solo si le piden demasiado — y se recupera solito, como un guardián que cierra la puerta y la vuelve a abrir. Lo peor que puede pasar si el servo se atasca es que el Arduino <strong>se reinicie</strong>: nada se quema.</p><p>Por eso <strong>un</strong> servo chico puede ir directo a los 5V. Para dos o más servos, o motores grandes, se les da su propia fuente (un portapilas), juntando los GND.</p><p>¿Y el cable naranjo? Tranquilo: por él viajan solo las <strong>órdenes</strong>, casi sin corriente. El trabajo pesado va por el rojo.</p>"
     },
     analogico: {
       t: "Digital y analógico",

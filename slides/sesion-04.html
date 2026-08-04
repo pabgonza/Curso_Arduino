@@ -641,13 +641,6 @@
   }
   .caja-var-valor.salto { animation: salto-var .3s; }
   @keyframes salto-var { 50% { transform: scale(1.25); } }
-  .anat {
-    font-size: .78rem; color: var(--gris); text-align: center;
-    background: var(--blanco); border: 2px solid var(--teal-suave);
-    border-radius: 10px; padding: .35em .6em; line-height: 1.35;
-  }
-  .anat code { color: var(--teal-osc); font-weight: 700; }
-
   /* piezas del armado que van apareciendo */
   .oculta { opacity: 0; transition: opacity .35s; }
   .visible-paso { opacity: 1; }
@@ -953,13 +946,7 @@
     pintar(false);
   })();
 
-  /* checklists y quiz */
-  document.querySelectorAll(".check").forEach(c => {
-    c.addEventListener("click", e => { if (e.target.closest(".sm")) return; c.classList.toggle("hecho"); });
-    c.addEventListener("keydown", e => {
-      if (e.key === "Enter" || e.key === " ") { c.classList.toggle("hecho"); e.preventDefault(); }
-    });
-  });
+  /* quiz */
   document.querySelectorAll(".quiz").forEach(q => {
     const voltear = () => q.classList.toggle("volteada");
     q.addEventListener("click", voltear);
@@ -1013,9 +1000,8 @@
     },
     "p-circuito": {
       t: "Así se ve armado completo 🔧",
-      d: "<svg viewBox='0 0 640 340' style='width:100%' aria-label='Boton y LED juntos en la protoboard'><rect x='6' y='60' width='120' height='250' rx='12' fill='#00878F'/><text x='66' y='87' text-anchor='middle' fill='#fff' font-family='monospace' font-size='14'>ARDUINO</text><rect x='14' y='100' width='104' height='24' rx='4' fill='#143642'/><text x='66' y='117' text-anchor='middle' fill='#fff' font-family='monospace' font-size='13'>5V</text><rect x='14' y='148' width='104' height='24' rx='4' fill='#143642'/><text x='66' y='165' text-anchor='middle' fill='#fff' font-family='monospace' font-size='13'>pin 2</text><rect x='14' y='196' width='104' height='24' rx='4' fill='#143642'/><text x='66' y='213' text-anchor='middle' fill='#fff' font-family='monospace' font-size='13'>pin 13</text><rect x='14' y='244' width='104' height='24' rx='4' fill='#143642'/><text x='66' y='261' text-anchor='middle' fill='#fff' font-family='monospace' font-size='13'>GND</text>"
-        + protoboardSVG({ x: 150, y: 30, w: 480, h: 300 })
-        + "<text x='304' y='90' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif' font-weight='700'>el botón (hoy)</text><text x='500' y='90' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif' font-weight='700'>el LED (sesión 3)</text><g stroke='#B0BEC5' stroke-width='5' stroke-linecap='round'><line x1='288' y1='164' x2='278' y2='156'/><line x1='320' y1='164' x2='330' y2='156'/><line x1='288' y1='194' x2='278' y2='202'/><line x1='320' y1='194' x2='330' y2='202'/></g><rect x='282' y='161' width='44' height='36' rx='6' fill='#2E3B41'/><circle cx='304' cy='179' r='13' fill='#E84855' stroke='#B03744' stroke-width='3'/><path d='M122 112 C 200 112, 240 126, 278 148' fill='none' stroke='#E84855' stroke-width='6' stroke-linecap='round'/><path d='M122 160 C 210 170, 280 205, 330 212' fill='none' stroke='#4C7CFF' stroke-width='6' stroke-linecap='round'/><line x1='330' y1='222' x2='330' y2='294' stroke='#9aa7ad' stroke-width='4'/><rect x='321' y='240' width='18' height='34' rx='4' fill='#D7B899' stroke='#8D6E63' stroke-width='2'/><rect x='321' y='246' width='18' height='4' fill='#8D3B0B'/><rect x='321' y='253' width='18' height='4' fill='#000'/><rect x='321' y='260' width='18' height='4' fill='#E8A33D'/><text x='348' y='262' font-size='12' fill='#5E7480' font-family='Nunito, sans-serif'>10 kΩ</text><circle cx='500' cy='210' r='13' fill='#E84855' stroke='#B03744' stroke-width='3'/><line x1='494' y1='222' x2='487' y2='248' stroke='#B03744' stroke-width='4' stroke-linecap='round'/><line x1='506' y1='222' x2='512' y2='244' stroke='#B03744' stroke-width='4' stroke-linecap='round'/><path d='M122 208 C 260 208, 400 250, 484 248' fill='none' stroke='#FB8C00' stroke-width='6' stroke-linecap='round'/><line x1='512' y1='248' x2='512' y2='294' stroke='#9aa7ad' stroke-width='4'/><rect x='503' y='254' width='18' height='32' rx='4' fill='#D7B899' stroke='#8D6E63' stroke-width='2'/><rect x='503' y='260' width='18' height='4' fill='#D32F2F'/><rect x='503' y='267' width='18' height='4' fill='#D32F2F'/><rect x='503' y='274' width='18' height='4' fill='#795548'/><text x='530' y='276' font-size='12' fill='#5E7480' font-family='Nunito, sans-serif'>220 Ω</text><path d='M122 256 C 150 276, 158 288, 170 292' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/></svg><p>Izquierda: el circuito del botón de hoy (5V → botón → pin 2, con su 10 kΩ al riel −). Derecha: el LED de la sesión 3 (pin 13 → patita larga, y la corta con su 220 Ω al riel −). <strong>Comparten el riel negro</strong>, que vuelve a GND.</p><p class='nota'>Los colores de las resistencias son su nombre: café-negro-naranjo = 10 kΩ · rojo-rojo-café = 220 Ω. 🎨</p>"
+      d: circuitoBotonLedSVG("el botón (hoy)", "el LED (sesión 3)")
+        + "<p>Izquierda: el circuito del botón de hoy (5V → botón → pin 2, con su 10 kΩ al riel −). Derecha: el LED de la sesión 3 (pin 13 → patita larga, y la corta con su 220 Ω al riel −). <strong>Comparten el riel negro</strong>, que vuelve a GND.</p><p class='nota'>Los colores de las resistencias son su nombre: café-negro-naranjo = 10 kΩ · rojo-rojo-café = 220 Ω. 🎨</p>"
     },
     "p-codigo": {
       t: "El programa completo 📋",

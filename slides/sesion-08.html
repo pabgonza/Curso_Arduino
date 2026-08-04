@@ -182,9 +182,9 @@
   <p class="eyebrow">⭐ Proyecto de la sesión</p>
   <h2>El termómetro semáforo 🌡️🚦</h2>
   <p class="grande">Junta todo: el sensor mide, el monitor serie cuenta, y los LEDs avisan de un vistazo.</p>
-  <div style="display:flex; flex-direction:column; gap:.5em; width:min(92vw,640px)">
-    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Armar el DHT11 y el semáforo de 3 LEDs en la protoboard</span></div>
-    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Subir el programa y abrir el <strong>monitor serie</strong>: ¿cuántos grados hace en la sala?</span></div>
+  <div style="display:flex; flex-direction:column; gap:.4em; width:min(92vw,680px)">
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Armar el DHT11 y el semáforo de 3 LEDs <button class="sm" data-sm="p-circuito">?</button></span></div>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Subir el programa: ¿cuántos grados marca el <strong>monitor serie</strong>? <button class="sm" data-sm="p-codigo">?</button></span></div>
     <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Experimento 1: aprieta el sensor con los dedos un rato… ¿sube? 🖐️</span></div>
     <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Experimento 2: acércale una bolsita <strong>cerrada</strong> con hielo… ¿baja? 🧊</span></div>
     <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Ajusta los umbrales hasta que el amarillo sea justo lo «rico» para ti</span></div>
@@ -350,12 +350,6 @@
   })();
 
   /* checklists y quiz */
-  document.querySelectorAll(".check").forEach(c => {
-    c.addEventListener("click", e => { if (e.target.closest(".sm")) return; c.classList.toggle("hecho"); });
-    c.addEventListener("keydown", e => {
-      if (e.key === "Enter" || e.key === " ") { c.classList.toggle("hecho"); e.preventDefault(); }
-    });
-  });
   document.querySelectorAll(".quiz").forEach(q => {
     const voltear = () => q.classList.toggle("volteada");
     q.addEventListener("click", voltear);
@@ -363,6 +357,30 @@
   });
 
   saberMas({
+    "p-circuito": {
+      t: "Así se ve armado completo 🔧",
+      d: "<svg viewBox='0 0 640 470' style='width:100%' aria-label='DHT11 y tres LEDs montados en la protoboard'>"
+        + arduinoSVG({ x: 6, y: 10, pads: ["pin 2", "5V", "pin 13", "pin 11", "pin 12", "GND"] }).svg
+        + protoboardSVG({ x: 150, y: 120, w: 480, h: 300 })
+        + "<g stroke='#B0BEC5' stroke-width='5' stroke-linecap='round'><line x1='382' y1='168' x2='382' y2='197'/><line x1='408' y1='168' x2='408' y2='197'/><line x1='434' y1='168' x2='434' y2='197'/></g>"
+        + "<rect x='369' y='60' width='78' height='110' rx='8' fill='#64B5F6' stroke='#1E88E5' stroke-width='3'/><text x='408' y='100' text-anchor='middle' font-size='13' fill='#fff' font-family='monospace'>DHT11</text>"
+        + "<text x='382' y='163' text-anchor='middle' font-size='10' fill='#fff' font-family='monospace'>+</text><text x='408' y='163' text-anchor='middle' font-size='8' fill='#fff' font-family='monospace'>datos</text><text x='434' y='163' text-anchor='middle' font-size='10' fill='#fff' font-family='monospace'>−</text>"
+        + ledSVG(265, 294, 393, "#46B450", "#2E7D32")
+        + ledSVG(395, 294, 393, "#F5B301", "#C78F00")
+        + ledSVG(525, 294, 393)
+        + "<path d='M128 62 C 250 60, 340 130, 406 208' fill='none' stroke='#FB8C00' stroke-width='6' stroke-linecap='round'/>"
+        + "<path d='M128 110 C 240 125, 330 190, 380 224' fill='none' stroke='#E84855' stroke-width='6' stroke-linecap='round'/>"
+        + "<path d='M434 214 C 560 235, 610 320, 572 391' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>"
+        + "<path d='M128 158 C 280 215, 430 245, 510 292' fill='none' stroke='#AB47BC' stroke-width='6' stroke-linecap='round'/>"
+        + "<path d='M128 206 C 260 250, 330 285, 380 294' fill='none' stroke='#F5B301' stroke-width='6' stroke-linecap='round'/>"
+        + "<path d='M128 254 C 175 275, 220 290, 250 294' fill='none' stroke='#46B450' stroke-width='6' stroke-linecap='round'/>"
+        + "<path d='M128 302 C 148 350, 160 382, 172 391' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>"
+        + "</svg><p>Todo en la protoboard. El DHT11 se para con sus tres patitas en una fila, y los cables llegan a la <strong>misma columna</strong> de cada una (+ → 5V, datos → pin 2). El semáforo térmico: verde en el pin 12, amarillo en el 11 y rojo en el 13 — el cable de cada pin llega a la columna de la patita <strong>+</strong> de su LED, y la patita <strong>−</strong> (el lado plano) baja con su <strong>220 Ω</strong> al riel −. Ahí se juntan <strong>todos los GND</strong>: los tres LEDs, el − del sensor y el cable que vuelve al Arduino.</p>"
+    },
+    "p-codigo": {
+      t: "El programa completo 📋",
+      d: "<pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.8em;line-height:1.45'><code>#include &lt;DHT.h&gt;\nDHT dht(2, DHT11);\n\nvoid setup() {\n  Serial.begin(9600);\n  dht.begin();\n  pinMode(12, OUTPUT);\n  pinMode(11, OUTPUT);\n  pinMode(13, OUTPUT);\n}\n\nvoid loop() {\n  float t = dht.readTemperature();\n  Serial.println(t);\n\n  // primero apagamos los tres...\n  digitalWrite(12, LOW);\n  digitalWrite(11, LOW);\n  digitalWrite(13, LOW);\n\n  // ...y prendemos solo el que gana\n  if (t &lt; 15) {\n    digitalWrite(12, HIGH);   // verde: ¡frío!\n  } else if (t &lt; 25) {\n    digitalWrite(11, HIGH);   // amarillo: rico\n  } else {\n    digitalWrite(13, HIGH);   // rojo: ¡calor!\n  }\n  delay(1000);\n}</code></pre><p>Ojo con el detalle nuevo: antes de elegir, se <strong>apagan los tres</strong> — si no, quedarían encendidos para siempre. También está en <code>sketches/sesion-08/semaforo_termico</code>.</p>"
+    },
     "dht-dentro": {
       t: "El DHT11 por dentro 🔎",
       d: "<p>Para la <strong>temperatura</strong> tiene un material al que le cuesta más o menos dejar pasar la electricidad según el calor: midiendo ese cambio, sabe los grados.</p><p>Para la <strong>humedad</strong> tiene una especie de <strong>esponjita eléctrica</strong>: cuando el aire trae más agua, la esponjita deja pasar la electricidad distinto… ¡y ahí está el número!</p>"
