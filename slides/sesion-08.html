@@ -118,7 +118,7 @@
       <p class="tuto-num">Pruébalo tú</p>
       <p class="tuto-texto" id="u-txt">Mueve la temperatura y mira qué pregunta gana.</p>
       <p class="grande" style="margin:0">🌡️ <strong id="u-val">21</strong> °C</p>
-      <input type="range" id="u-temp" min="0" max="40" value="21" aria-label="Temperatura">
+      <input type="range" id="u-temp" min="0" max="40" value="21" style="width:100%" aria-label="Temperatura">
       <div class="fila" style="gap:.6em; justify-content:center">
         <span class="led-u" id="u-verde" style="--c:var(--verde)"></span>
         <span class="led-u" id="u-ambar" style="--c:var(--ambar)"></span>
@@ -135,7 +135,7 @@
   <h2>Los tres cables del termómetro 🔌</h2>
   <div class="tuto">
     <div class="proto-caja">
-      <svg viewBox="0 0 620 330" aria-label="DHT11 conectado al Arduino con tres cables">
+      <svg viewBox="0 0 620 300" aria-label="DHT11 conectado al Arduino con tres cables">
         <rect x="20" y="30" width="150" height="210" rx="12" fill="#00878F"/>
         <text x="95" y="60" text-anchor="middle" fill="#fff" font-family="monospace" font-size="15">ARDUINO</text>
         <rect x="32" y="78" width="126" height="26" rx="4" fill="#143642"/>
@@ -145,25 +145,28 @@
         <rect x="32" y="174" width="126" height="26" rx="4" fill="#143642"/>
         <text x="95" y="192" text-anchor="middle" fill="#fff" font-family="monospace" font-size="13">GND</text>
 
-        <text x="505" y="56" text-anchor="middle" font-size="14" fill="#5E7480" font-family="Nunito, sans-serif" font-weight="700">DHT11</text>
-        <rect x="440" y="68" width="130" height="112" rx="10" fill="#1E88E5"/>
-        <g fill="#0D47A1">
-          <circle cx="470" cy="95" r="6"/><circle cx="505" cy="95" r="6"/><circle cx="540" cy="95" r="6"/>
-          <circle cx="470" cy="122" r="6"/><circle cx="505" cy="122" r="6"/><circle cx="540" cy="122" r="6"/>
-          <circle cx="470" cy="149" r="6"/><circle cx="505" cy="149" r="6"/><circle cx="540" cy="149" r="6"/>
-        </g>
+        <text x="495" y="44" text-anchor="middle" font-size="14" fill="#5E7480" font-family="Nunito, sans-serif" font-weight="700">DHT11</text>
+        <rect x="430" y="56" width="130" height="176" rx="10" fill="#1E88E5"/>
         <g stroke="#90A4AE" stroke-width="5" stroke-linecap="round">
-          <line x1="465" y1="180" x2="465" y2="202"/>
-          <line x1="505" y1="180" x2="505" y2="202"/>
-          <line x1="545" y1="180" x2="545" y2="202"/>
+          <line x1="404" y1="91" x2="430" y2="91"/>
+          <line x1="404" y1="139" x2="430" y2="139"/>
+          <line x1="404" y1="187" x2="430" y2="187"/>
         </g>
-        <text x="465" y="224" text-anchor="middle" font-size="11" fill="#5E7480" font-family="monospace">VCC</text>
-        <text x="505" y="224" text-anchor="middle" font-size="11" fill="#5E7480" font-family="monospace">DATA</text>
-        <text x="545" y="224" text-anchor="middle" font-size="11" fill="#5E7480" font-family="monospace">GND</text>
+        <g font-size="12" fill="#BBDEFB" font-family="monospace">
+          <text x="440" y="95">VCC</text>
+          <text x="440" y="143">DATA</text>
+          <text x="440" y="191">GND</text>
+        </g>
+        <g fill="#0D47A1">
+          <circle cx="505" cy="90" r="6"/><circle cx="535" cy="90" r="6"/>
+          <circle cx="505" cy="125" r="6"/><circle cx="535" cy="125" r="6"/>
+          <circle cx="505" cy="160" r="6"/><circle cx="535" cy="160" r="6"/>
+          <circle cx="505" cy="195" r="6"/><circle cx="535" cy="195" r="6"/>
+        </g>
 
-        <path class="cable-w" d="M164 91 L 369 91 Q 385 91 385 107 L 385 244 Q 385 260 401 260 L 449 260 Q 465 260 465 244 L 465 204" stroke="#E84855"/>
-        <path class="cable-w" d="M164 139 L 389 139 Q 405 139 405 155 L 405 260 Q 405 276 421 276 L 489 276 Q 505 276 505 260 L 505 204" stroke="#4C7CFF"/>
-        <path class="cable-w" d="M164 187 L 409 187 Q 425 187 425 203 L 425 276 Q 425 292 441 292 L 529 292 Q 545 292 545 276 L 545 204" stroke="#37474F"/>
+        <path class="cable-w" d="M164 91 L 400 91" stroke="#E84855"/>
+        <path class="cable-w" d="M164 139 L 400 139" stroke="#4C7CFF"/>
+        <path class="cable-w" d="M164 187 L 400 187" stroke="#37474F"/>
       </svg>
     </div>
     <aside class="tuto-panel">
@@ -197,10 +200,10 @@
   <p class="eyebrow">El mismo truco, mil sensores</p>
   <h2>Sensores para todo el mundo 🌍</h2>
   <div class="fila">
-    <div class="tarjeta mini8"><h3>🔆 Luz</h3><p>El «ojito de gato» (LDR): sabe si está oscuro. Luces de calle que se prenden solas.</p></div>
-    <div class="tarjeta mini8"><h3>🌱 Tierra seca</h3><p>Dos patitas en el macetero avisan cuando la planta tiene sed.</p></div>
-    <div class="tarjeta mini8"><h3>💨 Humo y gas</h3><p>Huele lo que nosotros no: es el corazón de las alarmas de incendio.</p></div>
-    <div class="tarjeta mini8"><h3>🧲 Imán</h3><p>Nota si un imán se acerca: así saben las alarmas si una ventana se abrió.</p></div>
+    <div class="tarjeta mini8"><img class="foto8" src="../recursos/img/ldr.jpg" alt="Fotorresistencia LDR con su pista en zigzag"><h3>🔆 Luz</h3><p>El «ojito de gato» (LDR): sabe si está oscuro. Luces de calle que se prenden solas.</p><span class="credito8">Foto: Raimond Spekking · CC BY-SA 4.0</span></div>
+    <div class="tarjeta mini8"><img class="foto8" src="../recursos/img/humedad-tierra.jpg" style="object-fit:contain; background:#fff" alt="Sensor de humedad de tierra con dos patas metálicas"><h3>🌱 Tierra seca</h3><p>Dos patitas en el macetero avisan cuando la planta tiene sed.</p><span class="credito8">Foto: SparkFun · CC BY 2.0</span></div>
+    <div class="tarjeta mini8"><img class="foto8" src="../recursos/img/sensor-gas.jpg" alt="Sensor de gas con rejilla metálica"><h3>💨 Humo y gas</h3><p>Huele lo que nosotros no: es el corazón de las alarmas de incendio.</p><span class="credito8">Foto: Stefan Riepl · dominio público</span></div>
+    <div class="tarjeta mini8"><img class="foto8" src="../recursos/img/reed.jpg" alt="Interruptor reed: dos laminitas dentro de un tubo de vidrio"><h3>🧲 Imán</h3><p>Nota si un imán se acerca: así saben las alarmas si una ventana se abrió.</p><span class="credito8">Foto: Timothée Cognard · CC BY-SA 4.0</span></div>
   </div>
   <p class="grande" style="max-width:34em">Todos hablan igual que los que ya conoces: <strong>mandan números</strong>. Y tú ya sabes leerlos, compararlos con umbrales… y decidir. 😎</p>
 </section>
@@ -273,6 +276,8 @@
   /* ---------- 8 · sensores del mundo ---------- */
   .mini8 { max-width: min(84vw, 13.5em); }
   .mini8 p { font-size: .9rem; }
+  .foto8 { display: block; width: 100%; height: 6.5em; object-fit: cover; border-radius: 8px; margin-bottom: .5em; }
+  .credito8 { display: block; font-size: .62rem; color: var(--gris); opacity: .75; margin-top: .4em; }
 
   .proto-caja { flex: 1 1 30em; max-width: min(92vw, 40em); }
   .proto-caja svg { width: 100%; }

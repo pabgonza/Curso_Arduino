@@ -28,6 +28,11 @@ Imagenes descargadas de Wikimedia Commons. Uso educativo con atribucion.
 - `leds.jpg` -- Verschiedene LEDs.jpg | Autor: Afrank99 | Licencia: CC BY-SA 2.0 | [fuente](https://commons.wikimedia.org/wiki/File:Verschiedene_LEDs.jpg)
 - `lcd.jpg` -- HelloWorldByDesignermadsen-001.jpg (recorte de la pantalla) | Autor: Designermadsen | Licencia: CC BY-SA 4.0 | [fuente](https://commons.wikimedia.org/wiki/File:HelloWorldByDesignermadsen-001.jpg)
 
+- `ldr.jpg` -- Photoresistor with orange background-7536.jpg (version de 960 px) | Autor: Raimond Spekking | Licencia: CC BY-SA 4.0 | [fuente](https://commons.wikimedia.org/wiki/File:Photoresistor_with_orange_background-7536.jpg)
+- `humedad-tierra.jpg` -- SparkFun Soil Moisture Sensor (with Screw Terminals) | Autor: SparkFun Electronics | Licencia: CC BY 2.0 | [fuente](https://www.flickr.com/photos/41898857@N04/35799069006) (Flickr)
+- `sensor-gas.jpg` -- Gassensor tgs822.jpg (sensor de gas Figaro TGS822) | Autor: Stefan Riepl (Quark48) | Licencia: Public domain | [fuente](https://commons.wikimedia.org/wiki/File:Gassensor_tgs822.jpg)
+- `reed.jpg` -- Interrupteur reed.jpg (version de 960 px) | Autor: Timothee Cognard | Licencia: CC BY-SA 4.0 | [fuente](https://commons.wikimedia.org/wiki/File:Interrupteur_reed.jpg)
+
 ## Pantallazos (`pantallazos/`)
 
 Todos provienen de la documentación oficial de Arduino
