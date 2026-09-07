@@ -18,6 +18,9 @@ archivo.
 - `sesion-07/` — el murciélago HC-SR04: `murcielago`, `alarma` y `retroceso`.
 - `sesion-08/` — el DHT11: `termometro` y `semaforo_termico` (necesitan la
   librería "DHT sensor library" de Adafruit, del gestor de librerías).
+- `sesion-09/` — el LED RGB: `mezcla` (recetas de colores), `respiracion`
+  (brillo con analogWrite), `rueda_perilla` (arcoíris con el potenciómetro) y
+  `lampara_humor` (el proyecto: el color según la distancia del HC-SR04).
 
 ## Librerías
 

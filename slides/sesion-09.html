@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sesión 9 · Colores locos: el LED RGB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/slides.css">
+</head>
+<body>
+
+<!-- 1 · Portada -->
+<section class="slide portada">
+  <span class="sesion-num">Sesión 9</span>
+  <h1>Colores locos 🌈</h1>
+  <p class="grande">Tu Arduino ya siente el calor y te lo cuenta.<br>Hoy aprende a <strong>pintar con luz</strong>: un solo LED que puede ser de <strong>cualquier color</strong>.</p>
+  <div class="semaforo-vivo" aria-hidden="true">
+    <span class="led" id="pled-r" style="--c:var(--rojo)"></span>
+    <span class="led" id="pled-a" style="--c:var(--verde)"></span>
+    <span class="led" id="pled-v" style="--c:#4C7CFF"></span>
+  </div>
+</section>
+
+<!-- 2 · El LED RGB -->
+<section class="slide">
+  <p class="eyebrow">El actuador de hoy</p>
+  <h2>El LED RGB: tres LEDs en uno 🔴🟢🔵</h2>
+  <div class="fila" style="align-items:center; gap:2em">
+    <figure class="figura">
+      <img src="../recursos/img/led-rgb.jpg" alt="LED RGB de 5 mm con sus cuatro patitas">
+      <figcaption>Se ve blanco… ¡hasta que lo prendes! <span class="credito">Foto: Mister rf · CC BY-SA 4.0</span></figcaption>
+    </figure>
+    <div style="max-width:24em; text-align:left; display:flex; flex-direction:column; gap:.5em">
+      <ul class="lista">
+        <li>Adentro viven <strong>tres LEDs chiquitos</strong>: uno <strong>R</strong>ojo, uno <strong>G</strong>reen (verde) y uno <strong>B</strong>lue (azul). Por eso «RGB».<button class="sm" data-sm="rgb-ojos">?</button></li>
+        <li>Tiene <strong>cuatro patitas</strong>: una por color… y una <strong>−</strong> que comparten los tres.</li>
+        <li>Si prendes los tres a la vez se <strong>mezclan</strong> y ves un solo color. ¡Así funcionan las pantallas!</li>
+      </ul>
+      <p class="nota">El de tu kit viene en un <strong>módulo</strong>: una plaquita con las patitas marcadas <strong>R G B −</strong> y las resistencias ya puestas. Cero resistencias que armar. 😎</p>
+    </div>
+  </div>
+</section>
+
+<!-- 3 · Mezclar luz -->
+<section class="slide">
+  <p class="eyebrow">Pintar con luz</p>
+  <h2>La receta de cada color 🎨</h2>
+  <div class="tuto">
+    <div class="mezcla-caja">
+      <div class="mezcla-luz" id="mz-luz"></div>
+      <div class="mezcla-sliders">
+        <label>🔴 <input type="range" id="mz-r" min="0" max="255" value="255"> <strong id="mz-rv">255</strong></label>
+        <label>🟢 <input type="range" id="mz-g" min="0" max="255" value="120"> <strong id="mz-gv">120</strong></label>
+        <label>🔵 <input type="range" id="mz-b" min="0" max="255" value="0"> <strong id="mz-bv">0</strong></label>
+      </div>
+    </div>
+    <aside class="tuto-panel">
+      <p class="tuto-num">Recetas listas</p>
+      <div class="fila" style="gap:.4em">
+        <button class="boton secundario chip" data-rgb="255,120,0">🍊</button>
+        <button class="boton secundario chip" data-rgb="150,0,255">💜</button>
+        <button class="boton secundario chip" data-rgb="0,200,255">🩵</button>
+        <button class="boton secundario chip" data-rgb="255,60,120">🩷</button>
+        <button class="boton secundario chip" data-rgb="255,255,0">💛</button>
+        <button class="boton secundario chip" data-rgb="255,255,255">⬜</button>
+      </div>
+      <div class="ide" style="width:100%">
+        <div class="ide-barra"><span class="ide-nombre">la receta</span></div>
+        <pre style="font-size:.85rem; overflow:hidden; padding:.5em .7em"><span class="fn">color</span>(<span class="num-vivo" id="mz-cr">255</span>, <span class="num-vivo" id="mz-cg">120</span>, <span class="num-vivo" id="mz-cb">0</span>);</pre>
+      </div>
+      <p class="nota">Cada color va del <strong>0</strong> (apagado) al <strong>255</strong> (a todo). ¿Rojo + verde? Con luz da <strong>amarillo</strong>, no café.<button class="sm" data-sm="luz-pintura">?</button></p>
+    </aside>
+  </div>
+</section>
+
+<!-- 4 · Medio encendido -->
+<section class="slide slide-concepto">
+  <p class="eyebrow">Una idea nueva de programación</p>
+  <h2>Medio encendido: <code>analogWrite</code> ✨</h2>
+  <p class="grande" style="max-width:36em"><code>digitalWrite</code> solo sabe <strong>prendido</strong> o <strong>apagado</strong>. Para un LED «a medias» el cerebrito hace trampa: lo <strong>prende y apaga tan rápido</strong> que tu ojo ve un promedio.</p>
+  <div class="tuto" style="align-items:center">
+    <div class="pwm-caja">
+      <svg viewBox="0 0 400 110" class="pwm-svg" aria-label="Pulsos de encendido y apagado">
+        <line x1="8" y1="92" x2="392" y2="92" stroke="#B0BEC5" stroke-width="3"/>
+        <g id="pwm-pulsos" fill="var(--teal)"></g>
+        <text x="200" y="108" text-anchor="middle" font-size="11" fill="#5E7480" font-family="Nunito, sans-serif">← una milésima de segundo →</text>
+      </svg>
+      <input type="range" id="pwm-v" min="0" max="255" value="128" aria-label="Brillo">
+    </div>
+    <aside class="tuto-panel" style="align-items:center">
+      <span class="pwm-led" id="pwm-led"></span>
+      <div class="ide" style="width:100%">
+        <div class="ide-barra"><span class="ide-nombre">brillo</span></div>
+        <pre style="font-size:.85rem; overflow:hidden; padding:.5em .7em"><span class="fn">analogWrite</span>(<span class="num">3</span>, <span class="num-vivo" id="pwm-num">128</span>);</pre>
+      </div>
+      <p class="nota" id="pwm-txt" style="margin:0">Mitad del tiempo prendido: brilla a la mitad.</p>
+    </aside>
+  </div>
+  <p class="nota">Solo los pines con <strong>~</strong> saben hacer este truco (3, 5, 6, 9, 10 y 11). Se llama <strong>PWM</strong>.<button class="sm" data-sm="pwm">?</button></p>
+</section>
+
+<!-- 5 · Tu propia orden -->
+<section class="slide slide-concepto">
+  <p class="eyebrow">Una idea nueva de programación</p>
+  <h2>Inventa tu propia orden: la función 🪄</h2>
+  <div class="tuto">
+    <div style="display:flex; flex-direction:column; gap:.7em; align-items:center">
+      <div class="sim-ide" style="flex:none; min-width:340px">
+        <div class="sim-titulo"><span class="sim-punto"></span>color.ino</div>
+        <div class="sim-editor lineas" style="height:auto">
+          <div class="ln"><span class="n">1</span><code><span class="kw">void</span> <span class="fn">color</span>(<span class="kw">int</span> r, <span class="kw">int</span> g, <span class="kw">int</span> b) {</code></div>
+          <div class="ln"><span class="n">2</span><code>  <span class="fn">analogWrite</span>(<span class="num">3</span>, r);   <span class="cm">// rojo</span></code></div>
+          <div class="ln"><span class="n">3</span><code>  <span class="fn">analogWrite</span>(<span class="num">5</span>, g);   <span class="cm">// verde</span></code></div>
+          <div class="ln"><span class="n">4</span><code>  <span class="fn">analogWrite</span>(<span class="num">6</span>, b);   <span class="cm">// azul</span></code></div>
+          <div class="ln"><span class="n">5</span><code>}</code></div>
+        </div>
+      </div>
+      <div class="fila" style="gap:.5em; justify-content:center">
+        <span class="anat"><code>void</code><br>no devuelve nada</span>
+        <span class="anat"><code>color</code><br>el nombre que inventaste</span>
+        <span class="anat"><code>(int r, int g, int b)</code><br>lo que le entregas</span>
+      </div>
+    </div>
+    <aside class="tuto-panel">
+      <p class="tuto-num">Escribir una vez, usar mil</p>
+      <p class="tuto-texto">Cada color son <strong>tres líneas</strong>. Si las escribes una sola vez dentro de <code>color(…)</code>, después basta con decir <code>color(255, 120, 0);</code> ¡y listo, naranjo!</p>
+      <p class="nota"><code>setup</code> y <code>loop</code> también son funciones: la diferencia es que a esas dos el Arduino las llama solo.<button class="sm" data-sm="funcion">?</button></p>
+    </aside>
+  </div>
+</section>
+
+<!-- 6 · Conexión -->
+<section class="slide">
+  <p class="eyebrow">¡Manos a la obra!</p>
+  <h2>Los cuatro cables del LED RGB 🔌</h2>
+  <div class="tuto">
+    <div class="proto-caja">
+      <svg viewBox="0 0 620 300" aria-label="Módulo LED RGB conectado al Arduino con cuatro cables">
+        <rect x="20" y="30" width="150" height="240" rx="12" fill="#00878F"/>
+        <text x="95" y="60" text-anchor="middle" fill="#fff" font-family="monospace" font-size="15">ARDUINO</text>
+        <rect x="32" y="78" width="126" height="26" rx="4" fill="#143642"/>
+        <text x="95" y="96" text-anchor="middle" fill="#fff" font-family="monospace" font-size="13">pin 3 ~</text>
+        <rect x="32" y="126" width="126" height="26" rx="4" fill="#143642"/>
+        <text x="95" y="144" text-anchor="middle" fill="#fff" font-family="monospace" font-size="13">pin 5 ~</text>
+        <rect x="32" y="174" width="126" height="26" rx="4" fill="#143642"/>
+        <text x="95" y="192" text-anchor="middle" fill="#fff" font-family="monospace" font-size="13">pin 6 ~</text>
+        <rect x="32" y="222" width="126" height="26" rx="4" fill="#143642"/>
+        <text x="95" y="240" text-anchor="middle" fill="#fff" font-family="monospace" font-size="13">GND</text>
+
+        <text x="495" y="44" text-anchor="middle" font-size="14" fill="#5E7480" font-family="Nunito, sans-serif" font-weight="700">módulo LED RGB</text>
+        <rect x="430" y="56" width="130" height="218" rx="10" fill="#1B2A4A"/>
+        <g stroke="#90A4AE" stroke-width="5" stroke-linecap="round">
+          <line x1="404" y1="91" x2="430" y2="91"/>
+          <line x1="404" y1="139" x2="430" y2="139"/>
+          <line x1="404" y1="187" x2="430" y2="187"/>
+          <line x1="404" y1="235" x2="430" y2="235"/>
+        </g>
+        <g font-size="13" fill="#BBDEFB" font-family="monospace" font-weight="700">
+          <text x="440" y="96">R</text>
+          <text x="440" y="144">G</text>
+          <text x="440" y="192">B</text>
+          <text x="440" y="240">−</text>
+        </g>
+        <circle cx="510" cy="160" r="36" fill="#ECEFF1" stroke="#90A4AE" stroke-width="4"/>
+        <circle cx="498" cy="150" r="8" fill="#E84855"/>
+        <circle cx="522" cy="150" r="8" fill="#46B450"/>
+        <circle cx="510" cy="172" r="8" fill="#4C7CFF"/>
+
+        <path class="cable-w" d="M164 91 L 400 91" stroke="#FB8C00"/>
+        <path class="cable-w" d="M164 139 L 400 139" stroke="#46B450"/>
+        <path class="cable-w" d="M164 187 L 400 187" stroke="#4C7CFF"/>
+        <path class="cable-w" d="M164 235 L 400 235" stroke="#37474F"/>
+      </svg>
+    </div>
+    <aside class="tuto-panel">
+      <p class="tuto-num">Regla de colores</p>
+      <p class="tuto-texto">
+      🟠 <strong>R → pin 3</strong>: cuánto rojo.<br>
+      🟢 <strong>G → pin 5</strong>: cuánto verde.<br>
+      🔵 <strong>B → pin 6</strong>: cuánto azul.<br>
+      ⚫ <strong>− → GND</strong>: el suelo.</p>
+      <p class="nota">Los tres pines tienen <strong>~</strong>: son de los que saben hacer «medio encendido». Sin 5V: la energía sale por cada pin de color.</p>
+    </aside>
+  </div>
+</section>
+
+<!-- 7 · Práctica: la respiración -->
+<section class="slide">
+  <p class="eyebrow">Práctica 1</p>
+  <h2>La respiración 🫁</h2>
+  <div class="tuto">
+    <div class="sim-ide">
+      <div class="sim-titulo"><span class="sim-punto"></span>respiracion.ino</div>
+      <div class="sim-editor lineas">
+        <div class="ln"><span class="n">1</span><code><span class="kw">void</span> <span class="fn">loop</span>() {</code></div>
+        <div class="ln" data-r="0"><span class="n">2</span><code>  <span class="kw">for</span> (<span class="kw">int</span> b = <span class="num">0</span>; b &lt;= <span class="num">255</span>; b++) {   <span class="cm">// inhala</span></code></div>
+        <div class="ln" data-r="0"><span class="n">3</span><code>    <span class="fn">analogWrite</span>(<span class="num">3</span>, b);</code></div>
+        <div class="ln" data-r="0"><span class="n">4</span><code>    <span class="fn">delay</span>(<span class="num">5</span>);</code></div>
+        <div class="ln" data-r="0"><span class="n">5</span><code>  }</code></div>
+        <div class="ln" data-r="1"><span class="n">6</span><code>  <span class="kw">for</span> (<span class="kw">int</span> b = <span class="num">255</span>; b &gt;= <span class="num">0</span>; b--) {   <span class="cm">// exhala</span></code></div>
+        <div class="ln" data-r="1"><span class="n">7</span><code>    <span class="fn">analogWrite</span>(<span class="num">3</span>, b);</code></div>
+        <div class="ln" data-r="1"><span class="n">8</span><code>    <span class="fn">delay</span>(<span class="num">5</span>);</code></div>
+        <div class="ln" data-r="1"><span class="n">9</span><code>  }</code></div>
+        <div class="ln"><span class="n">10</span><code>}</code></div>
+      </div>
+    </div>
+    <aside class="tuto-panel" style="align-items:center">
+      <p class="tuto-num">Pruébala tú</p>
+      <p class="tuto-texto" id="resp-txt" style="min-height:3em">El <code>for</code> de la sesión 6 sube el brillo de 0 a 255 pasito a pasito… y otro <code>for</code> lo baja. El LED parece respirar.</p>
+      <span class="pwm-led" id="resp-led"></span>
+      <p class="lectura">brillo = <strong id="resp-val">0</strong></p>
+      <button class="boton" id="resp-btn">▶ Respirar</button>
+    </aside>
+  </div>
+  <p class="nota">Fíjate en el <code>b--</code>: es el hermano de <code>a++</code>, pero <strong>resta</strong> uno. Programa completo: <code>sketches/sesion-09/respiracion</code>.</p>
+</section>
+
+<!-- 8 · Práctica: la rueda de colores -->
+<section class="slide">
+  <p class="eyebrow">Práctica 2</p>
+  <h2>La rueda de colores con la perilla 🎛️🌈</h2>
+  <div class="tuto">
+    <div class="sim-ide">
+      <div class="sim-titulo"><span class="sim-punto"></span>rueda_perilla.ino</div>
+      <div class="sim-editor lineas">
+        <div class="ln"><span class="n">1</span><code><span class="kw">void</span> <span class="fn">loop</span>() {</code></div>
+        <div class="ln"><span class="n">2</span><code>  <span class="kw">int</span> pos = <span class="fn">analogRead</span>(A0) / <span class="num">4</span>;   <span class="cm">// de 0-1023 a 0-255</span></code></div>
+        <div class="ln"><span class="n">3</span><code>  <span class="fn">rueda</span>(pos);                     <span class="cm">// ¡nuestra orden!</span></code></div>
+        <div class="ln"><span class="n">4</span><code>}</code></div>
+      </div>
+      <p class="nota" style="text-align:left; padding:.4em .9em 0"><code>rueda(pos)</code> es otra función inventada: recibe un número del 0 al 255 y elige el color del arcoíris que le toca.<button class="sm" data-sm="rueda-como">?</button></p>
+    </div>
+    <aside class="tuto-panel" style="align-items:center">
+      <div style="display:flex; align-items:center; gap:.8em">
+        <svg viewBox="0 0 160 160" style="width:min(30vw,90px)" aria-label="Perilla">
+          <circle cx="80" cy="80" r="58" fill="#ECEFF1" stroke="#90A4AE" stroke-width="5"/>
+          <g id="rueda-perilla" style="transform-origin:80px 80px"><rect x="75" y="26" width="10" height="34" rx="5" fill="#37474F"/></g>
+          <circle cx="80" cy="80" r="14" fill="#607D8B"/>
+        </svg>
+        <span style="font-size:1.6em">➡️</span>
+        <span class="pwm-led" id="rueda-led"></span>
+      </div>
+      <input type="range" id="rueda-pot" min="0" max="1023" value="0" style="width:100%" aria-label="Giro de la perilla">
+      <p class="lectura">pos = <strong id="rueda-pos">0</strong> → <code id="rueda-col">color(255, 0, 0)</code></p>
+      <div class="fila" style="gap:.5em">
+        <button class="boton secundario" data-sm="rueda-circuito" style="font-size:.85rem; padding:.35em .8em">🔧 circuito</button>
+        <button class="boton secundario" data-sm="rueda-codigo" style="font-size:.85rem; padding:.35em .8em">📋 programa</button>
+      </div>
+    </aside>
+  </div>
+  <p class="nota">Gira la perilla despacio: el LED recorre <strong>todo el arcoíris</strong>. Programa completo: <code>sketches/sesion-09/rueda_perilla</code>.</p>
+</section>
+
+<!-- 9 · Proyecto: la lámpara de humor -->
+<section class="slide">
+  <p class="eyebrow">⭐ Proyecto de la sesión</p>
+  <h2>La lámpara de humor 🪔</h2>
+  <p class="grande">Saca la perilla y pon al <strong>murciélago</strong>: la lámpara cambia de color según lo <strong>cerca</strong> que esté tu mano.</p>
+  <div style="display:flex; flex-direction:column; gap:.4em; width:min(92vw,680px)">
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Armar el LED RGB y el HC-SR04 en la protoboard <button class="sm" data-sm="p-circuito">?</button></span></div>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Subir el programa: la distancia manda a la rueda <button class="sm" data-sm="p-codigo">?</button></span></div>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Probar: mano pegada = rojo 🔴, a medio camino = verde 🟢, lejos = azul 🔵</span></div>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Decorar: tápalo con un vaso plástico o papel blanco para que la luz se <strong>esparza</strong> 🥤</span></div>
+  </div>
+  <p class="nota">El papel o el vaso es el <strong>difusor</strong>: el mismo truco de las lámparas de verdad para que no se vea el puntito del LED.</p>
+</section>
+
+<!-- 10 · Reto -->
+<section class="slide">
+  <div class="reto">
+    <p class="eyebrow">⭐ Reto de la sesión</p>
+    <h2>Elige tu aventura 🎯</h2>
+    <ul class="lista">
+      <li>Nivel 1: la lámpara <strong>respira</strong> en tu color favorito (el <code>for</code> de la práctica 1, con tu receta)</li>
+      <li>Nivel 2: <strong>modo fiesta</strong> 🎉 — cada medio segundo un color al azar: <code>color(random(256), random(256), random(256));</code></li>
+      <li>Nivel experto: el <strong>arcoíris automático</strong> — que <code>pos</code> suba solito con <code>pos++</code> y vuelva a 0 al pasar de 255</li>
+    </ul>
+  </div>
+  <p class="nota">Demo del profe: un <strong>aro de LEDs</strong> donde cada lucecita es un LED RGB con su propio cerebrito.<button class="sm" data-sm="neopixel">?</button></p>
+</section>
+
+<!-- 11 · Quiz -->
+<section class="slide">
+  <p class="eyebrow">Duelo de cerebritos</p>
+  <h2>¿Cuánto aprendiste? Toca para voltear</h2>
+  <div class="fila">
+    <div class="quiz" tabindex="0"><div class="quiz-caras">
+      <div class="quiz-cara quiz-frente">¿Qué tres colores viven dentro del LED RGB?</div>
+      <div class="quiz-cara quiz-atras">Rojo, verde y azul: Red, Green, Blue 🔴🟢🔵</div>
+    </div></div>
+    <div class="quiz" tabindex="0"><div class="quiz-caras">
+      <div class="quiz-cara quiz-frente">¿Qué hace <code>analogWrite(3, 128)</code>?</div>
+      <div class="quiz-cara quiz-atras">Prende el pin 3 «a la mitad»: lo prende y apaga rapidísimo ✨</div>
+    </div></div>
+    <div class="quiz" tabindex="0"><div class="quiz-caras">
+      <div class="quiz-cara quiz-frente">¿Rojo + verde, con luz?</div>
+      <div class="quiz-cara quiz-atras">¡Amarillo! La luz se suma, no se ensucia como la témpera 💛</div>
+    </div></div>
+    <div class="quiz" tabindex="0"><div class="quiz-caras">
+      <div class="quiz-cara quiz-frente">¿Para qué inventar una función como <code>color()</code>?</div>
+      <div class="quiz-cara quiz-atras">Para escribir las líneas una vez y usarlas mil veces 🪄</div>
+    </div></div>
+    <div class="quiz" tabindex="0"><div class="quiz-caras">
+      <div class="quiz-cara quiz-frente">¿Qué números acepta <code>analogWrite</code>?</div>
+      <div class="quiz-cara quiz-atras">Del 0 (apagado) al 255 (a todo) 🔢</div>
+    </div></div>
+  </div>
+</section>
+
+<!-- 12 · Cierre -->
+<section class="slide portada">
+  <p class="eyebrow">Lo lograste</p>
+  <h1>¡Tu Arduino pinta con luz! 🎉</h1>
+  <p class="grande">Hoy mezclaste colores, inventaste tus propias órdenes…<br>y tu pieza tiene una <strong>lámpara de humor</strong> hecha por ti. 🪔</p>
+  <div class="tarjeta" style="max-width:24em">
+    <h3>Próxima sesión 🚂</h3>
+    <p>El <strong>gran proyecto final</strong>: un paso a nivel de tren con luces, alarma y barrera. ¡Todo lo que aprendiste, junto!</p>
+  </div>
+  <div class="semaforo-vivo" aria-hidden="true">
+    <span class="led on" style="--c:var(--verde)"></span>
+  </div>
+</section>
+
+<style>
+  /* ---------- 3 · mezclar luz ---------- */
+  .mezcla-caja { display: flex; flex-direction: column; align-items: center; gap: .8em; flex: 1 1 22em; max-width: 26em; }
+  .mezcla-luz {
+    width: min(50vw, 190px); height: min(50vw, 190px); border-radius: 50%;
+    background: rgb(255, 120, 0); box-shadow: 0 0 60px 20px rgba(255, 120, 0, .55);
+    transition: background .1s, box-shadow .1s;
+  }
+  .mezcla-sliders { display: flex; flex-direction: column; gap: .2em; }
+  .mezcla-sliders label { display: flex; align-items: center; gap: .5em; font-size: 1.1rem; }
+  .mezcla-sliders input { width: min(50vw, 260px); }
+  .mezcla-sliders strong { font-family: var(--f-codigo); width: 2.4em; text-align: right; }
+  .chip { padding: .3em .55em; font-size: 1.1rem; }
+
+  /* ---------- 4 · PWM / LED de brillo variable ---------- */
+  .pwm-caja { display: flex; flex-direction: column; align-items: center; gap: .3em; flex: 1 1 24em; max-width: 30em; }
+  .pwm-svg { width: 100%; }
+  .pwm-led {
+    display: inline-block; width: 4em; height: 4em; border-radius: 50%;
+    background: rgb(var(--rgb, 232, 72, 85)); border: 4px solid rgba(0,0,0,.15);
+    box-shadow: 0 0 40px 10px rgba(var(--rgb, 232, 72, 85), var(--glow, .5));
+    opacity: calc(.15 + var(--nivel, .5) * .85);
+    transition: opacity .05s, background .1s, box-shadow .1s;
+  }
+  .lectura { font-size: .9rem !important; color: var(--gris); }
+  .lectura strong { font-family: var(--f-codigo); color: var(--teal-osc); }
+
+  .proto-caja { flex: 1 1 30em; max-width: min(92vw, 40em); }
+  .proto-caja svg { width: 100%; }
+  .cable-w { fill: none; stroke-width: 7; stroke-linecap: round; }
+</style>
+
+<script src="assets/slides.js"></script>
+<script>
+  const pleds = ["pled-r", "pled-a", "pled-v"].map(id => document.getElementById(id));
+  let pi = 0;
+  setInterval(() => {
+    pleds.forEach((l, i) => l.classList.toggle("on", i === pi));
+    pi = (pi + 1) % 3;
+  }, 700);
+
+  /* la rueda de colores: la misma cuenta que el sketch (pos 0-255 → r,g,b) */
+  function rueda(pos) {
+    if (pos < 85) return [255 - pos * 3, pos * 3, 0];
+    if (pos < 170) { pos -= 85; return [0, 255 - pos * 3, pos * 3]; }
+    pos -= 170; return [pos * 3, 0, 255 - pos * 3];
+  }
+  function pintarLed(el, r, g, b, nivel) {
+    el.style.setProperty("--rgb", r + "," + g + "," + b);
+    el.style.setProperty("--nivel", nivel);
+    el.style.setProperty("--glow", (nivel * .6).toFixed(2));
+  }
+
+  /* ---- 3 · mezclar luz ---- */
+  (function () {
+    const $ = id => document.getElementById(id);
+    function pintar() {
+      const r = +$("mz-r").value, g = +$("mz-g").value, b = +$("mz-b").value;
+      $("mz-rv").textContent = $("mz-cr").textContent = r;
+      $("mz-gv").textContent = $("mz-cg").textContent = g;
+      $("mz-bv").textContent = $("mz-cb").textContent = b;
+      $("mz-luz").style.background = `rgb(${r},${g},${b})`;
+      $("mz-luz").style.boxShadow = `0 0 60px 20px rgba(${r},${g},${b},.55)`;
+    }
+    ["mz-r", "mz-g", "mz-b"].forEach(id => $(id).addEventListener("input", pintar));
+    document.querySelectorAll("[data-rgb]").forEach(btn => btn.addEventListener("click", () => {
+      const [r, g, b] = btn.dataset.rgb.split(",");
+      $("mz-r").value = r; $("mz-g").value = g; $("mz-b").value = b;
+      pintar();
+    }));
+    pintar();
+  })();
+
+  /* ---- 4 · medio encendido ---- */
+  (function () {
+    const $ = id => document.getElementById(id);
+    function pintar(v) {
+      const duty = v / 255;
+      let s = "";
+      for (let k = 0; k < 6; k++) {
+        const x = 8 + k * 64, w = Math.max(0, 60 * duty);
+        s += `<rect x='${x}' y='22' width='${w}' height='70' rx='2'/>`;
+      }
+      $("pwm-pulsos").innerHTML = s;
+      $("pwm-num").textContent = v;
+      pintarLed($("pwm-led"), 232, 72, 85, duty);
+      $("pwm-txt").textContent = v === 0 ? "Nunca prendido: apagado."
+        : v === 255 ? "Siempre prendido: a todo brillo."
+        : v < 100 ? "Poquito tiempo prendido: brilla poquito."
+        : v < 160 ? "Mitad del tiempo prendido: brilla a la mitad."
+        : "Casi siempre prendido: brilla casi a todo.";
+    }
+    $("pwm-v").addEventListener("input", e => pintar(+e.target.value));
+    pintar(128);
+  })();
+
+  /* ---- 7 · la respiración ---- */
+  (function () {
+    const $ = id => document.getElementById(id);
+    let corriendo = false;
+    $("resp-btn").addEventListener("click", () => {
+      if (corriendo) return;
+      corriendo = true;
+      let b = 0, dir = 1, vueltas = 0;
+      const t = setInterval(() => {
+        b += dir * 3;
+        if (b >= 255) { b = 255; dir = -1; }
+        if (b <= 0 && dir === -1) { b = 0; dir = 1; vueltas++; }
+        document.querySelectorAll(".ln[data-r]").forEach(l =>
+          l.classList.toggle("aqui", +l.dataset.r === (dir === 1 ? 0 : 1)));
+        $("resp-txt").innerHTML = dir === 1 ? "Inhala: el primer <code>for</code> sube el brillo… 🫁" : "Exhala: el segundo <code>for</code> lo baja… 😮‍💨";
+        $("resp-val").textContent = b;
+        pintarLed($("resp-led"), 232, 72, 85, b / 255);
+        if (vueltas === 2) {
+          clearInterval(t); corriendo = false;
+          document.querySelectorAll(".ln[data-r]").forEach(l => l.classList.remove("aqui"));
+          $("resp-txt").innerHTML = "Dos respiraciones. En el Arduino de verdad no para nunca: es el <code>loop</code>.";
+          $("resp-btn").textContent = "▶ Respirar de nuevo";
+        }
+      }, 16);
+    });
+    pintarLed($("resp-led"), 232, 72, 85, 0);
+  })();
+
+  /* ---- 8 · la rueda con la perilla ---- */
+  (function () {
+    const $ = id => document.getElementById(id);
+    function pintar(v) {
+      const pos = Math.floor(v / 4), [r, g, b] = rueda(pos);
+      $("rueda-perilla").style.transform = "rotate(" + (v / 1023 * 270 - 135) + "deg)";
+      $("rueda-pos").textContent = pos;
+      $("rueda-col").textContent = `color(${r}, ${g}, ${b})`;
+      pintarLed($("rueda-led"), r, g, b, 1);
+    }
+    $("rueda-pot").addEventListener("input", e => pintar(+e.target.value));
+    pintar(0);
+  })();
+
+  document.querySelectorAll(".quiz").forEach(q => {
+    const voltear = () => q.classList.toggle("volteada");
+    q.addEventListener("click", voltear);
+    q.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { voltear(); e.preventDefault(); } });
+  });
+
+  /* módulo LED RGB parado en la protoboard: patitas R G B − en cuatro
+     columnas vecinas (colX = centro de la primera), puntas en la fila filaY */
+  function moduloRgbSVG(colX, filaY) {
+    const cx = colX + 39, top = filaY - 98;
+    let s = `<g stroke='#B0BEC5' stroke-width='5' stroke-linecap='round'>`;
+    for (let k = 0; k < 4; k++) s += `<line x1='${colX + 26 * k}' y1='${filaY - 18}' x2='${colX + 26 * k}' y2='${filaY}'/>`;
+    s += `</g><rect x='${colX - 12}' y='${top}' width='102' height='80' rx='6' fill='#1B2A4A'/>`;
+    s += `<circle cx='${cx}' cy='${top + 30}' r='17' fill='#ECEFF1' stroke='#90A4AE' stroke-width='3'/>`;
+    s += `<circle cx='${cx - 6}' cy='${top + 25}' r='4' fill='#E84855'/><circle cx='${cx + 6}' cy='${top + 25}' r='4' fill='#46B450'/><circle cx='${cx}' cy='${top + 36}' r='4' fill='#4C7CFF'/>`;
+    ["R", "G", "B", "−"].forEach((t, k) => s += `<text x='${colX + 26 * k}' y='${top + 72}' text-anchor='middle' font-size='11' font-weight='700' fill='#BBDEFB' font-family='monospace'>${t}</text>`);
+    return s;
+  }
+  const RGB_CABLES = (y3, y5, y6, yGnd) =>
+    `<path d='M128 ${y3} C 165 300, 185 314, 200 316' fill='none' stroke='#FB8C00' stroke-width='6' stroke-linecap='round'/>`
+    + `<path d='M128 ${y5} C 170 320, 200 332, 226 332' fill='none' stroke='#46B450' stroke-width='6' stroke-linecap='round'/>`
+    + `<path d='M128 ${y6} C 180 345, 220 348, 252 348' fill='none' stroke='#4C7CFF' stroke-width='6' stroke-linecap='round'/>`
+    + `<path d='M280 316 C 296 350, 296 372, 282 388' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>`
+    + `<path d='M128 ${yGnd} C 150 375, 162 386, 175 388' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>`;
+
+  saberMas({
+    "rgb-ojos": {
+      t: "¿Por qué justo rojo, verde y azul? 👀",
+      d: "<p>Porque así son <strong>tus ojos</strong>: adentro tienen tres tipos de sensores de color, y cada tipo se emociona con el rojo, el verde o el azul. Cualquier color que ves es una <strong>mezcla</strong> de cuánto se emociona cada uno.</p><p>Las pantallas del celular, la tele y el computador hacen exactamente esta trampa: millones de puntitos RGB diminutos. Acércate mucho a una pantalla y quizás los veas. 🔍</p>"
+    },
+    "luz-pintura": {
+      t: "Luz y pintura no mezclan igual 🎨💡",
+      d: "<p>Con <strong>témperas</strong>, mezclar quita luz: rojo + verde da un café oscuro, y todo junto da casi negro.</p><p>Con <strong>luces</strong>, mezclar <strong>suma</strong>: rojo + verde da <strong>amarillo</strong>, verde + azul da <strong>celeste</strong>, rojo + azul da <strong>morado</strong>… y los tres a todo dan <strong>blanco</strong>. ¡Por eso el LED apagado se ve blanquito y encendido es de cualquier color!</p>"
+    },
+    pwm: {
+      t: "PWM: la trampa del medio encendido ✨",
+      d: "<p>Son siglas en inglés: <strong>P</strong>ulse <strong>W</strong>idth <strong>M</strong>odulation, «modular el ancho del pulso». Suena difícil, pero es esto: el pin se prende y apaga unas <strong>500 veces por segundo</strong>, y lo que cambia es <strong>cuánto rato</strong> queda prendido en cada vuelta.</p><p>Tu ojo no alcanza a ver el parpadeo y ve un <strong>promedio</strong>: 255 es siempre prendido, 0 siempre apagado, 128 la mitad.</p><p>No todos los pines saben hacerlo: en el UNO son los que tienen una <strong>~</strong> dibujada al lado: 3, 5, 6, 9, 10 y 11.</p>"
+    },
+    funcion: {
+      t: "Las funciones: órdenes con nombre 🪄",
+      d: "<p>Una <strong>función</strong> es un pedacito de programa con nombre propio. Ya usaste muchas: <code>digitalWrite</code>, <code>tone</code>, <code>analogRead</code>… alguien las escribió una vez y tú las llamas por su nombre.</p><p>Hoy inventas una tuya. Lo que va entre paréntesis, <code>(int r, int g, int b)</code>, son sus <strong>ingredientes</strong>: cada vez que la llamas le pasas tres números y ella los usa adentro.</p><p><code>setup</code> y <code>loop</code> también son funciones, pero a esas dos <strong>el Arduino las llama solo</strong>: setup una vez al partir y loop para siempre. A las tuyas las llamas tú.</p>"
+    },
+    "rueda-como": {
+      t: "¿Cómo elige el color la rueda? 🌈",
+      d: "<p>El arcoíris se recorre en <strong>tres tramos</strong>, y en cada uno un color baja mientras el siguiente sube:</p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.8em;line-height:1.45'><code>void rueda(int pos) {          // pos: de 0 a 255\n  if (pos &lt; 85) {              // tramo 1: rojo → verde\n    color(255 - pos * 3, pos * 3, 0);\n  } else if (pos &lt; 170) {      // tramo 2: verde → azul\n    pos = pos - 85;\n    color(0, 255 - pos * 3, pos * 3);\n  } else {                     // tramo 3: azul → rojo\n    pos = pos - 170;\n    color(pos * 3, 0, 255 - pos * 3);\n  }\n}</code></pre><p>El <code>* 3</code> es porque cada tramo dura 85 pasos y 85 × 3 ≈ 255: así cada color alcanza a llegar de 0 a «todo». Es el mismo <code>if / else if / else</code> de los umbrales de la sesión 8.</p>"
+    },
+    "rueda-circuito": {
+      t: "La perilla y el LED RGB en la protoboard 🔧",
+      d: "<svg viewBox='0 0 640 470' style='width:100%' aria-label='Perilla y módulo LED RGB en la protoboard'>"
+        + arduinoSVG({ x: 6, y: 10, pads: ["A0", "5V", "pin 3", "pin 5", "pin 6", "GND"] }).svg
+        + protoboardSVG({ x: 150, y: 90 })
+        + "<text x='386' y='82' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif' font-weight='700'>la perilla</text>"
+        + "<line x1='360' y1='194' x2='360' y2='164' stroke='#9aa7ad' stroke-width='4'/><line x1='386' y1='194' x2='386' y2='164' stroke='#9aa7ad' stroke-width='4'/><line x1='412' y1='194' x2='412' y2='164' stroke='#9aa7ad' stroke-width='4'/>"
+        + "<rect x='344' y='100' width='84' height='66' rx='8' fill='#1565C0'/><circle cx='386' cy='126' r='21' fill='#ECEFF1' stroke='#90A4AE' stroke-width='3'/><rect x='383' y='107' width='6' height='15' rx='3' fill='#37474F'/>"
+        + "<text x='360' y='161' text-anchor='middle' font-size='9' fill='#fff' font-family='monospace'>5V</text><text x='386' y='161' text-anchor='middle' font-size='9' fill='#fff' font-family='monospace'>A0</text><text x='412' y='161' text-anchor='middle' font-size='9' fill='#fff' font-family='monospace'>GND</text>"
+        + moduloRgbSVG(202, 300)
+        + "<path d='M128 62 C 240 64, 330 190, 386 208' fill='none' stroke='#4C7CFF' stroke-width='6' stroke-linecap='round'/>"
+        + "<path d='M128 110 C 220 112, 310 220, 360 224' fill='none' stroke='#E84855' stroke-width='6' stroke-linecap='round'/>"
+        + "<path d='M412 242 C 560 265, 620 350, 568 386' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>"
+        + RGB_CABLES(158, 206, 254, 302)
+        + "<text x='241' y='450' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif'>el módulo LED RGB</text>"
+        + "</svg><p>La perilla, igual que en la sesión 6: orillas a <strong>5V</strong> y <strong>GND</strong>, la del medio a <strong>A0</strong>. El módulo RGB se para con sus cuatro patitas en una fila: cada cable de color llega a la <strong>misma columna</strong> de su patita (R → pin 3, G → pin 5, B → pin 6), y la patita <strong>−</strong> baja con un cablecito al <strong>riel −</strong>, donde se juntan todos los GND.</p>"
+    },
+    "rueda-codigo": {
+      t: "El programa completo 📋",
+      d: "<pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.78em;line-height:1.45'><code>void setup() {\n  // nada que preparar: analogWrite se arregla solo\n}\n\nvoid loop() {\n  int pos = analogRead(A0) / 4;   // de 0-1023 a 0-255\n  rueda(pos);\n}\n\nvoid color(int r, int g, int b) {\n  analogWrite(3, r);\n  analogWrite(5, g);\n  analogWrite(6, b);\n}\n\nvoid rueda(int pos) {\n  if (pos &lt; 85) {\n    color(255 - pos * 3, pos * 3, 0);\n  } else if (pos &lt; 170) {\n    pos = pos - 85;\n    color(0, 255 - pos * 3, pos * 3);\n  } else {\n    pos = pos - 170;\n    color(pos * 3, 0, 255 - pos * 3);\n  }\n}</code></pre><p>Fíjate: <strong>cuatro funciones</strong>. Dos las llama el Arduino (setup y loop) y dos las inventaste tú (color y rueda). El loop quedó de dos líneas porque el trabajo pesado vive en las tuyas. También está en <code>sketches/sesion-09/rueda_perilla</code>.</p>"
+    },
+    "p-circuito": {
+      t: "Así se ve armado completo 🔧",
+      d: "<svg viewBox='0 0 640 470' style='width:100%' aria-label='HC-SR04 y módulo LED RGB montados en la protoboard'>"
+        + arduinoSVG({ x: 6, y: 10, pads: ["pin 9", "5V", "pin 10", "pin 3", "pin 5", "pin 6", "GND"] }).svg
+        + protoboardSVG({ x: 150, y: 90 })
+        + "<g stroke='#B0BEC5' stroke-width='5' stroke-linecap='round'><line x1='386' y1='142' x2='386' y2='178'/><line x1='412' y1='142' x2='412' y2='178'/><line x1='438' y1='142' x2='438' y2='178'/><line x1='464' y1='142' x2='464' y2='178'/></g>"
+        + "<rect x='360' y='58' width='170' height='84' rx='8' fill='#1B2A4A'/><circle cx='402' cy='94' r='24' fill='#9FB4C8' stroke='#5E7480' stroke-width='4'/><circle cx='488' cy='94' r='24' fill='#9FB4C8' stroke='#5E7480' stroke-width='4'/><text x='445' y='98' text-anchor='middle' font-size='11' fill='#BBD3E6' font-family='monospace'>HC-SR04</text>"
+        + "<text x='386' y='136' text-anchor='middle' font-size='9' fill='#9FB4C8' font-family='monospace'>VCC</text><text x='412' y='136' text-anchor='middle' font-size='9' fill='#9FB4C8' font-family='monospace'>TRIG</text><text x='438' y='136' text-anchor='middle' font-size='9' fill='#9FB4C8' font-family='monospace'>ECHO</text><text x='464' y='136' text-anchor='middle' font-size='9' fill='#9FB4C8' font-family='monospace'>GND</text>"
+        + moduloRgbSVG(202, 300)
+        + "<path d='M128 62 C 250 60, 340 140, 412 191' fill='none' stroke='#AB47BC' stroke-width='6' stroke-linecap='round'/>"
+        + "<path d='M128 110 C 240 122, 330 200, 384 207' fill='none' stroke='#E84855' stroke-width='6' stroke-linecap='round'/>"
+        + "<path d='M128 158 C 280 170, 380 220, 436 224' fill='none' stroke='#F5B301' stroke-width='6' stroke-linecap='round'/>"
+        + "<path d='M464 196 C 570 220, 618 310, 572 386' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>"
+        + RGB_CABLES(206, 254, 302, 350)
+        + "<text x='241' y='450' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif'>el módulo LED RGB</text><text x='445' y='450' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif'>el murciélago, parado en la protoboard</text>"
+        + "</svg><p>El murciélago igual que en la sesión 7: parado con sus 4 patitas en una fila, cables a la <strong>misma columna</strong> de cada una (VCC → 5V, TRIG → pin 9, ECHO → pin 10). El módulo RGB abajo, también parado: R → pin 3, G → pin 5, B → pin 6. Y todos los GND se juntan en el <strong>riel −</strong>: el del sensor, el − del módulo y el cable que vuelve al Arduino.</p>"
+    },
+    "p-codigo": {
+      t: "El programa completo 📋",
+      d: "<pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.76em;line-height:1.45'><code>void setup() {\n  pinMode(9, OUTPUT);    // TRIG\n  pinMode(10, INPUT);    // ECHO\n}\n\nvoid loop() {\n  // el bloque del murciélago, tal cual\n  digitalWrite(9, HIGH);\n  delayMicroseconds(10);\n  digitalWrite(9, LOW);\n  long tiempo = pulseIn(10, HIGH);\n  int distancia = tiempo * 0.034 / 2;\n\n  // recortamos: solo nos importa de 5 a 50 cm\n  if (distancia &lt; 5) distancia = 5;\n  if (distancia &gt; 50) distancia = 50;\n\n  // la distancia manda a la rueda\n  int pos = map(distancia, 5, 50, 0, 255);\n  rueda(pos);\n  delay(30);\n}\n\n// color() y rueda(): las mismas de la práctica 2</code></pre><p>Tres piezas que ya conoces, pegadas: el murciélago (sesión 7), <code>map</code> (sesión 6) y la rueda de hoy. Solo cambió <strong>quién manda</strong>: antes la perilla, ahora la mano. Completo con las dos funciones en <code>sketches/sesion-09/lampara_humor</code>.</p>"
+    },
+    neopixel: {
+      t: "El aro de LEDs (NeoPixel) 💫",
+      d: "<p>Cada lucecita del aro es un LED RGB como el tuyo… pero con un <strong>cerebrito diminuto</strong> adentro. Por eso con <strong>un solo cable</strong> el Arduino le puede decir a cada una qué color poner.</p><p>Se manejan con una librería (como el servo o el DHT11) y son la base de las tiras de luces de colores que se ven en las piezas y los computadores gamer. 🎮</p>"
+    }
+  });
+</script>
+</body>
+</html>
