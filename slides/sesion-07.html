@@ -64,8 +64,8 @@
   <h2>La cuenta del eco ⏱️</h2>
   <div class="eco-caja">
     <div class="eco-visual">
-      <span class="eco-emoji">📡</span>
-      <div class="eco-barra">
+      <span class="eco-emoji">🦇</span>
+      <div class="eco-barra" id="eco-barra">
         <div class="eco-ida">grito ➡</div>
         <div class="eco-vuelta">⬅ eco</div>
       </div>
@@ -74,9 +74,10 @@
     <input type="range" id="eco-dist" min="5" max="100" value="30" aria-label="Distancia hasta la pared">
     <p class="nota" style="margin:0">acerca o aleja la pared</p>
   </div>
-  <div class="ide" style="max-width:30em">
+  <div class="ide" style="max-width:32em">
     <div class="ide-barra"><span class="ide-nombre">la cuenta</span></div>
     <pre>eco tardó <span class="num-vivo" id="eco-us">1749</span> microsegundos<button class="sm sm-ide" data-sm="microseg">?</button>
+sonido: 0.034 cm por microsegundo<button class="sm sm-ide" data-sm="velocidad">?</button>
 distancia = <span class="num-vivo" id="eco-us2">1749</span> × 0.034 / 2 = <span class="num-vivo" id="eco-cm">30</span> cm</pre>
   </div>
   <p class="grande" style="max-width:32em">¿Por qué <strong>dividir entre 2</strong>? Porque el grito hace el viaje <strong>ida y vuelta</strong>: a la pared… ¡y de regreso! ↔️</p>
@@ -88,7 +89,7 @@ distancia = <span class="num-vivo" id="eco-us2">1749</span> × 0.034 / 2 = <span
   <h2>Los cuatro cables del murciélago 🔌</h2>
   <div class="tuto">
     <div class="proto-caja">
-      <svg viewBox="0 0 620 330" aria-label="HC-SR04 conectado al Arduino con cuatro cables">
+      <svg viewBox="0 0 620 300" aria-label="HC-SR04 conectado al Arduino con cuatro cables">
         <rect x="20" y="30" width="150" height="240" rx="12" fill="#00878F"/>
         <text x="95" y="60" text-anchor="middle" fill="#fff" font-family="monospace" font-size="15">ARDUINO</text>
         <rect x="32" y="78" width="126" height="26" rx="4" fill="#143642"/>
@@ -100,27 +101,29 @@ distancia = <span class="num-vivo" id="eco-us2">1749</span> × 0.034 / 2 = <span
         <rect x="32" y="222" width="126" height="26" rx="4" fill="#143642"/>
         <text x="95" y="240" text-anchor="middle" fill="#fff" font-family="monospace" font-size="13">GND</text>
 
-        <text x="510" y="56" text-anchor="middle" font-size="14" fill="#5E7480" font-family="Nunito, sans-serif" font-weight="700">HC-SR04</text>
-        <rect x="420" y="68" width="180" height="112" rx="10" fill="#1A6FBF"/>
-        <circle cx="468" cy="112" r="27" fill="#B0BEC5" stroke="#78909C" stroke-width="5"/>
-        <circle cx="552" cy="112" r="27" fill="#B0BEC5" stroke="#78909C" stroke-width="5"/>
-        <text x="468" y="164" text-anchor="middle" font-size="12" fill="#BBDEFB" font-family="monospace">TRIG 📣</text>
-        <text x="552" y="164" text-anchor="middle" font-size="12" fill="#BBDEFB" font-family="monospace">ECHO 👂</text>
+        <text x="500" y="44" text-anchor="middle" font-size="14" fill="#5E7480" font-family="Nunito, sans-serif" font-weight="700">HC-SR04</text>
+        <rect x="430" y="56" width="140" height="218" rx="10" fill="#1A6FBF"/>
         <g stroke="#90A4AE" stroke-width="5" stroke-linecap="round">
-          <line x1="445" y1="180" x2="445" y2="202"/>
-          <line x1="485" y1="180" x2="485" y2="202"/>
-          <line x1="525" y1="180" x2="525" y2="202"/>
-          <line x1="565" y1="180" x2="565" y2="202"/>
+          <line x1="404" y1="91" x2="430" y2="91"/>
+          <line x1="404" y1="139" x2="430" y2="139"/>
+          <line x1="404" y1="187" x2="430" y2="187"/>
+          <line x1="404" y1="235" x2="430" y2="235"/>
         </g>
-        <text x="445" y="224" text-anchor="middle" font-size="11" fill="#5E7480" font-family="monospace">VCC</text>
-        <text x="485" y="224" text-anchor="middle" font-size="11" fill="#5E7480" font-family="monospace">TRIG</text>
-        <text x="525" y="224" text-anchor="middle" font-size="11" fill="#5E7480" font-family="monospace">ECHO</text>
-        <text x="565" y="224" text-anchor="middle" font-size="11" fill="#5E7480" font-family="monospace">GND</text>
+        <g font-size="12" fill="#BBDEFB" font-family="monospace">
+          <text x="440" y="95">VCC</text>
+          <text x="440" y="143">TRIG</text>
+          <text x="440" y="191">ECHO</text>
+          <text x="440" y="239">GND</text>
+        </g>
+        <circle cx="515" cy="112" r="27" fill="#B0BEC5" stroke="#78909C" stroke-width="5"/>
+        <text x="515" y="160" text-anchor="middle" font-size="12" fill="#BBDEFB" font-family="monospace">TRIG 📣</text>
+        <circle cx="515" cy="210" r="27" fill="#B0BEC5" stroke="#78909C" stroke-width="5"/>
+        <text x="515" y="258" text-anchor="middle" font-size="12" fill="#BBDEFB" font-family="monospace">ECHO 👂</text>
 
-        <path class="cable-w" d="M164 91 L 339 91 Q 355 91 355 107 L 355 242 Q 355 258 371 258 L 429 258 Q 445 258 445 242 L 445 204" stroke="#E84855"/>
-        <path class="cable-w" d="M164 139 L 359 139 Q 375 139 375 155 L 375 256 Q 375 272 391 272 L 469 272 Q 485 272 485 256 L 485 204" stroke="#FB8C00"/>
-        <path class="cable-w" d="M164 187 L 379 187 Q 395 187 395 203 L 395 270 Q 395 286 411 286 L 509 286 Q 525 286 525 270 L 525 204" stroke="#4C7CFF"/>
-        <path class="cable-w" d="M164 235 L 399 235 Q 415 235 415 251 L 415 284 Q 415 300 431 300 L 549 300 Q 565 300 565 284 L 565 204" stroke="#37474F"/>
+        <path class="cable-w" d="M164 91 L 400 91" stroke="#E84855"/>
+        <path class="cable-w" d="M164 139 L 400 139" stroke="#FB8C00"/>
+        <path class="cable-w" d="M164 187 L 400 187" stroke="#4C7CFF"/>
+        <path class="cable-w" d="M164 235 L 400 235" stroke="#37474F"/>
       </svg>
     </div>
     <aside class="tuto-panel">
@@ -140,7 +143,8 @@ distancia = <span class="num-vivo" id="eco-us2">1749</span> × 0.034 / 2 = <span
   <p class="eyebrow">Cópialo: va igual en todos tus proyectos</p>
   <h2>El código del murciélago 📋</h2>
   <div class="tuto">
-    <div class="sim-ide">
+    <div style="display:flex; flex-direction:column; gap:.6em; flex:1 1 30em; max-width:min(92vw, 40em)">
+    <div class="sim-ide" style="flex:none; max-width:100%">
       <div class="sim-titulo"><span class="sim-punto"></span>murcielago.ino</div>
       <div class="sim-editor lineas">
         <div class="ln"><span class="n">1</span><code><span class="kw">void</span> <span class="fn">loop</span>() {</code></div>
@@ -149,48 +153,63 @@ distancia = <span class="num-vivo" id="eco-us2">1749</span> × 0.034 / 2 = <span
         <div class="ln" data-paso="0"><span class="n">4</span><code>  <span class="fn">digitalWrite</span>(<span class="num">9</span>, <span class="kw">LOW</span>);</code></div>
         <div class="ln" data-paso="1"><span class="n">5</span><code>  <span class="kw">long</span> tiempo = <span class="fn">pulseIn</span>(<span class="num">10</span>, <span class="kw">HIGH</span>);</code></div>
         <div class="ln" data-paso="2"><span class="n">6</span><code>  <span class="kw">int</span> distancia = tiempo * <span class="num">0.034</span> / <span class="num">2</span>;</code></div>
-        <div class="ln"><span class="n">7</span><code>}</code></div>
+        <div class="ln" data-paso="3"><span class="n">7</span><code>  Serial.<span class="fn">print</span>(distancia);   <span class="cm">// ¡cuéntalo!</span></code></div>
+        <div class="ln" data-paso="3"><span class="n">8</span><code>  Serial.<span class="fn">println</span>(<span class="st">" cm"</span>);</code></div>
+        <div class="ln"><span class="n">9</span><code>}</code></div>
       </div>
     </div>
+    <div class="serial" style="flex:none; width:100%; max-width:100%">
+      <div class="serial-barra">🔍 Monitor serie · 9600</div>
+      <div class="serial-lineas" id="mur-serial" style="min-height:7.8em; max-height:7.8em"></div>
+    </div>
+    <div class="fila" style="gap:.6em; align-items:center">
+      <input type="range" id="mur-dist" min="5" max="100" value="30" style="width:min(50vw, 300px)" aria-label="Distancia de la mano al sensor">
+      <span class="nota">acerca o aleja la mano 🖐️</span>
+    </div>
+    </div>
     <aside class="tuto-panel">
-      <p class="tuto-num" id="cod-num">Tres pasos, siempre iguales</p>
-      <p class="tuto-texto" id="cod-txt">Toca cada paso para ver qué líneas hacen el trabajo. Este pedacito se <strong>copia tal cual</strong> en todos los proyectos con el murciélago.</p>
+      <p class="tuto-num" id="cod-num">Tres pasos y un chisme</p>
+      <p class="tuto-texto" id="cod-txt" style="min-height:4.5em">Toca cada paso para ver qué líneas hacen el trabajo. Los tres primeros se <strong>copian tal cual</strong> en todos los proyectos con el murciélago.</p>
       <div class="fila" style="gap:.5em">
         <button class="boton secundario" data-cp="0">📣 gritar</button>
         <button class="boton secundario" data-cp="1">👂 escuchar</button>
         <button class="boton secundario" data-cp="2">🧮 la cuenta</button>
+        <button class="boton secundario" data-cp="3">💬 contar</button>
       </div>
     </aside>
   </div>
-  <p class="nota"><code>pulseIn</code><button class="sm" data-sm="pulsein">?</button> es un cronómetro: espera el eco y devuelve cuántos microsegundos tardó. Programa completo: <code>sketches/sesion-07/murcielago</code>.</p>
+  <p class="nota"><code>pulseIn</code><button class="sm" data-sm="pulsein">?</button> es un cronómetro: espera el eco y devuelve cuántos microsegundos tardó. Programa completo (con su <code>Serial.begin(9600)</code> en el setup): <code>sketches/sesion-07/murcielago</code>.</p>
 </section>
 
-<!-- 7 · Práctica: alarma de intrusos -->
+<!-- 7 · Práctica: ¡no me toques! -->
 <section class="slide">
   <p class="eyebrow">Práctica</p>
-  <h2>La alarma de intrusos 🚨</h2>
+  <h2>¡No me toques! 🚨</h2>
   <div class="tuto">
     <div class="sim-ide">
       <div class="sim-titulo"><span class="sim-punto"></span>alarma.ino</div>
       <div class="sim-editor lineas">
         <div class="ln" data-si="1"><span class="n">1</span><code><span class="kw">if</span> (distancia &lt; <span class="num">20</span>) {</code></div>
         <div class="ln" data-si="1"><span class="n">2</span><code>  <span class="fn">digitalWrite</span>(<span class="num">13</span>, <span class="kw">HIGH</span>);  <span class="cm">// ¡luz!</span></code></div>
-        <div class="ln" data-si="1"><span class="n">3</span><code>  <span class="fn">tone</span>(<span class="num">8</span>, <span class="num">880</span>);           <span class="cm">// ¡alarma!</span></code></div>
-        <div class="ln" data-si="0"><span class="n">4</span><code>} <span class="kw">else</span> {</code></div>
-        <div class="ln" data-si="0"><span class="n">5</span><code>  <span class="fn">digitalWrite</span>(<span class="num">13</span>, <span class="kw">LOW</span>);</code></div>
-        <div class="ln" data-si="0"><span class="n">6</span><code>  <span class="fn">noTone</span>(<span class="num">8</span>);</code></div>
-        <div class="ln"><span class="n">7</span><code>}</code></div>
+        <div class="ln" data-si="1"><span class="n">3</span><code>  <span class="fn">tone</span>(<span class="num">8</span>, <span class="num">880</span>);           <span class="cm">// ni…</span></code></div>
+        <div class="ln" data-si="1"><span class="n">4</span><code>  <span class="fn">delay</span>(<span class="num">150</span>);</code></div>
+        <div class="ln" data-si="1"><span class="n">5</span><code>  <span class="fn">digitalWrite</span>(<span class="num">13</span>, <span class="kw">LOW</span>);</code></div>
+        <div class="ln" data-si="1"><span class="n">6</span><code>  <span class="fn">tone</span>(<span class="num">8</span>, <span class="num">660</span>);           <span class="cm">// …no!</span></code></div>
+        <div class="ln" data-si="1"><span class="n">7</span><code>  <span class="fn">delay</span>(<span class="num">150</span>);</code></div>
+        <div class="ln" data-si="0"><span class="n">8</span><code>} <span class="kw">else</span> {</code></div>
+        <div class="ln" data-si="0"><span class="n">9</span><code>  <span class="fn">noTone</span>(<span class="num">8</span>);            <span class="cm">// silencio</span></code></div>
+        <div class="ln"><span class="n">10</span><code>}</code></div>
       </div>
     </div>
     <aside class="tuto-panel">
       <p class="tuto-num">Pruébala tú</p>
-      <p class="tuto-texto" id="al-txt">Mueve la mano: si se acerca a <strong>menos de 20 cm</strong>, ¡se arma el escándalo!</p>
+      <p class="tuto-texto" id="al-txt">Acerca la mano: si llega a <strong>menos de 20 cm</strong>, ¡se arma la sirena! Ni‑no, ni‑no… 🚨</p>
       <div class="mano-caja">
         <span id="al-mano">🖐️</span>
-        <span class="mano-sensor">📡</span>
+        <span class="mano-sensor" id="al-sensor">🦇</span>
       </div>
-      <input type="range" id="al-dist" min="5" max="80" value="60" aria-label="Distancia de la mano al sensor">
-      <p class="lectura">distancia = <strong id="al-val">60</strong> cm</p>
+      <input type="range" id="al-dist" min="5" max="80" value="80" style="width:100%" aria-label="Distancia de la mano al sensor">
+      <p class="lectura">distancia = <strong id="al-val">80</strong> cm</p>
       <div class="tuto-placa">
         <span class="mini-placa grande"><span class="mini-led" id="al-led"></span><span class="mini-etiq">13</span></span>
         <span id="al-son" class="al-son">🔇</span>
@@ -295,18 +314,18 @@ distancia = <span class="num-vivo" id="eco-us2">1749</span> × 0.034 / 2 = <span
 
   /* ---------- 4 · la cuenta del eco ---------- */
   .eco-caja { display: flex; flex-direction: column; align-items: center; gap: .4em; }
-  .eco-visual { display: flex; align-items: center; gap: .6em; }
+  .eco-visual { display: flex; align-items: center; gap: .6em; width: min(64vw, 500px); }
   .eco-emoji { font-size: 2.2em; }
   .eco-barra {
-    width: min(56vw, 420px); display: flex; flex-direction: column; gap: .25em;
+    flex: none; width: 60%; display: flex; flex-direction: column; gap: .25em;
+    transition: width .15s;
   }
   .eco-ida, .eco-vuelta {
     font-family: var(--f-titulo); font-size: .85rem; color: #fff;
     border-radius: 999px; padding: .15em .8em; white-space: nowrap; overflow: hidden;
-    transition: width .15s;
   }
-  .eco-ida { background: var(--teal); width: 60%; }
-  .eco-vuelta { background: #FFB627; color: #6b4d00; width: 60%; text-align: right; align-self: flex-end; }
+  .eco-ida { background: var(--teal); }
+  .eco-vuelta { background: #FFB627; color: #6b4d00; text-align: right; }
   .sm-ide { vertical-align: super; }
 
   /* ---------- 7 · alarma ---------- */
@@ -400,9 +419,7 @@ distancia = <span class="num-vivo" id="eco-us2">1749</span> × 0.034 / 2 = <span
       $("eco-us").textContent = us;
       $("eco-us2").textContent = us;
       $("eco-cm").textContent = cm;
-      const w = 18 + (cm / 100) * 82;
-      document.querySelector(".eco-ida").style.width = w + "%";
-      document.querySelector(".eco-vuelta").style.width = w + "%";
+      $("eco-barra").style.width = (18 + (cm / 100) * 62) + "%";
     }
     $("eco-dist").addEventListener("input", e => pintar(+e.target.value));
     pintar(30);
@@ -413,7 +430,8 @@ distancia = <span class="num-vivo" id="eco-us2">1749</span> × 0.034 / 2 = <span
     const TXT = [
       ["📣 Gritar", "El pin 9 se prende <strong>10 microsegundos</strong>: es la orden «¡grita!». El sensor lanza su chillido ultrasónico."],
       ["👂 Escuchar", "<code>pulseIn</code> se queda esperando en el pin 10 y <strong>cronometra el eco</strong>: devuelve cuántos microsegundos tardó en volver."],
-      ["🧮 La cuenta", "La misma de la slide anterior: tiempo por la velocidad del sonido, <strong>dividido entre 2</strong> porque el viaje es ida y vuelta."]
+      ["🧮 La cuenta", "La misma de la slide anterior: tiempo por la velocidad del sonido, <strong>dividido entre 2</strong> porque el viaje es ida y vuelta."],
+      ["💬 Contar", "<code>Serial.print</code> manda la distancia al <strong>monitor serie</strong> (la lupita 🔍 de la sesión 4). Sin esto, el cerebrito mide en silencio y nadie se entera."]
     ];
     document.querySelectorAll("[data-cp]").forEach(b => b.addEventListener("click", () => {
       const k = +b.dataset.cp;
@@ -422,28 +440,40 @@ distancia = <span class="num-vivo" id="eco-us2">1749</span> × 0.034 / 2 = <span
       document.querySelectorAll(".ln[data-paso]").forEach(l =>
         l.classList.toggle("aqui", l.dataset.paso === String(k)));
     }));
+    const ser = document.getElementById("mur-serial"), dist = document.getElementById("mur-dist");
+    setInterval(() => {
+      const p = document.createElement("p");
+      p.textContent = dist.value + " cm";
+      ser.appendChild(p);
+      if (ser.children.length > 3) ser.firstChild.remove();
+    }, 500);
   })();
 
-  /* ---- 7 · alarma de intrusos ---- */
+  /* ---- 7 · ¡no me toques! ---- */
   (function () {
     const $ = id => document.getElementById(id);
-    let cerca = false;
+    let sirena = null, alto = false;
+    function nino() {
+      alto = !alto;
+      sonar(alto ? 880 : 660, 150);
+      $("al-led").classList.toggle("on", alto);
+    }
     function pintar(d) {
       $("al-val").textContent = d;
-      $("al-mano").style.transform = "translateX(" + ((80 - d) / 75 * 190) + "px)";
-      const ahora = d < 20;
+      const mano = $("al-mano"), sensor = $("al-sensor");
+      const tope = sensor.offsetLeft - mano.offsetLeft - mano.offsetWidth;
+      mano.style.transform = "translateX(" + ((80 - d) / 75 * tope) + "px)";
+      const cerca = d < 20;
       document.querySelectorAll(".ln[data-si]").forEach(l =>
-        l.classList.toggle("aqui", (l.dataset.si === "1") === ahora));
-      $("al-led").classList.toggle("on", ahora);
-      $("al-son").textContent = ahora ? "🔊" : "🔇";
-      $("al-txt").innerHTML = ahora
-        ? "¡Menos de 20! La pregunta del <strong>if</strong> da «sí»: luz y alarma. 🚨"
-        : "Mueve la mano: si se acerca a <strong>menos de 20 cm</strong>, ¡se arma el escándalo!";
-      if (ahora && !cerca) sonar(880, 150);
-      cerca = ahora;
+        l.classList.toggle("aqui", (l.dataset.si === "1") === cerca));
+      $("al-son").textContent = cerca ? "🔊" : "🔇";
+      $("al-txt").innerHTML = cerca
+        ? "¡Menos de 20! El <strong>if</strong> dice «sí»: luz y sirena. ¡Ni‑no, ni‑no! 🚨"
+        : "Acerca la mano: si llega a <strong>menos de 20 cm</strong>, ¡se arma la sirena! Ni‑no, ni‑no… 🚨";
+      if (cerca && !sirena) { nino(); sirena = setInterval(nino, 160); }
+      if (!cerca && sirena) { clearInterval(sirena); sirena = null; $("al-led").classList.remove("on"); }
     }
     $("al-dist").addEventListener("input", e => pintar(+e.target.value));
-    pintar(60);
   })();
 
   /* ---- 8 · la bici que retrocede ---- */
@@ -514,6 +544,10 @@ distancia = <span class="num-vivo" id="eco-us2">1749</span> × 0.034 / 2 = <span
     microseg: {
       t: "¿Micro… qué? ⏱️",
       d: "<p>Un <strong>microsegundo</strong> es una <strong>millonésima</strong> de segundo: en un solo parpadeo tuyo caben como 300&nbsp;000 microsegundos.</p><p>El sonido viaja a unos <strong>343 metros por segundo</strong> (¡una cuadra en un suspiro!), así que para distancias chicas el eco vuelve en muy poquitos microsegundos. Por eso el Arduino, que es velocísimo, es perfecto para cronometrarlo.</p>"
+    },
+    velocidad: {
+      t: "¿De dónde sale el 0.034? 🏃",
+      d: "<p>El sonido corre a <strong>343 metros por segundo</strong>: o sea, <strong>34&nbsp;300 centímetros</strong> en un segundo.</p><p>Pero el eco lo medimos en <strong>microsegundos</strong>, y un segundo tiene <strong>un millón</strong>. Repartimos: 34&nbsp;300 ÷ 1&nbsp;000&nbsp;000 = <strong>0.0343 cm</strong> por cada microsegundo. Redondeado: <strong>0.034</strong>.</p><p>Así la cuenta es: microsegundos que tardó × centímetros que avanza en cada uno = centímetros que recorrió el grito. Y como fue ida y vuelta, entre 2. ↔️</p>"
     },
     pulsein: {
       t: "pulseIn: el cronómetro paciente ⏲️",

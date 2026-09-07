@@ -74,7 +74,7 @@
 **Objetivo**: medir distancias con ultrasonido y reaccionar a ellas.
 - Cómo "ve" un murciélago; HC-SR04 y el eco.
 - Medir distancia y usarla en condiciones (`if` distancia < X).
-- **Práctica**: alarma de intrusos (LED + buzzer si algo se acerca).
+- **Práctica**: ¡no me toques! — sirena de cercanía (LED + buzzer alternando si algo se acerca a menos de 20 cm).
 - **Proyecto estrella**: 🚲 **sensor de retroceso para bicicleta** — pita más
   rápido cuanto más cerca está la pared (como los autos de verdad).
 
