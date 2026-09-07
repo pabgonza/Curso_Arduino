@@ -301,7 +301,42 @@ miServo.<span class="fn">write</span>(angulo);</pre>
   <p class="nota">Programa completo: <code>sketches/sesion-06/perilla</code>.</p>
 </section>
 
-<!-- 11 · Proyecto: la barrera -->
+<!-- 11 · ¡Manos a la obra!: la perilla mueve el servo -->
+<section class="slide">
+  <p class="eyebrow">¡Manos a la obra!</p>
+  <h2>Tú mandas: la perilla mueve el servo 🎛️</h2>
+  <div class="fila" style="align-items:center; gap:2em">
+    <div style="display:flex; flex-direction:column; align-items:center; gap:.4em">
+      <div style="display:flex; align-items:center; gap:1em">
+        <svg viewBox="0 0 160 160" class="perilla-svg" style="width:min(40vw,130px)" aria-label="Perilla que se puede girar">
+          <circle cx="80" cy="80" r="58" fill="#ECEFF1" stroke="#90A4AE" stroke-width="5"/>
+          <g id="perilla-sim" style="transform-origin:80px 80px">
+            <rect x="75" y="26" width="10" height="34" rx="5" fill="#37474F"/>
+          </g>
+          <circle cx="80" cy="80" r="14" fill="#607D8B"/>
+        </svg>
+        <span style="font-size:1.8em">➡️</span>
+        <svg viewBox="0 0 200 120" class="servo-mini" aria-label="Servo obedeciendo a la perilla">
+          <rect x="70" y="80" width="60" height="34" rx="6" fill="#1565C0"/>
+          <g id="brazo-perilla" style="transform-origin:100px 80px">
+            <rect x="96" y="18" width="8" height="64" rx="4" fill="#ECEFF1" stroke="#90A4AE" stroke-width="2"/>
+          </g>
+          <circle cx="100" cy="80" r="10" fill="#90A4AE"/>
+        </svg>
+      </div>
+      <input type="range" id="pot3" min="0" max="1023" value="512" aria-label="Giro de la perilla">
+      <p class="nota"><code>valor = <strong id="sim-val">512</strong></code> → <code>angulo = <strong id="sim-ang">90</strong>°</code></p>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:.5em; max-width:26em">
+      <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Armar el circuito: la perilla en la protoboard, el servo aparte <button class="sm" data-sm="perilla-circuito">?</button></span></div>
+      <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Subir el programa de la perilla <button class="sm" data-sm="perilla-codigo">?</button></span></div>
+      <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Probar: girar despacio y rápido — el brazo copia tu mano</span></div>
+      <p class="nota">Acabas de armar un <strong>control con perilla</strong>, como el volumen de una radio… ¡pero que mueve cosas! 🕹️</p>
+    </div>
+  </div>
+</section>
+
+<!-- 12 · Proyecto: la barrera -->
 <section class="slide">
   <p class="eyebrow">⭐ Proyecto de la sesión</p>
   <h2>La barrera del paso a nivel 🚂</h2>
@@ -330,7 +365,7 @@ miServo.<span class="fn">write</span>(angulo);</pre>
   </div>
 </section>
 
-<!-- 12 · Reto -->
+<!-- 13 · Reto -->
 <section class="slide">
   <div class="reto">
     <p class="eyebrow">⭐ Reto de la sesión</p>
@@ -345,7 +380,7 @@ miServo.<span class="fn">write</span>(angulo);</pre>
   <p class="nota">Cuidado: nunca fuerces el brazo del servo con la mano. Los engranajes son de plástico y se saltan. 🦷</p>
 </section>
 
-<!-- 13 · Quiz -->
+<!-- 14 · Quiz -->
 <section class="slide">
   <p class="eyebrow">Duelo de cerebritos</p>
   <h2>¿Cuánto aprendiste? Toca para voltear</h2>
@@ -544,7 +579,21 @@ miServo.<span class="fn">write</span>(angulo);</pre>
     mapear(512);
   })();
 
-  /* ---- 11 · la barrera ---- */
+  /* ---- 11 · la perilla mueve el servo ---- */
+  (function () {
+    const pot3 = document.getElementById("pot3");
+    function poner(v) {
+      const ang = Math.round(v / 1023 * 180);
+      document.getElementById("perilla-sim").style.transform = "rotate(" + (v / 1023 * 270 - 135) + "deg)";
+      document.getElementById("brazo-perilla").style.transform = "rotate(" + (ang - 90) + "deg)";
+      document.getElementById("sim-val").textContent = v;
+      document.getElementById("sim-ang").textContent = ang;
+    }
+    pot3.addEventListener("input", e => poner(+e.target.value));
+    poner(512);
+  })();
+
+  /* ---- 12 · la barrera ---- */
   (function () {
     const barrera = document.getElementById("barrera");
     const luz = document.getElementById("luz-barrera");
@@ -598,6 +647,34 @@ miServo.<span class="fn">write</span>(angulo);</pre>
     analogico: {
       t: "Digital y analógico",
       d: "<p><strong>Digital</strong> es de dos estados: prendido o apagado, como el interruptor de la luz. Es lo que leía el botón: HIGH o LOW.</p><p><strong>Analógico</strong> es todo lo del medio: como el dimmer que sube y baja la luz de a poquito, o el volumen de la radio. El Arduino lo mide con un número del <strong>0 al 1023</strong>.</p><p>Los pines que pueden hacer esto son los que empiezan con <strong>A</strong>: A0, A1, A2… 🎚️</p>"
+    },
+    "perilla-circuito": {
+      t: "Así se conecta la perilla 🎛️",
+      d: "<p>La perilla tiene <strong>tres patitas</strong> y se para en la protoboard: las de las orillas a <strong>5V</strong> y <strong>GND</strong>, y la del medio — la que dice cuánto giraste — al pin <strong>A0</strong>.</p>"
+        + "<svg viewBox='0 0 640 400' style='width:100%' aria-label='Perilla en la protoboard conectada al Arduino'>"
+        + arduinoSVG({ x: 6, y: 70, pads: ["A0", "5V", "GND"] }).svg
+        + protoboardSVG({ x: 150, y: 30 })
+        + "<text x='386' y='22' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif' font-weight='700'>la perilla (potenciómetro)</text>"
+        + "<line x1='360' y1='134' x2='360' y2='104' stroke='#9aa7ad' stroke-width='4'/>"
+        + "<line x1='386' y1='134' x2='386' y2='104' stroke='#9aa7ad' stroke-width='4'/>"
+        + "<line x1='412' y1='134' x2='412' y2='104' stroke='#9aa7ad' stroke-width='4'/>"
+        + "<rect x='344' y='40' width='84' height='66' rx='8' fill='#1565C0'/>"
+        + "<circle cx='386' cy='66' r='21' fill='#ECEFF1' stroke='#90A4AE' stroke-width='3'/>"
+        + "<rect x='383' y='47' width='6' height='15' rx='3' fill='#37474F'/>"
+        + "<text x='360' y='101' text-anchor='middle' font-size='10' fill='#fff' font-family='monospace'>5V</text>"
+        + "<text x='386' y='101' text-anchor='middle' font-size='10' fill='#fff' font-family='monospace'>A0</text>"
+        + "<text x='412' y='101' text-anchor='middle' font-size='10' fill='#fff' font-family='monospace'>GND</text>"
+        + "<path d='M128 122 C 240 124, 330 142, 386 150' fill='none' stroke='#4C7CFF' stroke-width='6' stroke-linecap='round'/>"
+        + "<path d='M128 170 C 220 172, 310 170, 360 166' fill='none' stroke='#E84855' stroke-width='6' stroke-linecap='round'/>"
+        + "<path d='M128 218 C 150 280, 162 312, 175 326' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>"
+        + "<path d='M412 182 C 560 205, 620 290, 568 326' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>"
+        + "</svg>"
+        + "<p>Y el servo aparte, con sus tres cables de siempre — él no necesita protoboard:</p><svg viewBox='0 0 620 300' style='width:100%; max-width:26em; display:block; margin:0 auto' aria-label='Servo conectado al Arduino con tres cables'><rect x='20' y='60' width='150' height='200' rx='12' fill='#00878F'/><text x='95' y='90' text-anchor='middle' fill='#fff' font-family='monospace' font-size='15'>ARDUINO</text><rect x='32' y='110' width='126' height='26' rx='4' fill='#143642'/><text x='95' y='128' text-anchor='middle' fill='#fff' font-family='monospace' font-size='13'>5V</text><rect x='32' y='160' width='126' height='26' rx='4' fill='#143642'/><text x='95' y='178' text-anchor='middle' fill='#fff' font-family='monospace' font-size='13'>GND</text><rect x='32' y='210' width='126' height='26' rx='4' fill='#143642'/><text x='95' y='228' text-anchor='middle' fill='#fff' font-family='monospace' font-size='13'>pin 9</text><rect x='430' y='110' width='120' height='90' rx='10' fill='#1565C0'/><circle cx='490' cy='110' r='18' fill='#90A4AE'/><rect x='484' y='55' width='12' height='56' rx='6' fill='#ECEFF1' stroke='#90A4AE' stroke-width='2'/><text x='490' y='225' text-anchor='middle' font-size='14' fill='#5E7480' font-family='Nunito, sans-serif'>servo SG90</text><path class='cable-w' d='M164 123 C 280 123, 320 140, 428 140' stroke='#E84855'/><path class='cable-w' d='M164 173 C 280 173, 320 160, 428 158' stroke='#6D4C41'/><path class='cable-w' d='M164 223 C 300 223, 340 180, 428 176' stroke='#FB8C00'/><text x='300' y='112' text-anchor='middle' font-size='13' fill='#E84855' font-family='Nunito, sans-serif'>rojo → 5V</text><text x='300' y='160' text-anchor='middle' font-size='13' fill='#6D4C41' font-family='Nunito, sans-serif'>café → GND</text><text x='300' y='248' text-anchor='middle' font-size='13' fill='#FB8C00' font-family='Nunito, sans-serif'>naranjo → pin 9</text></svg>"
+        + "<p class='nota'>¿Y si el 5V del Arduino ya lo usa la perilla? La columna del cable rojo tiene hoyitos libres: pincha ahí el rojo del servo. El café va a otro GND — el Arduino tiene tres. 😉</p>"
+    },
+    "perilla-codigo": {
+      t: "El programa de la perilla 📋",
+      d: "<pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>#include &lt;Servo.h&gt;\nServo miServo;\n\nvoid setup() {\n  miServo.attach(9);\n}\n\nvoid loop() {\n  int valor = analogRead(A0);                // de 0 a 1023\n  int angulo = map(valor, 0, 1023, 0, 180);  // traducido a grados\n  miServo.write(angulo);\n  delay(15);\n}\n</code></pre><p>Fíjate qué corto: el loop solo <strong>lee, traduce y ordena</strong>, miles de veces por segundo. Por eso el servo parece pegado a tu mano. También está en <code>sketches/sesion-06/perilla</code>.</p>"
     }
   });
 </script>
