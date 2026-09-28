@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lección 0 · ¿Qué vamos a inventar?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/slides.css">
+</head>
+<body>
+
+<!-- 1 · Portada -->
+<section class="slide portada">
+  <span class="sesion-num">Lección 0</span>
+  <h1>¿Qué vamos a inventar? 🚀</h1>
+  <p class="grande">Con un cerebrito, unos motores y un poco de programación<br>se pueden construir <strong>robots que bailan</strong>, <strong>cohetes con paracaídas</strong>…<br>En este curso vamos a construir <strong>un gran proyecto</strong>. ¡Y lo eligen ustedes!</p>
+  <div class="semaforo-vivo" aria-hidden="true">
+    <span class="led" id="pled-r" style="--c:var(--rojo)"></span>
+    <span class="led" id="pled-a" style="--c:var(--ambar)"></span>
+    <span class="led" id="pled-v" style="--c:var(--verde)"></span>
+  </div>
+</section>
+
+<!-- 2 · Sección 1: robotitos -->
+<section class="slide">
+  <p class="eyebrow">Idea 1 · Robotitos que caminan</p>
+  <h2>Otto y Cobot 🤖</h2>
+  <div class="fila proyectos">
+    <article class="proy">
+      <img class="proy-media" src="../recursos/img/otto-baile.gif" alt="Robot Otto verde y blanco caminando hacia atrás como Michael Jackson">
+      <h3>Otto, el bailarín 🕺</h3>
+      <p>Camina, baila, hace <em>moonwalk</em>, esquiva paredes y canta con su parlantito.</p>
+      <div class="piezas">
+        <span class="pieza">🦾 4 servos · S6</span>
+        <span class="pieza">🦇 distancia · S7</span>
+        <span class="pieza">🎵 buzzer · S5</span>
+      </div>
+      <p class="credito">Cuerpo impreso en 3D<button class="sm" data-sm="imp3d">?</button> · diseño abierto<button class="sm" data-sm="abierto">?</button> · Video: Otto DIY robot · YouTube</p>
+    </article>
+    <article class="proy">
+      <img class="proy-media" src="../recursos/img/cobot.gif" alt="Robot Cobot de cuatro patas agachándose y levantándose">
+      <h3>Cobot, el de cuatro patas 🐾</h3>
+      <p>Se agacha, se estira y camina con sus cuatro patas. Mide lo que tiene enfrente para no chocar.</p>
+      <div class="piezas">
+        <span class="pieza">🦾 4 servos · S6</span>
+        <span class="pieza">🦇 distancia · S7</span>
+      </div>
+      <p class="credito">Cuerpo impreso en 3D · Diseño y GIF: LucaDilo · MakerWorld · CC BY-NC-ND</p>
+    </article>
+  </div>
+</section>
+
+<!-- 3 · Idea 2: lámparas interactivas -->
+<section class="slide">
+  <p class="eyebrow">Idea 2 · Lámparas interactivas</p>
+  <h2>Luces que te hacen caso 💡</h2>
+  <div class="fila proyectos">
+    <article class="proy">
+      <img class="proy-media" src="../recursos/img/lampara-tactil.gif" alt="Lámpara con forma de hongo que se prende y cambia de intensidad al tocarle el sombrero" style="object-fit:contain; background:var(--tinta)">
+      <h3>El hongo mágico 🍄</h3>
+      <p>Le tocas el sombrero y se prende. Lo tocas otra vez y brilla más fuerte… o se apaga. ¡Sin ningún botón a la vista!</p>
+      <div class="piezas">
+        <span class="pieza">👆 sensor táctil · como el botón S4</span>
+        <span class="pieza">✨ medio encendido · S9</span>
+      </div>
+      <p class="credito">Diseño y GIF: Keralots · MakerWorld</p>
+    </article>
+    <article class="proy">
+      <img class="proy-media" src="../recursos/img/lampara-sonido.gif" alt="Lámpara con forma de caracol nautilus que cambia de colores cuando alguien aplaude">
+      <h3>El caracol que escucha 🐚</h3>
+      <p>Aplaudes o cantas cerca, y sus luces corren por la espiral cambiando de color.</p>
+      <div class="piezas">
+        <span class="pieza">👏 sensor de sonido · viene en el kit</span>
+        <span class="pieza">🌈 colores · S9</span>
+      </div>
+      <p class="credito">Diseño y GIF: seanliang00 · MakerWorld · CC BY-NC-SA</p>
+    </article>
+  </div>
+</section>
+
+<!-- 4 · Idea 3: vehículos -->
+<section class="slide">
+  <p class="eyebrow">Idea 3 · Vehículos</p>
+  <h2>¡A rodar y a navegar! 🏁</h2>
+  <div class="fila proyectos">
+    <article class="proy">
+      <img class="proy-media" src="../recursos/img/barco.gif" alt="Barquito hecho con una bandeja blanca navegando y girando en una piscina">
+      <h3>El barco del lago ⛵</h3>
+      <p>Una bandeja con motor y timón que manejas desde el teléfono. ¡Primero en la piscina, después en el lago!</p>
+      <div class="piezas">
+        <span class="pieza">🦾 timón · S6</span>
+        <span class="pieza">⚙️ motor con hélice · extra</span>
+        <span class="pieza">📱 control por teléfono · extra</span>
+      </div>
+      <p class="credito">Diseño y GIF: Edu (omnia-makers) · MakerWorld</p>
+    </article>
+    <article class="proy">
+      <img class="proy-media" src="../recursos/img/auto-linea.gif" alt="Autito robot recorriendo solo una pista de líneas blancas sobre un piso negro">
+      <h3>El autito que sigue la línea 🏎️</h3>
+      <p>Nadie lo maneja: mira el piso y sigue la cinta por las curvas, solito.<button class="sm" data-sm="linea">?</button> ¿Quién arma la pista más difícil?</p>
+      <div class="piezas">
+        <span class="pieza">👀 ve la línea · sensor infrarrojo</span>
+        <span class="pieza">⚙️ 2 motores · extra</span>
+        <span class="pieza">🦇 frena si hay algo · S7</span>
+      </div>
+      <p class="credito">Video: Friday Of Robotic's Dream · YouTube</p>
+    </article>
+  </div>
+</section>
+
+<!-- 5 · Idea 4: cohete de agua -->
+<section class="slide">
+  <p class="eyebrow">Idea 4 · Cohete de agua</p>
+  <h2>3, 2, 1… ¡despegue! 🚀</h2>
+  <div class="fila proyectos">
+    <article class="proy">
+      <img class="proy-media" src="../recursos/img/cohete-lanzador.gif" alt="Cohete de botella con aletas naranjas despegando en cámara lenta desde su lanzador, entre chorros de agua">
+      <h3>El lanzador automático 🎯</h3>
+      <p>Una botella con agua y aire a presión sale disparada. Nuestro lanzador cuenta 3, 2, 1… ¡y la suelta solito!</p>
+      <div class="piezas">
+        <span class="pieza">🚦 semáforo · S3</span>
+        <span class="pieza">🔘 botón · S4</span>
+        <span class="pieza">🎵 cuenta regresiva · S5</span>
+        <span class="pieza">🦾 gatillo · S6</span>
+      </div>
+      <p class="credito">Diseño y video: Marimo Labs · YouTube · CC BY-NC-SA</p>
+    </article>
+    <article class="proy">
+      <img class="proy-media" src="../recursos/img/cohete-paracaidas.gif" alt="Cohete de agua bajando lentamente colgado de un paracaídas rojo">
+      <h3>El cohete con paracaídas 🪂</h3>
+      <p>Arriba, cuando empieza a caer, la punta se abre sola y sale el paracaídas.<button class="sm" data-sm="paracaidas">?</button> Baja suavecito… ¡listo para volver a volar!</p>
+      <div class="piezas">
+        <span class="pieza">📏 mide la altura · extra</span>
+        <span class="pieza">🦾 abre la tapa · S6</span>
+        <span class="pieza">🎵 pita para encontrarlo · S5</span>
+      </div>
+      <p class="credito">Video: StratoFins · YouTube</p>
+    </article>
+  </div>
+</section>
+
+<!-- 6 · Idea 5: mini proyectos -->
+<section class="slide">
+  <p class="eyebrow">Idea 5 · Mini proyectos</p>
+  <h2>Cartón + Arduino + un sensor = ¡un invento! 📦</h2>
+  <div class="fila" style="align-items:center; gap:2em">
+    <video class="video-corto" src="../recursos/video/mini-proyectos.mp4" poster="../recursos/video/mini-proyectos.jpg" controls muted loop playsinline preload="metadata"></video>
+    <div style="max-width:24em; text-align:left; display:flex; flex-direction:column; gap:.6em">
+      <p class="grande" style="font-size:1.2rem">Doce inventos chicos, hechos con cajas y lo que hay en casa:</p>
+      <div class="mini-lista">
+        <span>🐶 Comida para la mascota</span>
+        <span>🚗 Auto con el teléfono</span>
+        <span>🏠 Casa inteligente</span>
+        <span>🥛 Agua que cae sola</span>
+        <span>🗑️ Basurero que separa</span>
+        <span>🚰 Bidón automático</span>
+        <span>🪜 Escalera que se ilumina</span>
+        <span>🪴 Planta que se riega sola</span>
+        <span>👕 Techo que se cierra si llueve</span>
+        <span>🚪 Puerta que se abre sola</span>
+        <span>🅿️ Estacionamiento con barrera</span>
+        <span>✊ Piedra, papel o tijera</span>
+      </div>
+      <p class="nota">Casi todos usan lo mismo: un <strong>sensor</strong> que se da cuenta de algo y un <strong>servo</strong> o una <strong>luz</strong> que responde. ¡Eso lo vas a aprender tú! <span class="credito" style="display:block; font-size:.8em; margin-top:.3em">Videos: Robotos y Eazytronic · YouTube</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- 7 · Inventa el tuyo -->
+<section class="slide">
+  <p class="eyebrow">Idea 6 · La tuya</p>
+  <h2>¿Y si inventas el tuyo? 💡</h2>
+  <p class="grande">Todo invento tiene tres partes. Elige una de cada fila:</p>
+  <div class="inventor">
+    <div class="inv-fila" data-parte="siente">
+      <span class="inv-titulo">👂 Siente…</span>
+      <button class="boton secundario chip" data-txt="la distancia">🦇 distancia</button>
+      <button class="boton secundario chip" data-txt="el calor">🌡️ calor</button>
+      <button class="boton secundario chip" data-txt="un botón">🔘 botón</button>
+      <button class="boton secundario chip" data-txt="una perilla">🎛️ perilla</button>
+    </div>
+    <div class="inv-fila" data-parte="hace">
+      <span class="inv-titulo">✋ Hace…</span>
+      <button class="boton secundario chip" data-txt="se mueve">🦾 moverse</button>
+      <button class="boton secundario chip" data-txt="toca música">🎵 música</button>
+      <button class="boton secundario chip" data-txt="brilla de colores">🌈 colores</button>
+      <button class="boton secundario chip" data-txt="suena una alarma">🚨 alarma</button>
+    </div>
+    <div class="inv-fila" data-parte="donde">
+      <span class="inv-titulo">📍 Vive en…</span>
+      <button class="boton secundario chip" data-txt="el lago">🌊 lago</button>
+      <button class="boton secundario chip" data-txt="el bosque">🌲 bosque</button>
+      <button class="boton secundario chip" data-txt="la pradera">🌾 pradera</button>
+      <button class="boton secundario chip" data-txt="mi pieza">🛏️ mi pieza</button>
+    </div>
+  </div>
+  <div class="reto">
+    <p class="grande" id="inv-frase">Mi invento siente <strong>…</strong>, y cuando pasa, <strong>…</strong>. Vive en <strong>…</strong>.</p>
+    <p class="nota">¿Cómo se llamaría? Dibújalo en tu cuaderno. ✏️</p>
+  </div>
+</section>
+
+<!-- 8 · Conversemos -->
+<section class="slide">
+  <p class="eyebrow">Ahora ustedes</p>
+  <h2>Conversemos 💬</h2>
+  <div class="charla">
+    <div class="tarjeta"><h3>🤩 ¿Cuál te gustó más?</h3><p>¿Por qué? ¿Qué fue lo que te hizo decir «¡guau!»?</p></div>
+    <div class="tarjeta"><h3>👂 ¿Qué tiene que sentir?</h3><p>¿Una mano, un aplauso, la luz, el agua? ¿Y qué hace cuando lo siente?</p></div>
+    <div class="tarjeta"><h3>📍 ¿Dónde lo probamos?</h3><p>¿En la sala, el patio, la pradera… o en el lago?</p></div>
+    <div class="tarjeta"><h3>🧩 ¿Y si juntamos dos?</h3><p>Un robot que baila con luces de colores, un barco que pita… ¡se vale mezclar!</p></div>
+    <div class="tarjeta"><h3>🤝 ¿Qué parte harías tú?</h3><p>Programar, armar el circuito, decorar, construir la carcasa…</p></div>
+  </div>
+  <p class="nota">Con todas estas ideas, al final elegimos juntos el proyecto del curso.</p>
+</section>
+
+<!-- 9 · A votar -->
+<section class="slide">
+  <p class="eyebrow">Decidimos juntos</p>
+  <h2>¡A votar! 🗳️</h2>
+  <p class="grande">Toca tu proyecto favorito para sumarle un voto.</p>
+  <div class="votos" id="votos">
+    <button class="voto" data-n="0">🕺 Otto <span class="barra"></span><b>0</b></button>
+    <button class="voto" data-n="0">🐾 Cobot <span class="barra"></span><b>0</b></button>
+    <button class="voto" data-n="0">🍄 Hongo mágico <span class="barra"></span><b>0</b></button>
+    <button class="voto" data-n="0">🐚 Caracol que escucha <span class="barra"></span><b>0</b></button>
+    <button class="voto" data-n="0">⛵ Barco <span class="barra"></span><b>0</b></button>
+    <button class="voto" data-n="0">🏎️ Autito sigue-línea <span class="barra"></span><b>0</b></button>
+    <button class="voto" data-n="0">🎯 Lanzador automático <span class="barra"></span><b>0</b></button>
+    <button class="voto" data-n="0">🪂 Cohete con paracaídas <span class="barra"></span><b>0</b></button>
+    <button class="voto" data-n="0">📦 Un mini proyecto <span class="barra"></span><b>0</b></button>
+    <button class="voto" data-n="0">💡 Una idea nueva <span class="barra"></span><b>0</b></button>
+  </div>
+  <p class="nota">¿Te equivocaste? Clic derecho sobre el proyecto le quita un voto.</p>
+</section>
+
+<!-- 10 · Cierre -->
+<section class="slide portada">
+  <p class="eyebrow">El plan</p>
+  <h1>Pieza por pieza 🧩</h1>
+  <p class="grande">Cada sesión vas a aprender <strong>una pieza nueva</strong>.<br>Al final las juntamos todas… ¡y nace nuestro proyecto!</p>
+  <div class="piezas" style="max-width:36em; justify-content:center">
+    <span class="pieza">💡 luces · S2</span>
+    <span class="pieza">🔘 botones · S4</span>
+    <span class="pieza">🎵 música · S5</span>
+    <span class="pieza">🦾 movimiento · S6</span>
+    <span class="pieza">🦇 distancia · S7</span>
+    <span class="pieza">🌡️ temperatura · S8</span>
+    <span class="pieza">🌈 colores · S9</span>
+  </div>
+  <div class="tarjeta" style="max-width:24em">
+    <h3>Próxima sesión 🤖</h3>
+    <p>Conocemos al <strong>cerebrito</strong> que hace posible todo esto: <strong>Arduino</strong>.</p>
+  </div>
+</section>
+
+<style>
+  /* ---------- tarjetas de proyecto, dos por slide ---------- */
+  .proyectos { align-items: stretch; }
+  .proy {
+    background: var(--blanco);
+    border: 3px solid var(--teal-suave);
+    border-radius: 16px;
+    padding: .7em .9em .8em;
+    width: min(44vw, 23em);
+    display: flex;
+    flex-direction: column;
+    gap: .4em;
+    text-align: left;
+    box-shadow: 0 6px 18px rgba(20, 54, 66, .08);
+  }
+  .proy h3 { font-family: var(--f-titulo); color: var(--teal-osc); line-height: 1.1; }
+  .proy p { font-size: .9em; line-height: 1.35; }
+  .proy .credito { font-size: .7em; color: var(--gris); margin-top: auto; }
+  .proy-media {
+    width: 100%;
+    height: 36vh;
+    object-fit: cover;
+    object-position: 50% 40%;
+    border-radius: 10px;
+    background: #fff;
+  }
+  .proy-media.maqueta {
+    background: var(--fondo);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 11vh;
+    line-height: 1;
+  }
+  .proy-media.maqueta span {
+    font-size: .8rem;
+    font-weight: 900;
+    color: var(--gris);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-top: .6em;
+  }
+  .piezas { display: flex; flex-wrap: wrap; gap: .3em; }
+  .pieza {
+    font-size: .75em;
+    font-weight: 900;
+    background: var(--teal-suave);
+    color: var(--teal-osc);
+    border-radius: 999px;
+    padding: .15em .7em;
+  }
+
+  /* ---------- mini proyectos ---------- */
+  .video-corto { height: 62vh; aspect-ratio: 9 / 16; border-radius: 14px; background: #000; box-shadow: 0 10px 24px rgba(20, 54, 66, .18); }
+  .mini-lista { display: grid; grid-template-columns: 1fr 1fr; gap: .3em .8em; font-size: .85em; font-weight: 700; }
+
+  /* ---------- 7 · inventor ---------- */
+  .inventor { display: flex; flex-direction: column; gap: .5em; }
+  .inv-fila { display: flex; flex-wrap: wrap; align-items: center; gap: .4em; justify-content: center; }
+  .inv-titulo { font-family: var(--f-titulo); width: 6.5em; text-align: right; }
+  .inv-fila .chip { padding: .3em .8em; font-size: .95rem; }
+  .inv-fila .chip.elegido { background: var(--teal); color: #fff; box-shadow: 0 4px 0 var(--teal-osc); }
+
+  /* ---------- 8 · conversemos ---------- */
+  .charla { display: grid; grid-template-columns: repeat(3, minmax(0, 15em)); gap: .8em; justify-content: center; }
+  .charla .tarjeta { max-width: none; text-align: left; padding: .7em .9em; }
+  .charla .tarjeta h3 { font-size: 1.05rem; }
+  .charla .tarjeta p { font-size: .85em; line-height: 1.35; }
+
+  /* ---------- 9 · votación ---------- */
+  .votos { display: flex; flex-direction: column; gap: .25em; width: min(90vw, 34em); }
+  .voto {
+    display: flex;
+    align-items: center;
+    gap: .6em;
+    font: inherit;
+    font-weight: 900;
+    color: var(--tinta);
+    background: var(--blanco);
+    border: 3px solid var(--teal-suave);
+    border-radius: 12px;
+    padding: .25em .7em;
+    cursor: pointer;
+    text-align: left;
+  }
+  .voto:hover { border-color: var(--teal); }
+  .voto .barra {
+    flex: 1;
+    height: .7em;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--verde) var(--p, 0%), var(--teal-suave) var(--p, 0%));
+    transition: background .2s;
+  }
+  .voto b { min-width: 1.5em; text-align: right; }
+</style>
+
+<script src="assets/slides.js"></script>
+<script>
+  // portada: semáforo que se turna
+  const pleds = ["pled-r", "pled-a", "pled-v"].map(id => document.getElementById(id));
+  let pi = 0;
+  setInterval(() => {
+    pleds.forEach((l, i) => l.classList.toggle("on", i === pi));
+    pi = (pi + 1) % 3;
+  }, 700);
+
+  // 7 · inventor: una opción por fila arma la frase
+  const eleccion = { siente: "…", hace: "…", donde: "…" };
+  document.querySelectorAll(".inv-fila").forEach(fila =>
+    fila.querySelectorAll(".chip").forEach(b => b.addEventListener("click", () => {
+      fila.querySelectorAll(".chip").forEach(o => o.classList.toggle("elegido", o === b));
+      eleccion[fila.dataset.parte] = b.dataset.txt;
+      document.getElementById("inv-frase").innerHTML =
+        `Mi invento siente <strong>${eleccion.siente}</strong>, y cuando pasa, <strong>${eleccion.hace}</strong>. Vive en <strong>${eleccion.donde}</strong>.`;
+    })));
+
+  // 9 · votación: clic suma, clic derecho resta; la barra es relativa al más votado
+  const votos = [...document.querySelectorAll(".voto")];
+  const pintarVotos = () => {
+    const max = Math.max(1, ...votos.map(v => +v.dataset.n));
+    votos.forEach(v => {
+      v.querySelector("b").textContent = v.dataset.n;
+      v.style.setProperty("--p", (100 * v.dataset.n / max) + "%");
+    });
+  };
+  votos.forEach(v => {
+    v.addEventListener("click", () => { v.dataset.n++; pintarVotos(); });
+    v.addEventListener("contextmenu", e => { e.preventDefault(); v.dataset.n = Math.max(0, v.dataset.n - 1); pintarVotos(); });
+  });
+
+  // ¿saber más?
+  saberMas({
+    imp3d: {
+      t: "Impresora 3D",
+      d: "<p>Es como una <strong>pistola de silicona robot</strong> 🔫: derrite un hilo de plástico y lo va dibujando capa sobre capa, muy fino, hasta que la pieza aparece. El cuerpo de Otto demora unas <strong>5 horas</strong> en imprimirse.</p>"
+    },
+    abierto: {
+      t: "Diseño abierto",
+      d: "<p>Los inventores de Otto publicaron <strong>toda su receta</strong> 📖: las piezas para imprimir, la lista de materiales y los programas. Cualquiera puede construirlo en su casa y hasta inventarle mejoras. ¡Igual que Arduino!</p>"
+    },
+    paracaidas: {
+      t: "¿Cómo sabe cuándo abrirse?",
+      d: "<p>La punta lleva un sensor que mide la <strong>altura</strong> con la presión del aire. Mientras sube, la altura crece. Cuando empieza a bajar… ¡ese es el momento! Un servo suelta la tapa y el paracaídas se abre. 🪂</p>"
+    },
+    linea: {
+      t: "¿Cómo ve la línea?",
+      d: "<p>Debajo lleva unos <strong>ojitos de luz infrarroja</strong>, una luz que nosotros no vemos. Cada ojito prende su luz y mira cuánta rebota: lo claro la <strong>devuelve</strong> y lo oscuro se la <strong>traga</strong>. Así sabe dónde está la línea: si se le escapa hacia un lado, el auto gira hacia ese lado para no perderla. 🏁</p>"
+    }
+  });
+</script>
+</body>
+</html>

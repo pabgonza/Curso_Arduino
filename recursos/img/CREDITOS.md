@@ -39,3 +39,22 @@ Todos provienen de la documentación oficial de Arduino
 ([docs.arduino.cc](https://docs.arduino.cc), repo
 [arduino/docs-content](https://github.com/arduino/docs-content)), licencia CC BY-SA 4.0:
 tutoriales "Downloading and installing the Arduino IDE 2" y "Uploading a sketch".
+
+## GIF de la leccion 0
+
+GIF animados recortados de videos o publicaciones de los autores. Uso educativo con atribucion.
+
+- `otto-baile.gif` -- Otto haciendo "moonwalker" (seg. 24-31) de "What can Otto DIY robot do?" | Autor: canal Otto DIY robot | Licencia: YouTube estandar (Otto DIY es hardware abierto CC BY-SA) | [fuente](https://www.youtube.com/watch?v=VD6sgTo6NOY)
+- `cobot.gif` -- GIF original del autor, reducido a 280 px | Autor: LucaDilo | Licencia: CC BY-NC-ND 4.0 | [fuente](https://makerworld.com/es/models/523448-cobot-four-servo-legs-and-distance-sensor-robot)
+- `lampara-tactil.gif` -- GIF original del autor, reducido a 200 px | Autor: Keralots | Licencia: licencia exclusiva de MakerWorld (no permite redistribuir fuera de MakerWorld ni uso comercial) | [fuente](https://makerworld.com/es/models/2407165-simple-touch-desk-lamp-based-on-arduino-and-ttp223)
+- `lampara-sonido.gif` -- GIF original del autor (reaccionando a aplausos), reducido a 360 px | Autor: seanliang00 | Licencia: CC BY-NC-SA 4.0 | [fuente](https://makerworld.com/es/models/2668498-sound-reactive-nautilus-lamp-arduino-project)
+- `barco.gif` -- GIF original del autor, recortado a la zona donde navega y reducido a 300 px | Autor: Edu (omnia-makers) | Licencia: licencia exclusiva de MakerWorld | [fuente](https://makerworld.com/es/models/2141050-esp32-rc-boat-easy-to-assemble-and-economical)
+- `auto-linea.gif` -- Seguidor de linea recorriendo la pista (seg. 28-36) de "Test L-sens01.1D Robotracer Robot" | Autor: canal Friday Of Robotic's Dream | Licencia: YouTube estandar | [fuente](https://www.youtube.com/watch?v=vEOgWIf6vqU)
+- `cohete-lanzador.gif` -- Despegue 23 en camara lenta (seg. 92-97) de "23 Water Rocket Launches - 3D-Printed Launcher Validation Testing" | Autor: Marimo Labs (diseno del lanzador CC BY-NC-SA en MakerWorld) | Licencia: YouTube estandar | [fuente](https://www.youtube.com/watch?v=hjkcgdyLsX4)
+- `cohete-paracaidas.gif` -- Descenso con paracaidas (seg. 32-41, al doble de velocidad) de "StratoRocket Mini" | Autor: canal StratoFins | Licencia: YouTube estandar | [fuente](https://www.youtube.com/watch?v=H4-hzaNt1gg)
+
+## Videos de la leccion 0 (recursos/video/)
+- `mini-proyectos.mp4` -- Union de tres Shorts, recodificada a H.264 360x640 (65 s); `mini-proyectos.jpg` es un cuadro del segundo 3:
+  1. "Top 10 Arduino Projects" completo (53 s) | Autor: canal Robotos (proyectos de Eazytronic, se ve su logo) | Licencia: YouTube estandar | [fuente](https://www.youtube.com/shorts/cmAWM1hZ5mk)
+  2. "Automatic Car Parking System", seg. 0-5 | Autor: EAZYTRONIC | Licencia: YouTube estandar | [fuente](https://www.youtube.com/shorts/sITKkMyOJb0)
+  3. "Rock Paper Scissors", seg. 0-7 | Autor: EAZYTRONIC | Licencia: YouTube estandar | [fuente](https://www.youtube.com/shorts/Nbjpv2-yjCY)
