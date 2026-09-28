@@ -312,12 +312,9 @@
   <h2>¿Qué pasa si cambias el número? 🎛️</h2>
   <div style="display:flex; gap:1.5em; align-items:center; flex-wrap:wrap; justify-content:center">
     <span class="led-cuerpo"><span class="led led-grande" id="led-juego" style="--c:var(--ambar)"></span></span>
-    <div class="pila-bloques">
-      <div class="bloque b-control">esperar <span class="chip" id="b-seg">0.5</span> segundos</div>
-    </div>
     <div class="ide">
-      <div class="ide-barra"><span class="ide-nombre">código generado</span></div>
-      <pre><span class="fn">delay</span>(<span class="num-vivo" id="v1">500</span>);</pre>
+      <div class="ide-barra"><span class="ide-nombre">tu código</span></div>
+      <pre><span class="fn">delay</span>(<span class="num-vivo" id="v1">500</span>);  <span class="cm">// <span id="b-seg">0,5</span> segundos</span></pre>
     </div>
   </div>
   <input type="range" id="slider-delay" min="60" max="1200" step="20" value="500" aria-label="Velocidad del parpadeo">
@@ -334,7 +331,7 @@
     <p class="eyebrow">⭐ Reto de la sesión</p>
     <h2>Haz latir un corazón ❤️</h2>
     <p class="grande">Un corazón no parpadea parejo: hace <strong>tum-tum… pausa… tum-tum… pausa</strong>.</p>
-    <p>Pista: necesitas <strong>varios</strong> bloques de <strong>esperar</strong> con números <strong>distintos</strong>.</p>
+    <p>Pista: necesitas <strong>varios</strong> <code>delay</code> con números <strong>distintos</strong>.</p>
   </div>
   <p>Así debería verse: <span class="led" id="led-corazon" style="--c:var(--rojo); font-size:2em"></span></p>
 </section>
@@ -353,16 +350,16 @@
       <div class="quiz-cara quiz-atras">El driver: su traductor 🗣️</div>
     </div></div>
     <div class="quiz" tabindex="0"><div class="quiz-caras">
-      <div class="quiz-cara quiz-frente">El bloque «esperar 0.5 segundos» genera el código…</div>
-      <div class="quiz-cara quiz-atras">delay(500) ⏱️</div>
+      <div class="quiz-cara quiz-frente">¿Cuánto espera <code>delay(500)</code>?</div>
+      <div class="quiz-cara quiz-atras">500 milésimas: ¡medio segundo! ⏱️</div>
     </div></div>
     <div class="quiz" tabindex="0"><div class="quiz-caras">
       <div class="quiz-cara quiz-frente">¿Qué hace el programa al llegar a la última instrucción?</div>
       <div class="quiz-cara quiz-atras">¡Vuelve a empezar! Es el loop 🔁</div>
     </div></div>
     <div class="quiz" tabindex="0"><div class="quiz-caras">
-      <div class="quiz-cara quiz-frente">En Tinkercad, ¿qué pasa si conectas algo mal?</div>
-      <div class="quiz-cara quiz-atras">¡Nada se quema! Es un simulador 🧪</div>
+      <div class="quiz-cara quiz-frente">¿A qué pin está conectado el LED «L» de la placa?</div>
+      <div class="quiz-cara quiz-atras">Al pin 13 💡</div>
     </div></div>
   </div>
 </section>
@@ -385,43 +382,80 @@
 <section class="slide">
   <p class="eyebrow">Extra · Tu laboratorio en casa</p>
   <h2>¿Y si no tengo Arduino en casa? 🧪</h2>
-  <p class="grande" style="max-width:26em">¡No hay problema! <strong>Tinkercad</strong> es un laboratorio
-  virtual gratis: tiene Arduinos infinitos y nada se puede quemar.</p>
-  <div style="display:flex; flex-direction:column; gap:.6em; width:min(92vw,640px)">
-    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Abrir <strong>tinkercad.com/joinclass</strong></span></div>
-    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Escribir el <strong>código de la clase</strong> (está en la pizarra)</span></div>
-    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Entrar con tu <strong>apodo</strong> (sin correo, sin contraseña)</span></div>
-    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Crear un <strong>Circuito nuevo</strong> y arrastrar un Arduino UNO</span></div>
+  <div class="fila" style="align-items:center; gap:1.6em">
+    <div style="max-width:24em; text-align:left; display:flex; flex-direction:column; gap:.6em">
+      <p class="grande" style="font-size:1.25rem">¡No hay problema! <strong>Tinkercad</strong> es un laboratorio virtual gratis: tiene Arduinos infinitos y nada se puede quemar.</p>
+      <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Abrir <strong>tinkercad.com/joinclass</strong></span></div>
+      <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Escribir el <strong>código de la clase</strong> (está en la pizarra)</span></div>
+      <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Entrar con tu <strong>apodo</strong> (sin correo, sin contraseña)</span></div>
+    </div>
+    <figure class="figura">
+      <img src="../recursos/img/pantallazos/tk-simulacion.gif" alt="Arduino Uno en Tinkercad con su LED L parpadeando">
+      <figcaption>La meta: ¡tu Blink funcionando en el computador!</figcaption>
+    </figure>
   </div>
 </section>
 
-<!-- 15 · Blink con bloques -->
+<!-- 15 · Tinkercad: armar el circuito -->
+<section class="slide">
+  <p class="eyebrow">Extra · Paso a paso en Tinkercad</p>
+  <h2>Arma tu circuito virtual 🔧</h2>
+  <div style="display:flex; flex-direction:column; gap:.6em; width:min(92vw,640px)">
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Apretar <strong>+ Crear</strong> y elegir <strong>Circuitos</strong> <button class="sm" data-sm="tk-crear">📷</button></span></div>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Ponerle nombre: arriba a la izquierda, por ejemplo <strong>Mi primer Blink</strong> <button class="sm" data-sm="tk-editor">📷</button></span></div>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">En <strong>Componentes</strong>, escribir <strong>arduino</strong> en el buscador <button class="sm" data-sm="tk-buscar">📷</button></span></div>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Arrastrar el <strong>Arduino Uno R3</strong> al área de trabajo <button class="sm" data-sm="tk-arduino">📷</button></span></div>
+  </div>
+  <p class="nota">Tinkercad guarda solo: no hay que apretar ningún botón de guardar. 💾</p>
+</section>
+
+<!-- 16 · Tinkercad: programar y simular -->
+<section class="slide">
+  <p class="eyebrow">Extra · Paso a paso en Tinkercad</p>
+  <h2>Prográmalo y… ¡simula! ▶️</h2>
+  <div class="fila" style="align-items:center; gap:1.6em">
+    <div style="display:flex; flex-direction:column; gap:.6em; width:min(92vw,30em)">
+      <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Apretar <strong>Código</strong> y, en el menú de arriba, cambiar <strong>Bloques</strong> por <strong>Texto</strong> <button class="sm" data-sm="tk-menu-texto">📷</button></span></div>
+      <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Si pregunta «¿Está seguro?», apretar <strong>Continuar</strong> <button class="sm" data-sm="tk-confirmar">📷</button></span></div>
+      <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Mirar el código: ¡es el mismo <strong>Blink</strong> que subiste a tu placa! <button class="sm" data-sm="tk-texto">📷</button></span></div>
+      <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Apretar <strong>Iniciar simulación</strong> y mirar el LED <strong>L</strong></span></div>
+    </div>
+    <figure class="figura">
+      <img src="../recursos/img/pantallazos/tk-simulacion.gif" alt="El LED L del Arduino de Tinkercad parpadeando durante la simulación">
+      <figcaption>1 segundo prendido, 1 segundo apagado… ¡igual que tu placa!</figcaption>
+    </figure>
+  </div>
+  <p class="nota">Prueba cambiar los <code>1000</code> por otros números y vuelve a simular. 🎛️</p>
+</section>
+
+<!-- 17 · Blink con bloques -->
 <section class="slide">
   <p class="eyebrow">Extra · Programando en Tinkercad</p>
   <h2>Blink con bloques 🧩</h2>
   <div class="pila-bloques" aria-label="Programa de bloques: encender LED, esperar, apagar, esperar">
-    <div class="bloque b-salida">poner LED integrado en <span class="chip">ALTO</span></div>
-    <div class="bloque b-control">esperar <span class="chip">0.5</span> segundos</div>
-    <div class="bloque b-salida">poner LED integrado en <span class="chip">BAJO</span></div>
-    <div class="bloque b-control">esperar <span class="chip">0.5</span> segundos</div>
+    <div class="bloque b-salida">definir LED integrado en <span class="chip">ALTA</span></div>
+    <div class="bloque b-control">esperar <span class="chip">1</span> segundos</div>
+    <div class="bloque b-salida">definir LED integrado en <span class="chip">BAJA</span></div>
+    <div class="bloque b-control">esperar <span class="chip">1</span> segundos</div>
   </div>
   <p class="grande">Los bloques se leen de arriba hacia abajo…<br>y al terminar, <strong>vuelven a empezar</strong>. 🔁 ¿Te suena? ¡Es el loop!</p>
+  <p class="nota">En un circuito nuevo, el panel <strong>Código</strong> de Tinkercad parte en bloques y ya trae este Blink armado <button class="sm" data-sm="tk-bloques">📷</button></p>
 </section>
 
-<!-- 16 · Los bloques escriben código -->
+<!-- 18 · Los bloques escriben código -->
 <section class="slide">
   <p class="eyebrow">Extra · El secreto de los bloques</p>
   <h2>Cada bloque escribe código por ti 🪄</h2>
   <div style="display:flex; gap:1.5em; align-items:center; flex-wrap:wrap; justify-content:center">
     <div class="pila-bloques">
-      <div class="bloque b-salida">poner LED integrado en <span class="chip">ALTO</span></div>
-      <div class="bloque b-control">esperar <span class="chip">0.5</span> segundos</div>
+      <div class="bloque b-salida">definir LED integrado en <span class="chip">ALTA</span></div>
+      <div class="bloque b-control">esperar <span class="chip">1</span> segundos</div>
     </div>
     <div style="font-size:2em">➡️</div>
     <div class="ide">
       <div class="ide-barra"><span class="boton-ide">✓</span><span class="boton-ide">→</span><span class="ide-nombre">lo que Tinkercad genera</span></div>
-      <pre><span class="fn">digitalWrite</span>(<span class="num">13</span>, <span class="kw">HIGH</span>);
-<span class="fn">delay</span>(<span class="num">500</span>);</pre>
+      <pre><span class="fn">digitalWrite</span>(<span class="kw">LED_BUILTIN</span>, <span class="kw">HIGH</span>);
+<span class="fn">delay</span>(<span class="num">1000</span>);</pre>
     </div>
   </div>
   <p class="grande">En Tinkercad, elige la vista <strong>«Bloques + Texto»</strong> para ver los dos a la vez.<br>¿Reconoces el código? ¡Es el mismo del Blink que subiste a tu placa! 💪</p>
@@ -801,6 +835,7 @@
     pintar();
   })();
 
+  const CREDITO_TK = "<p class='nota' style='font-size:.75em'>Pantallazo: Tinkercad (Autodesk)</p>";
   const CREDITO_DOCS = "<p class='nota' style='font-size:.75em'>Pantallazo: docs.arduino.cc · CC BY-SA 4.0</p>";
   saberMas({
     ide: {
@@ -882,6 +917,38 @@
 }</pre></div>
           </div>
           <p class="nota">Si se ve así, ¡el taller quedó montado! 🛠️</p>`
+    },
+    "tk-crear": {
+      t: "📷 Crear un circuito nuevo",
+      d: "<p>Arriba a la derecha está el botón <strong>+ Crear</strong>. Al apretarlo aparece un menú: elige <strong>Circuitos</strong>.</p><img src='../recursos/img/pantallazos/tk-crear.png' alt='Menú Crear de Tinkercad con la opción Circuitos'>" + CREDITO_TK
+    },
+    "tk-editor": {
+      t: "📷 El taller de circuitos",
+      d: "<p>Se abre un área de trabajo vacía. A la derecha están los <strong>componentes</strong>, y arriba a la izquierda el <strong>nombre</strong> de tu diseño: haz clic ahí para cambiarlo.</p><img src='../recursos/img/pantallazos/tk-editor.png' alt='Editor de circuitos de Tinkercad vacío, con el nombre Mi primer Blink'>" + CREDITO_TK
+    },
+    "tk-buscar": {
+      t: "📷 Buscar el Arduino",
+      d: "<p>En el buscador del panel de componentes escribe <strong>arduino</strong>. El primero que aparece es el <strong>Arduino Uno R3</strong>.</p><img src='../recursos/img/pantallazos/tk-buscar.png' alt='Panel de componentes de Tinkercad buscando arduino'>" + CREDITO_TK
+    },
+    "tk-arduino": {
+      t: "📷 El Arduino en la mesa",
+      d: "<p>Arrástralo con el mouse hasta el área blanca y suéltalo. ¡Ya viene con su cable USB!</p><img src='../recursos/img/pantallazos/tk-arduino.png' alt='Arduino Uno R3 en el área de trabajo de Tinkercad'>" + CREDITO_TK
+    },
+    "tk-menu-texto": {
+      t: "📷 De bloques a texto",
+      d: "<p>El panel de código parte con <strong>bloques</strong>. En el menú de arriba elige <strong>Texto</strong> para ver el programa escrito, como en el IDE.</p><img src='../recursos/img/pantallazos/tk-menu-texto.png' alt='Menú Modo de edición de Tinkercad con las opciones Bloques, Bloques + Texto y Texto'>" + CREDITO_TK
+    },
+    "tk-confirmar": {
+      t: "📷 ¿Está seguro?",
+      d: "<p>Tinkercad avisa que se van a borrar los bloques. No importa: el programa queda escrito en texto. Aprieta <strong>Continuar</strong>.</p><img src='../recursos/img/pantallazos/tk-confirmar.png' alt='Aviso de Tinkercad preguntando si desea cerrar el editor de bloques'>" + CREDITO_TK
+    },
+    "tk-bloques": {
+      t: "📷 El Blink en bloques",
+      d: "<p>Así se ve el panel <strong>Código</strong> recién abierto: a la izquierda, los bloques para arrastrar; a la derecha, el programa armado. <strong>al iniciar</strong> es el setup y <strong>siempre</strong> es el loop.</p><img src='../recursos/img/pantallazos/tk-bloques.png' alt='Panel de código de Tinkercad en modo bloques con el Blink armado'>" + CREDITO_TK
+    },
+    "tk-texto": {
+      t: "📷 El programa en texto",
+      d: "<p><code>setup</code> prepara el pin del LED y <code>loop</code> lo prende y apaga con esperas de <code>1000</code>: ¡el mismo Blink de hoy!</p><img src='../recursos/img/pantallazos/tk-texto.png' alt='Editor de texto de Tinkercad con el programa Blink'>" + CREDITO_TK
     },
     "f-cable": {
       t: "📷 El cable USB tiene dos puntas distintas",
