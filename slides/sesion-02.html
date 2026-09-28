@@ -63,7 +63,7 @@
       <div class="mock-botones"><span class="mock-si">✓ Instalar</span><span class="mock-no">No instalar</span></div>
     </div>
   </div>
-  <p class="nota" style="max-width:34em">Esto pasa <strong>mientras se instala el IDE</strong>, con el Arduino todavía desenchufado: así, cuando lo conectes, Windows ya sabrá quién es. (Algunas placas más baratas necesitan otro traductor llamado CH340: avísale al profe.)</p>
+  <p class="nota" style="max-width:34em">Esto pasa <strong>mientras se instala el IDE</strong>, con el Arduino todavía desenchufado: así, cuando lo conectes, Windows ya sabrá quién es. (Tu placa usa otro traductor, el <strong>CH340</strong>: si Windows no lo instala solo, avísale al profe.)</p>
   <p class="grande">Traductor listo ✅ … ¡ahora sí, <strong>conectemos el cable USB</strong>! 🔌 <button class="sm" data-sm="f-cable">📷</button></p>
 </section>
 
@@ -73,48 +73,102 @@
   <h2>Toca los círculos ámbar 👇</h2>
   <div style="position:relative; width:min(78vw,470px)">
     <svg viewBox="0 0 560 400" style="width:100%; filter:drop-shadow(0 8px 16px rgba(20,54,66,.2))" aria-label="Dibujo de la placa Arduino UNO">
-      <rect x="30" y="30" width="500" height="340" rx="18" fill="#00878F"/>
-      <rect x="60" y="42" width="300" height="26" rx="4" fill="#0b6e75"/>
-      <g fill="#143642"><rect x="70" y="46" width="280" height="18" rx="3"/></g>
-      <g fill="#fff" font-family="monospace" font-size="13"><text x="76" y="60">13 12 11 10 9 8</text><text x="230" y="60">7 6 5 4 3 2 1 0</text></g>
-      <rect x="180" y="330" width="200" height="26" rx="4" fill="#0b6e75"/>
-      <rect x="188" y="334" width="184" height="18" rx="3" fill="#143642"/>
-      <text x="196" y="348" fill="#fff" font-family="monospace" font-size="13">A0 A1 A2 A3 A4 A5</text>
-      <rect x="8" y="80" width="70" height="56" rx="6" fill="#B0BEC5"/>
-      <rect x="8" y="250" width="52" height="60" rx="8" fill="#263238"/>
-      <circle cx="470" cy="90" r="16" fill="#CFD8DC"/>
-      <rect x="452" y="60" width="36" height="12" rx="3" fill="#ECEFF1"/>
-      <rect x="150" y="150" width="150" height="150" rx="8" fill="#263238"/>
-      <text x="188" y="235" fill="#78909C" font-family="monospace" font-size="16">ATmega</text>
-      <rect x="118" y="96" width="16" height="9" rx="2" fill="#8a6a20" id="svg-led13"/>
-      <text x="138" y="105" fill="#fff" font-family="monospace" font-size="12">L</text>
-      <rect x="404" y="150" width="16" height="9" rx="2" fill="#1f6b46" id="svg-ledon"/>
-      <text x="426" y="159" fill="#fff" font-family="monospace" font-size="12">ON</text>
+      <rect x="70" y="22" width="460" height="357" rx="14" fill="#00878F"/>
+      <circle cx="169" cy="40" r="7" fill="#F3FAF7"/>
+      <circle cx="508" cy="136" r="7" fill="#F3FAF7"/>
+      <circle cx="508" cy="324" r="7" fill="#F3FAF7"/>
+      <circle cx="162" cy="361" r="7" fill="#F3FAF7"/>
+      <rect x="22" y="81" width="110" height="81" rx="4" fill="#CFD8DC" stroke="#90A4AE" stroke-width="2"/><rect x="34" y="96" width="70" height="51" rx="3" fill="#B0BEC5"/>
+      <rect x="55" y="294" width="96" height="59" rx="6" fill="#263238"/><circle cx="72" cy="323" r="11" fill="#11191d"/>
+      <rect x="90" y="31" width="40" height="36" rx="4" fill="#ECEFF1"/><circle cx="110" cy="49" r="11" fill="#C0392B"/>
+      <rect x="166" y="51" width="51" height="33" rx="3" fill="#143642"/>
+      <rect x="490" y="166" width="33" height="47" rx="3" fill="#143642"/>
+      <rect x="186" y="24" width="172" height="18" rx="3" fill="#143642"/><rect x="364" y="24" width="148" height="18" rx="3" fill="#143642"/>
+      <rect x="247" y="353" width="136" height="18" rx="3" fill="#143642"/><rect x="399" y="353" width="113" height="18" rx="3" fill="#143642"/>
+      <g fill="#546E7A"><rect x="191" y="30" width="6" height="6"/><rect x="208" y="30" width="6" height="6"/><rect x="225" y="30" width="6" height="6"/><rect x="243" y="30" width="6" height="6"/><rect x="260" y="30" width="6" height="6"/><rect x="277" y="30" width="6" height="6"/><rect x="295" y="30" width="6" height="6"/><rect x="312" y="30" width="6" height="6"/><rect x="329" y="30" width="6" height="6"/><rect x="347" y="30" width="6" height="6"/><rect x="373" y="30" width="6" height="6"/><rect x="390" y="30" width="6" height="6"/><rect x="408" y="30" width="6" height="6"/><rect x="425" y="30" width="6" height="6"/><rect x="442" y="30" width="6" height="6"/><rect x="460" y="30" width="6" height="6"/><rect x="477" y="30" width="6" height="6"/><rect x="495" y="30" width="6" height="6"/><rect x="252" y="359" width="6" height="6"/><rect x="269" y="359" width="6" height="6"/><rect x="285" y="359" width="6" height="6"/><rect x="303" y="359" width="6" height="6"/><rect x="320" y="359" width="6" height="6"/><rect x="337" y="359" width="6" height="6"/><rect x="353" y="359" width="6" height="6"/><rect x="370" y="359" width="6" height="6"/><rect x="405" y="359" width="6" height="6"/><rect x="422" y="359" width="6" height="6"/><rect x="439" y="359" width="6" height="6"/><rect x="456" y="359" width="6" height="6"/><rect x="473" y="359" width="6" height="6"/><rect x="490" y="359" width="6" height="6"/></g>
+      <g fill="#fff" font-family="monospace" font-size="11" text-anchor="middle"><text x="263" y="56">13</text><text x="280" y="56">12</text><text x="298" y="56">11</text><text x="315" y="56">10</text><text x="332" y="56">9</text><text x="350" y="56">8</text><text x="376" y="56">7</text><text x="393" y="56">6</text><text x="411" y="56">5</text><text x="428" y="56">4</text><text x="445" y="56">3</text><text x="463" y="56">2</text><text x="480" y="56">1</text><text x="498" y="56">0</text><text x="323" y="347">5V</text><text x="348" y="347">GND</text><text x="373" y="347">Vin</text><text x="408" y="347">A0</text><text x="425" y="347">A1</text><text x="442" y="347">A2</text><text x="459" y="347">A3</text><text x="476" y="347">A4</text><text x="493" y="347">A5</text><text x="350" y="72" font-size="10">DIGITAL (PWM~)</text><text font-size="9" text-anchor="end" transform="translate(231 46) rotate(-90)">AREF</text><text font-size="9" text-anchor="end" transform="translate(249 46) rotate(-90)">GND</text><text x="315" y="333" font-size="10">POWER</text><text x="455" y="333" font-size="10">ANALOG IN</text></g>
+      <rect x="184" y="132" width="37" height="33" rx="2" fill="#263238"/>
+      <rect x="158" y="191" width="70" height="26" rx="13" fill="#B0BEC5"/>
+      <circle cx="191" cy="316" r="20" fill="#B0BEC5" stroke="#78909C" stroke-width="2"/><circle cx="238" cy="316" r="20" fill="#B0BEC5" stroke="#78909C" stroke-width="2"/>
+      <g fill="#B0BEC5"><rect x="271" y="232" width="7" height="6"/><rect x="271" y="299" width="7" height="6"/><rect x="288" y="232" width="7" height="6"/><rect x="288" y="299" width="7" height="6"/><rect x="305" y="232" width="7" height="6"/><rect x="305" y="299" width="7" height="6"/><rect x="322" y="232" width="7" height="6"/><rect x="322" y="299" width="7" height="6"/><rect x="339" y="232" width="7" height="6"/><rect x="339" y="299" width="7" height="6"/><rect x="356" y="232" width="7" height="6"/><rect x="356" y="299" width="7" height="6"/><rect x="373" y="232" width="7" height="6"/><rect x="373" y="299" width="7" height="6"/><rect x="390" y="232" width="7" height="6"/><rect x="390" y="299" width="7" height="6"/><rect x="407" y="232" width="7" height="6"/><rect x="407" y="299" width="7" height="6"/><rect x="424" y="232" width="7" height="6"/><rect x="424" y="299" width="7" height="6"/><rect x="441" y="232" width="7" height="6"/><rect x="441" y="299" width="7" height="6"/><rect x="458" y="232" width="7" height="6"/><rect x="458" y="299" width="7" height="6"/><rect x="475" y="232" width="7" height="6"/><rect x="475" y="299" width="7" height="6"/><rect x="492" y="232" width="7" height="6"/><rect x="492" y="299" width="7" height="6"/></g>
+      <rect x="264" y="238" width="240" height="61" rx="4" fill="#263238"/><circle cx="264" cy="268" r="7" fill="#00878F"/>
+      <text x="388" y="274" fill="#78909C" font-family="monospace" font-size="15" text-anchor="middle">ATmega328P</text>
+      <g fill="none" stroke="#fff" stroke-width="5"><circle cx="301" cy="126" r="13"/><circle cx="330" cy="126" r="13"/></g>
+      <text x="322" y="162" fill="#fff" font-family="sans-serif" font-weight="bold" font-size="17" text-anchor="middle">ARDUINO</text>
+      <rect x="367" y="112" width="76" height="30" rx="15" fill="#fff"/><text x="405" y="134" fill="#00878F" font-family="sans-serif" font-weight="bold" font-size="18" text-anchor="middle">UNO</text>
+      <rect x="243" y="93" width="14" height="8" rx="2" fill="#8a6a20" id="svg-led13"/>
+      <rect x="243" y="131" width="14" height="8" rx="2" fill="#8a6a20"/><rect x="243" y="145" width="14" height="8" rx="2" fill="#8a6a20"/>
+      <rect x="449" y="128" width="14" height="8" rx="2" fill="#1f6b46" id="svg-ledon"/>
+      <g fill="#fff" font-family="monospace" font-size="11" text-anchor="end"><text x="238" y="101">L</text><text x="238" y="139">TX</text><text x="238" y="153">RX</text></g>
+      <text x="467" y="136" fill="#fff" font-family="monospace" font-size="11">ON</text>
     </svg>
-    <button class="hot" style="left:12%; top:26%" data-hot="usb">1</button>
-    <button class="hot" style="left:36%; top:12%" data-hot="dig">2</button>
-    <button class="hot" style="left:56%; top:86%" data-hot="ana">3</button>
-    <button class="hot" style="left:19%; top:32%" data-hot="led">4</button>
-    <button class="hot" style="left:84%; top:20%" data-hot="reset">5</button>
-    <button class="hot" style="left:78%; top:44%" data-hot="on">6</button>
+    <button class="hot" style="left:13.8%; top:30.3%" data-hot="usb">1</button>
+    <button class="hot" style="left:62.5%; top:2.5%" data-hot="dig">2</button>
+    <button class="hot" style="left:81.3%; top:98%" data-hot="ana">3</button>
+    <button class="hot" style="left:49.6%; top:25%" data-hot="led">4</button>
+    <button class="hot" style="left:19.6%; top:12.3%" data-hot="reset">5</button>
+    <button class="hot" style="left:81.4%; top:39.5%" data-hot="on">6</button>
+    <button class="hot" style="left:51.8%; top:67%" data-hot="cerebro">7</button>
   </div>
-  <p id="hot-info" class="grande" style="min-height:2.4em; max-width:32em">💡 Cada parte tiene un superpoder.</p>
+  <p class="grande hot-info" style="min-height:2.4em; max-width:32em">💡 Cada parte tiene un superpoder.</p>
   <button class="sm-grande" data-sm="placa">¿Saber más? ¿Qué es una "placa"?</button>
 </section>
 
-<!-- 6 · Conectar la placa -->
+<!-- 6 · Tu placa del kit -->
+<section class="slide">
+  <p class="eyebrow">Paso 4 · Tu placa del kit</p>
+  <h2>Tu Arduino es un primo del original<button class="sm" data-sm="compatible">?</button> 👯</h2>
+  <div style="position:relative; width:min(78vw,470px)">
+    <svg viewBox="0 0 560 400" style="width:100%; filter:drop-shadow(0 8px 16px rgba(20,54,66,.2))" aria-label="Dibujo de la placa compatible con Arduino UNO que trae el kit, con chip CH340">
+      <rect x="70" y="22" width="460" height="357" rx="14" fill="#1565C0"/>
+      <circle cx="172" cy="37" r="7" fill="#F3FAF7"/>
+      <circle cx="514" cy="138" r="7" fill="#F3FAF7"/>
+      <circle cx="514" cy="326" r="7" fill="#F3FAF7"/>
+      <circle cx="164" cy="364" r="7" fill="#F3FAF7"/>
+      <rect x="22" y="81" width="110" height="81" rx="4" fill="#CFD8DC" stroke="#90A4AE" stroke-width="2"/><rect x="34" y="96" width="70" height="51" rx="3" fill="#B0BEC5"/>
+      <rect x="40" y="298" width="96" height="59" rx="6" fill="#263238"/><circle cx="57" cy="327" r="11" fill="#11191d"/>
+      <rect x="90" y="28" width="40" height="36" rx="4" fill="#ECEFF1"/><circle cx="110" cy="46" r="11" fill="#C0392B"/>
+      <rect x="497" y="168" width="30" height="47" rx="3" fill="#143642"/>
+      <rect x="186" y="24" width="172" height="18" rx="3" fill="#143642"/><rect x="364" y="24" width="148" height="18" rx="3" fill="#143642"/>
+      <rect x="247" y="357" width="136" height="18" rx="3" fill="#143642"/><rect x="399" y="357" width="113" height="18" rx="3" fill="#143642"/>
+      <g fill="#546E7A"><rect x="191" y="30" width="6" height="6"/><rect x="208" y="30" width="6" height="6"/><rect x="225" y="30" width="6" height="6"/><rect x="243" y="30" width="6" height="6"/><rect x="260" y="30" width="6" height="6"/><rect x="277" y="30" width="6" height="6"/><rect x="295" y="30" width="6" height="6"/><rect x="312" y="30" width="6" height="6"/><rect x="329" y="30" width="6" height="6"/><rect x="347" y="30" width="6" height="6"/><rect x="373" y="30" width="6" height="6"/><rect x="390" y="30" width="6" height="6"/><rect x="408" y="30" width="6" height="6"/><rect x="425" y="30" width="6" height="6"/><rect x="442" y="30" width="6" height="6"/><rect x="460" y="30" width="6" height="6"/><rect x="477" y="30" width="6" height="6"/><rect x="495" y="30" width="6" height="6"/><rect x="252" y="363" width="6" height="6"/><rect x="269" y="363" width="6" height="6"/><rect x="285" y="363" width="6" height="6"/><rect x="303" y="363" width="6" height="6"/><rect x="320" y="363" width="6" height="6"/><rect x="337" y="363" width="6" height="6"/><rect x="353" y="363" width="6" height="6"/><rect x="370" y="363" width="6" height="6"/><rect x="405" y="363" width="6" height="6"/><rect x="422" y="363" width="6" height="6"/><rect x="439" y="363" width="6" height="6"/><rect x="456" y="363" width="6" height="6"/><rect x="473" y="363" width="6" height="6"/><rect x="490" y="363" width="6" height="6"/></g>
+      <g fill="#0D47A1" stroke="#E0E0E0" stroke-width="1.5"><circle cx="194" cy="53" r="3.5"/><circle cx="211" cy="53" r="3.5"/><circle cx="228" cy="53" r="3.5"/><circle cx="246" cy="53" r="3.5"/><circle cx="263" cy="53" r="3.5"/><circle cx="280" cy="53" r="3.5"/><circle cx="298" cy="53" r="3.5"/><circle cx="315" cy="53" r="3.5"/><circle cx="332" cy="53" r="3.5"/><circle cx="350" cy="53" r="3.5"/><circle cx="376" cy="53" r="3.5"/><circle cx="393" cy="53" r="3.5"/><circle cx="411" cy="53" r="3.5"/><circle cx="428" cy="53" r="3.5"/><circle cx="445" cy="53" r="3.5"/><circle cx="463" cy="53" r="3.5"/><circle cx="480" cy="53" r="3.5"/><circle cx="498" cy="53" r="3.5"/><circle cx="255" cy="346" r="3.5"/><circle cx="272" cy="346" r="3.5"/><circle cx="288" cy="346" r="3.5"/><circle cx="306" cy="346" r="3.5"/><circle cx="323" cy="346" r="3.5"/><circle cx="340" cy="346" r="3.5"/><circle cx="356" cy="346" r="3.5"/><circle cx="373" cy="346" r="3.5"/><circle cx="408" cy="346" r="3.5"/><circle cx="425" cy="346" r="3.5"/><circle cx="442" cy="346" r="3.5"/><circle cx="459" cy="346" r="3.5"/><circle cx="476" cy="346" r="3.5"/><circle cx="493" cy="346" r="3.5"/></g>
+      <g fill="#fff" font-family="monospace" font-size="11" text-anchor="middle"><text x="263" y="72">13</text><text x="280" y="72">12</text><text x="298" y="72">11</text><text x="315" y="72">10</text><text x="332" y="72">9</text><text x="350" y="72">8</text><text x="376" y="72">7</text><text x="393" y="72">6</text><text x="411" y="72">5</text><text x="428" y="72">4</text><text x="445" y="72">3</text><text x="463" y="72">2</text><text x="480" y="72">1</text><text x="498" y="72">0</text><text x="323" y="334">5V</text><text x="348" y="334">GND</text><text x="373" y="334">Vin</text><text x="408" y="334">A0</text><text x="425" y="334">A1</text><text x="442" y="334">A2</text><text x="459" y="334">A3</text><text x="476" y="334">A4</text><text x="493" y="334">A5</text><text font-size="9" text-anchor="end" transform="translate(231 64) rotate(-90)">AREF</text><text font-size="9" text-anchor="end" transform="translate(249 64) rotate(-90)">GND</text><text x="420" y="92" font-size="10">DIGITAL PWM(~)</text><text x="311" y="318" font-size="10">POWER</text><text x="452" y="318" font-size="10">ANALOG IN</text></g>
+      <rect x="138" y="108" width="83" height="30" rx="15" fill="#B0BEC5"/><text x="180" y="128" fill="#546E7A" font-family="monospace" font-size="11" text-anchor="middle">12.000</text>
+      <g fill="#B0BEC5"><rect x="149" y="160" width="4" height="6"/><rect x="149" y="195" width="4" height="6"/><rect x="157" y="160" width="4" height="6"/><rect x="157" y="195" width="4" height="6"/><rect x="165" y="160" width="4" height="6"/><rect x="165" y="195" width="4" height="6"/><rect x="173" y="160" width="4" height="6"/><rect x="173" y="195" width="4" height="6"/><rect x="181" y="160" width="4" height="6"/><rect x="181" y="195" width="4" height="6"/><rect x="189" y="160" width="4" height="6"/><rect x="189" y="195" width="4" height="6"/><rect x="197" y="160" width="4" height="6"/><rect x="197" y="195" width="4" height="6"/><rect x="205" y="160" width="4" height="6"/><rect x="205" y="195" width="4" height="6"/></g>
+      <rect x="144" y="165" width="72" height="31" rx="2" fill="#263238"/><text x="180" y="185" fill="#78909C" font-family="monospace" font-size="11" text-anchor="middle">CH340G</text>
+      <g fill="#B0BEC5"><rect x="333" y="170" width="3" height="6"/><rect x="333" y="227" width="3" height="6"/><rect x="322" y="183" width="6" height="3"/><rect x="379" y="183" width="6" height="3"/><rect x="341" y="170" width="3" height="6"/><rect x="341" y="227" width="3" height="6"/><rect x="322" y="191" width="6" height="3"/><rect x="379" y="191" width="6" height="3"/><rect x="349" y="170" width="3" height="6"/><rect x="349" y="227" width="3" height="6"/><rect x="322" y="199" width="6" height="3"/><rect x="379" y="199" width="6" height="3"/><rect x="357" y="170" width="3" height="6"/><rect x="357" y="227" width="3" height="6"/><rect x="322" y="207" width="6" height="3"/><rect x="379" y="207" width="6" height="3"/><rect x="365" y="170" width="3" height="6"/><rect x="365" y="227" width="3" height="6"/><rect x="322" y="215" width="6" height="3"/><rect x="379" y="215" width="6" height="3"/><rect x="373" y="170" width="3" height="6"/><rect x="373" y="227" width="3" height="6"/><rect x="322" y="223" width="6" height="3"/><rect x="379" y="223" width="6" height="3"/></g>
+      <rect x="328" y="176" width="51" height="51" rx="2" fill="#263238"/><text x="353" y="205" fill="#78909C" font-family="monospace" font-size="10" text-anchor="middle">328P</text>
+      <rect x="410" y="158" width="32" height="72" rx="14" fill="#B0BEC5"/>
+      <circle cx="161" cy="304" r="21" fill="#B0BEC5" stroke="#78909C" stroke-width="2"/><circle cx="211" cy="304" r="21" fill="#B0BEC5" stroke="#78909C" stroke-width="2"/>
+      <g fill="#0D47A1" stroke="#E0E0E0" stroke-width="1.5"><circle cx="466" cy="240" r="3.5"/><circle cx="483" cy="240" r="3.5"/><circle cx="500" cy="240" r="3.5"/><circle cx="517" cy="240" r="3.5"/><circle cx="466" cy="257" r="3.5"/><circle cx="483" cy="257" r="3.5"/><circle cx="500" cy="257" r="3.5"/><circle cx="517" cy="257" r="3.5"/><circle cx="466" cy="274" r="3.5"/><circle cx="483" cy="274" r="3.5"/><circle cx="500" cy="274" r="3.5"/><circle cx="517" cy="274" r="3.5"/></g>
+      <text x="372" y="140" fill="none" stroke="#fff" stroke-width="1.5" font-family="sans-serif" font-size="38" text-anchor="middle">UNO</text>
+      <rect x="241" y="96" width="14" height="8" rx="2" fill="#1f6b46" id="svg2-ledon"/><rect x="241" y="138" width="14" height="8" rx="2" fill="#8a6a20"/><rect x="241" y="182" width="14" height="8" rx="2" fill="#8a6a20"/><rect x="241" y="225" width="14" height="8" rx="2" fill="#8a6a20" id="svg2-led13"/>
+      <g fill="#fff" font-family="monospace" font-size="11"><text x="260" y="104">ON</text><text x="260" y="146">RX</text><text x="260" y="190">TX</text><text x="260" y="233">L</text></g>
+    </svg>
+    <button class="hot" style="left:13.8%; top:30.3%" data-hot="usb">1</button>
+    <button class="hot" style="left:62.5%; top:2.5%" data-hot="dig2">2</button>
+    <button class="hot" style="left:81.3%; top:98%" data-hot="ana">3</button>
+    <button class="hot" style="left:53%; top:57.3%" data-hot="led2">4</button>
+    <button class="hot" style="left:19.6%; top:11.5%" data-hot="reset">5</button>
+    <button class="hot" style="left:53.2%; top:25%" data-hot="on2">6</button>
+    <button class="hot" style="left:63%; top:50.3%" data-hot="cerebro2">7</button>
+  </div>
+  <p class="grande hot-info" style="min-height:2.4em; max-width:32em">💡 Es azul y se ve distinta… pero piensa igualito.</p>
+</section>
+
+<!-- 7 · Conectar la placa -->
 <section class="slide">
   <p class="eyebrow">Paso 5 · ¡A conectar!</p>
   <h2>Conectemos el cerebrito 🔌</h2>
   <div style="display:flex; flex-direction:column; gap:.6em; width:min(92vw,640px)">
     <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Conectar el cable <strong>USB</strong><button class="sm" data-sm="usb">?</button> al Arduino y al computador <button class="sm" data-sm="f-cable">📷</button></span></div>
-    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Ver que se enciende la lucecita <strong>ON</strong> verde (la número 6 de la placa 🟢)</span></div>
-    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">En el IDE, elegir <strong>Arduino UNO</strong> y su puerto <strong>COM</strong><button class="sm" data-sm="com">?</button> <button class="sm" data-sm="f-puerto">📷</button></span></div>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Ver que se enciende la lucecita <strong>ON</strong> verde (la número 6 de tu placa 🟢)</span></div>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Abrir el <strong>Arduino IDE</strong> 💻 <button class="sm" data-sm="f-inicio">📷</button></span></div>
   </div>
-  <p class="nota">¿No aparece ningún puerto? Revisa el cable (algunos solo cargan, no llevan datos) o llama al profe.</p>
 </section>
 
-<!-- 7 · Tutorial interactivo dentro del IDE -->
+<!-- 8 · Tutorial interactivo dentro del IDE -->
 <section class="slide">
   <p class="eyebrow">Paso 6 · La prueba de fuego</p>
   <h2>Sigue la manito: clic a clic 👆</h2>
@@ -154,9 +208,29 @@
         <button class="sim-btn" id="t-subir">→</button>
         <button class="sim-sel" id="t-placa"><span id="sim-sel-txt">Selecciona una placa</span> ▾</button>
         <div class="sim-desp placa" id="d-placa" hidden>
-          <button class="sim-op" id="t-uno">Arduino UNO — COM3</button>
-          <span class="sim-op apagado">Arduino Mega — sin conectar</span>
+          <span class="sim-op apagado">Placa desconocida — COM3</span>
+          <button class="sim-op" id="t-otra">Seleccionar otra placa y puerto…</button>
         </div>
+      </div>
+
+      <div class="sim-dialogo" id="d-otra" hidden>
+        <div class="sd-titulo">Seleccionar otra placa y puerto</div>
+        <div class="sd-cols">
+          <div class="sd-col">
+            <div class="sd-cab">PLACAS</div>
+            <button class="sd-buscar" id="t-buscar">🔍 <span id="sd-texto">Buscar placa</span></button>
+            <div id="sd-lista" hidden>
+              <button class="sim-op" id="t-uno">Arduino Uno</button>
+              <span class="sim-op apagado">Arduino Uno Mini</span>
+              <span class="sim-op apagado">Arduino Uno R4 WiFi</span>
+            </div>
+          </div>
+          <div class="sd-col">
+            <div class="sd-cab">PUERTOS</div>
+            <button class="sim-op" id="t-com3">COM3 Serial Port (USB)</button>
+          </div>
+        </div>
+        <div class="sd-pie"><span class="sd-cancelar">Cancelar</span><button class="sd-ok" id="t-ok">OK</button></div>
       </div>
 
       <div class="sim-editor"><pre id="sim-code"><span class="cm">// Tu programa va a aparecer aquí…</span></pre></div>
@@ -176,10 +250,10 @@
       <button class="boton secundario" id="tuto-reset">↺ Empezar de nuevo</button>
     </aside>
   </div>
-  <p class="nota">En el IDE de verdad se ve así: el botón de subir <button class="sm" data-sm="f-subir">📷</button> y el mensaje de éxito <button class="sm" data-sm="f-exito">📷</button></p>
+  <p class="nota">En el IDE de verdad se ve así: la placa y su puerto <strong>COM</strong><button class="sm" data-sm="com">?</button> <button class="sm" data-sm="f-puerto">📷</button>, el botón de subir <button class="sm" data-sm="f-subir">📷</button> y el mensaje de éxito <button class="sm" data-sm="f-exito">📷</button></p>
 </section>
 
-<!-- 8 · El programa, línea por línea -->
+<!-- 9 · El programa, línea por línea -->
 <section class="slide slide-concepto">
   <p class="eyebrow">Paso 6 · ¿Qué dice tu programa?</p>
   <h2>Leámoslo línea por línea 🔎</h2>
@@ -188,7 +262,7 @@
       <div class="sim-titulo"><span class="sim-punto"></span>Blink | Arduino IDE 2</div>
       <div class="sim-barra">
         <span class="sim-btn apagado">✓</span><span class="sim-btn apagado">→</span>
-        <span class="sim-sel">Arduino UNO en COM3 ▾</span>
+        <span class="sim-sel">Arduino Uno en COM3 ▾</span>
       </div>
       <div class="sim-editor lineas">
         <div class="ln"><span class="n">1</span><code class="cm">// Blink: prende y apaga el LED de la placa</code></div>
@@ -232,53 +306,7 @@
   <p class="nota">Programa completo: <code>sketches/sesion-02/blink</code>.</p>
 </section>
 
-<!-- 8 · Y en casa: Tinkercad -->
-<section class="slide">
-  <p class="eyebrow">Paso 7 · Tu laboratorio en casa</p>
-  <h2>¿Y si no tengo Arduino en casa? 🧪</h2>
-  <p class="grande" style="max-width:26em">¡No hay problema! <strong>Tinkercad</strong> es un laboratorio
-  virtual gratis: tiene Arduinos infinitos y nada se puede quemar.</p>
-  <div style="display:flex; flex-direction:column; gap:.6em; width:min(92vw,640px)">
-    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Abrir <strong>tinkercad.com/joinclass</strong></span></div>
-    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Escribir el <strong>código de la clase</strong> (está en la pizarra)</span></div>
-    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Entrar con tu <strong>apodo</strong> (sin correo, sin contraseña)</span></div>
-    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Crear un <strong>Circuito nuevo</strong> y arrastrar un Arduino UNO</span></div>
-  </div>
-</section>
-
-<!-- 9 · Blink con bloques -->
-<section class="slide">
-  <p class="eyebrow">Programando en Tinkercad</p>
-  <h2>Blink con bloques 🧩</h2>
-  <div class="pila-bloques" aria-label="Programa de bloques: encender LED, esperar, apagar, esperar">
-    <div class="bloque b-salida">poner LED integrado en <span class="chip">ALTO</span></div>
-    <div class="bloque b-control">esperar <span class="chip">0.5</span> segundos</div>
-    <div class="bloque b-salida">poner LED integrado en <span class="chip">BAJO</span></div>
-    <div class="bloque b-control">esperar <span class="chip">0.5</span> segundos</div>
-  </div>
-  <p class="grande">Los bloques se leen de arriba hacia abajo…<br>y al terminar, <strong>vuelven a empezar</strong>. 🔁 ¿Te suena? ¡Es el loop!</p>
-</section>
-
-<!-- 10 · Los bloques escriben código -->
-<section class="slide">
-  <p class="eyebrow">El secreto de los bloques</p>
-  <h2>Cada bloque escribe código por ti 🪄</h2>
-  <div style="display:flex; gap:1.5em; align-items:center; flex-wrap:wrap; justify-content:center">
-    <div class="pila-bloques">
-      <div class="bloque b-salida">poner LED integrado en <span class="chip">ALTO</span></div>
-      <div class="bloque b-control">esperar <span class="chip">0.5</span> segundos</div>
-    </div>
-    <div style="font-size:2em">➡️</div>
-    <div class="ide">
-      <div class="ide-barra"><span class="boton-ide">✓</span><span class="boton-ide">→</span><span class="ide-nombre">lo que Tinkercad genera</span></div>
-      <pre><span class="fn">digitalWrite</span>(<span class="num">13</span>, <span class="kw">HIGH</span>);
-<span class="fn">delay</span>(<span class="num">500</span>);</pre>
-    </div>
-  </div>
-  <p class="grande">En Tinkercad, elige la vista <strong>«Bloques + Texto»</strong> para ver los dos a la vez.<br>¿Reconoces el código? ¡Es el mismo del Blink que subiste a tu placa! 💪</p>
-</section>
-
-<!-- 11 · Patio de juegos -->
+<!-- 10 · Patio de juegos -->
 <section class="slide">
   <p class="eyebrow">Patio de juegos</p>
   <h2>¿Qué pasa si cambias el número? 🎛️</h2>
@@ -300,7 +328,7 @@
   </div>
 </section>
 
-<!-- 12 · Reto -->
+<!-- 11 · Reto -->
 <section class="slide">
   <div class="reto">
     <p class="eyebrow">⭐ Reto de la sesión</p>
@@ -311,7 +339,7 @@
   <p>Así debería verse: <span class="led" id="led-corazon" style="--c:var(--rojo); font-size:2em"></span></p>
 </section>
 
-<!-- 13 · Quiz -->
+<!-- 12 · Quiz -->
 <section class="slide">
   <p class="eyebrow">Duelo de cerebritos</p>
   <h2>¿Cuánto aprendiste? Toca para voltear</h2>
@@ -339,7 +367,7 @@
   </div>
 </section>
 
-<!-- 14 · Cierre -->
+<!-- 13 · Cierre -->
 <section class="slide portada">
   <p class="eyebrow">Lo lograste</p>
   <h1>¡Ya programas! 🎉</h1>
@@ -353,9 +381,75 @@
   </div>
 </section>
 
+<!-- 14 · Y en casa: Tinkercad -->
+<section class="slide">
+  <p class="eyebrow">Extra · Tu laboratorio en casa</p>
+  <h2>¿Y si no tengo Arduino en casa? 🧪</h2>
+  <p class="grande" style="max-width:26em">¡No hay problema! <strong>Tinkercad</strong> es un laboratorio
+  virtual gratis: tiene Arduinos infinitos y nada se puede quemar.</p>
+  <div style="display:flex; flex-direction:column; gap:.6em; width:min(92vw,640px)">
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Abrir <strong>tinkercad.com/joinclass</strong></span></div>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Escribir el <strong>código de la clase</strong> (está en la pizarra)</span></div>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Entrar con tu <strong>apodo</strong> (sin correo, sin contraseña)</span></div>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Crear un <strong>Circuito nuevo</strong> y arrastrar un Arduino UNO</span></div>
+  </div>
+</section>
+
+<!-- 15 · Blink con bloques -->
+<section class="slide">
+  <p class="eyebrow">Extra · Programando en Tinkercad</p>
+  <h2>Blink con bloques 🧩</h2>
+  <div class="pila-bloques" aria-label="Programa de bloques: encender LED, esperar, apagar, esperar">
+    <div class="bloque b-salida">poner LED integrado en <span class="chip">ALTO</span></div>
+    <div class="bloque b-control">esperar <span class="chip">0.5</span> segundos</div>
+    <div class="bloque b-salida">poner LED integrado en <span class="chip">BAJO</span></div>
+    <div class="bloque b-control">esperar <span class="chip">0.5</span> segundos</div>
+  </div>
+  <p class="grande">Los bloques se leen de arriba hacia abajo…<br>y al terminar, <strong>vuelven a empezar</strong>. 🔁 ¿Te suena? ¡Es el loop!</p>
+</section>
+
+<!-- 16 · Los bloques escriben código -->
+<section class="slide">
+  <p class="eyebrow">Extra · El secreto de los bloques</p>
+  <h2>Cada bloque escribe código por ti 🪄</h2>
+  <div style="display:flex; gap:1.5em; align-items:center; flex-wrap:wrap; justify-content:center">
+    <div class="pila-bloques">
+      <div class="bloque b-salida">poner LED integrado en <span class="chip">ALTO</span></div>
+      <div class="bloque b-control">esperar <span class="chip">0.5</span> segundos</div>
+    </div>
+    <div style="font-size:2em">➡️</div>
+    <div class="ide">
+      <div class="ide-barra"><span class="boton-ide">✓</span><span class="boton-ide">→</span><span class="ide-nombre">lo que Tinkercad genera</span></div>
+      <pre><span class="fn">digitalWrite</span>(<span class="num">13</span>, <span class="kw">HIGH</span>);
+<span class="fn">delay</span>(<span class="num">500</span>);</pre>
+    </div>
+  </div>
+  <p class="grande">En Tinkercad, elige la vista <strong>«Bloques + Texto»</strong> para ver los dos a la vez.<br>¿Reconoces el código? ¡Es el mismo del Blink que subiste a tu placa! 💪</p>
+</section>
+
 <style>
+  /* ventana «Seleccionar otra placa y puerto» del tutorial del IDE */
+  .sim-dialogo {
+    position: absolute; z-index: 5; top: 4.6em; left: 6%; right: 6%;
+    background: #fff; border: 1px solid #c9d6d8; border-radius: 10px;
+    box-shadow: 0 14px 30px rgba(20,54,66,.32);
+  }
+  .sim-dialogo[hidden] { display: none; }
+  .sd-titulo { font-weight: 800; font-size: .9em; padding: .5em .8em; border-bottom: 1px solid #dbe5e6; }
+  .sd-cols { display: grid; grid-template-columns: 1fr 1fr; gap: .8em; padding: .5em .8em; min-height: 8.5em; }
+  .sd-cab { font-size: .7em; font-weight: 800; letter-spacing: .08em; color: var(--gris); margin-bottom: .3em; }
+  .sd-buscar {
+    width: 100%; text-align: left; font-family: var(--f-cuerpo); font-size: .85em; color: #33525c;
+    background: #f5f8f8; border: 1px solid #c9d6d8; border-radius: 6px; padding: .3em .5em; cursor: pointer; margin-bottom: .3em;
+  }
+  .sim-op.elegido { background: var(--teal-suave); font-weight: 800; }
+  .sd-pie { display: flex; justify-content: flex-end; align-items: center; gap: .8em; padding: .4em .8em .6em; }
+  .sd-cancelar { font-size: .85em; color: #9fb0b5; }
+  .sd-ok { font-family: var(--f-titulo); background: var(--teal); color: #fff; border: none; border-radius: 6px; padding: .25em 1.2em; cursor: pointer; }
+
   .hot {
     position: absolute;
+    transform: translate(-50%, -50%);
     width: 2em; height: 2em;
     border-radius: 50%;
     border: 3px solid #fff;
@@ -465,14 +559,23 @@
     ana: "📈 Pines analógicos (A0-A5): oídos finos para sensores que miden cosas.",
     led: "💡 LED «L»: una lucecita integrada conectada al pin 13. ¡Hoy la haremos parpadear!",
     reset: "🔄 Botón RESET: reinicia el programa desde el principio.",
-    on: "🟢 LED «ON»: se enciende solito apenas la placa recibe energía. Si está prendido, ¡el cerebrito está vivo!"
+    on: "🟢 LED «ON»: se enciende solito apenas la placa recibe energía. Si está prendido, ¡el cerebrito está vivo!",
+    cerebro: "🧠 ATmega328P: el cerebrito. Aquí vive tu programa y se toman todas las decisiones.",
+    dig2: "🕹️ Pines digitales (0-13): los mismos del original y en el mismo lugar. La fila de hoyitos de abajo es una copia para soldar.",
+    led2: "💡 LED «L»: conectado al pin 13, igual que en el original. En tu placa está al final de la columna de lucecitas.",
+    on2: "🟢 LED «ON»: se enciende apenas la placa recibe energía. En tu placa está arriba de la columna de lucecitas.",
+    cerebro2: "🧠 ATmega328P: ¡el mismo cerebrito del original! Solo que en versión chiquita y cuadrada."
   };
-  const ledsPlaca = { led: ["svg-led13", "#FFB627"], on: ["svg-ledon", "#35CE8D"] };
+  const ledsPlaca = {
+    led: [["svg-led13", "#FFB627"]],
+    on: [["svg-ledon", "#35CE8D"]],
+    led2: [["svg2-led13", "#FFB627"]],
+    on2: [["svg2-ledon", "#35CE8D"]]
+  };
   document.querySelectorAll(".hot").forEach(b =>
     b.addEventListener("click", () => {
-      document.getElementById("hot-info").textContent = infoHot[b.dataset.hot];
-      const l = ledsPlaca[b.dataset.hot];
-      if (l) document.getElementById(l[0]).setAttribute("fill", l[1]);
+      b.closest(".slide").querySelector(".hot-info").textContent = infoHot[b.dataset.hot];
+      (ledsPlaca[b.dataset.hot] || []).forEach(([id, color]) => document.getElementById(id).setAttribute("fill", color));
     }));
 
   let delayMs = 500;
@@ -521,7 +624,7 @@
     const CONSOLA_VACIA = '<div class="tenue">Aquí el IDE te cuenta lo que va pasando…</div>';
     const FINAL = "🎉 <strong>¡Lo lograste!</strong> El LED «L» de la placa ya está parpadeando: 1 segundo prendido, 1 segundo apagado… para siempre.";
 
-    const menus = ["d-archivo", "d-ejemplos", "d-basics", "d-placa"];
+    const menus = ["d-archivo", "d-ejemplos", "d-basics", "d-placa", "d-otra"];
     const abrir = id => $(id).hidden = false;
     function cerrarMenus() {
       menus.forEach(m => $(m).hidden = true);
@@ -566,8 +669,16 @@
         al: () => { cerrarMenus(); $("sim-code").innerHTML = CODIGO; } },
       { obj: "t-placa", txt: "Mira el código: <strong>setup</strong> se hace una vez y <strong>loop</strong> se repite para siempre. Ahora el IDE necesita saber <strong>dónde</strong> está tu placa: abre el selector.",
         al: () => abrir("d-placa") },
-      { obj: "t-uno", txt: "La tuya es la <strong>Arduino UNO</strong>, enchufada en el puerto <strong>COM3</strong>.",
-        al: () => { cerrarMenus(); $("sim-sel-txt").textContent = "Arduino UNO en COM3"; } },
+      { obj: "t-otra", txt: "Tu placa es prima del Arduino: el IDE no la reconoce solo y la muestra como <strong>desconocida</strong>. Hay que presentársela: elige <strong>Seleccionar otra placa y puerto</strong>.",
+        al: () => { cerrarMenus(); abrir("d-otra"); } },
+      { obj: "t-buscar", txt: "Busca tu placa: haz clic en el buscador y escribe <strong>uno</strong>.",
+        al: () => { $("sd-texto").textContent = "uno"; abrir("sd-lista"); } },
+      { obj: "t-uno", txt: "Ahí está: <strong>Arduino Uno</strong>. Elígela.",
+        al: () => $("t-uno").classList.add("elegido") },
+      { obj: "t-com3", txt: "Ahora el puerto: tu placa está enchufada en <strong>COM3</strong>. (¿No aparece ningún puerto? Revisa el cable: algunos solo cargan y no llevan datos. O llama al profe.)",
+        al: () => $("t-com3").classList.add("elegido") },
+      { obj: "t-ok", txt: "Aprieta <strong>OK</strong> y listo: el IDE ya sabe cuál es tu placa y dónde está.",
+        al: () => { cerrarMenus(); $("sim-sel-txt").textContent = "Arduino Uno en COM3"; } },
       { obj: "t-subir", txt: "¡Llegó el momento! El botón <strong>→</strong> manda el programa por el cable hasta el cerebrito.",
         al: subir }
     ];
@@ -600,6 +711,9 @@
       $("sim-code").innerHTML = VACIO;
       $("sim-consola").innerHTML = CONSOLA_VACIA;
       $("sim-sel-txt").textContent = "Selecciona una placa";
+      $("sd-texto").textContent = "Buscar placa";
+      $("sd-lista").hidden = true;
+      ["t-uno", "t-com3"].forEach(id => $(id).classList.remove("elegido"));
       i = 0;
       pintar();
     });
@@ -708,6 +822,10 @@
     driver: {
       t: "Driver",
       d: "<p>Un <strong>traductor</strong> 🗣️: le enseña a Windows a hablar el idioma de un aparato nuevo. Sin el driver, el computador ve el Arduino y dice «¿y esta cosa qué es?». Se instala una sola vez y listo.</p>"
+    },
+    compatible: {
+      t: "¿Por qué existen placas compatibles?",
+      d: "<p>¿Te acuerdas del <strong>hardware abierto</strong> de la sesión 1? Arduino publicó los planos de su placa 📖, así que otras fábricas pueden hacer placas iguales y más baratas. Cambian algunas piezas, como el traductor USB, pero los pines, el cerebrito y tus programas son <strong>los mismos</strong>.</p>"
     },
     placa: {
       t: "¿Por qué le decimos «placa»?",
