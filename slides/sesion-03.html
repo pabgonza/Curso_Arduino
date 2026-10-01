@@ -340,10 +340,43 @@
   </div>
   <p class="grande" id="txt-casco" style="max-width:32em">El LED es delicado: aguanta poquita agua. ¿Qué pasa si le abrimos la manguera del todo?</p>
   <p class="nota">Por eso al LED siempre lo acompaña una resistencia de <strong>220 Ω</strong>: le dobla la manguera para que no le llegue todo de golpe.</p>
-  <button class="sm-grande" data-sm="colores">🎨 ¿Cómo se lee una resistencia?</button>
 </section>
 
-<!-- 7 · Qué es la protoboard -->
+<!-- 7 · Cómo se lee una resistencia -->
+<section class="slide">
+  <p class="eyebrow">El código secreto de colores</p>
+  <h2>¿Cómo se lee una resistencia? 🎨</h2>
+  <div class="fila" style="align-items:center; gap:1.6em">
+    <div class="lector">
+      <div class="fila" style="gap:.5em">
+        <button class="boton chip-res" data-res="220">220 Ω · la del LED</button>
+        <button class="boton secundario chip-res" data-res="10k">10 kΩ · la del botón</button>
+      </div>
+      <svg viewBox="0 0 560 175" id="res-svg" aria-label="Resistencia dibujada en grande con sus cuatro bandas de colores">
+        <line x1="12" y1="80" x2="548" y2="80" stroke="#9aa7ad" stroke-width="7" stroke-linecap="round"/>
+        <rect x="140" y="42" width="280" height="76" rx="26" fill="#D7B899" stroke="#8D6E63" stroke-width="3"/>
+        <rect class="banda" data-b="0" x="180" y="42" width="24" height="76"/>
+        <rect class="banda" data-b="1" x="222" y="42" width="24" height="76"/>
+        <rect class="banda" data-b="2" x="264" y="42" width="24" height="76"/>
+        <rect class="banda" data-b="3" x="360" y="42" width="24" height="76" fill="#C9A227"/>
+        <g font-family="Baloo 2, sans-serif" font-size="22" font-weight="800" fill="#143642" text-anchor="middle">
+          <text id="res-l0" x="192" y="152"></text>
+          <text id="res-l1" x="234" y="152"></text>
+          <text id="res-l2" x="276" y="152"></text>
+          <text x="372" y="152" font-size="16" fill="#5E7480">±5 %</text>
+        </g>
+        <text x="372" y="30" font-family="Nunito, sans-serif" font-size="13" fill="#5E7480" text-anchor="middle">dorada a la derecha ➜</text>
+      </svg>
+      <p class="grande" id="res-txt" style="min-height:2.6em; max-width:22em"></p>
+    </div>
+    <div class="tabla-colores" id="tabla-colores" aria-label="Tabla de colores y sus números"></div>
+  </div>
+  <p class="nota" style="max-width:40em">Toca cada banda para saber qué dice. ¿Tu resistencia es <strong>azul</strong>?
+    <svg viewBox="0 0 150 30" class="res-azul" aria-label="Resistencia azul de cinco bandas"><line x1="0" y1="15" x2="150" y2="15" stroke="#9aa7ad" stroke-width="3"/><rect x="30" y="4" width="90" height="22" rx="8" fill="#5B8FD6" stroke="#2F5E9E" stroke-width="2"/><rect x="42" y="4" width="7" height="22" fill="#D32F2F"/><rect x="54" y="4" width="7" height="22" fill="#D32F2F"/><rect x="66" y="4" width="7" height="22" fill="#212121"/><rect x="78" y="4" width="7" height="22" fill="#212121"/><rect x="102" y="4" width="7" height="22" fill="#795548"/></svg>
+    Trae <strong>5 bandas</strong>: tres números y una de ceros. Rojo · rojo · negro · negro · café también es <strong>220 Ω</strong>.</p>
+</section>
+
+<!-- 8 · Qué es la protoboard -->
 <section class="slide">
   <p class="eyebrow">Tu nueva mejor amiga</p>
   <h2>La protoboard 🏙️</h2>
@@ -359,7 +392,7 @@
   </div>
 </section>
 
-<!-- 8 · La protoboard por dentro (interactiva) -->
+<!-- 9 · La protoboard por dentro (interactiva) -->
 <section class="slide">
   <p class="eyebrow">El secreto de los agujeritos</p>
   <h2>Toca un agujerito y mira qué pasa 👇</h2>
@@ -376,23 +409,23 @@
   </div>
 </section>
 
-<!-- 9 · Regla de oro -->
+<!-- 10 · Regla de oro -->
 <section class="slide">
   <p class="eyebrow">Regla de oro</p>
   <h2>¿Estos dos están conectados? 🤔</h2>
   <p class="grande">Toca cada tarjeta para ver la respuesta.</p>
-  <div class="fila">
+  <div class="fila regla">
     <div class="quiz" tabindex="0"><div class="quiz-caras">
-      <div class="quiz-cara quiz-frente">Dos patitas en la <strong>misma columna</strong>, del mismo lado</div>
-      <div class="quiz-cara quiz-atras">✅ ¡Sí! Están unidas por dentro</div>
+      <div class="quiz-cara quiz-frente"><div class="mini-proto" data-caso="columna"></div>Dos patitas en la <strong>misma columna</strong>, del mismo lado</div>
+      <div class="quiz-cara quiz-atras"><div class="mini-proto" data-caso="columna" data-atras></div>✅ ¡Sí! La tira de metal de esa columna las une</div>
     </div></div>
     <div class="quiz" tabindex="0"><div class="quiz-caras">
-      <div class="quiz-cara quiz-frente">Dos patitas <strong>a cada lado del canal</strong> del medio</div>
-      <div class="quiz-cara quiz-atras">❌ No. El canal separa los dos lados</div>
+      <div class="quiz-cara quiz-frente"><div class="mini-proto" data-caso="canal"></div>Dos patitas <strong>a cada lado del canal</strong> del medio</div>
+      <div class="quiz-cara quiz-atras"><div class="mini-proto" data-caso="canal" data-atras></div>❌ No. Cada lado tiene su tira: el canal las separa</div>
     </div></div>
     <div class="quiz" tabindex="0"><div class="quiz-caras">
-      <div class="quiz-cara quiz-frente">Dos cables en el <strong>riel rojo</strong>, uno en cada punta</div>
-      <div class="quiz-cara quiz-atras">✅ ¡Sí! El riel va unido de punta a punta</div>
+      <div class="quiz-cara quiz-frente"><div class="mini-proto" data-caso="riel"></div>Dos cables en el <strong>riel rojo</strong>, uno en cada punta</div>
+      <div class="quiz-cara quiz-atras"><div class="mini-proto" data-caso="riel" data-atras></div>✅ ¡Sí! El riel va unido de punta a punta</div>
     </div></div>
   </div>
   <p class="nota">Por eso el canal del medio existe: para poder poner chips con patitas a los dos lados sin que se toquen.</p>
@@ -410,7 +443,7 @@
   <p class="nota">Arduino usa 5 voltios: no puede hacerte daño, pero un cable mal puesto sí puede dañar la placa.</p>
 </section>
 
-<!-- 10 · Armemos el circuito (paso a paso) -->
+<!-- 11 · Armemos el circuito (paso a paso) -->
 <section class="slide">
   <p class="eyebrow">¡Manos a la obra!</p>
   <h2>Armemos tu primer circuito 🔧</h2>
@@ -434,7 +467,8 @@
         <g id="pieza-led" class="oculta">
           <line x1="295" y1="122" x2="282" y2="150" stroke="#9aa7ad" stroke-width="4"/>
           <line x1="321" y1="122" x2="334" y2="150" stroke="#9aa7ad" stroke-width="4"/>
-          <circle cx="308" cy="108" r="21" id="led-armado" fill="#7a3a3a"/>
+          <!-- lado plano a la derecha = patita negativa, igual que ledSVG -->
+          <path d="M322.5 92.9 A21 21 0 1 0 322.5 123.1 Z" id="led-armado" fill="#7a3a3a"/>
           <circle cx="300" cy="101" r="6" fill="#fff" opacity=".3"/>
           <text x="269" y="126" text-anchor="middle" font-size="16" fill="#E84855" font-weight="bold">+</text>
           <text x="348" y="126" text-anchor="middle" font-size="16" fill="#37474F" font-weight="bold">−</text>
@@ -451,9 +485,10 @@
         <g id="pieza-res" class="oculta">
           <line x1="334" y1="166" x2="438" y2="166" stroke="#9aa7ad" stroke-width="4"/>
           <rect x="364" y="157" width="44" height="18" rx="4" fill="#D7B899" stroke="#8D6E63" stroke-width="2"/>
-          <rect x="372" y="157" width="4" height="18" fill="#8D3B0B"/>
-          <rect x="380" y="157" width="4" height="18" fill="#8D3B0B"/>
-          <rect x="394" y="157" width="4" height="18" fill="#E84855"/>
+          <rect x="372" y="157" width="4" height="18" fill="#D32F2F"/>
+          <rect x="379" y="157" width="4" height="18" fill="#D32F2F"/>
+          <rect x="386" y="157" width="4" height="18" fill="#795548"/>
+          <rect x="398" y="157" width="4" height="18" fill="#C9A227"/>
           <text x="386" y="145" text-anchor="middle" font-size="13" fill="#5E7480">220 Ω</text>
           <!-- cartelito con su simbolo -->
           <rect x="448" y="134" width="66" height="58" rx="9" fill="#fff" stroke="#0F8B93" stroke-width="2"/>
@@ -461,7 +496,7 @@
           <text x="481" y="182" text-anchor="middle" font-size="10" fill="#5E7480">en el plano</text>
         </g>
         <path id="pieza-gnd" class="oculta cable-w" d="M122 274 C 200 274, 420 240, 438 182" stroke="#37474F"/>
-        <path id="pieza-13" class="oculta cable-w" d="M122 184 C 180 184, 230 166, 282 166" stroke="#E84855"/>
+        <path id="pieza-13" class="oculta cable-w" d="M122 184 C 180 184, 230 166, 282 166" stroke="#4C7CFF"/>
       </svg>
     </div>
     <aside class="tuto-panel">
@@ -476,7 +511,7 @@
   <p class="nota">La <strong>patita larga</strong> del LED es la positiva (+): a ella llega el cable del <strong>pin 13</strong>; la <strong>corta</strong> es la negativa (−) y sale hacia la resistencia.</p>
 </section>
 
-<!-- 11 · El código es el mismo -->
+<!-- 12 · El código es el mismo -->
 <section class="slide">
   <p class="eyebrow">La mejor parte</p>
   <h2>¡El código es el mismo! 🤯</h2>
@@ -497,7 +532,7 @@
   <p class="nota" style="max-width:36em">El secreto: la lucecita de la placa está unida por un caminito escondido <strong>al mismo pin 13</strong>. Tu LED ahora vive en ese pin también, así que el código sirve igualito — sin cambiar ni una letra.</p>
 </section>
 
-<!-- 12 · Proyecto: semáforo -->
+<!-- 13 · Proyecto: semáforo -->
 <section class="slide">
   <p class="eyebrow">⭐ Proyecto de la sesión</p>
   <h2>El semáforo 🚦</h2>
@@ -530,7 +565,7 @@
   </div>
 </section>
 
-<!-- 13 · Reto -->
+<!-- 14 · Reto -->
 <section class="slide">
   <div class="reto">
     <p class="eyebrow">⭐ Reto de la sesión</p>
@@ -544,7 +579,7 @@
   </div>
 </section>
 
-<!-- 14 · Quiz -->
+<!-- 15 · Quiz -->
 <section class="slide">
   <p class="eyebrow">Duelo de cerebritos</p>
   <h2>¿Cuánto aprendiste? Toca para voltear</h2>
@@ -572,7 +607,7 @@
   </div>
 </section>
 
-<!-- 15 · Cierre -->
+<!-- 16 · Cierre -->
 <section class="slide portada">
   <p class="eyebrow">Lo lograste</p>
   <h1>¡Ya eres electricista! ⚡</h1>
@@ -692,6 +727,24 @@
     background: #263238; border-radius: 16px; padding: .8em;
     font-size: 2.4em; box-shadow: 0 8px 20px rgba(20,54,66,.3);
   }
+  /* ---- 7 · lector de resistencias ---- */
+  .lector { display: flex; flex-direction: column; align-items: center; gap: .5em; width: min(92vw, 30em); }
+  .lector svg { width: 100%; }
+  .chip-res { font-size: .9rem; padding: .4em 1em; }
+  .chip-res.activo { outline: 3px solid var(--teal-osc); outline-offset: 2px; }
+  .banda { cursor: pointer; stroke: transparent; stroke-width: 5; transition: stroke .15s; }
+  .banda.marcada { stroke: var(--ambar); }
+  .tabla-colores { display: grid; grid-template-columns: auto auto; gap: .25em 1em; font-size: .85em; text-align: left; }
+  .fila-color { display: flex; align-items: center; gap: .45em; padding: .1em .4em; border-radius: 8px; transition: background .15s; }
+  .fila-color .muestra { width: 1.3em; height: 1.3em; border-radius: 4px; border: 2px solid #B0BEC5; flex: none; }
+  .fila-color b { font-family: var(--f-titulo); min-width: 1em; }
+  .fila-color.usado { background: #FFF3D6; font-weight: 800; }
+  .res-azul { width: 7.5em; height: 1.5em; vertical-align: middle; }
+  /* ---- 10 · regla de oro: tarjetas con su pedacito de protoboard ---- */
+  .regla .quiz { width: 16em; height: 13.5em; }
+  .regla .quiz-cara { font-size: .95rem; padding: .6em; }
+  .mini-proto { background: #fff; border-radius: 10px; padding: .25em; margin-bottom: .45em; }
+  .mini-proto svg { display: block; width: 100%; height: 6.2em; }
 </style>
 
 <script src="assets/slides.js"></script>
@@ -1091,6 +1144,58 @@
     q.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { voltear(); e.preventDefault(); } });
   });
 
+  /* ---- 7 · lector de resistencias ---- */
+  const COLORES = [["negro", "#212121"], ["café", "#795548"], ["rojo", "#D32F2F"], ["naranjo", "#F57C00"], ["amarillo", "#FBC02D"],
+                   ["verde", "#388E3C"], ["azul", "#1976D2"], ["violeta", "#7B1FA2"], ["gris", "#9E9E9E"], ["blanco", "#FFFFFF"]];
+  const RES = {
+    "220": { num: [2, 2, 1], lab: ["2", "2", "+0"],
+             txt: "Rojo <strong>2</strong>, rojo <strong>2</strong>, y el café le agrega <strong>1 cero</strong>: <strong>220 Ω</strong>." },
+    "10k": { num: [1, 0, 3], lab: ["1", "0", "+000"],
+             txt: "Café <strong>1</strong>, negro <strong>0</strong>, y el naranjo le agrega <strong>3 ceros</strong>: 10 000 Ω = <strong>10 kΩ</strong>." }
+  };
+  const QUE_DICE = ["La <strong>1.ª banda</strong> es el primer número", "La <strong>2.ª banda</strong> es el segundo número",
+                    "La <strong>3.ª banda</strong> dice cuántos <strong>ceros</strong> agregar",
+                    "La <strong>dorada</strong> dice qué tan exacta es: no cuenta para el número, pero marca el final"];
+  const tabla = document.getElementById("tabla-colores");
+  tabla.innerHTML = COLORES.map(([n, c], i) => `<span class="fila-color"><span class="muestra" style="background:${c}"></span><b>${i}</b>${n}</span>`).join("");
+  const bandas = [...document.querySelectorAll(".banda")];
+  let resActual = "220";
+  function ponerRes(clave) {
+    resActual = clave;
+    const r = RES[clave];
+    r.num.forEach((n, i) => { bandas[i].setAttribute("fill", COLORES[n][1]); document.getElementById("res-l" + i).textContent = r.lab[i]; });
+    [...tabla.children].forEach((f, i) => f.classList.toggle("usado", r.num.includes(i)));
+    document.querySelectorAll(".chip-res").forEach(b => b.classList.toggle("activo", b.dataset.res === clave));
+    bandas.forEach(b => b.classList.remove("marcada"));
+    document.getElementById("res-txt").innerHTML = r.txt;
+  }
+  document.querySelectorAll(".chip-res").forEach(b => b.addEventListener("click", () => ponerRes(b.dataset.res)));
+  bandas.forEach((b, i) => b.addEventListener("click", () => {
+    bandas.forEach(o => o.classList.toggle("marcada", o === b));
+    const r = RES[resActual];
+    document.getElementById("res-txt").innerHTML = QUE_DICE[i] + (i < 2 ? `: aquí, <strong>${r.lab[i]}</strong>.` : i === 2 ? `: aquí, <strong>${r.num[2] === 1 ? "1 cero" : r.num[2] + " ceros"}</strong> (${r.lab[2]}).` : ".");
+  }));
+  ponerRes("220");
+
+  /* ---- 10 · regla de oro: pedacitos de protoboard (misma matriz que el armado) ---- */
+  const colP = c => 28 + c * 26;
+  const pata = (x, y) => `<circle cx='${x}' cy='${y}' r='7' fill='#FFB627' stroke='#C98F14' stroke-width='2'/>`;
+  const MINI = {
+    columna: { vb: "0 76 236 94", patas: [[colP(3), 104], [colP(3), 136]],
+               atras: `<rect x='${colP(3) - 9}' y='80' width='18' height='80' rx='5' fill='#35CE8D' opacity='.55'/>` },
+    canal:   { vb: "0 126 236 98", patas: [[colP(3), 152], [colP(3), 194]],
+               atras: `<rect x='${colP(3) - 9}' y='128' width='18' height='32' rx='5' fill='#35CE8D' opacity='.55'/>` +
+                      `<rect x='${colP(3) - 9}' y='186' width='18' height='38' rx='5' fill='#35CE8D' opacity='.55'/>` +
+                      `<rect x='0' y='164' width='236' height='18' fill='#E84855' opacity='.3'/>` },
+    riel:    { vb: "0 2 300 66", patas: [[colP(0), 26], [colP(10), 26]],
+               atras: `<line x1='14' y1='26' x2='300' y2='26' stroke='#35CE8D' stroke-width='14' stroke-linecap='round' opacity='.55'/>` }
+  };
+  document.querySelectorAll(".mini-proto").forEach(m => {
+    const c = MINI[m.dataset.caso];
+    m.innerHTML = `<svg viewBox='${c.vb}' preserveAspectRatio='xMidYMid meet' aria-hidden='true'>` + protoboardSVG({ x: 0, y: 0 }) +
+      (m.hasAttribute("data-atras") ? c.atras : "") + c.patas.map(([x, y]) => pata(x, y)).join("") + "</svg>";
+  });
+
   saberMas({
     "p-circuito": {
       t: "Así se ve armado completo 🔧",
@@ -1131,10 +1236,6 @@
     gnd: {
       t: "GND — el suelo del circuito",
       d: "<p>Viene del inglés <em>ground</em>: <strong>tierra</strong> 🌍. Es el <strong>suelo</strong> de nuestro dibujo: el lugar donde el agua ya no tiene nada de altura, <strong>cero voltios</strong>.</p><p>Regla práctica: <strong>todo circuito necesita llegar al GND</strong>. Si tu LED no prende, lo primero que hay que revisar es si le falta ese camino hasta el suelo.</p>"
-    },
-    colores: {
-      t: "Las bandas de colores 🎨",
-      d: "<p>Las resistencias no traen el número escrito: lo dicen con <strong>bandas de colores</strong>, como un código secreto.</p><p>La de <strong>220 Ω</strong> que usamos es <strong>rojo · rojo · marrón</strong> (y una banda dorada al final). ¡Búscala en tu kit y compárala!</p>"
     },
     soldar: {
       t: "Soldar",

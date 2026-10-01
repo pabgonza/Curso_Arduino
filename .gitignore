@@ -11,3 +11,6 @@ build/
 Thumbs.db
 Desktop.ini
 .DS_Store
+
+# Notas locales de Claude (entorno de este equipo)
+CLAUDE.local.md
