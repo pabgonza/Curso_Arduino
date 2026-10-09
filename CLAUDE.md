@@ -6,6 +6,7 @@ Estructura y propósito en [README.md](README.md). Diagramas de circuito: seguir
 - Una slide por tema; siglas y "cómo funciona por dentro" en popups `¿Saber más?` (`saberMas()` de `slides/assets/slides.js`)
 - Proyecto con checklist `.check` y al menos los popups `p-circuito` y `p-codigo`; quiz de tarjetas al final
 - Todo programa mostrado tiene su sketch completo en `sketches/sesion-NN/<nombre>/<nombre>.ino`
+- Slide 2 «Lo que ya sabemos» (`.fila.repaso`, desde la sesión 3): tarjeta con los conceptos de la sesión anterior + tarjeta «De antes, para hoy». Solo conceptos (sensor/actuador, voltaje/corriente/resistencia, `if`/`for`/variables) y para qué sirve cada componente; nada de pasos de armado ni de los proyectos hechos
 - Nueva sesión: agregarla a `slides/index.html`
 
 ## Editar slides
@@ -18,6 +19,8 @@ Estructura y propósito en [README.md](README.md). Diagramas de circuito: seguir
 - `npx -y http-server -p 8123 -s -c-1` desde la raíz; slides en http://localhost:8123/slides/
 - Playwright a 1280×720: activar cada slide moviendo `.activa`; desborde = `scrollHeight-clientHeight > 4`; revisar imágenes rotas
 - Probar los interactivos (hotspots, tutoriales paso a paso, popups) además de mirar la captura
+- Capturas: esperar ~2 s tras cargar la slide (animación de entrada); si no, sale vacía
+- Cambios visuales: enviar las capturas a Pablo para revisarlas antes del commit
 
 ## Imágenes, GIF y video
 - Todo medio nuevo: crédito visible en la slide + entrada en `recursos/img/CREDITOS.md`; fotos preferentemente de Wikimedia Commons
