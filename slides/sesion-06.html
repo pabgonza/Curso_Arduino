@@ -7,6 +7,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/slides.css">
+<style>
+  .repaso .tarjeta { text-align: left; max-width: 22em; }
+  .repaso ul { padding-left: 1.1em; display: grid; gap: .35em; }
+</style>
 </head>
 <body>
 
@@ -22,7 +26,33 @@
   </div>
 </section>
 
-<!-- 2 · Motor vs servo -->
+<!-- 2 · Repaso -->
+<section class="slide">
+  <p class="eyebrow">Antes de partir</p>
+  <h2>Lo que ya sabemos 🧠</h2>
+  <div class="fila repaso">
+    <div class="tarjeta">
+      <h3>🎵 Sesión 5: el buzzer</h3>
+      <ul>
+        <li>El sonido es <strong>aire que tiembla</strong>; más rápido = más agudo 🐦</li>
+        <li>El buzzer es un <strong>actuador</strong> de sonido</li>
+        <li><code>tone(pin, nota)</code> lo hace sonar; <code>noTone</code> lo calla</li>
+        <li>La duración la pone el <code>delay</code> de después ⏱️</li>
+      </ul>
+    </div>
+    <div class="tarjeta">
+      <h3>🧰 De antes, para hoy</h3>
+      <ul>
+        <li>Sensor + decisión + actuador: botón, <code>if</code>, LED (sesión 4)</li>
+        <li>Variables <code>int</code> para guardar números (sesión 4)</li>
+        <li><code>HIGH</code> / <code>LOW</code> y <code>delay</code> (sesión 2)</li>
+      </ul>
+    </div>
+  </div>
+  <p class="grande">Luz ✅ y sonido ✅…<br>hoy llega el <strong>movimiento</strong> 🦾</p>
+</section>
+
+<!-- 3 · Motor vs servo -->
 <section class="slide">
   <p class="eyebrow">Dos formas de moverse</p>
   <h2>Motor o servo: ¿cuál necesito? 🤔</h2>
@@ -55,7 +85,7 @@
   <p class="grande">Hoy usamos el <strong>servo</strong>: es el que obedece órdenes exactas. 🎯</p>
 </section>
 
-<!-- 3 · El servo por dentro -->
+<!-- 4 · El servo por dentro -->
 <section class="slide">
   <p class="eyebrow">Abramos la cajita</p>
   <h2>El servo por dentro 🔎</h2>
@@ -76,7 +106,7 @@
   </div>
 </section>
 
-<!-- 4 · Los ángulos -->
+<!-- 5 · Los ángulos -->
 <section class="slide">
   <p class="eyebrow">Pruébalo tú</p>
   <h2>Del 0 al 180: elige el ángulo 📐</h2>
@@ -110,7 +140,7 @@
   <p class="nota">El SG90 solo da media vuelta: de 0 a 180 grados. No puede dar vueltas completas.</p>
 </section>
 
-<!-- 5 · Librerías -->
+<!-- 6 · Librerías -->
 <section class="slide slide-concepto">
   <p class="eyebrow">Una palabra nueva</p>
   <h2>Las librerías: código regalado 🎁</h2>
@@ -132,7 +162,7 @@ Servo miServo;           <span class="cm">// le pongo nombre a mi servo</span>
   </div>
 </section>
 
-<!-- 6 · Los tres cables -->
+<!-- 7 · Los tres cables -->
 <section class="slide">
   <p class="eyebrow">¡Manos a la obra!</p>
   <h2>Los tres cables del servo 🔌</h2>
@@ -172,7 +202,7 @@ Servo miServo;           <span class="cm">// le pongo nombre a mi servo</span>
   </div>
 </section>
 
-<!-- 7 · El for (concepto) -->
+<!-- 8 · El for (concepto) -->
 <section class="slide slide-concepto">
   <p class="eyebrow">Una idea nueva de programación</p>
   <h2>El for: repetir contando 🔁</h2>
@@ -204,7 +234,7 @@ Servo miServo;           <span class="cm">// le pongo nombre a mi servo</span>
   <p class="nota">La <code>a</code> es una cajita como las de la sesión 4: parte en 1 y el <code>a++</code> le suma uno en cada vuelta. Dos líneas de código… ¡y el cerebrito escribe cinco!</p>
 </section>
 
-<!-- 8 · El barrido -->
+<!-- 9 · El barrido -->
 <section class="slide">
   <p class="eyebrow">Práctica</p>
   <h2>El barrido: contar mientras se mueve 🔢</h2>
@@ -245,7 +275,7 @@ Servo miServo;           <span class="cm">// le pongo nombre a mi servo</span>
   </div>
 </section>
 
-<!-- 9 · La perilla mágica -->
+<!-- 10 · La perilla mágica -->
 <section class="slide">
   <p class="eyebrow">Un sensor nuevo</p>
   <h2>La perilla mágica 🎛️</h2>
@@ -274,7 +304,7 @@ Servo miServo;           <span class="cm">// le pongo nombre a mi servo</span>
   <p class="nota">¿Te acuerdas del <strong>espía</strong> que el servo lleva adentro para saber su ángulo? ¡Es justamente una de estas perillas! 🕵️</p>
 </section>
 
-<!-- 10 · map -->
+<!-- 11 · map -->
 <section class="slide slide-concepto">
   <p class="eyebrow">El traductor de números</p>
   <h2>map(): del 0-1023 al 0-180 🔀</h2>
@@ -301,7 +331,7 @@ miServo.<span class="fn">write</span>(angulo);</pre>
   <p class="nota">Programa completo: <code>sketches/sesion-06/perilla</code>.</p>
 </section>
 
-<!-- 11 · ¡Manos a la obra!: la perilla mueve el servo -->
+<!-- 12 · ¡Manos a la obra!: la perilla mueve el servo -->
 <section class="slide">
   <p class="eyebrow">¡Manos a la obra!</p>
   <h2>Tú mandas: la perilla mueve el servo 🎛️</h2>
@@ -336,7 +366,7 @@ miServo.<span class="fn">write</span>(angulo);</pre>
   </div>
 </section>
 
-<!-- 12 · Proyecto: la barrera -->
+<!-- 13 · Proyecto: la barrera -->
 <section class="slide">
   <p class="eyebrow">⭐ Proyecto de la sesión</p>
   <h2>La barrera del paso a nivel 🚂</h2>
@@ -365,7 +395,7 @@ miServo.<span class="fn">write</span>(angulo);</pre>
   </div>
 </section>
 
-<!-- 13 · Reto -->
+<!-- 14 · Reto -->
 <section class="slide">
   <div class="reto">
     <p class="eyebrow">⭐ Reto de la sesión</p>
@@ -380,7 +410,7 @@ miServo.<span class="fn">write</span>(angulo);</pre>
   <p class="nota">Cuidado: nunca fuerces el brazo del servo con la mano. Los engranajes son de plástico y se saltan. 🦷</p>
 </section>
 
-<!-- 14 · Quiz -->
+<!-- 15 · Quiz -->
 <section class="slide">
   <p class="eyebrow">Duelo de cerebritos</p>
   <h2>¿Cuánto aprendiste? Toca para voltear</h2>
@@ -408,7 +438,7 @@ miServo.<span class="fn">write</span>(angulo);</pre>
   </div>
 </section>
 
-<!-- 14 · Cierre -->
+<!-- 16 · Cierre -->
 <section class="slide portada">
   <p class="eyebrow">Lo lograste</p>
   <h1>¡Tu Arduino se mueve! 🎉</h1>

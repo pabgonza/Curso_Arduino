@@ -7,6 +7,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/slides.css">
+<style>
+  .repaso .tarjeta { text-align: left; max-width: 22em; }
+  .repaso ul { padding-left: 1.1em; display: grid; gap: .35em; }
+</style>
 </head>
 <body>
 
@@ -22,7 +26,34 @@
   </div>
 </section>
 
-<!-- 2 · El DHT11 -->
+<!-- 2 · Repaso -->
+<section class="slide">
+  <p class="eyebrow">Antes de partir</p>
+  <h2>Lo que ya sabemos 🧠</h2>
+  <div class="fila repaso">
+    <div class="tarjeta">
+      <h3>🦇 Sesión 7: el murciélago</h3>
+      <ul>
+        <li>El HC-SR04 es un sensor: <strong>grita</strong> (TRIG) y escucha el <strong>eco</strong> (ECHO)</li>
+        <li><code>pulseIn</code> mide cuánto tardó el eco</li>
+        <li>Se divide entre 2: el grito <strong>va y vuelve</strong> ↔️</li>
+        <li>Un número en una variable sirve para <strong>decidir</strong> con <code>if</code></li>
+      </ul>
+    </div>
+    <div class="tarjeta">
+      <h3>🧰 De antes, para hoy</h3>
+      <ul>
+        <li>Monitor serie: <code>Serial.begin</code> y <code>Serial.println</code> (sesión 4)</li>
+        <li><code>if / else</code> para decidir según un número (sesiones 4 y 7)</li>
+        <li>Librerías con <code>#include</code> (sesión 6)</li>
+        <li>El LED: actuador de luz, con su resistencia (sesión 3)</li>
+      </ul>
+    </div>
+  </div>
+  <p class="grande">Hoy tu Arduino siente el <strong>calor</strong>…<br>y nos lo cuenta por el monitor serie 🌡️💬</p>
+</section>
+
+<!-- 3 · El DHT11 -->
 <section class="slide">
   <p class="eyebrow">El sensor de hoy</p>
   <h2>El DHT11: calor y humedad 🌡️💧</h2>
@@ -42,7 +73,7 @@
   </div>
 </section>
 
-<!-- 3 · El monitor serie -->
+<!-- 4 · El monitor serie -->
 <section class="slide">
   <p class="eyebrow">Un viejo conocido</p>
   <h2>El monitor serie 💬</h2>
@@ -62,7 +93,7 @@
   </div>
 </section>
 
-<!-- 4 · El código completo -->
+<!-- 5 · El código completo -->
 <section class="slide">
   <p class="eyebrow">Solo código: ya estás grande</p>
   <h2>El código del termómetro 📋</h2>
@@ -97,7 +128,7 @@
   <p class="nota"><code>float</code><button class="sm" data-sm="float8">?</button> es una cajita para números <strong>con coma</strong>, como 21.5 — porque la temperatura casi nunca es redondita. Programa completo: <code>sketches/sesion-08/termometro</code>.</p>
 </section>
 
-<!-- 5 · Umbrales -->
+<!-- 6 · Umbrales -->
 <section class="slide slide-concepto">
   <p class="eyebrow">Frío, templado o caluroso</p>
   <h2>Los umbrales: ¿dónde está la raya? 📏</h2>
@@ -129,7 +160,7 @@
   <p class="nota">El <code>else if</code> es una <strong>segunda pregunta</strong> que solo se hace si la primera dio «no». Puedes encadenar todas las que quieras. Programa completo: <code>sketches/sesion-08/semaforo_termico</code>.</p>
 </section>
 
-<!-- 6 · Conexión -->
+<!-- 7 · Conexión -->
 <section class="slide">
   <p class="eyebrow">¡Manos a la obra!</p>
   <h2>Los tres cables del termómetro 🔌</h2>
@@ -180,7 +211,7 @@
   </div>
 </section>
 
-<!-- 7 · Proyecto -->
+<!-- 8 · Proyecto -->
 <section class="slide">
   <p class="eyebrow">⭐ Proyecto de la sesión</p>
   <h2>El termómetro semáforo 🌡️🚦</h2>
@@ -195,7 +226,7 @@
   <p class="nota">El hielo siempre <strong>dentro de su bolsa</strong>: el sensor mide la humedad… ¡pero odia mojarse! 💦🚫</p>
 </section>
 
-<!-- 8 · Sensores del mundo -->
+<!-- 9 · Sensores del mundo -->
 <section class="slide">
   <p class="eyebrow">El mismo truco, mil sensores</p>
   <h2>Sensores para todo el mundo 🌍</h2>
@@ -208,7 +239,7 @@
   <p class="grande" style="max-width:34em">Todos hablan igual que los que ya conoces: <strong>mandan números</strong>. Y tú ya sabes leerlos, compararlos con umbrales… y decidir. 😎</p>
 </section>
 
-<!-- 9 · Reto -->
+<!-- 10 · Reto -->
 <section class="slide">
   <div class="reto">
     <p class="eyebrow">⭐ Reto de la sesión</p>
@@ -222,7 +253,7 @@
   <p class="nota">Pista del experto: <code>if (t &gt; record) { record = t; }</code> — una cajita que solo guarda lo más alto que has visto.</p>
 </section>
 
-<!-- 10 · Quiz -->
+<!-- 11 · Quiz -->
 <section class="slide">
   <p class="eyebrow">Duelo de cerebritos</p>
   <h2>¿Cuánto aprendiste? Toca para voltear</h2>
@@ -250,7 +281,7 @@
   </div>
 </section>
 
-<!-- 11 · Cierre -->
+<!-- 12 · Cierre -->
 <section class="slide portada">
   <p class="eyebrow">Lo lograste</p>
   <h1>¡Tu Arduino siente y te lo cuenta! 🎉</h1>

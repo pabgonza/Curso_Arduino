@@ -7,6 +7,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/slides.css">
+<style>
+  .repaso .tarjeta { text-align: left; max-width: 22em; }
+  .repaso ul { padding-left: 1.1em; display: grid; gap: .35em; }
+</style>
 </head>
 <body>
 
@@ -22,7 +26,34 @@
   </div>
 </section>
 
-<!-- 2 · El LED RGB -->
+<!-- 2 · Repaso -->
+<section class="slide">
+  <p class="eyebrow">Antes de partir</p>
+  <h2>Lo que ya sabemos 🧠</h2>
+  <div class="fila repaso">
+    <div class="tarjeta">
+      <h3>🌡️ Sesión 8: el termómetro</h3>
+      <ul>
+        <li>El DHT11 es un sensor de <strong>temperatura y humedad</strong>; viene con librería</li>
+        <li><code>else if</code>: la pregunta <strong>encadenada</strong></li>
+        <li><code>float</code>: cajita para números con coma, como 21.5</li>
+        <li>Un <strong>umbral</strong> es la raya que decide qué hacer</li>
+      </ul>
+    </div>
+    <div class="tarjeta">
+      <h3>🧰 De antes, para hoy</h3>
+      <ul>
+        <li>El LED: actuador de luz, con su resistencia de 220 Ω (sesión 3)</li>
+        <li><code>for</code> para contar de a uno (sesión 6)</li>
+        <li><code>analogRead</code> y <code>map</code>: traducir rangos (sesión 6)</li>
+        <li>El murciélago mide <strong>distancia</strong> (sesión 7)</li>
+      </ul>
+    </div>
+  </div>
+  <p class="grande">Hoy <strong>pintamos con luz</strong>: un solo LED… de cualquier color 🌈</p>
+</section>
+
+<!-- 3 · El LED RGB -->
 <section class="slide">
   <p class="eyebrow">El actuador de hoy</p>
   <h2>El LED RGB: tres LEDs en uno 🔴🟢🔵</h2>
@@ -42,7 +73,7 @@
   </div>
 </section>
 
-<!-- 3 · Mezclar luz -->
+<!-- 4 · Mezclar luz -->
 <section class="slide">
   <p class="eyebrow">Pintar con luz</p>
   <h2>La receta de cada color 🎨</h2>
@@ -74,7 +105,7 @@
   </div>
 </section>
 
-<!-- 4 · Medio encendido -->
+<!-- 5 · Medio encendido -->
 <section class="slide slide-concepto">
   <p class="eyebrow">Una idea nueva de programación</p>
   <h2>Medio encendido: <code>analogWrite</code> ✨</h2>
@@ -100,7 +131,7 @@
   <p class="nota">Solo los pines con <strong>~</strong> saben hacer este truco (3, 5, 6, 9, 10 y 11). Se llama <strong>PWM</strong>.<button class="sm" data-sm="pwm">?</button></p>
 </section>
 
-<!-- 5 · Tu propia orden -->
+<!-- 6 · Tu propia orden -->
 <section class="slide slide-concepto">
   <p class="eyebrow">Una idea nueva de programación</p>
   <h2>Inventa tu propia orden: la función 🪄</h2>
@@ -130,7 +161,7 @@
   </div>
 </section>
 
-<!-- 6 · Conexión -->
+<!-- 7 · Conexión -->
 <section class="slide">
   <p class="eyebrow">¡Manos a la obra!</p>
   <h2>Los cuatro cables del LED RGB 🔌</h2>
@@ -185,7 +216,7 @@
   </div>
 </section>
 
-<!-- 7 · Práctica: la respiración -->
+<!-- 8 · Práctica: la respiración -->
 <section class="slide">
   <p class="eyebrow">Práctica 1</p>
   <h2>La respiración 🫁</h2>
@@ -216,7 +247,7 @@
   <p class="nota">Fíjate en el <code>b--</code>: es el hermano de <code>a++</code>, pero <strong>resta</strong> uno. Programa completo: <code>sketches/sesion-09/respiracion</code>.</p>
 </section>
 
-<!-- 8 · Práctica: la rueda de colores -->
+<!-- 9 · Práctica: la rueda de colores -->
 <section class="slide">
   <p class="eyebrow">Práctica 2</p>
   <h2>La rueda de colores con la perilla 🎛️🌈</h2>
@@ -252,7 +283,7 @@
   <p class="nota">Gira la perilla despacio: el LED recorre <strong>todo el arcoíris</strong>. Programa completo: <code>sketches/sesion-09/rueda_perilla</code>.</p>
 </section>
 
-<!-- 9 · Proyecto: la lámpara de humor -->
+<!-- 10 · Proyecto: la lámpara de humor -->
 <section class="slide">
   <p class="eyebrow">⭐ Proyecto de la sesión</p>
   <h2>La lámpara de humor 🪔</h2>
@@ -266,7 +297,7 @@
   <p class="nota">El papel o el vaso es el <strong>difusor</strong>: el mismo truco de las lámparas de verdad para que no se vea el puntito del LED.</p>
 </section>
 
-<!-- 10 · Reto -->
+<!-- 11 · Reto -->
 <section class="slide">
   <div class="reto">
     <p class="eyebrow">⭐ Reto de la sesión</p>
@@ -280,7 +311,7 @@
   <p class="nota">Demo del profe: un <strong>aro de LEDs</strong> donde cada lucecita es un LED RGB con su propio cerebrito.<button class="sm" data-sm="neopixel">?</button></p>
 </section>
 
-<!-- 11 · Quiz -->
+<!-- 12 · Quiz -->
 <section class="slide">
   <p class="eyebrow">Duelo de cerebritos</p>
   <h2>¿Cuánto aprendiste? Toca para voltear</h2>
@@ -308,7 +339,7 @@
   </div>
 </section>
 
-<!-- 12 · Cierre -->
+<!-- 13 · Cierre -->
 <section class="slide portada">
   <p class="eyebrow">Lo lograste</p>
   <h1>¡Tu Arduino pinta con luz! 🎉</h1>

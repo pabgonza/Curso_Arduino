@@ -7,6 +7,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/slides.css">
+<style>
+  .repaso .tarjeta { text-align: left; max-width: 22em; }
+  .repaso ul { padding-left: 1.1em; display: grid; gap: .35em; }
+</style>
 </head>
 <body>
 
@@ -22,7 +26,33 @@
   </div>
 </section>
 
-<!-- 2 · El ciclo -->
+<!-- 2 · Repaso -->
+<section class="slide">
+  <p class="eyebrow">Antes de partir</p>
+  <h2>Lo que ya sabemos 🧠</h2>
+  <div class="fila repaso">
+    <div class="tarjeta">
+      <h3>⚡ Sesión 3: electricidad</h3>
+      <ul>
+        <li>Voltaje = <strong>altura</strong> del estanque; corriente = <strong>cuánta agua</strong> baja</li>
+        <li>Resistencia = <strong>doblar la manguera</strong>: frena la corriente</li>
+        <li>El LED es un <strong>actuador</strong> de luz; va siempre con su <strong>220 Ω</strong> para no quemarse</li>
+        <li>Circuito <strong>cerrado</strong>: la corriente tiene que poder dar la vuelta 🔄</li>
+      </ul>
+    </div>
+    <div class="tarjeta">
+      <h3>🧰 De antes, para hoy</h3>
+      <ul>
+        <li>Todo robot <strong>siente → piensa → actúa</strong> (sesión 1)</li>
+        <li><code>pinMode(13, OUTPUT)</code> y <code>digitalWrite</code> (sesión 2)</li>
+        <li>El LED con su resistencia en la protoboard (sesión 3)</li>
+      </ul>
+    </div>
+  </div>
+  <p class="grande">Hasta ahora tu Arduino solo <strong>manda</strong>…<br>hoy también <strong>escucha</strong>: un botón 🔘 y una decisión</p>
+</section>
+
+<!-- 3 · El ciclo -->
 <section class="slide">
   <p class="eyebrow">¿Te acuerdas de la sesión 1?</p>
   <h2>Sentir → Pensar → Actuar 🔁</h2>
@@ -34,7 +64,7 @@
   <p class="grande" style="max-width:32em">En las sesiones anteriores solo usamos la tercera parte: prender un LED.<br>Hoy completamos el círculo. 🎯</p>
 </section>
 
-<!-- 3 · Sensores -->
+<!-- 4 · Sensores -->
 <section class="slide">
   <p class="eyebrow">Los sentidos del cerebrito</p>
   <h2>Sensores 👀</h2>
@@ -74,7 +104,7 @@
   <p class="grande">Un sensor no decide nada: solo <strong>avisa</strong>. Es el programa el que decide qué hacer.</p>
 </section>
 
-<!-- 4 · Actuadores -->
+<!-- 5 · Actuadores -->
 <section class="slide">
   <p class="eyebrow">Los músculos del cerebrito</p>
   <h2>Actuadores 💪</h2>
@@ -108,7 +138,7 @@
   <p class="grande">Los conocerás uno por uno en las próximas sesiones. ¡Hoy empezamos por el más simple de todos! 🔘</p>
 </section>
 
-<!-- 5 · El juego -->
+<!-- 6 · El juego -->
 <section class="slide">
   <p class="eyebrow">Duelo de cerebritos</p>
   <h2>¿Sensor o actuador? 🎮</h2>
@@ -127,7 +157,7 @@
   </div>
 </section>
 
-<!-- 6 · El botón por dentro -->
+<!-- 7 · El botón por dentro -->
 <section class="slide">
   <p class="eyebrow">Tu primer sensor</p>
   <h2>El botón por dentro 🔘</h2>
@@ -183,7 +213,7 @@
   </div>
 </section>
 
-<!-- 7 · Entradas y salidas -->
+<!-- 8 · Entradas y salidas -->
 <section class="slide slide-concepto">
   <p class="eyebrow">Una palabra nueva</p>
   <h2>Entradas y salidas ↔️</h2>
@@ -206,7 +236,7 @@
   <p class="grande" style="max-width:32em">Un mismo pin puede ser <strong>boca</strong> o <strong>oreja</strong>: se lo decimos una vez en el <strong>setup</strong> y listo.</p>
 </section>
 
-<!-- 8 · El circuito del botón -->
+<!-- 9 · El circuito del botón -->
 <section class="slide">
   <p class="eyebrow">¡Manos a la obra!</p>
   <h2>El circuito del botón 🔧</h2>
@@ -261,7 +291,7 @@
   <p class="nota">¿Y para qué la resistencia de 10 kΩ? <button class="sm" data-sm="pulldown">?</button> No es como la del LED: esta tiene otro trabajo… y un atajo secreto. 🤫</p>
 </section>
 
-<!-- 9 · El if/else: la pregunta con dos caminos -->
+<!-- 10 · El if/else: la pregunta con dos caminos -->
 <section class="slide slide-concepto">
   <p class="eyebrow">Una idea nueva de programación</p>
   <h2>El <code>if</code> y el <code>else</code>: dos caminos 🛤️</h2>
@@ -294,7 +324,7 @@
   <p class="grande" style="max-width:34em">La pregunta va entre <strong>paréntesis ( )</strong> y cada camino entre <strong>llaves { }</strong>. Pase lo que pase, se toma <strong>uno y solo uno</strong> de los dos.</p>
 </section>
 
-<!-- 10 · El cable que conversa -->
+<!-- 11 · El cable que conversa -->
 <section class="slide slide-concepto">
   <p class="eyebrow">Una idea nueva de programación</p>
   <h2>El cable USB: no solo da energía 🔌</h2>
@@ -313,7 +343,7 @@
   <p class="grande" style="max-width:36em">El cable USB también es un <strong>teléfono</strong>: por adentro viajan mensajes <strong>en los dos sentidos</strong>. Ese camino de conversación es el <strong>puerto serial</strong><button class="sm" data-sm="serie-nombre">?</button> — ya lo usabas sin saberlo: ¡tus programas viajan por ahí!</p>
 </section>
 
-<!-- 11 · El monitor serie: ver lo que siente -->
+<!-- 12 · El monitor serie: ver lo que siente -->
 <section class="slide slide-concepto">
   <p class="eyebrow">Una idea nueva de programación</p>
   <h2>¿Qué siente? ¡Que nos lo cuente! 💬</h2>
@@ -348,7 +378,7 @@
   <p class="nota">¡Nuestro primer if/else de verdad! Y el <code>delay(200)</code> es para que no escriba mil veces por segundo y llene la pantalla. 😅 Programa completo: <code>sketches/sesion-04/espia</code>.</p>
 </section>
 
-<!-- 12 · El if, con el botón y el LED -->
+<!-- 13 · El if, con el botón y el LED -->
 <section class="slide">
   <p class="eyebrow">Sentir → pensar → actuar</p>
   <h2>Ahora sí: un actuador que obedece 💪</h2>
@@ -383,7 +413,7 @@
   </div>
 </section>
 
-<!-- 13 · Proyecto -->
+<!-- 14 · Proyecto -->
 <section class="slide">
   <p class="eyebrow">⭐ Proyecto de la sesión</p>
   <h2>Tu propio interruptor de luz 💡</h2>
@@ -397,7 +427,7 @@
   <p class="nota">Truco de profe: si el LED parpadea solo cuando pasas la mano cerca, seguramente falta la resistencia de 10 kΩ. 👻 Programa completo: <code>sketches/sesion-04/boton</code>.</p>
 </section>
 
-<!-- 14 · Las variables -->
+<!-- 15 · Las variables -->
 <section class="slide slide-concepto">
   <p class="eyebrow">Una idea nueva de programación</p>
   <h2>Las variables: cajitas con nombre 📦</h2>
@@ -426,7 +456,7 @@
   <p class="nota">Más cajitas: <code>int edad = 10;</code> · <code>int pinLed = 13;</code> — y sirven para ponerle <strong>nombre a los pines</strong> <button class="sm" data-sm="var-nombres">?</button>. Ojo: la línea 2 no es una ecuación, significa «guarda lo que había <strong>más uno</strong>». 🤯</p>
 </section>
 
-<!-- 15 · Actividad: el contador de apretones -->
+<!-- 16 · Actividad: el contador de apretones -->
 <section class="slide">
   <p class="eyebrow">Experimento misterioso 🕵️</p>
   <h2>El contador de apretones 🔢</h2>
@@ -463,7 +493,7 @@
   <p class="nota">Las cajitas <code>antes</code> y <code>ahora</code> guardan cómo estaba el botón: cuenta solo cuando pasa de suelto a apretado. (El <code>&amp;&amp;</code> significa «y también».)</p>
 </section>
 
-<!-- 16 · El rebote -->
+<!-- 17 · El rebote -->
 <section class="slide">
   <p class="eyebrow">Un secreto de los botones</p>
   <h2>El rebote: ¿por qué cuenta de más? 🏀</h2>
@@ -495,7 +525,7 @@
   <p class="nota">El truco: un <code>delay(50);</code> que deje a las laminitas dejar de vibrar. Mira dónde ponerlo <button class="sm" data-sm="reb-arreglo">?</button> ¡y prueba de nuevo en tu circuito! (El IDE trae el ejemplo <strong>Debounce</strong>, y existen librerías anti-rebote.)</p>
 </section>
 
-<!-- 17 · Reto -->
+<!-- 18 · Reto -->
 <section class="slide">
   <div class="reto">
     <p class="eyebrow">⭐ Reto de la sesión</p>
@@ -506,7 +536,7 @@
   <p class="nota">Este reto es difícil: si lo logras, ya estás programando como grande. 💪 ¿La luz se cambia sola dos veces con un solo clic? No estás loco: es el <strong>rebote</strong>. 🏀</p>
 </section>
 
-<!-- 18 · Quiz -->
+<!-- 19 · Quiz -->
 <section class="slide">
   <p class="eyebrow">Duelo de cerebritos</p>
   <h2>¿Cuánto aprendiste? Toca para voltear</h2>
@@ -534,7 +564,7 @@
   </div>
 </section>
 
-<!-- 19 · Cierre -->
+<!-- 20 · Cierre -->
 <section class="slide portada">
   <p class="eyebrow">Lo lograste</p>
   <h1>¡Tu Arduino ya siente! 🎉</h1>

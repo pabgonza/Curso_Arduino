@@ -7,6 +7,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/slides.css">
+<style>
+  .repaso .tarjeta { text-align: left; max-width: 22em; }
+  .repaso ul { padding-left: 1.1em; display: grid; gap: .35em; }
+</style>
 </head>
 <body>
 
@@ -22,7 +26,34 @@
   </div>
 </section>
 
-<!-- 2 · Cómo ve un murciélago -->
+<!-- 2 · Repaso -->
+<section class="slide">
+  <p class="eyebrow">Antes de partir</p>
+  <h2>Lo que ya sabemos 🧠</h2>
+  <div class="fila repaso">
+    <div class="tarjeta">
+      <h3>🦾 Sesión 6: el servo</h3>
+      <ul>
+        <li>El servo es un <strong>actuador</strong>: va a un <strong>ángulo exacto</strong> (0 a 180) y se queda</li>
+        <li>Una <strong>librería</strong> es código regalado: <code>#include &lt;Servo.h&gt;</code></li>
+        <li><code>for</code>: repetir contando 🔁</li>
+        <li>La perilla es un sensor que da un <strong>número</strong>: <code>analogRead</code> (0 a 1023); <code>map()</code> lo traduce</li>
+      </ul>
+    </div>
+    <div class="tarjeta">
+      <h3>🧰 De antes, para hoy</h3>
+      <ul>
+        <li>Sensores que miden <strong>cuánto</strong>, no solo sí o no (sesión 6)</li>
+        <li><code>if / else</code> y variables <code>int</code> (sesión 4)</li>
+        <li>El <strong>monitor serie</strong> para ver los números (sesión 4)</li>
+        <li>El buzzer: actuador de sonido con <code>tone</code> (sesión 5)</li>
+      </ul>
+    </div>
+  </div>
+  <p class="grande">Hoy tu Arduino aprende a <strong>ver con los oídos</strong> 🦇</p>
+</section>
+
+<!-- 3 · Cómo ve un murciélago -->
 <section class="slide">
   <p class="eyebrow">Un superpoder de verdad</p>
   <h2>¿Cómo ve un murciélago de noche? 🌙</h2>
@@ -37,7 +68,7 @@
   <p class="grande" style="max-width:34em">Grita un sonido <strong>tan agudo que no lo escuchamos</strong><button class="sm" data-sm="ultra7">?</button> y espera el <strong>eco</strong>. Si el eco vuelve rápido, la polilla está cerca; si tarda, está lejos.</p>
 </section>
 
-<!-- 3 · El HC-SR04 -->
+<!-- 4 · El HC-SR04 -->
 <section class="slide">
   <p class="eyebrow">Nuestro murciélago electrónico</p>
   <h2>El sensor HC-SR04 👀</h2>
@@ -58,7 +89,7 @@
   </div>
 </section>
 
-<!-- 4 · La cuenta del eco -->
+<!-- 5 · La cuenta del eco -->
 <section class="slide">
   <p class="eyebrow">La matemática del murciélago</p>
   <h2>La cuenta del eco ⏱️</h2>
@@ -83,7 +114,7 @@ distancia = <span class="num-vivo" id="eco-us2">1749</span> × 0.034 / 2 = <span
   <p class="grande" style="max-width:32em">¿Por qué <strong>dividir entre 2</strong>? Porque el grito hace el viaje <strong>ida y vuelta</strong>: a la pared… ¡y de regreso! ↔️</p>
 </section>
 
-<!-- 5 · Conexión -->
+<!-- 6 · Conexión -->
 <section class="slide">
   <p class="eyebrow">¡Manos a la obra!</p>
   <h2>Los cuatro cables del murciélago 🔌</h2>
@@ -138,7 +169,7 @@ distancia = <span class="num-vivo" id="eco-us2">1749</span> × 0.034 / 2 = <span
   </div>
 </section>
 
-<!-- 6 · El código que mide -->
+<!-- 7 · El código que mide -->
 <section class="slide">
   <p class="eyebrow">Cópialo: va igual en todos tus proyectos</p>
   <h2>El código del murciélago 📋</h2>
@@ -181,7 +212,7 @@ distancia = <span class="num-vivo" id="eco-us2">1749</span> × 0.034 / 2 = <span
   <p class="nota"><code>pulseIn</code><button class="sm" data-sm="pulsein">?</button> es un cronómetro: espera el eco y devuelve cuántos microsegundos tardó. Programa completo (con su <code>Serial.begin(9600)</code> en el setup): <code>sketches/sesion-07/murcielago</code>.</p>
 </section>
 
-<!-- 7 · Práctica: ¡no me toques! -->
+<!-- 8 · Práctica: ¡no me toques! -->
 <section class="slide">
   <p class="eyebrow">Práctica</p>
   <h2>¡No me toques! 🚨</h2>
@@ -219,7 +250,7 @@ distancia = <span class="num-vivo" id="eco-us2">1749</span> × 0.034 / 2 = <span
   <p class="nota">El LED va en el <strong>pin 13</strong> igual que en la sesión 3, y el buzzer en el <strong>pin 8</strong> igual que en la sesión 5. ¡Ya sabes armar los dos! Programa completo: <code>sketches/sesion-07/alarma</code>.</p>
 </section>
 
-<!-- 8 · Proyecto: retroceso de bici -->
+<!-- 9 · Proyecto: retroceso de bici -->
 <section class="slide">
   <p class="eyebrow">⭐ Proyecto estrella</p>
   <h2>Sensor de retroceso para tu bici 🚲</h2>
@@ -251,7 +282,7 @@ distancia = <span class="num-vivo" id="eco-us2">1749</span> × 0.034 / 2 = <span
   </div>
 </section>
 
-<!-- 9 · Reto -->
+<!-- 10 · Reto -->
 <section class="slide">
   <div class="reto">
     <p class="eyebrow">⭐ Reto de la sesión</p>
@@ -265,7 +296,7 @@ distancia = <span class="num-vivo" id="eco-us2">1749</span> × 0.034 / 2 = <span
   <p class="nota">El murciélago mide bien entre 2 cm y 4 m. Ojo: las cosas <strong>blanditas</strong> (peluches, cortinas) se tragan el eco y lo confunden. 🧸</p>
 </section>
 
-<!-- 10 · Quiz -->
+<!-- 11 · Quiz -->
 <section class="slide">
   <p class="eyebrow">Duelo de cerebritos</p>
   <h2>¿Cuánto aprendiste? Toca para voltear</h2>
@@ -293,7 +324,7 @@ distancia = <span class="num-vivo" id="eco-us2">1749</span> × 0.034 / 2 = <span
   </div>
 </section>
 
-<!-- 11 · Cierre -->
+<!-- 12 · Cierre -->
 <section class="slide portada">
   <p class="eyebrow">Lo lograste</p>
   <h1>¡Tu Arduino ve en la oscuridad! 🎉</h1>

@@ -7,6 +7,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/slides.css">
+<style>
+  .repaso .tarjeta { text-align: left; max-width: 22em; }
+  .repaso ul { padding-left: 1.1em; display: grid; gap: .35em; }
+</style>
 </head>
 <body>
 
@@ -23,7 +27,34 @@
   </div>
 </section>
 
-<!-- 2 · ¿Qué es el sonido? -->
+<!-- 2 · Repaso -->
+<section class="slide">
+  <p class="eyebrow">Antes de partir</p>
+  <h2>Lo que ya sabemos 🧠</h2>
+  <div class="fila repaso">
+    <div class="tarjeta">
+      <h3>🕹️ Sesión 4: sentir y actuar</h3>
+      <ul>
+        <li>Los <strong>sensores</strong> le avisan al cerebrito; los <strong>actuadores</strong> cambian el mundo</li>
+        <li>El botón es un sensor: <code>pinMode(2, INPUT)</code> + <code>digitalRead</code> 👂</li>
+        <li><code>if / else</code>: una pregunta con <strong>dos caminos</strong></li>
+        <li>Una <strong>variable</strong> es una cajita para acordarse: <code>int contador</code></li>
+      </ul>
+    </div>
+    <div class="tarjeta">
+      <h3>🧰 De antes, para hoy</h3>
+      <ul>
+        <li>Sentir → pensar → actuar: hoy, un <strong>actuador nuevo</strong> (sesión 1)</li>
+        <li><code>setup</code> corre una vez; <code>loop</code>, para siempre (sesión 2)</li>
+        <li><code>if</code> para decidir y <code>delay</code> para esperar (sesiones 2 y 4)</li>
+        <li>El botón, nuestro sensor del pin 2 (sesión 4)</li>
+      </ul>
+    </div>
+  </div>
+  <p class="grande">Luz ya tiene y decidir ya sabe…<br>hoy le damos <strong>voz</strong> 🔊</p>
+</section>
+
+<!-- 3 · ¿Qué es el sonido? -->
 <section class="slide">
   <p class="eyebrow">Antes de hacer ruido</p>
   <h2>El sonido es aire que tiembla 🌬️</h2>
@@ -41,7 +72,7 @@
   <p class="nota">Pocas vibraciones = sonido <strong>grave</strong> (como un tambor). Muchas = <strong>agudo</strong> (como un pajarito).</p>
 </section>
 
-<!-- 3 · El buzzer por dentro -->
+<!-- 4 · El buzzer por dentro -->
 <section class="slide">
   <p class="eyebrow">¿Y cómo hace temblar el aire?</p>
   <h2>El buzzer por dentro 🔎</h2>
@@ -67,7 +98,7 @@
   <button class="sm-grande" data-sm="piezo">¿Saber más? ¿Por qué se dobla?</button>
 </section>
 
-<!-- 4 · Activo vs pasivo -->
+<!-- 5 · Activo vs pasivo -->
 <section class="slide">
   <p class="eyebrow">Ojo con esto</p>
   <h2>Hay dos buzzers en tu kit 👀</h2>
@@ -86,7 +117,7 @@
   <p class="grande" style="max-width:32em">Hoy usamos el <strong>pasivo</strong>: es el único que puede hacer música. 🎹</p>
 </section>
 
-<!-- 5 · La orden nueva: tone -->
+<!-- 6 · La orden nueva: tone -->
 <section class="slide">
   <p class="eyebrow">Una orden nueva</p>
   <h2>tone(): «vibra así de rápido» 🎚️</h2>
@@ -103,7 +134,7 @@
   </div>
 </section>
 
-<!-- 6 · Piano interactivo -->
+<!-- 7 · Piano interactivo -->
 <section class="slide">
   <p class="eyebrow">Pruébalo tú</p>
   <h2>Toca el piano 🎹</h2>
@@ -115,7 +146,7 @@
   <p class="grande" id="piano-txt">Cada nota tiene su número. ¡Toca las teclas y escucha!</p>
 </section>
 
-<!-- 7 · El circuito -->
+<!-- 8 · El circuito -->
 <section class="slide">
   <p class="eyebrow">¡Manos a la obra!</p>
   <h2>El circuito del buzzer 🔧</h2>
@@ -156,7 +187,7 @@
   <p class="nota">El buzzer tiene un lado marcado con <strong>+</strong>: ese va al pin. El otro, a tierra.</p>
 </section>
 
-<!-- 8 · Tu primera canción -->
+<!-- 9 · Tu primera canción -->
 <section class="slide">
   <p class="eyebrow">¡A tocar!</p>
   <h2>Tu primera canción 🎼</h2>
@@ -191,7 +222,7 @@
   </div>
 </section>
 
-<!-- 9 · Sirena -->
+<!-- 10 · Sirena -->
 <section class="slide">
   <p class="eyebrow">Práctica rápida</p>
   <h2>La sirena de policía 🚓</h2>
@@ -211,7 +242,7 @@
   </div>
 </section>
 
-<!-- 10 · Proyecto -->
+<!-- 11 · Proyecto -->
 <section class="slide">
   <p class="eyebrow">⭐ Proyecto de la sesión</p>
   <h2>El timbre de tu pieza 🔔</h2>
@@ -233,7 +264,7 @@
   </div>
 </section>
 
-<!-- 11 · Reto -->
+<!-- 12 · Reto -->
 <section class="slide">
   <div class="reto">
     <p class="eyebrow">⭐ Reto de la sesión</p>
@@ -249,7 +280,7 @@
   <p class="nota">Pista: cada botón necesita su propia resistencia de 10 kΩ, igual que el de la sesión pasada.</p>
 </section>
 
-<!-- 12 · Quiz -->
+<!-- 13 · Quiz -->
 <section class="slide">
   <p class="eyebrow">Duelo de cerebritos</p>
   <h2>¿Cuánto aprendiste? Toca para voltear</h2>
@@ -277,7 +308,7 @@
   </div>
 </section>
 
-<!-- 13 · Cierre -->
+<!-- 14 · Cierre -->
 <section class="slide portada">
   <p class="eyebrow">Lo lograste</p>
   <h1>¡Tu Arduino canta! 🎉</h1>
