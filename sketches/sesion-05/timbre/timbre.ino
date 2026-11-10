@@ -1,13 +1,13 @@
 // Sesion 5 - El timbre de tu pieza
-// Boton en el pin 2 (con su resistencia de 10 kOhm a GND, como en la sesion 4)
-// y buzzer en el pin 8.
+// Boton entre el pin 2 y GND (sin resistencia: INPUT_PULLUP) y buzzer en el pin 8.
+// Ojo: con INPUT_PULLUP el boton apretado se lee LOW.
 
 void setup() {
-  pinMode(2, INPUT);
+  pinMode(2, INPUT_PULLUP);
 }
 
 void loop() {
-  if (digitalRead(2) == HIGH) {
+  if (digitalRead(2) == LOW) {   // apretado
     tone(8, 523);   // ding
     delay(200);
     tone(8, 392);   // dong

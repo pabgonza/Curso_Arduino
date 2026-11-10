@@ -333,6 +333,7 @@
     <p class="grande">Un corazón no parpadea parejo: hace <strong>tum-tum… pausa… tum-tum… pausa</strong>.</p>
     <p>Pista: necesitas <strong>varios</strong> <code>delay</code> con números <strong>distintos</strong>.</p>
   </div>
+  <button class="sm-grande" data-sm="reto-sol">🔓 ¿Te trabaste? La solución (¡después de intentarlo!)</button>
   <p>Así debería verse: <span class="led" id="led-corazon" style="--c:var(--rojo); font-size:2em"></span></p>
 </section>
 
@@ -838,6 +839,10 @@
   const CREDITO_TK = "<p class='nota' style='font-size:.75em'>Pantallazo: Tinkercad (Autodesk)</p>";
   const CREDITO_DOCS = "<p class='nota' style='font-size:.75em'>Pantallazo: docs.arduino.cc · CC BY-SA 4.0</p>";
   saberMas({
+    "reto-sol": {
+      t: "La solución: el corazón ❤️",
+      d: "<p class='aviso'>🔒 <strong>Recuerda hacer el desafío primero.</strong> Pelear un rato con el problema es donde más se aprende: esto es para comparar tu solución… o para destrabarte si llevas mucho rato. 💪</p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>void setup() {\n  pinMode(LED_BUILTIN, OUTPUT);\n}\n\nvoid loop() {\n  digitalWrite(LED_BUILTIN, HIGH);   // tum\n  delay(120);\n  digitalWrite(LED_BUILTIN, LOW);\n  delay(120);\n  digitalWrite(LED_BUILTIN, HIGH);   // tum\n  delay(120);\n  digitalWrite(LED_BUILTIN, LOW);\n  delay(640);                        // ...pausa\n}</code></pre><p>Dos destellos cortitos (120) y una pausa larga (640): ese «tum-tum… pausa» es el latido. Juega con los números hasta que se parezca al de la slide. 🫀 Programa completo: <code>sketches/sesion-02/corazon</code>.</p>"
+    },
     ide: {
       t: "IDE — Integrated Development Environment",
       d: "<p>En español: <strong>Entorno de Desarrollo Integrado</strong>. Suena complicado, pero solo significa que <strong>todas las herramientas del programador están juntas en un solo programa</strong>: donde escribes, donde se revisa y el botón para enviar. Como una mochila con todos tus útiles adentro 🎒.</p>"

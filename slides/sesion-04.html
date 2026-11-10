@@ -533,6 +533,7 @@
     <p class="grande">Nuestro interruptor solo alumbra <strong>mientras</strong> aprietas. Los de tu casa no son así: aprietas una vez y la luz se queda.</p>
     <p>Pista: el Arduino necesita <strong>acordarse</strong> de si la luz estaba prendida o apagada. Una <strong>variable</strong> es justamente una cajita para acordarse de cosas. 🧠</p>
   </div>
+  <button class="sm-grande" data-sm="reto-sol">🔓 ¿Te trabaste? La solución (¡después de intentarlo!)</button>
   <p class="nota">Este reto es difícil: si lo logras, ya estás programando como grande. 💪 ¿La luz se cambia sola dos veces con un solo clic? No estás loco: es el <strong>rebote</strong>. 🏀</p>
 </section>
 
@@ -984,6 +985,10 @@
   });
 
   saberMas({
+    "reto-sol": {
+      t: "La solución: la luz que se queda 🔒",
+      d: "<p class='aviso'>🔒 <strong>Recuerda hacer el desafío primero.</strong> Pelear un rato con el problema es donde más se aprende: esto es para comparar tu solución… o para destrabarte si llevas mucho rato. 💪</p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>int encendida = LOW;   // la cajita que se acuerda: ¿esta prendida la luz?\nint antes = LOW;       // como estaba el boton la ultima vez que miramos\n\nvoid setup() {\n  pinMode(2, INPUT);\n  pinMode(13, OUTPUT);\n}\n\nvoid loop() {\n  int ahora = digitalRead(2);\n  if (ahora == HIGH &amp;&amp; antes == LOW) {   // recien lo apretaron\n    if (encendida == LOW) {              // estaba apagada...\n      encendida = HIGH;                  // ...ahora prendida\n    } else {\n      encendida = LOW;                   // y al reves\n    }\n    digitalWrite(13, encendida);\n    delay(50);                           // filtro anti-rebote\n  }\n  antes = ahora;\n}</code></pre><p>Dos cajitas: <code>encendida</code> se acuerda de si la luz está prendida, y <code>antes</code> de cómo estaba el botón la última vez (igual que en el contador). Solo cuando el botón <strong>pasa</strong> de suelto a apretado damos vuelta la cajita y mandamos su valor al LED. El <code>delay(50)</code> es el filtro anti-rebote. 🏀</p><p>Truco de grandes: <code>encendida = !encendida;</code> da vuelta la cajita en una sola línea (el <code>!</code> significa «lo contrario»). Programa completo: <code>sketches/sesion-04/luz_fija</code>.</p>"
+    },
     "boton-s": {
       t: "El botón: el sensor más simple 🔘",
       d: "<p>Solo sabe avisar dos cosas: <strong>«me están apretando»</strong> o <strong>«no»</strong>. Nada más… ¡y con eso alcanza para un montón de inventos!</p><p>En un ratito más lo vas a ver <strong>por dentro</strong>. 👀</p>"

@@ -188,25 +188,32 @@ function resistencia10kSVG(x, y) {
     `<rect x='${x}' y='${y + 20}' width='18' height='4' fill='#E8A33D'/>`;
 }
 
-/* Circuito completo botón (pin 2, con 10 kΩ) + LED (pin 13, con 220 Ω)
-   compartiendo protoboard — el del proyecto de S4, reusado en S6.
-   Las etiquetas nombran cada mitad del circuito. */
-function circuitoBotonLedSVG(etiqBoton, etiqLed) {
+/* Circuito completo botón (pin 2) + LED (pin 13, con 220 Ω) compartiendo
+   protoboard — el del proyecto de S4, reusado en S6. Las etiquetas nombran
+   cada mitad. Sin `pullup`: 5V → botón y 10 kΩ al riel − (S4). Con `pullup`
+   (desde S5): sin 5V ni resistencia, la columna izquierda del botón va con
+   un cablecito al riel − y el pin usa INPUT_PULLUP. */
+function circuitoBotonLedSVG(etiqBoton, etiqLed, pullup) {
+  const pads = pullup ? ["pin 13", "pin 2", "GND"] : ["pin 13", "5V", "pin 2", "GND"];
+  const ard = arduinoSVG({ x: 6, y: 70, pads });
+  const y2 = ard.padY(pads.indexOf("pin 2")), yg = ard.padY(pads.length - 1);
   return "<svg viewBox='0 0 640 400' style='width:100%' aria-label='Botón y LED juntos en la protoboard'>"
-    + arduinoSVG({ x: 6, y: 70, pads: ["pin 13", "5V", "pin 2", "GND"] }).svg
+    + ard.svg
     + protoboardSVG({ x: 150, y: 30 })
     + `<text x='308' y='105' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif' font-weight='700'>${etiqBoton}</text>`
     + `<text x='503' y='105' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif' font-weight='700'>${etiqLed}</text>`
     + botonSVG(308, 203)
     + "<path d='M128 122 C 300 126, 430 170, 490 250' fill='none' stroke='#FB8C00' stroke-width='6' stroke-linecap='round'/>"
-    + "<path d='M128 170 C 190 168, 240 166, 280 166' fill='none' stroke='#E84855' stroke-width='6' stroke-linecap='round'/>"
-    + "<path d='M128 218 C 210 228, 290 237, 332 240' fill='none' stroke='#4C7CFF' stroke-width='6' stroke-linecap='round'/>"
-    + "<line x1='334' y1='246' x2='334' y2='328' stroke='#9aa7ad' stroke-width='4'/>"
-    + resistencia10kSVG(325, 254)
-    + "<text x='352' y='276' font-size='12' fill='#5E7480' font-family='Nunito, sans-serif'>10 kΩ</text>"
+    + (pullup ? "" : "<path d='M128 170 C 190 168, 240 166, 280 166' fill='none' stroke='#E84855' stroke-width='6' stroke-linecap='round'/>")
+    + `<path d='M128 ${y2} C 210 ${y2 + 10}, 290 237, 332 240' fill='none' stroke='#4C7CFF' stroke-width='6' stroke-linecap='round'/>`
+    + (pullup
+      ? "<path d='M282 240 C 282 280, 282 310, 282 328' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>"
+      : "<line x1='334' y1='246' x2='334' y2='328' stroke='#9aa7ad' stroke-width='4'/>"
+        + resistencia10kSVG(325, 254)
+        + "<text x='352' y='276' font-size='12' fill='#5E7480' font-family='Nunito, sans-serif'>10 kΩ</text>")
     + ledSVG(503, 232, 328)
     + "<text x='538' y='300' font-size='12' fill='#5E7480' font-family='Nunito, sans-serif'>220 Ω</text>"
-    + "<path d='M128 266 C 148 296, 160 318, 175 326' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>"
+    + `<path d='M128 ${yg} C 148 ${yg + 30}, 160 318, 175 326' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>`
     + "</svg>";
 }
 

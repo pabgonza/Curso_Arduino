@@ -6,6 +6,8 @@ Estructura y propósito en [README.md](README.md). Diagramas de circuito: seguir
 - Una slide por tema; siglas y "cómo funciona por dentro" en popups `¿Saber más?` (`saberMas()` de `slides/assets/slides.js`)
 - Proyecto con checklist `.check` y al menos los popups `p-circuito` y `p-codigo`; quiz de tarjetas al final
 - Todo programa mostrado tiene su sketch completo en `sketches/sesion-NN/<nombre>/<nombre>.ino`
+- Botones: en la sesión 4 con su 10 kΩ a GND (`INPUT`, apretado = `HIGH`); desde la sesión 5, entre el pin y GND sin resistencia (`INPUT_PULLUP`, apretado = `LOW`), explicado una sola vez en la slide «El botón, versión corta» de la S5
+- Reto: botón `.sm-grande` con el popup `reto-sol` (aviso `.aviso` de intentarlo primero + solución por nivel; desde el nivel 2 solo lo que cambia) y un sketch por nivel
 - Slide 2 «Lo que ya sabemos» (`.fila.repaso`, desde la sesión 3): tarjeta con los conceptos de la sesión anterior + tarjeta «De antes, para hoy». Solo conceptos (sensor/actuador, voltaje/corriente/resistencia, `if`/`for`/variables) y para qué sirve cada componente; nada de pasos de armado ni de los proyectos hechos
 - Nueva sesión: agregarla a `slides/index.html`
 

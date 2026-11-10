@@ -614,6 +614,7 @@
       <li>Nivel experto: un <strong>auto fantástico</strong>, con la luz que va y vuelve 🚗</li>
     </ul>
   </div>
+  <button class="sm-grande" data-sm="reto-sol">🔓 ¿Te trabaste? La solución (¡después de intentarlo!)</button>
 </section>
 
 <!-- 16 · Quiz -->
@@ -1234,6 +1235,10 @@
   });
 
   saberMas({
+    "reto-sol": {
+      t: "Las soluciones: tu coreografía 💃",
+      d: "<p class='aviso'>🔒 <strong>Recuerda hacer el desafío primero.</strong> Pelear un rato con el problema es donde más se aprende: esto es para comparar tu solución… o para destrabarte si llevas mucho rato. 💪</p><p>Las tres usan el mismo <code>setup</code> del semáforo (pines 13, 12 y 11 como <code>OUTPUT</code>); cambia solo el <code>loop</code>.</p><p><strong>🌊 La ola:</strong> se prenden una tras otra y se apagan en el mismo orden.</p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>void loop() {\n  digitalWrite(13, HIGH);\n  delay(200);\n  digitalWrite(12, HIGH);\n  delay(200);\n  digitalWrite(11, HIGH);\n  delay(200);\n  digitalWrite(13, LOW);\n  delay(200);\n  digitalWrite(12, LOW);\n  delay(200);\n  digitalWrite(11, LOW);\n  delay(200);\n}</code></pre><p><strong>🚨 La alarma:</strong> las tres juntas.</p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>void loop() {\n  digitalWrite(13, HIGH);\n  digitalWrite(12, HIGH);\n  digitalWrite(11, HIGH);\n  delay(300);\n  digitalWrite(13, LOW);\n  digitalWrite(12, LOW);\n  digitalWrite(11, LOW);\n  delay(300);\n}</code></pre><p><strong>🚗 El auto fantástico:</strong> va 13 → 12 → 11 y vuelve por el 12; como el <code>loop</code> se repite, nunca se nota dónde empieza la vuelta.</p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>void loop() {\n  digitalWrite(13, HIGH);\n  delay(150);\n  digitalWrite(13, LOW);\n  digitalWrite(12, HIGH);\n  delay(150);\n  digitalWrite(12, LOW);\n  digitalWrite(11, HIGH);\n  delay(150);\n  digitalWrite(11, LOW);\n  digitalWrite(12, HIGH);   // de vuelta\n  delay(150);\n  digitalWrite(12, LOW);\n}</code></pre><p>Programas completos: <code>sketches/sesion-03/ola</code>, <code>alarma</code> y <code>auto_fantastico</code>.</p>"
+    },
     "p-circuito": {
       t: "Así se ve armado completo 🔧",
       d: "<svg viewBox='0 0 640 400' style='width:100%' aria-label='Tres LEDs con sus resistencias en la protoboard'>"

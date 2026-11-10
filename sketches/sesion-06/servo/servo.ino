@@ -1,6 +1,7 @@
 // Sesion 6 - El primer movimiento del servo
 // Cables del servo: cafe (o negro) a GND, rojo a 5V, naranjo al pin 9.
-// La libreria Servo ya viene con el Arduino IDE.
+// La libreria Servo se instala una vez desde el gestor de librerias del IDE
+// (icono de libros): esta explicado al final de la sesion 6.
 
 #include <Servo.h>
 Servo miServo;           // le pongo nombre a mi servo

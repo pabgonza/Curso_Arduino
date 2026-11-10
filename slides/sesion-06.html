@@ -10,6 +10,18 @@
 <style>
   .repaso .tarjeta { text-align: left; max-width: 22em; }
   .repaso ul { padding-left: 1.1em; display: grid; gap: .35em; }
+  .lib-mock { display: flex; width: min(44vw, 24em); border: 3px solid var(--teal); border-radius: 14px; overflow: hidden; background: var(--blanco); text-align: left; font-size: .8rem; box-shadow: 0 10px 28px rgba(20,54,66,.16); }
+  .lib-barra { display: flex; flex-direction: column; gap: .6em; padding: .6em .4em; background: #F1F3F4; border-right: 1px solid #D8DEDD; font-size: 1.3em; }
+  .lib-barra span { opacity: .45; }
+  .lib-barra .activo { opacity: 1; outline: 3px solid var(--ambar); border-radius: 6px; }
+  .lib-panel { flex: 1; padding: .7em .9em; display: grid; gap: .5em; align-content: start; }
+  .lib-titulo { font-family: var(--f-titulo); font-size: .75em; letter-spacing: .08em; color: var(--gris); }
+  .lib-busca { border: 1px solid #B0BEC5; border-radius: 6px; padding: .3em .6em; background: #fff; }
+  .lib-card { border: 1px solid #D8DEDD; border-radius: 8px; padding: .5em .7em; display: grid; gap: .25em; }
+  .lib-fila { display: flex; justify-content: space-between; align-items: center; margin-top: .2em; }
+  .lib-ver { border: 1px solid #B0BEC5; border-radius: 4px; padding: .1em .4em; }
+  .lib-btn { background: var(--teal); color: #fff; font-weight: 700; border-radius: 4px; padding: .2em .8em; }
+  .lib-pasos { padding-left: 1.2em; display: grid; gap: .45em; max-width: 22em; text-align: left; }
 </style>
 </head>
 <body>
@@ -407,6 +419,7 @@ miServo.<span class="fn">write</span>(angulo);</pre>
       <li>Nivel experto: un <strong>medidor</strong> — que la aguja marque cuánto giraste la perilla 📊</li>
     </ul>
   </div>
+  <button class="sm-grande" data-sm="reto-sol">🔓 ¿Te trabaste? La solución (¡después de intentarlo!)</button>
   <p class="nota">Cuidado: nunca fuerces el brazo del servo con la mano. Los engranajes son de plástico y se saltan. 🦷</p>
 </section>
 
@@ -438,7 +451,35 @@ miServo.<span class="fn">write</span>(angulo);</pre>
   </div>
 </section>
 
-<!-- 16 · Cierre -->
+<!-- 16 · Instalar una librería -->
+<section class="slide">
+  <p class="eyebrow">Para tu casa</p>
+  <h2>Cómo instalar una librería 📚</h2>
+  <p class="grande" style="max-width:34em">La librería <strong>Servo</strong> no viene instalada en el Arduino IDE nuevo: se baja desde el <strong>gestor de librerías</strong>. Una sola vez por computador.</p>
+  <div class="fila" style="align-items:center; gap:1.5em">
+    <div class="lib-mock" aria-label="Gestor de librerías del Arduino IDE 2">
+      <div class="lib-barra"><span>📁</span><span>🔲</span><span class="activo">📚</span><span>🐞</span><span>🔍</span></div>
+      <div class="lib-panel">
+        <p class="lib-titulo">LIBRARY MANAGER</p>
+        <div class="lib-busca">🔍 Servo</div>
+        <div class="lib-card">
+          <p><strong>Servo</strong> by Arduino</p>
+          <p class="nota">Allows Arduino boards to control a variety of servo motors.</p>
+          <div class="lib-fila"><span class="lib-ver">1.3.0 ▾</span><span class="lib-btn">INSTALL</span></div>
+        </div>
+      </div>
+    </div>
+    <ol class="lib-pasos">
+      <li>Toca el icono de los <strong>libros</strong> 📚 en la barra de la izquierda (o <code>Ctrl</code>+<code>Shift</code>+<code>I</code>)</li>
+      <li>Escribe <strong>Servo</strong> en el buscador</li>
+      <li>En «Servo by Arduino», aprieta <strong>INSTALL</strong></li>
+      <li>¡Listo! Ya puedes usar <code>#include &lt;Servo.h&gt;</code></li>
+    </ol>
+  </div>
+  <p class="nota">Mismo camino para la sesión 8: la librería <strong>DHT sensor library</strong> (de Adafruit). Si pregunta por otras que necesita, elige <strong>Install all</strong>.</p>
+</section>
+
+<!-- 17 · Cierre -->
 <section class="slide portada">
   <p class="eyebrow">Lo lograste</p>
   <h1>¡Tu Arduino se mueve! 🎉</h1>
@@ -652,6 +693,10 @@ miServo.<span class="fn">write</span>(angulo);</pre>
   });
 
   saberMas({
+    "reto-sol": {
+      t: "Las soluciones: el brazo que saluda 👋",
+      d: "<p class='aviso'>🔒 <strong>Recuerda hacer el desafío primero.</strong> Pelear un rato con el problema es donde más se aprende: esto es para comparar tu solución… o para destrabarte si llevas mucho rato. 💪</p><p>Servo en el pin 9, como siempre. Un saludo es un barrido corto: de 60 a 120 grados y de vuelta.</p><p><strong>👋 Nivel 1: saluda sin parar</strong></p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>#include &lt;Servo.h&gt;\nServo brazo;\n\nint velocidad = 10;   // pausa entre grado y grado: 5 = frenetico, 30 = tranquilo\n\nvoid setup() {\n  brazo.attach(9);\n}\n\nvoid loop() {\n  for (int a = 60; a &lt;= 120; a++) {   // de ida\n    brazo.write(a);\n    delay(velocidad);\n  }\n  for (int a = 120; a &gt;= 60; a--) {   // y de vuelta\n    brazo.write(a);\n    delay(velocidad);\n  }\n}</code></pre><p>La cajita <code>velocidad</code> es la pausa entre grado y grado: 5 = frenético, 30 = tranquilo. ¿Solo cuando aprietas el botón? Botón entre el pin 2 y GND (<code>INPUT_PULLUP</code>, apretado = <code>LOW</code>) y el saludo adentro de un <code>if</code>:</p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>void loop() {\n  if (digitalRead(2) == LOW) {    // solo si alguien aprieta\n    for (int a = 60; a &lt;= 120; a++) {   // de ida\n      brazo.write(a);\n      delay(velocidad);\n    }\n    for (int a = 120; a &gt;= 60; a--) {   // y de vuelta\n      brazo.write(a);\n      delay(velocidad);\n    }\n    }\n}</code></pre><p><strong>🎚️ Nivel 2: la perilla manda la velocidad.</strong> Perilla en A0; <code>map</code> traduce 0-1023 a una pausa de 2 a 40.</p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>void loop() {\n  int velocidad = map(analogRead(A0), 0, 1023, 2, 40);   // de 0-1023 a una pausa de 2 a 40\n  for (int a = 60; a &lt;= 120; a++) {   // de ida\n    brazo.write(a);\n    delay(velocidad);\n  }\n  for (int a = 120; a &gt;= 60; a--) {   // y de vuelta\n    brazo.write(a);\n    delay(velocidad);\n  }\n}</code></pre><p><strong>📊 Nivel experto: el medidor</strong> es la perilla mágica de la práctica (<code>sketches/sesion-06/perilla</code>) con una aguja de papel pegada al brazo y una escala dibujada detrás, de 0 a 180. Programas completos: <code>sketches/sesion-06/saludo</code>, <code>saludo_boton</code> y <code>saludo_perilla</code>.</p>"
+    },
     engranajes: {
       t: "Los engranajes: cambiar velocidad por fuerza ⚙️",
       d: "<p>El motorcito de adentro gira <strong>rapidísimo pero es débil</strong>: no podría ni levantar un palito.</p><p>Los engranajes hacen un trato: <strong>«gira muchas vueltas tú, para que yo dé una sola… pero con mucha más fuerza»</strong>. Es el mismo truco de los cambios de la bicicleta: en subida pedaleas más rápido, pero te cuesta menos. 🚲</p>"
@@ -662,13 +707,13 @@ miServo.<span class="fn">write</span>(angulo);</pre>
     },
     "p-circuito": {
       t: "Así se arma la barrera 🔧",
-      d: "<p>La protoboard va <strong>igualita al proyecto de la sesión 4</strong>: el botón al pin 2 (con su 10 kΩ) y la luz de la barrera al pin 13 (con su 220 Ω).</p>"
-        + circuitoBotonLedSVG("el botón", "la luz de la barrera")
+      d: "<p>La protoboard va <strong>como en el timbre de la sesión 5</strong>: el botón entre el pin 2 y GND (sin resistencia: <code>INPUT_PULLUP</code>) y la luz de la barrera al pin 13 (con su 220 Ω).</p>"
+        + circuitoBotonLedSVG("el botón", "la luz de la barrera", true)
         + "<p>Y el servo aparte, con sus tres cables de siempre — él no necesita protoboard:</p><svg viewBox='0 0 620 300' style='width:100%; max-width:26em; display:block; margin:0 auto' aria-label='Servo conectado al Arduino con tres cables'><rect x='20' y='60' width='150' height='200' rx='12' fill='#00878F'/><text x='95' y='90' text-anchor='middle' fill='#fff' font-family='monospace' font-size='15'>ARDUINO</text><rect x='32' y='110' width='126' height='26' rx='4' fill='#143642'/><text x='95' y='128' text-anchor='middle' fill='#fff' font-family='monospace' font-size='13'>5V</text><rect x='32' y='160' width='126' height='26' rx='4' fill='#143642'/><text x='95' y='178' text-anchor='middle' fill='#fff' font-family='monospace' font-size='13'>GND</text><rect x='32' y='210' width='126' height='26' rx='4' fill='#143642'/><text x='95' y='228' text-anchor='middle' fill='#fff' font-family='monospace' font-size='13'>pin 9</text><rect x='430' y='110' width='120' height='90' rx='10' fill='#1565C0'/><circle cx='490' cy='110' r='18' fill='#90A4AE'/><rect x='484' y='55' width='12' height='56' rx='6' fill='#ECEFF1' stroke='#90A4AE' stroke-width='2'/><text x='490' y='225' text-anchor='middle' font-size='14' fill='#5E7480' font-family='Nunito, sans-serif'>servo SG90</text><path class='cable-w' d='M164 123 C 280 123, 320 140, 428 140' stroke='#E84855'/><path class='cable-w' d='M164 173 C 280 173, 320 160, 428 158' stroke='#6D4C41'/><path class='cable-w' d='M164 223 C 300 223, 340 180, 428 176' stroke='#FB8C00'/><text x='300' y='112' text-anchor='middle' font-size='13' fill='#E84855' font-family='Nunito, sans-serif'>rojo → 5V</text><text x='300' y='160' text-anchor='middle' font-size='13' fill='#6D4C41' font-family='Nunito, sans-serif'>café → GND</text><text x='300' y='248' text-anchor='middle' font-size='13' fill='#FB8C00' font-family='Nunito, sans-serif'>naranjo → pin 9</text></svg><p class='nota'>Truco: si los pines 5V y GND del Arduino ya están ocupados, el rojo y el café del servo pueden salir de los rieles + y − de la protoboard. 😉</p>"
     },
     "p-codigo": {
       t: "El programa completo 📋",
-      d: "<pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>#include &lt;Servo.h&gt;\nServo barrera;\n\nvoid setup() {\n  pinMode(2, INPUT);\n  pinMode(13, OUTPUT);\n  barrera.attach(9);\n  barrera.write(90);   // barrera arriba al partir...\n  delay(500);          // ...y tiempo de llegar\n}\n\nvoid loop() {\n  if (digitalRead(2) == HIGH) {\n    barrera.write(0);          // barrera abajo\n    digitalWrite(13, HIGH);    // y la luz parpadea\n    delay(300);\n    digitalWrite(13, LOW);\n    delay(300);\n  } else {\n    barrera.write(90);         // barrera arriba\n    delay(300);                // esperamos que llegue\n    digitalWrite(13, LOW);\n  }\n}</code></pre><p>Junta todo lo de hoy: el if/else de la sesión 4, la librería Servo y los delay que le dan su tiempo al servo. También está en <code>sketches/sesion-06/barrera</code>.</p>"
+      d: "<pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>#include &lt;Servo.h&gt;\nServo barrera;\n\nvoid setup() {\n  pinMode(2, INPUT_PULLUP);   // botón al GND\n  pinMode(13, OUTPUT);\n  barrera.attach(9);\n  barrera.write(90);   // barrera arriba al partir...\n  delay(500);          // ...y tiempo de llegar\n}\n\nvoid loop() {\n  if (digitalRead(2) == LOW) {   // apretado = LOW\n    barrera.write(0);          // barrera abajo\n    digitalWrite(13, HIGH);    // y la luz parpadea\n    delay(300);\n    digitalWrite(13, LOW);\n    delay(300);\n  } else {\n    barrera.write(90);         // barrera arriba\n    delay(300);                // esperamos que llegue\n    digitalWrite(13, LOW);\n  }\n}</code></pre><p>Junta todo lo de hoy: el if/else de la sesión 4, la librería Servo y los delay que le dan su tiempo al servo. También está en <code>sketches/sesion-06/barrera</code>.</p>"
     },
     servo5v: {
       t: "¿No es mucho pedirle energía al Arduino? 🔋",

@@ -32,8 +32,12 @@ Nunca dibujar a mano lo que ya existe en `slides/assets/slides.js`:
   Patitas en `cx ± 26`. Las patitas de un mismo lado (izq/der) son el mismo
   nodo: el 5V puede entrar por la columna izquierda en cualquier mitad.
 - `resistencia10kSVG(x, y)` — 10 kΩ vertical (café-negro-naranjo).
-- `circuitoBotonLedSVG(etiqBoton, etiqLed)` — el circuito completo botón+LED
-  compartido por S4 y S6.
+- `circuitoBotonLedSVG(etiqBoton, etiqLed, pullup)` — el circuito completo
+  botón+LED compartido por S4 (sin `pullup`: 5V → botón y 10 kΩ al riel −) y
+  S6 (`pullup = true`: sin 5V ni 10 kΩ, el pin 2 llega a la columna derecha
+  del botón y un cablecito negro lleva la columna izquierda al riel −).
+- Botones desde S5: siempre la variante pull-up (botón entre pin y GND); la
+  10 kΩ solo se dibuja en S4.
 
 ## Reglas de montaje
 

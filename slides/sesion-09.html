@@ -308,6 +308,7 @@
       <li>Nivel experto: el <strong>arcoíris automático</strong> — que <code>pos</code> suba solito con <code>pos++</code> y vuelva a 0 al pasar de 255</li>
     </ul>
   </div>
+  <button class="sm-grande" data-sm="reto-sol">🔓 ¿Te trabaste? La solución (¡después de intentarlo!)</button>
   <p class="nota">Demo del profe: un <strong>aro de LEDs</strong> donde cada lucecita es un LED RGB con su propio cerebrito.<button class="sm" data-sm="neopixel">?</button></p>
 </section>
 
@@ -517,6 +518,10 @@
     + `<path d='M128 ${yGnd} C 150 375, 162 386, 175 388' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>`;
 
   saberMas({
+    "reto-sol": {
+      t: "Las soluciones: la lámpara 🌈",
+      d: "<p class='aviso'>🔒 <strong>Recuerda hacer el desafío primero.</strong> Pelear un rato con el problema es donde más se aprende: esto es para comparar tu solución… o para destrabarte si llevas mucho rato. 💪</p><p>Las tres usan la orden <code>color(r, g, b)</code> de la práctica (y el arcoíris, también <code>rueda</code>): van completas en los sketches.</p><p><strong>🫁 Nivel 1: respira en tu color.</strong> La receta del morado es (150, 0, 255); <code>map</code> escala cada ingrediente según el brillo <code>b</code>.</p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>void loop() {\n  for (int b = 0; b &lt;= 255; b++) {        // inhala\n    color(map(b, 0, 255, 0, 150), 0, b);  // morado, de apagado a todo\n    delay(5);\n  }\n  for (int b = 255; b &gt;= 0; b--) {        // exhala\n    color(map(b, 0, 255, 0, 150), 0, b);\n    delay(5);\n  }\n}</code></pre><p><strong>🎉 Nivel 2: modo fiesta</strong></p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>void loop() {\n  color(random(256), random(256), random(256));   // random(256): un numero de 0 a 255\n  delay(500);\n}</code></pre><p><strong>🌈 Nivel experto: arcoíris automático.</strong> <code>pos</code> vive afuera del <code>loop</code> para que no se olvide, sube con <code>pos++</code> y vuelve a 0 al pasar de 255.</p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>int pos = 0;\n\nvoid setup() {\n}\n\nvoid loop() {\n  rueda(pos);\n  pos++;              // pos = pos + 1, escrito corto\n  if (pos &gt; 255) {\n    pos = 0;          // vuelta completa: a empezar de nuevo\n  }\n  delay(20);\n}</code></pre><p>Programas completos: <code>sketches/sesion-09/respira_color</code>, <code>fiesta</code> y <code>arcoiris</code>.</p>"
+    },
     "rgb-ojos": {
       t: "¿Por qué justo rojo, verde y azul? 👀",
       d: "<p>Porque así son <strong>tus ojos</strong>: adentro tienen tres tipos de sensores de color, y cada tipo se emociona con el rojo, el verde o el azul. Cualquier color que ves es una <strong>mezcla</strong> de cuánto se emociona cada uno.</p><p>Las pantallas del celular, la tele y el computador hacen exactamente esta trampa: millones de puntitos RGB diminutos. Acércate mucho a una pantalla y quizás los veas. 🔍</p>"

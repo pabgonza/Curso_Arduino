@@ -250,6 +250,7 @@
       <li>Nivel experto: la <strong>memoria</strong> 🧠 — guarda en una variable la temperatura <strong>récord</strong> del día y muéstrala</li>
     </ul>
   </div>
+  <button class="sm-grande" data-sm="reto-sol">🔓 ¿Te trabaste? La solución (¡después de intentarlo!)</button>
   <p class="nota">Pista del experto: <code>if (t &gt; record) { record = t; }</code> — una cajita que solo guarda lo más alto que has visto.</p>
 </section>
 
@@ -393,6 +394,10 @@
   });
 
   saberMas({
+    "reto-sol": {
+      t: "Las soluciones: la alarma de fiebre 🤒",
+      d: "<p class='aviso'>🔒 <strong>Recuerda hacer el desafío primero.</strong> Pelear un rato con el problema es donde más se aprende: esto es para comparar tu solución… o para destrabarte si llevas mucho rato. 💪</p><p>DHT11 en el pin 2 y buzzer en el 8. Para probarlo sin fiebre, aprieta el sensor entre los dedos o acércale la mano. 🖐️</p><p><strong>🔔 Nivel 1: si pasa de 30 °C, suena</strong></p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>#include &lt;DHT.h&gt;\nDHT dht(2, DHT11);\n\nvoid setup() {\n  Serial.begin(9600);\n  dht.begin();\n}\n\nvoid loop() {\n  float t = dht.readTemperature();\n  Serial.println(t);\n\n  if (t &gt; 30) {\n    tone(8, 880);   // ¡fiebre!\n  } else {\n    noTone(8);\n  }\n  delay(1000);\n}</code></pre><p><strong>💬 Nivel 2: avisar solo al cruzar la raya.</strong> Una cajita <code>yaAviso</code> se acuerda de si ya lo dijimos; vuelve a 0 cuando la temperatura baja.</p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>int yaAviso = 0;   // 0 = todavia no lo hemos dicho, 1 = ya lo dijimos\n\nvoid setup() {\n  Serial.begin(9600);\n  dht.begin();\n}\n\nvoid loop() {\n  float t = dht.readTemperature();\n\n  if (t &gt; 30) {\n    tone(8, 880);\n    if (yaAviso == 0) {             // la primera vez que cruza...\n      Serial.println(\"¡Hace calor!\");\n      yaAviso = 1;                  // ...lo decimos y lo anotamos\n    }\n  } else {\n    noTone(8);\n    yaAviso = 0;                    // bajo: listo para avisar de nuevo\n  }\n  delay(1000);\n}</code></pre><p><strong>🧠 Nivel experto: el récord.</strong> La cajita <code>record</code> solo cambia cuando ve algo más alto.</p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>float record = 0;\n\nvoid setup() {\n  Serial.begin(9600);\n  dht.begin();\n}\n\nvoid loop() {\n  float t = dht.readTemperature();\n  if (t &gt; record) {\n    record = t;      // ¡nuevo record!\n  }\n  Serial.print(\"Ahora: \");\n  Serial.print(t);\n  Serial.print(\"   Record: \");\n  Serial.println(record);\n  delay(1000);\n}</code></pre><p>Programas completos: <code>sketches/sesion-08/fiebre</code>, <code>fiebre_aviso</code> y <code>record</code>.</p>"
+    },
     "p-circuito": {
       t: "Así se ve armado completo 🔧",
       d: "<svg viewBox='0 0 640 470' style='width:100%' aria-label='DHT11 y tres LEDs montados en la protoboard'>"

@@ -242,14 +242,40 @@
   </div>
 </section>
 
-<!-- 11 · Proyecto -->
+<!-- 11 · El botón sin resistencia -->
+<section class="slide">
+  <p class="eyebrow">Un truco nuevo</p>
+  <h2>El botón, versión corta 🤫</h2>
+  <p class="grande" style="max-width:34em">¿Te acuerdas de la resistencia de 10 kΩ del botón? Desde hoy la dejamos guardada: el Arduino trae una <strong>escondida adentro</strong><button class="sm" data-sm="pullup">?</button>.</p>
+  <div class="fila repaso">
+    <div class="tarjeta">
+      <h3>Antes (sesión 4)</h3>
+      <ul>
+        <li>5V → botón → pin 2, y la 10 kΩ a GND</li>
+        <li><code>pinMode(2, INPUT)</code></li>
+        <li>Apretado = <code>HIGH</code></li>
+      </ul>
+    </div>
+    <div class="tarjeta" style="border-color:var(--ambar)">
+      <h3>Desde hoy ✨</h3>
+      <ul>
+        <li>Botón entre el <strong>pin 2 y GND</strong>, nada más</li>
+        <li><code>pinMode(2, INPUT_PULLUP)</code></li>
+        <li>Apretado = <code>LOW</code> ¡al revés! 🙃</li>
+      </ul>
+    </div>
+  </div>
+  <p class="nota">Menos piezas, menos cables… pero la pregunta se da vuelta: suelto se lee <strong>HIGH</strong>, apretado se lee <strong>LOW</strong>.</p>
+</section>
+
+<!-- 12 · Proyecto -->
 <section class="slide">
   <p class="eyebrow">⭐ Proyecto de la sesión</p>
   <h2>El timbre de tu pieza 🔔</h2>
   <p class="grande">Junta lo de hoy con lo de la sesión pasada: <strong>si</strong> aprietan el botón… <strong>suena</strong> la melodía.</p>
   <div class="ide">
     <div class="ide-barra"><span class="ide-nombre">timbre.ino</span></div>
-    <pre><span class="kw">if</span> (<span class="fn">digitalRead</span>(<span class="num">2</span>) == <span class="kw">HIGH</span>) {
+    <pre><span class="kw">if</span> (<span class="fn">digitalRead</span>(<span class="num">2</span>) == <span class="kw">LOW</span>) {   <span class="cm">// apretado = LOW</span>
   <span class="fn">tone</span>(<span class="num">8</span>, <span class="num">523</span>);
   <span class="fn">delay</span>(<span class="num">200</span>);
   <span class="fn">tone</span>(<span class="num">8</span>, <span class="num">392</span>);
@@ -264,7 +290,7 @@
   </div>
 </section>
 
-<!-- 12 · Reto -->
+<!-- 13 · Reto -->
 <section class="slide">
   <div class="reto">
     <p class="eyebrow">⭐ Reto de la sesión</p>
@@ -277,10 +303,11 @@
       <li>Nivel secreto 🎁: tocar <strong>Mario Bros</strong> o <strong>Star Wars</strong> de verdad, con un regalo llamado <strong>librería</strong> <button class="sm" data-sm="libreria5">?</button></li>
     </ul>
   </div>
-  <p class="nota">Pista: cada botón necesita su propia resistencia de 10 kΩ, igual que el de la sesión pasada.</p>
+  <button class="sm-grande" data-sm="reto-sol">🔓 ¿Te trabaste? La solución (¡después de intentarlo!)</button>
+  <p class="nota">Pista: cada botón va entre su pin y GND, con <code>INPUT_PULLUP</code> y sin resistencia: apretado se lee <code>LOW</code>.</p>
 </section>
 
-<!-- 13 · Quiz -->
+<!-- 14 · Quiz -->
 <section class="slide">
   <p class="eyebrow">Duelo de cerebritos</p>
   <h2>¿Cuánto aprendiste? Toca para voltear</h2>
@@ -308,7 +335,7 @@
   </div>
 </section>
 
-<!-- 14 · Cierre -->
+<!-- 15 · Cierre -->
 <section class="slide portada">
   <p class="eyebrow">Lo lograste</p>
   <h1>¡Tu Arduino canta! 🎉</h1>
@@ -533,28 +560,33 @@
   });
 
   saberMas({
+    pullup: {
+      t: "La resistencia escondida: INPUT_PULLUP 🤫",
+      d: "<p>Un pin de entrada suelto «al aire» lee cualquier cosa: por eso en la sesión 4 lo amarramos al GND con la 10 kΩ. Pero cada pin del Arduino trae <strong>su propia resistencia adentro</strong>, apagada. Con <code>pinMode(2, INPUT_PULLUP)</code> se enciende y <strong>tira el pin hacia arriba</strong>: suelto, lee <code>HIGH</code> solito.</p><p>Por eso el botón ahora se conecta al <strong>GND</strong>: al apretar, gana el GND y el pin lee <code>LOW</code>. La lógica queda <strong>invertida</strong>: la pregunta pasa a ser <code>if (digitalRead(2) == LOW)</code>.</p><p>Se llama <em>pull-up</em> («que tira hacia arriba»). De aquí en adelante todos los botones del curso van así: más cortos de armar y con una pieza menos que se pueda soltar. 🔌</p>"
+    },
+    "reto-sol": {
+      t: "Las soluciones: tu caja de ruidos 🎛️",
+      d: "<p class='aviso'>🔒 <strong>Recuerda hacer el desafío primero.</strong> Pelear un rato con el problema es donde más se aprende: esto es para comparar tu solución… o para destrabarte si llevas mucho rato. 💪</p><p>Botones entre los pines 2, 3 y 4 y GND (sin resistencia: <code>INPUT_PULLUP</code>, apretado = <code>LOW</code>) y el buzzer en el 8.</p><p><strong>🎹 Nivel 1: tres notas</strong></p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>void setup() {\n  pinMode(2, INPUT_PULLUP);   // cada boton va entre su pin y GND\n  pinMode(3, INPUT_PULLUP);\n  pinMode(4, INPUT_PULLUP);\n}\n\nvoid loop() {\n  if (digitalRead(2) == LOW) {\n    tone(8, 262);   // do\n  }\n  if (digitalRead(3) == LOW) {\n    tone(8, 330);   // mi\n  }\n  if (digitalRead(4) == LOW) {\n    tone(8, 392);   // sol\n  }\n  if (digitalRead(2) == HIGH &amp;&amp; digitalRead(3) == HIGH &amp;&amp; digitalRead(4) == HIGH) {\n    noTone(8);      // nadie aprieta: silencio\n  }\n}</code></pre><p>Cada <code>if</code> mira su botón; el último pregunta «¿nadie aprieta?» (los tres en <code>HIGH</code>) con <code>&amp;&amp;</code> para hacer silencio.</p><p><strong>🎵 Nivel 2: melodías.</strong> Mismo <code>setup</code>; cada botón toca su secuencia y termina con <code>noTone</code>.</p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>void loop() {\n  if (digitalRead(2) == LOW) {    // boton 1: do - mi - sol\n    tone(8, 262);\n    delay(200);\n    tone(8, 330);\n    delay(200);\n    tone(8, 392);\n    delay(400);\n    noTone(8);\n  }\n  if (digitalRead(3) == LOW) {    // boton 2: sol - mi - do (al reves)\n    tone(8, 392);\n    delay(200);\n    tone(8, 330);\n    delay(200);\n    tone(8, 262);\n    delay(400);\n    noTone(8);\n  }\n  if (digitalRead(4) == LOW) {    // boton 3: la sirena\n    tone(8, 440);\n    delay(150);\n    tone(8, 660);\n    delay(150);\n    tone(8, 440);\n    delay(150);\n    tone(8, 660);\n    delay(150);\n    noTone(8);\n  }\n}</code></pre><p><strong>Nivel experto:</strong> anota tu canción en papel como pares (nota, tiempo) y pásala a <code>tone</code> + <code>delay</code>. El nivel secreto está en el otro popup. 🎁 Programas completos: <code>sketches/sesion-05/piano</code> y <code>piano_melodias</code>.</p>"
+    },
     "p-circuito": {
       t: "Así se ve armado completo 🔧",
       d: "<svg viewBox='0 0 640 400' style='width:100%' aria-label='Botón y buzzer juntos en la protoboard'>"
-        + arduinoSVG({ x: 6, y: 70, pads: ["pin 8", "5V", "pin 2", "GND"] }).svg
+        + arduinoSVG({ x: 6, y: 70, pads: ["pin 8", "pin 2", "GND"] }).svg
         + protoboardSVG({ x: 150, y: 30 })
-        + "<text x='308' y='105' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif' font-weight='700'>el botón (sesión 4)</text><text x='503' y='105' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif' font-weight='700'>el buzzer (hoy)</text>"
+        + "<text x='308' y='105' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif' font-weight='700'>el botón (sin resistencia)</text><text x='503' y='105' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif' font-weight='700'>el buzzer (hoy)</text>"
         + botonSVG(308, 203)
         + "<path d='M128 122 C 300 105, 480 108, 568 160 C 592 182, 575 240, 466 255' fill='none' stroke='#FB8C00' stroke-width='6' stroke-linecap='round'/>"
-        + "<path d='M128 170 C 190 168, 240 166, 280 166' fill='none' stroke='#E84855' stroke-width='6' stroke-linecap='round'/>"
-        + "<path d='M128 218 C 210 228, 290 237, 332 240' fill='none' stroke='#4C7CFF' stroke-width='6' stroke-linecap='round'/>"
-        + "<line x1='334' y1='246' x2='334' y2='328' stroke='#9aa7ad' stroke-width='4'/>"
-        + resistencia10kSVG(325, 254)
-        + "<text x='352' y='276' font-size='12' fill='#5E7480' font-family='Nunito, sans-serif'>10 kΩ</text>"
+        + "<path d='M128 170 C 210 180, 290 237, 332 240' fill='none' stroke='#4C7CFF' stroke-width='6' stroke-linecap='round'/>"
+        + "<path d='M282 240 C 282 280, 282 310, 282 328' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>"
         + "<line x1='434' y1='228' x2='434' y2='242' stroke='#B0BEC5' stroke-width='5' stroke-linecap='round'/><line x1='460' y1='228' x2='460' y2='242' stroke='#B0BEC5' stroke-width='5' stroke-linecap='round'/>"
         + "<circle cx='447' cy='196' r='30' fill='#37474F'/><circle cx='447' cy='196' r='9' fill='#546E7A'/><text x='460' y='222' text-anchor='middle' font-size='12' fill='#CFD8DC' font-family='monospace'>+</text>"
         + "<path d='M434 258 C 429 282, 429 306, 434 326' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>"
-        + "<path d='M128 266 C 148 296, 160 318, 175 326' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>"
-        + "</svg><p>Izquierda: el botón de la sesión pasada (5V → botón → pin 2, con su 10 kΩ al riel −). Derecha: el buzzer de hoy, pinchado a caballito del canal — el cable del pin 8 llega por fuera hasta la <strong>misma columna</strong> que su patita <strong>+</strong>, y un cablecito lleva la otra columna al riel −, que vuelve a GND. Sin resistencia: el buzzer no la necesita.</p>"
+        + "<path d='M128 218 C 148 266, 160 318, 175 326' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>"
+        + "</svg><p>Izquierda: el botón, versión corta: el pin 2 llega a la columna de una patita y un cablecito lleva la columna de la otra al riel −. Sin 5V ni 10 kΩ: el <code>INPUT_PULLUP</code> hace el trabajo. Derecha: el buzzer de hoy, pinchado a caballito del canal — el cable del pin 8 llega por fuera hasta la <strong>misma columna</strong> que su patita <strong>+</strong>, y un cablecito lleva la otra columna al riel −, que vuelve a GND. Sin resistencia: el buzzer no la necesita.</p>"
     },
     "p-codigo": {
       t: "El programa completo 📋",
-      d: "<pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.85em;line-height:1.5'><code>void setup() {\n  pinMode(2, INPUT);   // el botón avisa\n}\n\nvoid loop() {\n  if (digitalRead(2) == HIGH) {\n    tone(8, 523);   // ding\n    delay(200);\n    tone(8, 392);   // dong\n    delay(400);\n    noTone(8);\n  }\n}</code></pre><p>El buzzer no necesita <code>pinMode</code>: <code>tone()</code> se encarga solito. También está en <code>sketches/sesion-05/timbre</code>.</p>"
+      d: "<pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.85em;line-height:1.5'><code>void setup() {\n  pinMode(2, INPUT_PULLUP);   // el botón avisa (va al GND)\n}\n\nvoid loop() {\n  if (digitalRead(2) == LOW) {   // apretado = LOW\n    tone(8, 523);   // ding\n    delay(200);\n    tone(8, 392);   // dong\n    delay(400);\n    noTone(8);\n  }\n}</code></pre><p>Con <code>INPUT_PULLUP</code> la pregunta va al revés: apretado es <code>LOW</code>. El buzzer no necesita <code>pinMode</code>: <code>tone()</code> se encarga solito. También está en <code>sketches/sesion-05/timbre</code>.</p>"
     },
     hertz: {
       t: "Hertz (Hz): las vibraciones por segundo",

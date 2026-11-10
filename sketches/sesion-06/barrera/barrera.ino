@@ -1,5 +1,5 @@
 // Sesion 6 - La barrera del paso a nivel (proyecto de la sesion)
-// Boton en el pin 2 (con su resistencia de 10 kOhm a GND),
+// Boton entre el pin 2 y GND (sin resistencia: INPUT_PULLUP, apretado = LOW),
 // LED en el pin 13 (con su resistencia de 220 ohm),
 // servo: cafe a GND, rojo a 5V, naranjo al pin 9.
 //
@@ -10,7 +10,7 @@
 Servo barrera;
 
 void setup() {
-  pinMode(2, INPUT);
+  pinMode(2, INPUT_PULLUP);
   pinMode(13, OUTPUT);
   barrera.attach(9);
   barrera.write(90);   // barrera arriba (brazo vertical) al partir...
@@ -18,7 +18,7 @@ void setup() {
 }
 
 void loop() {
-  if (digitalRead(2) == HIGH) {
+  if (digitalRead(2) == LOW) {   // apretado
     barrera.write(0);          // barrera abajo (brazo horizontal)
     digitalWrite(13, HIGH);    // y la luz parpadea
     delay(300);
