@@ -36,7 +36,7 @@
       <h3>🕹️ Sesión 4: sentir y actuar</h3>
       <ul>
         <li>Los <strong>sensores</strong> le avisan al cerebrito; los <strong>actuadores</strong> cambian el mundo</li>
-        <li>El botón es un sensor: <code>pinMode(2, INPUT)</code> + <code>digitalRead</code> 👂</li>
+        <li>El botón es un sensor: <code>pinMode(2, INPUT_PULLUP)</code> + <code>digitalRead</code>; apretado = <code>LOW</code> 👂</li>
         <li><code>if / else</code>: una pregunta con <strong>dos caminos</strong></li>
         <li>Una <strong>variable</strong> es una cajita para acordarse: <code>int contador</code></li>
       </ul>
@@ -242,30 +242,30 @@
   </div>
 </section>
 
-<!-- 11 · El botón sin resistencia -->
+<!-- 11 · El botón, otra vez -->
 <section class="slide">
-  <p class="eyebrow">Un truco nuevo</p>
-  <h2>El botón, versión corta 🤫</h2>
-  <p class="grande" style="max-width:34em">¿Te acuerdas de la resistencia de 10 kΩ del botón? Desde hoy la dejamos guardada: el Arduino trae una <strong>escondida adentro</strong><button class="sm" data-sm="pullup">?</button>.</p>
+  <p class="eyebrow">Un repaso rápido</p>
+  <h2>El botón, igual que en la sesión 4 🔘</h2>
+  <p class="grande" style="max-width:34em">Hoy el botón vuelve a trabajar. ¿Te acuerdas de la resistencia <strong>escondida adentro</strong><button class="sm" data-sm="pullup">?</button> del Arduino?</p>
   <div class="fila repaso">
     <div class="tarjeta">
-      <h3>Antes (sesión 4)</h3>
+      <h3>El circuito 🔧</h3>
       <ul>
-        <li>5V → botón → pin 2, y la 10 kΩ a GND</li>
-        <li><code>pinMode(2, INPUT)</code></li>
-        <li>Apretado = <code>HIGH</code></li>
+        <li>Botón a caballo del canal</li>
+        <li>Entre el <strong>pin 2 y GND</strong>, nada más</li>
+        <li>Sin 5V y sin resistencia</li>
       </ul>
     </div>
     <div class="tarjeta" style="border-color:var(--ambar)">
-      <h3>Desde hoy ✨</h3>
+      <h3>El programa 💻</h3>
       <ul>
-        <li>Botón entre el <strong>pin 2 y GND</strong>, nada más</li>
         <li><code>pinMode(2, INPUT_PULLUP)</code></li>
+        <li>Suelto = <code>HIGH</code></li>
         <li>Apretado = <code>LOW</code> ¡al revés! 🙃</li>
       </ul>
     </div>
   </div>
-  <p class="nota">Menos piezas, menos cables… pero la pregunta se da vuelta: suelto se lee <strong>HIGH</strong>, apretado se lee <strong>LOW</strong>.</p>
+  <p class="nota">Por eso la pregunta es <code>if (digitalRead(2) == LOW)</code>: «¿lo están apretando?».</p>
 </section>
 
 <!-- 12 · Proyecto -->
@@ -562,7 +562,7 @@
   saberMas({
     pullup: {
       t: "La resistencia escondida: INPUT_PULLUP 🤫",
-      d: "<p>Un pin de entrada suelto «al aire» lee cualquier cosa: por eso en la sesión 4 lo amarramos al GND con la 10 kΩ. Pero cada pin del Arduino trae <strong>su propia resistencia adentro</strong>, apagada. Con <code>pinMode(2, INPUT_PULLUP)</code> se enciende y <strong>tira el pin hacia arriba</strong>: suelto, lee <code>HIGH</code> solito.</p><p>Por eso el botón ahora se conecta al <strong>GND</strong>: al apretar, gana el GND y el pin lee <code>LOW</code>. La lógica queda <strong>invertida</strong>: la pregunta pasa a ser <code>if (digitalRead(2) == LOW)</code>.</p><p>Se llama <em>pull-up</em> («que tira hacia arriba»). De aquí en adelante todos los botones del curso van así: más cortos de armar y con una pieza menos que se pueda soltar. 🔌</p>"
+      d: "<p>Un pin de entrada suelto «al aire» lee cualquier cosa. Por eso cada pin del Arduino trae <strong>su propia resistencia adentro</strong>, apagada. Con <code>pinMode(2, INPUT_PULLUP)</code> se enciende y <strong>tira el pin hacia arriba</strong>: suelto, lee <code>HIGH</code> solito.</p><p>Por eso el botón se conecta al <strong>GND</strong>: al apretar, gana el GND y el pin lee <code>LOW</code>. La lógica queda <strong>invertida</strong>: la pregunta pasa a ser <code>if (digitalRead(2) == LOW)</code>.</p><p>Se llama <em>pull-up</em> («que tira hacia arriba»). Todos los botones del curso van así: cortos de armar y sin piezas que se puedan soltar. 🔌</p>"
     },
     "reto-sol": {
       t: "Las soluciones: tu caja de ruidos 🎛️",
@@ -582,7 +582,7 @@
         + "<circle cx='447' cy='196' r='30' fill='#37474F'/><circle cx='447' cy='196' r='9' fill='#546E7A'/><text x='460' y='222' text-anchor='middle' font-size='12' fill='#CFD8DC' font-family='monospace'>+</text>"
         + "<path d='M434 258 C 429 282, 429 306, 434 326' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>"
         + "<path d='M128 218 C 148 266, 160 318, 175 326' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>"
-        + "</svg><p>Izquierda: el botón, versión corta: el pin 2 llega a la columna de una patita y un cablecito lleva la columna de la otra al riel −. Sin 5V ni 10 kΩ: el <code>INPUT_PULLUP</code> hace el trabajo. Derecha: el buzzer de hoy, pinchado a caballito del canal — el cable del pin 8 llega por fuera hasta la <strong>misma columna</strong> que su patita <strong>+</strong>, y un cablecito lleva la otra columna al riel −, que vuelve a GND. Sin resistencia: el buzzer no la necesita.</p>"
+        + "</svg><p>Izquierda: el botón, igual que en la sesión 4: el pin 2 llega a la columna de una patita y un cablecito lleva la columna de la otra al riel −. Sin 5V ni resistencia: el <code>INPUT_PULLUP</code> hace el trabajo. Derecha: el buzzer de hoy, pinchado a caballito del canal — el cable del pin 8 llega por fuera hasta la <strong>misma columna</strong> que su patita <strong>+</strong>, y un cablecito lleva la otra columna al riel −, que vuelve a GND. Sin resistencia: el buzzer no la necesita.</p>"
     },
     "p-codigo": {
       t: "El programa completo 📋",

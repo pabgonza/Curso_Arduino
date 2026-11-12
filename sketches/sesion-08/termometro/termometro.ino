@@ -1,5 +1,5 @@
 // Sesion 8 - El termometro (DHT11)
-// Cables: + a 5V, - a GND, la patita de datos al pin 2.
+// Cables: la patita S al pin 2, + a 5V, - a GND.
 // Necesita la libreria "DHT sensor library" (de Adafruit):
 // se instala desde el gestor de librerias del IDE (icono de libros).
 // Abre el monitor serie a 9600.

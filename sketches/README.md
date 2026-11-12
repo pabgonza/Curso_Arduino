@@ -10,12 +10,12 @@ archivo.
 - `sesion-02/` — `blink`: el LED de la placa. Reto: `corazon`.
 - `sesion-03/` — `semaforo`: tres LEDs por turnos. Reto: `ola`, `alarma` y
   `auto_fantastico`.
-- `sesion-04/` — el botón: `espia` (monitor serie), `boton` (LED que obedece)
+- `sesion-04/` — el botón, entre el pin y GND con `INPUT_PULLUP` (sin
+  resistencia; apretado = `LOW`), como en todo el curso: `espia` (monitor serie), `boton` (LED que obedece)
   y `contador` (el experimento del rebote). Reto: `luz_fija`.
 - `sesion-05/` — el buzzer: `estrellita` (con las tres notas de tarea),
   `sirena`, `timbre` y `cancion` (usa la librería BuzzerMusic, ver abajo).
-  Reto: `piano` y `piano_melodias`. Desde esta sesión los botones van con
-  `INPUT_PULLUP` (entre el pin y GND, sin resistencia; apretado = `LOW`).
+  Reto: `piano` y `piano_melodias`.
 - `sesion-06/` — el servo: `servo`, `barrido`, `perilla` y `barrera` (el
   proyecto de la sesión). Reto: `saludo`, `saludo_boton` y `saludo_perilla`.
   Usan la librería Servo, que se instala desde el gestor de librerías del IDE

@@ -1,5 +1,5 @@
 // Sesion 8 - Reto: la alarma de fiebre
-// DHT11 con la patita de datos al pin 2 (libreria "DHT sensor library").
+// DHT11 con la patita S al pin 2 (libreria "DHT sensor library").
 // Buzzer en el pin 8. Si pasa de 30 grados, suena.
 
 #include <DHT.h>

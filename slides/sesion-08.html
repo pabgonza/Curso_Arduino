@@ -68,7 +68,7 @@
         <li>💧 Y de regalo, la <strong>humedad</strong>: cuánta agua flota en el aire.<button class="sm" data-sm="dht-dentro">?</button></li>
         <li>🗣️ Es un sensor <strong>conversador</strong>: no manda un simple voltaje, manda un <strong>mensajito con números</strong>. Por eso usa una <strong>librería</strong>, como el servo.</li>
       </ul>
-      <p class="nota">Tres patitas: VCC (5V), DATA (el mensajito, al <strong>pin 2</strong>) y GND.</p>
+      <p class="nota">Tres patitas, marcadas en el módulo: <strong>S</strong> (la señal: el mensajito, al <strong>pin 2</strong>), <strong>+</strong> (5V) y <strong>−</strong> (GND).</p>
     </div>
   </div>
 </section>
@@ -170,9 +170,9 @@
         <rect x="20" y="30" width="150" height="210" rx="12" fill="#00878F"/>
         <text x="95" y="60" text-anchor="middle" fill="#fff" font-family="monospace" font-size="15">ARDUINO</text>
         <rect x="32" y="78" width="126" height="26" rx="4" fill="#143642"/>
-        <text x="95" y="96" text-anchor="middle" fill="#fff" font-family="monospace" font-size="13">5V</text>
+        <text x="95" y="96" text-anchor="middle" fill="#fff" font-family="monospace" font-size="13">pin 2</text>
         <rect x="32" y="126" width="126" height="26" rx="4" fill="#143642"/>
-        <text x="95" y="144" text-anchor="middle" fill="#fff" font-family="monospace" font-size="13">pin 2</text>
+        <text x="95" y="144" text-anchor="middle" fill="#fff" font-family="monospace" font-size="13">5V</text>
         <rect x="32" y="174" width="126" height="26" rx="4" fill="#143642"/>
         <text x="95" y="192" text-anchor="middle" fill="#fff" font-family="monospace" font-size="13">GND</text>
 
@@ -183,10 +183,10 @@
           <line x1="404" y1="139" x2="430" y2="139"/>
           <line x1="404" y1="187" x2="430" y2="187"/>
         </g>
-        <g font-size="12" fill="#BBDEFB" font-family="monospace">
-          <text x="440" y="95">VCC</text>
-          <text x="440" y="143">DATA</text>
-          <text x="440" y="191">GND</text>
+        <g font-size="14" fill="#BBDEFB" font-family="monospace" font-weight="700">
+          <text x="440" y="96">S</text>
+          <text x="440" y="144">+</text>
+          <text x="440" y="192">−</text>
         </g>
         <g fill="#0D47A1">
           <circle cx="505" cy="90" r="6"/><circle cx="535" cy="90" r="6"/>
@@ -195,17 +195,17 @@
           <circle cx="505" cy="195" r="6"/><circle cx="535" cy="195" r="6"/>
         </g>
 
-        <path class="cable-w" d="M164 91 L 400 91" stroke="#E84855"/>
-        <path class="cable-w" d="M164 139 L 400 139" stroke="#4C7CFF"/>
+        <path class="cable-w" d="M164 91 L 400 91" stroke="#4C7CFF"/>
+        <path class="cable-w" d="M164 139 L 400 139" stroke="#E84855"/>
         <path class="cable-w" d="M164 187 L 400 187" stroke="#37474F"/>
       </svg>
     </div>
     <aside class="tuto-panel">
       <p class="tuto-num">Regla de colores</p>
       <p class="tuto-texto">
-      🔴 <strong>VCC → 5V</strong>: la energía.<br>
-      🔵 <strong>DATA → pin 2</strong>: por aquí llegan los mensajitos con la temperatura.<br>
-      ⚫ <strong>GND → GND</strong>: el suelo.</p>
+      🔵 <strong>S → pin 2</strong>: la señal; por aquí llegan los mensajitos con la temperatura.<br>
+      🔴 <strong>+ → 5V</strong>: la energía.<br>
+      ⚫ <strong>− → GND</strong>: el suelo.</p>
       <p class="nota">Los <strong>3 LEDs</strong> con sus resistencias van en los pines <strong>13, 11 y 12</strong>, igualito que el semáforo de la sesión 3. 🚦</p>
     </aside>
   </div>
@@ -405,18 +405,18 @@
         + protoboardSVG({ x: 150, y: 90 })
         + "<g stroke='#B0BEC5' stroke-width='5' stroke-linecap='round'><line x1='386' y1='142' x2='386' y2='183'/><line x1='412' y1='142' x2='412' y2='183'/><line x1='438' y1='142' x2='438' y2='183'/></g>"
         + "<rect x='373' y='30' width='78' height='112' rx='8' fill='#64B5F6' stroke='#1E88E5' stroke-width='3'/><text x='412' y='72' text-anchor='middle' font-size='13' fill='#fff' font-family='monospace'>DHT11</text>"
-        + "<text x='386' y='135' text-anchor='middle' font-size='10' fill='#fff' font-family='monospace'>+</text><text x='412' y='135' text-anchor='middle' font-size='8' fill='#fff' font-family='monospace'>datos</text><text x='438' y='135' text-anchor='middle' font-size='10' fill='#fff' font-family='monospace'>−</text>"
+        + "<text x='386' y='135' text-anchor='middle' font-size='10' fill='#fff' font-family='monospace'>S</text><text x='412' y='135' text-anchor='middle' font-size='10' fill='#fff' font-family='monospace'>+</text><text x='438' y='135' text-anchor='middle' font-size='10' fill='#fff' font-family='monospace'>−</text>"
         + ledSVG(269, 292, 388, "#46B450", "#2E7D32")
         + ledSVG(399, 292, 388, "#F5B301", "#C78F00")
         + ledSVG(529, 292, 388)
-        + "<path d='M128 62 C 250 60, 340 130, 410 191' fill='none' stroke='#FB8C00' stroke-width='6' stroke-linecap='round'/>"
-        + "<path d='M128 110 C 240 122, 330 180, 384 207' fill='none' stroke='#E84855' stroke-width='6' stroke-linecap='round'/>"
+        + "<path d='M128 62 C 240 60, 320 125, 384 191' fill='none' stroke='#FB8C00' stroke-width='6' stroke-linecap='round'/>"
+        + "<path d='M128 110 C 240 122, 340 190, 410 223' fill='none' stroke='#E84855' stroke-width='6' stroke-linecap='round'/>"
         + "<path d='M438 196 C 560 220, 618 310, 572 386' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>"
         + "<path d='M128 158 C 280 225, 430 265, 514 312' fill='none' stroke='#AB47BC' stroke-width='6' stroke-linecap='round'/>"
         + "<path d='M128 206 C 260 255, 330 300, 384 313' fill='none' stroke='#F5B301' stroke-width='6' stroke-linecap='round'/>"
         + "<path d='M128 254 C 175 285, 220 308, 254 314' fill='none' stroke='#46B450' stroke-width='6' stroke-linecap='round'/>"
         + "<path d='M128 302 C 148 345, 160 378, 175 385' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>"
-        + "</svg><p>Todo en la protoboard. El DHT11 se para con sus tres patitas en una fila, y los cables llegan a la <strong>misma columna</strong> de cada una (+ → 5V, datos → pin 2). El semáforo térmico: verde en el pin 12, amarillo en el 11 y rojo en el 13 — el cable de cada pin llega a la columna de la patita <strong>+</strong> de su LED, y la patita <strong>−</strong> (el lado plano) baja con su <strong>220 Ω</strong> al riel −. Ahí se juntan <strong>todos los GND</strong>: los tres LEDs, el − del sensor y el cable que vuelve al Arduino.</p>"
+        + "</svg><p>Todo en la protoboard. El DHT11 se para con sus tres patitas en una fila, y los cables llegan a la <strong>misma columna</strong> de cada una (S → pin 2, + → 5V). El semáforo térmico: verde en el pin 12, amarillo en el 11 y rojo en el 13 — el cable de cada pin llega a la columna de la patita <strong>+</strong> de su LED, y la patita <strong>−</strong> (el lado plano) baja con su <strong>220 Ω</strong> al riel −. Ahí se juntan <strong>todos los GND</strong>: los tres LEDs, el − del sensor y el cable que vuelve al Arduino.</p>"
     },
     "p-codigo": {
       t: "El programa completo 📋",

@@ -1,5 +1,5 @@
 // Sesion 8 - El semaforo termico
-// DHT11 con la patita de datos al pin 2 (libreria "DHT sensor library").
+// DHT11 con la patita S al pin 2 (libreria "DHT sensor library").
 // LEDs con sus resistencias de 220 ohm: verde en el 12, amarillo en el 11,
 // rojo en el 13.
 

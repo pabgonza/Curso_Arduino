@@ -227,9 +227,9 @@
     </div>
     <div class="tarjeta">
       <h3>← INPUT (entrada)</h3>
-      <p>El pin <strong>escucha</strong>: se queda esperando a ver si le llega electricidad.</p>
+      <p>El pin <strong>escucha</strong>: se queda atento a lo que le llega. El <code>_PULLUP</code> es un ayudante que conocerás al armar el botón.</p>
       <div class="ide" style="margin-top:.6em">
-        <pre><span class="fn">pinMode</span>(<span class="num">2</span>, <span class="kw">INPUT</span>);</pre>
+        <pre><span class="fn">pinMode</span>(<span class="num">2</span>, <span class="kw">INPUT_PULLUP</span>);</pre>
       </div>
     </div>
   </div>
@@ -245,8 +245,6 @@
       <svg viewBox="0 0 620 400" id="armado" aria-label="Botón conectado a la protoboard">
         <rect x="6" y="120" width="120" height="210" rx="12" fill="#00878F"/>
         <text x="66" y="147" text-anchor="middle" fill="#fff" font-family="monospace" font-size="14">ARDUINO</text>
-        <rect x="14" y="162" width="104" height="24" rx="4" fill="#143642"/>
-        <text x="66" y="179" text-anchor="middle" fill="#fff" font-family="monospace" font-size="13">5V</text>
         <rect x="14" y="228" width="104" height="24" rx="4" fill="#143642"/>
         <text x="66" y="245" text-anchor="middle" fill="#fff" font-family="monospace" font-size="13">pin 2</text>
         <rect x="14" y="294" width="104" height="24" rx="4" fill="#143642"/>
@@ -265,17 +263,9 @@
           <rect x="286" y="185" width="44" height="36" rx="6" fill="#2E3B41"/>
           <circle cx="308" cy="203" r="13" fill="#E84855" stroke="#B03744" stroke-width="3"/>
         </g>
-        <!-- resistencia de 10k al riel negativo -->
-        <g id="pieza-res" class="oculta">
-          <line x1="334" y1="272" x2="334" y2="328" stroke="#9aa7ad" stroke-width="4"/>
-          <rect x="325" y="284" width="18" height="34" rx="4" fill="#D7B899" stroke="#8D6E63" stroke-width="2"/>
-          <rect x="325" y="290" width="18" height="4" fill="#8D3B0B"/>
-          <rect x="325" y="298" width="18" height="4" fill="#000"/>
-          <rect x="325" y="306" width="18" height="4" fill="#E8A33D"/>
-          <text x="352" y="306" font-size="13" fill="#5E7480" font-family="Nunito, sans-serif">10 kΩ</text>
-        </g>
-        <path id="pieza-5v" class="oculta cable-w" d="M122 174 C 190 174, 240 150, 282 150" stroke="#E84855"/>
-        <path id="pieza-gnd" class="oculta cable-w" d="M122 306 C 180 330, 240 328, 282 328" stroke="#37474F"/>
+        <!-- cablecito de la columna izquierda del botón al riel negativo -->
+        <path id="pieza-puente" class="oculta cable-w" d="M282 240 C 282 280, 282 310, 282 328" stroke="#37474F"/>
+        <path id="pieza-gnd" class="oculta cable-w" d="M122 306 C 140 322, 160 327, 178 328" stroke="#37474F"/>
         <path id="pieza-pin" class="oculta cable-w" d="M122 240 C 190 250, 250 256, 334 256" stroke="#4C7CFF"/>
       </svg>
     </div>
@@ -288,7 +278,7 @@
       </div>
     </aside>
   </div>
-  <p class="nota">¿Y para qué la resistencia de 10 kΩ? <button class="sm" data-sm="pulldown">?</button> No es como la del LED: esta tiene otro trabajo… y un atajo secreto. 🤫</p>
+  <p class="nota">¿Solo cables, sin 5V ni resistencia? <button class="sm" data-sm="pullup">?</button> El Arduino trae una resistencia <strong>escondida adentro</strong>… y por eso el botón avisa al revés: apretado se lee <strong>LOW</strong>. 🤫</p>
 </section>
 
 <!-- 10 · El if/else: la pregunta con dos caminos -->
@@ -352,11 +342,11 @@
       <div class="sim-titulo"><span class="sim-punto"></span>espia.ino</div>
       <div class="sim-editor lineas" style="height:auto">
         <div class="ln"><span class="n">1</span><code><span class="kw">void</span> <span class="fn">setup</span>() {</code></div>
-        <div class="ln"><span class="n">2</span><code>  <span class="fn">pinMode</span>(<span class="num">2</span>, <span class="kw">INPUT</span>);</code></div>
+        <div class="ln"><span class="n">2</span><code>  <span class="fn">pinMode</span>(<span class="num">2</span>, <span class="kw">INPUT_PULLUP</span>);</code></div>
         <div class="ln"><span class="n">3</span><code>  Serial.<span class="fn">begin</span>(<span class="num">9600</span>);</code></div>
         <div class="ln"><span class="n">4</span><code>}</code></div>
         <div class="ln"><span class="n">5</span><code><span class="kw">void</span> <span class="fn">loop</span>() {</code></div>
-        <div class="ln" data-ser="1"><span class="n">6</span><code>  <span class="kw">if</span> (<span class="fn">digitalRead</span>(<span class="num">2</span>) == <span class="kw">HIGH</span>) {</code></div>
+        <div class="ln" data-ser="1"><span class="n">6</span><code>  <span class="kw">if</span> (<span class="fn">digitalRead</span>(<span class="num">2</span>) == <span class="kw">LOW</span>) {</code></div>
         <div class="ln" data-ser="1"><span class="n">7</span><code>    Serial.<span class="fn">println</span>(<span class="st">"¡Apretado!"</span>);</code></div>
         <div class="ln" data-ser="0"><span class="n">8</span><code>  } <span class="kw">else</span> {</code></div>
         <div class="ln" data-ser="0"><span class="n">9</span><code>    Serial.<span class="fn">println</span>(<span class="st">"suelto..."</span>);</code></div>
@@ -375,7 +365,7 @@
       </div>
     </aside>
   </div>
-  <p class="nota">¡Nuestro primer if/else de verdad! Y el <code>delay(200)</code> es para que no escriba mil veces por segundo y llene la pantalla. 😅 Programa completo: <code>sketches/sesion-04/espia</code>.</p>
+  <p class="nota">¡Nuestro primer if/else de verdad! Preguntamos por <code>LOW</code> porque, con la resistencia escondida, apretado se lee <strong>LOW</strong>. Y el <code>delay(200)</code> es para que no escriba mil veces por segundo y llene la pantalla. 😅 Programa completo: <code>sketches/sesion-04/espia</code>.</p>
 </section>
 
 <!-- 13 · El if, con el botón y el LED -->
@@ -388,12 +378,12 @@
       <div class="sim-titulo"><span class="sim-punto"></span>boton.ino | Arduino IDE 2</div>
       <div class="sim-editor lineas">
         <div class="ln"><span class="n">1</span><code><span class="kw">void</span> <span class="fn">setup</span>() {</code></div>
-        <div class="ln"><span class="n">2</span><code>  <span class="fn">pinMode</span>(<span class="num">2</span>, <span class="kw">INPUT</span>);</code></div>
+        <div class="ln"><span class="n">2</span><code>  <span class="fn">pinMode</span>(<span class="num">2</span>, <span class="kw">INPUT_PULLUP</span>);</code></div>
         <div class="ln"><span class="n">3</span><code>  <span class="fn">pinMode</span>(<span class="num">13</span>, <span class="kw">OUTPUT</span>);</code></div>
         <div class="ln"><span class="n">4</span><code>}</code></div>
         <div class="ln"><span class="n">5</span><code> </code></div>
         <div class="ln"><span class="n">6</span><code><span class="kw">void</span> <span class="fn">loop</span>() {</code></div>
-        <div class="ln" data-si="1"><span class="n">7</span><code>  <span class="kw">if</span> (<span class="fn">digitalRead</span>(<span class="num">2</span>) == <span class="kw">HIGH</span>) {</code></div>
+        <div class="ln" data-si="1"><span class="n">7</span><code>  <span class="kw">if</span> (<span class="fn">digitalRead</span>(<span class="num">2</span>) == <span class="kw">LOW</span>) {</code></div>
         <div class="ln" data-si="1"><span class="n">8</span><code>    <span class="fn">digitalWrite</span>(<span class="num">13</span>, <span class="kw">HIGH</span>);</code></div>
         <div class="ln" data-si="0"><span class="n">9</span><code>  } <span class="kw">else</span> {</code></div>
         <div class="ln" data-si="0"><span class="n">10</span><code>    <span class="fn">digitalWrite</span>(<span class="num">13</span>, <span class="kw">LOW</span>);</code></div>
@@ -405,7 +395,7 @@
       <p class="tuto-num">Pruébalo tú</p>
       <p class="tuto-texto" id="if-txt">Mantén apretado el botón y mira qué línea se ilumina.</p>
       <button class="boton-fisico" id="boton-sim">🔘 Mantén apretado</button>
-      <p class="lectura"><code>digitalRead(2)</code> = <strong id="lectura">LOW</strong></p>
+      <p class="lectura"><code>digitalRead(2)</code> = <strong id="lectura">HIGH</strong></p>
       <div class="tuto-placa">
         <span class="mini-placa grande"><span class="mini-led" id="if-led"></span><span class="mini-etiq">L</span></span>
       </div>
@@ -421,10 +411,10 @@
   <div style="display:flex; flex-direction:column; gap:.5em; width:min(92vw,640px)">
     <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Armar el circuito del botón <strong>y</strong> el del LED en la misma protoboard <button class="sm" data-sm="p-circuito">?</button></span></div>
     <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Subir el programa del <strong>if</strong> y probarlo <button class="sm" data-sm="p-codigo">?</button></span></div>
-    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Cambiar el <strong>HIGH</strong> por <strong>LOW</strong> en el if: ¿qué pasa ahora? <button class="sm" data-sm="p-low">?</button></span></div>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Cambiar el <strong>LOW</strong> por <strong>HIGH</strong> en el if: ¿qué pasa ahora? <button class="sm" data-sm="p-low">?</button></span></div>
     <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Hacer que el botón encienda <strong>tres</strong> LEDs de una vez</span></div>
   </div>
-  <p class="nota">Truco de profe: si el LED parpadea solo cuando pasas la mano cerca, seguramente falta la resistencia de 10 kΩ. 👻 Programa completo: <code>sketches/sesion-04/boton</code>.</p>
+  <p class="nota">Truco de profe: si el LED parpadea solo cuando pasas la mano cerca, seguramente escribiste <code>INPUT</code> en vez de <code>INPUT_PULLUP</code>. 👻 Programa completo: <code>sketches/sesion-04/boton</code>.</p>
 </section>
 
 <!-- 15 · Las variables -->
@@ -465,14 +455,14 @@
       <div class="sim-titulo"><span class="sim-punto"></span>contador.ino</div>
       <div class="sim-editor lineas" style="height:auto">
         <div class="ln"><span class="n">1</span><code><span class="kw">int</span> contador = <span class="num">0</span>;</code></div>
-        <div class="ln"><span class="n">2</span><code><span class="kw">int</span> antes = <span class="kw">LOW</span>;</code></div>
+        <div class="ln"><span class="n">2</span><code><span class="kw">int</span> antes = <span class="kw">HIGH</span>;</code></div>
         <div class="ln"><span class="n">3</span><code><span class="kw">void</span> <span class="fn">setup</span>() {</code></div>
-        <div class="ln"><span class="n">4</span><code>  <span class="fn">pinMode</span>(<span class="num">2</span>, <span class="kw">INPUT</span>);</code></div>
+        <div class="ln"><span class="n">4</span><code>  <span class="fn">pinMode</span>(<span class="num">2</span>, <span class="kw">INPUT_PULLUP</span>);</code></div>
         <div class="ln"><span class="n">5</span><code>  Serial.<span class="fn">begin</span>(<span class="num">9600</span>);</code></div>
         <div class="ln"><span class="n">6</span><code>}</code></div>
         <div class="ln"><span class="n">7</span><code><span class="kw">void</span> <span class="fn">loop</span>() {</code></div>
         <div class="ln"><span class="n">8</span><code>  <span class="kw">int</span> ahora = <span class="fn">digitalRead</span>(<span class="num">2</span>);</code></div>
-        <div class="ln"><span class="n">9</span><code>  <span class="kw">if</span> (ahora == <span class="kw">HIGH</span> &amp;&amp; antes == <span class="kw">LOW</span>) {</code></div>
+        <div class="ln"><span class="n">9</span><code>  <span class="kw">if</span> (ahora == <span class="kw">LOW</span> &amp;&amp; antes == <span class="kw">HIGH</span>) {</code></div>
         <div class="ln"><span class="n">10</span><code>    contador = contador + <span class="num">1</span>;</code></div>
         <div class="ln"><span class="n">11</span><code>    Serial.<span class="fn">println</span>(contador);</code></div>
         <div class="ln"><span class="n">12</span><code>  }</code></div>
@@ -506,7 +496,7 @@
         <line x1="52" y1="160" x2="408" y2="160" stroke="#DCF0EF" stroke-width="2" stroke-dasharray="4 6"/>
         <rect id="reb-zona" x="150" y="36" width="80" height="140" rx="8" fill="#FFF4D6" opacity="0"/>
         <text id="reb-zona-txt" x="190" y="196" text-anchor="middle" font-size="12" fill="#B37D00" font-family="Nunito, sans-serif" font-weight="700" opacity="0">delay(50): no miro 🙈</text>
-        <path id="reb-traza" d="M52 160 H408" fill="none" stroke="var(--teal)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path id="reb-traza" d="M52 50 H408" fill="none" stroke="var(--teal)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
         <text x="150" y="26" text-anchor="middle" font-size="13" fill="#5E7480" font-family="Nunito, sans-serif">↓ tu único clic</text>
       </svg>
     </div>
@@ -551,7 +541,7 @@
       <div class="quiz-cara quiz-atras">Cambiar algo del mundo real: luz, sonido, movimiento 💪</div>
     </div></div>
     <div class="quiz" tabindex="0"><div class="quiz-caras">
-      <div class="quiz-cara quiz-frente">¿Qué le dice <code>pinMode(2, INPUT)</code> al Arduino?</div>
+      <div class="quiz-cara quiz-frente">¿Qué le dice <code>pinMode(2, INPUT_PULLUP)</code> al Arduino?</div>
       <div class="quiz-cara quiz-atras">Que ese pin va a escuchar, no a mandar 👂</div>
     </div></div>
     <div class="quiz" tabindex="0"><div class="quiz-caras">
@@ -797,10 +787,9 @@
 
     const PASOS = [
       { pieza: "pieza-boton", txt: "El botón se pone <strong>a caballo del canal</strong>: dos patitas de un lado y dos del otro. Así sus dos mitades caen en columnas distintas." },
-      { pieza: "pieza-5v", txt: "Un cable desde <strong>5V</strong> hasta la columna de la izquierda del botón: por ahí llega la electricidad, esperando." },
-      { pieza: "pieza-pin", txt: "Otro cable desde la columna de la derecha al <strong>pin 2</strong>: esa es la oreja del Arduino." },
-      { pieza: "pieza-res", txt: "Y la <strong>resistencia de 10 kΩ</strong> desde esa misma columna al riel negro (−). Mientras el botón está suelto, ella mantiene al pin 2 <strong>amarrado al suelo</strong>." },
-      { pieza: "pieza-gnd", txt: "Falta cerrar: un cable del riel negro al <strong>GND</strong>. ¡Listo! Al apretar, los 5 V llegan al pin 2 y el Arduino lo nota. 🎉" }
+      { pieza: "pieza-pin", txt: "Un cable desde el <strong>pin 2</strong> hasta la columna de la derecha del botón: esa es la oreja del Arduino." },
+      { pieza: "pieza-puente", txt: "Un cablecito negro desde la columna de la izquierda hasta el <strong>riel negro (−)</strong>." },
+      { pieza: "pieza-gnd", txt: "Falta cerrar: un cable del riel negro al <strong>GND</strong>. ¡Listo! Al apretar, el botón junta el pin 2 con el GND y el Arduino lo nota. 🎉" }
     ];
     let i = 0;
     function pintar() {
@@ -850,9 +839,9 @@
     const $ = id => document.getElementById(id);
     // trazas según cuántos "apretones" vio el Arduino en un solo clic
     const TRAZAS = {
-      1: "M52 160 H150 V50 H340 V160 H408",
-      2: "M52 160 H150 V50 H166 V160 H178 V50 H340 V160 H408",
-      3: "M52 160 H150 V50 H162 V160 H172 V50 H182 V160 H190 V50 H340 V160 H408"
+      1: "M52 50 H150 V160 H340 V50 H408",
+      2: "M52 50 H150 V160 H166 V50 H178 V160 H340 V50 H408",
+      3: "M52 50 H150 V160 H162 V50 H172 V160 H182 V50 H190 V160 H340 V50 H408"
     };
     let filtro = false, tuyos = 0, contados = 0;
     function reiniciar() {
@@ -860,7 +849,7 @@
       $("reb-tuyos").textContent = "0";
       $("reb-cuenta").textContent = "0";
       $("reb-serial").innerHTML = "";
-      $("reb-traza").setAttribute("d", "M52 160 H408");
+      $("reb-traza").setAttribute("d", "M52 50 H408");
       $("reb-zona").setAttribute("opacity", filtro ? ".8" : "0");
       $("reb-zona-txt").setAttribute("opacity", filtro ? "1" : "0");
     }
@@ -965,10 +954,10 @@
         l.classList.toggle("aqui", (l.dataset.si === "1") === apretado));
       boton.classList.toggle("abajo", apretado);
       led.classList.toggle("on", apretado);
-      $("lectura").textContent = apretado ? "HIGH" : "LOW";
+      $("lectura").textContent = apretado ? "LOW" : "HIGH";
       $("if-txt").innerHTML = apretado
-        ? "El botón deja pasar los 5 V, así que <code>digitalRead</code> devuelve <strong>HIGH</strong>: se cumple la pregunta del <strong>if</strong> y el LED se prende. 💡"
-        : "Sin apretar, la resistencia mantiene el pin en <strong>LOW</strong>: la pregunta del if es «no», así que se hace lo del <strong>else</strong> y el LED queda apagado.";
+        ? "El botón junta el pin 2 con el GND, así que <code>digitalRead</code> devuelve <strong>LOW</strong>: se cumple la pregunta del <strong>if</strong> y el LED se prende. 💡"
+        : "Sin apretar, la resistencia escondida mantiene el pin en <strong>HIGH</strong>: la pregunta del if es «no», así que se hace lo del <strong>else</strong> y el LED queda apagado.";
     }
     boton.addEventListener("pointerdown", () => pintar(true));
     ["pointerup", "pointerleave", "pointercancel"].forEach(ev => boton.addEventListener(ev, () => pintar(false)));
@@ -987,7 +976,7 @@
   saberMas({
     "reto-sol": {
       t: "La solución: la luz que se queda 🔒",
-      d: "<p class='aviso'>🔒 <strong>Recuerda hacer el desafío primero.</strong> Pelear un rato con el problema es donde más se aprende: esto es para comparar tu solución… o para destrabarte si llevas mucho rato. 💪</p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>int encendida = LOW;   // la cajita que se acuerda: ¿esta prendida la luz?\nint antes = LOW;       // como estaba el boton la ultima vez que miramos\n\nvoid setup() {\n  pinMode(2, INPUT);\n  pinMode(13, OUTPUT);\n}\n\nvoid loop() {\n  int ahora = digitalRead(2);\n  if (ahora == HIGH &amp;&amp; antes == LOW) {   // recien lo apretaron\n    if (encendida == LOW) {              // estaba apagada...\n      encendida = HIGH;                  // ...ahora prendida\n    } else {\n      encendida = LOW;                   // y al reves\n    }\n    digitalWrite(13, encendida);\n    delay(50);                           // filtro anti-rebote\n  }\n  antes = ahora;\n}</code></pre><p>Dos cajitas: <code>encendida</code> se acuerda de si la luz está prendida, y <code>antes</code> de cómo estaba el botón la última vez (igual que en el contador). Solo cuando el botón <strong>pasa</strong> de suelto a apretado damos vuelta la cajita y mandamos su valor al LED. El <code>delay(50)</code> es el filtro anti-rebote. 🏀</p><p>Truco de grandes: <code>encendida = !encendida;</code> da vuelta la cajita en una sola línea (el <code>!</code> significa «lo contrario»). Programa completo: <code>sketches/sesion-04/luz_fija</code>.</p>"
+      d: "<p class='aviso'>🔒 <strong>Recuerda hacer el desafío primero.</strong> Pelear un rato con el problema es donde más se aprende: esto es para comparar tu solución… o para destrabarte si llevas mucho rato. 💪</p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>int encendida = LOW;   // la cajita que se acuerda: ¿esta prendida la luz?\nint antes = HIGH;      // como estaba el boton la ultima vez que miramos\n\nvoid setup() {\n  pinMode(2, INPUT_PULLUP);\n  pinMode(13, OUTPUT);\n}\n\nvoid loop() {\n  int ahora = digitalRead(2);\n  if (ahora == LOW &amp;&amp; antes == HIGH) {   // recien lo apretaron\n    if (encendida == LOW) {              // estaba apagada...\n      encendida = HIGH;                  // ...ahora prendida\n    } else {\n      encendida = LOW;                   // y al reves\n    }\n    digitalWrite(13, encendida);\n    delay(50);                           // filtro anti-rebote\n  }\n  antes = ahora;\n}</code></pre><p>Dos cajitas: <code>encendida</code> se acuerda de si la luz está prendida, y <code>antes</code> de cómo estaba el botón la última vez (igual que en el contador). Solo cuando el botón <strong>pasa</strong> de suelto a apretado damos vuelta la cajita y mandamos su valor al LED. El <code>delay(50)</code> es el filtro anti-rebote. 🏀</p><p>Truco de grandes: <code>encendida = !encendida;</code> da vuelta la cajita en una sola línea (el <code>!</code> significa «lo contrario»). Programa completo: <code>sketches/sesion-04/luz_fija</code>.</p>"
     },
     "boton-s": {
       t: "El botón: el sensor más simple 🔘",
@@ -1036,27 +1025,27 @@
     "p-circuito": {
       t: "Así se ve armado completo 🔧",
       d: circuitoBotonLedSVG("el botón (hoy)", "el LED (sesión 3)")
-        + "<p>Izquierda: el circuito del botón de hoy (5V → botón → pin 2, con su 10 kΩ al riel −). Derecha: el LED de la sesión 3 (pin 13 → patita larga, y la corta con su 220 Ω al riel −). <strong>Comparten el riel negro</strong>, que vuelve a GND.</p><p class='nota'>Los colores de las resistencias son su nombre: café-negro-naranjo = 10 kΩ · rojo-rojo-café = 220 Ω. 🎨</p>"
+        + "<p>Izquierda: el circuito del botón de hoy (pin 2 → botón → riel −; sin 5V ni resistencia: el <code>INPUT_PULLUP</code> hace el trabajo). Derecha: el LED de la sesión 3 (pin 13 → patita larga, y la corta con su 220 Ω al riel −). <strong>Comparten el riel negro</strong>, que vuelve a GND.</p><p class='nota'>Los colores de la resistencia son su nombre: rojo-rojo-café = 220 Ω. 🎨</p>"
     },
     "p-codigo": {
       t: "El programa completo 📋",
-      d: "<pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.85em;line-height:1.5'><code>void setup() {\n  pinMode(2, INPUT);      // la oreja\n  pinMode(13, OUTPUT);    // el músculo\n}\n\nvoid loop() {\n  if (digitalRead(2) == HIGH) {\n    digitalWrite(13, HIGH);   // ¡luz!\n  } else {\n    digitalWrite(13, LOW);\n  }\n}</code></pre><p>Es el mismo if/else del espía… pero ahora, en vez de <code>Serial.println</code>, la respuesta es un <strong>actuador</strong>. 💪</p>"
+      d: "<pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.85em;line-height:1.5'><code>void setup() {\n  pinMode(2, INPUT_PULLUP);   // la oreja\n  pinMode(13, OUTPUT);        // el músculo\n}\n\nvoid loop() {\n  if (digitalRead(2) == LOW) {   // apretado\n    digitalWrite(13, HIGH);   // ¡luz!\n  } else {\n    digitalWrite(13, LOW);\n  }\n}</code></pre><p>Es el mismo if/else del espía… pero ahora, en vez de <code>Serial.println</code>, la respuesta es un <strong>actuador</strong>. 💪</p>"
     },
     "p-low": {
-      t: "HIGH por LOW: el mundo al revés 🙃",
-      d: "<pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.85em;line-height:1.5'><code>if (digitalRead(2) == LOW) {   // ¡al revés!\n  digitalWrite(13, HIGH);\n} else {\n  digitalWrite(13, LOW);\n}</code></pre><p>Ahora la pregunta da «sí» cuando el botón está <strong>suelto</strong>: la luz vive encendida y se apaga al apretar.</p><p>¿Dónde has visto eso? ¡En el <strong>refrigerador</strong>! Su botón se aprieta al cerrar la puerta… y la luz se apaga. 🧊</p>"
+      t: "LOW por HIGH: el mundo al revés 🙃",
+      d: "<pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.85em;line-height:1.5'><code>if (digitalRead(2) == HIGH) {   // ¡al revés!\n  digitalWrite(13, HIGH);\n} else {\n  digitalWrite(13, LOW);\n}</code></pre><p>Ahora la pregunta da «sí» cuando el botón está <strong>suelto</strong>: la luz vive encendida y se apaga al apretar.</p><p>¿Dónde has visto eso? ¡En el <strong>refrigerador</strong>! Su botón se aprieta al cerrar la puerta… y la luz se apaga. 🧊</p>"
     },
     "reb-arreglo": {
       t: "Dónde va el filtro anti-rebote 🧹",
-      d: "<p>Es el mismo contador de la actividad, con <strong>una sola línea nueva</strong> — justo después de contar:</p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>void loop() {\n  int ahora = digitalRead(2);\n  if (ahora == HIGH &amp;&amp; antes == LOW) {\n    contador = contador + 1;\n    Serial.println(contador);\n<b style='background:#FFF6E3;display:inline-block;width:100%'>    delay(50);   // ← ¡el filtro va AQUÍ!</b>\n  }\n  antes = ahora;\n}</code></pre><p>¿Por qué ahí adentro? Porque recién detectó el apretón: esas 50 milésimas de «no mirar» dejan pasar las vibraciones sin contarlas. El setup y las cajitas de arriba quedan igualitos.</p><p>Súbelo, aprieta 10 veces contando en voz alta… ¡y ahora sí deberían llegar juntos a 10! ✅</p>"
+      d: "<p>Es el mismo contador de la actividad, con <strong>una sola línea nueva</strong> — justo después de contar:</p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>void loop() {\n  int ahora = digitalRead(2);\n  if (ahora == LOW &amp;&amp; antes == HIGH) {\n    contador = contador + 1;\n    Serial.println(contador);\n<b style='background:#FFF6E3;display:inline-block;width:100%'>    delay(50);   // ← ¡el filtro va AQUÍ!</b>\n  }\n  antes = ahora;\n}</code></pre><p>¿Por qué ahí adentro? Porque recién detectó el apretón: esas 50 milésimas de «no mirar» dejan pasar las vibraciones sin contarlas. El setup y las cajitas de arriba quedan igualitos.</p><p>Súbelo, aprieta 10 veces contando en voz alta… ¡y ahora sí deberían llegar juntos a 10! ✅</p>"
     },
     "var-nombres": {
       t: "Ponerle nombre a los pines 🏷️",
       d: "<p>¿Te acuerdas del semáforo? El código estaba lleno de números misteriosos:</p><pre style='background:#F4FAF9;border-radius:10px;padding:.6em .9em;font-size:.85em'><code>digitalWrite(13, HIGH);  // ¿cuál era el 13? 🤔</code></pre><p>Con variables, el programa se lee <strong>como un cuento</strong>:</p><pre style='background:#F4FAF9;border-radius:10px;padding:.6em .9em;font-size:.85em'><code>int luzRoja = 13;\nint luzVerde = 12;\n\ndigitalWrite(luzRoja, HIGH);  // ¡ah, la roja!</code></pre><p>Al Arduino le da igual… pero a los humanos no. Y de regalo: si un día cambias el LED de pin, corriges <strong>una sola línea</strong> y todo el programa sigue funcionando. 🎁</p>"
     },
-    pulldown: {
-      t: "La resistencia de 10 kΩ (pull-down)",
-      d: "<p>Cuando el botón está suelto, el pin 2 <strong>no está conectado a nada</strong>: queda «al aire» y lee cualquier cosa, como una antena. Puede prenderse solo si le pasas la mano cerca. 👻</p><p>La resistencia lo mantiene <strong>amarrado al suelo</strong> (GND) mientras nadie aprieta: así lee <strong>LOW</strong> tranquilo. Al apretar el botón, llegan los 5 V y gana el HIGH.</p><p>En inglés se llama <em>pull-down</em>: «que tira hacia abajo».</p><p><strong>El atajo secreto 🤫:</strong> el Arduino trae una resistencia de estas <strong>escondida adentro</strong>. Si en el setup escribes <code>pinMode(2, INPUT_PULLUP)</code>, se enciende sola y te ahorras la de 10 kΩ. Eso sí, es de las que «tiran hacia arriba»: el botón se conecta a <strong>GND</strong> en vez de 5 V, y todo queda al revés — apretado se lee <strong>LOW</strong>.</p><p>El UNO solo trae la versión hacia arriba (<code>INPUT_PULLUP</code>); otras placas, como el ESP32, también traen <code>INPUT_PULLDOWN</code>. Hoy usamos la resistencia de verdad, que se ve y se entiende mejor. 😉</p>"
+    pullup: {
+      t: "La resistencia escondida: INPUT_PULLUP 🤫",
+      d: "<p>Cuando el botón está suelto, el pin 2 <strong>no está conectado a nada</strong>: quedaría «al aire» y leería cualquier cosa, como una antena. Podría prenderse solo si le pasas la mano cerca. 👻</p><p>Por eso cada pin del Arduino trae <strong>su propia resistencia adentro</strong>, apagada. Con <code>pinMode(2, INPUT_PULLUP)</code> se enciende y <strong>tira el pin hacia arriba</strong>: suelto, lee <code>HIGH</code> tranquilo.</p><p>El botón va entre el pin y el <strong>GND</strong>: al apretar, gana el GND y el pin lee <code>LOW</code>. Queda <strong>al revés</strong> de lo que uno espera: apretado es <code>LOW</code>, y la pregunta es <code>if (digitalRead(2) == LOW)</code>.</p><p>Se llama <em>pull-up</em> («que tira hacia arriba»). Todos los botones del curso van así: sin 5V, sin resistencia y con menos cables que se puedan soltar. 🔌</p>"
     }
   });
 </script>
