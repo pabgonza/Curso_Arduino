@@ -1,0 +1,155 @@
+{
+  "format": "velxio-project",
+  "version": 1,
+  "exportedAt": "2026-11-13T11:06:14.368Z",
+  "name": "sirena",
+  "boards": [
+    {
+      "id": "arduino-uno",
+      "boardKind": "arduino-uno",
+      "x": 50,
+      "y": 50,
+      "activeFileGroupId": "group-arduino-uno",
+      "languageMode": "arduino",
+      "serialBaudRate": 0
+    }
+  ],
+  "fileGroups": {
+    "group-arduino-uno": [
+      {
+        "name": "sketch.ino",
+        "content": "// Generado desde bloques\nvoid setup() {\n  pinMode(8, OUTPUT);\n}\n\nvoid loop() {\n  tone(8, 440, 300);\n  delay(300);\n  tone(8, 659, 300);\n  delay(300);\n}\n"
+      },
+      {
+        "name": "bloques.json",
+        "content": "{\"blocks\":{\"languageVersion\":0,\"blocks\":[{\"type\":\"ab_al_iniciar\",\"id\":\"a`3MUM52dbP~qt#;UUZx\",\"x\":0,\"y\":0,\"next\":{\"block\":{\"type\":\"ab_por_siempre\",\"id\":\"3E~h3+Ito`126GPKT+Nv\",\"inputs\":{\"DO\":{\"block\":{\"type\":\"ab_tocar_nota\",\"id\":\"g-1IauPZNT}daaGe`VQ/\",\"fields\":{\"NOTA\":\"440\",\"PIN\":\"8\"},\"inputs\":{\"S\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"=rE/~gcr3~bf(|Zr:Q1b\",\"fields\":{\"NUM\":0.3}}}},\"next\":{\"block\":{\"type\":\"ab_tocar_nota\",\"id\":\"J+ul(#4e?fZu=$Jpm[].\",\"fields\":{\"NOTA\":\"659\",\"PIN\":\"8\"},\"inputs\":{\"S\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"*.pZs;S1jxn8%zx.OckV\",\"fields\":{\"NUM\":0.3}}}}}}}}}}}}]}}"
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "breadboard_1794567944413_rjrx1zg8j",
+      "metadataId": "breadboard",
+      "x": -284,
+      "y": -191,
+      "properties": {}
+    },
+    {
+      "id": "buzzer_1794567945035_3zwlcmbsm",
+      "metadataId": "buzzer",
+      "x": -18.240000000000038,
+      "y": -159.8,
+      "properties": {
+        "hasSignal": false
+      }
+    }
+  ],
+  "wires": [
+    {
+      "id": "bbwire-buzzer_1794567945035_3zwlcmbsm-0-30b.f",
+      "start": {
+        "componentId": "buzzer_1794567945035_3zwlcmbsm",
+        "pinName": "1",
+        "x": 14.759999999999962,
+        "y": -69.80000000000001
+      },
+      "end": {
+        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "pinName": "30b.f",
+        "x": 14.95999999999998,
+        "y": -69.8
+      },
+      "waypoints": [],
+      "color": "#000000",
+      "bb": true
+    },
+    {
+      "id": "bbwire-buzzer_1794567945035_3zwlcmbsm-1-31b.f",
+      "start": {
+        "componentId": "buzzer_1794567945035_3zwlcmbsm",
+        "pinName": "2",
+        "x": 24.759999999999962,
+        "y": -69.80000000000001
+      },
+      "end": {
+        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "pinName": "31b.f",
+        "x": 24.559999999999945,
+        "y": -69.8
+      },
+      "waypoints": [],
+      "color": "#000000",
+      "bb": true
+    },
+    {
+      "id": "wire-1794567948161",
+      "start": {
+        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "pinName": "30b.j",
+        "x": 14.95999999999998,
+        "y": -31.400000000000006
+      },
+      "end": {
+        "componentId": "arduino-uno",
+        "pinName": "8",
+        "x": 223,
+        "y": 59
+      },
+      "waypoints": [
+        {
+          "x": 223,
+          "y": -31.400000000000006
+        }
+      ],
+      "color": "#00FFFF",
+      "autoRouted": true
+    },
+    {
+      "id": "wire-1794567949897",
+      "start": {
+        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "pinName": "31b.j",
+        "x": 24.559999999999945,
+        "y": -31.400000000000006
+      },
+      "end": {
+        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "pinName": "bn.28",
+        "x": 62.97333333333336,
+        "y": -2.5999999999999943
+      },
+      "waypoints": [
+        {
+          "x": 24.559999999999945,
+          "y": -2.5999999999999943
+        }
+      ],
+      "color": "#FFD700",
+      "autoRouted": true
+    },
+    {
+      "id": "wire-1794567952220",
+      "start": {
+        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "pinName": "bn.45",
+        "x": 254.97333333333336,
+        "y": -2.5999999999999943
+      },
+      "end": {
+        "componentId": "arduino-uno",
+        "pinName": "GND.2",
+        "x": 219.5,
+        "y": 241.5
+      },
+      "waypoints": [
+        {
+          "x": 254.97333333333336,
+          "y": 241.5
+        }
+      ],
+      "color": "#000000",
+      "autoRouted": true
+    }
+  ],
+  "activeBoardId": "arduino-uno"
+}

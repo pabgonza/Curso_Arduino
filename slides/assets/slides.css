@@ -440,6 +440,69 @@ dialog.saber-mas .cerrar {
   cursor: pointer;
 }
 
+/* ---------- programas en bloques de Bloquino ---------- */
+
+/* imagen de los bloques de un programa (herramientas/bloques) */
+img.bloques {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 60vh;
+  object-fit: contain;
+  background: #fff;
+  border: 3px solid var(--teal);
+  border-radius: 14px;
+  padding: .5em;
+  box-shadow: 0 10px 28px rgba(20, 54, 66, .16);
+}
+/* programa alto: la caja muestra los bloques a buen tamaño y se desplaza */
+.bloques-caja {
+  max-height: 62vh;
+  overflow-y: auto;
+  border: 3px solid var(--teal);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 10px 28px rgba(20, 54, 66, .16);
+}
+.bloques-caja img.bloques { max-height: none; border: none; box-shadow: none; border-radius: 0; }
+dialog.saber-mas img.bloques { max-height: none; width: auto; max-width: 100%; border-width: 2px; box-shadow: none; }
+dialog.saber-mas pre.codigo {
+  font-family: var(--f-codigo);
+  font-size: .8em;
+  line-height: 1.45;
+  background: #F4FAF9;
+  border-radius: 10px;
+  padding: .7em 1em;
+  overflow-x: auto;
+}
+
+/* un bloque suelto, dibujado como en Bloquino (interactivos y texto) */
+.bloque {
+  display: inline-flex;
+  align-items: center;
+  gap: .35em;
+  background: #FFAB19;            /* Control */
+  color: #fff;
+  font-family: var(--f-cuerpo);
+  font-weight: 700;
+  padding: .3em .75em;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, .15);
+  white-space: nowrap;
+}
+.bloque.luces { background: #9966FF; }
+.bloque.sonido { background: #CF63CF; }
+.bloque.eventos { background: #FFBF00; }
+.bloque .valor {
+  background: #fff;
+  color: var(--tinta);
+  border-radius: 999px;
+  padding: .05em .6em;
+  min-width: 2.2em;
+  text-align: center;
+}
+
 /* ---------- barra de navegación tipo protoboard ---------- */
 
 .nav-slides {

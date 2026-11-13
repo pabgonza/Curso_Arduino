@@ -1,0 +1,32 @@
+{
+  "format": "velxio-project",
+  "version": 1,
+  "exportedAt": "2026-11-13T10:43:41.679Z",
+  "name": "corazon",
+  "boards": [
+    {
+      "id": "arduino-uno",
+      "boardKind": "arduino-uno",
+      "x": 50,
+      "y": 50,
+      "activeFileGroupId": "group-arduino-uno",
+      "languageMode": "arduino",
+      "serialBaudRate": 0
+    }
+  ],
+  "fileGroups": {
+    "group-arduino-uno": [
+      {
+        "name": "sketch.ino",
+        "content": "// Generado desde bloques\nvoid setup() {\n  pinMode(13, OUTPUT);\n}\n\nvoid loop() {\n  digitalWrite(13, HIGH);\n  delay(120);\n  digitalWrite(13, LOW);\n  delay(120);\n  digitalWrite(13, HIGH);\n  delay(120);\n  digitalWrite(13, LOW);\n  delay(640);\n}\n"
+      },
+      {
+        "name": "bloques.json",
+        "content": "{\"blocks\":{\"languageVersion\":0,\"blocks\":[{\"type\":\"ab_al_iniciar\",\"id\":\"Zsfc2U7XptqUo977PfW,\",\"x\":0,\"y\":0,\"next\":{\"block\":{\"type\":\"ab_por_siempre\",\"id\":\"2mo(-)3_~p`pt0%j$wWX\",\"inputs\":{\"DO\":{\"block\":{\"type\":\"ab_led\",\"id\":\"(b3P1*EK_|_;L*dI9-_*\",\"fields\":{\"ESTADO\":\"HIGH\",\"PIN\":\"13\"},\"next\":{\"block\":{\"type\":\"ab_esperar\",\"id\":\"Fdxa]#l#37*Q%Z;LbGI.\",\"inputs\":{\"S\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"zK,5g]?tv+=0RDn8cWOX\",\"fields\":{\"NUM\":0.12}}}},\"next\":{\"block\":{\"type\":\"ab_led\",\"id\":\"11+fj36+rY]~K4X8+:|T\",\"fields\":{\"ESTADO\":\"LOW\",\"PIN\":\"13\"},\"next\":{\"block\":{\"type\":\"ab_esperar\",\"id\":\"HSB5.^jUEc(9q,HR;:uk\",\"inputs\":{\"S\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"pEC(in{b4bdqx*dD*mq)\",\"fields\":{\"NUM\":0.12}}}},\"next\":{\"block\":{\"type\":\"ab_led\",\"id\":\"RPLCK;!30g*K#^w=6`v[\",\"fields\":{\"ESTADO\":\"HIGH\",\"PIN\":\"13\"},\"next\":{\"block\":{\"type\":\"ab_esperar\",\"id\":\"NY;e=#`Bb:k]7vW_S}LL\",\"inputs\":{\"S\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"$SbUw9=EKG7o6w!/tk+d\",\"fields\":{\"NUM\":0.12}}}},\"next\":{\"block\":{\"type\":\"ab_led\",\"id\":\"p.utR`x)XP`KshRx1j.k\",\"fields\":{\"ESTADO\":\"LOW\",\"PIN\":\"13\"},\"next\":{\"block\":{\"type\":\"ab_esperar\",\"id\":\"r6cJVn4`~:~B2@^=wa[Y\",\"inputs\":{\"S\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"vmkvSPt$0#0t+O3tlqRk\",\"fields\":{\"NUM\":0.64}}}}}}}}}}}}}}}}}}}}}}}}]}}"
+      }
+    ]
+  },
+  "components": [],
+  "wires": [],
+  "activeBoardId": "arduino-uno"
+}

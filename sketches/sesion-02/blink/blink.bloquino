@@ -1,0 +1,32 @@
+{
+  "format": "velxio-project",
+  "version": 1,
+  "exportedAt": "2026-11-13T10:43:33.661Z",
+  "name": "blink",
+  "boards": [
+    {
+      "id": "arduino-uno",
+      "boardKind": "arduino-uno",
+      "x": 50,
+      "y": 50,
+      "activeFileGroupId": "group-arduino-uno",
+      "languageMode": "arduino",
+      "serialBaudRate": 0
+    }
+  ],
+  "fileGroups": {
+    "group-arduino-uno": [
+      {
+        "name": "sketch.ino",
+        "content": "// Generado desde bloques\nvoid setup() {\n  pinMode(13, OUTPUT);\n}\n\nvoid loop() {\n  digitalWrite(13, HIGH);\n  delay(1000);\n  digitalWrite(13, LOW);\n  delay(1000);\n}\n"
+      },
+      {
+        "name": "bloques.json",
+        "content": "{\"blocks\":{\"languageVersion\":0,\"blocks\":[{\"type\":\"ab_al_iniciar\",\"id\":\"7+#[Ij4+hAv}3]21KY+|\",\"x\":0,\"y\":0,\"next\":{\"block\":{\"type\":\"ab_por_siempre\",\"id\":\"$j.+1OBj80pH0qX;{3W1\",\"inputs\":{\"DO\":{\"block\":{\"type\":\"ab_led\",\"id\":\"aQ~^{EN@#/HSs-gv+Pts\",\"fields\":{\"ESTADO\":\"HIGH\",\"PIN\":\"13\"},\"next\":{\"block\":{\"type\":\"ab_esperar\",\"id\":\"]}{SPa{qN#n}^(Ur+n@U\",\"inputs\":{\"S\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"Y-e5L[E}.NgqLQ5!qx#1\",\"fields\":{\"NUM\":1}}}},\"next\":{\"block\":{\"type\":\"ab_led\",\"id\":\"u:5bpP:fU-v)waQT7PQo\",\"fields\":{\"ESTADO\":\"LOW\",\"PIN\":\"13\"},\"next\":{\"block\":{\"type\":\"ab_esperar\",\"id\":\"gwq`Ox3`v4g|y+(UA;;N\",\"inputs\":{\"S\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"NeK@^r17@,x,ZSrVu#%3\",\"fields\":{\"NUM\":1}}}}}}}}}}}}}}}}]}}"
+      }
+    ]
+  },
+  "components": [],
+  "wires": [],
+  "activeBoardId": "arduino-uno"
+}

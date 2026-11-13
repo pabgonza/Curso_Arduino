@@ -86,7 +86,9 @@ addEventListener("DOMContentLoaded", () => {
 
 /* "¿Saber más?": popups opcionales que no cortan el flujo de la clase.
    Uso: saberMas({ ide: { t: "IDE", d: "Texto…" } }) y en el HTML
-   <button class="sm" data-sm="ide">?</button> (o .sm-grande). */
+   <button class="sm" data-sm="ide">?</button> (o .sm-grande). Un data-sm con
+   la ruta de un programa ("sesion-02/blink") muestra el C++ que generan sus
+   bloques (assets/codigo.js). Sirve también para botones dentro de un popup. */
 function saberMas(defs) {
   const dlg = document.createElement("dialog");
   dlg.className = "saber-mas";
@@ -96,15 +98,20 @@ function saberMas(defs) {
   dlg.querySelector(".cerrar").addEventListener("click", () => dlg.close());
   dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
 
-  document.querySelectorAll("[data-sm]").forEach(b =>
-    b.addEventListener("click", () => {
-      const def = defs[b.dataset.sm];
-      if (!def) return;
-      dlg.querySelector("h3").textContent = def.t;
-      dlg.querySelector(".sm-cuerpo").innerHTML = def.d;
-      dlg.showModal();
-      dlg.scrollTop = 0;   // el foco en "¡Entendido!" deja los popups largos a media altura
-    }));
+  document.addEventListener("click", e => {
+    const b = e.target.closest("[data-sm]");
+    if (!b) return;
+    const k = b.dataset.sm, c = window.CODIGO?.[k];
+    const def = defs[k] ?? (c && {
+      t: "👀 El código de los bloques",
+      d: `<p>Bloquino traduce los bloques a <strong>C++</strong>, el idioma que entiende la placa. Esto es lo que le envía:</p><pre class="codigo">${c.replace(/[&<>]/g, x => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[x])}</pre>`
+    });
+    if (!def) return;
+    dlg.querySelector("h3").textContent = def.t;
+    dlg.querySelector(".sm-cuerpo").innerHTML = def.d;
+    if (!dlg.open) dlg.showModal();
+    dlg.scrollTop = 0;   // el foco en "¡Entendido!" deja los popups largos a media altura
+  });
 }
 
 /* Protoboard genérica para popups y diagramas: la MISMA matriz que la de los

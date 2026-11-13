@@ -1,0 +1,710 @@
+{
+  "format": "velxio-project",
+  "version": 1,
+  "exportedAt": "2026-11-13T11:26:19.159Z",
+  "name": "estacionamiento_pito",
+  "boards": [
+    {
+      "id": "arduino-uno",
+      "boardKind": "arduino-uno",
+      "x": 50,
+      "y": 50,
+      "activeFileGroupId": "group-arduino-uno",
+      "languageMode": "arduino",
+      "serialBaudRate": 9600
+    }
+  ],
+  "fileGroups": {
+    "group-arduino-uno": [
+      {
+        "name": "sketch.ino",
+        "content": "// Generado desde bloques\nfloat distancia = 0;\n\nfloat distanciaCm(int disparo, int eco) {\n  digitalWrite(disparo, LOW);\n  delayMicroseconds(2);\n  digitalWrite(disparo, HIGH);\n  delayMicroseconds(10);\n  digitalWrite(disparo, LOW);\n  unsigned long eco_us = pulseIn(eco, HIGH, 25000);\n  if (eco_us == 0) {\n    return 400;\n  }\n  return eco_us / 58.0;\n}\n\nvoid setup() {\n  pinMode(9, OUTPUT);\n  pinMode(10, INPUT);\n  pinMode(13, OUTPUT);\n  pinMode(12, OUTPUT);\n  pinMode(11, OUTPUT);\n  pinMode(8, OUTPUT);\n}\n\nvoid loop() {\n  distancia = distanciaCm(9, 10);\n  digitalWrite(13, LOW);\n  digitalWrite(12, LOW);\n  digitalWrite(11, LOW);\n  if (distancia < 10) {\n    digitalWrite(13, HIGH);\n    tone(8, 440, 100);\n    delay(100);\n  } else {\n    noTone(8);\n    if (distancia < 30) {\n      digitalWrite(11, HIGH);\n    } else {\n      digitalWrite(12, HIGH);\n    }\n    delay(100);\n  }\n}\n"
+      },
+      {
+        "name": "bloques.json",
+        "content": "{\"blocks\":{\"languageVersion\":0,\"blocks\":[{\"type\":\"ab_al_iniciar\",\"id\":\"azPqqGDVXfel48l/xso.\",\"x\":0,\"y\":0,\"next\":{\"block\":{\"type\":\"ab_por_siempre\",\"id\":\"xDWaGKIjAeS7;T)Fn-@T\",\"inputs\":{\"DO\":{\"block\":{\"type\":\"variables_set\",\"id\":\"5nwe5D;cu09b;9-tFZ/m\",\"fields\":{\"VAR\":{\"id\":\"d\"}},\"inputs\":{\"VALUE\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"u?fN7AIs,kuLjC#QR{Q)\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_distancia\",\"id\":\"BmdC?df-6TzjHLYf4D|t\",\"fields\":{\"DISPARO\":\"9\",\"ECO\":\"10\"}}}},\"next\":{\"block\":{\"type\":\"ab_led\",\"id\":\"jFHTI[m;E]?8+TJ;f/.f\",\"fields\":{\"ESTADO\":\"LOW\",\"PIN\":\"13\"},\"next\":{\"block\":{\"type\":\"ab_led\",\"id\":\"E|L}k$cxT6PXmwe^P]u=\",\"fields\":{\"ESTADO\":\"LOW\",\"PIN\":\"12\"},\"next\":{\"block\":{\"type\":\"ab_led\",\"id\":\"S0?2GkF#H|S6pw5yuoi|\",\"fields\":{\"ESTADO\":\"LOW\",\"PIN\":\"11\"},\"next\":{\"block\":{\"type\":\"ab_si_sino\",\"id\":\"PB$eT9%M4hrVem-,j9Ya\",\"inputs\":{\"COND\":{\"block\":{\"type\":\"ab_comparar\",\"id\":\"W%o=.LFo=MbiK6$1E~2T\",\"fields\":{\"OP\":\"<\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"+(Xy|cqG4c2#[5@(@2--\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"U/oVY_1Cy~17EC(R9!-`\",\"fields\":{\"VAR\":{\"id\":\"d\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"nZC|K_$wsD2jmpZ$Sv`G\",\"fields\":{\"NUM\":10}}}}}},\"DO\":{\"block\":{\"type\":\"ab_led\",\"id\":\"5a:W.}ba2ksP`q%Yw-Jy\",\"fields\":{\"ESTADO\":\"HIGH\",\"PIN\":\"13\"},\"next\":{\"block\":{\"type\":\"ab_tocar_nota\",\"id\":\"C^T;xXDVA:[^;M8,1eH8\",\"fields\":{\"NOTA\":\"440\",\"PIN\":\"8\"},\"inputs\":{\"S\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"$5,KE/Q5;j)9(lP;A[#9\",\"fields\":{\"NUM\":0.1}}}}}}}},\"SINO\":{\"block\":{\"type\":\"ab_silenciar\",\"id\":\"sJAm0:8gYq/o(hZ:PVdI\",\"fields\":{\"PIN\":\"8\"},\"next\":{\"block\":{\"type\":\"ab_si_sino\",\"id\":\"5@Fu~sd}hb7~%Ne%$1]x\",\"inputs\":{\"COND\":{\"block\":{\"type\":\"ab_comparar\",\"id\":\"{VF7ihS7_j{7AzK!QcZ/\",\"fields\":{\"OP\":\"<\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"Rp.;}$v}vB+:LC:e2T$f\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"C#,I#wyo1SvE[}ubY`LO\",\"fields\":{\"VAR\":{\"id\":\"d\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"`Js/sJs5*g+H((iVfmlb\",\"fields\":{\"NUM\":30}}}}}},\"DO\":{\"block\":{\"type\":\"ab_led\",\"id\":\"%!207#N0d(W|=1sc!fI5\",\"fields\":{\"ESTADO\":\"HIGH\",\"PIN\":\"11\"}}},\"SINO\":{\"block\":{\"type\":\"ab_led\",\"id\":\")3Fxw$1x+cXlKSkq{!sG\",\"fields\":{\"ESTADO\":\"HIGH\",\"PIN\":\"12\"}}}},\"next\":{\"block\":{\"type\":\"ab_esperar\",\"id\":\"`7N6,g;*b2Dn=G]I`[y^\",\"inputs\":{\"S\":{\"shadow\":{\"type\":\"math_number\",\"id\":\";:-M5-B*yC4em{gsarJ`\",\"fields\":{\"NUM\":0.1}}}}}}}}}}}}}}}}}}}}}}}}}]},\"variables\":[{\"name\":\"distancia\",\"id\":\"d\"}]}"
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "breadboard_1794569090368_bbef3irzd",
+      "metadataId": "breadboard",
+      "x": -284,
+      "y": -191,
+      "properties": {}
+    },
+    {
+      "id": "hc_sr04_1794569091044_0iqq00ms6",
+      "metadataId": "hc-sr04",
+      "x": -254.94000000000003,
+      "y": -170.3,
+      "properties": {}
+    },
+    {
+      "id": "led_1794569100403_kkhq5k8x9",
+      "metadataId": "led",
+      "x": 89.76000000000002,
+      "y": -117.8,
+      "properties": {
+        "value": false,
+        "brightness": 1,
+        "color": "red",
+        "lightColor": null,
+        "label": "",
+        "flip": false
+      }
+    },
+    {
+      "id": "resistor_1794569103095_4bdl427q6",
+      "metadataId": "resistor",
+      "x": 75.6166666666667,
+      "y": -42.8,
+      "properties": {
+        "value": "220",
+        "rotation": 90
+      }
+    },
+    {
+      "id": "buzzer_1794569107436_4t62i3f37",
+      "metadataId": "buzzer",
+      "x": 192.95999999999998,
+      "y": -159.8,
+      "properties": {
+        "hasSignal": false
+      }
+    },
+    {
+      "id": "led_1794569114401_mrtz8rt9f",
+      "metadataId": "led",
+      "x": -63.84000000000003,
+      "y": -117.8,
+      "properties": {
+        "value": false,
+        "brightness": 1,
+        "color": "green",
+        "lightColor": null,
+        "label": "",
+        "flip": false
+      }
+    },
+    {
+      "id": "resistor_1794569117030_3y47ca0pi",
+      "metadataId": "resistor",
+      "x": -77.98333333333335,
+      "y": -42.800000000000004,
+      "properties": {
+        "value": "220",
+        "rotation": 90
+      }
+    },
+    {
+      "id": "led_1794569121272_ad52ml6qb",
+      "metadataId": "led",
+      "x": -6.2400000000000375,
+      "y": -117.8,
+      "properties": {
+        "value": false,
+        "brightness": 1,
+        "color": "yellow",
+        "lightColor": null,
+        "label": "",
+        "flip": false
+      }
+    },
+    {
+      "id": "resistor_1794569123973_osnfs9aac",
+      "metadataId": "resistor",
+      "x": -20.383333333333333,
+      "y": -42.800000000000004,
+      "properties": {
+        "value": "220",
+        "rotation": 90
+      }
+    }
+  ],
+  "wires": [
+    {
+      "id": "bbwire-hc_sr04_1794569091044_0iqq00ms6-0-10b.f",
+      "start": {
+        "componentId": "hc_sr04_1794569091044_0iqq00ms6",
+        "pinName": "VCC",
+        "x": -177.64000000000004,
+        "y": -69.80000000000001
+      },
+      "end": {
+        "componentId": "breadboard_1794569090368_bbef3irzd",
+        "pinName": "10b.f",
+        "x": -177.04000000000002,
+        "y": -69.8
+      },
+      "waypoints": [],
+      "color": "#000000",
+      "bb": true
+    },
+    {
+      "id": "bbwire-hc_sr04_1794569091044_0iqq00ms6-1-11b.f",
+      "start": {
+        "componentId": "hc_sr04_1794569091044_0iqq00ms6",
+        "pinName": "TRIG",
+        "x": -167.64000000000004,
+        "y": -69.80000000000001
+      },
+      "end": {
+        "componentId": "breadboard_1794569090368_bbef3irzd",
+        "pinName": "11b.f",
+        "x": -167.44,
+        "y": -69.8
+      },
+      "waypoints": [],
+      "color": "#000000",
+      "bb": true
+    },
+    {
+      "id": "bbwire-hc_sr04_1794569091044_0iqq00ms6-2-12b.f",
+      "start": {
+        "componentId": "hc_sr04_1794569091044_0iqq00ms6",
+        "pinName": "ECHO",
+        "x": -157.64000000000004,
+        "y": -69.80000000000001
+      },
+      "end": {
+        "componentId": "breadboard_1794569090368_bbef3irzd",
+        "pinName": "12b.f",
+        "x": -157.84,
+        "y": -69.8
+      },
+      "waypoints": [],
+      "color": "#000000",
+      "bb": true
+    },
+    {
+      "id": "bbwire-hc_sr04_1794569091044_0iqq00ms6-3-13b.f",
+      "start": {
+        "componentId": "hc_sr04_1794569091044_0iqq00ms6",
+        "pinName": "GND",
+        "x": -147.64000000000004,
+        "y": -69.80000000000001
+      },
+      "end": {
+        "componentId": "breadboard_1794569090368_bbef3irzd",
+        "pinName": "13b.f",
+        "x": -148.24,
+        "y": -69.8
+      },
+      "waypoints": [],
+      "color": "#000000",
+      "bb": true
+    },
+    {
+      "id": "wire-1794569094034",
+      "start": {
+        "componentId": "breadboard_1794569090368_bbef3irzd",
+        "pinName": "10b.j",
+        "x": -177.04000000000002,
+        "y": -31.400000000000006
+      },
+      "end": {
+        "componentId": "breadboard_1794569090368_bbef3irzd",
+        "pinName": "bp.6",
+        "x": -186.62666666666667,
+        "y": 7
+      },
+      "waypoints": [
+        {
+          "x": -177.04000000000002,
+          "y": 7
+        }
+      ],
+      "color": "#8B4513",
+      "autoRouted": true
+    },
+    {
+      "id": "wire-1794569096008",
+      "start": {
+        "componentId": "breadboard_1794569090368_bbef3irzd",
+        "pinName": "11b.j",
+        "x": -167.44,
+        "y": -31.400000000000006
+      },
+      "end": {
+        "componentId": "arduino-uno",
+        "pinName": "9",
+        "x": 213,
+        "y": 59
+      },
+      "waypoints": [
+        {
+          "x": 213,
+          "y": -31.400000000000006
+        }
+      ],
+      "color": "#8B4513",
+      "autoRouted": true
+    },
+    {
+      "id": "wire-1794569097860",
+      "start": {
+        "componentId": "breadboard_1794569090368_bbef3irzd",
+        "pinName": "12b.j",
+        "x": -157.84,
+        "y": -31.400000000000006
+      },
+      "end": {
+        "componentId": "arduino-uno",
+        "pinName": "10",
+        "x": 203.5,
+        "y": 59
+      },
+      "waypoints": [
+        {
+          "x": -157.84,
+          "y": 59
+        }
+      ],
+      "color": "#0000cc",
+      "autoRouted": true
+    },
+    {
+      "id": "wire-1794569099725",
+      "start": {
+        "componentId": "breadboard_1794569090368_bbef3irzd",
+        "pinName": "13b.j",
+        "x": -148.24,
+        "y": -31.400000000000006
+      },
+      "end": {
+        "componentId": "breadboard_1794569090368_bbef3irzd",
+        "pinName": "bn.12",
+        "x": -119.42666666666668,
+        "y": -2.5999999999999943
+      },
+      "waypoints": [
+        {
+          "x": -148.24,
+          "y": -2.5999999999999943
+        }
+      ],
+      "color": "#00FFFF",
+      "autoRouted": true
+    },
+    {
+      "id": "bbwire-led_1794569100403_kkhq5k8x9-0-41b.f",
+      "start": {
+        "componentId": "led_1794569100403_kkhq5k8x9",
+        "pinName": "A",
+        "x": 120.76000000000002,
+        "y": -69.8
+      },
+      "end": {
+        "componentId": "breadboard_1794569090368_bbef3irzd",
+        "pinName": "41b.f",
+        "x": 120.56,
+        "y": -69.8
+      },
+      "waypoints": [],
+      "color": "#000000",
+      "bb": true
+    },
+    {
+      "id": "bbwire-led_1794569100403_kkhq5k8x9-1-40b.f",
+      "start": {
+        "componentId": "led_1794569100403_kkhq5k8x9",
+        "pinName": "C",
+        "x": 110.76000000000002,
+        "y": -69.8
+      },
+      "end": {
+        "componentId": "breadboard_1794569090368_bbef3irzd",
+        "pinName": "40b.f",
+        "x": 110.96000000000004,
+        "y": -69.8
+      },
+      "waypoints": [],
+      "color": "#000000",
+      "bb": true
+    },
+    {
+      "id": "bbwire-resistor_1794569103095_4bdl427q6-0-40b.g",
+      "start": {
+        "componentId": "resistor_1794569103095_4bdl427q6",
+        "pinName": "1",
+        "x": 110.9666666666667,
+        "y": -60.8
+      },
+      "end": {
+        "componentId": "breadboard_1794569090368_bbef3irzd",
+        "pinName": "40b.g",
+        "x": 110.96000000000004,
+        "y": -60.20000000000002
+      },
+      "waypoints": [],
+      "color": "#000000",
+      "bb": true
+    },
+    {
+      "id": "bbwire-resistor_1794569103095_4bdl427q6-1-bn.32",
+      "start": {
+        "componentId": "resistor_1794569103095_4bdl427q6",
+        "pinName": "2",
+        "x": 110.96666666666671,
+        "y": -2.000000000000014
+      },
+      "end": {
+        "componentId": "breadboard_1794569090368_bbef3irzd",
+        "pinName": "bn.32",
+        "x": 110.97333333333336,
+        "y": -2.5999999999999943
+      },
+      "waypoints": [],
+      "color": "#000000",
+      "bb": true
+    },
+    {
+      "id": "wire-1794569107049",
+      "start": {
+        "componentId": "breadboard_1794569090368_bbef3irzd",
+        "pinName": "41b.j",
+        "x": 120.56,
+        "y": -31.400000000000006
+      },
+      "end": {
+        "componentId": "arduino-uno",
+        "pinName": "13",
+        "x": 175,
+        "y": 59
+      },
+      "waypoints": [
+        {
+          "x": 120.56,
+          "y": 59
+        }
+      ],
+      "color": "#8B00FF",
+      "autoRouted": true
+    },
+    {
+      "id": "bbwire-buzzer_1794569107436_4t62i3f37-0-52b.f",
+      "start": {
+        "componentId": "buzzer_1794569107436_4t62i3f37",
+        "pinName": "1",
+        "x": 225.95999999999998,
+        "y": -69.80000000000001
+      },
+      "end": {
+        "componentId": "breadboard_1794569090368_bbef3irzd",
+        "pinName": "52b.f",
+        "x": 226.15999999999997,
+        "y": -69.8
+      },
+      "waypoints": [],
+      "color": "#000000",
+      "bb": true
+    },
+    {
+      "id": "bbwire-buzzer_1794569107436_4t62i3f37-1-53b.f",
+      "start": {
+        "componentId": "buzzer_1794569107436_4t62i3f37",
+        "pinName": "2",
+        "x": 235.95999999999998,
+        "y": -69.80000000000001
+      },
+      "end": {
+        "componentId": "breadboard_1794569090368_bbef3irzd",
+        "pinName": "53b.f",
+        "x": 235.76,
+        "y": -69.8
+      },
+      "waypoints": [],
+      "color": "#000000",
+      "bb": true
+    },
+    {
+      "id": "wire-1794569111685",
+      "start": {
+        "componentId": "breadboard_1794569090368_bbef3irzd",
+        "pinName": "52b.j",
+        "x": 226.15999999999997,
+        "y": -31.400000000000006
+      },
+      "end": {
+        "componentId": "arduino-uno",
+        "pinName": "8",
+        "x": 223,
+        "y": 59
+      },
+      "waypoints": [
+        {
+          "x": 226.15999999999997,
+          "y": 59
+        }
+      ],
+      "color": "#22c55e",
+      "autoRouted": true
+    },
+    {
+      "id": "wire-1794569113586",
+      "start": {
+        "componentId": "breadboard_1794569090368_bbef3irzd",
+        "pinName": "53b.j",
+        "x": 235.76,
+        "y": -31.400000000000006
+      },
+      "end": {
+        "componentId": "breadboard_1794569090368_bbef3irzd",
+        "pinName": "bn.48",
+        "x": 293.3733333333332,
+        "y": -2.5999999999999943
+      },
+      "waypoints": [
+        {
+          "x": 293.3733333333332,
+          "y": -31.400000000000006
+        }
+      ],
+      "color": "#32CD32",
+      "autoRouted": true
+    },
+    {
+      "id": "bbwire-led_1794569114401_mrtz8rt9f-0-25b.f",
+      "start": {
+        "componentId": "led_1794569114401_mrtz8rt9f",
+        "pinName": "A",
+        "x": -32.84000000000003,
+        "y": -69.8
+      },
+      "end": {
+        "componentId": "breadboard_1794569090368_bbef3irzd",
+        "pinName": "25b.f",
+        "x": -33.04000000000002,
+        "y": -69.8
+      },
+      "waypoints": [],
+      "color": "#000000",
+      "bb": true
+    },
+    {
+      "id": "bbwire-led_1794569114401_mrtz8rt9f-1-24b.f",
+      "start": {
+        "componentId": "led_1794569114401_mrtz8rt9f",
+        "pinName": "C",
+        "x": -42.84000000000003,
+        "y": -69.8
+      },
+      "end": {
+        "componentId": "breadboard_1794569090368_bbef3irzd",
+        "pinName": "24b.f",
+        "x": -42.64000000000004,
+        "y": -69.8
+      },
+      "waypoints": [],
+      "color": "#000000",
+      "bb": true
+    },
+    {
+      "id": "bbwire-resistor_1794569117030_3y47ca0pi-0-24b.g",
+      "start": {
+        "componentId": "resistor_1794569117030_3y47ca0pi",
+        "pinName": "1",
+        "x": -42.63333333333335,
+        "y": -60.800000000000004
+      },
+      "end": {
+        "componentId": "breadboard_1794569090368_bbef3irzd",
+        "pinName": "24b.g",
+        "x": -42.64000000000004,
+        "y": -60.20000000000002
+      },
+      "waypoints": [],
+      "color": "#000000",
+      "bb": true
+    },
+    {
+      "id": "bbwire-resistor_1794569117030_3y47ca0pi-1-bn.19",
+      "start": {
+        "componentId": "resistor_1794569117030_3y47ca0pi",
+        "pinName": "2",
+        "x": -42.63333333333335,
+        "y": -2.000000000000007
+      },
+      "end": {
+        "componentId": "breadboard_1794569090368_bbef3irzd",
+        "pinName": "bn.19",
+        "x": -42.62666666666664,
+        "y": -2.5999999999999943
+      },
+      "waypoints": [],
+      "color": "#000000",
+      "bb": true
+    },
+    {
+      "id": "wire-1794569120880",
+      "start": {
+        "componentId": "breadboard_1794569090368_bbef3irzd",
+        "pinName": "25b.j",
+        "x": -33.04000000000002,
+        "y": -31.400000000000006
+      },
+      "end": {
+        "componentId": "arduino-uno",
+        "pinName": "12",
+        "x": 184.5,
+        "y": 59
+      },
+      "waypoints": [
+        {
+          "x": 184.5,
+          "y": -31.400000000000006
+        }
+      ],
+      "color": "#FFD700",
+      "autoRouted": true
+    },
+    {
+      "id": "bbwire-led_1794569121272_ad52ml6qb-0-31b.f",
+      "start": {
+        "componentId": "led_1794569121272_ad52ml6qb",
+        "pinName": "A",
+        "x": 24.759999999999962,
+        "y": -69.8
+      },
+      "end": {
+        "componentId": "breadboard_1794569090368_bbef3irzd",
+        "pinName": "31b.f",
+        "x": 24.559999999999945,
+        "y": -69.8
+      },
+      "waypoints": [],
+      "color": "#000000",
+      "bb": true
+    },
+    {
+      "id": "bbwire-led_1794569121272_ad52ml6qb-1-30b.f",
+      "start": {
+        "componentId": "led_1794569121272_ad52ml6qb",
+        "pinName": "C",
+        "x": 14.759999999999962,
+        "y": -69.8
+      },
+      "end": {
+        "componentId": "breadboard_1794569090368_bbef3irzd",
+        "pinName": "30b.f",
+        "x": 14.95999999999998,
+        "y": -69.8
+      },
+      "waypoints": [],
+      "color": "#000000",
+      "bb": true
+    },
+    {
+      "id": "bbwire-resistor_1794569123973_osnfs9aac-0-30b.g",
+      "start": {
+        "componentId": "resistor_1794569123973_osnfs9aac",
+        "pinName": "1",
+        "x": 14.966666666666667,
+        "y": -60.800000000000004
+      },
+      "end": {
+        "componentId": "breadboard_1794569090368_bbef3irzd",
+        "pinName": "30b.g",
+        "x": 14.95999999999998,
+        "y": -60.20000000000002
+      },
+      "waypoints": [],
+      "color": "#000000",
+      "bb": true
+    },
+    {
+      "id": "bbwire-resistor_1794569123973_osnfs9aac-1-bn.24",
+      "start": {
+        "componentId": "resistor_1794569123973_osnfs9aac",
+        "pinName": "2",
+        "x": 14.96666666666667,
+        "y": -2.000000000000007
+      },
+      "end": {
+        "componentId": "breadboard_1794569090368_bbef3irzd",
+        "pinName": "bn.24",
+        "x": 14.973333333333358,
+        "y": -2.5999999999999943
+      },
+      "waypoints": [],
+      "color": "#000000",
+      "bb": true
+    },
+    {
+      "id": "wire-1794569128318",
+      "start": {
+        "componentId": "breadboard_1794569090368_bbef3irzd",
+        "pinName": "31b.j",
+        "x": 24.559999999999945,
+        "y": -31.400000000000006
+      },
+      "end": {
+        "componentId": "arduino-uno",
+        "pinName": "11",
+        "x": 194,
+        "y": 59
+      },
+      "waypoints": [
+        {
+          "x": 194,
+          "y": -31.400000000000006
+        }
+      ],
+      "color": "#FFD700",
+      "autoRouted": true
+    },
+    {
+      "id": "wire-1794569130360",
+      "start": {
+        "componentId": "breadboard_1794569090368_bbef3irzd",
+        "pinName": "bp.48",
+        "x": 293.3733333333332,
+        "y": 7
+      },
+      "end": {
+        "componentId": "arduino-uno",
+        "pinName": "5V",
+        "x": 210,
+        "y": 241.5
+      },
+      "waypoints": [
+        {
+          "x": 293.3733333333332,
+          "y": 241.5
+        }
+      ],
+      "color": "#cc0000",
+      "autoRouted": true
+    },
+    {
+      "id": "wire-1794569132398",
+      "start": {
+        "componentId": "breadboard_1794569090368_bbef3irzd",
+        "pinName": "bn.45",
+        "x": 254.97333333333336,
+        "y": -2.5999999999999943
+      },
+      "end": {
+        "componentId": "arduino-uno",
+        "pinName": "GND.2",
+        "x": 219.5,
+        "y": 241.5
+      },
+      "waypoints": [
+        {
+          "x": 254.97333333333336,
+          "y": 233.5
+        },
+        {
+          "x": 219.5,
+          "y": 233.5
+        }
+      ],
+      "color": "#000000",
+      "autoRouted": true
+    }
+  ],
+  "activeBoardId": "arduino-uno"
+}

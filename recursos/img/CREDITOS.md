@@ -35,15 +35,12 @@ Imagenes descargadas de Wikimedia Commons. Uso educativo con atribucion.
 
 ## Pantallazos (`pantallazos/`)
 
-Los `ide-*` provienen de la documentación oficial de Arduino
-([docs.arduino.cc](https://docs.arduino.cc), repo
-[arduino/docs-content](https://github.com/arduino/docs-content)), licencia CC BY-SA 4.0:
-tutoriales "Downloading and installing the Arduino IDE 2" y "Uploading a sketch".
-
-Los `tk-*` son capturas propias de Tinkercad (Autodesk), tomadas el 28-sep-2026 con la
-interfaz en español al crear el circuito "Mi primer Blink"; `tk-simulacion.gif` es la
-simulacion del Blink grabada cuadro a cuadro. Uso educativo, con credito "Pantallazo:
-Tinkercad (Autodesk)" en cada popup.
+Los `bq-*` son capturas propias de Bloquino, la plataforma del curso
+(`../Plataforma_Arduino_Bloques`), tomadas en noviembre de 2026 (casi todas con
+`herramientas/bloques/sesion-02-pantallazos.js`); `bq-aviso.jpg` es el aviso de
+certificado de Chrome al entrar a la dirección de la sala. Crédito "Captura: Bloquino"
+en la slide o el popup. Las imágenes de bloques (`bloques/sesion-NN/*.png`) también son
+capturas propias de Bloquino.
 
 ## GIF de la leccion 0
 

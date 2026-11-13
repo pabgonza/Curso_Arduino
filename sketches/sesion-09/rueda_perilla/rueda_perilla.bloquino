@@ -1,0 +1,724 @@
+{
+  "format": "velxio-project",
+  "version": 1,
+  "exportedAt": "2026-11-13T11:29:33.036Z",
+  "name": "rueda_perilla",
+  "boards": [
+    {
+      "id": "arduino-uno",
+      "boardKind": "arduino-uno",
+      "x": 50,
+      "y": 50,
+      "activeFileGroupId": "group-arduino-uno",
+      "languageMode": "arduino",
+      "serialBaudRate": 0
+    }
+  ],
+  "fileGroups": {
+    "group-arduino-uno": [
+      {
+        "name": "sketch.ino",
+        "content": "// Generado desde bloques\nfloat pos = 0;\nfloat tramo = 0;\n\nvoid setup() {\n  pinMode(3, OUTPUT);\n  pinMode(5, OUTPUT);\n  pinMode(6, OUTPUT);\n}\n\nvoid loop() {\n  pos = map(analogRead(A0), 0, 1023, 0, 255);\n  if (pos < 85) {\n    // rojo → verde\n    analogWrite(3, 255 - pos * 3);\n    analogWrite(5, pos * 3);\n    analogWrite(6, 0);\n  } else {\n    if (pos < 170) {\n      // verde → azul\n      tramo = pos - 85;\n      analogWrite(3, 0);\n      analogWrite(5, 255 - tramo * 3);\n      analogWrite(6, tramo * 3);\n    } else {\n      // azul → rojo\n      tramo = pos - 170;\n      analogWrite(3, tramo * 3);\n      analogWrite(5, 0);\n      analogWrite(6, 255 - tramo * 3);\n    }\n  }\n}\n"
+      },
+      {
+        "name": "bloques.json",
+        "content": "{\"blocks\":{\"languageVersion\":0,\"blocks\":[{\"type\":\"ab_al_iniciar\",\"id\":\"-JX-%d3~O!W4[Z8lA_z@\",\"x\":0,\"y\":0,\"next\":{\"block\":{\"type\":\"ab_por_siempre\",\"id\":\"3I1LZe^3$6u91o8n{vjC\",\"inputs\":{\"DO\":{\"block\":{\"type\":\"variables_set\",\"id\":\"GHZ]z=-+_*Edl7F81wel\",\"fields\":{\"VAR\":{\"id\":\"p\"}},\"inputs\":{\"VALUE\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"*7=EkHx~nqazWrz!lz}G\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_mapear\",\"id\":\"~[+]6~a^lasPwn:Lo{,P\",\"inputs\":{\"X\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"]I$fdc|z{R8g@+yOVPmG\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_leer_analogico\",\"id\":\"EQ|fz{5h-jB5=*5:z[=-\",\"fields\":{\"PIN\":\"A0\"}}},\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"%|_.|wKe%bEY}!BsOwvj\",\"fields\":{\"NUM\":0}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"Q~,|AeI9RTn$kiN;C^3o\",\"fields\":{\"NUM\":1023}}},\"C\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"TMHXqIzYX`)o+;Y(f]vi\",\"fields\":{\"NUM\":0}}},\"D\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"h41p:Z3ED#4nO!IeGcl*\",\"fields\":{\"NUM\":255}}}}}}},\"next\":{\"block\":{\"type\":\"ab_si_sino\",\"id\":\"IsTE`w+,7BpWJbeQiDo7\",\"inputs\":{\"COND\":{\"block\":{\"type\":\"ab_comparar\",\"id\":\"O@MIG7wzywPyt9q@LuMH\",\"fields\":{\"OP\":\"<\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"UC#,,d5$7;5/2.H)l?b7\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"*c2j1FtoG#!^7J`X5ekH\",\"fields\":{\"VAR\":{\"id\":\"p\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"U8bj.C]u(z+L*q$zdg}/\",\"fields\":{\"NUM\":85}}}}}},\"DO\":{\"block\":{\"type\":\"ab_comentario\",\"id\":\"$U!7Tk^L/dpe,^lOC$AB\",\"fields\":{\"TEXTO\":\"rojo → verde\"},\"next\":{\"block\":{\"type\":\"ab_pin_pwm\",\"id\":\"_|]!@aZS=}+9{*-QVcl2\",\"fields\":{\"PIN\":\"3\"},\"inputs\":{\"VALOR\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"g-|%6$hg!2oX4+@MBM.P\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"3SyRMb~n!K:zz3*yhcKy\",\"fields\":{\"OP\":\"-\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"QUipy=h|:bR0#dB0$`I/\",\"fields\":{\"NUM\":255}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"SU+`U;cYMsHv[0r)16k.\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"Zm%$KPG-6V14MCc-#jVL\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"kc!{-JbydMc6+Y!.MnZX\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"bsbSq,fHFRZlMU!2Xjtr\",\"fields\":{\"VAR\":{\"id\":\"p\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"_irIv@Ds|6j]xm-eC)7k\",\"fields\":{\"NUM\":3}}}}}}}}}},\"next\":{\"block\":{\"type\":\"ab_pin_pwm\",\"id\":\"wH$_a-~Rq6x4orm_.K2-\",\"fields\":{\"PIN\":\"5\"},\"inputs\":{\"VALOR\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"ExJ[SkGP=KC;D0l./|}M\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"o{7d;u08}h}(E=09*g2%\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"*i;rOY6Aq3|Q$,c0.$oh\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"dVs2nhGGzwg)pH()!,Z]\",\"fields\":{\"VAR\":{\"id\":\"p\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"nG-H67sZ(j|6eC-nX({!\",\"fields\":{\"NUM\":3}}}}}}},\"next\":{\"block\":{\"type\":\"ab_pin_pwm\",\"id\":\"wggRfWn-5;p^D6{gf7K(\",\"fields\":{\"PIN\":\"6\"},\"inputs\":{\"VALOR\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"9=N+^wE5h3El{x|nlnK(\",\"fields\":{\"NUM\":0}}}}}}}}}}}},\"SINO\":{\"block\":{\"type\":\"ab_si_sino\",\"id\":\"gLYoWQJ/nE!iI60E%goT\",\"inputs\":{\"COND\":{\"block\":{\"type\":\"ab_comparar\",\"id\":\"dKNA%mYYp4Mj0e)qmNj1\",\"fields\":{\"OP\":\"<\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"j]mntw!]Isz)V}U0`8sp\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"B.3Lkk_AM2mQQIosR[5*\",\"fields\":{\"VAR\":{\"id\":\"p\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"Vq2);MR#I#;_k,6uCv1{\",\"fields\":{\"NUM\":170}}}}}},\"DO\":{\"block\":{\"type\":\"ab_comentario\",\"id\":\"/1Q/_}:i~dS-b2*Sz+Or\",\"fields\":{\"TEXTO\":\"verde → azul\"},\"next\":{\"block\":{\"type\":\"variables_set\",\"id\":\"RbCQ7KD[VyqtUzqA`xI.\",\"fields\":{\"VAR\":{\"id\":\"t\"}},\"inputs\":{\"VALUE\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"_G|DL,Nt-RyEK4CUSEE[\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"^b:_eG#!wUoD:K^HvL,H\",\"fields\":{\"OP\":\"-\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"@J$7,Rp[[Fn%kOi-J[3_\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"c|R/Aa#dqMp)tlcgyB.?\",\"fields\":{\"VAR\":{\"id\":\"p\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"kGJrklVP5/#]f}LT*gjH\",\"fields\":{\"NUM\":85}}}}}}},\"next\":{\"block\":{\"type\":\"ab_pin_pwm\",\"id\":\"#Pq@PV!zYw=pWtSZtirK\",\"fields\":{\"PIN\":\"3\"},\"inputs\":{\"VALOR\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"{s7h:#]qGp-Z^me1pV}=\",\"fields\":{\"NUM\":0}}}},\"next\":{\"block\":{\"type\":\"ab_pin_pwm\",\"id\":\"MuJ4$ynP+o)|!(0RUEXZ\",\"fields\":{\"PIN\":\"5\"},\"inputs\":{\"VALOR\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"Y0jx{f4n!d2$Kpb~`Nrf\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"^eYf3fYL|nCG!66=6(*U\",\"fields\":{\"OP\":\"-\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"n/ev1+%xliJR!(QjD%CV\",\"fields\":{\"NUM\":255}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"P6u5siBUQmb7%.-ZZ0MQ\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"~OoamFN@]BecBPz.Qk^}\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"oCr-_F#L?|w2..(0D,-M\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\".;9_Z0@y#~{@lCXvyt](\",\"fields\":{\"VAR\":{\"id\":\"t\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"8B+]]1~|m{vz?%YMs^Vz\",\"fields\":{\"NUM\":3}}}}}}}}}},\"next\":{\"block\":{\"type\":\"ab_pin_pwm\",\"id\":\"Cgi*Z=CD4-QzXeF,7x+4\",\"fields\":{\"PIN\":\"6\"},\"inputs\":{\"VALOR\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"u6AZ7|@7-.o81N2VAJma\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"gkv@GN;w;jbFkV2}hM}c\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"Ib7CK[4$~MInN:^z]M}5\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"lA2f@gJvX_$n7yayBo|#\",\"fields\":{\"VAR\":{\"id\":\"t\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\")5y_1rF,2ro]9MhV.`f8\",\"fields\":{\"NUM\":3}}}}}}}}}}}}}}}}},\"SINO\":{\"block\":{\"type\":\"ab_comentario\",\"id\":\"w6Jlo4VkaxhL07m!0fIM\",\"fields\":{\"TEXTO\":\"azul → rojo\"},\"next\":{\"block\":{\"type\":\"variables_set\",\"id\":\"liDdthN)K.B+FZ(k.]*8\",\"fields\":{\"VAR\":{\"id\":\"t\"}},\"inputs\":{\"VALUE\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"R]YfU^9RnVo:Tw#[nC2`\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"hNqg.Hh?yJNvrXKz(A[p\",\"fields\":{\"OP\":\"-\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\",@V-x,tqv{AQU}EmQ6mi\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"63(XHIg,:3p?HN[yo;iu\",\"fields\":{\"VAR\":{\"id\":\"p\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"q.tf,3y_6OQ,Q/6-Zd#0\",\"fields\":{\"NUM\":170}}}}}}},\"next\":{\"block\":{\"type\":\"ab_pin_pwm\",\"id\":\"!pRnO2,}T)9v4ct[1e:e\",\"fields\":{\"PIN\":\"3\"},\"inputs\":{\"VALOR\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"rd_kLP16XLYlU{t,II$~\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"Ud/-%9!gq_U}btCzxEd4\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"I1[HPGFD%+_Ci6i[TYp/\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"isuhGe/~5wgqzK]xGMP}\",\"fields\":{\"VAR\":{\"id\":\"t\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"j8mkIWhNDNL:^@Fdb~BC\",\"fields\":{\"NUM\":3}}}}}}},\"next\":{\"block\":{\"type\":\"ab_pin_pwm\",\"id\":\"X}UJ(HbBCI6YuloM%]Dj\",\"fields\":{\"PIN\":\"5\"},\"inputs\":{\"VALOR\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"NT(2L#HQDv4:MfslWHS[\",\"fields\":{\"NUM\":0}}}},\"next\":{\"block\":{\"type\":\"ab_pin_pwm\",\"id\":\"BCYL_:u,ND#6f6QJyhwX\",\"fields\":{\"PIN\":\"6\"},\"inputs\":{\"VALOR\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"P37o(82p.{5SqJkqTa%`\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"ll-.mdpzR;VRm/eWWDc$\",\"fields\":{\"OP\":\"-\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"_akc:H$lgPc_CC1nd=4E\",\"fields\":{\"NUM\":255}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"y77!FF]5dl4rIM+Mf{1f\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"vN3sOe6*9|{_5/[NkiDO\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"#hSvCkaj=oHZ|etcX^jA\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"OMTLv.UqHz$Hc^![;,4%\",\"fields\":{\"VAR\":{\"id\":\"t\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"%3v$jm:iseVr9:kDwshC\",\"fields\":{\"NUM\":3}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}]},\"variables\":[{\"name\":\"pos\",\"id\":\"p\"},{\"name\":\"tramo\",\"id\":\"t\"}]}"
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "breadboard_1794569305170_vnmmkzllc",
+      "metadataId": "breadboard",
+      "x": -284,
+      "y": -191,
+      "properties": {}
+    },
+    {
+      "id": "rgb_led_1794569305734_u49kjyzhg",
+      "metadataId": "rgb-led",
+      "x": 1.2099999999999707,
+      "y": -119.9,
+      "properties": {
+        "ledRed": 0,
+        "ledGreen": 0,
+        "ledBlue": 0
+      }
+    },
+    {
+      "id": "resistor_1794569308484_q6uwox0bg",
+      "metadataId": "resistor",
+      "x": -20.390000000000015,
+      "y": -100.4,
+      "properties": {
+        "value": "220",
+        "rotation": 90
+      }
+    },
+    {
+      "id": "resistor_1794569312697_hklipmoac",
+      "metadataId": "resistor",
+      "x": -1.1900000000000261,
+      "y": -100.4,
+      "properties": {
+        "value": "220",
+        "rotation": 90
+      }
+    },
+    {
+      "id": "resistor_1794569316988_8rbfz1ej1",
+      "metadataId": "resistor",
+      "x": 8.409999999999997,
+      "y": -100.4,
+      "properties": {
+        "value": "220",
+        "rotation": 90
+      }
+    },
+    {
+      "id": "potentiometer_1794569325339_dkxf4ceoq",
+      "metadataId": "potentiometer",
+      "x": -106.84000000000002,
+      "y": -144.3,
+      "properties": {
+        "min": 0,
+        "max": 1023,
+        "value": 0,
+        "step": 1,
+        "startDegree": -135,
+        "endDegree": 135
+      }
+    },
+    {
+      "id": "hc_sr04_1794569333154_rlpp36ktd",
+      "metadataId": "hc-sr04",
+      "x": -274.14000000000004,
+      "y": -170.3,
+      "properties": {}
+    }
+  ],
+  "wires": [
+    {
+      "id": "bbwire-rgb_led_1794569305734_u49kjyzhg-0-30b.f",
+      "start": {
+        "componentId": "rgb_led_1794569305734_u49kjyzhg",
+        "pinName": "R",
+        "x": 15.70999999999997,
+        "y": -69.9
+      },
+      "end": {
+        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "pinName": "30b.f",
+        "x": 14.95999999999998,
+        "y": -69.8
+      },
+      "waypoints": [],
+      "color": "#000000",
+      "bb": true
+    },
+    {
+      "id": "bbwire-rgb_led_1794569305734_u49kjyzhg-1-31b.g",
+      "start": {
+        "componentId": "rgb_led_1794569305734_u49kjyzhg",
+        "pinName": "COM",
+        "x": 25.209999999999972,
+        "y": -59.900000000000006
+      },
+      "end": {
+        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "pinName": "31b.g",
+        "x": 24.559999999999945,
+        "y": -60.20000000000002
+      },
+      "waypoints": [],
+      "color": "#000000",
+      "bb": true
+    },
+    {
+      "id": "bbwire-rgb_led_1794569305734_u49kjyzhg-2-32b.f",
+      "start": {
+        "componentId": "rgb_led_1794569305734_u49kjyzhg",
+        "pinName": "G",
+        "x": 33.60999999999997,
+        "y": -69.9
+      },
+      "end": {
+        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "pinName": "32b.f",
+        "x": 34.15999999999997,
+        "y": -69.8
+      },
+      "waypoints": [],
+      "color": "#000000",
+      "bb": true
+    },
+    {
+      "id": "bbwire-rgb_led_1794569305734_u49kjyzhg-3-33b.f",
+      "start": {
+        "componentId": "rgb_led_1794569305734_u49kjyzhg",
+        "pinName": "B",
+        "x": 42.909999999999975,
+        "y": -69.9
+      },
+      "end": {
+        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "pinName": "33b.f",
+        "x": 43.75999999999999,
+        "y": -69.8
+      },
+      "waypoints": [],
+      "color": "#000000",
+      "bb": true
+    },
+    {
+      "id": "bbwire-resistor_1794569308484_q6uwox0bg-0-30t.c",
+      "start": {
+        "componentId": "resistor_1794569308484_q6uwox0bg",
+        "pinName": "1",
+        "x": 14.959999999999978,
+        "y": -118.4
+      },
+      "end": {
+        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "pinName": "30t.c",
+        "x": 14.95999999999998,
+        "y": -117.80000000000001
+      },
+      "waypoints": [],
+      "color": "#000000",
+      "bb": true
+    },
+    {
+      "id": "bbwire-resistor_1794569308484_q6uwox0bg-1-30b.g",
+      "start": {
+        "componentId": "resistor_1794569308484_q6uwox0bg",
+        "pinName": "2",
+        "x": 14.959999999999981,
+        "y": -59.60000000000001
+      },
+      "end": {
+        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "pinName": "30b.g",
+        "x": 14.95999999999998,
+        "y": -60.20000000000002
+      },
+      "waypoints": [],
+      "color": "#000000",
+      "bb": true
+    },
+    {
+      "id": "wire-1794569312202",
+      "start": {
+        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "pinName": "30t.a",
+        "x": 14.95999999999998,
+        "y": -137
+      },
+      "end": {
+        "componentId": "arduino-uno",
+        "pinName": "3",
+        "x": 277,
+        "y": 59
+      },
+      "waypoints": [
+        {
+          "x": 277,
+          "y": -137
+        }
+      ],
+      "color": "#FF00FF",
+      "autoRouted": true
+    },
+    {
+      "id": "bbwire-resistor_1794569312697_hklipmoac-0-32t.c",
+      "start": {
+        "componentId": "resistor_1794569312697_hklipmoac",
+        "pinName": "1",
+        "x": 34.15999999999997,
+        "y": -118.4
+      },
+      "end": {
+        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "pinName": "32t.c",
+        "x": 34.15999999999997,
+        "y": -117.80000000000001
+      },
+      "waypoints": [],
+      "color": "#000000",
+      "bb": true
+    },
+    {
+      "id": "bbwire-resistor_1794569312697_hklipmoac-1-32b.g",
+      "start": {
+        "componentId": "resistor_1794569312697_hklipmoac",
+        "pinName": "2",
+        "x": 34.15999999999997,
+        "y": -59.60000000000001
+      },
+      "end": {
+        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "pinName": "32b.g",
+        "x": 34.15999999999997,
+        "y": -60.20000000000002
+      },
+      "waypoints": [],
+      "color": "#000000",
+      "bb": true
+    },
+    {
+      "id": "wire-1794569316505",
+      "start": {
+        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "pinName": "32t.a",
+        "x": 34.15999999999997,
+        "y": -137
+      },
+      "end": {
+        "componentId": "arduino-uno",
+        "pinName": "5",
+        "x": 258,
+        "y": 59
+      },
+      "waypoints": [
+        {
+          "x": 34.15999999999997,
+          "y": -127.9
+        },
+        {
+          "x": 258,
+          "y": -127.9
+        }
+      ],
+      "color": "#FF00FF",
+      "autoRouted": true
+    },
+    {
+      "id": "bbwire-resistor_1794569316988_8rbfz1ej1-0-33t.c",
+      "start": {
+        "componentId": "resistor_1794569316988_8rbfz1ej1",
+        "pinName": "1",
+        "x": 43.75999999999999,
+        "y": -118.4
+      },
+      "end": {
+        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "pinName": "33t.c",
+        "x": 43.75999999999999,
+        "y": -117.80000000000001
+      },
+      "waypoints": [],
+      "color": "#000000",
+      "bb": true
+    },
+    {
+      "id": "bbwire-resistor_1794569316988_8rbfz1ej1-1-33b.g",
+      "start": {
+        "componentId": "resistor_1794569316988_8rbfz1ej1",
+        "pinName": "2",
+        "x": 43.75999999999999,
+        "y": -59.60000000000001
+      },
+      "end": {
+        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "pinName": "33b.g",
+        "x": 43.75999999999999,
+        "y": -60.20000000000002
+      },
+      "waypoints": [],
+      "color": "#000000",
+      "bb": true
+    },
+    {
+      "id": "wire-1794569320952",
+      "start": {
+        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "pinName": "33t.a",
+        "x": 43.75999999999999,
+        "y": -137
+      },
+      "end": {
+        "componentId": "arduino-uno",
+        "pinName": "6",
+        "x": 248.5,
+        "y": 59
+      },
+      "waypoints": [
+        {
+          "x": 43.75999999999999,
+          "y": -145
+        },
+        {
+          "x": 248.5,
+          "y": -145
+        }
+      ],
+      "color": "#8B00FF",
+      "autoRouted": true
+    },
+    {
+      "id": "wire-1794569322716",
+      "start": {
+        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "pinName": "31b.j",
+        "x": 24.559999999999945,
+        "y": -31.400000000000006
+      },
+      "end": {
+        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "pinName": "bn.24",
+        "x": 14.973333333333358,
+        "y": -2.5999999999999943
+      },
+      "waypoints": [
+        {
+          "x": 24.559999999999945,
+          "y": -2.5999999999999943
+        }
+      ],
+      "color": "#8B00FF",
+      "autoRouted": true
+    },
+    {
+      "id": "wire-1794569324956",
+      "start": {
+        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "pinName": "bn.45",
+        "x": 254.97333333333336,
+        "y": -2.5999999999999943
+      },
+      "end": {
+        "componentId": "arduino-uno",
+        "pinName": "GND.2",
+        "x": 219.5,
+        "y": 241.5
+      },
+      "waypoints": [
+        {
+          "x": 219.5,
+          "y": -2.5999999999999943
+        }
+      ],
+      "color": "#000000",
+      "autoRouted": true
+    },
+    {
+      "id": "bbwire-potentiometer_1794569325339_dkxf4ceoq-0-21b.f",
+      "start": {
+        "componentId": "potentiometer_1794569325339_dkxf4ceoq",
+        "pinName": "GND",
+        "x": -71.84000000000002,
+        "y": -69.80000000000001
+      },
+      "end": {
+        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "pinName": "21b.f",
+        "x": -71.44000000000003,
+        "y": -69.8
+      },
+      "waypoints": [],
+      "color": "#000000",
+      "bb": true
+    },
+    {
+      "id": "bbwire-potentiometer_1794569325339_dkxf4ceoq-1-22b.f",
+      "start": {
+        "componentId": "potentiometer_1794569325339_dkxf4ceoq",
+        "pinName": "SIG",
+        "x": -61.84000000000002,
+        "y": -69.80000000000001
+      },
+      "end": {
+        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "pinName": "22b.f",
+        "x": -61.84,
+        "y": -69.8
+      },
+      "waypoints": [],
+      "color": "#000000",
+      "bb": true
+    },
+    {
+      "id": "bbwire-potentiometer_1794569325339_dkxf4ceoq-2-23b.f",
+      "start": {
+        "componentId": "potentiometer_1794569325339_dkxf4ceoq",
+        "pinName": "VCC",
+        "x": -51.84000000000002,
+        "y": -69.80000000000001
+      },
+      "end": {
+        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "pinName": "23b.f",
+        "x": -52.24000000000001,
+        "y": -69.8
+      },
+      "waypoints": [],
+      "color": "#000000",
+      "bb": true
+    },
+    {
+      "id": "wire-1794569328766",
+      "start": {
+        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "pinName": "22b.j",
+        "x": -61.84,
+        "y": -31.400000000000006
+      },
+      "end": {
+        "componentId": "arduino-uno",
+        "pinName": "A0",
+        "x": 258,
+        "y": 241.5
+      },
+      "waypoints": [
+        {
+          "x": -61.84,
+          "y": 241.5
+        }
+      ],
+      "color": "#8B4513",
+      "autoRouted": true
+    },
+    {
+      "id": "wire-1794569330524",
+      "start": {
+        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "pinName": "21b.i",
+        "x": -71.44000000000003,
+        "y": -41
+      },
+      "end": {
+        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "pinName": "bn.17",
+        "x": -61.82666666666668,
+        "y": -2.5999999999999943
+      },
+      "waypoints": [
+        {
+          "x": -71.44000000000003,
+          "y": -2.5999999999999943
+        }
+      ],
+      "color": "#FF00FF",
+      "autoRouted": true
+    },
+    {
+      "id": "wire-1794569332525",
+      "start": {
+        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "pinName": "23b.i",
+        "x": -52.24000000000001,
+        "y": -41
+      },
+      "end": {
+        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "pinName": "bp.21",
+        "x": -13.82666666666671,
+        "y": 7
+      },
+      "waypoints": [
+        {
+          "x": -52.24000000000001,
+          "y": 7
+        }
+      ],
+      "color": "#FFD700",
+      "autoRouted": true
+    },
+    {
+      "id": "bbwire-hc_sr04_1794569333154_rlpp36ktd-0-8b.f",
+      "start": {
+        "componentId": "hc_sr04_1794569333154_rlpp36ktd",
+        "pinName": "VCC",
+        "x": -196.84000000000003,
+        "y": -69.80000000000001
+      },
+      "end": {
+        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "pinName": "8b.f",
+        "x": -196.24,
+        "y": -69.8
+      },
+      "waypoints": [],
+      "color": "#000000",
+      "bb": true
+    },
+    {
+      "id": "bbwire-hc_sr04_1794569333154_rlpp36ktd-1-9b.f",
+      "start": {
+        "componentId": "hc_sr04_1794569333154_rlpp36ktd",
+        "pinName": "TRIG",
+        "x": -186.84000000000003,
+        "y": -69.80000000000001
+      },
+      "end": {
+        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "pinName": "9b.f",
+        "x": -186.64000000000001,
+        "y": -69.8
+      },
+      "waypoints": [],
+      "color": "#000000",
+      "bb": true
+    },
+    {
+      "id": "bbwire-hc_sr04_1794569333154_rlpp36ktd-2-10b.f",
+      "start": {
+        "componentId": "hc_sr04_1794569333154_rlpp36ktd",
+        "pinName": "ECHO",
+        "x": -176.84000000000003,
+        "y": -69.80000000000001
+      },
+      "end": {
+        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "pinName": "10b.f",
+        "x": -177.04000000000002,
+        "y": -69.8
+      },
+      "waypoints": [],
+      "color": "#000000",
+      "bb": true
+    },
+    {
+      "id": "bbwire-hc_sr04_1794569333154_rlpp36ktd-3-11b.f",
+      "start": {
+        "componentId": "hc_sr04_1794569333154_rlpp36ktd",
+        "pinName": "GND",
+        "x": -166.84000000000003,
+        "y": -69.80000000000001
+      },
+      "end": {
+        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "pinName": "11b.f",
+        "x": -167.44,
+        "y": -69.8
+      },
+      "waypoints": [],
+      "color": "#000000",
+      "bb": true
+    },
+    {
+      "id": "wire-1794569336362",
+      "start": {
+        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "pinName": "8b.j",
+        "x": -196.24,
+        "y": -31.400000000000006
+      },
+      "end": {
+        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "pinName": "bp.4",
+        "x": -215.42666666666668,
+        "y": 7
+      },
+      "waypoints": [
+        {
+          "x": -196.24,
+          "y": 7
+        }
+      ],
+      "color": "#808080",
+      "autoRouted": true
+    },
+    {
+      "id": "wire-1794569338366",
+      "start": {
+        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "pinName": "9b.j",
+        "x": -186.64000000000001,
+        "y": -31.400000000000006
+      },
+      "end": {
+        "componentId": "arduino-uno",
+        "pinName": "9",
+        "x": 213,
+        "y": 59
+      },
+      "waypoints": [
+        {
+          "x": -186.64000000000001,
+          "y": 59
+        }
+      ],
+      "color": "#808080",
+      "autoRouted": true
+    },
+    {
+      "id": "wire-1794569340169",
+      "start": {
+        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "pinName": "10b.j",
+        "x": -177.04000000000002,
+        "y": -31.400000000000006
+      },
+      "end": {
+        "componentId": "arduino-uno",
+        "pinName": "10",
+        "x": 203.5,
+        "y": 59
+      },
+      "waypoints": [
+        {
+          "x": -177.04000000000002,
+          "y": 51
+        },
+        {
+          "x": 203.5,
+          "y": 51
+        }
+      ],
+      "color": "#FF00FF",
+      "autoRouted": true
+    },
+    {
+      "id": "wire-1794569341936",
+      "start": {
+        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "pinName": "11b.j",
+        "x": -167.44,
+        "y": -31.400000000000006
+      },
+      "end": {
+        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "pinName": "bn.10",
+        "x": -148.2266666666667,
+        "y": -2.5999999999999943
+      },
+      "waypoints": [
+        {
+          "x": -167.44,
+          "y": -2.5999999999999943
+        }
+      ],
+      "color": "#22c55e",
+      "autoRouted": true
+    },
+    {
+      "id": "wire-1794569344205",
+      "start": {
+        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "pinName": "bp.48",
+        "x": 293.3733333333332,
+        "y": 7
+      },
+      "end": {
+        "componentId": "arduino-uno",
+        "pinName": "5V",
+        "x": 210,
+        "y": 241.5
+      },
+      "waypoints": [
+        {
+          "x": 293.3733333333332,
+          "y": 233.5
+        },
+        {
+          "x": 210,
+          "y": 233.5
+        }
+      ],
+      "color": "#cc0000",
+      "autoRouted": true
+    }
+  ],
+  "activeBoardId": "arduino-uno"
+}
