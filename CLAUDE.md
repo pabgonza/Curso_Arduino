@@ -8,6 +8,10 @@ Estructura y propósito en [README.md](README.md). Diagramas de circuito: seguir
 - El curso se hace en Bloquino (`../Plataforma_Arduino_Bloques`): nada de Arduino IDE ni Tinkercad como herramienta
 - Todo programa mostrado se ve como bloques (`<img class="bloques">`, o `.bloques-caja` si es alto) con su botón «Ver el código» (`data-sm="sesion-NN/<nombre>"`, C++ de `slides/assets/codigo.js`); tiene `.bloquino` y `.ino` en `sketches/sesion-NN/<nombre>/`
 - Programa nuevo o cambiado: editarlo en `herramientas/bloques/sesion-NN.js` y regenerar (ver su README); nunca editar a mano los `.bloquino`, las imágenes de `recursos/img/bloques/` ni `codigo.js`
+- Tamaño de las imágenes de bloques: `ws.setScale(0.75)` en `herramientas/bloques/comun.js` (la `ESCALA` de Bloquino, 0,675, más un 10 %); si cambia `ESCALA` en Bloquino, ajustarla y regenerar todas las sesiones
+- `armar.mjs --copiar` reescribe todos los `.bloquino` aunque solo cambien los ids y la fecha: si los bloques no cambiaron, `git checkout -- sketches`
+- Una llamada del MCP de Playwright puede regenerar varias sesiones seguidas (por cada una: `goto`, `instalar` y `curso-NN`)
+- Sesión 4: las `.bq-luz` van en porcentajes sobre `espia.png` y `boton.png`; revisar que calcen después de regenerar
 - Bloque suelto en el texto o un interactivo: `<span class="bloque">esperar <span class="valor">1</span> segundos</span>` (variantes por categoría en `slides.css`)
 - Botones: siempre entre el pin y GND sin resistencia (`INPUT_PULLUP`, apretado = `LOW`), igual que en Bloquino; se explica en la S4 (popup `pullup`) y se repasa en la S5
 - Reto: botón `.sm-grande` con el popup `reto-sol` (aviso `.aviso` de intentarlo primero + solución por nivel; desde el nivel 2 solo lo que cambia) y un sketch por nivel
