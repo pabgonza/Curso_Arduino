@@ -500,6 +500,15 @@ dialog.saber-mas pre.codigo {
 .bloque.operadores { background: #59C059; }
 .bloque.variables { background: #FF8C1A; }
 .bloque.avanzado { background: #7F8C8D; }
+.bloque.misbloques { background: #FF6680; }
+.bloque.definir { border-radius: 16px 16px 6px 6px; padding-top: .55em; }
+/* Entrada de un bloque propio: el óvalo rosado que se arrastra desde «definir». */
+.bloque .entrada {
+  background: #FF6680;
+  border: 1px solid rgba(0, 0, 0, .2);
+  border-radius: 999px;
+  padding: .05em .6em;
+}
 .bloque .valor {
   background: #fff;
   color: var(--tinta);

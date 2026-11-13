@@ -130,30 +130,40 @@
   <p class="nota">Está en la categoría <strong>Avanzado</strong> y recibe un número del <strong>0</strong> al <strong>255</strong>. Solo los pines con <strong>~</strong> saben hacer este truco (3, 5, 6, 9, 10 y 11). Se llama <strong>PWM</strong>.<button class="sm" data-sm="pwm">?</button></p>
 </section>
 
-<!-- 6 · Cada color, con su etiqueta -->
+<!-- 6 · Tu propio bloque -->
 <section class="slide slide-concepto">
   <p class="eyebrow">Una idea nueva de programación</p>
-  <h2>Cada color, con su etiqueta 🏷️</h2>
+  <h2>Tu propio bloque: «color» 🧩</h2>
   <div class="tuto">
     <div style="display:flex; flex-direction:column; gap:.8em; align-items:center">
-      <div class="pila" style="font-size:clamp(1rem, 2.6vh, 1.25rem)">
-        <span class="bloque avanzado">comentario <span class="valor">naranjo</span></span>
-        <span class="bloque avanzado">fijar pin <span class="valor">3</span> en <span class="valor">255</span></span>
-        <span class="bloque avanzado">fijar pin <span class="valor">5</span> en <span class="valor">120</span></span>
-        <span class="bloque avanzado">fijar pin <span class="valor">6</span> en <span class="valor">0</span></span>
-        <span class="bloque">esperar <span class="valor">1</span> segundos</span>
+      <div class="fila" style="gap:1.2em; align-items:flex-start; justify-content:center">
+        <div class="pila" style="font-size:clamp(.9rem, 2.4vh, 1.15rem)">
+          <span class="bloque misbloques definir">definir color <span class="entrada">r</span> <span class="entrada">g</span> <span class="entrada">b</span></span>
+          <span class="bloque avanzado">fijar pin <span class="valor">3</span> en <span class="entrada">r</span></span>
+          <span class="bloque avanzado">fijar pin <span class="valor">5</span> en <span class="entrada">g</span></span>
+          <span class="bloque avanzado">fijar pin <span class="valor">6</span> en <span class="entrada">b</span></span>
+        </div>
+        <div class="pila" style="font-size:clamp(.9rem, 2.4vh, 1.15rem)">
+          <span class="bloque avanzado">comentario <span class="valor">naranjo</span></span>
+          <span class="bloque misbloques">color <span class="valor">255</span> <span class="valor">120</span> <span class="valor">0</span></span>
+          <span class="bloque">esperar <span class="valor">1</span> segundos</span>
+        </div>
       </div>
       <div class="fila" style="gap:.5em; justify-content:center">
+        <span class="anat"><strong>definir color</strong><br>lo que hace tu bloque;<br>r, g y b son sus entradas</span>
+        <span class="anat"><strong>color 255 120 0</strong><br>un solo bloque<br>por color</span>
         <span class="anat"><strong>comentario</strong><br>una etiqueta para ti:<br>el Arduino no la lee</span>
-        <span class="anat"><strong>fijar pin 3, 5 y 6</strong><br>cuánto rojo, verde y azul</span>
-        <span class="anat"><strong>esperar</strong><br>cuánto dura el color</span>
       </div>
     </div>
     <aside class="tuto-panel">
-      <p class="tuto-num">Fácil de encontrar</p>
-      <p class="tuto-texto">Cada color son <strong>tres bloques</strong>, uno por patita. Encima, un <strong>comentario</strong> con su nombre: en un programa largo encuentras cada color de un vistazo.</p>
+      <p class="tuto-num">Cómo se crea</p>
+      <ol class="tuto-texto" style="padding-left:1.2em; margin:0; display:grid; gap:.3em">
+        <li>En <strong>Mis bloques</strong>, toca «Crear un bloque».</li>
+        <li>Nombre: <strong>color</strong>. Agrega tres entradas de número: <strong>r</strong>, <strong>g</strong> y <strong>b</strong>.</li>
+        <li>Bajo «definir color» van los tres «fijar pin». Arrastra <strong>r</strong>, <strong>g</strong> y <strong>b</strong> desde el sombrero a sus huecos.</li>
+      </ol>
       <button class="boton secundario" data-sm="mezcla" style="font-size:.9rem; padding:.4em .9em">📋 Las seis recetas</button>
-      <p class="nota">En C++ hay un atajo: inventar tu propia orden.<button class="sm" data-sm="funcion">?</button></p>
+      <p class="nota">En C++, tu bloque es una <strong>función</strong>.<button class="sm" data-sm="funcion">?</button></p>
     </aside>
   </div>
 </section>
@@ -241,7 +251,7 @@
   <div class="tuto">
     <div class="tarjeta rueda-pasos">
       <p><strong>1️⃣ Leer la perilla.</strong> «leer pin analógico A0» da un número de 0 a 1023; «asignar» lo traduce de 0 a 255 y lo guarda en la variable <strong>pos</strong>.</p>
-      <p><strong>2️⃣ La rueda.</strong> Dos «si / si no», uno dentro del otro, miran <strong>pos</strong>, eligen el tramo del arcoíris que le toca y fijan los pines 3, 5 y 6.<button class="sm" data-sm="rueda-como">?</button></p>
+      <p><strong>2️⃣ La rueda.</strong> Dos «si / si no», uno dentro del otro, miran <strong>pos</strong>, eligen el tramo del arcoíris que le toca y le pasan su mezcla a <span class="bloque misbloques" style="font-size:.8em; padding:.15em .6em">color</span>.<button class="sm" data-sm="rueda-como">?</button></p>
     </div>
     <aside class="tuto-panel" style="align-items:center">
       <div style="display:flex; align-items:center; gap:.8em">
@@ -254,7 +264,7 @@
         <span class="pwm-led" id="rueda-led"></span>
       </div>
       <input type="range" id="rueda-pot" min="0" max="1023" value="0" style="width:100%" aria-label="Giro de la perilla">
-      <p class="lectura">pos = <strong id="rueda-pos">0</strong> → pines 3 · 5 · 6 = <strong id="rueda-col">255 · 0 · 0</strong></p>
+      <p class="lectura">pos = <strong id="rueda-pos">0</strong> → color <strong id="rueda-col">255 · 0 · 0</strong></p>
       <div class="fila" style="gap:.5em">
         <button class="boton secundario" data-sm="rueda-circuito" style="font-size:.85rem; padding:.35em .8em">🔧 circuito</button>
         <button class="boton secundario" data-sm="rueda-codigo" style="font-size:.85rem; padding:.35em .8em">📋 programa</button>
@@ -285,7 +295,7 @@
     <h2>Elige tu aventura 🎯</h2>
     <ul class="lista">
       <li>Nivel 1: la lámpara <strong>respira</strong> en tu color favorito (los dos «contar» de la práctica 1, con tu receta)</li>
-      <li>Nivel 2: <strong>modo fiesta</strong> 🎉 — cada medio segundo un color al azar: cada pin con un <span class="bloque operadores">número al azar entre <span class="valor">0</span> y <span class="valor">255</span></span></li>
+      <li>Nivel 2: <strong>modo fiesta</strong> 🎉 — cada medio segundo un color al azar: cada entrada de <span class="bloque misbloques">color</span> con un <span class="bloque operadores">número al azar entre <span class="valor">0</span> y <span class="valor">255</span></span></li>
       <li>Nivel experto: el <strong>arcoíris automático</strong> — que <strong>pos</strong> suba solito con <span class="bloque variables">cambiar <span class="valor">pos</span> por <span class="valor">1</span></span> y vuelva a 0 al pasar de 255</li>
     </ul>
   </div>
@@ -505,11 +515,11 @@
   saberMas({
     "reto-sol": {
       t: "Las soluciones: la lámpara 🌈",
-      d: "<p class='aviso'>🔒 <strong>Recuerda hacer el desafío primero.</strong> Pelear un rato con el problema es donde más se aprende: esto es para comparar tu solución… o para destrabarte si llevas mucho rato. 💪</p><p>En las tres, cada color son los tres bloques «fijar pin» de los pines 3, 5 y 6, y el arcoíris lleva la rueda completa, igual que en la práctica 2.</p><p><strong>🫁 Nivel 1: respira en tu color.</strong> La receta del morado es (150, 0, 255). El azul (pin 6) sigue al <strong>brillo</strong>; el rojo (pin 3) llega solo hasta 150, así que «asignar» lo traduce de 0-255 a 0-150. El verde (pin 5) se apaga una vez, al iniciar.</p><img class='bloques ancha' src='../recursos/img/bloques/sesion-09/respira_color.png' alt='Bloques de respira_color: al iniciar fijar pin 5 en 0; por siempre: contar brillo de 0 a 255 fijando el pin 3 en asignar brillo del rango 0-255 al rango 0-150 y el pin 6 en brillo, esperar 0.005 segundos; luego lo mismo con 255 menos brillo'><button class='sm-grande' data-sm='sesion-09/respira_color'>👀 Ver el código</button><p><strong>🎉 Nivel 2: modo fiesta.</strong> Cada pin con su propio número al azar entre 0 y 255, y medio segundo de espera.</p><img class='bloques' src='../recursos/img/bloques/sesion-09/fiesta.png' alt='Bloques de fiesta: por siempre, fijar pin 3, 5 y 6 en número al azar entre 0 y 255, esperar 0.5 segundos'><button class='sm-grande' data-sm='sesion-09/fiesta'>👀 Ver el código</button><p><strong>🌈 Nivel experto: arcoíris automático.</strong> La rueda de la práctica 2, pero <strong>pos</strong> ya no viene de la perilla: después de la rueda, «cambiar pos por 1» lo sube, y un «si pos &gt; 255» lo devuelve a 0 para dar otra vuelta.</p><img class='bloques' src='../recursos/img/bloques/sesion-09/arcoiris.png' alt='Bloques del arcoíris: por siempre, la rueda de colores con pos, cambiar pos por 1, si pos mayor que 255 fijar pos en 0, esperar 0.02 segundos'><button class='sm-grande' data-sm='sesion-09/arcoiris'>👀 Ver el código</button><p class='nota'>Proyectos: <code>sketches/sesion-09/respira_color</code>, <code>fiesta</code> y <code>arcoiris</code> (cada uno con su <code>.bloquino</code>).</p>"
+      d: "<p class='aviso'>🔒 <strong>Recuerda hacer el desafío primero.</strong> Pelear un rato con el problema es donde más se aprende: esto es para comparar tu solución… o para destrabarte si llevas mucho rato. 💪</p><p>En las tres, cada color es un bloque «color» (el que creaste en la práctica), y el arcoíris lleva la rueda completa, igual que en la práctica 2.</p><p><strong>🫁 Nivel 1: respira en tu color.</strong> La receta del morado es (150, 0, 255). El azul sigue al <strong>brillo</strong>; el rojo llega solo hasta 150, así que «asignar» lo traduce de 0-255 a 0-150. El verde queda en 0.</p><img class='bloques ancha' src='../recursos/img/bloques/sesion-09/respira_color.png' alt='Bloques de respira_color: por siempre, contar brillo de 0 a 255 con color (asignar brillo del rango 0-255 al rango 0-150) (0) (brillo), esperar 0.005 segundos; luego lo mismo con 255 menos brillo. Al lado, definir color r g b con fijar pin 3, 5 y 6'><button class='sm-grande' data-sm='sesion-09/respira_color'>👀 Ver el código</button><p><strong>🎉 Nivel 2: modo fiesta.</strong> Cada entrada de «color» con su propio número al azar entre 0 y 255, y medio segundo de espera.</p><img class='bloques' src='../recursos/img/bloques/sesion-09/fiesta.png' alt='Bloques de fiesta: por siempre, color con un número al azar entre 0 y 255 en cada entrada, esperar 0.5 segundos. Al lado, definir color r g b'><button class='sm-grande' data-sm='sesion-09/fiesta'>👀 Ver el código</button><p><strong>🌈 Nivel experto: arcoíris automático.</strong> La rueda de la práctica 2, pero <strong>pos</strong> ya no viene de la perilla: después de la rueda, «cambiar pos por 1» lo sube, y un «si pos &gt; 255» lo devuelve a 0 para dar otra vuelta.</p><img class='bloques' src='../recursos/img/bloques/sesion-09/arcoiris.png' alt='Bloques del arcoíris: por siempre, la rueda de colores con pos, cambiar pos por 1, si pos mayor que 255 fijar pos en 0, esperar 0.02 segundos. Al lado, definir color r g b'><button class='sm-grande' data-sm='sesion-09/arcoiris'>👀 Ver el código</button><p class='nota'>Proyectos: <code>sketches/sesion-09/respira_color</code>, <code>fiesta</code> y <code>arcoiris</code> (cada uno con su <code>.bloquino</code>).</p>"
     },
     mezcla: {
       t: "Las seis recetas 🎨",
-      d: "<p>Seis colores, uno detrás de otro: cada uno con su <strong>comentario</strong>, sus tres «fijar pin» y un segundo de espera. Son las mismas recetas de los botones de «La receta de cada color».</p><img class='bloques' src='../recursos/img/bloques/sesion-09/mezcla.png' alt='Bloques de mezcla: por siempre, seis colores (naranjo, morado, celeste, rosado, amarillo y blanco), cada uno con un comentario, fijar pin 3, 5 y 6 en su receta y esperar 1 segundos'><p class='nota'>Proyecto: <code>sketches/sesion-09/mezcla/mezcla.bloquino</code></p><button class='sm-grande' data-sm='sesion-09/mezcla'>👀 Ver el código</button>"
+      d: "<p>Seis colores, uno detrás de otro: cada uno con su <strong>comentario</strong>, su bloque «color» y un segundo de espera. Son las mismas recetas de los botones de «La receta de cada color». Al lado, «definir color»: lo que hace el bloque.</p><img class='bloques' src='../recursos/img/bloques/sesion-09/mezcla.png' alt='Bloques de mezcla: por siempre, seis colores (naranjo, morado, celeste, rosado, amarillo y blanco), cada uno con un comentario, color con su receta y esperar 1 segundos. Al lado, definir color r g b con fijar pin 3, 5 y 6 en r, g y b'><p class='nota'>Proyecto: <code>sketches/sesion-09/mezcla/mezcla.bloquino</code></p><button class='sm-grande' data-sm='sesion-09/mezcla'>👀 Ver el código</button>"
     },
     "rgb-ojos": {
       t: "¿Por qué justo rojo, verde y azul? 👀",
@@ -524,12 +534,12 @@
       d: "<p>Son siglas en inglés: <strong>P</strong>ulse <strong>W</strong>idth <strong>M</strong>odulation, «modular el ancho del pulso». Suena difícil, pero es esto: el pin se prende y apaga unas <strong>500 veces por segundo</strong>, y lo que cambia es <strong>cuánto rato</strong> queda prendido en cada vuelta.</p><p>Tu ojo no alcanza a ver el parpadeo y ve un <strong>promedio</strong>: 255 es siempre prendido, 0 siempre apagado, 128 la mitad.</p><p>No todos los pines saben hacerlo: en el UNO son los que tienen una <strong>~</strong> dibujada al lado: 3, 5, 6, 9, 10 y 11.</p><p>En el C++ que escriben los bloques, «fijar pin 3 en 128» se escribe <code>analogWrite(3, 128)</code>.</p>"
     },
     funcion: {
-      t: "En C++: inventa tu propia orden 🪄",
-      d: "<p>En bloques, cada color son tres «fijar pin». En C++, el texto que escriben los bloques, hay un atajo: inventar una <strong>función</strong>, un pedacito de programa con nombre propio. Los tres pasos se escriben una sola vez…</p><pre class='codigo'>void color(int r, int g, int b) {\n  analogWrite(3, r);   // rojo\n  analogWrite(5, g);   // verde\n  analogWrite(6, b);   // azul\n}</pre><p>…y después basta con decir <code>color(255, 120, 0);</code> ¡y listo, naranjo! Lo que va entre paréntesis son sus <strong>ingredientes</strong>: cada vez que la llamas le pasas tres números y ella los usa adentro.</p><p>Tus bloques ya viven dentro de funciones: lo de adentro de «por siempre» termina dentro de una función llamada <code>loop</code>, que <strong>el Arduino llama solo</strong>, una y otra vez.</p>"
+      t: "En C++: tu bloque es una función 🪄",
+      d: "<p>En C++, el texto que escriben los bloques, tu bloque «color» se llama <strong>función</strong>: un pedacito de programa con nombre propio. Lo que cuelga de «definir color» se escribe una sola vez…</p><pre class='codigo'>void color(float r, float g, float b) {\n  analogWrite(3, r);   // rojo\n  analogWrite(5, g);   // verde\n  analogWrite(6, b);   // azul\n}</pre><p>…y cada bloque «color 255 120 0» se escribe <code>color(255, 120, 0);</code> ¡y listo, naranjo! Lo que va entre paréntesis son sus <strong>ingredientes</strong>, las entradas r, g y b: cada vez que la llamas le pasas tres números y ella los usa adentro.</p><p><code>float</code> quiere decir «número»: el mismo tipo de las variables de los bloques.</p><p>Tus bloques ya viven dentro de funciones: lo de adentro de «por siempre» termina dentro de una función llamada <code>loop</code>, que <strong>el Arduino llama solo</strong>, una y otra vez.</p>"
     },
     "rueda-como": {
       t: "¿Cómo elige el color la rueda? 🌈",
-      d: "<p>El arcoíris se recorre en <strong>tres tramos</strong>, y en cada uno un color baja mientras el siguiente sube. Los dos «si / si no» eligen el tramo según <strong>pos</strong>:</p><ul style='padding-left:1.2em; display:grid; gap:.4em'><li><strong>si pos &lt; 85</strong> → rojo → verde: pin 3 en 255 − pos × 3, pin 5 en pos × 3, pin 6 en 0.</li><li><strong>si no, si pos &lt; 170</strong> → verde → azul: primero <strong>tramo</strong> = pos − 85; pin 3 en 0, pin 5 en 255 − tramo × 3, pin 6 en tramo × 3.</li><li><strong>si no</strong> → azul → rojo: <strong>tramo</strong> = pos − 170; pin 3 en tramo × 3, pin 5 en 0, pin 6 en 255 − tramo × 3.</li></ul><p>La variable <strong>tramo</strong> cuenta cuántos pasos llevas dentro del tramo, partiendo de 0. El <strong>× 3</strong> es porque cada tramo dura 85 pasos y 85 × 3 ≈ 255: así cada color alcanza a llegar de 0 a «todo». Es la misma pregunta encadenada de los umbrales de la sesión 8, y cada tramo empieza con un comentario para encontrarlo rápido.</p>"
+      d: "<p>El arcoíris se recorre en <strong>tres tramos</strong>, y en cada uno un color baja mientras el siguiente sube. Los dos «si / si no» eligen el tramo según <strong>pos</strong>:</p><ul style='padding-left:1.2em; display:grid; gap:.4em'><li><strong>si pos &lt; 85</strong> → rojo → verde: color (255 − pos × 3) (pos × 3) (0).</li><li><strong>si no, si pos &lt; 170</strong> → verde → azul: primero <strong>tramo</strong> = pos − 85; color (0) (255 − tramo × 3) (tramo × 3).</li><li><strong>si no</strong> → azul → rojo: <strong>tramo</strong> = pos − 170; color (tramo × 3) (0) (255 − tramo × 3).</li></ul><p>La variable <strong>tramo</strong> cuenta cuántos pasos llevas dentro del tramo, partiendo de 0. El <strong>× 3</strong> es porque cada tramo dura 85 pasos y 85 × 3 ≈ 255: así cada color alcanza a llegar de 0 a «todo». Es la misma pregunta encadenada de los umbrales de la sesión 8, y cada tramo empieza con un comentario para encontrarlo rápido.</p>"
     },
     "rueda-circuito": {
       t: "La perilla y el LED RGB en la protoboard 🔧",
@@ -550,7 +560,7 @@
     },
     "rueda-codigo": {
       t: "El programa completo 📋",
-      d: "<p>Arriba, un solo bloque lee la perilla y la guarda en <strong>pos</strong>. Todo lo demás es la <strong>rueda</strong>: tres tramos, cada uno con su comentario y sus tres «fijar pin».</p><img class='bloques ancha' src='../recursos/img/bloques/sesion-09/rueda_perilla.png' alt='Bloques de rueda_perilla: por siempre, fijar pos en asignar leer pin analógico A0 del rango 0-1023 al rango 0-255; si pos menor que 85, rojo a verde; si no, si pos menor que 170, verde a azul; si no, azul a rojo; cada tramo fija los pines 3, 5 y 6'><p class='nota'>Proyecto: <code>sketches/sesion-09/rueda_perilla/rueda_perilla.bloquino</code></p><button class='sm-grande' data-sm='sesion-09/rueda_perilla'>👀 Ver el código</button>"
+      d: "<p>Arriba, un solo bloque lee la perilla y la guarda en <strong>pos</strong>. Todo lo demás es la <strong>rueda</strong>: tres tramos, cada uno con su comentario y su bloque «color». Al lado va «definir color», el de la slide «Tu propio bloque».</p><img class='bloques ancha' src='../recursos/img/bloques/sesion-09/rueda_perilla.png' alt='Bloques de rueda_perilla: por siempre, fijar pos en asignar leer pin analógico A0 del rango 0-1023 al rango 0-255; si pos menor que 85, rojo a verde; si no, si pos menor que 170, verde a azul; si no, azul a rojo; cada tramo con su bloque color. Al lado, definir color r g b con fijar pin 3, 5 y 6'><p class='nota'>Proyecto: <code>sketches/sesion-09/rueda_perilla/rueda_perilla.bloquino</code></p><button class='sm-grande' data-sm='sesion-09/rueda_perilla'>👀 Ver el código</button>"
     },
     "p-circuito": {
       t: "Así se ve armado completo 🔧",
@@ -571,7 +581,7 @@
     },
     "p-codigo": {
       t: "El programa completo 📋",
-      d: "<img class='bloques ancha' src='../recursos/img/bloques/sesion-09/lampara_humor.png' alt='Bloques de la lámpara de humor: por siempre, fijar distancia en restringir distancia en cm (disparo 9, eco 10) entre 5 y 50; fijar pos en asignar distancia del rango 5-50 al rango 0-255; la rueda de colores; esperar 0.03 segundos'><p>Piezas que ya conoces, pegadas: el bloque del murciélago <strong>distancia en cm</strong> (sesión 7), «asignar» (sesión 6) y la rueda de hoy. Solo cambió <strong>quién manda</strong>: antes la perilla, ahora la mano.</p><p>Y una nueva: <strong>«restringir … entre 5 y 50»</strong> recorta la distancia. Si es menos de 5 queda en 5, si es más de 50 queda en 50: así «asignar» siempre recibe un número de 5 a 50.</p><p class='nota'>¿Sin mano adelante? El murciélago no oye eco y da 400 cm, que queda en 50… ¡azul! 🔵</p><p class='nota'>Proyecto: <code>sketches/sesion-09/lampara_humor/lampara_humor.bloquino</code></p><button class='sm-grande' data-sm='sesion-09/lampara_humor'>👀 Ver el código</button>"
+      d: "<img class='bloques ancha' src='../recursos/img/bloques/sesion-09/lampara_humor.png' alt='Bloques de la lámpara de humor: por siempre, fijar distancia en restringir distancia en cm (disparo 9, eco 10) entre 5 y 50; fijar pos en asignar distancia del rango 5-50 al rango 0-255; la rueda de colores; esperar 0.03 segundos. Al lado, definir color r g b'><p>Piezas que ya conoces, pegadas: el bloque del murciélago <strong>distancia en cm</strong> (sesión 7), «asignar» (sesión 6) y la rueda de hoy. Solo cambió <strong>quién manda</strong>: antes la perilla, ahora la mano.</p><p>Y una nueva: <strong>«restringir … entre 5 y 50»</strong> recorta la distancia. Si es menos de 5 queda en 5, si es más de 50 queda en 50: así «asignar» siempre recibe un número de 5 a 50.</p><p class='nota'>¿Sin mano adelante? El murciélago no oye eco y da 400 cm, que queda en 50… ¡azul! 🔵</p><p class='nota'>Proyecto: <code>sketches/sesion-09/lampara_humor/lampara_humor.bloquino</code></p><button class='sm-grande' data-sm='sesion-09/lampara_humor'>👀 Ver el código</button>"
     },
     neopixel: {
       t: "El aro de LEDs (NeoPixel) 💫",

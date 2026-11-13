@@ -1,11 +1,12 @@
 {
   "format": "velxio-project",
   "version": 1,
-  "exportedAt": "2026-11-13T11:30:08.667Z",
+  "exportedAt": "2026-11-13T18:31:50.738Z",
   "name": "arcoiris",
   "boards": [
     {
       "id": "arduino-uno",
+      "name": "Placa 1",
       "boardKind": "arduino-uno",
       "x": 50,
       "y": 50,
@@ -18,26 +19,26 @@
     "group-arduino-uno": [
       {
         "name": "sketch.ino",
-        "content": "// Generado desde bloques\nfloat pos = 0;\nfloat tramo = 0;\n\nvoid setup() {\n  pinMode(3, OUTPUT);\n  pinMode(5, OUTPUT);\n  pinMode(6, OUTPUT);\n}\n\nvoid loop() {\n  if (pos < 85) {\n    // rojo → verde\n    analogWrite(3, 255 - pos * 3);\n    analogWrite(5, pos * 3);\n    analogWrite(6, 0);\n  } else {\n    if (pos < 170) {\n      // verde → azul\n      tramo = pos - 85;\n      analogWrite(3, 0);\n      analogWrite(5, 255 - tramo * 3);\n      analogWrite(6, tramo * 3);\n    } else {\n      // azul → rojo\n      tramo = pos - 170;\n      analogWrite(3, tramo * 3);\n      analogWrite(5, 0);\n      analogWrite(6, 255 - tramo * 3);\n    }\n  }\n  pos += 1;\n  if (pos > 255) {\n    pos = 0;\n  }\n  delay(20);\n}\n"
+        "content": "// Generado desde bloques\nfloat pos = 0;\nfloat tramo = 0;\n\nvoid color(float r, float g, float b) {\n  analogWrite(3, r);\n  analogWrite(5, g);\n  analogWrite(6, b);\n}\n\nvoid setup() {\n  pinMode(3, OUTPUT);\n  pinMode(5, OUTPUT);\n  pinMode(6, OUTPUT);\n}\n\nvoid loop() {\n  if (pos < 85) {\n    // rojo → verde\n    color(255 - pos * 3, pos * 3, 0);\n  } else {\n    if (pos < 170) {\n      // verde → azul\n      tramo = pos - 85;\n      color(0, 255 - tramo * 3, tramo * 3);\n    } else {\n      // azul → rojo\n      tramo = pos - 170;\n      color(tramo * 3, 0, 255 - tramo * 3);\n    }\n  }\n  pos += 1;\n  if (pos > 255) {\n    pos = 0;\n  }\n  delay(20);\n}\n"
       },
       {
         "name": "bloques.json",
-        "content": "{\"blocks\":{\"languageVersion\":0,\"blocks\":[{\"type\":\"ab_al_iniciar\",\"id\":\"[yp.Yhu_SzXfT@qRc/rR\",\"x\":0,\"y\":0,\"next\":{\"block\":{\"type\":\"ab_por_siempre\",\"id\":\"!yBEq^4|gE?t@kAFUcy@\",\"inputs\":{\"DO\":{\"block\":{\"type\":\"ab_si_sino\",\"id\":\"lMjBN=}kfh]``{T1pU3L\",\"inputs\":{\"COND\":{\"block\":{\"type\":\"ab_comparar\",\"id\":\"MM2e!,8%#f|yiyhqksX1\",\"fields\":{\"OP\":\"<\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"@h[Ez@rVWhTLVl7ox9mo\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\".Jn?6~-CAKklqV{^KmUv\",\"fields\":{\"VAR\":{\"id\":\"p\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"O%Z(b!B1v,A[M.#p=/U(\",\"fields\":{\"NUM\":85}}}}}},\"DO\":{\"block\":{\"type\":\"ab_comentario\",\"id\":\"CjTcQT-:[dP7qb+GyPRG\",\"fields\":{\"TEXTO\":\"rojo → verde\"},\"next\":{\"block\":{\"type\":\"ab_pin_pwm\",\"id\":\"%%fB[qtSWt,$1^TfcP$g\",\"fields\":{\"PIN\":\"3\"},\"inputs\":{\"VALOR\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"uCo[-w.OIWNYB$Z:m0nI\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"`V2i{XC[Q36E)r2gsr5|\",\"fields\":{\"OP\":\"-\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"nD0:EcK)~L^]wm%bz):/\",\"fields\":{\"NUM\":255}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"h9i6#6pz6Xa;le%C0VM=\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"A:uE6$6j*XpwFw2u]UEZ\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"c+WN%[?Un:lyu@!{G:BJ\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"Jq=C@bYbr1Asv^{`mB}a\",\"fields\":{\"VAR\":{\"id\":\"p\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"jJW-yI/Z^)}^eOp|OB=k\",\"fields\":{\"NUM\":3}}}}}}}}}},\"next\":{\"block\":{\"type\":\"ab_pin_pwm\",\"id\":\"E[DIuU}N;11?8RONXYHI\",\"fields\":{\"PIN\":\"5\"},\"inputs\":{\"VALOR\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"bzo2sbRx^}X~OWQAun(b\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"HAf6(:4GxsvP}vAVbCKC\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"~iu9y~u{E+_4?MdOI5)w\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"omIG,6P}TnO~w|p4d8*o\",\"fields\":{\"VAR\":{\"id\":\"p\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"oJ=zWC..=A5UFxeE,u4f\",\"fields\":{\"NUM\":3}}}}}}},\"next\":{\"block\":{\"type\":\"ab_pin_pwm\",\"id\":\"w/k%$:aEvQu,7~xrH3c4\",\"fields\":{\"PIN\":\"6\"},\"inputs\":{\"VALOR\":{\"shadow\":{\"type\":\"math_number\",\"id\":\",k)]``@B|CGkl/RX#N4C\",\"fields\":{\"NUM\":0}}}}}}}}}}}},\"SINO\":{\"block\":{\"type\":\"ab_si_sino\",\"id\":\"x#+#2xE?vs6@yrgAFlSX\",\"inputs\":{\"COND\":{\"block\":{\"type\":\"ab_comparar\",\"id\":\"o-iCpHa3BV!=Rbu9;WH3\",\"fields\":{\"OP\":\"<\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"Lym[MEMQTz4*ROG3^F{+\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"XB;:i-vESK6P`b!Wq|L2\",\"fields\":{\"VAR\":{\"id\":\"p\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"V+dV1R0Sm21Z0x6X[WuI\",\"fields\":{\"NUM\":170}}}}}},\"DO\":{\"block\":{\"type\":\"ab_comentario\",\"id\":\"inv8pj!y]),H==jSx#EZ\",\"fields\":{\"TEXTO\":\"verde → azul\"},\"next\":{\"block\":{\"type\":\"variables_set\",\"id\":\"4ddg~ti~l6wkCpM}snbo\",\"fields\":{\"VAR\":{\"id\":\"t\"}},\"inputs\":{\"VALUE\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"g$]6ad|Yi|B%|)fdj);Z\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"f`uGA5}*RzqfpR|_jR%)\",\"fields\":{\"OP\":\"-\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"Y/xNZm(*iYGOI7v^bO%*\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"Y:(_a08Nph{f/+A|+QTt\",\"fields\":{\"VAR\":{\"id\":\"p\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"MALxLL9N%#Ylw@;EGKQ?\",\"fields\":{\"NUM\":85}}}}}}},\"next\":{\"block\":{\"type\":\"ab_pin_pwm\",\"id\":\"$m}6#RS3}YkJbkkJB+,2\",\"fields\":{\"PIN\":\"3\"},\"inputs\":{\"VALOR\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"cuSh)Vol~=kI^prwPkL@\",\"fields\":{\"NUM\":0}}}},\"next\":{\"block\":{\"type\":\"ab_pin_pwm\",\"id\":\"e-ulT$*TAVh8os1Zcbg4\",\"fields\":{\"PIN\":\"5\"},\"inputs\":{\"VALOR\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"xwzaf~%4/]w8@{@h{Rxr\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"J%hfR`mG5LQK8SQXwA,O\",\"fields\":{\"OP\":\"-\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"KAiv88rEnT-uig|e:B?4\",\"fields\":{\"NUM\":255}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"Oz@TdM7y51+qi_~%birM\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"w`YB[uJ4C@;`:IUM}rbM\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"-]7w.F%le:]!~tk-97L#\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"L3@oWa~c`81nF.O7{!Ie\",\"fields\":{\"VAR\":{\"id\":\"t\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"sO!n:Cr%D78TB6%.R9pO\",\"fields\":{\"NUM\":3}}}}}}}}}},\"next\":{\"block\":{\"type\":\"ab_pin_pwm\",\"id\":\"z0(!v`bI`Q+r@S7U$vBq\",\"fields\":{\"PIN\":\"6\"},\"inputs\":{\"VALOR\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"(yCmXK82-NkC^#@voU%8\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"e^~7ZF.0vtdst_!Wz0AU\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"gws^($._~cKr@O#kB.)Q\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"pVQs6l(_k(p:mu$CBCsE\",\"fields\":{\"VAR\":{\"id\":\"t\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"*Y6.Lg7[Q`W0UMGLm{7?\",\"fields\":{\"NUM\":3}}}}}}}}}}}}}}}}},\"SINO\":{\"block\":{\"type\":\"ab_comentario\",\"id\":\"HE|v$K~|.Ia]Kt.Vi51$\",\"fields\":{\"TEXTO\":\"azul → rojo\"},\"next\":{\"block\":{\"type\":\"variables_set\",\"id\":\"YNvo^U!d?Onwo;_]9FS6\",\"fields\":{\"VAR\":{\"id\":\"t\"}},\"inputs\":{\"VALUE\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"jD{:|)n0y!u3C5Tc6s[t\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"#RM9i0uM~%FFtX;HVeLI\",\"fields\":{\"OP\":\"-\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"*|p_u!S;Dp,ZvETXgCSk\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\";7RGdU-h2ng1J:7r}Ut*\",\"fields\":{\"VAR\":{\"id\":\"p\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"*@`_s0-7cQI_hCXnDzdI\",\"fields\":{\"NUM\":170}}}}}}},\"next\":{\"block\":{\"type\":\"ab_pin_pwm\",\"id\":\"[hGmf=jcwZD{/AZ$RY~H\",\"fields\":{\"PIN\":\"3\"},\"inputs\":{\"VALOR\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"k+o:hzCll|!w;8H[|[/]\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"W)QG!B4-:Tmr^FOEfZP;\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\".hO)Uuu8zW.h#?*T=Wwg\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"]-MKZvFJ8[S@Y8OkT2SZ\",\"fields\":{\"VAR\":{\"id\":\"t\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"Y8uEU:{Eym7.M|~3`L9`\",\"fields\":{\"NUM\":3}}}}}}},\"next\":{\"block\":{\"type\":\"ab_pin_pwm\",\"id\":\"lkX=eExE=@T}$UJFLFDF\",\"fields\":{\"PIN\":\"5\"},\"inputs\":{\"VALOR\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"#7Q$4;=KXGhTX6+_^v-?\",\"fields\":{\"NUM\":0}}}},\"next\":{\"block\":{\"type\":\"ab_pin_pwm\",\"id\":\")tv:qo!79;{ZNZT[,PG[\",\"fields\":{\"PIN\":\"6\"},\"inputs\":{\"VALOR\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"_TQN:4?-F(F)jfDXAGGL\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"-/RC:tPF0uzy7kP{)7qA\",\"fields\":{\"OP\":\"-\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"rQI_wFCsUV`zK@B-,v6B\",\"fields\":{\"NUM\":255}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"(CgAt7d);q}^eUn@vMON\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"P8dFwc?faQO~bV0drgou\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"`jpkdw_@l].4,cB_vLSC\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"|?{=R)MXX}{M]f/XVBTp\",\"fields\":{\"VAR\":{\"id\":\"t\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"5F:CKE7r?O6nijIC+fk)\",\"fields\":{\"NUM\":3}}}}}}}}}}}}}}}}}}}}}}}},\"next\":{\"block\":{\"type\":\"math_change\",\"id\":\"-c3%ko}.qs|j8Y[(9bND\",\"fields\":{\"VAR\":{\"id\":\"p\"}},\"inputs\":{\"DELTA\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"I$QRU|619~E6:e+WpPkb\",\"fields\":{\"NUM\":1}}}},\"next\":{\"block\":{\"type\":\"ab_si\",\"id\":\")tUJu82=dL`J6?VnFt-(\",\"inputs\":{\"COND\":{\"block\":{\"type\":\"ab_comparar\",\"id\":\"L7EX0]Fy5JQk6PojO2lm\",\"fields\":{\"OP\":\">\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"m~dK?^=@Cv}:P/Ldz;{@\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"f4hHz_(+Q]aymbq$^tA(\",\"fields\":{\"VAR\":{\"id\":\"p\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"^#9|dkp?`hc3d_k`pzE^\",\"fields\":{\"NUM\":255}}}}}},\"DO\":{\"block\":{\"type\":\"variables_set\",\"id\":\"0nBq4$!iOb`JqX9nQq;q\",\"fields\":{\"VAR\":{\"id\":\"p\"}},\"inputs\":{\"VALUE\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"gW]@gxX3:#Fr~011K{Oz\",\"fields\":{\"NUM\":0}}}}}}},\"next\":{\"block\":{\"type\":\"ab_esperar\",\"id\":\"1PmDLssiW)4~@n$$eU_J\",\"inputs\":{\"S\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"]*y#@R8y7b|X);.(vE+y\",\"fields\":{\"NUM\":0.02}}}}}}}}}}}}}}}}]},\"variables\":[{\"name\":\"pos\",\"id\":\"p\"},{\"name\":\"tramo\",\"id\":\"t\"}]}"
+        "content": "{\"blocks\":{\"languageVersion\":0,\"blocks\":[{\"type\":\"ab_al_iniciar\",\"id\":\"d_|AjweTfpWGFs/vZ/]p\",\"x\":0,\"y\":0,\"next\":{\"block\":{\"type\":\"ab_por_siempre\",\"id\":\"v3]`9!3s?-a.4SVHC_6@\",\"inputs\":{\"DO\":{\"block\":{\"type\":\"ab_si_sino\",\"id\":\"K@zvluglP,Z2sT_h-Ec2\",\"inputs\":{\"COND\":{\"block\":{\"type\":\"ab_comparar\",\"id\":\"9G8Bq$7=/Yk]qhFs`6N~\",\"fields\":{\"OP\":\"<\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"tI=ys{P`7Uzf}Tqp(S4W\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"5~R~zlZ(DC(4Y|!~KO,K\",\"fields\":{\"VAR\":{\"id\":\"p\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"dX8[YAVr~[%DNA9!M]ui\",\"fields\":{\"NUM\":85}}}}}},\"DO\":{\"block\":{\"type\":\"ab_comentario\",\"id\":\"D6QFzydZE7Io,}mvykr/\",\"fields\":{\"TEXTO\":\"rojo → verde\"},\"next\":{\"block\":{\"type\":\"ab_mi_bloque\",\"id\":\"toZIn=`lNiEOP2e+m|:Y\",\"extraState\":{\"definicion\":\"color\",\"partes\":[{\"tipo\":\"nombre\",\"texto\":\"color\",\"id\":\"n\"},{\"tipo\":\"numero\",\"texto\":\"r\",\"id\":\"r\"},{\"tipo\":\"numero\",\"texto\":\"g\",\"id\":\"g\"},{\"tipo\":\"numero\",\"texto\":\"b\",\"id\":\"b\"}]},\"inputs\":{\"r\":{\"shadow\":{\"type\":\"math_number\",\"id\":\",_xxPpY^zszR+q6=#6[w\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"9N9]S5_Fk.[P]uyzhuRM\",\"fields\":{\"OP\":\"-\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"=eU9RRclD@pucx,R?$*F\",\"fields\":{\"NUM\":255}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"gv$#c0_bZb9HzJcW7ixr\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"pW9XmQwhe.%=R]vPG_6v\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"MD(Iwul6#CIY!GbFaAB}\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"%x)=ao?WyN0mn9J1mFCD\",\"fields\":{\"VAR\":{\"id\":\"p\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\",MlEbj37?iV7U/uefJ$V\",\"fields\":{\"NUM\":3}}}}}}}}},\"g\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"~s)cl,FwU$|%=lqWz/o}\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"-I7]Pzq,Gx,J*_^h.IW`\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"%j~7|6pOs9m;efg11^*M\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"5U;y(Ov=5TI$%z~,13_9\",\"fields\":{\"VAR\":{\"id\":\"p\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"3Kca~5O+$8G,zk9JC!{h\",\"fields\":{\"NUM\":3}}}}}},\"b\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"utjF5YlkbtZ+U?8wNL5e\",\"fields\":{\"NUM\":0}}}}}}}},\"SINO\":{\"block\":{\"type\":\"ab_si_sino\",\"id\":\"`T*3GK3w{W2{z-puZTa+\",\"inputs\":{\"COND\":{\"block\":{\"type\":\"ab_comparar\",\"id\":\",rs5L6]5dq:zwOfM(a9Z\",\"fields\":{\"OP\":\"<\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"Qj0@AGe;lyXR1c0{Y]RV\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"vxrA{)eW0D+q@eCm6uJI\",\"fields\":{\"VAR\":{\"id\":\"p\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"D2)R+A^jj^Ajh6#2#BLc\",\"fields\":{\"NUM\":170}}}}}},\"DO\":{\"block\":{\"type\":\"ab_comentario\",\"id\":\"o4f~c@)@/pbN|4rr_fU4\",\"fields\":{\"TEXTO\":\"verde → azul\"},\"next\":{\"block\":{\"type\":\"variables_set\",\"id\":\"O7UppQ%$po3{6LrP3rJ:\",\"fields\":{\"VAR\":{\"id\":\"t\"}},\"inputs\":{\"VALUE\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"p_kIg#%Wab6B.|pkDex/\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"X_;=1#elrwLL}eg~Zhw;\",\"fields\":{\"OP\":\"-\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"uK4JVEZmjaJ657FNdFj~\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"#3JDYq{q.w=/(DUp5sg|\",\"fields\":{\"VAR\":{\"id\":\"p\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"C,]~cq^!{@o`NajY[@{b\",\"fields\":{\"NUM\":85}}}}}}},\"next\":{\"block\":{\"type\":\"ab_mi_bloque\",\"id\":\"yJ;}Ik)L0@M$,U!kP+*A\",\"extraState\":{\"definicion\":\"color\",\"partes\":[{\"tipo\":\"nombre\",\"texto\":\"color\",\"id\":\"n\"},{\"tipo\":\"numero\",\"texto\":\"r\",\"id\":\"r\"},{\"tipo\":\"numero\",\"texto\":\"g\",\"id\":\"g\"},{\"tipo\":\"numero\",\"texto\":\"b\",\"id\":\"b\"}]},\"inputs\":{\"r\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"_X=pw#SpW%Ot6MtFFqzR\",\"fields\":{\"NUM\":0}}},\"g\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"a|szg(A16F[L7(;Vab:;\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"{s6r9WwV}4VX?NRmm^.6\",\"fields\":{\"OP\":\"-\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"rDFHUQ5TAk02v2m+BH$D\",\"fields\":{\"NUM\":255}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"Q@a]L+[#Y?aHt6`iy~2-\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"Hp[PT4aOyzP[qm,B*py.\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\".*3^AP*aIu[{56rYpwE!\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"#68f6SGPUt{t}cdGedIG\",\"fields\":{\"VAR\":{\"id\":\"t\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"eD.a7nZ.#QJPrs}~OEi`\",\"fields\":{\"NUM\":3}}}}}}}}},\"b\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"fTF2:u^Pz17Xu!pjPlHI\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"-iWL`AotbOBukfXr#gL!\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"So$Y!^rRTu?tjU4MwbDe\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"w.m!O])EFp[D#}SY4#bR\",\"fields\":{\"VAR\":{\"id\":\"t\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"i%J+kli2:Ht8MZ^^n=.O\",\"fields\":{\"NUM\":3}}}}}}}}}}}}},\"SINO\":{\"block\":{\"type\":\"ab_comentario\",\"id\":\"1W4AYw|~j[3Pfop.fo|*\",\"fields\":{\"TEXTO\":\"azul → rojo\"},\"next\":{\"block\":{\"type\":\"variables_set\",\"id\":\"/MA05yt5h(/21(#X0iqH\",\"fields\":{\"VAR\":{\"id\":\"t\"}},\"inputs\":{\"VALUE\":{\"shadow\":{\"type\":\"math_number\",\"id\":\":DF*]CSe*?:ltBxO_x/E\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"^BTOnN?y.A-I8!i7uB;c\",\"fields\":{\"OP\":\"-\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"|H.pUcp!+XoCt`Tv[7M_\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"93k,CMFzEn?A}azKfKxJ\",\"fields\":{\"VAR\":{\"id\":\"p\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"pkmIk#2?TNJ%hPvj8!I}\",\"fields\":{\"NUM\":170}}}}}}},\"next\":{\"block\":{\"type\":\"ab_mi_bloque\",\"id\":\"3#W}C=2q~o}@{[k!W`$8\",\"extraState\":{\"definicion\":\"color\",\"partes\":[{\"tipo\":\"nombre\",\"texto\":\"color\",\"id\":\"n\"},{\"tipo\":\"numero\",\"texto\":\"r\",\"id\":\"r\"},{\"tipo\":\"numero\",\"texto\":\"g\",\"id\":\"g\"},{\"tipo\":\"numero\",\"texto\":\"b\",\"id\":\"b\"}]},\"inputs\":{\"r\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"*#uMM+`_wb+}KB#KnE`z\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"yrJ@n0tNkpA@SD;C`AKo\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"^b1owX+y9Qkk7G0p1ESM\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"j6XYupNQ1~r]^T8FgDQM\",\"fields\":{\"VAR\":{\"id\":\"t\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"~y1vR_y0A^PLO*c1RnZ-\",\"fields\":{\"NUM\":3}}}}}},\"g\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"-}uaX(QEz)B}B~`qfo%d\",\"fields\":{\"NUM\":0}}},\"b\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"JrkR{02%2,riRgGFWv8v\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"k7b5/_!gC16Mg8pMf1@h\",\"fields\":{\"OP\":\"-\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"Zpr:PW3]?FYy0o1bi)[f\",\"fields\":{\"NUM\":255}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"=y`;k%^GK[x9XhbV)j%7\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"jy[ryGmpgQRI=?f45R`P\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"!6m@.qSB=Qo^uvwac~Js\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"PsbHNDmi)G$B=*ZXqy46\",\"fields\":{\"VAR\":{\"id\":\"t\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"o${/R25w_f4g|wK,MO[L\",\"fields\":{\"NUM\":3}}}}}}}}}}}}}}}}}}}},\"next\":{\"block\":{\"type\":\"math_change\",\"id\":\"39r,nDFUSgJu6P(pYw^`\",\"fields\":{\"VAR\":{\"id\":\"p\"}},\"inputs\":{\"DELTA\":{\"shadow\":{\"type\":\"math_number\",\"id\":\",NT@sm}.teEshu4]RJkD\",\"fields\":{\"NUM\":1}}}},\"next\":{\"block\":{\"type\":\"ab_si\",\"id\":\"w:l/}NAA(OI)7GMI;{J!\",\"inputs\":{\"COND\":{\"block\":{\"type\":\"ab_comparar\",\"id\":\"i%n;?lW4IdABKo{-`H7W\",\"fields\":{\"OP\":\">\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"1|il4AL{n`rAt_;=WqcD\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"A`B.$:u!jBMrDoT0D?pa\",\"fields\":{\"VAR\":{\"id\":\"p\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\")anShTX4aG8v3@uMR}=0\",\"fields\":{\"NUM\":255}}}}}},\"DO\":{\"block\":{\"type\":\"variables_set\",\"id\":\"mYV}**z9|1!XR3qEFgDq\",\"fields\":{\"VAR\":{\"id\":\"p\"}},\"inputs\":{\"VALUE\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"AU.T@$`F3`W}iWTw=Y$G\",\"fields\":{\"NUM\":0}}}}}}},\"next\":{\"block\":{\"type\":\"ab_esperar\",\"id\":\"[SYw$;b~_h-%*!a.}$WV\",\"inputs\":{\"S\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"pi3j~`C$0^;(-D7!`)u[\",\"fields\":{\"NUM\":0.02}}}}}}}}}}}}}}}},{\"type\":\"ab_definir\",\"id\":\"N;N^j,9Z$b4h!KuP6}_N\",\"x\":743,\"y\":0,\"extraState\":{\"id\":\"color\",\"partes\":[{\"tipo\":\"nombre\",\"texto\":\"color\",\"id\":\"n\"},{\"tipo\":\"numero\",\"texto\":\"r\",\"id\":\"r\"},{\"tipo\":\"numero\",\"texto\":\"g\",\"id\":\"g\"},{\"tipo\":\"numero\",\"texto\":\"b\",\"id\":\"b\"}]},\"inputs\":{\"r\":{\"block\":{\"type\":\"ab_entrada\",\"id\":\"Famif;=$=$3XG8`gRFta\",\"deletable\":false,\"extraState\":{\"definicion\":\"color\",\"entrada\":\"r\",\"tipo\":\"numero\",\"texto\":\"r\"}}},\"g\":{\"block\":{\"type\":\"ab_entrada\",\"id\":\"k/s=kHipbOT6HA,91y=O\",\"deletable\":false,\"extraState\":{\"definicion\":\"color\",\"entrada\":\"g\",\"tipo\":\"numero\",\"texto\":\"g\"}}},\"b\":{\"block\":{\"type\":\"ab_entrada\",\"id\":\"hc6czL[kwsXfl@+})xZt\",\"deletable\":false,\"extraState\":{\"definicion\":\"color\",\"entrada\":\"b\",\"tipo\":\"numero\",\"texto\":\"b\"}}}},\"next\":{\"block\":{\"type\":\"ab_pin_pwm\",\"id\":\"H369s;y@qGMY#ILG/Nq]\",\"fields\":{\"PIN\":\"3\"},\"inputs\":{\"VALOR\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"+Gvr;7yFQQ8_xK[tHJ!V\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_entrada\",\"id\":\"u*tjN**S/?[,s@yWV3fj\",\"extraState\":{\"definicion\":\"color\",\"entrada\":\"r\",\"tipo\":\"numero\",\"texto\":\"r\"}}}},\"next\":{\"block\":{\"type\":\"ab_pin_pwm\",\"id\":\"l^a72R@~KPm-tkM=lST;\",\"fields\":{\"PIN\":\"5\"},\"inputs\":{\"VALOR\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"ZjJ[@q]0~%5gTQ3jkRF2\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_entrada\",\"id\":\"TS=:$DB%@Zw5wo;DPBAN\",\"extraState\":{\"definicion\":\"color\",\"entrada\":\"g\",\"tipo\":\"numero\",\"texto\":\"g\"}}}},\"next\":{\"block\":{\"type\":\"ab_pin_pwm\",\"id\":\"Q1Ri!b%)gwH;raRD:#nF\",\"fields\":{\"PIN\":\"6\"},\"inputs\":{\"VALOR\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"K)nFS6MMqo6S91Ja1~w{\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_entrada\",\"id\":\"N8~QQdf7vwsTT[N+P;Az\",\"extraState\":{\"definicion\":\"color\",\"entrada\":\"b\",\"tipo\":\"numero\",\"texto\":\"b\"}}}}}}}}}}}]},\"variables\":[{\"name\":\"pos\",\"id\":\"p\"},{\"name\":\"tramo\",\"id\":\"t\"}]}"
       }
     ]
   },
   "components": [
     {
-      "id": "breadboard_1794569305170_vnmmkzllc",
+      "id": "breadboard_1794594624647_dqp4l18p2",
       "metadataId": "breadboard",
-      "x": -284,
+      "x": -338,
       "y": -191,
       "properties": {}
     },
     {
-      "id": "rgb_led_1794569305734_u49kjyzhg",
+      "id": "rgb_led_1794594625239_b82wn8r4n",
       "metadataId": "rgb-led",
-      "x": 1.2099999999999707,
+      "x": -52.79000000000003,
       "y": -119.9,
       "properties": {
         "ledRed": 0,
@@ -46,9 +47,9 @@
       }
     },
     {
-      "id": "resistor_1794569308484_q6uwox0bg",
+      "id": "resistor_1794594627154_j319mihcd",
       "metadataId": "resistor",
-      "x": -20.390000000000015,
+      "x": -74.39000000000001,
       "y": -100.4,
       "properties": {
         "value": "220",
@@ -56,9 +57,9 @@
       }
     },
     {
-      "id": "resistor_1794569312697_hklipmoac",
+      "id": "resistor_1794594630505_dpbzcs49n",
       "metadataId": "resistor",
-      "x": -1.1900000000000261,
+      "x": -55.190000000000026,
       "y": -100.4,
       "properties": {
         "value": "220",
@@ -66,9 +67,9 @@
       }
     },
     {
-      "id": "resistor_1794569316988_8rbfz1ej1",
+      "id": "resistor_1794594633755_cv79muati",
       "metadataId": "resistor",
-      "x": 8.409999999999997,
+      "x": -45.59,
       "y": -100.4,
       "properties": {
         "value": "220",
@@ -76,9 +77,9 @@
       }
     },
     {
-      "id": "potentiometer_1794569325339_dkxf4ceoq",
+      "id": "potentiometer_1794594639871_8h6aqlj85",
       "metadataId": "potentiometer",
-      "x": -106.84000000000002,
+      "x": -160.84,
       "y": -144.3,
       "properties": {
         "min": 0,
@@ -90,26 +91,26 @@
       }
     },
     {
-      "id": "hc_sr04_1794569333154_rlpp36ktd",
+      "id": "hc_sr04_1794594646056_i27othi9y",
       "metadataId": "hc-sr04",
-      "x": -274.14000000000004,
+      "x": -328.14000000000004,
       "y": -170.3,
       "properties": {}
     }
   ],
   "wires": [
     {
-      "id": "bbwire-rgb_led_1794569305734_u49kjyzhg-0-30b.f",
+      "id": "bbwire-rgb_led_1794594625239_b82wn8r4n-0-30b.f",
       "start": {
-        "componentId": "rgb_led_1794569305734_u49kjyzhg",
+        "componentId": "rgb_led_1794594625239_b82wn8r4n",
         "pinName": "R",
-        "x": 15.70999999999997,
+        "x": -38.29000000000003,
         "y": -69.9
       },
       "end": {
-        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "componentId": "breadboard_1794594624647_dqp4l18p2",
         "pinName": "30b.f",
-        "x": 14.95999999999998,
+        "x": -39.04000000000002,
         "y": -69.8
       },
       "waypoints": [],
@@ -117,17 +118,17 @@
       "bb": true
     },
     {
-      "id": "bbwire-rgb_led_1794569305734_u49kjyzhg-1-31b.g",
+      "id": "bbwire-rgb_led_1794594625239_b82wn8r4n-1-31b.g",
       "start": {
-        "componentId": "rgb_led_1794569305734_u49kjyzhg",
+        "componentId": "rgb_led_1794594625239_b82wn8r4n",
         "pinName": "COM",
-        "x": 25.209999999999972,
+        "x": -28.790000000000028,
         "y": -59.900000000000006
       },
       "end": {
-        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "componentId": "breadboard_1794594624647_dqp4l18p2",
         "pinName": "31b.g",
-        "x": 24.559999999999945,
+        "x": -29.440000000000055,
         "y": -60.20000000000002
       },
       "waypoints": [],
@@ -135,17 +136,17 @@
       "bb": true
     },
     {
-      "id": "bbwire-rgb_led_1794569305734_u49kjyzhg-2-32b.f",
+      "id": "bbwire-rgb_led_1794594625239_b82wn8r4n-2-32b.f",
       "start": {
-        "componentId": "rgb_led_1794569305734_u49kjyzhg",
+        "componentId": "rgb_led_1794594625239_b82wn8r4n",
         "pinName": "G",
-        "x": 33.60999999999997,
+        "x": -20.39000000000003,
         "y": -69.9
       },
       "end": {
-        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "componentId": "breadboard_1794594624647_dqp4l18p2",
         "pinName": "32b.f",
-        "x": 34.15999999999997,
+        "x": -19.840000000000032,
         "y": -69.8
       },
       "waypoints": [],
@@ -153,17 +154,17 @@
       "bb": true
     },
     {
-      "id": "bbwire-rgb_led_1794569305734_u49kjyzhg-3-33b.f",
+      "id": "bbwire-rgb_led_1794594625239_b82wn8r4n-3-33b.f",
       "start": {
-        "componentId": "rgb_led_1794569305734_u49kjyzhg",
+        "componentId": "rgb_led_1794594625239_b82wn8r4n",
         "pinName": "B",
-        "x": 42.909999999999975,
+        "x": -11.090000000000025,
         "y": -69.9
       },
       "end": {
-        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "componentId": "breadboard_1794594624647_dqp4l18p2",
         "pinName": "33b.f",
-        "x": 43.75999999999999,
+        "x": -10.240000000000009,
         "y": -69.8
       },
       "waypoints": [],
@@ -171,17 +172,17 @@
       "bb": true
     },
     {
-      "id": "bbwire-resistor_1794569308484_q6uwox0bg-0-30t.c",
+      "id": "bbwire-resistor_1794594627154_j319mihcd-0-30t.c",
       "start": {
-        "componentId": "resistor_1794569308484_q6uwox0bg",
+        "componentId": "resistor_1794594627154_j319mihcd",
         "pinName": "1",
-        "x": 14.959999999999978,
+        "x": -39.04000000000002,
         "y": -118.4
       },
       "end": {
-        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "componentId": "breadboard_1794594624647_dqp4l18p2",
         "pinName": "30t.c",
-        "x": 14.95999999999998,
+        "x": -39.04000000000002,
         "y": -117.80000000000001
       },
       "waypoints": [],
@@ -189,17 +190,17 @@
       "bb": true
     },
     {
-      "id": "bbwire-resistor_1794569308484_q6uwox0bg-1-30b.g",
+      "id": "bbwire-resistor_1794594627154_j319mihcd-1-30b.g",
       "start": {
-        "componentId": "resistor_1794569308484_q6uwox0bg",
+        "componentId": "resistor_1794594627154_j319mihcd",
         "pinName": "2",
-        "x": 14.959999999999981,
+        "x": -39.04000000000002,
         "y": -59.60000000000001
       },
       "end": {
-        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "componentId": "breadboard_1794594624647_dqp4l18p2",
         "pinName": "30b.g",
-        "x": 14.95999999999998,
+        "x": -39.04000000000002,
         "y": -60.20000000000002
       },
       "waypoints": [],
@@ -207,11 +208,11 @@
       "bb": true
     },
     {
-      "id": "wire-1794569312202",
+      "id": "wire-1794594630156",
       "start": {
-        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "componentId": "breadboard_1794594624647_dqp4l18p2",
         "pinName": "30t.a",
-        "x": 14.95999999999998,
+        "x": -39.04000000000002,
         "y": -137
       },
       "end": {
@@ -226,21 +227,21 @@
           "y": -137
         }
       ],
-      "color": "#FF00FF",
+      "color": "#FF8C00",
       "autoRouted": true
     },
     {
-      "id": "bbwire-resistor_1794569312697_hklipmoac-0-32t.c",
+      "id": "bbwire-resistor_1794594630505_dpbzcs49n-0-32t.c",
       "start": {
-        "componentId": "resistor_1794569312697_hklipmoac",
+        "componentId": "resistor_1794594630505_dpbzcs49n",
         "pinName": "1",
-        "x": 34.15999999999997,
+        "x": -19.840000000000035,
         "y": -118.4
       },
       "end": {
-        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "componentId": "breadboard_1794594624647_dqp4l18p2",
         "pinName": "32t.c",
-        "x": 34.15999999999997,
+        "x": -19.840000000000032,
         "y": -117.80000000000001
       },
       "waypoints": [],
@@ -248,17 +249,17 @@
       "bb": true
     },
     {
-      "id": "bbwire-resistor_1794569312697_hklipmoac-1-32b.g",
+      "id": "bbwire-resistor_1794594630505_dpbzcs49n-1-32b.g",
       "start": {
-        "componentId": "resistor_1794569312697_hklipmoac",
+        "componentId": "resistor_1794594630505_dpbzcs49n",
         "pinName": "2",
-        "x": 34.15999999999997,
+        "x": -19.84000000000003,
         "y": -59.60000000000001
       },
       "end": {
-        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "componentId": "breadboard_1794594624647_dqp4l18p2",
         "pinName": "32b.g",
-        "x": 34.15999999999997,
+        "x": -19.840000000000032,
         "y": -60.20000000000002
       },
       "waypoints": [],
@@ -266,11 +267,11 @@
       "bb": true
     },
     {
-      "id": "wire-1794569316505",
+      "id": "wire-1794594633392",
       "start": {
-        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "componentId": "breadboard_1794594624647_dqp4l18p2",
         "pinName": "32t.a",
-        "x": 34.15999999999997,
+        "x": -19.840000000000032,
         "y": -137
       },
       "end": {
@@ -281,7 +282,7 @@
       },
       "waypoints": [
         {
-          "x": 34.15999999999997,
+          "x": -19.840000000000032,
           "y": -127.9
         },
         {
@@ -289,21 +290,21 @@
           "y": -127.9
         }
       ],
-      "color": "#FF00FF",
+      "color": "#32CD32",
       "autoRouted": true
     },
     {
-      "id": "bbwire-resistor_1794569316988_8rbfz1ej1-0-33t.c",
+      "id": "bbwire-resistor_1794594633755_cv79muati-0-33t.c",
       "start": {
-        "componentId": "resistor_1794569316988_8rbfz1ej1",
+        "componentId": "resistor_1794594633755_cv79muati",
         "pinName": "1",
-        "x": 43.75999999999999,
+        "x": -10.24000000000001,
         "y": -118.4
       },
       "end": {
-        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "componentId": "breadboard_1794594624647_dqp4l18p2",
         "pinName": "33t.c",
-        "x": 43.75999999999999,
+        "x": -10.240000000000009,
         "y": -117.80000000000001
       },
       "waypoints": [],
@@ -311,17 +312,17 @@
       "bb": true
     },
     {
-      "id": "bbwire-resistor_1794569316988_8rbfz1ej1-1-33b.g",
+      "id": "bbwire-resistor_1794594633755_cv79muati-1-33b.g",
       "start": {
-        "componentId": "resistor_1794569316988_8rbfz1ej1",
+        "componentId": "resistor_1794594633755_cv79muati",
         "pinName": "2",
-        "x": 43.75999999999999,
+        "x": -10.240000000000007,
         "y": -59.60000000000001
       },
       "end": {
-        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "componentId": "breadboard_1794594624647_dqp4l18p2",
         "pinName": "33b.g",
-        "x": 43.75999999999999,
+        "x": -10.240000000000009,
         "y": -60.20000000000002
       },
       "waypoints": [],
@@ -329,11 +330,11 @@
       "bb": true
     },
     {
-      "id": "wire-1794569320952",
+      "id": "wire-1794594636744",
       "start": {
-        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "componentId": "breadboard_1794594624647_dqp4l18p2",
         "pinName": "33t.a",
-        "x": 43.75999999999999,
+        "x": -10.240000000000009,
         "y": -137
       },
       "end": {
@@ -344,7 +345,7 @@
       },
       "waypoints": [
         {
-          "x": 43.75999999999999,
+          "x": -10.240000000000009,
           "y": -145
         },
         {
@@ -352,38 +353,38 @@
           "y": -145
         }
       ],
-      "color": "#8B00FF",
+      "color": "#8B4513",
       "autoRouted": true
     },
     {
-      "id": "wire-1794569322716",
+      "id": "wire-1794594638110",
       "start": {
-        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "componentId": "breadboard_1794594624647_dqp4l18p2",
         "pinName": "31b.j",
-        "x": 24.559999999999945,
+        "x": -29.440000000000055,
         "y": -31.400000000000006
       },
       "end": {
-        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "componentId": "breadboard_1794594624647_dqp4l18p2",
         "pinName": "bn.24",
-        "x": 14.973333333333358,
+        "x": -39.02666666666664,
         "y": -2.5999999999999943
       },
       "waypoints": [
         {
-          "x": 24.559999999999945,
+          "x": -29.440000000000055,
           "y": -2.5999999999999943
         }
       ],
-      "color": "#8B00FF",
+      "color": "#8B4513",
       "autoRouted": true
     },
     {
-      "id": "wire-1794569324956",
+      "id": "wire-1794594639509",
       "start": {
-        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "componentId": "breadboard_1794594624647_dqp4l18p2",
         "pinName": "bn.45",
-        "x": 254.97333333333336,
+        "x": 200.97333333333336,
         "y": -2.5999999999999943
       },
       "end": {
@@ -394,25 +395,25 @@
       },
       "waypoints": [
         {
-          "x": 219.5,
-          "y": -2.5999999999999943
+          "x": 200.97333333333336,
+          "y": 241.5
         }
       ],
       "color": "#000000",
       "autoRouted": true
     },
     {
-      "id": "bbwire-potentiometer_1794569325339_dkxf4ceoq-0-21b.f",
+      "id": "bbwire-potentiometer_1794594639871_8h6aqlj85-0-21b.f",
       "start": {
-        "componentId": "potentiometer_1794569325339_dkxf4ceoq",
+        "componentId": "potentiometer_1794594639871_8h6aqlj85",
         "pinName": "GND",
-        "x": -71.84000000000002,
+        "x": -125.84,
         "y": -69.80000000000001
       },
       "end": {
-        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "componentId": "breadboard_1794594624647_dqp4l18p2",
         "pinName": "21b.f",
-        "x": -71.44000000000003,
+        "x": -125.44000000000003,
         "y": -69.8
       },
       "waypoints": [],
@@ -420,17 +421,17 @@
       "bb": true
     },
     {
-      "id": "bbwire-potentiometer_1794569325339_dkxf4ceoq-1-22b.f",
+      "id": "bbwire-potentiometer_1794594639871_8h6aqlj85-1-22b.f",
       "start": {
-        "componentId": "potentiometer_1794569325339_dkxf4ceoq",
+        "componentId": "potentiometer_1794594639871_8h6aqlj85",
         "pinName": "SIG",
-        "x": -61.84000000000002,
+        "x": -115.84,
         "y": -69.80000000000001
       },
       "end": {
-        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "componentId": "breadboard_1794594624647_dqp4l18p2",
         "pinName": "22b.f",
-        "x": -61.84,
+        "x": -115.84,
         "y": -69.8
       },
       "waypoints": [],
@@ -438,17 +439,17 @@
       "bb": true
     },
     {
-      "id": "bbwire-potentiometer_1794569325339_dkxf4ceoq-2-23b.f",
+      "id": "bbwire-potentiometer_1794594639871_8h6aqlj85-2-23b.f",
       "start": {
-        "componentId": "potentiometer_1794569325339_dkxf4ceoq",
+        "componentId": "potentiometer_1794594639871_8h6aqlj85",
         "pinName": "VCC",
-        "x": -51.84000000000002,
+        "x": -105.84,
         "y": -69.80000000000001
       },
       "end": {
-        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "componentId": "breadboard_1794594624647_dqp4l18p2",
         "pinName": "23b.f",
-        "x": -52.24000000000001,
+        "x": -106.24000000000001,
         "y": -69.8
       },
       "waypoints": [],
@@ -456,11 +457,11 @@
       "bb": true
     },
     {
-      "id": "wire-1794569328766",
+      "id": "wire-1794594642844",
       "start": {
-        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "componentId": "breadboard_1794594624647_dqp4l18p2",
         "pinName": "22b.j",
-        "x": -61.84,
+        "x": -115.84,
         "y": -31.400000000000006
       },
       "end": {
@@ -471,71 +472,71 @@
       },
       "waypoints": [
         {
-          "x": -61.84,
+          "x": -115.84,
           "y": 241.5
+        }
+      ],
+      "color": "#0000cc",
+      "autoRouted": true
+    },
+    {
+      "id": "wire-1794594644234",
+      "start": {
+        "componentId": "breadboard_1794594624647_dqp4l18p2",
+        "pinName": "21b.i",
+        "x": -125.44000000000003,
+        "y": -41
+      },
+      "end": {
+        "componentId": "breadboard_1794594624647_dqp4l18p2",
+        "pinName": "bn.17",
+        "x": -115.82666666666668,
+        "y": -2.5999999999999943
+      },
+      "waypoints": [
+        {
+          "x": -125.44000000000003,
+          "y": -2.5999999999999943
         }
       ],
       "color": "#8B4513",
       "autoRouted": true
     },
     {
-      "id": "wire-1794569330524",
+      "id": "wire-1794594645667",
       "start": {
-        "componentId": "breadboard_1794569305170_vnmmkzllc",
-        "pinName": "21b.i",
-        "x": -71.44000000000003,
-        "y": -41
-      },
-      "end": {
-        "componentId": "breadboard_1794569305170_vnmmkzllc",
-        "pinName": "bn.17",
-        "x": -61.82666666666668,
-        "y": -2.5999999999999943
-      },
-      "waypoints": [
-        {
-          "x": -71.44000000000003,
-          "y": -2.5999999999999943
-        }
-      ],
-      "color": "#FF00FF",
-      "autoRouted": true
-    },
-    {
-      "id": "wire-1794569332525",
-      "start": {
-        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "componentId": "breadboard_1794594624647_dqp4l18p2",
         "pinName": "23b.i",
-        "x": -52.24000000000001,
+        "x": -106.24000000000001,
         "y": -41
       },
       "end": {
-        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "componentId": "breadboard_1794594624647_dqp4l18p2",
         "pinName": "bp.21",
-        "x": -13.82666666666671,
+        "x": -67.82666666666671,
         "y": 7
       },
       "waypoints": [
         {
-          "x": -52.24000000000001,
+          "x": -106.24000000000001,
           "y": 7
         }
       ],
-      "color": "#FFD700",
+      "color": "#FF8C00",
       "autoRouted": true
     },
     {
-      "id": "bbwire-hc_sr04_1794569333154_rlpp36ktd-0-8b.f",
+      "id": "bbwire-hc_sr04_1794594646056_i27othi9y-0-8b.f",
       "start": {
-        "componentId": "hc_sr04_1794569333154_rlpp36ktd",
+        "componentId": "hc_sr04_1794594646056_i27othi9y",
         "pinName": "VCC",
-        "x": -196.84000000000003,
+        "x": -250.84000000000003,
         "y": -69.80000000000001
       },
       "end": {
-        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "componentId": "breadboard_1794594624647_dqp4l18p2",
         "pinName": "8b.f",
-        "x": -196.24,
+        "x": -250.24,
         "y": -69.8
       },
       "waypoints": [],
@@ -543,17 +544,17 @@
       "bb": true
     },
     {
-      "id": "bbwire-hc_sr04_1794569333154_rlpp36ktd-1-9b.f",
+      "id": "bbwire-hc_sr04_1794594646056_i27othi9y-1-9b.f",
       "start": {
-        "componentId": "hc_sr04_1794569333154_rlpp36ktd",
+        "componentId": "hc_sr04_1794594646056_i27othi9y",
         "pinName": "TRIG",
-        "x": -186.84000000000003,
+        "x": -240.84000000000003,
         "y": -69.80000000000001
       },
       "end": {
-        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "componentId": "breadboard_1794594624647_dqp4l18p2",
         "pinName": "9b.f",
-        "x": -186.64000000000001,
+        "x": -240.64000000000001,
         "y": -69.8
       },
       "waypoints": [],
@@ -561,17 +562,17 @@
       "bb": true
     },
     {
-      "id": "bbwire-hc_sr04_1794569333154_rlpp36ktd-2-10b.f",
+      "id": "bbwire-hc_sr04_1794594646056_i27othi9y-2-10b.f",
       "start": {
-        "componentId": "hc_sr04_1794569333154_rlpp36ktd",
+        "componentId": "hc_sr04_1794594646056_i27othi9y",
         "pinName": "ECHO",
-        "x": -176.84000000000003,
+        "x": -230.84000000000003,
         "y": -69.80000000000001
       },
       "end": {
-        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "componentId": "breadboard_1794594624647_dqp4l18p2",
         "pinName": "10b.f",
-        "x": -177.04000000000002,
+        "x": -231.04000000000002,
         "y": -69.8
       },
       "waypoints": [],
@@ -579,17 +580,17 @@
       "bb": true
     },
     {
-      "id": "bbwire-hc_sr04_1794569333154_rlpp36ktd-3-11b.f",
+      "id": "bbwire-hc_sr04_1794594646056_i27othi9y-3-11b.f",
       "start": {
-        "componentId": "hc_sr04_1794569333154_rlpp36ktd",
+        "componentId": "hc_sr04_1794594646056_i27othi9y",
         "pinName": "GND",
-        "x": -166.84000000000003,
+        "x": -220.84000000000003,
         "y": -69.80000000000001
       },
       "end": {
-        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "componentId": "breadboard_1794594624647_dqp4l18p2",
         "pinName": "11b.f",
-        "x": -167.44,
+        "x": -221.44,
         "y": -69.8
       },
       "waypoints": [],
@@ -597,34 +598,34 @@
       "bb": true
     },
     {
-      "id": "wire-1794569336362",
+      "id": "wire-1794594648343",
       "start": {
-        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "componentId": "breadboard_1794594624647_dqp4l18p2",
         "pinName": "8b.j",
-        "x": -196.24,
+        "x": -250.24,
         "y": -31.400000000000006
       },
       "end": {
-        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "componentId": "breadboard_1794594624647_dqp4l18p2",
         "pinName": "bp.4",
-        "x": -215.42666666666668,
+        "x": -269.4266666666667,
         "y": 7
       },
       "waypoints": [
         {
-          "x": -196.24,
+          "x": -250.24,
           "y": 7
         }
       ],
-      "color": "#808080",
+      "color": "#8B00FF",
       "autoRouted": true
     },
     {
-      "id": "wire-1794569338366",
+      "id": "wire-1794594649754",
       "start": {
-        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "componentId": "breadboard_1794594624647_dqp4l18p2",
         "pinName": "9b.j",
-        "x": -186.64000000000001,
+        "x": -240.64000000000001,
         "y": -31.400000000000006
       },
       "end": {
@@ -635,19 +636,19 @@
       },
       "waypoints": [
         {
-          "x": -186.64000000000001,
+          "x": -240.64000000000001,
           "y": 59
         }
       ],
-      "color": "#808080",
+      "color": "#FF8C00",
       "autoRouted": true
     },
     {
-      "id": "wire-1794569340169",
+      "id": "wire-1794594651133",
       "start": {
-        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "componentId": "breadboard_1794594624647_dqp4l18p2",
         "pinName": "10b.j",
-        "x": -177.04000000000002,
+        "x": -231.04000000000002,
         "y": -31.400000000000006
       },
       "end": {
@@ -658,7 +659,7 @@
       },
       "waypoints": [
         {
-          "x": -177.04000000000002,
+          "x": -231.04000000000002,
           "y": 51
         },
         {
@@ -666,38 +667,38 @@
           "y": 51
         }
       ],
-      "color": "#FF00FF",
+      "color": "#8B4513",
       "autoRouted": true
     },
     {
-      "id": "wire-1794569341936",
+      "id": "wire-1794594652534",
       "start": {
-        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "componentId": "breadboard_1794594624647_dqp4l18p2",
         "pinName": "11b.j",
-        "x": -167.44,
+        "x": -221.44,
         "y": -31.400000000000006
       },
       "end": {
-        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "componentId": "breadboard_1794594624647_dqp4l18p2",
         "pinName": "bn.10",
-        "x": -148.2266666666667,
+        "x": -202.2266666666667,
         "y": -2.5999999999999943
       },
       "waypoints": [
         {
-          "x": -167.44,
+          "x": -221.44,
           "y": -2.5999999999999943
         }
       ],
-      "color": "#22c55e",
+      "color": "#8B4513",
       "autoRouted": true
     },
     {
-      "id": "wire-1794569344205",
+      "id": "wire-1794594653959",
       "start": {
-        "componentId": "breadboard_1794569305170_vnmmkzllc",
+        "componentId": "breadboard_1794594624647_dqp4l18p2",
         "pinName": "bp.48",
-        "x": 293.3733333333332,
+        "x": 239.37333333333322,
         "y": 7
       },
       "end": {
@@ -708,12 +709,8 @@
       },
       "waypoints": [
         {
-          "x": 293.3733333333332,
-          "y": 233.5
-        },
-        {
           "x": 210,
-          "y": 233.5
+          "y": 7
         }
       ],
       "color": "#cc0000",
