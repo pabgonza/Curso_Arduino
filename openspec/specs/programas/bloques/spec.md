@@ -2,6 +2,7 @@
 
 ## Purpose
 
+Cómo muestran las slides los programas: como bloques de Bloquino, con el C++ a mano para quien quiera verlo.
 
 
 ## Requirements

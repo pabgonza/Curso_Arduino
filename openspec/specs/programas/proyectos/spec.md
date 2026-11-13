@@ -2,6 +2,7 @@
 
 ## Purpose
 
+Cada programa del curso se puede abrir en Bloquino ya armado, y un generador lo mantiene al día.
 
 
 ## Requirements

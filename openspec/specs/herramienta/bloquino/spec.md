@@ -2,6 +2,7 @@
 
 ## Purpose
 
+El curso se arma, programa, simula y carga a la placa en Bloquino, la plataforma propia que corre en la sala.
 
 
 ## Requirements
