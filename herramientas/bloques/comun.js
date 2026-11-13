@@ -46,7 +46,7 @@ async function guardar(nombre, bloques, variables = []) {
   const caja = await page.evaluate(async () => {
     const B = (await import('/src/blocks/blockly.ts')).Blockly;
     const ws = B.getMainWorkspace();
-    ws.setScale(1.1);
+    ws.setScale(0.75); // la escala del panel (0.675) más un 10 %
     let x = 0;
     for (const b of ws.getTopBlocks(true)) {
       b.moveTo(new B.utils.Coordinate(x, 0));
