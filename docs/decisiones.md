@@ -19,3 +19,10 @@ Registro de decisiones tomadas en conversación (2026-07-28):
 Pendientes por decidir:
 - Aprobación del [temario](temario.md) reestructurado (10 sesiones)
 - Tarea futura: dónde comprar el kit o armarlo con piezas sueltas lo más barato posible puesto en Chile
+
+Decisiones del 2026-11-13 (rama `bloquino`, change `curso-en-bloques`):
+
+| # | Tema | Decisión | Nota |
+|---|------|----------|------|
+| 10 | Herramienta | **Bloquino** (`../Plataforma_Arduino_Bloques`) reemplaza a Arduino IDE y Tinkercad: armar, programar con bloques, simular y cargar a la placa, abierto en el navegador en la dirección de la sala | Reemplaza la 7. Sin cuentas ni instalaciones en los equipos de los alumnos |
+| 11 | Lenguaje | **Bloques en todo el curso**; el C++ que generan queda en un popup «Ver el código» | Reemplaza la 3: se abandona el gradiente hacia solo código. Cada programa tiene su `.bloquino` junto al `.ino` |

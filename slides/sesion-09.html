@@ -34,9 +34,9 @@
     <div class="tarjeta">
       <h3>🌡️ Sesión 8: el termómetro</h3>
       <ul>
-        <li>El DHT11 es un sensor de <strong>temperatura y humedad</strong>; viene con librería</li>
-        <li><code>else if</code>: la pregunta <strong>encadenada</strong></li>
-        <li><code>float</code>: cajita para números con coma, como 21.5</li>
+        <li>El DHT11 es un sensor de <strong>temperatura y humedad</strong>; trae sus propios bloques</li>
+        <li>«si / si no» uno dentro de otro: la pregunta <strong>encadenada</strong></li>
+        <li>Las variables guardan números con coma, como 21.5</li>
         <li>Un <strong>umbral</strong> es la raya que decide qué hacer</li>
       </ul>
     </div>
@@ -44,8 +44,8 @@
       <h3>🧰 De antes, para hoy</h3>
       <ul>
         <li>El LED: actuador de luz, con su resistencia de 220 Ω (sesión 3)</li>
-        <li><code>for</code> para contar de a uno (sesión 6)</li>
-        <li><code>analogRead</code> y <code>map</code>: traducir rangos (sesión 6)</li>
+        <li>«contar» para ir de a uno… y el truco para bajar: 180 − ángulo (sesión 6)</li>
+        <li>«asignar … del rango … al rango …»: traducir rangos (sesión 6)</li>
         <li>El murciélago mide <strong>distancia</strong> (sesión 7)</li>
       </ul>
     </div>
@@ -96,9 +96,11 @@
         <button class="boton secundario chip" data-rgb="255,255,0">💛</button>
         <button class="boton secundario chip" data-rgb="255,255,255">⬜</button>
       </div>
-      <div class="ide" style="width:100%">
-        <div class="ide-barra"><span class="ide-nombre">la receta</span></div>
-        <pre style="font-size:.85rem; overflow:hidden; padding:.5em .7em"><span class="fn">color</span>(<span class="num-vivo" id="mz-cr">255</span>, <span class="num-vivo" id="mz-cg">120</span>, <span class="num-vivo" id="mz-cb">0</span>);</pre>
+      <p class="tuto-num">La receta en bloques</p>
+      <div class="pila" style="font-size:.9rem">
+        <span class="bloque avanzado">fijar pin <span class="valor">3</span> en <span class="valor" id="mz-cr">255</span></span>
+        <span class="bloque avanzado">fijar pin <span class="valor">5</span> en <span class="valor" id="mz-cg">120</span></span>
+        <span class="bloque avanzado">fijar pin <span class="valor">6</span> en <span class="valor" id="mz-cb">0</span></span>
       </div>
       <p class="nota">Cada color va del <strong>0</strong> (apagado) al <strong>255</strong> (a todo). ¿Rojo + verde? Con luz da <strong>amarillo</strong>, no café.<button class="sm" data-sm="luz-pintura">?</button></p>
     </aside>
@@ -108,8 +110,8 @@
 <!-- 5 · Medio encendido -->
 <section class="slide slide-concepto">
   <p class="eyebrow">Una idea nueva de programación</p>
-  <h2>Medio encendido: <code>analogWrite</code> ✨</h2>
-  <p class="grande" style="max-width:36em"><code>digitalWrite</code> solo sabe <strong>prendido</strong> o <strong>apagado</strong>. Para un LED «a medias» el cerebrito hace trampa: lo <strong>prende y apaga tan rápido</strong> que tu ojo ve un promedio.</p>
+  <h2>Medio encendido: el bloque «fijar pin» ✨</h2>
+  <p class="grande" style="max-width:36em">«encender LED» y «apagar LED» solo saben <strong>prendido</strong> o <strong>apagado</strong>. Para un LED «a medias» el cerebrito hace trampa: lo <strong>prende y apaga tan rápido</strong> que tu ojo ve un promedio.</p>
   <div class="tuto" style="align-items:center">
     <div class="pwm-caja">
       <svg viewBox="0 0 400 110" class="pwm-svg" aria-label="Pulsos de encendido y apagado">
@@ -121,42 +123,37 @@
     </div>
     <aside class="tuto-panel" style="align-items:center">
       <span class="pwm-led" id="pwm-led"></span>
-      <div class="ide" style="width:100%">
-        <div class="ide-barra"><span class="ide-nombre">brillo</span></div>
-        <pre style="font-size:.85rem; overflow:hidden; padding:.5em .7em"><span class="fn">analogWrite</span>(<span class="num">3</span>, <span class="num-vivo" id="pwm-num">128</span>);</pre>
-      </div>
+      <span class="bloque avanzado" style="font-size:1rem">fijar pin <span class="valor">3</span> en <span class="valor" id="pwm-num">128</span></span>
       <p class="nota" id="pwm-txt" style="margin:0">Mitad del tiempo prendido: brilla a la mitad.</p>
     </aside>
   </div>
-  <p class="nota">Solo los pines con <strong>~</strong> saben hacer este truco (3, 5, 6, 9, 10 y 11). Se llama <strong>PWM</strong>.<button class="sm" data-sm="pwm">?</button></p>
+  <p class="nota">Está en la categoría <strong>Avanzado</strong> y recibe un número del <strong>0</strong> al <strong>255</strong>. Solo los pines con <strong>~</strong> saben hacer este truco (3, 5, 6, 9, 10 y 11). Se llama <strong>PWM</strong>.<button class="sm" data-sm="pwm">?</button></p>
 </section>
 
-<!-- 6 · Tu propia orden -->
+<!-- 6 · Cada color, con su etiqueta -->
 <section class="slide slide-concepto">
   <p class="eyebrow">Una idea nueva de programación</p>
-  <h2>Inventa tu propia orden: la función 🪄</h2>
+  <h2>Cada color, con su etiqueta 🏷️</h2>
   <div class="tuto">
-    <div style="display:flex; flex-direction:column; gap:.7em; align-items:center">
-      <div class="sim-ide" style="flex:none; min-width:340px">
-        <div class="sim-titulo"><span class="sim-punto"></span>color.ino</div>
-        <div class="sim-editor lineas" style="height:auto">
-          <div class="ln"><span class="n">1</span><code><span class="kw">void</span> <span class="fn">color</span>(<span class="kw">int</span> r, <span class="kw">int</span> g, <span class="kw">int</span> b) {</code></div>
-          <div class="ln"><span class="n">2</span><code>  <span class="fn">analogWrite</span>(<span class="num">3</span>, r);   <span class="cm">// rojo</span></code></div>
-          <div class="ln"><span class="n">3</span><code>  <span class="fn">analogWrite</span>(<span class="num">5</span>, g);   <span class="cm">// verde</span></code></div>
-          <div class="ln"><span class="n">4</span><code>  <span class="fn">analogWrite</span>(<span class="num">6</span>, b);   <span class="cm">// azul</span></code></div>
-          <div class="ln"><span class="n">5</span><code>}</code></div>
-        </div>
+    <div style="display:flex; flex-direction:column; gap:.8em; align-items:center">
+      <div class="pila" style="font-size:clamp(1rem, 2.6vh, 1.25rem)">
+        <span class="bloque avanzado">comentario <span class="valor">naranjo</span></span>
+        <span class="bloque avanzado">fijar pin <span class="valor">3</span> en <span class="valor">255</span></span>
+        <span class="bloque avanzado">fijar pin <span class="valor">5</span> en <span class="valor">120</span></span>
+        <span class="bloque avanzado">fijar pin <span class="valor">6</span> en <span class="valor">0</span></span>
+        <span class="bloque">esperar <span class="valor">1</span> segundos</span>
       </div>
       <div class="fila" style="gap:.5em; justify-content:center">
-        <span class="anat"><code>void</code><br>no devuelve nada</span>
-        <span class="anat"><code>color</code><br>el nombre que inventaste</span>
-        <span class="anat"><code>(int r, int g, int b)</code><br>lo que le entregas</span>
+        <span class="anat"><strong>comentario</strong><br>una etiqueta para ti:<br>el Arduino no la lee</span>
+        <span class="anat"><strong>fijar pin 3, 5 y 6</strong><br>cuánto rojo, verde y azul</span>
+        <span class="anat"><strong>esperar</strong><br>cuánto dura el color</span>
       </div>
     </div>
     <aside class="tuto-panel">
-      <p class="tuto-num">Escribir una vez, usar mil</p>
-      <p class="tuto-texto">Cada color son <strong>tres líneas</strong>. Si las escribes una sola vez dentro de <code>color(…)</code>, después basta con decir <code>color(255, 120, 0);</code> ¡y listo, naranjo!</p>
-      <p class="nota"><code>setup</code> y <code>loop</code> también son funciones: la diferencia es que a esas dos el Arduino las llama solo.<button class="sm" data-sm="funcion">?</button></p>
+      <p class="tuto-num">Fácil de encontrar</p>
+      <p class="tuto-texto">Cada color son <strong>tres bloques</strong>, uno por patita. Encima, un <strong>comentario</strong> con su nombre: en un programa largo encuentras cada color de un vistazo.</p>
+      <button class="boton secundario" data-sm="mezcla" style="font-size:.9rem; padding:.4em .9em">📋 Las seis recetas</button>
+      <p class="nota">En C++ hay un atajo: inventar tu propia orden.<button class="sm" data-sm="funcion">?</button></p>
     </aside>
   </div>
 </section>
@@ -221,46 +218,30 @@
   <p class="eyebrow">Práctica 1</p>
   <h2>La respiración 🫁</h2>
   <div class="tuto">
-    <div class="sim-ide">
-      <div class="sim-titulo"><span class="sim-punto"></span>respiracion.ino</div>
-      <div class="sim-editor lineas">
-        <div class="ln"><span class="n">1</span><code><span class="kw">void</span> <span class="fn">loop</span>() {</code></div>
-        <div class="ln" data-r="0"><span class="n">2</span><code>  <span class="kw">for</span> (<span class="kw">int</span> b = <span class="num">0</span>; b &lt;= <span class="num">255</span>; b++) {   <span class="cm">// inhala</span></code></div>
-        <div class="ln" data-r="0"><span class="n">3</span><code>    <span class="fn">analogWrite</span>(<span class="num">3</span>, b);</code></div>
-        <div class="ln" data-r="0"><span class="n">4</span><code>    <span class="fn">delay</span>(<span class="num">5</span>);</code></div>
-        <div class="ln" data-r="0"><span class="n">5</span><code>  }</code></div>
-        <div class="ln" data-r="1"><span class="n">6</span><code>  <span class="kw">for</span> (<span class="kw">int</span> b = <span class="num">255</span>; b &gt;= <span class="num">0</span>; b--) {   <span class="cm">// exhala</span></code></div>
-        <div class="ln" data-r="1"><span class="n">7</span><code>    <span class="fn">analogWrite</span>(<span class="num">3</span>, b);</code></div>
-        <div class="ln" data-r="1"><span class="n">8</span><code>    <span class="fn">delay</span>(<span class="num">5</span>);</code></div>
-        <div class="ln" data-r="1"><span class="n">9</span><code>  }</code></div>
-        <div class="ln"><span class="n">10</span><code>}</code></div>
-      </div>
+    <div class="bloques-caja" style="flex:none; max-height:54vh">
+      <img class="bloques" src="../recursos/img/bloques/sesion-09/respiracion.png" alt="Bloques de la respiración: al iniciar; por siempre: comentario inhala: sube el brillo; contar brillo de 0 a 255: fijar pin 3 en brillo, esperar 0.005 segundos; comentario exhala: lo baja; contar brillo de 0 a 255: fijar pin 3 en 255 menos brillo, esperar 0.005 segundos">
     </div>
     <aside class="tuto-panel" style="align-items:center">
       <p class="tuto-num">Pruébala tú</p>
-      <p class="tuto-texto" id="resp-txt" style="min-height:3em">El <code>for</code> de la sesión 6 sube el brillo de 0 a 255 pasito a pasito… y otro <code>for</code> lo baja. El LED parece respirar.</p>
+      <p class="tuto-texto" id="resp-txt" style="min-height:3em">«contar» (el de la sesión 6) sube el brillo de 0 a 255 pasito a pasito… y otro «contar» lo baja. El LED parece respirar.</p>
       <span class="pwm-led" id="resp-led"></span>
-      <p class="lectura">brillo = <strong id="resp-val">0</strong></p>
+      <p class="lectura">pin 3 = <strong id="resp-val">0</strong></p>
       <button class="boton" id="resp-btn">▶ Respirar</button>
+      <button class="sm-grande" data-sm="sesion-09/respiracion">👀 Ver el código</button>
     </aside>
   </div>
-  <p class="nota">Fíjate en el <code>b--</code>: es el hermano de <code>a++</code>, pero <strong>resta</strong> uno. Programa completo: <code>sketches/sesion-09/respiracion</code>.</p>
+  <p class="nota">«contar» solo sabe subir: para bajar, el pin va en <span class="bloque operadores"><span class="valor">255</span> − <span class="bloque variables">brillo</span></span>. ¡El truco del servo de la sesión 6! Proyecto: <code>sketches/sesion-09/respiracion/respiracion.bloquino</code></p>
 </section>
 
 <!-- 9 · Práctica: la rueda de colores -->
 <section class="slide">
   <p class="eyebrow">Práctica 2</p>
   <h2>La rueda de colores con la perilla 🎛️🌈</h2>
+  <span class="bloque variables" style="font-size:.8rem">fijar <span class="valor">pos</span> en <span class="bloque operadores">asignar <span class="bloque avanzado">leer pin analógico <span class="valor">A0</span></span> del rango <span class="valor">0</span> - <span class="valor">1023</span> al rango <span class="valor">0</span> - <span class="valor">255</span></span></span>
   <div class="tuto">
-    <div class="sim-ide">
-      <div class="sim-titulo"><span class="sim-punto"></span>rueda_perilla.ino</div>
-      <div class="sim-editor lineas">
-        <div class="ln"><span class="n">1</span><code><span class="kw">void</span> <span class="fn">loop</span>() {</code></div>
-        <div class="ln"><span class="n">2</span><code>  <span class="kw">int</span> pos = <span class="fn">analogRead</span>(A0) / <span class="num">4</span>;   <span class="cm">// de 0-1023 a 0-255</span></code></div>
-        <div class="ln"><span class="n">3</span><code>  <span class="fn">rueda</span>(pos);                     <span class="cm">// ¡nuestra orden!</span></code></div>
-        <div class="ln"><span class="n">4</span><code>}</code></div>
-      </div>
-      <p class="nota" style="text-align:left; padding:.4em .9em 0"><code>rueda(pos)</code> es otra función inventada: recibe un número del 0 al 255 y elige el color del arcoíris que le toca.<button class="sm" data-sm="rueda-como">?</button></p>
+    <div class="tarjeta rueda-pasos">
+      <p><strong>1️⃣ Leer la perilla.</strong> «leer pin analógico A0» da un número de 0 a 1023; «asignar» lo traduce de 0 a 255 y lo guarda en la variable <strong>pos</strong>.</p>
+      <p><strong>2️⃣ La rueda.</strong> Dos «si / si no», uno dentro del otro, miran <strong>pos</strong>, eligen el tramo del arcoíris que le toca y fijan los pines 3, 5 y 6.<button class="sm" data-sm="rueda-como">?</button></p>
     </div>
     <aside class="tuto-panel" style="align-items:center">
       <div style="display:flex; align-items:center; gap:.8em">
@@ -273,14 +254,14 @@
         <span class="pwm-led" id="rueda-led"></span>
       </div>
       <input type="range" id="rueda-pot" min="0" max="1023" value="0" style="width:100%" aria-label="Giro de la perilla">
-      <p class="lectura">pos = <strong id="rueda-pos">0</strong> → <code id="rueda-col">color(255, 0, 0)</code></p>
+      <p class="lectura">pos = <strong id="rueda-pos">0</strong> → pines 3 · 5 · 6 = <strong id="rueda-col">255 · 0 · 0</strong></p>
       <div class="fila" style="gap:.5em">
         <button class="boton secundario" data-sm="rueda-circuito" style="font-size:.85rem; padding:.35em .8em">🔧 circuito</button>
         <button class="boton secundario" data-sm="rueda-codigo" style="font-size:.85rem; padding:.35em .8em">📋 programa</button>
       </div>
     </aside>
   </div>
-  <p class="nota">Gira la perilla despacio: el LED recorre <strong>todo el arcoíris</strong>. Programa completo: <code>sketches/sesion-09/rueda_perilla</code>.</p>
+  <p class="nota">Gira la perilla despacio: el LED recorre <strong>todo el arcoíris</strong>. Proyecto: <code>sketches/sesion-09/rueda_perilla/rueda_perilla.bloquino</code></p>
 </section>
 
 <!-- 10 · Proyecto: la lámpara de humor -->
@@ -290,8 +271,8 @@
   <p class="grande">Saca la perilla y pon al <strong>murciélago</strong>: la lámpara cambia de color según lo <strong>cerca</strong> que esté tu mano.</p>
   <div style="display:flex; flex-direction:column; gap:.4em; width:min(92vw,680px)">
     <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Armar el LED RGB y el HC-SR04 en la protoboard <button class="sm" data-sm="p-circuito">?</button></span></div>
-    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Subir el programa: la distancia manda a la rueda <button class="sm" data-sm="p-codigo">?</button></span></div>
-    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Probar: mano pegada = rojo 🔴, a medio camino = verde 🟢, lejos = azul 🔵</span></div>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Armar los bloques y probarlos con <strong>Iniciar simulación</strong>: la distancia manda a la rueda <button class="sm" data-sm="p-codigo">?</button></span></div>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt"><strong>Cargar a la placa</strong> y probar: mano pegada = rojo 🔴, a medio camino = verde 🟢, lejos = azul 🔵</span></div>
     <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Decorar: tápalo con un vaso plástico o papel blanco para que la luz se <strong>esparza</strong> 🥤</span></div>
   </div>
   <p class="nota">El papel o el vaso es el <strong>difusor</strong>: el mismo truco de las lámparas de verdad para que no se vea el puntito del LED.</p>
@@ -303,9 +284,9 @@
     <p class="eyebrow">⭐ Reto de la sesión</p>
     <h2>Elige tu aventura 🎯</h2>
     <ul class="lista">
-      <li>Nivel 1: la lámpara <strong>respira</strong> en tu color favorito (el <code>for</code> de la práctica 1, con tu receta)</li>
-      <li>Nivel 2: <strong>modo fiesta</strong> 🎉 — cada medio segundo un color al azar: <code>color(random(256), random(256), random(256));</code></li>
-      <li>Nivel experto: el <strong>arcoíris automático</strong> — que <code>pos</code> suba solito con <code>pos++</code> y vuelva a 0 al pasar de 255</li>
+      <li>Nivel 1: la lámpara <strong>respira</strong> en tu color favorito (los dos «contar» de la práctica 1, con tu receta)</li>
+      <li>Nivel 2: <strong>modo fiesta</strong> 🎉 — cada medio segundo un color al azar: cada pin con un <span class="bloque operadores">número al azar entre <span class="valor">0</span> y <span class="valor">255</span></span></li>
+      <li>Nivel experto: el <strong>arcoíris automático</strong> — que <strong>pos</strong> suba solito con <span class="bloque variables">cambiar <span class="valor">pos</span> por <span class="valor">1</span></span> y vuelva a 0 al pasar de 255</li>
     </ul>
   </div>
   <button class="sm-grande" data-sm="reto-sol">🔓 ¿Te trabaste? La solución (¡después de intentarlo!)</button>
@@ -322,7 +303,7 @@
       <div class="quiz-cara quiz-atras">Rojo, verde y azul: Red, Green, Blue 🔴🟢🔵</div>
     </div></div>
     <div class="quiz" tabindex="0"><div class="quiz-caras">
-      <div class="quiz-cara quiz-frente">¿Qué hace <code>analogWrite(3, 128)</code>?</div>
+      <div class="quiz-cara quiz-frente">¿Qué hace «fijar pin 3 en 128»?</div>
       <div class="quiz-cara quiz-atras">Prende el pin 3 «a la mitad»: lo prende y apaga rapidísimo ✨</div>
     </div></div>
     <div class="quiz" tabindex="0"><div class="quiz-caras">
@@ -330,11 +311,11 @@
       <div class="quiz-cara quiz-atras">¡Amarillo! La luz se suma, no se ensucia como la témpera 💛</div>
     </div></div>
     <div class="quiz" tabindex="0"><div class="quiz-caras">
-      <div class="quiz-cara quiz-frente">¿Para qué inventar una función como <code>color()</code>?</div>
-      <div class="quiz-cara quiz-atras">Para escribir las líneas una vez y usarlas mil veces 🪄</div>
+      <div class="quiz-cara quiz-frente">«contar» solo sube: ¿cómo bajas el brillo?</div>
+      <div class="quiz-cara quiz-atras">Fijando el pin en 255 − brillo: cuando brillo sube, eso baja 🔽</div>
     </div></div>
     <div class="quiz" tabindex="0"><div class="quiz-caras">
-      <div class="quiz-cara quiz-frente">¿Qué números acepta <code>analogWrite</code>?</div>
+      <div class="quiz-cara quiz-frente">¿Qué números acepta «fijar pin … en …»?</div>
       <div class="quiz-cara quiz-atras">Del 0 (apagado) al 255 (a todo) 🔢</div>
     </div></div>
   </div>
@@ -344,7 +325,7 @@
 <section class="slide portada">
   <p class="eyebrow">Lo lograste</p>
   <h1>¡Tu Arduino pinta con luz! 🎉</h1>
-  <p class="grande">Hoy mezclaste colores, inventaste tus propias órdenes…<br>y tu pieza tiene una <strong>lámpara de humor</strong> hecha por ti. 🪔</p>
+  <p class="grande">Hoy mezclaste colores, prendiste luces a medias…<br>y tu pieza tiene una <strong>lámpara de humor</strong> hecha por ti. 🪔</p>
   <div class="tarjeta" style="max-width:24em">
     <h3>Próxima sesión 🚂</h3>
     <p>El <strong>gran proyecto final</strong>: un paso a nivel de tren con luces, alarma y barrera. ¡Todo lo que aprendiste, junto!</p>
@@ -381,12 +362,19 @@
   .lectura { font-size: .9rem !important; color: var(--gris); }
   .lectura strong { font-family: var(--f-codigo); color: var(--teal-osc); }
 
+  /* ---------- bloques: categorías que slides.css no trae ---------- */
+  .pila { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; }
+  .rueda-pasos { max-width: 26em; text-align: left; display: flex; flex-direction: column; gap: .6em; }
+  /* popups con bloques de más de 900 px de ancho: a tamaño natural */
+  dialog.saber-mas:has(img.ancha) { max-width: min(96vw, 64em); }
+
   .proto-caja { flex: 1 1 30em; max-width: min(92vw, 40em); }
   .proto-caja svg { width: 100%; }
   .cable-w { fill: none; stroke-width: 7; stroke-linecap: round; }
 </style>
 
 <script src="assets/slides.js"></script>
+<script src="assets/codigo.js"></script>
 <script>
   const pleds = ["pled-r", "pled-a", "pled-v"].map(id => document.getElementById(id));
   let pi = 0;
@@ -395,7 +383,7 @@
     pi = (pi + 1) % 3;
   }, 700);
 
-  /* la rueda de colores: la misma cuenta que el sketch (pos 0-255 → r,g,b) */
+  /* la rueda de colores: la misma cuenta que los bloques (pos 0-255 → r,g,b) */
   function rueda(pos) {
     if (pos < 85) return [255 - pos * 3, pos * 3, 0];
     if (pos < 170) { pos -= 85; return [0, 255 - pos * 3, pos * 3]; }
@@ -462,15 +450,12 @@
         b += dir * 3;
         if (b >= 255) { b = 255; dir = -1; }
         if (b <= 0 && dir === -1) { b = 0; dir = 1; vueltas++; }
-        document.querySelectorAll(".ln[data-r]").forEach(l =>
-          l.classList.toggle("aqui", +l.dataset.r === (dir === 1 ? 0 : 1)));
-        $("resp-txt").innerHTML = dir === 1 ? "Inhala: el primer <code>for</code> sube el brillo… 🫁" : "Exhala: el segundo <code>for</code> lo baja… 😮‍💨";
+        $("resp-txt").textContent = dir === 1 ? "Inhala: el primer «contar» sube el brillo… 🫁" : "Exhala: el segundo «contar» fija el pin en 255 − brillo, que va bajando… 😮‍💨";
         $("resp-val").textContent = b;
         pintarLed($("resp-led"), 232, 72, 85, b / 255);
         if (vueltas === 2) {
           clearInterval(t); corriendo = false;
-          document.querySelectorAll(".ln[data-r]").forEach(l => l.classList.remove("aqui"));
-          $("resp-txt").innerHTML = "Dos respiraciones. En el Arduino de verdad no para nunca: es el <code>loop</code>.";
+          $("resp-txt").textContent = "Dos respiraciones. En el Arduino de verdad no para nunca: es el «por siempre».";
           $("resp-btn").textContent = "▶ Respirar de nuevo";
         }
       }, 16);
@@ -485,7 +470,7 @@
       const pos = Math.floor(v / 4), [r, g, b] = rueda(pos);
       $("rueda-perilla").style.transform = "rotate(" + (v / 1023 * 270 - 135) + "deg)";
       $("rueda-pos").textContent = pos;
-      $("rueda-col").textContent = `color(${r}, ${g}, ${b})`;
+      $("rueda-col").textContent = `${r} · ${g} · ${b}`;
       pintarLed($("rueda-led"), r, g, b, 1);
     }
     $("rueda-pot").addEventListener("input", e => pintar(+e.target.value));
@@ -520,7 +505,11 @@
   saberMas({
     "reto-sol": {
       t: "Las soluciones: la lámpara 🌈",
-      d: "<p class='aviso'>🔒 <strong>Recuerda hacer el desafío primero.</strong> Pelear un rato con el problema es donde más se aprende: esto es para comparar tu solución… o para destrabarte si llevas mucho rato. 💪</p><p>Las tres usan la orden <code>color(r, g, b)</code> de la práctica (y el arcoíris, también <code>rueda</code>): van completas en los sketches.</p><p><strong>🫁 Nivel 1: respira en tu color.</strong> La receta del morado es (150, 0, 255); <code>map</code> escala cada ingrediente según el brillo <code>b</code>.</p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>void loop() {\n  for (int b = 0; b &lt;= 255; b++) {        // inhala\n    color(map(b, 0, 255, 0, 150), 0, b);  // morado, de apagado a todo\n    delay(5);\n  }\n  for (int b = 255; b &gt;= 0; b--) {        // exhala\n    color(map(b, 0, 255, 0, 150), 0, b);\n    delay(5);\n  }\n}</code></pre><p><strong>🎉 Nivel 2: modo fiesta</strong></p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>void loop() {\n  color(random(256), random(256), random(256));   // random(256): un numero de 0 a 255\n  delay(500);\n}</code></pre><p><strong>🌈 Nivel experto: arcoíris automático.</strong> <code>pos</code> vive afuera del <code>loop</code> para que no se olvide, sube con <code>pos++</code> y vuelve a 0 al pasar de 255.</p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>int pos = 0;\n\nvoid setup() {\n}\n\nvoid loop() {\n  rueda(pos);\n  pos++;              // pos = pos + 1, escrito corto\n  if (pos &gt; 255) {\n    pos = 0;          // vuelta completa: a empezar de nuevo\n  }\n  delay(20);\n}</code></pre><p>Programas completos: <code>sketches/sesion-09/respira_color</code>, <code>fiesta</code> y <code>arcoiris</code>.</p>"
+      d: "<p class='aviso'>🔒 <strong>Recuerda hacer el desafío primero.</strong> Pelear un rato con el problema es donde más se aprende: esto es para comparar tu solución… o para destrabarte si llevas mucho rato. 💪</p><p>En las tres, cada color son los tres bloques «fijar pin» de los pines 3, 5 y 6, y el arcoíris lleva la rueda completa, igual que en la práctica 2.</p><p><strong>🫁 Nivel 1: respira en tu color.</strong> La receta del morado es (150, 0, 255). El azul (pin 6) sigue al <strong>brillo</strong>; el rojo (pin 3) llega solo hasta 150, así que «asignar» lo traduce de 0-255 a 0-150. El verde (pin 5) se apaga una vez, al iniciar.</p><img class='bloques ancha' src='../recursos/img/bloques/sesion-09/respira_color.png' alt='Bloques de respira_color: al iniciar fijar pin 5 en 0; por siempre: contar brillo de 0 a 255 fijando el pin 3 en asignar brillo del rango 0-255 al rango 0-150 y el pin 6 en brillo, esperar 0.005 segundos; luego lo mismo con 255 menos brillo'><button class='sm-grande' data-sm='sesion-09/respira_color'>👀 Ver el código</button><p><strong>🎉 Nivel 2: modo fiesta.</strong> Cada pin con su propio número al azar entre 0 y 255, y medio segundo de espera.</p><img class='bloques' src='../recursos/img/bloques/sesion-09/fiesta.png' alt='Bloques de fiesta: por siempre, fijar pin 3, 5 y 6 en número al azar entre 0 y 255, esperar 0.5 segundos'><button class='sm-grande' data-sm='sesion-09/fiesta'>👀 Ver el código</button><p><strong>🌈 Nivel experto: arcoíris automático.</strong> La rueda de la práctica 2, pero <strong>pos</strong> ya no viene de la perilla: después de la rueda, «cambiar pos por 1» lo sube, y un «si pos &gt; 255» lo devuelve a 0 para dar otra vuelta.</p><img class='bloques' src='../recursos/img/bloques/sesion-09/arcoiris.png' alt='Bloques del arcoíris: por siempre, la rueda de colores con pos, cambiar pos por 1, si pos mayor que 255 fijar pos en 0, esperar 0.02 segundos'><button class='sm-grande' data-sm='sesion-09/arcoiris'>👀 Ver el código</button><p class='nota'>Proyectos: <code>sketches/sesion-09/respira_color</code>, <code>fiesta</code> y <code>arcoiris</code> (cada uno con su <code>.bloquino</code>).</p>"
+    },
+    mezcla: {
+      t: "Las seis recetas 🎨",
+      d: "<p>Seis colores, uno detrás de otro: cada uno con su <strong>comentario</strong>, sus tres «fijar pin» y un segundo de espera. Son las mismas recetas de los botones de «La receta de cada color».</p><img class='bloques' src='../recursos/img/bloques/sesion-09/mezcla.png' alt='Bloques de mezcla: por siempre, seis colores (naranjo, morado, celeste, rosado, amarillo y blanco), cada uno con un comentario, fijar pin 3, 5 y 6 en su receta y esperar 1 segundos'><p class='nota'>Proyecto: <code>sketches/sesion-09/mezcla/mezcla.bloquino</code></p><button class='sm-grande' data-sm='sesion-09/mezcla'>👀 Ver el código</button>"
     },
     "rgb-ojos": {
       t: "¿Por qué justo rojo, verde y azul? 👀",
@@ -532,15 +521,15 @@
     },
     pwm: {
       t: "PWM: la trampa del medio encendido ✨",
-      d: "<p>Son siglas en inglés: <strong>P</strong>ulse <strong>W</strong>idth <strong>M</strong>odulation, «modular el ancho del pulso». Suena difícil, pero es esto: el pin se prende y apaga unas <strong>500 veces por segundo</strong>, y lo que cambia es <strong>cuánto rato</strong> queda prendido en cada vuelta.</p><p>Tu ojo no alcanza a ver el parpadeo y ve un <strong>promedio</strong>: 255 es siempre prendido, 0 siempre apagado, 128 la mitad.</p><p>No todos los pines saben hacerlo: en el UNO son los que tienen una <strong>~</strong> dibujada al lado: 3, 5, 6, 9, 10 y 11.</p>"
+      d: "<p>Son siglas en inglés: <strong>P</strong>ulse <strong>W</strong>idth <strong>M</strong>odulation, «modular el ancho del pulso». Suena difícil, pero es esto: el pin se prende y apaga unas <strong>500 veces por segundo</strong>, y lo que cambia es <strong>cuánto rato</strong> queda prendido en cada vuelta.</p><p>Tu ojo no alcanza a ver el parpadeo y ve un <strong>promedio</strong>: 255 es siempre prendido, 0 siempre apagado, 128 la mitad.</p><p>No todos los pines saben hacerlo: en el UNO son los que tienen una <strong>~</strong> dibujada al lado: 3, 5, 6, 9, 10 y 11.</p><p>En el C++ que escriben los bloques, «fijar pin 3 en 128» se escribe <code>analogWrite(3, 128)</code>.</p>"
     },
     funcion: {
-      t: "Las funciones: órdenes con nombre 🪄",
-      d: "<p>Una <strong>función</strong> es un pedacito de programa con nombre propio. Ya usaste muchas: <code>digitalWrite</code>, <code>tone</code>, <code>analogRead</code>… alguien las escribió una vez y tú las llamas por su nombre.</p><p>Hoy inventas una tuya. Lo que va entre paréntesis, <code>(int r, int g, int b)</code>, son sus <strong>ingredientes</strong>: cada vez que la llamas le pasas tres números y ella los usa adentro.</p><p><code>setup</code> y <code>loop</code> también son funciones, pero a esas dos <strong>el Arduino las llama solo</strong>: setup una vez al partir y loop para siempre. A las tuyas las llamas tú.</p>"
+      t: "En C++: inventa tu propia orden 🪄",
+      d: "<p>En bloques, cada color son tres «fijar pin». En C++, el texto que escriben los bloques, hay un atajo: inventar una <strong>función</strong>, un pedacito de programa con nombre propio. Los tres pasos se escriben una sola vez…</p><pre class='codigo'>void color(int r, int g, int b) {\n  analogWrite(3, r);   // rojo\n  analogWrite(5, g);   // verde\n  analogWrite(6, b);   // azul\n}</pre><p>…y después basta con decir <code>color(255, 120, 0);</code> ¡y listo, naranjo! Lo que va entre paréntesis son sus <strong>ingredientes</strong>: cada vez que la llamas le pasas tres números y ella los usa adentro.</p><p>Tus bloques ya viven dentro de funciones: lo de adentro de «por siempre» termina dentro de una función llamada <code>loop</code>, que <strong>el Arduino llama solo</strong>, una y otra vez.</p>"
     },
     "rueda-como": {
       t: "¿Cómo elige el color la rueda? 🌈",
-      d: "<p>El arcoíris se recorre en <strong>tres tramos</strong>, y en cada uno un color baja mientras el siguiente sube:</p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.8em;line-height:1.45'><code>void rueda(int pos) {          // pos: de 0 a 255\n  if (pos &lt; 85) {              // tramo 1: rojo → verde\n    color(255 - pos * 3, pos * 3, 0);\n  } else if (pos &lt; 170) {      // tramo 2: verde → azul\n    pos = pos - 85;\n    color(0, 255 - pos * 3, pos * 3);\n  } else {                     // tramo 3: azul → rojo\n    pos = pos - 170;\n    color(pos * 3, 0, 255 - pos * 3);\n  }\n}</code></pre><p>El <code>* 3</code> es porque cada tramo dura 85 pasos y 85 × 3 ≈ 255: así cada color alcanza a llegar de 0 a «todo». Es el mismo <code>if / else if / else</code> de los umbrales de la sesión 8.</p>"
+      d: "<p>El arcoíris se recorre en <strong>tres tramos</strong>, y en cada uno un color baja mientras el siguiente sube. Los dos «si / si no» eligen el tramo según <strong>pos</strong>:</p><ul style='padding-left:1.2em; display:grid; gap:.4em'><li><strong>si pos &lt; 85</strong> → rojo → verde: pin 3 en 255 − pos × 3, pin 5 en pos × 3, pin 6 en 0.</li><li><strong>si no, si pos &lt; 170</strong> → verde → azul: primero <strong>tramo</strong> = pos − 85; pin 3 en 0, pin 5 en 255 − tramo × 3, pin 6 en tramo × 3.</li><li><strong>si no</strong> → azul → rojo: <strong>tramo</strong> = pos − 170; pin 3 en tramo × 3, pin 5 en 0, pin 6 en 255 − tramo × 3.</li></ul><p>La variable <strong>tramo</strong> cuenta cuántos pasos llevas dentro del tramo, partiendo de 0. El <strong>× 3</strong> es porque cada tramo dura 85 pasos y 85 × 3 ≈ 255: así cada color alcanza a llegar de 0 a «todo». Es la misma pregunta encadenada de los umbrales de la sesión 8, y cada tramo empieza con un comentario para encontrarlo rápido.</p>"
     },
     "rueda-circuito": {
       t: "La perilla y el LED RGB en la protoboard 🔧",
@@ -561,7 +550,7 @@
     },
     "rueda-codigo": {
       t: "El programa completo 📋",
-      d: "<pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.78em;line-height:1.45'><code>void setup() {\n  // nada que preparar: analogWrite se arregla solo\n}\n\nvoid loop() {\n  int pos = analogRead(A0) / 4;   // de 0-1023 a 0-255\n  rueda(pos);\n}\n\nvoid color(int r, int g, int b) {\n  analogWrite(3, r);\n  analogWrite(5, g);\n  analogWrite(6, b);\n}\n\nvoid rueda(int pos) {\n  if (pos &lt; 85) {\n    color(255 - pos * 3, pos * 3, 0);\n  } else if (pos &lt; 170) {\n    pos = pos - 85;\n    color(0, 255 - pos * 3, pos * 3);\n  } else {\n    pos = pos - 170;\n    color(pos * 3, 0, 255 - pos * 3);\n  }\n}</code></pre><p>Fíjate: <strong>cuatro funciones</strong>. Dos las llama el Arduino (setup y loop) y dos las inventaste tú (color y rueda). El loop quedó de dos líneas porque el trabajo pesado vive en las tuyas. También está en <code>sketches/sesion-09/rueda_perilla</code>.</p>"
+      d: "<p>Arriba, un solo bloque lee la perilla y la guarda en <strong>pos</strong>. Todo lo demás es la <strong>rueda</strong>: tres tramos, cada uno con su comentario y sus tres «fijar pin».</p><img class='bloques ancha' src='../recursos/img/bloques/sesion-09/rueda_perilla.png' alt='Bloques de rueda_perilla: por siempre, fijar pos en asignar leer pin analógico A0 del rango 0-1023 al rango 0-255; si pos menor que 85, rojo a verde; si no, si pos menor que 170, verde a azul; si no, azul a rojo; cada tramo fija los pines 3, 5 y 6'><p class='nota'>Proyecto: <code>sketches/sesion-09/rueda_perilla/rueda_perilla.bloquino</code></p><button class='sm-grande' data-sm='sesion-09/rueda_perilla'>👀 Ver el código</button>"
     },
     "p-circuito": {
       t: "Así se ve armado completo 🔧",
@@ -582,7 +571,7 @@
     },
     "p-codigo": {
       t: "El programa completo 📋",
-      d: "<pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.76em;line-height:1.45'><code>void setup() {\n  pinMode(9, OUTPUT);    // TRIG\n  pinMode(10, INPUT);    // ECHO\n}\n\nvoid loop() {\n  // el bloque del murciélago, tal cual\n  digitalWrite(9, HIGH);\n  delayMicroseconds(10);\n  digitalWrite(9, LOW);\n  long tiempo = pulseIn(10, HIGH);\n  int distancia = tiempo * 0.034 / 2;\n\n  // recortamos: solo nos importa de 5 a 50 cm\n  if (distancia &lt; 5) distancia = 5;\n  if (distancia &gt; 50) distancia = 50;\n\n  // la distancia manda a la rueda\n  int pos = map(distancia, 5, 50, 0, 255);\n  rueda(pos);\n  delay(30);\n}\n\n// color() y rueda(): las mismas de la práctica 2</code></pre><p>Tres piezas que ya conoces, pegadas: el murciélago (sesión 7), <code>map</code> (sesión 6) y la rueda de hoy. Solo cambió <strong>quién manda</strong>: antes la perilla, ahora la mano. Completo con las dos funciones en <code>sketches/sesion-09/lampara_humor</code>.</p>"
+      d: "<img class='bloques ancha' src='../recursos/img/bloques/sesion-09/lampara_humor.png' alt='Bloques de la lámpara de humor: por siempre, fijar distancia en restringir distancia en cm (disparo 9, eco 10) entre 5 y 50; fijar pos en asignar distancia del rango 5-50 al rango 0-255; la rueda de colores; esperar 0.03 segundos'><p>Piezas que ya conoces, pegadas: el bloque del murciélago <strong>distancia en cm</strong> (sesión 7), «asignar» (sesión 6) y la rueda de hoy. Solo cambió <strong>quién manda</strong>: antes la perilla, ahora la mano.</p><p>Y una nueva: <strong>«restringir … entre 5 y 50»</strong> recorta la distancia. Si es menos de 5 queda en 5, si es más de 50 queda en 50: así «asignar» siempre recibe un número de 5 a 50.</p><p class='nota'>¿Sin mano adelante? El murciélago no oye eco y da 400 cm, que queda en 50… ¡azul! 🔵</p><p class='nota'>Proyecto: <code>sketches/sesion-09/lampara_humor/lampara_humor.bloquino</code></p><button class='sm-grande' data-sm='sesion-09/lampara_humor'>👀 Ver el código</button>"
     },
     neopixel: {
       t: "El aro de LEDs (NeoPixel) 💫",

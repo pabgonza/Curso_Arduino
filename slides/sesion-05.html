@@ -10,6 +10,7 @@
 <style>
   .repaso .tarjeta { text-align: left; max-width: 22em; }
   .repaso ul { padding-left: 1.1em; display: grid; gap: .35em; }
+  .bloque-grande { font-size: clamp(1.1rem, 3.4vh, 1.6rem); }
 </style>
 </head>
 <body>
@@ -36,17 +37,17 @@
       <h3>🕹️ Sesión 4: sentir y actuar</h3>
       <ul>
         <li>Los <strong>sensores</strong> le avisan al cerebrito; los <strong>actuadores</strong> cambian el mundo</li>
-        <li>El botón es un sensor: <code>pinMode(2, INPUT_PULLUP)</code> + <code>digitalRead</code>; apretado = <code>LOW</code> 👂</li>
-        <li><code>if / else</code>: una pregunta con <strong>dos caminos</strong></li>
-        <li>Una <strong>variable</strong> es una cajita para acordarse: <code>int contador</code></li>
+        <li>El botón es un sensor: se le pregunta con su bloque celeste 👂</li>
+        <li><strong>si … si no</strong>: una pregunta con <strong>dos caminos</strong></li>
+        <li>Una <strong>variable</strong> es una cajita para acordarse: <strong>contador</strong></li>
       </ul>
     </div>
     <div class="tarjeta">
       <h3>🧰 De antes, para hoy</h3>
       <ul>
         <li>Sentir → pensar → actuar: hoy, un <strong>actuador nuevo</strong> (sesión 1)</li>
-        <li><code>setup</code> corre una vez; <code>loop</code>, para siempre (sesión 2)</li>
-        <li><code>if</code> para decidir y <code>delay</code> para esperar (sesiones 2 y 4)</li>
+        <li><strong>al iniciar</strong> arranca una vez; <strong>por siempre</strong> repite sin parar (sesión 2)</li>
+        <li><strong>si</strong> para decidir y <strong>esperar</strong> para hacer pausas (sesiones 2 y 4)</li>
         <li>El botón, nuestro sensor del pin 2 (sesión 4)</li>
       </ul>
     </div>
@@ -117,20 +118,16 @@
   <p class="grande" style="max-width:32em">Hoy usamos el <strong>pasivo</strong>: es el único que puede hacer música. 🎹</p>
 </section>
 
-<!-- 6 · La orden nueva: tone -->
+<!-- 6 · El bloque nuevo: tocar nota -->
 <section class="slide">
-  <p class="eyebrow">Una orden nueva</p>
-  <h2>tone(): «vibra así de rápido» 🎚️</h2>
-  <div class="ide">
-    <div class="ide-barra"><span class="boton-ide">✓</span><span class="boton-ide">→</span><span class="ide-nombre">las dos órdenes de hoy</span></div>
-    <pre><span class="fn">tone</span>(<span class="num">8</span>, <span class="num">440</span>);   <span class="cm">// pin 8, 440 vibraciones por segundo</span>
-<span class="fn">delay</span>(<span class="num">500</span>);      <span class="cm">// deja que suene medio segundo</span>
-<span class="fn">noTone</span>(<span class="num">8</span>);       <span class="cm">// ¡silencio!</span></pre>
-  </div>
+  <p class="eyebrow">Un bloque nuevo</p>
+  <h2>tocar nota: «vibra así de rápido» 🎚️</h2>
+  <p class="bloque-grande"><span class="bloque sonido">tocar nota <span class="valor">la</span> por <span class="valor">0.5</span> segundos en pin <span class="valor">8</span></span></p>
+  <p class="nota">Está en la categoría <strong>Sonido</strong>, la rosada.</p>
   <div class="fila">
-    <div class="tarjeta"><h3>🎚️ El número</h3><p>Es la <strong>velocidad de la vibración</strong>. Más grande = más agudo.</p></div>
-    <div class="tarjeta"><h3>⏱️ El delay</h3><p><code>tone</code> no espera: sigue sonando <strong>mientras</strong> el programa avanza. El <code>delay</code> es lo que le da su duración.</p></div>
-    <div class="tarjeta"><h3>🤫 noTone</h3><p>Apaga el sonido. Sin él, ¡la última nota queda sonando para siempre!</p></div>
+    <div class="tarjeta"><h3>🎵 La nota</h3><p>Se elige del menú: do, re, mi… y más arriba, «do agudo», «re agudo»… Cada nota es una <strong>velocidad de vibración</strong><button class="sm" data-sm="notas">?</button>: más aguda = más rápido.</p></div>
+    <div class="tarjeta"><h3>⏱️ Los segundos</h3><p>Cuánto <strong>dura</strong> la nota. El programa espera a que termine antes de pasar al bloque siguiente.</p></div>
+    <div class="tarjeta"><h3>🤫 Se calla sola</h3><p>Cuando se acaba su tiempo, el buzzer queda en <strong>silencio</strong>. ¿Quieres una pausa entre notas? Usa <strong>esperar</strong>.</p></div>
   </div>
 </section>
 
@@ -139,11 +136,8 @@
   <p class="eyebrow">Pruébalo tú</p>
   <h2>Toca el piano 🎹</h2>
   <div class="piano" id="piano"></div>
-  <div class="ide" style="max-width:24em">
-    <div class="ide-barra"><span class="ide-nombre">lo que suena por dentro</span></div>
-    <pre><span class="fn">tone</span>(<span class="num">8</span>, <span class="num-vivo" id="piano-hz">262</span>);</pre>
-  </div>
-  <p class="grande" id="piano-txt">Cada nota tiene su número. ¡Toca las teclas y escucha!</p>
+  <p class="bloque-grande"><span class="bloque sonido">tocar nota <span class="valor" id="piano-nota">do</span> por <span class="valor">0.5</span> segundos en pin <span class="valor">8</span></span></p>
+  <p class="grande" id="piano-txt">Cada nota vibra a su propia velocidad. ¡Toca las teclas y escucha!</p>
 </section>
 
 <!-- 8 · El circuito -->
@@ -192,32 +186,16 @@
   <p class="eyebrow">¡A tocar!</p>
   <h2>Tu primera canción 🎼</h2>
   <div class="tuto">
-    <div class="sim-ide">
-      <div class="sim-titulo"><span class="sim-punto"></span>estrellita.ino | Arduino IDE 2</div>
-      <div class="sim-editor lineas">
-        <div class="ln"><span class="n">1</span><code><span class="kw">void</span> <span class="fn">setup</span>() { }  <span class="cm">// nada que preparar</span></code></div>
-        <div class="ln"><span class="n">2</span><code></code></div>
-        <div class="ln"><span class="n">3</span><code><span class="kw">void</span> <span class="fn">loop</span>() {</code></div>
-        <div class="ln" data-nota="0"><span class="n">4</span><code>  <span class="fn">tone</span>(<span class="num">8</span>, <span class="num">262</span>);  <span class="cm">// do</span></code></div>
-        <div class="ln" data-nota="0"><span class="n">5</span><code>  <span class="fn">delay</span>(<span class="num">400</span>);</code></div>
-        <div class="ln" data-nota="1"><span class="n">6</span><code>  <span class="fn">tone</span>(<span class="num">8</span>, <span class="num">262</span>);  <span class="cm">// do</span></code></div>
-        <div class="ln" data-nota="1"><span class="n">7</span><code>  <span class="fn">delay</span>(<span class="num">400</span>);</code></div>
-        <div class="ln" data-nota="2"><span class="n">8</span><code>  <span class="fn">tone</span>(<span class="num">8</span>, <span class="num">392</span>);  <span class="cm">// sol</span></code></div>
-        <div class="ln" data-nota="2"><span class="n">9</span><code>  <span class="fn">delay</span>(<span class="num">400</span>);</code></div>
-        <div class="ln" data-nota="3"><span class="n">10</span><code>  <span class="fn">tone</span>(<span class="num">8</span>, <span class="num">392</span>);  <span class="cm">// sol</span></code></div>
-        <div class="ln" data-nota="3"><span class="n">11</span><code>  <span class="fn">delay</span>(<span class="num">400</span>);</code></div>
-        <div class="ln"><span class="n">12</span><code>  <span class="cm">// … y siguen: la la sol</span></code></div>
-        <div class="ln"><span class="n">13</span><code>  <span class="fn">noTone</span>(<span class="num">8</span>);</code></div>
-        <div class="ln"><span class="n">14</span><code>  <span class="fn">delay</span>(<span class="num">1000</span>);</code></div>
-        <div class="ln"><span class="n">15</span><code>}</code></div>
-      </div>
+    <div style="display:flex; flex-direction:column; align-items:center; gap:.5em">
+      <img class="bloques" src="../recursos/img/bloques/sesion-05/estrellita.png" alt="Bloques de Estrellita: al iniciar; por siempre: tocar nota do por 0.4 segundos en pin 8, otra vez do, sol, sol, y esperar 1 segundos">
+      <button class="sm-grande" data-sm="sesion-05/estrellita">👀 Ver el código</button>
     </div>
     <aside class="tuto-panel">
       <p class="tuto-num">Estrellita, ¿dónde estás?</p>
-      <p class="tuto-texto" id="cancion-txt">La primera frase son siete notas. Aprieta ▶ y mira cómo el programa va bajando línea por línea.</p>
+      <p class="tuto-texto" id="cancion-txt">La primera frase son siete notas. Aprieta ▶ y sigue las notas: cada una es un bloque <strong>tocar nota</strong>.</p>
       <div class="partitura" id="partitura"></div>
       <button class="boton" id="tocar">▶ Tocar la canción</button>
-      <p class="nota">Para probarlo de verdad: carga <code>sketches/sesion-05/estrellita</code> en el IDE.</p>
+      <p class="nota">Para probarlo de verdad: abre <code>sketches/sesion-05/estrellita/<wbr>estrellita.bloquino</code> en Bloquino y aprieta <strong>Iniciar simulación</strong>.</p>
     </aside>
   </div>
 </section>
@@ -227,17 +205,12 @@
   <p class="eyebrow">Práctica rápida</p>
   <h2>La sirena de policía 🚓</h2>
   <div class="fila" style="align-items:center; gap:2em">
-    <div class="ide" style="max-width:24em">
-      <div class="ide-barra"><span class="ide-nombre">sirena.ino</span></div>
-      <pre><span class="fn">tone</span>(<span class="num">8</span>, <span class="num">440</span>);
-<span class="fn">delay</span>(<span class="num">300</span>);
-<span class="fn">tone</span>(<span class="num">8</span>, <span class="num">660</span>);
-<span class="fn">delay</span>(<span class="num">300</span>);</pre>
-    </div>
+    <img class="bloques" src="../recursos/img/bloques/sesion-05/sirena.png" alt="Bloques de la sirena: al iniciar; por siempre: tocar nota la por 0.3 segundos en pin 8, tocar nota mi agudo por 0.3 segundos en pin 8">
     <div style="display:flex; flex-direction:column; gap:.7em; max-width:20em">
-      <p class="grande">Dos notas que se turnan, rapidito. ¡Eso es todo!</p>
+      <p class="grande">Dos notas, <strong>la</strong> y <strong>mi agudo</strong>, que se turnan rapidito. ¡Eso es todo!</p>
       <button class="boton" id="sirena">🚓 Probar la sirena</button>
-      <p class="nota">¿Y si cambias el 300 por 80? ¿Y por 800?<br>Programa completo: <code>sketches/sesion-05/sirena</code>.</p>
+      <p class="nota">¿Y si cambias el 0.3 por 0.08? ¿Y por 0.8?<br>Proyecto: <code>sketches/sesion-05/sirena/<wbr>sirena.bloquino</code>.</p>
+      <button class="sm-grande" data-sm="sesion-05/sirena">👀 Ver el código</button>
     </div>
   </div>
 </section>
@@ -257,15 +230,15 @@
       </ul>
     </div>
     <div class="tarjeta" style="border-color:var(--ambar)">
-      <h3>El programa 💻</h3>
+      <h3>El bloque 🧩</h3>
       <ul>
-        <li><code>pinMode(2, INPUT_PULLUP)</code></li>
-        <li>Suelto = <code>HIGH</code></li>
-        <li>Apretado = <code>LOW</code> ¡al revés! 🙃</li>
+        <li><span class="bloque sensores">¿botón en pin 2 presionado?</span>, de <strong>Sensores</strong></li>
+        <li>Responde <strong>sí</strong> mientras lo aprietas</li>
+        <li>El pin lee al revés 🙃, pero el bloque lo da vuelta por ti</li>
       </ul>
     </div>
   </div>
-  <p class="nota">Por eso la pregunta es <code>if (digitalRead(2) == LOW)</code>: «¿lo están apretando?».</p>
+  <p class="nota">Por eso basta con <strong>si</strong> <span class="bloque sensores">¿botón en pin 2 presionado?</span>: «¿lo están apretando?».</p>
 </section>
 
 <!-- 12 · Proyecto -->
@@ -273,20 +246,14 @@
   <p class="eyebrow">⭐ Proyecto de la sesión</p>
   <h2>El timbre de tu pieza 🔔</h2>
   <p class="grande">Junta lo de hoy con lo de la sesión pasada: <strong>si</strong> aprietan el botón… <strong>suena</strong> la melodía.</p>
-  <div class="ide">
-    <div class="ide-barra"><span class="ide-nombre">timbre.ino</span></div>
-    <pre><span class="kw">if</span> (<span class="fn">digitalRead</span>(<span class="num">2</span>) == <span class="kw">LOW</span>) {   <span class="cm">// apretado = LOW</span>
-  <span class="fn">tone</span>(<span class="num">8</span>, <span class="num">523</span>);
-  <span class="fn">delay</span>(<span class="num">200</span>);
-  <span class="fn">tone</span>(<span class="num">8</span>, <span class="num">392</span>);
-  <span class="fn">delay</span>(<span class="num">400</span>);
-  <span class="fn">noTone</span>(<span class="num">8</span>);
-}</pre>
-  </div>
-  <button class="boton" id="ding">🔔 Escuchar el «ding-dong»</button>
-  <div class="fila" style="gap:.6em; margin-top:.3em">
-    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Armar el circuito: botón + buzzer <button class="sm" data-sm="p-circuito">?</button></span></div>
-    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Subir el programa completo <button class="sm" data-sm="p-codigo">?</button></span></div>
+  <div class="fila" style="align-items:center; gap:1.6em">
+    <img class="bloques" src="../recursos/img/bloques/sesion-05/timbre.png" alt="Bloques del timbre: al iniciar; por siempre: si botón en pin 2 presionado, tocar nota do agudo por 0.2 segundos en pin 8 y tocar nota sol por 0.4 segundos en pin 8" style="max-height:50vh">
+    <div style="display:flex; flex-direction:column; gap:.6em; align-items:flex-start; max-width:20em">
+      <button class="boton" id="ding">🔔 Escuchar el «ding-dong»</button>
+      <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Armar el circuito: botón + buzzer <button class="sm" data-sm="p-circuito">?</button></span></div>
+      <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Armar los bloques y cargarlos a la placa <button class="sm" data-sm="p-codigo">?</button></span></div>
+      <button class="sm-grande" data-sm="sesion-05/timbre">👀 Ver el código</button>
+    </div>
   </div>
 </section>
 
@@ -304,7 +271,7 @@
     </ul>
   </div>
   <button class="sm-grande" data-sm="reto-sol">🔓 ¿Te trabaste? La solución (¡después de intentarlo!)</button>
-  <p class="nota">Pista: cada botón va entre su pin y GND, con <code>INPUT_PULLUP</code> y sin resistencia: apretado se lee <code>LOW</code>.</p>
+  <p class="nota">Pista: cada botón va entre su pin y GND, sin resistencia, y tiene su propio <span class="bloque sensores">¿botón en pin … presionado?</span></p>
 </section>
 
 <!-- 14 · Quiz -->
@@ -317,20 +284,20 @@
       <div class="quiz-cara quiz-atras">Aire que tiembla, empujado por algo que vibra 🌬️</div>
     </div></div>
     <div class="quiz" tabindex="0"><div class="quiz-caras">
-      <div class="quiz-cara quiz-frente">Un número grande en <code>tone()</code> suena…</div>
-      <div class="quiz-cara quiz-atras">¡Agudo! Vibra más veces por segundo 🐦</div>
+      <div class="quiz-cara quiz-frente">¿Qué suena más agudo: «do» o «do agudo»?</div>
+      <div class="quiz-cara quiz-atras">«do agudo»: vibra el doble de veces por segundo 🐦</div>
     </div></div>
     <div class="quiz" tabindex="0"><div class="quiz-caras">
       <div class="quiz-cara quiz-frente">¿Cuál de los dos buzzers toca notas?</div>
       <div class="quiz-cara quiz-atras">El pasivo: al activo hay que dejarlo hacer «biip» 🔇</div>
     </div></div>
     <div class="quiz" tabindex="0"><div class="quiz-caras">
-      <div class="quiz-cara quiz-frente">¿Qué pasa si olvidas el <code>noTone</code>?</div>
-      <div class="quiz-cara quiz-atras">La última nota queda sonando… para siempre 😵</div>
+      <div class="quiz-cara quiz-frente">En «tocar nota do por 0.4 segundos», ¿qué dice el 0.4?</div>
+      <div class="quiz-cara quiz-atras">Cuánto dura la nota: después se calla solita ⏱️</div>
     </div></div>
     <div class="quiz" tabindex="0"><div class="quiz-caras">
-      <div class="quiz-cara quiz-frente">¿Quién decide cuánto dura una nota?</div>
-      <div class="quiz-cara quiz-atras">El <code>delay</code> que va después del tone ⏱️</div>
+      <div class="quiz-cara quiz-frente">¿Cómo haces un silencio entre dos notas?</div>
+      <div class="quiz-cara quiz-atras">Con «esperar … segundos»: mientras espera, el buzzer calla 🤫</div>
     </div></div>
   </div>
 </section>
@@ -396,6 +363,7 @@
 </style>
 
 <script src="assets/slides.js"></script>
+<script src="assets/codigo.js"></script>
 <script>
   const pleds = ["pled-r", "pled-a", "pled-v"].map(id => document.getElementById(id));
   let pi = 0;
@@ -458,7 +426,7 @@
   (function () {
     const NOTAS = [
       { n: "do", hz: 262 }, { n: "re", hz: 294 }, { n: "mi", hz: 330 }, { n: "fa", hz: 349 },
-      { n: "sol", hz: 392 }, { n: "la", hz: 440 }, { n: "si", hz: 494 }, { n: "do↑", hz: 523 }
+      { n: "sol", hz: 392 }, { n: "la", hz: 440 }, { n: "si", hz: 494 }, { n: "do↑", hz: 523, b: "do agudo" }
     ];
     const piano = document.getElementById("piano");
     NOTAS.forEach(nt => {
@@ -468,9 +436,9 @@
       t.addEventListener("pointerdown", () => {
         t.classList.add("abajo");
         sonar(nt.hz, 500);
-        document.getElementById("piano-hz").textContent = nt.hz;
+        document.getElementById("piano-nota").textContent = nt.b || nt.n;
         document.getElementById("piano-txt").innerHTML =
-          "Estás tocando <strong>" + nt.n + "</strong>: el buzzer vibra <strong>" + nt.hz + "</strong> veces por segundo.";
+          "Estás tocando <strong>" + (nt.b || nt.n) + "</strong>: el buzzer vibra <strong>" + nt.hz + "</strong> veces por segundo.";
       });
       ["pointerup", "pointerleave", "pointercancel"].forEach(ev =>
         t.addEventListener(ev, () => t.classList.remove("abajo")));
@@ -525,18 +493,15 @@
         timers.push(setTimeout(() => {
           chips.forEach(c => c.classList.remove("sonando"));
           chips[k].classList.add("sonando");
-          document.querySelectorAll(".ln[data-nota]").forEach(l =>
-            l.classList.toggle("aqui", +l.dataset.nota === k));
           sonar(nt.hz, nt.largo ? 750 : 380);
         }, t));
         t += nt.largo ? 800 : 420;
       });
       timers.push(setTimeout(() => {
         chips.forEach(c => c.classList.remove("sonando"));
-        document.querySelectorAll(".ln[data-nota]").forEach(l => l.classList.remove("aqui"));
         tocando = false;
         $("tocar").textContent = "▶ Tocar de nuevo";
-        $("cancion-txt").innerHTML = "¿La reconociste? Es <strong>Estrellita, ¿dónde estás?</strong> Las primeras cuatro notas están en el código; las otras tres son tu tarea. 😉";
+        $("cancion-txt").innerHTML = "¿La reconociste? Es <strong>Estrellita, ¿dónde estás?</strong> Las primeras cuatro notas están en los bloques; las otras tres (la, la, sol) son tu tarea. 😉";
       }, t + 200));
     });
   })();
@@ -562,11 +527,11 @@
   saberMas({
     pullup: {
       t: "La resistencia escondida: INPUT_PULLUP 🤫",
-      d: "<p>Un pin de entrada suelto «al aire» lee cualquier cosa. Por eso cada pin del Arduino trae <strong>su propia resistencia adentro</strong>, apagada. Con <code>pinMode(2, INPUT_PULLUP)</code> se enciende y <strong>tira el pin hacia arriba</strong>: suelto, lee <code>HIGH</code> solito.</p><p>Por eso el botón se conecta al <strong>GND</strong>: al apretar, gana el GND y el pin lee <code>LOW</code>. La lógica queda <strong>invertida</strong>: la pregunta pasa a ser <code>if (digitalRead(2) == LOW)</code>.</p><p>Se llama <em>pull-up</em> («que tira hacia arriba»). Todos los botones del curso van así: cortos de armar y sin piezas que se puedan soltar. 🔌</p>"
+      d: "<p>Un pin de entrada suelto «al aire» lee cualquier cosa. Por eso cada pin del Arduino trae <strong>su propia resistencia adentro</strong>, apagada. Al encenderla, <strong>tira el pin hacia arriba</strong>: suelto, lee <strong>HIGH</strong> solito.</p><p>Por eso el botón se conecta al <strong>GND</strong>: al apretar, gana el GND y el pin lee <strong>LOW</strong>. La lógica queda <strong>invertida</strong>… pero no tienes que hacer nada: el bloque <span class='bloque sensores'>¿botón en pin 2 presionado?</span> enciende la resistencia y da vuelta la respuesta por ti. (En el código verás <code>INPUT_PULLUP</code> y <code>== LOW</code>.)</p><p>Se llama <em>pull-up</em> («que tira hacia arriba»). Todos los botones del curso van así: cortos de armar y sin piezas que se puedan soltar. 🔌</p>"
     },
     "reto-sol": {
       t: "Las soluciones: tu caja de ruidos 🎛️",
-      d: "<p class='aviso'>🔒 <strong>Recuerda hacer el desafío primero.</strong> Pelear un rato con el problema es donde más se aprende: esto es para comparar tu solución… o para destrabarte si llevas mucho rato. 💪</p><p>Botones entre los pines 2, 3 y 4 y GND (sin resistencia: <code>INPUT_PULLUP</code>, apretado = <code>LOW</code>) y el buzzer en el 8.</p><p><strong>🎹 Nivel 1: tres notas</strong></p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>void setup() {\n  pinMode(2, INPUT_PULLUP);   // cada boton va entre su pin y GND\n  pinMode(3, INPUT_PULLUP);\n  pinMode(4, INPUT_PULLUP);\n}\n\nvoid loop() {\n  if (digitalRead(2) == LOW) {\n    tone(8, 262);   // do\n  }\n  if (digitalRead(3) == LOW) {\n    tone(8, 330);   // mi\n  }\n  if (digitalRead(4) == LOW) {\n    tone(8, 392);   // sol\n  }\n  if (digitalRead(2) == HIGH &amp;&amp; digitalRead(3) == HIGH &amp;&amp; digitalRead(4) == HIGH) {\n    noTone(8);      // nadie aprieta: silencio\n  }\n}</code></pre><p>Cada <code>if</code> mira su botón; el último pregunta «¿nadie aprieta?» (los tres en <code>HIGH</code>) con <code>&amp;&amp;</code> para hacer silencio.</p><p><strong>🎵 Nivel 2: melodías.</strong> Mismo <code>setup</code>; cada botón toca su secuencia y termina con <code>noTone</code>.</p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>void loop() {\n  if (digitalRead(2) == LOW) {    // boton 1: do - mi - sol\n    tone(8, 262);\n    delay(200);\n    tone(8, 330);\n    delay(200);\n    tone(8, 392);\n    delay(400);\n    noTone(8);\n  }\n  if (digitalRead(3) == LOW) {    // boton 2: sol - mi - do (al reves)\n    tone(8, 392);\n    delay(200);\n    tone(8, 330);\n    delay(200);\n    tone(8, 262);\n    delay(400);\n    noTone(8);\n  }\n  if (digitalRead(4) == LOW) {    // boton 3: la sirena\n    tone(8, 440);\n    delay(150);\n    tone(8, 660);\n    delay(150);\n    tone(8, 440);\n    delay(150);\n    tone(8, 660);\n    delay(150);\n    noTone(8);\n  }\n}</code></pre><p><strong>Nivel experto:</strong> anota tu canción en papel como pares (nota, tiempo) y pásala a <code>tone</code> + <code>delay</code>. El nivel secreto está en el otro popup. 🎁 Programas completos: <code>sketches/sesion-05/piano</code> y <code>piano_melodias</code>.</p>"
+      d: "<p class='aviso'>🔒 <strong>Recuerda hacer el desafío primero.</strong> Pelear un rato con el problema es donde más se aprende: esto es para comparar tu solución… o para destrabarte si llevas mucho rato. 💪</p><p>Botones entre los pines 2, 3 y 4 y GND (sin resistencia, como el del timbre) y el buzzer en el 8.</p><p><strong>🎹 Nivel 1: tres notas</strong></p><img class='bloques' src='../recursos/img/bloques/sesion-05/piano.png' alt='Bloques del piano: al iniciar; por siempre: si botón en pin 2 presionado, tocar nota do por 0.1 segundos en pin 8; si botón en pin 3, mi; si botón en pin 4, sol'><p>Un <strong>si</strong> por botón. Cada vuelta del <strong>por siempre</strong> toca la nota del botón apretado un ratito (0.1 segundos): mientras lo mantienes apretado, suena sin parar; al soltarlo, se calla solo.</p><p class='nota'>Proyecto: <code>sketches/sesion-05/piano/piano.bloquino</code></p><button class='sm-grande' data-sm='sesion-05/piano'>👀 Ver el código</button><p><strong>🎵 Nivel 2: melodías.</strong> Mismo circuito; ahora cada <strong>si</strong> toca varias notas seguidas: do-mi-sol, sol-mi-do (al revés) y la sirena.</p><img class='bloques' src='../recursos/img/bloques/sesion-05/piano_melodias.png' alt='Bloques del piano de melodías: al iniciar; por siempre: si botón en pin 2, do, mi y sol; si botón en pin 3, sol, mi y do; si botón en pin 4, la, mi agudo, la, mi agudo'><p class='nota'>Proyecto: <code>sketches/sesion-05/piano_melodias/piano_melodias.bloquino</code></p><button class='sm-grande' data-sm='sesion-05/piano_melodias'>👀 Ver el código</button><p><strong>Nivel experto:</strong> anota tu canción en papel como pares (nota, tiempo) y pásala a bloques <strong>tocar nota</strong>. El nivel secreto está en el otro popup. 🎁</p>"
     },
     "p-circuito": {
       t: "Así se ve armado completo 🔧",
@@ -582,11 +547,15 @@
         + "<circle cx='447' cy='196' r='30' fill='#37474F'/><circle cx='447' cy='196' r='9' fill='#546E7A'/><text x='460' y='222' text-anchor='middle' font-size='12' fill='#CFD8DC' font-family='monospace'>+</text>"
         + "<path d='M434 258 C 429 282, 429 306, 434 326' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>"
         + "<path d='M128 218 C 148 266, 160 318, 175 326' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>"
-        + "</svg><p>Izquierda: el botón, igual que en la sesión 4: el pin 2 llega a la columna de una patita y un cablecito lleva la columna de la otra al riel −. Sin 5V ni resistencia: el <code>INPUT_PULLUP</code> hace el trabajo. Derecha: el buzzer de hoy, pinchado a caballito del canal — el cable del pin 8 llega por fuera hasta la <strong>misma columna</strong> que su patita <strong>+</strong>, y un cablecito lleva la otra columna al riel −, que vuelve a GND. Sin resistencia: el buzzer no la necesita.</p>"
+        + "</svg><p>Izquierda: el botón, igual que en la sesión 4: el pin 2 llega a la columna de una patita y un cablecito lleva la columna de la otra al riel −. Sin 5V ni resistencia: la resistencia escondida del Arduino hace el trabajo. Derecha: el buzzer de hoy, pinchado a caballito del canal — el cable del pin 8 llega por fuera hasta la <strong>misma columna</strong> que su patita <strong>+</strong>, y un cablecito lleva la otra columna al riel −, que vuelve a GND. Sin resistencia: el buzzer no la necesita.</p>"
     },
     "p-codigo": {
       t: "El programa completo 📋",
-      d: "<pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.85em;line-height:1.5'><code>void setup() {\n  pinMode(2, INPUT_PULLUP);   // el botón avisa (va al GND)\n}\n\nvoid loop() {\n  if (digitalRead(2) == LOW) {   // apretado = LOW\n    tone(8, 523);   // ding\n    delay(200);\n    tone(8, 392);   // dong\n    delay(400);\n    noTone(8);\n  }\n}</code></pre><p>Con <code>INPUT_PULLUP</code> la pregunta va al revés: apretado es <code>LOW</code>. El buzzer no necesita <code>pinMode</code>: <code>tone()</code> se encarga solito. También está en <code>sketches/sesion-05/timbre</code>.</p>"
+      d: "<img class='bloques' src='../recursos/img/bloques/sesion-05/timbre.png' alt='Bloques del timbre: al iniciar; por siempre: si botón en pin 2 presionado, tocar nota do agudo por 0.2 segundos en pin 8 y tocar nota sol por 0.4 segundos en pin 8'><p>Si aprietan el botón: «ding» (do agudo) y «dong» (sol). Cada nota se calla sola, y el bloque del botón ya sabe que apretado se lee al revés.</p><p>Pruébalo con <strong>Iniciar simulación</strong>, haciendo clic en el botón de la pantalla. ¿Suena? Conecta tu Arduino y aprieta <strong>Cargar a la placa</strong>. 🔔</p><p class='nota'>Proyecto: <code>sketches/sesion-05/timbre/timbre.bloquino</code> (en Bloquino se abre con <strong>Abrir</strong>).</p><button class='sm-grande' data-sm='sesion-05/timbre'>👀 Ver el código</button>"
+    },
+    notas: {
+      t: "Las notas y sus vibraciones 🎼",
+      d: "<p>Cada nota del menú es una velocidad de vibración, en <strong>hertz</strong> (veces por segundo):</p><p>do 262 · re 294 · mi 330 · fa 349 · sol 392 · la 440 · si 494</p><p>do agudo 523 · re agudo 587 · mi agudo 659 · fa agudo 698 · sol agudo 784 · la agudo 880 · si agudo 988</p><p>¿Ves el truco? Cada nota «agudo» vibra <strong>el doble</strong> que la normal. En el código, <span class='bloque sonido'>tocar nota <span class='valor'>la</span> por <span class='valor'>0.5</span> segundos en pin <span class='valor'>8</span></span> se escribe <code>tone(8, 440, 500)</code>: pin, vibraciones y milisegundos.</p>"
     },
     hertz: {
       t: "Hertz (Hz): las vibraciones por segundo",
@@ -598,7 +567,7 @@
     },
     libreria5: {
       t: "El regalo: la librería BuzzerMusic 🎁",
-      d: "<p>Escribir Estrellita nota por nota fue trabajo… ¿te imaginas escribir <strong>toda</strong> la canción de Mario Bros? Alguien ya lo hizo — y la regaló. Eso es una <strong>librería</strong>: código listo que otra persona comparte para que tú lo uses. (En la próxima sesión las conoceremos en serio.)</p><p><strong>Instalarla</strong> (una sola vez): copia la carpeta <code>sketches/librerias/BuzzerMusic</code> del curso dentro de <code>Documentos → Arduino → libraries</code>, y vuelve a abrir el IDE.</p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.85em'><code>#include &lt;BuzzerMusic.h&gt;\n\nBuzzerMusic musica(8);\n\nvoid setup() {\n  musica.marioBros();\n}\n\nvoid loop() { }</code></pre><p>Trae cuatro canciones: <code>marioBros()</code>, <code>imperialMarch()</code> (Star Wars), <code>happyBirthday()</code> y <code>odeToJoy()</code>. El programa listo está en <code>sketches/sesion-05/cancion</code>.</p><p>¿Y agregar la tuya? Cada canción es una lista de pares (nota, duración). El README de la librería explica cómo — misión para valientes, con ayuda del profe. 😎</p>"
+      d: "<p>Escribir Estrellita nota por nota fue trabajo… ¿te imaginas escribir <strong>toda</strong> la canción de Mario Bros? Alguien ya lo hizo — y la regaló. Eso es una <strong>librería</strong>: código listo que otra persona comparte para que tú lo uses.</p><p>En Bloquino ya viene incluida: en <strong>Sonido</strong> está el bloque <strong>tocar canción</strong>. Eliges la canción del menú… ¡y listo!</p><img class='bloques' src='../recursos/img/bloques/sesion-05/cancion.png' alt='Bloques de la canción: al iniciar, tocar canción Mario Bros en pin 8'><p>Trae cuatro: <strong>Mario Bros</strong>, <strong>Marcha Imperial</strong> (Star Wars), <strong>Cumpleaños feliz</strong> e <strong>Himno de la Alegría</strong>. Cada una es una lista larguísima de pares (nota, duración), como tu caja de ruidos… pero alguien ya la escribió por ti. 😎</p><p class='nota'>Proyecto: <code>sketches/sesion-05/cancion/cancion.bloquino</code></p><button class='sm-grande' data-sm='sesion-05/cancion'>👀 Ver el código</button>"
     }
   });
 </script>

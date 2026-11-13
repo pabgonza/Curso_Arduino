@@ -21,9 +21,12 @@ presentaciones funcionan sin internet. Para agregar más, usar
 
 Abrir `slides/index.html` en el navegador. Cada sesión es un HTML standalone
 (navegación con flechas, espacio, o táctil; tecla `F` = pantalla completa).
-Enfoque didáctico: bloques + código en paralelo al inicio, con transición
-progresiva a solo código. Las siglas y los "cómo funciona por dentro" van en
-popups "¿Saber más?" que no interrumpen la clase.
+Enfoque didáctico: se programa con bloques en
+[Bloquino](../Plataforma_Arduino_Bloques/README.md) durante todo el curso; el
+C++ que generan los bloques se puede mirar en un popup «Ver el código». Las
+siglas y los "cómo funciona por dentro" van en popups "¿Saber más?" que no
+interrumpen la clase. Los programas en bloques se generan con
+`herramientas/bloques/`.
 
 ## Estado
 

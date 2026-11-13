@@ -3,17 +3,16 @@
 > Estado: PROPUESTA v2 en discusión (reestructurada tras feedback).
 > Cada sesión sigue el ciclo: mini-teoría (5-10 min) → práctica guiada (20-30 min)
 > → reto/juego → quiz de tarjetas → cierre. Todos los circuitos tienen versión
-> en simulador (Tinkercad) y en hardware real, con los mismos pines.
+> en simulador (Bloquino) y en hardware real, con los mismos pines.
 
 ## Patrones transversales
 
 - **"¿Saber más?"**: siglas (IDE, USB, COM, LED…), definiciones y el
   "cómo funciona por dentro" de cada componente viven en popups opcionales
   que no interrumpen el flujo de la presentación. Nada se asume sabido.
-- **Andamiaje progresivo** (bloques → código):
-  - S2-S4: bloques y código C++ generado, lado a lado (Tinkercad Blocks+Text).
-  - S5-S7: código como protagonista, "copiar y modificar"; bloques solo de apoyo.
-  - S8-S10: solo código.
+- **Bloques en todo el curso**, en Bloquino: cada programa se muestra como sus
+  bloques; el C++ que generan queda en un popup «Ver el código» para quien
+  quiera mirarlo (decisión 11).
 - **Cada componente nuevo** trae su mini-sección "¿Cómo funciona por dentro?"
   (corta, tipo popup o slide opcional al final).
 
@@ -28,12 +27,12 @@
 - Quiz: tarjetas de la historia + "¿tiene un cerebrito?" (objetos cotidianos).
 
 ## Sesión 2 — El taller del programador 🛠️
-**Objetivo**: entender qué es un IDE, dejar todo instalado y hacer el primer Blink.
-- ¿Qué es un IDE? (siglas explicadas: el taller donde se escribe, revisa y envía).
-- Paso a paso desde cero: instalar el IDE, conectar el USB, drivers, elegir
-  placa y puerto COM (con popups "¿Saber más?": USB, puerto, driver, sketch).
-- Primer programa con bloques en Tinkercad + el código que generan.
-- **Práctica**: Blink en simulador → subir el Blink real a la placa.
+**Objetivo**: conocer Bloquino, el taller del programador, y hacer el primer Blink.
+- Bloquino: armar, programar con bloques, simular y cargar a la placa.
+- Entrar desde el navegador (dirección de la pizarra, sin instalar nada) y
+  conocer la página; conectar el USB (popups "¿Saber más?": USB, puerto, driver).
+- Primer programa con bloques + el código C++ que generan («Bloques + Texto»).
+- **Práctica**: Blink en el simulador → cargarlo a la placa real.
 - **Reto**: hacer que el LED "lata como un corazón".
 
 ## Sesión 3 — Electricidad y protoboard 💧⚡
@@ -101,7 +100,7 @@
 
 ## Versión comprimida (si solo hay 8 sesiones)
 
-- S1 + S2 se fusionan (historia en 25 min + IDE y Blink en 60 min).
+- S1 + S2 se fusionan (historia en 25 min + Bloquino y Blink en 60 min).
 - S4 + S5 se fusionan (panorama sensores/actuadores en 25 min + botón y buzzer).
 
 ## Mapa de componentes por sesión
@@ -120,4 +119,4 @@
 | 10 | — (integración) | HC-SR04, servo, LEDs, buzzer |
 
 Todos los componentes están incluidos en el Elegoo UNO R3 Super Starter Kit
-y son simulables en Tinkercad Circuits.
+y son simulables en Bloquino.

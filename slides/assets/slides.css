@@ -494,6 +494,12 @@ dialog.saber-mas pre.codigo {
 .bloque.luces { background: #9966FF; }
 .bloque.sonido { background: #CF63CF; }
 .bloque.eventos { background: #FFBF00; }
+.bloque.movimiento { background: #4C97FF; }
+.bloque.sensores { background: #5CB1D6; }
+.bloque.serie { background: #0FBD8C; }
+.bloque.operadores { background: #59C059; }
+.bloque.variables { background: #FF8C1A; }
+.bloque.avanzado { background: #7F8C8D; }
 .bloque .valor {
   background: #fff;
   color: var(--tinta);

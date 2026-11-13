@@ -10,18 +10,18 @@
 <style>
   .repaso .tarjeta { text-align: left; max-width: 22em; }
   .repaso ul { padding-left: 1.1em; display: grid; gap: .35em; }
-  .lib-mock { display: flex; width: min(44vw, 24em); border: 3px solid var(--teal); border-radius: 14px; overflow: hidden; background: var(--blanco); text-align: left; font-size: .8rem; box-shadow: 0 10px 28px rgba(20,54,66,.16); }
-  .lib-barra { display: flex; flex-direction: column; gap: .6em; padding: .6em .4em; background: #F1F3F4; border-right: 1px solid #D8DEDD; font-size: 1.3em; }
-  .lib-barra span { opacity: .45; }
-  .lib-barra .activo { opacity: 1; outline: 3px solid var(--ambar); border-radius: 6px; }
-  .lib-panel { flex: 1; padding: .7em .9em; display: grid; gap: .5em; align-content: start; }
-  .lib-titulo { font-family: var(--f-titulo); font-size: .75em; letter-spacing: .08em; color: var(--gris); }
-  .lib-busca { border: 1px solid #B0BEC5; border-radius: 6px; padding: .3em .6em; background: #fff; }
-  .lib-card { border: 1px solid #D8DEDD; border-radius: 8px; padding: .5em .7em; display: grid; gap: .25em; }
-  .lib-fila { display: flex; justify-content: space-between; align-items: center; margin-top: .2em; }
-  .lib-ver { border: 1px solid #B0BEC5; border-radius: 4px; padding: .1em .4em; }
-  .lib-btn { background: var(--teal); color: #fff; font-weight: 700; border-radius: 4px; padding: .2em .8em; }
-  .lib-pasos { padding-left: 1.2em; display: grid; gap: .45em; max-width: 22em; text-align: left; }
+  /* bloques sueltos con los colores de Bloquino */
+  .bloque.operadores { background: #59C059; border-radius: 999px; }
+  .bloque .valor.var { background: #FF8C1A; color: #fff; }
+  .bloque.aqui { outline: 4px solid var(--ambar); outline-offset: 2px; }
+  .bloque-grande { font-size: clamp(1rem, 3vh, 1.45rem); }
+  .pila { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; }
+  /* lectura bloque por bloque del primer programa del servo */
+  .lectura { display: flex; flex-direction: column; gap: .45em; text-align: left; max-width: 30em; font-size: clamp(.9rem, 2.3vh, 1.1rem); }
+  .lectura p { padding: .2em .5em; border-left: 5px solid transparent; border-radius: 8px; }
+  .lectura p.ojo { background: #FFF6E3; border-left-color: var(--ambar); }
+  /* programas anchos (más de ~900 px): el popup se ensancha para que se lean */
+  dialog.saber-mas:has(img.ancho) { max-width: 96vw; }
 </style>
 </head>
 <body>
@@ -48,16 +48,16 @@
       <ul>
         <li>El sonido es <strong>aire que tiembla</strong>; más rápido = más agudo 🐦</li>
         <li>El buzzer es un <strong>actuador</strong> de sonido</li>
-        <li><code>tone(pin, nota)</code> lo hace sonar; <code>noTone</code> lo calla</li>
-        <li>La duración la pone el <code>delay</code> de después ⏱️</li>
+        <li><strong>tocar nota</strong> lo hace sonar… y se calla solo</li>
+        <li>Los segundos del bloque dicen cuánto dura cada nota ⏱️</li>
       </ul>
     </div>
     <div class="tarjeta">
       <h3>🧰 De antes, para hoy</h3>
       <ul>
-        <li>Sensor + decisión + actuador: botón, <code>if</code>, LED (sesión 4)</li>
-        <li>Variables <code>int</code> para guardar números (sesión 4)</li>
-        <li><code>HIGH</code> / <code>LOW</code> y <code>delay</code> (sesión 2)</li>
+        <li>Sensor + decisión + actuador: botón, <strong>si</strong>, LED (sesión 4)</li>
+        <li>Variables: cajitas para guardar números (sesión 4)</li>
+        <li><strong>encender</strong> / <strong>apagar</strong> y <strong>esperar</strong> (sesión 2)</li>
       </ul>
     </div>
   </div>
@@ -137,10 +137,8 @@
       <circle cx="150" cy="150" r="14" fill="#90A4AE"/>
     </svg>
     <div style="display:flex; flex-direction:column; gap:.7em; align-items:center">
-      <div class="ide">
-        <div class="ide-barra"><span class="ide-nombre">lo que ordena el programa</span></div>
-        <pre>miServo.<span class="fn">write</span>(<span class="num-vivo" id="ang-txt">90</span>);</pre>
-      </div>
+      <p class="nota">El bloque que lo ordena, de <strong>Movimiento</strong>:</p>
+      <p class="bloque-grande"><span class="bloque movimiento">mover servo en pin <span class="valor">9</span> a <span class="valor" id="ang-txt">90</span> °</span></p>
       <input type="range" id="angulo" min="0" max="180" value="90" aria-label="Ángulo del servo">
       <div class="fila" style="gap:.4em">
         <button class="boton" data-ang="0">0°</button>
@@ -152,26 +150,21 @@
   <p class="nota">El SG90 solo da media vuelta: de 0 a 180 grados. No puede dar vueltas completas.</p>
 </section>
 
-<!-- 6 · Librerías -->
+<!-- 6 · Tu primer programa con el servo -->
 <section class="slide slide-concepto">
-  <p class="eyebrow">Una palabra nueva</p>
-  <h2>Las librerías: código regalado 🎁</h2>
-  <p class="grande" style="max-width:34em">Mover un servo es complicadísimo por dentro. Pero alguien ya lo resolvió… <strong>y lo regaló</strong>. Eso es una <strong>librería</strong><button class="sm" data-sm="libreria">?</button>.</p>
-  <div class="ide">
-    <div class="ide-barra"><span class="boton-ide">✓</span><span class="boton-ide">→</span><span class="ide-nombre">servo.ino — completo en sketches/sesion-06/servo</span></div>
-    <pre><span class="cm">#include &lt;Servo.h&gt;</span>        <span class="cm">// pido la caja de herramientas</span>
-Servo miServo;           <span class="cm">// le pongo nombre a mi servo</span>
-<span class="kw">void</span> <span class="fn">setup</span>() {
-  miServo.<span class="fn">attach</span>(<span class="num">9</span>);      <span class="cm">// vive en el pin 9</span>
-}
-
-<span class="kw">void</span> <span class="fn">loop</span>() {
-  miServo.<span class="fn">write</span>(<span class="num">0</span>);       <span class="cm">// ¡al ángulo 0!</span>
-  <b style="background:#FFF6E3; font-weight:normal"><span class="fn">delay</span>(<span class="num">1000</span>);            <span class="cm">// ¡espera! dale tiempo de llegar</span></b>
-  miServo.<span class="fn">write</span>(<span class="num">180</span>);     <span class="cm">// ¡ahora al 180!</span>
-  <b style="background:#FFF6E3; font-weight:normal"><span class="fn">delay</span>(<span class="num">1000</span>);            <span class="cm">// y tiempo de volver</span></b>
-}</pre>
+  <p class="eyebrow">Tu primer programa con el servo</p>
+  <h2>¡Al 0… y ahora al 180! 🦾</h2>
+  <div class="fila" style="align-items:center; gap:1.6em">
+    <img class="bloques" src="../recursos/img/bloques/sesion-06/servo.png" alt="Bloques del servo: al iniciar; por siempre: mover servo en pin 9 a 0 grados, esperar 1 segundos, mover servo en pin 9 a 180 grados, esperar 1 segundos" style="max-height:52vh">
+    <div class="lectura">
+      <p><span class="bloque movimiento">mover servo en pin 9 a <span class="valor">0</span> °</span> ¡Al ángulo 0!</p>
+      <p class="ojo"><span class="bloque">esperar <span class="valor">1</span> segundos</span> ¡Espera! Dale tiempo de llegar ⏳</p>
+      <p><span class="bloque movimiento">mover servo en pin 9 a <span class="valor">180</span> °</span> ¡Ahora al 180!</p>
+      <p class="ojo"><span class="bloque">esperar <span class="valor">1</span> segundos</span> Y tiempo de volver.</p>
+      <button class="sm-grande" data-sm="sesion-06/servo" style="align-self:flex-start">👀 Ver el código</button>
+    </div>
   </div>
+  <p class="nota" style="max-width:40em">Por dentro, mover un servo es complicadísimo… pero alguien ya lo resolvió y lo regaló: una <strong>librería</strong><button class="sm" data-sm="libreria">?</button>. Proyecto: <code>sketches/sesion-06/servo/servo.bloquino</code></p>
 </section>
 
 <!-- 7 · Los tres cables -->
@@ -214,36 +207,32 @@ Servo miServo;           <span class="cm">// le pongo nombre a mi servo</span>
   </div>
 </section>
 
-<!-- 8 · El for (concepto) -->
+<!-- 8 · contar (concepto) -->
 <section class="slide slide-concepto">
   <p class="eyebrow">Una idea nueva de programación</p>
-  <h2>El for: repetir contando 🔁</h2>
-  <p class="grande" style="max-width:36em">Para mover el servo pasito a pasito habría que escribir <strong>181 líneas casi iguales</strong>. Mejor: decirle al cerebrito que <strong>repita él</strong>, contando. Esa orden es el <code>for</code>.</p>
+  <h2>contar: repetir contando 🔁</h2>
+  <p class="grande" style="max-width:36em">Para mover el servo pasito a pasito habría que poner <strong>181 bloques casi iguales</strong>. Mejor: decirle al cerebrito que <strong>repita él</strong>, contando. Ese bloque es <strong>contar</strong>, de <strong>Control</strong>.</p>
   <div class="tuto">
-    <div style="display:flex; flex-direction:column; gap:.7em; align-items:center">
-      <div class="sim-ide" style="flex:none; min-width:330px">
-        <div class="sim-titulo"><span class="sim-punto"></span>conteo.ino</div>
-        <div class="sim-editor lineas" style="height:auto">
-          <div class="ln"><span class="n">1</span><code><span class="kw">for</span> (<span class="kw">int</span> a = <span class="num">1</span>; a &lt;= <span class="num">5</span>; a++) {</code></div>
-          <div class="ln" id="for-cuerpo"><span class="n">2</span><code>  Serial.<span class="fn">println</span>(a);</code></div>
-          <div class="ln"><span class="n">3</span><code>}</code></div>
-        </div>
+    <div style="display:flex; flex-direction:column; gap:.9em; align-items:center">
+      <div class="pila bloque-grande">
+        <span class="bloque">contar <span class="valor var">a</span> de <span class="valor">1</span> a <span class="valor">5</span></span>
+        <span class="bloque serie" id="for-cuerpo" style="margin-left:1.5em">decir <span class="valor var">a</span></span>
       </div>
       <div class="fila" style="gap:.5em; justify-content:center">
-        <span class="anat"><code>int a = 1</code><br>parte en 1</span>
-        <span class="anat"><code>a &lt;= 5</code><br>¿sigo? hasta el 5</span>
-        <span class="anat"><code>a++</code><br>y suma 1</span>
+        <span class="anat"><code>a</code><br>la cajita que cuenta</span>
+        <span class="anat"><code>de 1</code><br>parte en 1</span>
+        <span class="anat"><code>a 5</code><br>¿sigo? hasta el 5</span>
       </div>
     </div>
     <aside class="tuto-panel">
       <button class="boton" id="for-btn">▶ Ejecutar</button>
       <div class="serial" style="flex:none; width:100%; max-width:100%">
-        <div class="serial-barra">🔍 Monitor serie · 9600</div>
+        <div class="serial-barra">🔍 Monitor serie</div>
         <div class="serial-lineas" id="for-serial" style="min-height:11em; max-height:11em"></div>
       </div>
     </aside>
   </div>
-  <p class="nota">La <code>a</code> es una cajita como las de la sesión 4: parte en 1 y el <code>a++</code> le suma uno en cada vuelta. Dos líneas de código… ¡y el cerebrito escribe cinco!</p>
+  <p class="nota">La <strong>a</strong> es una cajita como las de la sesión 4: parte en 1 y <strong>contar</strong> le suma uno en cada vuelta. Dos bloques… ¡y el cerebrito escribe cinco números! (En Bloquino se ven en el <strong>Monitor serie</strong>, bajo los bloques.)</p>
 </section>
 
 <!-- 9 · El barrido -->
@@ -251,30 +240,16 @@ Servo miServo;           <span class="cm">// le pongo nombre a mi servo</span>
   <p class="eyebrow">Práctica</p>
   <h2>El barrido: contar mientras se mueve 🔢</h2>
   <div class="tuto">
-    <div class="sim-ide">
-      <div class="sim-titulo"><span class="sim-punto"></span>barrido.ino — completo en sketches/sesion-06/barrido</div>
-      <div class="sim-editor lineas">
-        <div class="ln"><span class="n">1</span><code><span class="kw">void</span> <span class="fn">setup</span>() {</code></div>
-        <div class="ln"><span class="n">2</span><code>  miServo.<span class="fn">attach</span>(<span class="num">9</span>);</code></div>
-        <div class="ln"><span class="n">3</span><code>  miServo.<span class="fn">write</span>(<span class="num">0</span>);    <span class="cm">// a la partida…</span></code></div>
-        <div class="ln"><span class="n">4</span><code>  <span class="fn">delay</span>(<span class="num">500</span>);         <span class="cm">// …y llega antes de barrer</span></code></div>
-        <div class="ln"><span class="n">5</span><code>}</code></div>
-        <div class="ln"><span class="n">6</span><code><span class="kw">void</span> <span class="fn">loop</span>() {</code></div>
-        <div class="ln" id="ln-for"><span class="n">7</span><code>  <span class="kw">for</span> (<span class="kw">int</span> a = <span class="num">0</span>; a &lt;= <span class="num">180</span>; a++) {   <span class="cm">// de ida…</span></code></div>
-        <div class="ln" id="ln-write"><span class="n">8</span><code>    miServo.<span class="fn">write</span>(a);</code></div>
-        <div class="ln"><span class="n">9</span><code>    <span class="fn">delay</span>(<span class="num">15</span>);</code></div>
-        <div class="ln"><span class="n">10</span><code>  }</code></div>
-        <div class="ln" id="ln-for2"><span class="n">11</span><code>  <span class="kw">for</span> (<span class="kw">int</span> a = <span class="num">180</span>; a &gt;= <span class="num">0</span>; a--) {  <span class="cm">// …y de vuelta</span></code></div>
-        <div class="ln" id="ln-write2"><span class="n">12</span><code>    miServo.<span class="fn">write</span>(a);</code></div>
-        <div class="ln"><span class="n">13</span><code>    <span class="fn">delay</span>(<span class="num">15</span>);</code></div>
-        <div class="ln"><span class="n">14</span><code>  }</code></div>
-        <div class="ln"><span class="n">15</span><code>}</code></div>
+    <div style="display:flex; flex-direction:column; align-items:center; gap:.5em">
+      <div class="bloques-caja" style="max-height:52vh">
+        <img class="bloques" src="../recursos/img/bloques/sesion-06/barrido.png" alt="Bloques del barrido: al iniciar, mover servo en pin 9 a 0 grados y esperar 0.5 segundos; por siempre: contar ángulo de 0 a 180, mover servo a ángulo y esperar 0.015 segundos; contar ángulo de 0 a 180, mover servo a 180 menos ángulo y esperar 0.015 segundos">
       </div>
+      <p class="nota">Proyecto: <code>sketches/sesion-06/barrido/barrido.bloquino</code> · <button class="sm-grande" data-sm="sesion-06/barrido">👀 Ver el código</button></p>
     </div>
     <aside class="tuto-panel">
-      <p class="tuto-num">Dos <code>for</code>: ida y vuelta</p>
-      <p class="tuto-texto">Es como decir: «empieza en 0, sube de a uno hasta 180, y en cada número manda el servo ahí». El segundo <code>for</code> cuenta al revés: el viaje de vuelta también necesita su tiempo.</p>
-      <p class="grande">a = <strong id="contador">0</strong></p>
+      <p class="tuto-num">Dos «contar»: ida y vuelta</p>
+      <p class="tuto-texto">«Cuenta de 0 a 180 y manda el servo a cada número». El segundo <strong>contar</strong> manda a <strong>180 − ángulo</strong>: ¡la vuelta!</p>
+      <p class="grande">ángulo = <strong id="contador">0</strong> · servo en <strong id="pos">0</strong>°</p>
       <svg viewBox="0 0 200 120" class="servo-mini" aria-label="Servo barriendo">
         <rect x="70" y="80" width="60" height="34" rx="6" fill="#1565C0"/>
         <g id="brazo-barrido" style="transform-origin:100px 80px">
@@ -300,31 +275,28 @@ Servo miServo;           <span class="cm">// le pongo nombre a mi servo</span>
         </g>
         <circle cx="80" cy="80" r="14" fill="#607D8B"/>
       </svg>
-      <input type="range" id="pot" min="0" max="1023" value="512" aria-label="Giro de la perilla">
+      <input type="range" id="pot" min="0" max="100" value="50" aria-label="Giro de la perilla">
       <span class="nota">gírala</span>
     </div>
     <div style="display:flex; flex-direction:column; gap:.6em; max-width:24em">
-      <div class="ide">
-        <div class="ide-barra"><span class="ide-nombre">lo que lee el Arduino</span></div>
-        <pre><span class="kw">int</span> valor = <span class="fn">analogRead</span>(A0);
-<span class="cm">// valor = </span><span class="num-vivo" id="pot-val">512</span></pre>
-      </div>
-      <p class="grande">El botón solo sabía decir <strong>sí</strong> o <strong>no</strong>. La perilla dice <strong>cuánto</strong>: del <strong>0</strong> al <strong>1023</strong>.</p>
+      <p class="nota">Lo que lee el bloque, de <strong>Sensores</strong>:</p>
+      <p class="bloque-grande"><span class="bloque sensores">perilla en pin <span class="valor">A0</span></span> = <strong id="pot-val">50</strong></p>
+      <p class="grande">El botón solo sabía decir <strong>sí</strong> o <strong>no</strong>. La perilla dice <strong>cuánto</strong>: del <strong>0</strong> al <strong>100</strong>.</p>
       <p class="nota">Eso es una entrada <strong>analógica</strong><button class="sm" data-sm="analogico">?</button>: no es un interruptor, es un dimmer.</p>
     </div>
   </div>
   <p class="nota">¿Te acuerdas del <strong>espía</strong> que el servo lleva adentro para saber su ángulo? ¡Es justamente una de estas perillas! 🕵️</p>
 </section>
 
-<!-- 11 · map -->
+<!-- 11 · asignar -->
 <section class="slide slide-concepto">
   <p class="eyebrow">El traductor de números</p>
-  <h2>map(): del 0-1023 al 0-180 🔀</h2>
+  <h2>asignar: del 0-100 al 0-180 🔀</h2>
   <div class="mapa">
     <div class="barra-caja">
       <span class="barra-etiq">la perilla dice</span>
       <div class="barra"><div class="marca" id="marca-pot"></div></div>
-      <span class="barra-num">0 … <strong id="map-in">512</strong> … 1023</span>
+      <span class="barra-num">0 … <strong id="map-in">50</strong> … 100</span>
     </div>
     <div style="font-size:2em">⬇️</div>
     <div class="barra-caja">
@@ -333,14 +305,9 @@ Servo miServo;           <span class="cm">// le pongo nombre a mi servo</span>
       <span class="barra-num">0° … <strong id="map-out">90</strong>° … 180°</span>
     </div>
   </div>
-  <input type="range" id="pot2" min="0" max="1023" value="512" aria-label="Giro de la perilla">
-  <div class="ide">
-    <div class="ide-barra"><span class="ide-nombre">perilla.ino</span></div>
-    <pre><span class="kw">int</span> valor = <span class="fn">analogRead</span>(A0);
-<span class="kw">int</span> angulo = <span class="fn">map</span>(valor, <span class="num">0</span>, <span class="num">1023</span>, <span class="num">0</span>, <span class="num">180</span>);
-miServo.<span class="fn">write</span>(angulo);</pre>
-  </div>
-  <p class="nota">Programa completo: <code>sketches/sesion-06/perilla</code>.</p>
+  <input type="range" id="pot2" min="0" max="100" value="50" aria-label="Giro de la perilla">
+  <p style="font-size:clamp(.85rem, 2.4vh, 1.1rem)"><span class="bloque movimiento">mover servo en pin <span class="valor">9</span> a <span class="bloque operadores">asignar <span class="bloque sensores">perilla en pin <span class="valor">A0</span></span> del rango <span class="valor">0</span> - <span class="valor">100</span> al rango <span class="valor">0</span> - <span class="valor">180</span></span> °</span></p>
+  <p class="nota">El bloque verde <strong>asignar</strong>, de <strong>Operadores</strong>, traduce: lo que dice la perilla (0-100) pasa a grados (0-180).</p>
 </section>
 
 <!-- 12 · ¡Manos a la obra!: la perilla mueve el servo -->
@@ -366,12 +333,12 @@ miServo.<span class="fn">write</span>(angulo);</pre>
           <circle cx="100" cy="80" r="10" fill="#90A4AE"/>
         </svg>
       </div>
-      <input type="range" id="pot3" min="0" max="1023" value="512" aria-label="Giro de la perilla">
-      <p class="nota"><code>valor = <strong id="sim-val">512</strong></code> → <code>angulo = <strong id="sim-ang">90</strong>°</code></p>
+      <input type="range" id="pot3" min="0" max="100" value="50" aria-label="Giro de la perilla">
+      <p class="nota">perilla = <strong id="sim-val">50</strong> → servo en <strong id="sim-ang">90</strong>°</p>
     </div>
     <div style="display:flex; flex-direction:column; gap:.5em; max-width:26em">
       <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Armar el circuito: la perilla en la protoboard, el servo aparte <button class="sm" data-sm="perilla-circuito">?</button></span></div>
-      <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Subir el programa de la perilla <button class="sm" data-sm="perilla-codigo">?</button></span></div>
+      <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Armar los bloques de la perilla y cargarlos a la placa <button class="sm" data-sm="perilla-codigo">?</button></span></div>
       <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Probar: girar despacio y rápido — el brazo copia tu mano</span></div>
       <p class="nota">Acabas de armar un <strong>control con perilla</strong>, como el volumen de una radio… ¡pero que mueve cosas! 🕹️</p>
     </div>
@@ -400,7 +367,7 @@ miServo.<span class="fn">write</span>(angulo);</pre>
     </div>
     <div style="display:flex; flex-direction:column; gap:.5em; max-width:26em">
       <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Armar el circuito: botón, luz y el servo aparte <button class="sm" data-sm="p-circuito">?</button></span></div>
-      <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Subir el programa de la barrera <button class="sm" data-sm="p-codigo">?</button></span></div>
+      <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Armar los bloques de la barrera y cargarlos a la placa <button class="sm" data-sm="p-codigo">?</button></span></div>
       <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Probar: apretar → baja y parpadea; soltar → sube</span></div>
       <p class="nota">Es el corazón del proyecto final de la sesión 10. ¡Hoy ya lo tienes funcionando!</p>
     </div>
@@ -433,15 +400,15 @@ miServo.<span class="fn">write</span>(angulo);</pre>
       <div class="quiz-cara quiz-atras">El servo va a un ángulo exacto y se queda ahí 🎯</div>
     </div></div>
     <div class="quiz" tabindex="0"><div class="quiz-caras">
-      <div class="quiz-cara quiz-frente">¿Qué es una librería?</div>
-      <div class="quiz-cara quiz-atras">Código que alguien ya escribió y regaló 🎁</div>
+      <div class="quiz-cara quiz-frente">¿Por qué va un «esperar» después de «mover servo»?</div>
+      <div class="quiz-cara quiz-atras">Para darle tiempo de llegar al ángulo ⏳</div>
     </div></div>
     <div class="quiz" tabindex="0"><div class="quiz-caras">
-      <div class="quiz-cara quiz-frente">¿Qué números puede leer <code>analogRead</code>?</div>
-      <div class="quiz-cara quiz-atras">Del 0 al 1023 🎚️</div>
+      <div class="quiz-cara quiz-frente">¿Qué números da el bloque «perilla en pin A0»?</div>
+      <div class="quiz-cara quiz-atras">Del 0 al 100 🎚️</div>
     </div></div>
     <div class="quiz" tabindex="0"><div class="quiz-caras">
-      <div class="quiz-cara quiz-frente">¿Para qué sirve <code>map()</code>?</div>
+      <div class="quiz-cara quiz-frente">¿Para qué sirve el bloque «asignar … del rango … al rango …»?</div>
       <div class="quiz-cara quiz-atras">Para traducir de un rango de números a otro 🔀</div>
     </div></div>
     <div class="quiz" tabindex="0"><div class="quiz-caras">
@@ -451,39 +418,11 @@ miServo.<span class="fn">write</span>(angulo);</pre>
   </div>
 </section>
 
-<!-- 16 · Instalar una librería -->
-<section class="slide">
-  <p class="eyebrow">Para tu casa</p>
-  <h2>Cómo instalar una librería 📚</h2>
-  <p class="grande" style="max-width:34em">La librería <strong>Servo</strong> no viene instalada en el Arduino IDE nuevo: se baja desde el <strong>gestor de librerías</strong>. Una sola vez por computador.</p>
-  <div class="fila" style="align-items:center; gap:1.5em">
-    <div class="lib-mock" aria-label="Gestor de librerías del Arduino IDE 2">
-      <div class="lib-barra"><span>📁</span><span>🔲</span><span class="activo">📚</span><span>🐞</span><span>🔍</span></div>
-      <div class="lib-panel">
-        <p class="lib-titulo">LIBRARY MANAGER</p>
-        <div class="lib-busca">🔍 Servo</div>
-        <div class="lib-card">
-          <p><strong>Servo</strong> by Arduino</p>
-          <p class="nota">Allows Arduino boards to control a variety of servo motors.</p>
-          <div class="lib-fila"><span class="lib-ver">1.3.0 ▾</span><span class="lib-btn">INSTALL</span></div>
-        </div>
-      </div>
-    </div>
-    <ol class="lib-pasos">
-      <li>Toca el icono de los <strong>libros</strong> 📚 en la barra de la izquierda (o <code>Ctrl</code>+<code>Shift</code>+<code>I</code>)</li>
-      <li>Escribe <strong>Servo</strong> en el buscador</li>
-      <li>En «Servo by Arduino», aprieta <strong>INSTALL</strong></li>
-      <li>¡Listo! Ya puedes usar <code>#include &lt;Servo.h&gt;</code></li>
-    </ol>
-  </div>
-  <p class="nota">Mismo camino para la sesión 8: la librería <strong>DHT sensor library</strong> (de Adafruit). Si pregunta por otras que necesita, elige <strong>Install all</strong>.</p>
-</section>
-
-<!-- 17 · Cierre -->
+<!-- 16 · Cierre -->
 <section class="slide portada">
   <p class="eyebrow">Lo lograste</p>
   <h1>¡Tu Arduino se mueve! 🎉</h1>
-  <p class="grande">Hoy aprendiste ángulos, librerías y la perilla mágica…<br>y armaste la <strong>barrera</strong> del proyecto final.</p>
+  <p class="grande">Hoy aprendiste ángulos, a repetir contando y la perilla mágica…<br>y armaste la <strong>barrera</strong> del proyecto final.</p>
   <div class="tarjeta" style="max-width:24em">
     <h3>Próxima sesión 🦇</h3>
     <p>El <strong>murciélago</strong>: un sensor que mide distancias con ecos. ¡Y el sensor de retroceso para la bici!</p>
@@ -536,6 +475,7 @@ miServo.<span class="fn">write</span>(angulo);</pre>
 </style>
 
 <script src="assets/slides.js"></script>
+<script src="assets/codigo.js"></script>
 <script>
   const pleds = ["pled-r", "pled-a", "pled-v"].map(id => document.getElementById(id));
   let pi = 0;
@@ -576,7 +516,7 @@ miServo.<span class="fn">write</span>(angulo);</pre>
     poner(90);
   })();
 
-  /* ---- 7 · el for ---- */
+  /* ---- 7 · contar ---- */
   (function () {
     const btn = document.getElementById("for-btn");
     const ser = document.getElementById("for-serial");
@@ -612,50 +552,46 @@ miServo.<span class="fn">write</span>(angulo);</pre>
     boton.addEventListener("click", () => {
       if (t) { clearInterval(t); t = null; boton.textContent = "▶ Empezar el barrido"; return; }
       boton.textContent = "⏸ Detener";
-      document.getElementById("ln-for").classList.add("aqui");
       t = setInterval(() => {
         a += subiendo ? 4 : -4;
         if (a >= 180) { a = 180; subiendo = false; }
         if (a <= 0) { a = 0; subiendo = true; }
-        cont.textContent = a;
+        cont.textContent = subiendo ? a : 180 - a;   // los dos «contar» suben
+        document.getElementById("pos").textContent = a;
         brazo.style.transform = "rotate(" + (a - 90) + "deg)";
-        document.getElementById("ln-for").classList.toggle("aqui", subiendo);
-        document.getElementById("ln-for2").classList.toggle("aqui", !subiendo);
-        document.getElementById("ln-write").classList.toggle("aqui", subiendo && a % 8 === 0);
-        document.getElementById("ln-write2").classList.toggle("aqui", !subiendo && a % 8 === 0);
       }, 60);
     });
   })();
 
   /* ---- 9 y 10 · la perilla y el map ---- */
   (function () {
-    const girar = (el, v) => el.style.transform = "rotate(" + (v / 1023 * 270 - 135) + "deg)";
+    const girar = (el, v) => el.style.transform = "rotate(" + (v / 100 * 270 - 135) + "deg)";
     const pot = document.getElementById("pot");
     pot.addEventListener("input", e => {
       const v = +e.target.value;
       girar(document.getElementById("perilla"), v);
       document.getElementById("pot-val").textContent = v;
     });
-    girar(document.getElementById("perilla"), 512);
+    girar(document.getElementById("perilla"), 50);
 
     const pot2 = document.getElementById("pot2");
     function mapear(v) {
-      const ang = Math.round(v / 1023 * 180);
+      const ang = Math.round(v / 100 * 180);
       document.getElementById("map-in").textContent = v;
       document.getElementById("map-out").textContent = ang;
-      document.getElementById("marca-pot").style.left = (v / 1023 * 100) + "%";
+      document.getElementById("marca-pot").style.left = v + "%";
       document.getElementById("marca-ang").style.left = (ang / 180 * 100) + "%";
     }
     pot2.addEventListener("input", e => mapear(+e.target.value));
-    mapear(512);
+    mapear(50);
   })();
 
   /* ---- 11 · la perilla mueve el servo ---- */
   (function () {
     const pot3 = document.getElementById("pot3");
     function poner(v) {
-      const ang = Math.round(v / 1023 * 180);
-      document.getElementById("perilla-sim").style.transform = "rotate(" + (v / 1023 * 270 - 135) + "deg)";
+      const ang = Math.round(v / 100 * 180);
+      document.getElementById("perilla-sim").style.transform = "rotate(" + (v / 100 * 270 - 135) + "deg)";
       document.getElementById("brazo-perilla").style.transform = "rotate(" + (ang - 90) + "deg)";
       document.getElementById("sim-val").textContent = v;
       document.getElementById("sim-ang").textContent = ang;
@@ -695,7 +631,7 @@ miServo.<span class="fn">write</span>(angulo);</pre>
   saberMas({
     "reto-sol": {
       t: "Las soluciones: el brazo que saluda 👋",
-      d: "<p class='aviso'>🔒 <strong>Recuerda hacer el desafío primero.</strong> Pelear un rato con el problema es donde más se aprende: esto es para comparar tu solución… o para destrabarte si llevas mucho rato. 💪</p><p>Servo en el pin 9, como siempre. Un saludo es un barrido corto: de 60 a 120 grados y de vuelta.</p><p><strong>👋 Nivel 1: saluda sin parar</strong></p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>#include &lt;Servo.h&gt;\nServo brazo;\n\nint velocidad = 10;   // pausa entre grado y grado: 5 = frenetico, 30 = tranquilo\n\nvoid setup() {\n  brazo.attach(9);\n}\n\nvoid loop() {\n  for (int a = 60; a &lt;= 120; a++) {   // de ida\n    brazo.write(a);\n    delay(velocidad);\n  }\n  for (int a = 120; a &gt;= 60; a--) {   // y de vuelta\n    brazo.write(a);\n    delay(velocidad);\n  }\n}</code></pre><p>La cajita <code>velocidad</code> es la pausa entre grado y grado: 5 = frenético, 30 = tranquilo. ¿Solo cuando aprietas el botón? Botón entre el pin 2 y GND (<code>INPUT_PULLUP</code>, apretado = <code>LOW</code>) y el saludo adentro de un <code>if</code>:</p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>void loop() {\n  if (digitalRead(2) == LOW) {    // solo si alguien aprieta\n    for (int a = 60; a &lt;= 120; a++) {   // de ida\n      brazo.write(a);\n      delay(velocidad);\n    }\n    for (int a = 120; a &gt;= 60; a--) {   // y de vuelta\n      brazo.write(a);\n      delay(velocidad);\n    }\n    }\n}</code></pre><p><strong>🎚️ Nivel 2: la perilla manda la velocidad.</strong> Perilla en A0; <code>map</code> traduce 0-1023 a una pausa de 2 a 40.</p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>void loop() {\n  int velocidad = map(analogRead(A0), 0, 1023, 2, 40);   // de 0-1023 a una pausa de 2 a 40\n  for (int a = 60; a &lt;= 120; a++) {   // de ida\n    brazo.write(a);\n    delay(velocidad);\n  }\n  for (int a = 120; a &gt;= 60; a--) {   // y de vuelta\n    brazo.write(a);\n    delay(velocidad);\n  }\n}</code></pre><p><strong>📊 Nivel experto: el medidor</strong> es la perilla mágica de la práctica (<code>sketches/sesion-06/perilla</code>) con una aguja de papel pegada al brazo y una escala dibujada detrás, de 0 a 180. Programas completos: <code>sketches/sesion-06/saludo</code>, <code>saludo_boton</code> y <code>saludo_perilla</code>.</p>"
+      d: "<p class='aviso'>🔒 <strong>Recuerda hacer el desafío primero.</strong> Pelear un rato con el problema es donde más se aprende: esto es para comparar tu solución… o para destrabarte si llevas mucho rato. 💪</p><p>Servo en el pin 9, como siempre. Un saludo es un barrido corto: de 60 a 120 grados y de vuelta (con <strong>180 − ángulo</strong>, como en el barrido).</p><p><strong>👋 Nivel 1: saluda sin parar</strong></p><img class='bloques' src='../recursos/img/bloques/sesion-06/saludo.png' alt='Bloques del saludo: al iniciar, fijar velocidad en 0.01; por siempre: contar ángulo de 60 a 120, mover servo a ángulo y esperar velocidad segundos; contar ángulo de 60 a 120, mover servo a 180 menos ángulo y esperar velocidad segundos'><p>La cajita <strong>velocidad</strong> es la pausa entre grado y grado, en segundos: 0.005 = frenético, 0.03 = tranquilo.</p><p class='nota'>Proyecto: <code>sketches/sesion-06/saludo/saludo.bloquino</code></p><button class='sm-grande' data-sm='sesion-06/saludo'>👀 Ver el código</button><p>¿Solo cuando aprietas el botón? Botón entre el pin 2 y GND (sin resistencia) y los dos <strong>contar</strong> adentro de un <strong>si</strong> <span class='bloque sensores'>¿botón en pin 2 presionado?</span>:</p><img class='bloques' src='../recursos/img/bloques/sesion-06/saludo_boton.png' alt='Bloques del saludo con botón: igual que el saludo, pero los dos contar van adentro de si botón en pin 2 presionado'><p class='nota'>Proyecto: <code>sketches/sesion-06/saludo_boton/saludo_boton.bloquino</code></p><button class='sm-grande' data-sm='sesion-06/saludo_boton'>👀 Ver el código</button><p><strong>🎚️ Nivel 2: la perilla manda la velocidad.</strong> Perilla en A0. Lo que cambia: en cada vuelta, <strong>fijar velocidad</strong> usa <strong>asignar</strong> para traducir la perilla (0-100) a una pausa de 2 a 40 milésimas, y <strong>÷ 1000</strong> la pasa a segundos.</p><img class='bloques ancho' src='../recursos/img/bloques/sesion-06/saludo_perilla.png' alt='Bloques del saludo con perilla: al iniciar; por siempre: fijar velocidad en asignar perilla en pin A0 del rango 0-100 al rango 2-40, dividido por 1000; y los dos contar del saludo'><p class='nota'>Proyecto: <code>sketches/sesion-06/saludo_perilla/saludo_perilla.bloquino</code></p><button class='sm-grande' data-sm='sesion-06/saludo_perilla'>👀 Ver el código</button><p><strong>📊 Nivel experto: el medidor</strong> es la perilla mágica de la práctica (<code>sketches/sesion-06/perilla/perilla.bloquino</code>) con una aguja de papel pegada al brazo y una escala dibujada detrás, de 0 a 180.</p>"
     },
     engranajes: {
       t: "Los engranajes: cambiar velocidad por fuerza ⚙️",
@@ -703,17 +639,17 @@ miServo.<span class="fn">write</span>(angulo);</pre>
     },
     libreria: {
       t: "¿Qué es una librería?",
-      d: "<p>Es un <strong>paquete de código que alguien ya escribió</strong> y dejó disponible para todos. Al poner <code>#include &lt;Servo.h&gt;</code> le dices al IDE: «tráeme esa caja de herramientas».</p><p>Desde ese momento puedes usar órdenes nuevas como <code>attach</code> y <code>write</code>, sin saber cómo funcionan por dentro. Es como usar el microondas sin saber construir uno. 🍿</p><p>Hay librerías para casi todo: pantallas, sensores, tarjetas de memoria… y casi todas son <strong>gratis</strong>, igual que el propio Arduino.</p>"
+      d: "<p>Es un <strong>paquete de código que alguien ya escribió</strong> y dejó disponible para todos — como la de las canciones del buzzer en la sesión 5. 🎁</p><p>Para mover un servo hay que mandarle pulsos eléctricos muy precisos, ¡cincuenta veces por segundo! La librería <strong>Servo</strong> hace todo eso, y Bloquino la usa solita cada vez que pones <span class='bloque movimiento'>mover servo en pin <span class='valor'>9</span> a <span class='valor'>90</span> °</span>. Tú no instalas nada: es como usar el microondas sin saber construir uno. 🍿</p><p>¿Quieres verla? Aprieta «Ver el código» de cualquier programa de hoy: la primera línea, <code>#include &lt;Servo.h&gt;</code>, es la que pide esa caja de herramientas.</p><p>Hay librerías para casi todo: pantallas, sensores, tarjetas de memoria… y casi todas son <strong>gratis</strong>, igual que el propio Arduino.</p>"
     },
     "p-circuito": {
       t: "Así se arma la barrera 🔧",
-      d: "<p>La protoboard va <strong>como en el timbre de la sesión 5</strong>: el botón entre el pin 2 y GND (sin resistencia: <code>INPUT_PULLUP</code>) y la luz de la barrera al pin 13 (con su 220 Ω).</p>"
+      d: "<p>La protoboard va <strong>como en el timbre de la sesión 5</strong>: el botón entre el pin 2 y GND (sin resistencia: usa la escondida del Arduino) y la luz de la barrera al pin 13 (con su 220 Ω).</p>"
         + circuitoBotonLedSVG("el botón", "la luz de la barrera")
         + "<p>Y el servo aparte, con sus tres cables de siempre — él no necesita protoboard:</p><svg viewBox='0 0 620 300' style='width:100%; max-width:26em; display:block; margin:0 auto' aria-label='Servo conectado al Arduino con tres cables'><rect x='20' y='60' width='150' height='200' rx='12' fill='#00878F'/><text x='95' y='90' text-anchor='middle' fill='#fff' font-family='monospace' font-size='15'>ARDUINO</text><rect x='32' y='110' width='126' height='26' rx='4' fill='#143642'/><text x='95' y='128' text-anchor='middle' fill='#fff' font-family='monospace' font-size='13'>5V</text><rect x='32' y='160' width='126' height='26' rx='4' fill='#143642'/><text x='95' y='178' text-anchor='middle' fill='#fff' font-family='monospace' font-size='13'>GND</text><rect x='32' y='210' width='126' height='26' rx='4' fill='#143642'/><text x='95' y='228' text-anchor='middle' fill='#fff' font-family='monospace' font-size='13'>pin 9</text><rect x='430' y='110' width='120' height='90' rx='10' fill='#1565C0'/><circle cx='490' cy='110' r='18' fill='#90A4AE'/><rect x='484' y='55' width='12' height='56' rx='6' fill='#ECEFF1' stroke='#90A4AE' stroke-width='2'/><text x='490' y='225' text-anchor='middle' font-size='14' fill='#5E7480' font-family='Nunito, sans-serif'>servo SG90</text><path class='cable-w' d='M164 123 C 280 123, 320 140, 428 140' stroke='#E84855'/><path class='cable-w' d='M164 173 C 280 173, 320 160, 428 158' stroke='#6D4C41'/><path class='cable-w' d='M164 223 C 300 223, 340 180, 428 176' stroke='#FB8C00'/><text x='300' y='112' text-anchor='middle' font-size='13' fill='#E84855' font-family='Nunito, sans-serif'>rojo → 5V</text><text x='300' y='160' text-anchor='middle' font-size='13' fill='#6D4C41' font-family='Nunito, sans-serif'>café → GND</text><text x='300' y='248' text-anchor='middle' font-size='13' fill='#FB8C00' font-family='Nunito, sans-serif'>naranjo → pin 9</text></svg><p class='nota'>Truco: si los pines 5V y GND del Arduino ya están ocupados, el rojo y el café del servo pueden salir de los rieles + y − de la protoboard. 😉</p>"
     },
     "p-codigo": {
       t: "El programa completo 📋",
-      d: "<pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>#include &lt;Servo.h&gt;\nServo barrera;\n\nvoid setup() {\n  pinMode(2, INPUT_PULLUP);   // botón al GND\n  pinMode(13, OUTPUT);\n  barrera.attach(9);\n  barrera.write(90);   // barrera arriba al partir...\n  delay(500);          // ...y tiempo de llegar\n}\n\nvoid loop() {\n  if (digitalRead(2) == LOW) {   // apretado = LOW\n    barrera.write(0);          // barrera abajo\n    digitalWrite(13, HIGH);    // y la luz parpadea\n    delay(300);\n    digitalWrite(13, LOW);\n    delay(300);\n  } else {\n    barrera.write(90);         // barrera arriba\n    delay(300);                // esperamos que llegue\n    digitalWrite(13, LOW);\n  }\n}</code></pre><p>Junta todo lo de hoy: el if/else de la sesión 4, la librería Servo y los delay que le dan su tiempo al servo. También está en <code>sketches/sesion-06/barrera</code>.</p>"
+      d: "<img class='bloques' src='../recursos/img/bloques/sesion-06/barrera.png' alt='Bloques de la barrera: al iniciar, mover servo en pin 9 a 90 grados y esperar 0.5 segundos; por siempre: si botón en pin 2 presionado, mover servo a 0, encender LED en pin 13, esperar 0.3, apagar LED, esperar 0.3; si no, mover servo a 90, esperar 0.3 y apagar LED en pin 13'><p>Al partir, la barrera sube (90°) y espera a llegar. Después, para siempre: si aprietan el botón, baja (0°) y la luz parpadea; si no, sube y la luz se apaga.</p><p>Junta todo lo de hoy y de antes: el <strong>si … si no</strong> de la sesión 4, el servo y los <strong>esperar</strong> que le dan su tiempo para llegar. Pruébalo con <strong>Iniciar simulación</strong> (haz clic en el botón de la pantalla) y después <strong>Cargar a la placa</strong>.</p><p class='nota'>Proyecto: <code>sketches/sesion-06/barrera/barrera.bloquino</code> (en Bloquino se abre con <strong>Abrir</strong>).</p><button class='sm-grande' data-sm='sesion-06/barrera'>👀 Ver el código</button>"
     },
     servo5v: {
       t: "¿No es mucho pedirle energía al Arduino? 🔋",
@@ -721,7 +657,7 @@ miServo.<span class="fn">write</span>(angulo);</pre>
     },
     analogico: {
       t: "Digital y analógico",
-      d: "<p><strong>Digital</strong> es de dos estados: prendido o apagado, como el interruptor de la luz. Es lo que leía el botón: HIGH o LOW.</p><p><strong>Analógico</strong> es todo lo del medio: como el dimmer que sube y baja la luz de a poquito, o el volumen de la radio. El Arduino lo mide con un número del <strong>0 al 1023</strong>.</p><p>Los pines que pueden hacer esto son los que empiezan con <strong>A</strong>: A0, A1, A2… 🎚️</p>"
+      d: "<p><strong>Digital</strong> es de dos estados: prendido o apagado, como el interruptor de la luz. Es lo que leía el botón: presionado o no.</p><p><strong>Analógico</strong> es todo lo del medio: como el dimmer que sube y baja la luz de a poquito, o el volumen de la radio. Por dentro, el Arduino lo mide con un número del <strong>0 al 1023</strong>; el bloque <strong>perilla</strong> lo convierte a uno del <strong>0 al 100</strong>, como un porcentaje.</p><p>Los pines que pueden hacer esto son los que empiezan con <strong>A</strong>: A0, A1, A2… 🎚️</p>"
     },
     "perilla-circuito": {
       t: "Así se conecta la perilla 🎛️",
@@ -749,7 +685,7 @@ miServo.<span class="fn">write</span>(angulo);</pre>
     },
     "perilla-codigo": {
       t: "El programa de la perilla 📋",
-      d: "<pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>#include &lt;Servo.h&gt;\nServo miServo;\n\nvoid setup() {\n  miServo.attach(9);\n}\n\nvoid loop() {\n  int valor = analogRead(A0);                // de 0 a 1023\n  int angulo = map(valor, 0, 1023, 0, 180);  // traducido a grados\n  miServo.write(angulo);\n  delay(15);\n}\n</code></pre><p>Fíjate qué corto: el loop solo <strong>lee, traduce y ordena</strong>, miles de veces por segundo. Por eso el servo parece pegado a tu mano. También está en <code>sketches/sesion-06/perilla</code>.</p>"
+      d: "<img class='bloques ancho' src='../recursos/img/bloques/sesion-06/perilla.png' alt='Bloques de la perilla: al iniciar; por siempre: mover servo en pin 9 a asignar perilla en pin A0 del rango 0-100 al rango 0-180 grados, esperar 0.015 segundos'><p>Fíjate qué corto: el <strong>por siempre</strong> solo <strong>lee, traduce y ordena</strong>, muchísimas veces por segundo. Por eso el servo parece pegado a tu mano.</p><p>Pruébalo con <strong>Iniciar simulación</strong>, girando la perilla de la pantalla, y después <strong>Cargar a la placa</strong>.</p><p class='nota'>Proyecto: <code>sketches/sesion-06/perilla/perilla.bloquino</code></p><button class='sm-grande' data-sm='sesion-06/perilla'>👀 Ver el código</button>"
     }
   });
 </script>

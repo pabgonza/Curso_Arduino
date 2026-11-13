@@ -10,6 +10,7 @@
 <style>
   .repaso .tarjeta { text-align: left; max-width: 22em; }
   .repaso ul { padding-left: 1.1em; display: grid; gap: .35em; }
+  /* colores de Bloquino que slides.css no trae */
 </style>
 </head>
 <body>
@@ -35,17 +36,17 @@
       <h3>🦇 Sesión 7: el murciélago</h3>
       <ul>
         <li>El HC-SR04 es un sensor: <strong>grita</strong> (TRIG) y escucha el <strong>eco</strong> (ECHO)</li>
-        <li><code>pulseIn</code> mide cuánto tardó el eco</li>
+        <li>El bloque «distancia en cm» cronometra el eco y hace la cuenta por ti</li>
         <li>Se divide entre 2: el grito <strong>va y vuelve</strong> ↔️</li>
-        <li>Un número en una variable sirve para <strong>decidir</strong> con <code>if</code></li>
+        <li>Un número en una variable sirve para <strong>decidir</strong> con «si»</li>
       </ul>
     </div>
     <div class="tarjeta">
       <h3>🧰 De antes, para hoy</h3>
       <ul>
-        <li>Monitor serie: <code>Serial.begin</code> y <code>Serial.println</code> (sesión 4)</li>
-        <li><code>if / else</code> para decidir según un número (sesiones 4 y 7)</li>
-        <li>Librerías con <code>#include</code> (sesión 6)</li>
+        <li>Monitor serie: el bloque «decir» (sesión 4)</li>
+        <li>«si / si no» para decidir según un número (sesiones 4 y 7)</li>
+        <li>Variables: cajitas que guardan un número (sesiones 4 y 7)</li>
         <li>El LED: actuador de luz, con su resistencia (sesión 3)</li>
       </ul>
     </div>
@@ -66,7 +67,7 @@
       <ul class="lista">
         <li>🌡️ Mide la <strong>temperatura</strong>: cuántos grados hace.</li>
         <li>💧 Y de regalo, la <strong>humedad</strong>: cuánta agua flota en el aire.<button class="sm" data-sm="dht-dentro">?</button></li>
-        <li>🗣️ Es un sensor <strong>conversador</strong>: no manda un simple voltaje, manda un <strong>mensajito con números</strong>. Por eso usa una <strong>librería</strong>, como el servo.</li>
+        <li>🗣️ Es un sensor <strong>conversador</strong>: no manda un simple voltaje, manda un <strong>mensajito con números</strong>. Para entenderlo hace falta una <strong>librería</strong><button class="sm" data-sm="libreria8">?</button>… que en Bloquino ya viene puesta. 🎁</li>
       </ul>
       <p class="nota">Tres patitas, marcadas en el módulo: <strong>S</strong> (la señal: el mensajito, al <strong>pin 2</strong>), <strong>+</strong> (5V) y <strong>−</strong> (GND).</p>
     </div>
@@ -86,64 +87,42 @@
     </div>
     <aside class="tuto-panel">
       <p class="tuto-num">El Arduino te escribe</p>
-      <p class="tuto-texto">Lo conociste en la sesión 4, espiando el botón. Con <code>Serial.println</code> el Arduino manda frases por el cable USB al <strong>monitor serie</strong> (la lupita 🔍)… y hoy las frases traen <strong>grados</strong>.</p>
+      <p class="tuto-texto">Lo conociste en la sesión 4, espiando el botón. Con el bloque <span class="bloque serie">decir</span> el Arduino manda frases por el cable USB al <strong>Monitor serie</strong>, bajo los bloques del panel Código… y hoy las frases traen <strong>grados</strong>.</p>
       <button class="boton" id="btn-serial">▶ Abrir el monitor serie</button>
-      <p class="nota">Antes hay que decirle la velocidad en el setup: <code>Serial.begin(9600)</code>. Si el monitor usa otra, ¡se leen puros jeroglíficos! 🗿</p>
+      <p class="nota">Los dos lados conversan a la misma velocidad: <strong>9600</strong>. Bloquino la pone solito; si no coincidiera, ¡se leerían puros jeroglíficos! 🗿</p>
     </aside>
   </div>
 </section>
 
-<!-- 5 · El código completo -->
+<!-- 5 · Los bloques del termómetro -->
 <section class="slide">
-  <p class="eyebrow">Solo código: ya estás grande</p>
-  <h2>El código del termómetro 📋</h2>
-  <div class="tuto">
-    <div class="sim-ide">
-      <div class="sim-titulo"><span class="sim-punto"></span>termometro.ino</div>
-      <div class="sim-editor lineas">
-        <div class="ln" data-paso="0"><span class="n">1</span><code><span class="cm">#include &lt;DHT.h&gt;</span></code></div>
-        <div class="ln" data-paso="0"><span class="n">2</span><code>DHT dht(<span class="num">2</span>, DHT11);</code></div>
-        <div class="ln"><span class="n">3</span><code><span class="kw">void</span> <span class="fn">setup</span>() {</code></div>
-        <div class="ln" data-paso="1"><span class="n">4</span><code>  Serial.<span class="fn">begin</span>(<span class="num">9600</span>);</code></div>
-        <div class="ln" data-paso="0"><span class="n">5</span><code>  dht.<span class="fn">begin</span>();</code></div>
-        <div class="ln"><span class="n">6</span><code>}</code></div>
-        <div class="ln"><span class="n">7</span><code><span class="kw">void</span> <span class="fn">loop</span>() {</code></div>
-        <div class="ln" data-paso="2"><span class="n">8</span><code>  <span class="kw">float</span> t = dht.<span class="fn">readTemperature</span>();</code></div>
-        <div class="ln" data-paso="1"><span class="n">9</span><code>  Serial.<span class="fn">print</span>(<span class="st">"Temperatura: "</span>);</code></div>
-        <div class="ln" data-paso="1"><span class="n">10</span><code>  Serial.<span class="fn">println</span>(t);</code></div>
-        <div class="ln"><span class="n">11</span><code>  <span class="fn">delay</span>(<span class="num">1000</span>);</code></div>
-        <div class="ln"><span class="n">12</span><code>}</code></div>
-      </div>
+  <p class="eyebrow">Tres bloques y listo</p>
+  <h2>Los bloques del termómetro 🧩</h2>
+  <div class="tuto" style="align-items:center">
+    <div style="display:flex; flex-direction:column; align-items:center; gap:.6em">
+      <img class="bloques" src="../recursos/img/bloques/sesion-08/termometro.png" alt="Bloques del termómetro: al iniciar; por siempre: decir Temperatura: sin saltar de línea, decir temperatura en °C (DHT11 en pin 2), esperar 1 segundos">
+      <button class="sm-grande" data-sm="sesion-08/termometro">👀 Ver el código</button>
     </div>
     <aside class="tuto-panel">
-      <p class="tuto-num" id="t8-num">Tres equipos de líneas</p>
-      <p class="tuto-texto" id="t8-txt">Toca cada equipo para ver sus líneas. Ya conoces casi todo: librería, setup, loop…</p>
+      <p class="tuto-num" id="t8-num">Tres bloques</p>
+      <p class="tuto-texto" id="t8-txt">Toca cada uno para ver qué hace. Ya conoces casi todo: «al iniciar», «por siempre», «decir»…</p>
       <div class="fila" style="gap:.5em">
         <button class="boton secundario" data-cp="0">🌡️ sensor</button>
         <button class="boton secundario" data-cp="1">💬 hablar</button>
-        <button class="boton secundario" data-cp="2">📦 guardar</button>
+        <button class="boton secundario" data-cp="2">⏳ esperar</button>
       </div>
     </aside>
   </div>
-  <p class="nota"><code>float</code><button class="sm" data-sm="float8">?</button> es una cajita para números <strong>con coma</strong>, como 21.5 — porque la temperatura casi nunca es redondita. Programa completo: <code>sketches/sesion-08/termometro</code>.</p>
+  <p class="nota">La temperatura viene <strong>con coma</strong>, como 21.5: casi nunca es redondita. Al simular, cámbiala en el <strong>panel del sensor</strong>. Proyecto: <code>sketches/sesion-08/termometro/termometro.bloquino</code></p>
 </section>
 
 <!-- 6 · Umbrales -->
 <section class="slide slide-concepto">
   <p class="eyebrow">Frío, templado o caluroso</p>
   <h2>Los umbrales: ¿dónde está la raya? 📏</h2>
-  <div class="tuto">
-    <div class="sim-ide">
-      <div class="sim-titulo"><span class="sim-punto"></span>semaforo_termico.ino</div>
-      <div class="sim-editor lineas">
-        <div class="ln" data-u="0"><span class="n">1</span><code><span class="kw">if</span> (t &lt; <span class="num">15</span>) {</code></div>
-        <div class="ln" data-u="0"><span class="n">2</span><code>  <span class="fn">digitalWrite</span>(<span class="num">12</span>, <span class="kw">HIGH</span>); <span class="cm">// verde: ¡frío!</span></code></div>
-        <div class="ln" data-u="1"><span class="n">3</span><code>} <span class="kw">else if</span> (t &lt; <span class="num">25</span>) {</code></div>
-        <div class="ln" data-u="1"><span class="n">4</span><code>  <span class="fn">digitalWrite</span>(<span class="num">11</span>, <span class="kw">HIGH</span>); <span class="cm">// amarillo: rico</span></code></div>
-        <div class="ln" data-u="2"><span class="n">5</span><code>} <span class="kw">else</span> {</code></div>
-        <div class="ln" data-u="2"><span class="n">6</span><code>  <span class="fn">digitalWrite</span>(<span class="num">13</span>, <span class="kw">HIGH</span>); <span class="cm">// rojo: ¡calor!</span></code></div>
-        <div class="ln"><span class="n">7</span><code>}</code></div>
-      </div>
+  <div class="tuto" style="align-items:center">
+    <div class="bloques-caja" id="u-caja" style="max-height:56vh">
+      <img class="bloques" src="../recursos/img/bloques/sesion-08/semaforo_termico.png" alt="Bloques del semáforo térmico: al iniciar; por siempre: decir la temperatura, apagar LEDs 12, 11 y 13; si temperatura menor que 15 encender LED en pin 12; si no, si temperatura menor que 25 encender LED en pin 11, si no encender LED en pin 13; esperar 1 segundos">
     </div>
     <aside class="tuto-panel">
       <p class="tuto-num">Pruébalo tú</p>
@@ -155,9 +134,10 @@
         <span class="led-u" id="u-ambar" style="--c:var(--ambar)"></span>
         <span class="led-u" id="u-rojo" style="--c:var(--rojo)"></span>
       </div>
+      <button class="sm-grande" data-sm="sesion-08/semaforo_termico">👀 Ver el código</button>
     </aside>
   </div>
-  <p class="nota">El <code>else if</code> es una <strong>segunda pregunta</strong> que solo se hace si la primera dio «no». Puedes encadenar todas las que quieras. Programa completo: <code>sketches/sesion-08/semaforo_termico</code>.</p>
+  <p class="nota">Un «si» dentro del «si no» es una <strong>segunda pregunta</strong> que solo se hace si la primera dio «no». Puedes meter todas las que quieras, una dentro de otra. Proyecto: <code>sketches/sesion-08/semaforo_termico/semaforo_termico.bloquino</code></p>
 </section>
 
 <!-- 7 · Conexión -->
@@ -216,9 +196,10 @@
   <p class="eyebrow">⭐ Proyecto de la sesión</p>
   <h2>El termómetro semáforo 🌡️🚦</h2>
   <p class="grande">Junta todo: el sensor mide, el monitor serie cuenta, y los LEDs avisan de un vistazo.</p>
-  <div style="display:flex; flex-direction:column; gap:.4em; width:min(92vw,680px)">
+  <div style="display:flex; flex-direction:column; gap:.25em; width:min(94vw,860px)">
     <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Armar el DHT11 y el semáforo de 3 LEDs <button class="sm" data-sm="p-circuito">?</button></span></div>
-    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Subir el programa: ¿cuántos grados marca el <strong>monitor serie</strong>? <button class="sm" data-sm="p-codigo">?</button></span></div>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Armar los bloques y probarlos con <strong>Iniciar simulación</strong>: mueve la temperatura en el panel del sensor <button class="sm" data-sm="p-codigo">?</button></span></div>
+    <div class="check" tabindex="0"><span class="caja"></span><span class="txt"><strong>Cargar a la placa</strong>: ¿cuántos grados marca el <strong>Monitor serie</strong>?</span></div>
     <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Experimento 1: aprieta el sensor con los dedos un rato… ¿sube? 🖐️</span></div>
     <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Experimento 2: acércale una bolsita <strong>cerrada</strong> con hielo… ¿baja? 🧊</span></div>
     <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Ajusta los umbrales hasta que el amarillo sea justo lo «rico» para ti</span></div>
@@ -251,7 +232,7 @@
     </ul>
   </div>
   <button class="sm-grande" data-sm="reto-sol">🔓 ¿Te trabaste? La solución (¡después de intentarlo!)</button>
-  <p class="nota">Pista del experto: <code>if (t &gt; record) { record = t; }</code> — una cajita que solo guarda lo más alto que has visto.</p>
+  <p class="nota" style="line-height:2.2">Pista del experto: <span class="bloque">si <span class="bloque sensores">temperatura</span> &gt; <span class="bloque variables">récord</span></span> ➡️ <span class="bloque variables">fijar récord en <span class="bloque sensores">temperatura</span></span><br>Una variable que solo guarda lo más alto que has visto.</p>
 </section>
 
 <!-- 11 · Quiz -->
@@ -260,11 +241,11 @@
   <h2>¿Cuánto aprendiste? Toca para voltear</h2>
   <div class="fila">
     <div class="quiz" tabindex="0"><div class="quiz-caras">
-      <div class="quiz-cara quiz-frente">¿Con qué orden nos escribe el Arduino?</div>
-      <div class="quiz-cara quiz-atras"><code>Serial.println</code>, y se lee en el monitor serie 💬</div>
+      <div class="quiz-cara quiz-frente">¿Con qué bloque nos escribe el Arduino?</div>
+      <div class="quiz-cara quiz-atras">«decir», y se lee en el Monitor serie 💬</div>
     </div></div>
     <div class="quiz" tabindex="0"><div class="quiz-caras">
-      <div class="quiz-cara quiz-frente">¿Qué es el 9600 de <code>Serial.begin</code>?</div>
+      <div class="quiz-cara quiz-frente">¿Qué es el 9600 del monitor serie?</div>
       <div class="quiz-cara quiz-atras">La velocidad de la conversación: los dos lados deben usar la misma 🏎️</div>
     </div></div>
     <div class="quiz" tabindex="0"><div class="quiz-caras">
@@ -272,12 +253,12 @@
       <div class="quiz-cara quiz-atras">Temperatura y humedad 🌡️💧</div>
     </div></div>
     <div class="quiz" tabindex="0"><div class="quiz-caras">
-      <div class="quiz-cara quiz-frente">¿Cuándo se revisa un <code>else if</code>?</div>
-      <div class="quiz-cara quiz-atras">Solo si la pregunta anterior dio «no» 🤔</div>
+      <div class="quiz-cara quiz-frente">¿Cuándo se revisa un «si» que está dentro de un «si no»?</div>
+      <div class="quiz-cara quiz-atras">Solo si la pregunta de afuera dio «no» 🤔</div>
     </div></div>
     <div class="quiz" tabindex="0"><div class="quiz-caras">
-      <div class="quiz-cara quiz-frente">¿Para qué sirve una cajita <code>float</code>?</div>
-      <div class="quiz-cara quiz-atras">Para números con coma, como 21.5 🔢</div>
+      <div class="quiz-cara quiz-frente">«decir … sin saltar de línea» y «decir»: ¿qué cambia?</div>
+      <div class="quiz-cara quiz-atras">El primero sigue en la misma línea; el segundo salta a la siguiente ↩️</div>
     </div></div>
   </div>
 </section>
@@ -286,7 +267,7 @@
 <section class="slide portada">
   <p class="eyebrow">Lo lograste</p>
   <h1>¡Tu Arduino siente y te lo cuenta! 🎉</h1>
-  <p class="grande">Hoy midió el calor, te habló por el monitor serie…<br>y aprendiste el <strong>else if</strong>, la pregunta encadenada.</p>
+  <p class="grande">Hoy midió el calor, te habló por el monitor serie…<br>y aprendiste a encadenar preguntas: un <strong>«si» dentro del «si no»</strong>.</p>
   <div class="tarjeta" style="max-width:24em">
     <h3>Próxima sesión 🌈</h3>
     <p><strong>Colores locos</strong>: el LED RGB que puede ser de <strong>cualquier color</strong>… ¡y tu propia lámpara de humor!</p>
@@ -304,6 +285,7 @@
     transition: background .15s, box-shadow .15s;
   }
   .led-u.on { background: var(--c); border-color: var(--c); box-shadow: 0 0 18px var(--c); }
+  .bloque .bloque { padding: .15em .5em; }
 
   /* ---------- 8 · sensores del mundo ---------- */
   .mini8 { max-width: min(84vw, 13.5em); }
@@ -317,6 +299,7 @@
 </style>
 
 <script src="assets/slides.js"></script>
+<script src="assets/codigo.js"></script>
 <script>
   const pleds = ["pled-r", "pled-a", "pled-v"].map(id => document.getElementById(id));
   let pi = 0;
@@ -342,26 +325,24 @@
         t += (Math.random() - 0.45) * 0.3;
         t = Math.max(19, Math.min(24, t));
         const p = document.createElement("p");
-        p.textContent = "Temperatura: " + t.toFixed(1) + " °C";
+        p.textContent = "Temperatura: " + t.toFixed(2);
         caja.appendChild(p);
         while (caja.children.length > 8) caja.removeChild(caja.firstChild);
       }, 750);
     });
   })();
 
-  /* ---- 4 · los equipos de líneas ---- */
+  /* ---- 4 · los tres bloques ---- */
   (function () {
     const TXT = [
-      ["🌡️ El equipo del sensor", "La librería <code>DHT.h</code>, el bautizo <code>dht(2, DHT11)</code> —vive en el pin 2— y su <code>begin</code> para despertarlo."],
-      ["💬 El equipo de hablar", "<code>Serial.begin(9600)</code> abre la conversación, <code>print</code> escribe sin saltar de línea y <code>println</code> escribe y salta. Por eso salen frases completas."],
-      ["📦 El equipo de guardar", "<code>float t</code> es la cajita donde guardamos lo que midió el sensor, para después mostrarlo o compararlo con umbrales."]
+      ["🌡️ El sensor", "«temperatura en °C (DHT11 en pin 2)» le pregunta al sensor del pin 2 cuántos grados hace. Su librería ya viene en Bloquino: ¡solo usas el bloque!"],
+      ["💬 Hablar", "«decir … sin saltar de línea» escribe «Temperatura: » y se queda en la misma línea; «decir» escribe los grados y salta. Por eso salen frases completas."],
+      ["⏳ Esperar", "«esperar 1 segundos»: el DHT11 es tranquilo y mide como mucho una vez por segundo. Así el monitor no se llena de números repetidos."]
     ];
     document.querySelectorAll("[data-cp]").forEach(b => b.addEventListener("click", () => {
       const k = +b.dataset.cp;
       document.getElementById("t8-num").textContent = TXT[k][0];
       document.getElementById("t8-txt").innerHTML = TXT[k][1];
-      document.querySelectorAll(".ln[data-paso]").forEach(l =>
-        l.classList.toggle("aqui", l.dataset.paso === String(k)));
     }));
   })();
 
@@ -371,16 +352,17 @@
     function pintar(t) {
       $("u-val").textContent = t;
       const zona = t < 15 ? 0 : t < 25 ? 1 : 2;
-      document.querySelectorAll(".ln[data-u]").forEach(l =>
-        l.classList.toggle("aqui", +l.dataset.u === zona));
+      /* la caja baja hasta la pregunta que se está respondiendo */
+      const caja = $("u-caja");
+      caja.scrollTo({ top: zona === 0 ? caja.scrollHeight * .35 : caja.scrollHeight, behavior: "smooth" });
       $("u-verde").classList.toggle("on", zona === 0);
       $("u-ambar").classList.toggle("on", zona === 1);
       $("u-rojo").classList.toggle("on", zona === 2);
       $("u-txt").innerHTML = zona === 0
         ? "Menos de 15: gana la <strong>primera</strong> pregunta. ¡Frío! 🧣"
         : zona === 1
-        ? "No es menos de 15, pero sí menos de 25: gana el <strong>else if</strong>. Rico. 😌"
-        : "Ninguna pregunta dio «sí»: cae al <strong>else</strong>. ¡Calor! 🥵";
+        ? "No es menos de 15, pero sí menos de 25: gana el <strong>«si» de adentro</strong>. Rico. 😌"
+        : "Ninguna pregunta dio «sí»: cae al <strong>último «si no»</strong>. ¡Calor! 🥵";
     }
     $("u-temp").addEventListener("input", e => pintar(+e.target.value));
     pintar(21);
@@ -396,7 +378,7 @@
   saberMas({
     "reto-sol": {
       t: "Las soluciones: la alarma de fiebre 🤒",
-      d: "<p class='aviso'>🔒 <strong>Recuerda hacer el desafío primero.</strong> Pelear un rato con el problema es donde más se aprende: esto es para comparar tu solución… o para destrabarte si llevas mucho rato. 💪</p><p>DHT11 en el pin 2 y buzzer en el 8. Para probarlo sin fiebre, aprieta el sensor entre los dedos o acércale la mano. 🖐️</p><p><strong>🔔 Nivel 1: si pasa de 30 °C, suena</strong></p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>#include &lt;DHT.h&gt;\nDHT dht(2, DHT11);\n\nvoid setup() {\n  Serial.begin(9600);\n  dht.begin();\n}\n\nvoid loop() {\n  float t = dht.readTemperature();\n  Serial.println(t);\n\n  if (t &gt; 30) {\n    tone(8, 880);   // ¡fiebre!\n  } else {\n    noTone(8);\n  }\n  delay(1000);\n}</code></pre><p><strong>💬 Nivel 2: avisar solo al cruzar la raya.</strong> Una cajita <code>yaAviso</code> se acuerda de si ya lo dijimos; vuelve a 0 cuando la temperatura baja.</p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>int yaAviso = 0;   // 0 = todavia no lo hemos dicho, 1 = ya lo dijimos\n\nvoid setup() {\n  Serial.begin(9600);\n  dht.begin();\n}\n\nvoid loop() {\n  float t = dht.readTemperature();\n\n  if (t &gt; 30) {\n    tone(8, 880);\n    if (yaAviso == 0) {             // la primera vez que cruza...\n      Serial.println(\"¡Hace calor!\");\n      yaAviso = 1;                  // ...lo decimos y lo anotamos\n    }\n  } else {\n    noTone(8);\n    yaAviso = 0;                    // bajo: listo para avisar de nuevo\n  }\n  delay(1000);\n}</code></pre><p><strong>🧠 Nivel experto: el récord.</strong> La cajita <code>record</code> solo cambia cuando ve algo más alto.</p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>float record = 0;\n\nvoid setup() {\n  Serial.begin(9600);\n  dht.begin();\n}\n\nvoid loop() {\n  float t = dht.readTemperature();\n  if (t &gt; record) {\n    record = t;      // ¡nuevo record!\n  }\n  Serial.print(\"Ahora: \");\n  Serial.print(t);\n  Serial.print(\"   Record: \");\n  Serial.println(record);\n  delay(1000);\n}</code></pre><p>Programas completos: <code>sketches/sesion-08/fiebre</code>, <code>fiebre_aviso</code> y <code>record</code>.</p>"
+      d: "<p class='aviso'>🔒 <strong>Recuerda hacer el desafío primero.</strong> Pelear un rato con el problema es donde más se aprende: esto es para comparar tu solución… o para destrabarte si llevas mucho rato. 💪</p><p>DHT11 en el pin 2 y buzzer en el 8. Para probarlo sin fiebre, aprieta el sensor entre los dedos o acércale la mano 🖐️; en la simulación, sube la temperatura en el panel del sensor.</p><p><strong>🔔 Nivel 1: si pasa de 30 °C, suena</strong></p><img class='bloques' src='../recursos/img/bloques/sesion-08/fiebre.png' alt='Bloques de la alarma de fiebre: al iniciar; por siempre: decir la temperatura; si temperatura mayor que 30, tocar nota la agudo por 1 segundos en pin 8; si no, esperar 1 segundos'><p class='nota'>Proyecto: <code>sketches/sesion-08/fiebre/fiebre.bloquino</code></p><button class='sm-grande' data-sm='sesion-08/fiebre'>👀 Ver el código</button><p>Sobre 30 °C toca la nota <strong>la agudo</strong> durante <strong>1 segundo</strong>: lo mismo que dura cada vuelta, así que suena seguido. Si no, solo espera 1 segundo, en silencio.</p><p><strong>💬 Nivel 2: avisar solo al cruzar la raya.</strong> Una variable, <strong>ya avisé</strong>, se acuerda de si ya lo dijimos: 0 = todavía no, 1 = ya lo dijimos. Vuelve a 0 cuando la temperatura baja, y queda lista para avisar de nuevo.</p><img class='bloques' src='../recursos/img/bloques/sesion-08/fiebre_aviso.png' alt='Bloques del aviso de fiebre: si temperatura mayor que 30: si ya avisé igual a 0, decir ¡Hace calor! y fijar ya avisé en 1; tocar nota la agudo por 1 segundos en pin 8; si no: fijar ya avisé en 0 y esperar 1 segundos'><p class='nota'>Proyecto: <code>sketches/sesion-08/fiebre_aviso/fiebre_aviso.bloquino</code></p><button class='sm-grande' data-sm='sesion-08/fiebre_aviso'>👀 Ver el código</button><p><strong>🧠 Nivel experto: el récord.</strong> La variable <strong>récord</strong> solo cambia cuando el sensor ve algo más alto.</p><img class='bloques' src='../recursos/img/bloques/sesion-08/record.png' alt='Bloques del récord: si temperatura mayor que récord, fijar récord en temperatura; decir Ahora:, la temperatura, Record: y récord; esperar 1 segundos'><p class='nota'>Proyecto: <code>sketches/sesion-08/record/record.bloquino</code></p><button class='sm-grande' data-sm='sesion-08/record'>👀 Ver el código</button>"
     },
     "p-circuito": {
       t: "Así se ve armado completo 🔧",
@@ -420,7 +402,7 @@
     },
     "p-codigo": {
       t: "El programa completo 📋",
-      d: "<pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.8em;line-height:1.45'><code>#include &lt;DHT.h&gt;\nDHT dht(2, DHT11);\n\nvoid setup() {\n  Serial.begin(9600);\n  dht.begin();\n  pinMode(12, OUTPUT);\n  pinMode(11, OUTPUT);\n  pinMode(13, OUTPUT);\n}\n\nvoid loop() {\n  float t = dht.readTemperature();\n  Serial.println(t);\n\n  // primero apagamos los tres...\n  digitalWrite(12, LOW);\n  digitalWrite(11, LOW);\n  digitalWrite(13, LOW);\n\n  // ...y prendemos solo el que gana\n  if (t &lt; 15) {\n    digitalWrite(12, HIGH);   // verde: ¡frío!\n  } else if (t &lt; 25) {\n    digitalWrite(11, HIGH);   // amarillo: rico\n  } else {\n    digitalWrite(13, HIGH);   // rojo: ¡calor!\n  }\n  delay(1000);\n}</code></pre><p>Ojo con el detalle nuevo: antes de elegir, se <strong>apagan los tres</strong> — si no, quedarían encendidos para siempre. También está en <code>sketches/sesion-08/semaforo_termico</code>.</p>"
+      d: "<img class='bloques' src='../recursos/img/bloques/sesion-08/semaforo_termico.png' alt='Bloques del semáforo térmico: decir la temperatura, apagar LEDs 12, 11 y 13; si temperatura menor que 15 encender el 12; si no, si temperatura menor que 25 encender el 11, si no encender el 13; esperar 1 segundos'><p>Ojo con el detalle nuevo: antes de elegir, se <strong>apagan los tres</strong> — si no, quedarían encendidos para siempre. Después viene la primera pregunta y, dentro de su «si no», la segunda.</p><p class='nota'>Proyecto: <code>sketches/sesion-08/semaforo_termico/semaforo_termico.bloquino</code></p><button class='sm-grande' data-sm='sesion-08/semaforo_termico'>👀 Ver el código</button>"
     },
     "dht-dentro": {
       t: "El DHT11 por dentro 🔎",
@@ -428,11 +410,11 @@
     },
     baudios: {
       t: "¿Qué son los baudios? 🏎️",
-      d: "<p>Es la <strong>velocidad de la conversación</strong>: 9600 baudios significa más o menos 9600 señales por segundo por el cable.</p><p>El Arduino y el computador deben usar <strong>la misma</strong>: si uno habla rápido y el otro escucha lento, se entienden puros jeroglíficos 🗿. Por eso el monitor serie tiene un menú para elegir la velocidad — debe decir <strong>9600</strong>, igual que tu <code>Serial.begin</code>.</p>"
+      d: "<p>Es la <strong>velocidad de la conversación</strong>: 9600 baudios significa más o menos 9600 señales por segundo por el cable.</p><p>El Arduino y el computador deben usar <strong>la misma</strong>: si uno habla rápido y el otro escucha lento, se entienden puros jeroglíficos 🗿. Bloquino pone <strong>9600</strong> a los dos lados, así que no tienes que preocuparte. En C++ se escribe <code>Serial.begin(9600)</code>: lo verás en «Ver el código».</p>"
     },
-    float8: {
-      t: "int y float: dos tipos de cajitas 📦",
-      d: "<p><code>int</code> guarda números <strong>enteros</strong>: 1, 42, 180. Perfecto para pines y ángulos.</p><p><code>float</code> guarda números <strong>con coma</strong>: 21.5, 36.8… Perfecto para temperaturas, que casi nunca son redonditas.</p><p>¿Por qué no usar float para todo? Porque le cuesta más trabajo al cerebrito: las cajitas simples son más rápidas. 🏃</p>"
+    libreria8: {
+      t: "¿Qué es una librería? 📚",
+      d: "<p>Es <strong>código regalado</strong>: alguien ya escribió cómo conversar con el DHT11, mensajito por mensajito, y lo compartió para que nadie tenga que inventarlo de nuevo.</p><p>Bloquino ya trae la librería del DHT11. Cuando usas el bloque «temperatura en °C», la agrega solita al C++: si miras «Ver el código», es la primera línea, <code>#include &lt;DHT.h&gt;</code>. 😉</p>"
     }
   });
 </script>

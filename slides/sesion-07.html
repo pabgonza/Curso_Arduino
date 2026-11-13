@@ -10,6 +10,7 @@
 <style>
   .repaso .tarjeta { text-align: left; max-width: 22em; }
   .repaso ul { padding-left: 1.1em; display: grid; gap: .35em; }
+  /* colores de Bloquino que slides.css no trae */
 </style>
 </head>
 <body>
@@ -35,18 +36,17 @@
       <h3>🦾 Sesión 6: el servo</h3>
       <ul>
         <li>El servo es un <strong>actuador</strong>: va a un <strong>ángulo exacto</strong> (0 a 180) y se queda</li>
-        <li>Una <strong>librería</strong> es código regalado: <code>#include &lt;Servo.h&gt;</code></li>
-        <li><code>for</code>: repetir contando 🔁</li>
-        <li>La perilla es un sensor que da un <strong>número</strong>: <code>analogRead</code> (0 a 1023); <code>map()</code> lo traduce</li>
+        <li>«contar»: repetir contando 🔁</li>
+        <li>La perilla es un sensor que da un <strong>número</strong> (0 a 100); «asignar … al rango …» lo traduce a un ángulo</li>
       </ul>
     </div>
     <div class="tarjeta">
       <h3>🧰 De antes, para hoy</h3>
       <ul>
         <li>Sensores que miden <strong>cuánto</strong>, no solo sí o no (sesión 6)</li>
-        <li><code>if / else</code> y variables <code>int</code> (sesión 4)</li>
-        <li>El <strong>monitor serie</strong> para ver los números (sesión 4)</li>
-        <li>El buzzer: actuador de sonido con <code>tone</code> (sesión 5)</li>
+        <li>«si / si no» y las <strong>variables</strong>, cajitas con un número (sesión 4)</li>
+        <li>El <strong>monitor serie</strong> y el bloque «decir» para ver los números (sesión 4)</li>
+        <li>El buzzer: actuador de sonido con «tocar nota» (sesión 5)</li>
       </ul>
     </div>
   </div>
@@ -112,6 +112,7 @@ sonido: 0.034 cm por microsegundo<button class="sm sm-ide" data-sm="velocidad">?
 distancia = <span class="num-vivo" id="eco-us2">1749</span> × 0.034 / 2 = <span class="num-vivo" id="eco-cm">30</span> cm</pre>
   </div>
   <p class="grande" style="max-width:32em">¿Por qué <strong>dividir entre 2</strong>? Porque el grito hace el viaje <strong>ida y vuelta</strong>: a la pared… ¡y de regreso! ↔️</p>
+  <p class="nota">Tranquilo: no tendrás que hacer esta cuenta. En Bloquino, un bloque la hace por ti. 😉</p>
 </section>
 
 <!-- 6 · Conexión -->
@@ -164,73 +165,45 @@ distancia = <span class="num-vivo" id="eco-us2">1749</span> × 0.034 / 2 = <span
       🟠 <strong>TRIG → pin 9</strong>: por aquí el Arduino le ordena gritar.<br>
       🔵 <strong>ECHO → pin 10</strong>: por aquí el sensor avisa cuánto tardó el eco.<br>
       ⚫ <strong>GND → GND</strong>: el suelo.</p>
-      <p class="nota">¿TRIG y ECHO al revés? No se rompe, pero mide puro cero. ¡Revisa antes de reclamar! 😄</p>
+      <p class="nota">En los bloques, TRIG se llama <strong>disparo</strong> y ECHO, <strong>eco</strong>. ¿Al revés? No se rompe, pero marca siempre 400. ¡Revisa antes de reclamar! 😄</p>
     </aside>
   </div>
 </section>
 
-<!-- 7 · El código que mide -->
+<!-- 7 · Los bloques que miden -->
 <section class="slide">
-  <p class="eyebrow">Cópialo: va igual en todos tus proyectos</p>
-  <h2>El código del murciélago 📋</h2>
-  <div class="tuto">
-    <div style="display:flex; flex-direction:column; gap:.6em; flex:1 1 30em; max-width:min(92vw, 40em)">
-    <div class="sim-ide" style="flex:none; max-width:100%">
-      <div class="sim-titulo"><span class="sim-punto"></span>murcielago.ino</div>
-      <div class="sim-editor lineas">
-        <div class="ln"><span class="n">1</span><code><span class="kw">void</span> <span class="fn">loop</span>() {</code></div>
-        <div class="ln" data-paso="0"><span class="n">2</span><code>  <span class="fn">digitalWrite</span>(<span class="num">9</span>, <span class="kw">HIGH</span>);   <span class="cm">// ¡grita!</span></code></div>
-        <div class="ln" data-paso="0"><span class="n">3</span><code>  <span class="fn">delayMicroseconds</span>(<span class="num">10</span>);</code></div>
-        <div class="ln" data-paso="0"><span class="n">4</span><code>  <span class="fn">digitalWrite</span>(<span class="num">9</span>, <span class="kw">LOW</span>);</code></div>
-        <div class="ln" data-paso="1"><span class="n">5</span><code>  <span class="kw">long</span> tiempo = <span class="fn">pulseIn</span>(<span class="num">10</span>, <span class="kw">HIGH</span>);</code></div>
-        <div class="ln" data-paso="2"><span class="n">6</span><code>  <span class="kw">int</span> distancia = tiempo * <span class="num">0.034</span> / <span class="num">2</span>;</code></div>
-        <div class="ln" data-paso="3"><span class="n">7</span><code>  Serial.<span class="fn">print</span>(distancia);   <span class="cm">// ¡cuéntalo!</span></code></div>
-        <div class="ln" data-paso="3"><span class="n">8</span><code>  Serial.<span class="fn">println</span>(<span class="st">" cm"</span>);</code></div>
-        <div class="ln"><span class="n">9</span><code>}</code></div>
-      </div>
+  <p class="eyebrow">Van igual en todos tus proyectos</p>
+  <h2>Los bloques del murciélago 🧩</h2>
+  <div class="tuto" style="align-items:center">
+    <div style="display:flex; flex-direction:column; align-items:center; gap:.6em">
+      <img class="bloques" src="../recursos/img/bloques/sesion-07/murcielago.png" alt="Bloques del murciélago: al iniciar; por siempre: fijar distancia en distancia en cm (disparo 9 eco 10), decir distancia sin saltar de línea, decir cm, esperar 0.2 segundos" style="max-height:46vh">
+      <button class="sm-grande" data-sm="sesion-07/murcielago">👀 Ver el código</button>
     </div>
-    <div class="serial" style="flex:none; width:100%; max-width:100%">
-      <div class="serial-barra">🔍 Monitor serie · 9600</div>
-      <div class="serial-lineas" id="mur-serial" style="min-height:7.8em; max-height:7.8em"></div>
-    </div>
-    <div class="fila" style="gap:.6em; align-items:center">
-      <input type="range" id="mur-dist" min="5" max="100" value="30" style="width:min(50vw, 300px)" aria-label="Distancia de la mano al sensor">
-      <span class="nota">acerca o aleja la mano 🖐️</span>
-    </div>
-    </div>
-    <aside class="tuto-panel">
-      <p class="tuto-num" id="cod-num">Tres pasos y un chisme</p>
-      <p class="tuto-texto" id="cod-txt" style="min-height:4.5em">Toca cada paso para ver qué líneas hacen el trabajo. Los tres primeros se <strong>copian tal cual</strong> en todos los proyectos con el murciélago.</p>
+    <aside class="tuto-panel" style="flex-basis:21em">
+      <p class="tuto-num" id="cod-num">Medir, guardar y contar</p>
+      <p class="tuto-texto" id="cod-txt" style="min-height:4.5em">Toca cada paso para ver qué bloque hace el trabajo. Los dos primeros van <strong>igualitos</strong> en todos los proyectos con el murciélago.</p>
       <div class="fila" style="gap:.5em">
-        <button class="boton secundario" data-cp="0">📣 gritar</button>
-        <button class="boton secundario" data-cp="1">👂 escuchar</button>
-        <button class="boton secundario" data-cp="2">🧮 la cuenta</button>
-        <button class="boton secundario" data-cp="3">💬 contar</button>
+        <button class="boton secundario" data-cp="0">📏 medir</button>
+        <button class="boton secundario" data-cp="1">📦 guardar</button>
+        <button class="boton secundario" data-cp="2">💬 contar</button>
       </div>
+      <div class="serial" style="flex:none; width:100%">
+        <div class="serial-barra">🔍 Monitor serie · acerca o aleja la mano 🖐️</div>
+        <div class="serial-lineas" id="mur-serial" style="min-height:3.4em; max-height:3.4em"></div>
+      </div>
+      <input type="range" id="mur-dist" min="5" max="100" value="30" style="width:100%" aria-label="Distancia de la mano al sensor">
     </aside>
   </div>
-  <p class="nota"><code>pulseIn</code><button class="sm" data-sm="pulsein">?</button> es un cronómetro: espera el eco y devuelve cuántos microsegundos tardó. Programa completo (con su <code>Serial.begin(9600)</code> en el setup): <code>sketches/sesion-07/murcielago</code>.</p>
+  <p class="nota" style="max-width:46em">Al simular, cambia la distancia en el <strong>panel del sensor</strong>. ¿Cómo mide el bloque por dentro?<button class="sm" data-sm="dentro">?</button> Proyecto: <code>sketches/sesion-07/murcielago/murcielago.bloquino</code></p>
 </section>
 
 <!-- 8 · Práctica: ¡no me toques! -->
 <section class="slide">
   <p class="eyebrow">Práctica</p>
   <h2>¡No me toques! 🚨</h2>
-  <div class="tuto">
-    <div class="sim-ide">
-      <div class="sim-titulo"><span class="sim-punto"></span>alarma.ino</div>
-      <div class="sim-editor lineas">
-        <div class="ln" data-si="1"><span class="n">1</span><code><span class="kw">if</span> (distancia &lt; <span class="num">20</span>) {</code></div>
-        <div class="ln" data-si="1"><span class="n">2</span><code>  <span class="fn">digitalWrite</span>(<span class="num">13</span>, <span class="kw">HIGH</span>);  <span class="cm">// ¡luz!</span></code></div>
-        <div class="ln" data-si="1"><span class="n">3</span><code>  <span class="fn">tone</span>(<span class="num">8</span>, <span class="num">880</span>);           <span class="cm">// ni…</span></code></div>
-        <div class="ln" data-si="1"><span class="n">4</span><code>  <span class="fn">delay</span>(<span class="num">150</span>);</code></div>
-        <div class="ln" data-si="1"><span class="n">5</span><code>  <span class="fn">digitalWrite</span>(<span class="num">13</span>, <span class="kw">LOW</span>);</code></div>
-        <div class="ln" data-si="1"><span class="n">6</span><code>  <span class="fn">tone</span>(<span class="num">8</span>, <span class="num">660</span>);           <span class="cm">// …no!</span></code></div>
-        <div class="ln" data-si="1"><span class="n">7</span><code>  <span class="fn">delay</span>(<span class="num">150</span>);</code></div>
-        <div class="ln" data-si="0"><span class="n">8</span><code>} <span class="kw">else</span> {</code></div>
-        <div class="ln" data-si="0"><span class="n">9</span><code>  <span class="fn">noTone</span>(<span class="num">8</span>);            <span class="cm">// silencio</span></code></div>
-        <div class="ln"><span class="n">10</span><code>}</code></div>
-      </div>
+  <div class="tuto" style="align-items:center">
+    <div class="bloques-caja">
+      <img class="bloques" src="../recursos/img/bloques/sesion-07/alarma.png" alt="Bloques de la alarma: al iniciar; por siempre: fijar distancia en distancia en cm (disparo 9 eco 10); si distancia menor que 20: encender LED en pin 13, tocar nota la agudo por 0.15 segundos en pin 8, apagar LED en pin 13, tocar nota mi agudo por 0.15 segundos en pin 8; si no: silenciar pin 8; esperar 0.05 segundos">
     </div>
     <aside class="tuto-panel">
       <p class="tuto-num">Pruébala tú</p>
@@ -245,9 +218,10 @@ distancia = <span class="num-vivo" id="eco-us2">1749</span> × 0.034 / 2 = <span
         <span class="mini-placa grande"><span class="mini-led" id="al-led"></span><span class="mini-etiq">13</span></span>
         <span id="al-son" class="al-son">🔇</span>
       </div>
+      <button class="sm-grande" data-sm="sesion-07/alarma">👀 Ver el código</button>
     </aside>
   </div>
-  <p class="nota">El LED va en el <strong>pin 13</strong> igual que en la sesión 3, y el buzzer en el <strong>pin 8</strong> igual que en la sesión 5. ¡Ya sabes armar los dos! Programa completo: <code>sketches/sesion-07/alarma</code>.</p>
+  <p class="nota">LED en el <strong>pin 13</strong> (sesión 3) y buzzer en el <strong>pin 8</strong> (sesión 5): ¡ya sabes armar los dos! Proyecto: <code>sketches/sesion-07/alarma/alarma.bloquino</code>.</p>
 </section>
 
 <!-- 9 · Proyecto: retroceso de bici -->
@@ -266,18 +240,17 @@ distancia = <span class="num-vivo" id="eco-us2">1749</span> × 0.034 / 2 = <span
       <p class="nota" style="margin:0">retrocede… con cuidado</p>
       <button class="boton" id="btn-bici">🔈 Encender el sensor</button>
     </div>
-    <div style="display:flex; flex-direction:column; gap:.6em; max-width:22em">
+    <div style="display:flex; flex-direction:column; gap:.6em; max-width:26em">
       <p class="grande">Mientras <strong>más cerca</strong> de la pared, <strong>más seguido</strong> pita. Igual que los autos de verdad.<button class="sm" data-sm="autos">?</button></p>
-      <div class="ide">
-        <div class="ide-barra"><span class="ide-nombre">el truco</span></div>
-        <pre><span class="kw">int</span> pausa = distancia * <span class="num">8</span>;
-<span class="fn">tone</span>(<span class="num">8</span>, <span class="num">880</span>);
-<span class="fn">delay</span>(<span class="num">60</span>);
-<span class="fn">noTone</span>(<span class="num">8</span>);
-<span class="fn">delay</span>(pausa);  <span class="cm">// ¡pip pip pip!</span></pre>
+      <div class="truco">
+        <p class="tuto-num">El truco 🪄</p>
+        <span class="bloque sonido">tocar nota <span class="valor">la agudo</span> por <span class="valor">0.06</span> segundos en pin 8</span>
+        <span class="bloque">esperar <span class="bloque operadores"><span class="bloque variables">distancia</span> × <span class="valor">0.008</span></span> segundos</span>
+        <p class="nota" style="margin:0">A 50 cm espera 0.4 segundos entre pitidos; a 10 cm, ¡solo 0.08! 🔊</p>
       </div>
       <div class="check" tabindex="0" style="font-size:.95rem"><span class="caja"></span><span class="txt">Armar el circuito: murciélago + buzzer <button class="sm" data-sm="p-circuito">?</button></span></div>
-      <div class="check" tabindex="0" style="font-size:.95rem"><span class="caja"></span><span class="txt">Subir el programa completo <button class="sm" data-sm="p-codigo">?</button></span></div>
+      <div class="check" tabindex="0" style="font-size:.95rem"><span class="caja"></span><span class="txt">Armar los bloques y probarlos con <strong>Iniciar simulación</strong> <button class="sm" data-sm="p-codigo">?</button></span></div>
+      <div class="check" tabindex="0" style="font-size:.95rem"><span class="caja"></span><span class="txt"><strong>Cargar a la placa</strong> y… ¡a retroceder! 🚲</span></div>
     </div>
   </div>
 </section>
@@ -290,7 +263,7 @@ distancia = <span class="num-vivo" id="eco-us2">1749</span> × 0.034 / 2 = <span
     <ul class="lista">
       <li>Nivel 1: <strong>semáforo de estacionamiento</strong> 🚦 — verde lejos, amarillo cerca, rojo ¡FRENA!</li>
       <li>Nivel 2: que al llegar al rojo el buzzer haga un pitido <strong>largo y seguido</strong>, como los autos</li>
-      <li>Nivel experto: el <strong>theremin fantasma</strong> 👻 — <code>tone(8, distancia * 10)</code>: ¡música moviendo la mano en el aire!</li>
+      <li>Nivel experto: el <strong>theremin fantasma</strong> 👻 — cada 15 cm, una nota distinta: ¡música moviendo la mano en el aire!</li>
     </ul>
   </div>
   <button class="sm-grande" data-sm="reto-sol">🔓 ¿Te trabaste? La solución (¡después de intentarlo!)</button>
@@ -315,12 +288,12 @@ distancia = <span class="num-vivo" id="eco-us2">1749</span> × 0.034 / 2 = <span
       <div class="quiz-cara quiz-atras">Porque el grito va a la pared y vuelve: dos viajes ↔️</div>
     </div></div>
     <div class="quiz" tabindex="0"><div class="quiz-caras">
-      <div class="quiz-cara quiz-frente">¿Qué nos regala <code>pulseIn</code>?</div>
-      <div class="quiz-cara quiz-atras">El tiempo que tardó el eco, en microsegundos ⏱️</div>
+      <div class="quiz-cara quiz-frente">¿Qué nos regala el bloque «distancia en cm»?</div>
+      <div class="quiz-cara quiz-atras">Los centímetros hasta el objeto, con la cuenta ya hecha 📏</div>
     </div></div>
     <div class="quiz" tabindex="0"><div class="quiz-caras">
       <div class="quiz-cara quiz-frente">La alarma suena si distancia &lt; 20. ¿Y a 50 cm?</div>
-      <div class="quiz-cara quiz-atras">Nada: la pregunta del if da «no» y manda el else 🤫</div>
+      <div class="quiz-cara quiz-atras">Nada: el «si» da «no» y manda el «si no»: silencio 🤫</div>
     </div></div>
   </div>
 </section>
@@ -374,6 +347,12 @@ distancia = <span class="num-vivo" id="eco-us2">1749</span> × 0.034 / 2 = <span
   .bici-caja { display: flex; flex-direction: column; align-items: center; gap: .5em; }
   .bici-svg { width: min(88vw, 460px); }
   #bici { transition: x .15s; }
+  .truco {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 4px;
+    font-size: .82rem; text-align: left;
+    background: var(--blanco); border: 2px solid var(--teal-suave); border-radius: 12px; padding: .6em .8em;
+  }
+  .bloque .bloque { padding: .15em .5em; }
 
   .proto-caja { flex: 1 1 30em; max-width: min(92vw, 40em); }
   .proto-caja svg { width: 100%; }
@@ -381,6 +360,7 @@ distancia = <span class="num-vivo" id="eco-us2">1749</span> × 0.034 / 2 = <span
 </style>
 
 <script src="assets/slides.js"></script>
+<script src="assets/codigo.js"></script>
 <script>
   const pleds = ["pled-r", "pled-a", "pled-v"].map(id => document.getElementById(id));
   let pi = 0;
@@ -457,25 +437,22 @@ distancia = <span class="num-vivo" id="eco-us2">1749</span> × 0.034 / 2 = <span
     pintar(30);
   })();
 
-  /* ---- 6 · los tres pasos del código ---- */
+  /* ---- 6 · los pasos de los bloques ---- */
   (function () {
     const TXT = [
-      ["📣 Gritar", "El pin 9 se prende <strong>10 microsegundos</strong>: es la orden «¡grita!». El sensor lanza su chillido ultrasónico."],
-      ["👂 Escuchar", "<code>pulseIn</code> se queda esperando en el pin 10 y <strong>cronometra el eco</strong>: devuelve cuántos microsegundos tardó en volver."],
-      ["🧮 La cuenta", "La misma de la slide anterior: tiempo por la velocidad del sonido, <strong>dividido entre 2</strong> porque el viaje es ida y vuelta."],
-      ["💬 Contar", "<code>Serial.print</code> manda la distancia al <strong>monitor serie</strong> (la lupita 🔍 de la sesión 4). Sin esto, el cerebrito mide en silencio y nadie se entera."]
+      ["📏 Medir", "«distancia en cm (disparo 9 eco 10)» hace todo el trabajo: manda gritar, <strong>cronometra el eco</strong> y hace la cuenta. ¡Te da los centímetros listos!"],
+      ["📦 Guardar", "«fijar distancia en …» guarda la medida en la variable <strong>distancia</strong>, para mostrarla o preguntar con «si» si algo está cerca."],
+      ["💬 Contar", "«decir … sin saltar de línea» escribe el número en el <strong>Monitor serie</strong> (bajo los bloques) y «decir cm» pone la unidad y salta de línea."]
     ];
     document.querySelectorAll("[data-cp]").forEach(b => b.addEventListener("click", () => {
       const k = +b.dataset.cp;
       document.getElementById("cod-num").textContent = TXT[k][0];
       document.getElementById("cod-txt").innerHTML = TXT[k][1];
-      document.querySelectorAll(".ln[data-paso]").forEach(l =>
-        l.classList.toggle("aqui", l.dataset.paso === String(k)));
     }));
     const ser = document.getElementById("mur-serial"), dist = document.getElementById("mur-dist");
     setInterval(() => {
       const p = document.createElement("p");
-      p.textContent = dist.value + " cm";
+      p.textContent = (+dist.value + Math.random()).toFixed(2) + " cm";
       ser.appendChild(p);
       if (ser.children.length > 3) ser.firstChild.remove();
     }, 500);
@@ -487,7 +464,7 @@ distancia = <span class="num-vivo" id="eco-us2">1749</span> × 0.034 / 2 = <span
     let sirena = null, alto = false;
     function nino() {
       alto = !alto;
-      sonar(alto ? 880 : 660, 150);
+      sonar(alto ? 880 : 659, 150);
       $("al-led").classList.toggle("on", alto);
     }
     function pintar(d) {
@@ -496,12 +473,10 @@ distancia = <span class="num-vivo" id="eco-us2">1749</span> × 0.034 / 2 = <span
       const tope = sensor.offsetLeft - mano.offsetLeft - mano.offsetWidth;
       mano.style.transform = "translateX(" + ((80 - d) / 75 * tope) + "px)";
       const cerca = d < 20;
-      document.querySelectorAll(".ln[data-si]").forEach(l =>
-        l.classList.toggle("aqui", (l.dataset.si === "1") === cerca));
       $("al-son").textContent = cerca ? "🔊" : "🔇";
       $("al-txt").innerHTML = cerca
-        ? "¡Menos de 20! El <strong>if</strong> dice «sí»: luz y sirena. ¡Ni‑no, ni‑no! 🚨"
-        : "Acerca la mano: si llega a <strong>menos de 20 cm</strong>, ¡se arma la sirena! Ni‑no, ni‑no… 🚨";
+        ? "¡Menos de 20! El <strong>si</strong> dice «sí»: luz y sirena, nota <strong>la agudo</strong> y nota <strong>mi agudo</strong>. ¡Ni‑no, ni‑no! 🚨"
+        : "Acerca la mano: si llega a <strong>menos de 20 cm</strong>, ¡se arma la sirena! Si no, el <strong>si no</strong> silencia el pin 8. 🤫";
       if (cerca && !sirena) { nino(); sirena = setInterval(nino, 160); }
       if (!cerca && sirena) { clearInterval(sirena); sirena = null; $("al-led").classList.remove("on"); }
     }
@@ -543,7 +518,7 @@ distancia = <span class="num-vivo" id="eco-us2">1749</span> × 0.034 / 2 = <span
   saberMas({
     "reto-sol": {
       t: "Las soluciones: elige tu aventura 🎯",
-      d: "<p class='aviso'>🔒 <strong>Recuerda hacer el desafío primero.</strong> Pelear un rato con el problema es donde más se aprende: esto es para comparar tu solución… o para destrabarte si llevas mucho rato. 💪</p><p>Murciélago en los pines 9 y 10; LEDs del semáforo: rojo 13, verde 12, amarillo 11; buzzer en el 8.</p><p><strong>🚦 Nivel 1: semáforo de estacionamiento</strong></p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>void setup() {\n  pinMode(9, OUTPUT);    // TRIG\n  pinMode(10, INPUT);    // ECHO\n  pinMode(13, OUTPUT);\n  pinMode(12, OUTPUT);\n  pinMode(11, OUTPUT);\n}\n\nvoid loop() {\n  digitalWrite(9, HIGH);\n  delayMicroseconds(10);\n  digitalWrite(9, LOW);\n  long tiempo = pulseIn(10, HIGH);\n  int distancia = tiempo * 0.034 / 2;\n\n  // primero apagamos los tres...\n  digitalWrite(13, LOW);\n  digitalWrite(12, LOW);\n  digitalWrite(11, LOW);\n\n  // ...y prende solo el que gana\n  if (distancia &lt; 10) {\n    digitalWrite(13, HIGH);   // rojo: ¡FRENA!\n  }\n  if (distancia &gt;= 10 &amp;&amp; distancia &lt; 30) {\n    digitalWrite(11, HIGH);   // amarillo: cerca\n  }\n  if (distancia &gt;= 30) {\n    digitalWrite(12, HIGH);   // verde: lejos\n  }\n  delay(100);\n}</code></pre><p>Primero apagamos los tres y después prende solo el que gana su <code>if</code>. Fíjate en el del medio: usa <code>&amp;&amp;</code> para decir «entre 10 y 30».</p><p><strong>📢 Nivel 2: el pitido.</strong> En el <code>if</code> del rojo agregamos <code>tone(8, 440)</code>, y en los otros dos, <code>noTone(8)</code>.</p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>void loop() {\n  digitalWrite(9, HIGH);\n  delayMicroseconds(10);\n  digitalWrite(9, LOW);\n  long tiempo = pulseIn(10, HIGH);\n  int distancia = tiempo * 0.034 / 2;\n\n  digitalWrite(13, LOW);\n  digitalWrite(12, LOW);\n  digitalWrite(11, LOW);\n\n  if (distancia &lt; 10) {\n    digitalWrite(13, HIGH);   // rojo: ¡FRENA!\n    tone(8, 440);             // y pita sin parar\n  }\n  if (distancia &gt;= 10 &amp;&amp; distancia &lt; 30) {\n    digitalWrite(11, HIGH);   // amarillo\n    noTone(8);\n  }\n  if (distancia &gt;= 30) {\n    digitalWrite(12, HIGH);   // verde\n    noTone(8);\n  }\n  delay(100);\n}</code></pre><p><strong>👻 Nivel experto: el theremin.</strong> La distancia se convierte directo en nota. Le sumamos 100 para que de cerca no quede demasiado grave, y más allá de 60 cm, silencio.</p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>void loop() {\n  digitalWrite(9, HIGH);\n  delayMicroseconds(10);\n  digitalWrite(9, LOW);\n  long tiempo = pulseIn(10, HIGH);\n  int distancia = tiempo * 0.034 / 2;\n\n  if (distancia &lt; 60) {               // la mano dentro del campo magico\n    tone(8, 100 + distancia * 10);    // mas lejos = mas agudo\n  } else {\n    noTone(8);                        // sin mano, silencio\n  }\n  delay(30);\n}</code></pre><p>Programas completos: <code>sketches/sesion-07/estacionamiento</code>, <code>estacionamiento_pito</code> y <code>theremin</code>.</p>"
+      d: "<p class='aviso'>🔒 <strong>Recuerda hacer el desafío primero.</strong> Pelear un rato con el problema es donde más se aprende: esto es para comparar tu solución… o para destrabarte si llevas mucho rato. 💪</p><p>Murciélago en los pines 9 y 10; LEDs del semáforo: rojo 13, verde 12, amarillo 11; buzzer en el 8.</p><p><strong>🚦 Nivel 1: semáforo de estacionamiento</strong></p><img class='bloques' src='../recursos/img/bloques/sesion-07/estacionamiento.png' alt='Bloques del semáforo de estacionamiento: medir la distancia, apagar los LEDs 13, 12 y 11; si distancia menor que 10 encender el 13; si no, si distancia menor que 30 encender el 11, si no encender el 12; esperar 0.1 segundos'><p class='nota'>Proyecto: <code>sketches/sesion-07/estacionamiento/estacionamiento.bloquino</code></p><button class='sm-grande' data-sm='sesion-07/estacionamiento'>👀 Ver el código</button><p>Primero apagamos los tres y después prende solo el que gana. Fíjate en el <strong>si no</strong>: adentro trae otra pregunta, «si distancia &lt; 30». Si llegamos ahí es porque la distancia <strong>no</strong> es menor que 10… así que esa segunda pregunta significa «entre 10 y 30». 🟡</p><p><strong>📢 Nivel 2: el pitido.</strong> En el <strong>si</strong> del rojo agregamos «tocar nota la por 0.1 segundos en pin 8», y al comienzo del <strong>si no</strong>, «silenciar pin 8». La nota dura lo mismo que el «esperar 0.1» del otro lado, así que vuelta tras vuelta el pitido sale seguido, sin pausas.</p><img class='bloques' src='../recursos/img/bloques/sesion-07/estacionamiento_pito.png' alt='Bloques del estacionamiento con pitido: igual que el nivel 1, pero el si del rojo también toca nota la por 0.1 segundos en pin 8 y el si no empieza con silenciar pin 8'><p class='nota'>Proyecto: <code>sketches/sesion-07/estacionamiento_pito/estacionamiento_pito.bloquino</code></p><button class='sm-grande' data-sm='sesion-07/estacionamiento_pito'>👀 Ver el código</button><p><strong>👻 Nivel experto: el theremin.</strong> La mano elige la nota: cada 15 cm, una distinta — <strong>do, mi, sol</strong> y <strong>do agudo</strong>. Más lejos, más agudo; y más allá de 60 cm, silencio. Cada nota dura apenas 0.03 segundos y el murciélago vuelve a medir: si mueves la mano, cambia la música. 🎶</p><img class='bloques' src='../recursos/img/bloques/sesion-07/theremin.png' alt='Bloques del theremin: medir la distancia; si menor que 15 tocar do, si no si menor que 30 tocar mi, si no si menor que 45 tocar sol, si no si menor que 60 tocar do agudo, si no silenciar pin 8 y esperar 0.03 segundos; cada nota por 0.03 segundos en pin 8'><p class='nota'>Proyecto: <code>sketches/sesion-07/theremin/theremin.bloquino</code></p><button class='sm-grande' data-sm='sesion-07/theremin'>👀 Ver el código</button>"
     },
     "p-circuito": {
       t: "Así se ve armado completo 🔧",
@@ -567,7 +542,7 @@ distancia = <span class="num-vivo" id="eco-us2">1749</span> × 0.034 / 2 = <span
     },
     "p-codigo": {
       t: "El programa completo 📋",
-      d: "<pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>void setup() {\n  pinMode(9, OUTPUT);    // TRIG: por aquí grita\n  pinMode(10, INPUT);    // ECHO: por aquí escucha\n}\n\nvoid loop() {\n  digitalWrite(9, HIGH);\n  delayMicroseconds(10);\n  digitalWrite(9, LOW);\n  long tiempo = pulseIn(10, HIGH);\n  int distancia = tiempo * 0.034 / 2;\n\n  if (distancia &lt; 100) {         // a menos de un metro, avisa\n    int pausa = distancia * 8;   // cerca = ¡pip pip pip!\n    tone(8, 880);\n    delay(60);\n    noTone(8);\n    delay(pausa);\n  }\n}</code></pre><p>Arriba, el bloque del murciélago que se copia tal cual; abajo, el truco de la pausa que crece con la distancia. También está en <code>sketches/sesion-07/retroceso</code>.</p>"
+      d: "<img class='bloques' src='../recursos/img/bloques/sesion-07/retroceso.png' alt='Bloques del sensor de retroceso: al iniciar; por siempre: fijar distancia en distancia en cm (disparo 9 eco 10); si distancia menor que 100: tocar nota la agudo por 0.06 segundos en pin 8, esperar distancia por 0.008 segundos'><p>Arriba, los bloques del murciélago que van igual en todos tus proyectos. Abajo, el truco: si estás a <strong>menos de un metro</strong>, pita cortito y espera <strong>distancia × 0.008</strong> segundos. Mientras más cerca, más corta la espera… ¡pip pip pip!</p><p class='nota'>Proyecto: <code>sketches/sesion-07/retroceso/retroceso.bloquino</code></p><button class='sm-grande' data-sm='sesion-07/retroceso'>👀 Ver el código</button>"
     },
     ultra7: {
       t: "El ultrasonido 🔊",
@@ -585,9 +560,9 @@ distancia = <span class="num-vivo" id="eco-us2">1749</span> × 0.034 / 2 = <span
       t: "¿De dónde sale el 0.034? 🏃",
       d: "<p>El sonido corre a <strong>343 metros por segundo</strong>: o sea, <strong>34&nbsp;300 centímetros</strong> en un segundo.</p><p>Pero el eco lo medimos en <strong>microsegundos</strong>, y un segundo tiene <strong>un millón</strong>. Repartimos: 34&nbsp;300 ÷ 1&nbsp;000&nbsp;000 = <strong>0.0343 cm</strong> por cada microsegundo. Redondeado: <strong>0.034</strong>.</p><p>Así la cuenta es: microsegundos que tardó × centímetros que avanza en cada uno = centímetros que recorrió el grito. Y como fue ida y vuelta, entre 2. ↔️</p>"
     },
-    pulsein: {
-      t: "pulseIn: el cronómetro paciente ⏲️",
-      d: "<p><code>pulseIn(10, HIGH)</code> significa: «quédate mirando el pin 10 y <strong>cronometra</strong> cuánto rato estuvo encendido».</p><p>El sensor mantiene el pin ECHO encendido <strong>exactamente el tiempo que tardó el eco</strong>. Así que ese cronómetro nos regala justo el número que necesitamos para la cuenta. 🎁</p>"
+    dentro: {
+      t: "El bloque «distancia en cm» por dentro ⚙️",
+      d: "<p>Ese bloque hace tres cosas, rapidísimo:</p><ol style='padding-left:1.3em'><li>📣 <strong>Grita</strong>: prende el pin de <strong>disparo</strong> durante 10 microsegundos.</li><li>👂 <strong>Cronometra</strong>: el sensor deja el pin de <strong>eco</strong> encendido justo lo que tardó el eco, y el Arduino mide ese rato (en C++ eso se llama <code>pulseIn</code>).</li><li>🧮 <strong>Hace la cuenta</strong>: divide los microsegundos por <strong>58</strong>. ¿Por qué 58? Porque multiplicar por 0.034 y dividir entre 2 es casi lo mismo que dividir por 58. 😉</li></ol><p>Si el eco no vuelve (no hay nada al frente, o está a más de 4 metros), el bloque da <strong>400</strong>.</p>"
     },
     autos: {
       t: "El sensor de retroceso de los autos 🚗",

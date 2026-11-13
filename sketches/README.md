@@ -1,11 +1,16 @@
 # Sketches del curso
 
-Programas completos y listos para subir, uno por carpeta (el Arduino IDE exige
-que cada `.ino` viva en una carpeta con su mismo nombre).
+Programas completos, uno por carpeta. Cada carpeta trae dos versiones del
+mismo programa:
 
-Para usarlos: abrir el `.ino` con el Arduino IDE, conectar el Arduino por USB
-y apretar ➡ (Subir). El pin de cada componente viene comentado al inicio del
-archivo.
+- `<nombre>.bloquino`: el proyecto de Bloquino, con el circuito de la sesión y
+  los bloques. Es el que usa el curso: en Bloquino, «Abrir» y elegir el
+  archivo; después «Iniciar simulación» o «Cargar a la placa». Lo genera
+  `herramientas/bloques/` (no editarlo a mano).
+- `<nombre>.ino`: el mismo programa escrito en C++, para el Arduino IDE (que
+  exige que cada `.ino` viva en una carpeta con su mismo nombre). Algunos se
+  apartan un poco de su versión en bloques; el comentario inicial de
+  `herramientas/bloques/sesion-NN.js` dice en qué.
 
 - `sesion-02/` — `blink`: el LED de la placa. Reto: `corazon`.
 - `sesion-03/` — `semaforo`: tres LEDs por turnos. Reto: `ola`, `alarma` y
@@ -18,8 +23,8 @@ archivo.
   Reto: `piano` y `piano_melodias`.
 - `sesion-06/` — el servo: `servo`, `barrido`, `perilla` y `barrera` (el
   proyecto de la sesión). Reto: `saludo`, `saludo_boton` y `saludo_perilla`.
-  Usan la librería Servo, que se instala desde el gestor de librerías del IDE
-  (icono de libros), como muestra la última slide de la sesión 6.
+  Los `.ino` usan la librería Servo, que se instala desde el gestor de
+  librerías del IDE (en Bloquino ya viene).
 - `sesion-07/` — el murciélago HC-SR04: `murcielago`, `alarma` y `retroceso`.
   Reto: `estacionamiento`, `estacionamiento_pito` y `theremin`.
 - `sesion-08/` — el DHT11: `termometro` y `semaforo_termico` (necesitan la
@@ -31,6 +36,9 @@ archivo.
   Reto: `respira_color`, `fiesta` y `arcoiris`.
 
 ## Librerías
+
+Bloquino ya trae las librerías del kit (Servo, DHT, BuzzerMusic): esto es solo
+para los `.ino` en el Arduino IDE.
 
 En `librerias/` viven las librerías propias del curso. Para instalarlas:
 copiar la carpeta (por ejemplo `librerias/BuzzerMusic`) dentro de

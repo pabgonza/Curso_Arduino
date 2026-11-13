@@ -48,11 +48,11 @@
       </ul>
     </div>
     <div class="tarjeta">
-      <h3>💻 Sesión 2</h3>
+      <h3>🧩 Sesión 2</h3>
       <ul>
-        <li>Escribimos en el <strong>IDE</strong> y subimos por USB</li>
-        <li><code>setup</code> corre una vez; <code>loop</code>, para siempre 🔁</li>
-        <li><code>HIGH</code> prende, <code>LOW</code> apaga, <code>delay(1000)</code> = 1 segundo</li>
+        <li>Programamos con <strong>bloques</strong> en Bloquino y cargamos a la placa por USB</li>
+        <li><strong>al iniciar</strong> parte una vez; <strong>por siempre</strong> repite sin parar 🔁</li>
+        <li><strong>encender</strong> prende, <strong>apagar</strong> apaga, <strong>esperar 1 segundos</strong> hace una pausa ⏳</li>
       </ul>
     </div>
   </div>
@@ -435,7 +435,7 @@
   <h2>Toca un agujerito y mira qué pasa 👇</h2>
   <div class="tuto">
     <div class="proto-caja">
-      <svg viewBox="0 0 620 340" id="proto" aria-label="Protoboard interactiva al estilo Tinkercad"></svg>
+      <svg viewBox="0 0 620 340" id="proto" aria-label="Protoboard interactiva"></svg>
     </div>
     <aside class="tuto-panel">
       <p class="tuto-num" id="pb-num">Los agujeritos</p>
@@ -548,25 +548,18 @@
   <p class="nota">La <strong>patita larga</strong> del LED es la positiva (+): a ella llega el cable del <strong>pin 13</strong>; la <strong>corta</strong> es la negativa (−) y sale hacia la resistencia.</p>
 </section>
 
-<!-- 13 · El código es el mismo -->
+<!-- 13 · Los bloques son los mismos -->
 <section class="slide">
   <p class="eyebrow">La mejor parte</p>
-  <h2>¡El código es el mismo! 🤯</h2>
-  <div class="ide">
-    <div class="ide-barra"><span class="boton-ide">✓</span><span class="boton-ide">→</span><span class="ide-nombre">Blink, ahora con tu LED</span></div>
-    <pre><span class="kw">void</span> <span class="fn">setup</span>() {
-  <span class="fn">pinMode</span>(<span class="num">13</span>, <span class="kw">OUTPUT</span>);
-}
-
-<span class="kw">void</span> <span class="fn">loop</span>() {
-  <span class="fn">digitalWrite</span>(<span class="num">13</span>, <span class="kw">HIGH</span>);
-  <span class="fn">delay</span>(<span class="num">500</span>);
-  <span class="fn">digitalWrite</span>(<span class="num">13</span>, <span class="kw">LOW</span>);
-  <span class="fn">delay</span>(<span class="num">500</span>);
-}</pre>
+  <h2>¡Los bloques son los mismos! 🤯</h2>
+  <div class="fila" style="align-items:center; gap:2em">
+    <img class="bloques" src="../recursos/img/bloques/sesion-02/blink.png" alt="Bloques del Blink: al iniciar; por siempre: encender LED en pin 13, esperar 1 segundos, apagar LED en pin 13, esperar 1 segundos" style="max-height:50vh">
+    <div style="display:flex; flex-direction:column; gap:.8em; align-items:center; max-width:24em">
+      <p class="grande">Antes el pin 13 prendía la lucecita <strong>de adentro</strong>.<br>Ahora prende <strong>tu</strong> LED, el que armaste con tus manos. 💪</p>
+      <button class="sm-grande" data-sm="sesion-02/blink">👀 Ver el código</button>
+    </div>
   </div>
-  <p class="grande" style="max-width:32em">Antes el pin 13 prendía la lucecita <strong>de adentro</strong>.<br>Ahora prende <strong>tu</strong> LED, el que armaste con tus manos. 💪</p>
-  <p class="nota" style="max-width:36em">El secreto: la lucecita de la placa está unida por un caminito escondido <strong>al mismo pin 13</strong>. Tu LED ahora vive en ese pin también, así que el código sirve igualito — sin cambiar ni una letra.</p>
+  <p class="nota" style="max-width:36em">El secreto: la lucecita de la placa está unida por un caminito escondido <strong>al mismo pin 13</strong>. Tu LED ahora vive en ese pin también, así que el Blink sirve igualito — sin cambiar ni un bloque.</p>
 </section>
 
 <!-- 14 · Proyecto: semáforo -->
@@ -579,27 +572,18 @@
       <span class="led" id="sem-a" style="--c:var(--ambar)"></span>
       <span class="led" id="sem-v" style="--c:var(--verde)"></span>
     </div>
-    <div class="ide" style="max-width:22em">
-      <div class="ide-barra"><span class="ide-nombre">semaforo.ino</span></div>
-      <pre><span class="cm">// luz roja: 3 segundos</span>
-<span class="fn">digitalWrite</span>(<span class="num">13</span>, <span class="kw">HIGH</span>);
-<span class="fn">delay</span>(<span class="num">3000</span>);
-<span class="fn">digitalWrite</span>(<span class="num">13</span>, <span class="kw">LOW</span>);
-<span class="cm">// luz verde: 3 segundos</span>
-<span class="fn">digitalWrite</span>(<span class="num">12</span>, <span class="kw">HIGH</span>);
-<span class="fn">delay</span>(<span class="num">3000</span>);
-<span class="fn">digitalWrite</span>(<span class="num">12</span>, <span class="kw">LOW</span>);
-<span class="cm">// amarilla: 1 segundo</span>
-<span class="fn">digitalWrite</span>(<span class="num">11</span>, <span class="kw">HIGH</span>);
-<span class="fn">delay</span>(<span class="num">1000</span>);
-<span class="fn">digitalWrite</span>(<span class="num">11</span>, <span class="kw">LOW</span>);</pre>
+    <div class="bloques-caja" style="max-height:56vh">
+      <img class="bloques" src="../recursos/img/bloques/sesion-03/semaforo.png" alt="Bloques del semáforo: al iniciar; por siempre: comentario luz roja: 3 segundos, encender LED en pin 13, esperar 3 segundos, apagar LED en pin 13; comentario luz verde: 3 segundos, encender LED en pin 12, esperar 3 segundos, apagar LED en pin 12; comentario amarilla: 1 segundo, encender LED en pin 11, esperar 1 segundos, apagar LED en pin 11">
     </div>
     <div style="display:flex; flex-direction:column; gap:.5em; max-width:17em">
       <button class="boton" id="btn-sem">▶ Probar el semáforo</button>
       <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Armar el circuito: 3 LEDs con sus resistencias <button class="sm" data-sm="p-circuito">?</button></span></div>
-      <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Subir el programa completo y ver el show <button class="sm" data-sm="p-codigo">?</button></span></div>
+      <div class="check" tabindex="0"><span class="caja"></span><span class="txt">Armar los bloques y probarlos con <strong>Iniciar simulación</strong> <button class="sm" data-sm="p-codigo">?</button></span></div>
+      <div class="check" tabindex="0"><span class="caja"></span><span class="txt"><strong>Cargar a la placa</strong> y ver el show 🚦</span></div>
+      <button class="sm-grande" data-sm="sesion-03/semaforo">👀 Ver el código</button>
     </div>
   </div>
+  <p class="nota">Proyecto: <code>sketches/sesion-03/semaforo/semaforo.bloquino</code> (trae el circuito armado; en Bloquino se abre con <strong>Abrir</strong>).</p>
 </section>
 
 <!-- 15 · Reto -->
@@ -786,6 +770,7 @@
 </style>
 
 <script src="assets/slides.js"></script>
+<script src="assets/codigo.js"></script>
 <script>
   /* portada: LEDs que se van turnando */
   const pleds = ["pled-r", "pled-a", "pled-v"].map(id => document.getElementById(id));
@@ -1012,7 +997,7 @@
     const svg = document.getElementById("proto");
     const txt = document.getElementById("pb-txt");
     const num = document.getElementById("pb-num");
-    // geometría al estilo Tinkercad: rieles + / − arriba y abajo,
+    // geometría: rieles + / − arriba y abajo,
     // columnas numeradas y filas con letras A-J
     const COLS = 20, X0 = 60, PASO = 26, FILA = 16;
     const LETRAS_ARRIBA = ["J", "I", "H", "G", "F"], LETRAS_ABAJO = ["E", "D", "C", "B", "A"];
@@ -1050,7 +1035,7 @@
       tira(X0 + c * PASO - 8, Y_ABAJO - 9, 16, 82, "abajo" + c);
     }
 
-    // agujeritos (cuadraditos, como los dibuja Tinkercad)
+    // agujeritos (cuadraditos)
     function hoyo(x, y, id) {
       const h = crear("rect", { x: x - 5, y: y - 5, width: 10, height: 10, rx: 2, class: "hoyo", "data-g": id });
       grupos[id].hoyos.push(h);
@@ -1125,7 +1110,7 @@
       { pieza: "pieza-gnd", txt: "Un cable desde esa columna hasta el <strong>GND</strong> del Arduino: el camino de vuelta a casa." },
       { pieza: "pieza-13", txt: "Y por fin, un cable del <strong>pin 13</strong> a la columna de la patita larga. ¡Circuito cerrado! 🎉" }
     ];
-    const FINAL = "🎉 Ahora sí: enchufa el USB y sube el Blink. Tu LED debería parpadear… ¡y es todo tuyo!";
+    const FINAL = "🎉 Ahora sí: enchufa el USB y carga el Blink con <strong>Cargar a la placa</strong>. Tu LED debería parpadear… ¡y es todo tuyo!";
     let i = 0, latido = null;
 
     function pintar() {
@@ -1237,7 +1222,7 @@
   saberMas({
     "reto-sol": {
       t: "Las soluciones: tu coreografía 💃",
-      d: "<p class='aviso'>🔒 <strong>Recuerda hacer el desafío primero.</strong> Pelear un rato con el problema es donde más se aprende: esto es para comparar tu solución… o para destrabarte si llevas mucho rato. 💪</p><p>Las tres usan el mismo <code>setup</code> del semáforo (pines 13, 12 y 11 como <code>OUTPUT</code>); cambia solo el <code>loop</code>.</p><p><strong>🌊 La ola:</strong> se prenden una tras otra y se apagan en el mismo orden.</p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>void loop() {\n  digitalWrite(13, HIGH);\n  delay(200);\n  digitalWrite(12, HIGH);\n  delay(200);\n  digitalWrite(11, HIGH);\n  delay(200);\n  digitalWrite(13, LOW);\n  delay(200);\n  digitalWrite(12, LOW);\n  delay(200);\n  digitalWrite(11, LOW);\n  delay(200);\n}</code></pre><p><strong>🚨 La alarma:</strong> las tres juntas.</p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>void loop() {\n  digitalWrite(13, HIGH);\n  digitalWrite(12, HIGH);\n  digitalWrite(11, HIGH);\n  delay(300);\n  digitalWrite(13, LOW);\n  digitalWrite(12, LOW);\n  digitalWrite(11, LOW);\n  delay(300);\n}</code></pre><p><strong>🚗 El auto fantástico:</strong> va 13 → 12 → 11 y vuelve por el 12; como el <code>loop</code> se repite, nunca se nota dónde empieza la vuelta.</p><pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>void loop() {\n  digitalWrite(13, HIGH);\n  delay(150);\n  digitalWrite(13, LOW);\n  digitalWrite(12, HIGH);\n  delay(150);\n  digitalWrite(12, LOW);\n  digitalWrite(11, HIGH);\n  delay(150);\n  digitalWrite(11, LOW);\n  digitalWrite(12, HIGH);   // de vuelta\n  delay(150);\n  digitalWrite(12, LOW);\n}</code></pre><p>Programas completos: <code>sketches/sesion-03/ola</code>, <code>alarma</code> y <code>auto_fantastico</code>.</p>"
+      d: "<p class='aviso'>🔒 <strong>Recuerda hacer el desafío primero.</strong> Pelear un rato con el problema es donde más se aprende: esto es para comparar tu solución… o para destrabarte si llevas mucho rato. 💪</p><p>Las tres usan el mismo circuito del semáforo (LEDs en los pines 13, 12 y 11); cambia solo lo que va dentro de <strong>por siempre</strong>.</p><p><strong>🌊 La ola:</strong> se prenden una tras otra y se apagan en el mismo orden, con <strong>esperar 0.2 segundos</strong> entre cada paso.</p><img class='bloques' src='../recursos/img/bloques/sesion-03/ola.png' alt='Bloques de la ola: por siempre, encender LED en pin 13, 12 y 11 con esperar 0.2 segundos entre cada uno, y después apagar 13, 12 y 11 con las mismas esperas'><p class='nota'>Proyecto: <code>sketches/sesion-03/ola/ola.bloquino</code></p><button class='sm-grande' data-sm='sesion-03/ola'>👀 Ver el código</button><p><strong>🚨 La alarma:</strong> las tres juntas. Los tres <strong>encender</strong> van seguidos, sin esperar entre ellos: pasan tan rápido que se ven al mismo tiempo.</p><img class='bloques' src='../recursos/img/bloques/sesion-03/alarma.png' alt='Bloques de la alarma: por siempre, encender LED en pin 13, 12 y 11, esperar 0.3 segundos, apagar LED en pin 13, 12 y 11, esperar 0.3 segundos'><p class='nota'>Proyecto: <code>sketches/sesion-03/alarma/alarma.bloquino</code></p><button class='sm-grande' data-sm='sesion-03/alarma'>👀 Ver el código</button><p><strong>🚗 El auto fantástico:</strong> va 13 → 12 → 11 y vuelve por el 12; como <strong>por siempre</strong> se repite, nunca se nota dónde empieza la vuelta.</p><img class='bloques' src='../recursos/img/bloques/sesion-03/auto_fantastico.png' alt='Bloques del auto fantástico: por siempre, encender 13, esperar 0.15 segundos, apagar 13; lo mismo con el 12, el 11 y otra vez el 12'><p class='nota'>Proyecto: <code>sketches/sesion-03/auto_fantastico/auto_fantastico.bloquino</code></p><button class='sm-grande' data-sm='sesion-03/auto_fantastico'>👀 Ver el código</button>"
     },
     "p-circuito": {
       t: "Así se ve armado completo 🔧",
@@ -1257,7 +1242,7 @@
     },
     "p-codigo": {
       t: "El programa completo 📋",
-      d: "<pre style='background:#F4FAF9;border-radius:10px;padding:.7em 1em;font-size:.82em;line-height:1.45'><code>void setup() {\n  pinMode(13, OUTPUT);\n  pinMode(12, OUTPUT);\n  pinMode(11, OUTPUT);\n}\n\nvoid loop() {\n  // luz roja: 3 segundos\n  digitalWrite(13, HIGH);\n  delay(3000);\n  digitalWrite(13, LOW);\n  // luz verde: 3 segundos\n  digitalWrite(12, HIGH);\n  delay(3000);\n  digitalWrite(12, LOW);\n  // amarilla: 1 segundo\n  digitalWrite(11, HIGH);\n  delay(1000);\n  digitalWrite(11, LOW);\n}</code></pre><p>El loop es el ciclo del semáforo que ya viste; el setup solo avisa que los tres pines son salidas. También está en <code>sketches/sesion-03/semaforo</code>.</p>"
+      d: "<img class='bloques' src='../recursos/img/bloques/sesion-03/semaforo.png' alt='Bloques del semáforo completo'><p>Dentro de <strong>por siempre</strong> va el ciclo del semáforo que ya viste: cada luz se <strong>enciende</strong>, <strong>espera</strong> su turno y se <strong>apaga</strong>. Los bloques grises de <strong>comentario</strong> son notitas para las personas: la placa se los salta. 📝</p><p class='nota'>Proyecto: <code>sketches/sesion-03/semaforo/semaforo.bloquino</code></p>"
     },
     volta: {
       t: "Voltio — por Alessandro Volta",

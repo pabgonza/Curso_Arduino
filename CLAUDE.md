@@ -5,7 +5,10 @@ Estructura y propósito en [README.md](README.md). Diagramas de circuito: seguir
 ## Cada sesión
 - Una slide por tema; siglas y "cómo funciona por dentro" en popups `¿Saber más?` (`saberMas()` de `slides/assets/slides.js`)
 - Proyecto con checklist `.check` y al menos los popups `p-circuito` y `p-codigo`; quiz de tarjetas al final
-- Todo programa mostrado tiene su sketch completo en `sketches/sesion-NN/<nombre>/<nombre>.ino`
+- El curso se hace en Bloquino (`../Plataforma_Arduino_Bloques`): nada de Arduino IDE ni Tinkercad como herramienta
+- Todo programa mostrado se ve como bloques (`<img class="bloques">`, o `.bloques-caja` si es alto) con su botón «Ver el código» (`data-sm="sesion-NN/<nombre>"`, C++ de `slides/assets/codigo.js`); tiene `.bloquino` y `.ino` en `sketches/sesion-NN/<nombre>/`
+- Programa nuevo o cambiado: editarlo en `herramientas/bloques/sesion-NN.js` y regenerar (ver su README); nunca editar a mano los `.bloquino`, las imágenes de `recursos/img/bloques/` ni `codigo.js`
+- Bloque suelto en el texto o un interactivo: `<span class="bloque">esperar <span class="valor">1</span> segundos</span>` (variantes por categoría en `slides.css`)
 - Botones: siempre entre el pin y GND sin resistencia (`INPUT_PULLUP`, apretado = `LOW`), igual que en Bloquino; se explica en la S4 (popup `pullup`) y se repasa en la S5
 - Reto: botón `.sm-grande` con el popup `reto-sol` (aviso `.aviso` de intentarlo primero + solución por nivel; desde el nivel 2 solo lo que cambia) y un sketch por nivel
 - Slide 2 «Lo que ya sabemos» (`.fila.repaso`, desde la sesión 3): tarjeta con los conceptos de la sesión anterior + tarjeta «De antes, para hoy». Solo conceptos (sensor/actuador, voltaje/corriente/resistencia, `if`/`for`/variables) y para qué sirve cada componente; nada de pasos de armado ni de los proyectos hechos
