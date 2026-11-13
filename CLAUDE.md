@@ -18,7 +18,8 @@ Estructura y propósito en [README.md](README.md). Diagramas de circuito: seguir
 - Textos que no deben cortarse (p. ej. `USB‑SERIAL`): guion no separable U+2011
 
 ## Verificar
-- `npx -y http-server -p 8123 -s -c-1` desde la raíz; slides en http://localhost:8123/slides/
+- `python -m http.server 8123 --bind 127.0.0.1` desde la raíz (no instala nada; `npx -y http-server` sí); slides en http://localhost:8123/slides/
+- El circuito y el código de cada sesión coinciden con Bloquino (`../Plataforma_Arduino_Bloques`): al cambiar uno, revisar el otro
 - Playwright a 1280×720: activar cada slide moviendo `.activa`; desborde = `scrollHeight-clientHeight > 4`; revisar imágenes rotas
 - Probar los interactivos (hotspots, tutoriales paso a paso, popups) además de mirar la captura
 - Capturas: esperar ~2 s tras cargar la slide (animación de entrada); si no, sale vacía
