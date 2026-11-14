@@ -1,11 +1,12 @@
 {
   "format": "velxio-project",
   "version": 1,
-  "exportedAt": "2026-11-13T11:06:05.702Z",
+  "exportedAt": "2026-11-14T05:02:46.548Z",
   "name": "estrellita",
   "boards": [
     {
       "id": "arduino-uno",
+      "name": "Placa 1",
       "boardKind": "arduino-uno",
       "x": 50,
       "y": 50,
@@ -18,26 +19,26 @@
     "group-arduino-uno": [
       {
         "name": "sketch.ino",
-        "content": "// Generado desde bloques\nvoid setup() {\n  pinMode(8, OUTPUT);\n}\n\nvoid loop() {\n  tone(8, 262, 400);\n  delay(400);\n  tone(8, 262, 400);\n  delay(400);\n  tone(8, 392, 400);\n  delay(400);\n  tone(8, 392, 400);\n  delay(400);\n  delay(1000);\n}\n"
+        "content": "// Generado desde bloques\nvoid setup() {\n  pinMode(8, OUTPUT);\n}\n\nvoid loop() {\n  tone(8, 262);\n  delay(400);\n  noTone(8);\n  tone(8, 262);\n  delay(400);\n  noTone(8);\n  tone(8, 392);\n  delay(400);\n  noTone(8);\n  tone(8, 392);\n  delay(400);\n  noTone(8);\n  delay(1000);\n}\n"
       },
       {
         "name": "bloques.json",
-        "content": "{\"blocks\":{\"languageVersion\":0,\"blocks\":[{\"type\":\"ab_al_iniciar\",\"id\":\"iKAsE%6vx9#6WHbM3e9B\",\"x\":0,\"y\":0,\"next\":{\"block\":{\"type\":\"ab_por_siempre\",\"id\":\"5jwFhV-s|)6#Pm]4sO1i\",\"inputs\":{\"DO\":{\"block\":{\"type\":\"ab_tocar_nota\",\"id\":\"b,F:,.4CATaxvH[LeOg2\",\"fields\":{\"NOTA\":\"262\",\"PIN\":\"8\"},\"inputs\":{\"S\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"T1@([l%:G?]jk)V1J[EY\",\"fields\":{\"NUM\":0.4}}}},\"next\":{\"block\":{\"type\":\"ab_tocar_nota\",\"id\":\"m2p4(WU^K8W`GAgss+rJ\",\"fields\":{\"NOTA\":\"262\",\"PIN\":\"8\"},\"inputs\":{\"S\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"}E6F29A9O]ymGsxcSpiB\",\"fields\":{\"NUM\":0.4}}}},\"next\":{\"block\":{\"type\":\"ab_tocar_nota\",\"id\":\"_gD{7B%bJsKaSqL,s,m!\",\"fields\":{\"NOTA\":\"392\",\"PIN\":\"8\"},\"inputs\":{\"S\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"Q*MYdX|3kJBB7EE6W$!*\",\"fields\":{\"NUM\":0.4}}}},\"next\":{\"block\":{\"type\":\"ab_tocar_nota\",\"id\":\"-TG?pvIl^qXiS?}Q82Hm\",\"fields\":{\"NOTA\":\"392\",\"PIN\":\"8\"},\"inputs\":{\"S\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"R7bV#4O0GGtz$aLsrqN5\",\"fields\":{\"NUM\":0.4}}}},\"next\":{\"block\":{\"type\":\"ab_esperar\",\"id\":\"dHhyBupZv?`d#THzOJg^\",\"inputs\":{\"S\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"F_CIwy#%i.G66Ys=|4wR\",\"fields\":{\"NUM\":1}}}}}}}}}}}}}}}}}}]}}"
+        "content": "{\"blocks\":{\"languageVersion\":0,\"blocks\":[{\"type\":\"ab_al_iniciar\",\"id\":\"b8#h2jm-DNg;*pRvkLGv\",\"x\":0,\"y\":0,\"next\":{\"block\":{\"type\":\"ab_por_siempre\",\"id\":\"WdQ7hqb^^LB,`}rnyd+5\",\"inputs\":{\"DO\":{\"block\":{\"type\":\"ab_tocar_nota\",\"id\":\"ru)^wgde+7C;-3;|7KT6\",\"fields\":{\"NOTA\":\"262\",\"PIN\":\"8\"},\"inputs\":{\"S\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"WZE%xgm!RX2vt_3DPOmY\",\"fields\":{\"NUM\":0.4}}}},\"next\":{\"block\":{\"type\":\"ab_tocar_nota\",\"id\":\"^q/gtwc_vEEi(}Hx(~13\",\"fields\":{\"NOTA\":\"262\",\"PIN\":\"8\"},\"inputs\":{\"S\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"H*vqW:e5]9I$h9SW+zbV\",\"fields\":{\"NUM\":0.4}}}},\"next\":{\"block\":{\"type\":\"ab_tocar_nota\",\"id\":\"kEH?sOCy`8bJ%bk8qy;/\",\"fields\":{\"NOTA\":\"392\",\"PIN\":\"8\"},\"inputs\":{\"S\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"wl9!ZBnP7A/9D:zL1n.t\",\"fields\":{\"NUM\":0.4}}}},\"next\":{\"block\":{\"type\":\"ab_tocar_nota\",\"id\":\"H2kx,ZSw%+)20,z4w/^I\",\"fields\":{\"NOTA\":\"392\",\"PIN\":\"8\"},\"inputs\":{\"S\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"k4|{VQ1$:~6oqybNJ9N9\",\"fields\":{\"NUM\":0.4}}}},\"next\":{\"block\":{\"type\":\"ab_esperar\",\"id\":\"Gu/q=pcn+x*x?Rbe*2)V\",\"inputs\":{\"S\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"bb7[i1xbpE$V[iHN1z#u\",\"fields\":{\"NUM\":1}}}}}}}}}}}}}}}}}}]}}"
       }
     ]
   },
   "components": [
     {
-      "id": "breadboard_1794567944413_rjrx1zg8j",
+      "id": "breadboard_1794632550183_pa0nq6sk0",
       "metadataId": "breadboard",
-      "x": -284,
+      "x": -338,
       "y": -191,
       "properties": {}
     },
     {
-      "id": "buzzer_1794567945035_3zwlcmbsm",
+      "id": "buzzer_1794632550747_sta4se2j4",
       "metadataId": "buzzer",
-      "x": -18.240000000000038,
+      "x": -72.24000000000004,
       "y": -159.8,
       "properties": {
         "hasSignal": false
@@ -46,17 +47,17 @@
   ],
   "wires": [
     {
-      "id": "bbwire-buzzer_1794567945035_3zwlcmbsm-0-30b.f",
+      "id": "bbwire-buzzer_1794632550747_sta4se2j4-0-30b.f",
       "start": {
-        "componentId": "buzzer_1794567945035_3zwlcmbsm",
+        "componentId": "buzzer_1794632550747_sta4se2j4",
         "pinName": "1",
-        "x": 14.759999999999962,
+        "x": -39.24000000000004,
         "y": -69.80000000000001
       },
       "end": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794632550183_pa0nq6sk0",
         "pinName": "30b.f",
-        "x": 14.95999999999998,
+        "x": -39.04000000000002,
         "y": -69.8
       },
       "waypoints": [],
@@ -64,17 +65,17 @@
       "bb": true
     },
     {
-      "id": "bbwire-buzzer_1794567945035_3zwlcmbsm-1-31b.f",
+      "id": "bbwire-buzzer_1794632550747_sta4se2j4-1-31b.f",
       "start": {
-        "componentId": "buzzer_1794567945035_3zwlcmbsm",
+        "componentId": "buzzer_1794632550747_sta4se2j4",
         "pinName": "2",
-        "x": 24.759999999999962,
+        "x": -29.240000000000038,
         "y": -69.80000000000001
       },
       "end": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794632550183_pa0nq6sk0",
         "pinName": "31b.f",
-        "x": 24.559999999999945,
+        "x": -29.440000000000055,
         "y": -69.8
       },
       "waypoints": [],
@@ -82,11 +83,11 @@
       "bb": true
     },
     {
-      "id": "wire-1794567948161",
+      "id": "wire-1794632553402",
       "start": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794632550183_pa0nq6sk0",
         "pinName": "30b.j",
-        "x": 14.95999999999998,
+        "x": -39.04000000000002,
         "y": -31.400000000000006
       },
       "end": {
@@ -101,38 +102,38 @@
           "y": -31.400000000000006
         }
       ],
-      "color": "#00FFFF",
-      "autoRouted": true
-    },
-    {
-      "id": "wire-1794567949897",
-      "start": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
-        "pinName": "31b.j",
-        "x": 24.559999999999945,
-        "y": -31.400000000000006
-      },
-      "end": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
-        "pinName": "bn.28",
-        "x": 62.97333333333336,
-        "y": -2.5999999999999943
-      },
-      "waypoints": [
-        {
-          "x": 24.559999999999945,
-          "y": -2.5999999999999943
-        }
-      ],
       "color": "#FFD700",
       "autoRouted": true
     },
     {
-      "id": "wire-1794567952220",
+      "id": "wire-1794632554817",
       "start": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794632550183_pa0nq6sk0",
+        "pinName": "31b.j",
+        "x": -29.440000000000055,
+        "y": -31.400000000000006
+      },
+      "end": {
+        "componentId": "breadboard_1794632550183_pa0nq6sk0",
+        "pinName": "bn.28",
+        "x": 8.973333333333358,
+        "y": -2.5999999999999943
+      },
+      "waypoints": [
+        {
+          "x": -29.440000000000055,
+          "y": -2.5999999999999943
+        }
+      ],
+      "color": "#22c55e",
+      "autoRouted": true
+    },
+    {
+      "id": "wire-1794632556258",
+      "start": {
+        "componentId": "breadboard_1794632550183_pa0nq6sk0",
         "pinName": "bn.45",
-        "x": 254.97333333333336,
+        "x": 200.97333333333336,
         "y": -2.5999999999999943
       },
       "end": {
@@ -143,7 +144,7 @@
       },
       "waypoints": [
         {
-          "x": 254.97333333333336,
+          "x": 200.97333333333336,
           "y": 241.5
         }
       ],

@@ -1,11 +1,12 @@
 {
   "format": "velxio-project",
   "version": 1,
-  "exportedAt": "2026-11-13T11:06:33.756Z",
+  "exportedAt": "2026-11-14T05:03:12.086Z",
   "name": "timbre",
   "boards": [
     {
       "id": "arduino-uno",
+      "name": "Placa 1",
       "boardKind": "arduino-uno",
       "x": 50,
       "y": 50,
@@ -18,35 +19,35 @@
     "group-arduino-uno": [
       {
         "name": "sketch.ino",
-        "content": "// Generado desde bloques\nvoid setup() {\n  pinMode(2, INPUT_PULLUP);\n  pinMode(8, OUTPUT);\n}\n\nvoid loop() {\n  if (digitalRead(2) == LOW) {\n    tone(8, 523, 200);\n    delay(200);\n    tone(8, 392, 400);\n    delay(400);\n  }\n}\n"
+        "content": "// Generado desde bloques\nvoid setup() {\n  pinMode(2, INPUT_PULLUP);\n  pinMode(8, OUTPUT);\n}\n\nvoid loop() {\n  if (digitalRead(2) == LOW) {\n    tone(8, 523);\n    delay(200);\n    noTone(8);\n    tone(8, 392);\n    delay(400);\n    noTone(8);\n  }\n}\n"
       },
       {
         "name": "bloques.json",
-        "content": "{\"blocks\":{\"languageVersion\":0,\"blocks\":[{\"type\":\"ab_al_iniciar\",\"id\":\"@+8*eWa!;(V(w)!(`wx=\",\"x\":0,\"y\":0,\"next\":{\"block\":{\"type\":\"ab_por_siempre\",\"id\":\"QL75MMQ:;(ppf:=[cou7\",\"inputs\":{\"DO\":{\"block\":{\"type\":\"ab_si\",\"id\":\"HS8=}SDMvh./yG_r)Tia\",\"inputs\":{\"COND\":{\"block\":{\"type\":\"ab_boton\",\"id\":\"5QWDsRo2UT=,CB[kktH1\",\"fields\":{\"PIN\":\"2\"}}},\"DO\":{\"block\":{\"type\":\"ab_tocar_nota\",\"id\":\"%MhFUv{)~1uIq[n:($HS\",\"fields\":{\"NOTA\":\"523\",\"PIN\":\"8\"},\"inputs\":{\"S\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"ixnhz1p(IHrh;jWY4qR=\",\"fields\":{\"NUM\":0.2}}}},\"next\":{\"block\":{\"type\":\"ab_tocar_nota\",\"id\":\"0u/*U]ZC0Zss+-CFMAXQ\",\"fields\":{\"NOTA\":\"392\",\"PIN\":\"8\"},\"inputs\":{\"S\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"mZJ2pRQ_Kw`LEVn=hk}R\",\"fields\":{\"NUM\":0.4}}}}}}}}}}}}}}}]}}"
+        "content": "{\"blocks\":{\"languageVersion\":0,\"blocks\":[{\"type\":\"ab_al_iniciar\",\"id\":\"CR6iE=cu*/QxN~kCxG8r\",\"x\":0,\"y\":0,\"next\":{\"block\":{\"type\":\"ab_por_siempre\",\"id\":\"88)]hR}Cl2%Am93;a=w-\",\"inputs\":{\"DO\":{\"block\":{\"type\":\"ab_si\",\"id\":\"V@8Mr1rZV_hp$-n_,:]~\",\"inputs\":{\"COND\":{\"block\":{\"type\":\"ab_boton\",\"id\":\"aHCj6^z.:jO/#g~]rs9J\",\"fields\":{\"PIN\":\"2\"}}},\"DO\":{\"block\":{\"type\":\"ab_tocar_nota\",\"id\":\"yxE6*o@G4JzRTOJ!Hy?]\",\"fields\":{\"NOTA\":\"523\",\"PIN\":\"8\"},\"inputs\":{\"S\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"#T1l[[,D(N`a!m);pDFe\",\"fields\":{\"NUM\":0.2}}}},\"next\":{\"block\":{\"type\":\"ab_tocar_nota\",\"id\":\"uyM!EdBkv8l150Z!dSPp\",\"fields\":{\"NOTA\":\"392\",\"PIN\":\"8\"},\"inputs\":{\"S\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"eg+#A8h:G1v8fWFM$2un\",\"fields\":{\"NUM\":0.4}}}}}}}}}}}}}}}]}}"
       }
     ]
   },
   "components": [
     {
-      "id": "breadboard_1794567944413_rjrx1zg8j",
+      "id": "breadboard_1794632550183_pa0nq6sk0",
       "metadataId": "breadboard",
-      "x": -284,
+      "x": -338,
       "y": -191,
       "properties": {}
     },
     {
-      "id": "buzzer_1794567945035_3zwlcmbsm",
+      "id": "buzzer_1794632550747_sta4se2j4",
       "metadataId": "buzzer",
-      "x": -18.240000000000038,
+      "x": -72.24000000000004,
       "y": -159.8,
       "properties": {
         "hasSignal": false
       }
     },
     {
-      "id": "pushbutton_1794567975278_33f4qwd4g",
+      "id": "pushbutton_1794632575062_swucnh2ck",
       "metadataId": "pushbutton",
-      "x": -190.74,
+      "x": -244.74,
       "y": -115.70000000000002,
       "properties": {
         "color": "red",
@@ -59,17 +60,17 @@
   ],
   "wires": [
     {
-      "id": "bbwire-buzzer_1794567945035_3zwlcmbsm-0-30b.f",
+      "id": "bbwire-buzzer_1794632550747_sta4se2j4-0-30b.f",
       "start": {
-        "componentId": "buzzer_1794567945035_3zwlcmbsm",
+        "componentId": "buzzer_1794632550747_sta4se2j4",
         "pinName": "1",
-        "x": 14.759999999999962,
+        "x": -39.24000000000004,
         "y": -69.80000000000001
       },
       "end": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794632550183_pa0nq6sk0",
         "pinName": "30b.f",
-        "x": 14.95999999999998,
+        "x": -39.04000000000002,
         "y": -69.8
       },
       "waypoints": [],
@@ -77,17 +78,17 @@
       "bb": true
     },
     {
-      "id": "bbwire-buzzer_1794567945035_3zwlcmbsm-1-31b.f",
+      "id": "bbwire-buzzer_1794632550747_sta4se2j4-1-31b.f",
       "start": {
-        "componentId": "buzzer_1794567945035_3zwlcmbsm",
+        "componentId": "buzzer_1794632550747_sta4se2j4",
         "pinName": "2",
-        "x": 24.759999999999962,
+        "x": -29.240000000000038,
         "y": -69.80000000000001
       },
       "end": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794632550183_pa0nq6sk0",
         "pinName": "31b.f",
-        "x": 24.559999999999945,
+        "x": -29.440000000000055,
         "y": -69.8
       },
       "waypoints": [],
@@ -95,11 +96,11 @@
       "bb": true
     },
     {
-      "id": "wire-1794567948161",
+      "id": "wire-1794632553402",
       "start": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794632550183_pa0nq6sk0",
         "pinName": "30b.j",
-        "x": 14.95999999999998,
+        "x": -39.04000000000002,
         "y": -31.400000000000006
       },
       "end": {
@@ -114,38 +115,38 @@
           "y": -31.400000000000006
         }
       ],
-      "color": "#00FFFF",
-      "autoRouted": true
-    },
-    {
-      "id": "wire-1794567949897",
-      "start": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
-        "pinName": "31b.j",
-        "x": 24.559999999999945,
-        "y": -31.400000000000006
-      },
-      "end": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
-        "pinName": "bn.28",
-        "x": 62.97333333333336,
-        "y": -2.5999999999999943
-      },
-      "waypoints": [
-        {
-          "x": 24.559999999999945,
-          "y": -2.5999999999999943
-        }
-      ],
       "color": "#FFD700",
       "autoRouted": true
     },
     {
-      "id": "wire-1794567952220",
+      "id": "wire-1794632554817",
       "start": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794632550183_pa0nq6sk0",
+        "pinName": "31b.j",
+        "x": -29.440000000000055,
+        "y": -31.400000000000006
+      },
+      "end": {
+        "componentId": "breadboard_1794632550183_pa0nq6sk0",
+        "pinName": "bn.28",
+        "x": 8.973333333333358,
+        "y": -2.5999999999999943
+      },
+      "waypoints": [
+        {
+          "x": -29.440000000000055,
+          "y": -2.5999999999999943
+        }
+      ],
+      "color": "#22c55e",
+      "autoRouted": true
+    },
+    {
+      "id": "wire-1794632556258",
+      "start": {
+        "componentId": "breadboard_1794632550183_pa0nq6sk0",
         "pinName": "bn.45",
-        "x": 254.97333333333336,
+        "x": 200.97333333333336,
         "y": -2.5999999999999943
       },
       "end": {
@@ -156,7 +157,7 @@
       },
       "waypoints": [
         {
-          "x": 254.97333333333336,
+          "x": 200.97333333333336,
           "y": 241.5
         }
       ],
@@ -164,17 +165,17 @@
       "autoRouted": true
     },
     {
-      "id": "bbwire-pushbutton_1794567975278_33f4qwd4g-0-14t.c",
+      "id": "bbwire-pushbutton_1794632575062_swucnh2ck-0-14t.c",
       "start": {
-        "componentId": "pushbutton_1794567975278_33f4qwd4g",
+        "componentId": "pushbutton_1794632575062_swucnh2ck",
         "pinName": "1.l",
-        "x": -138.74,
+        "x": -192.74,
         "y": -117.70000000000002
       },
       "end": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794632550183_pa0nq6sk0",
         "pinName": "14t.c",
-        "x": -138.64,
+        "x": -192.64,
         "y": -117.80000000000001
       },
       "waypoints": [],
@@ -182,17 +183,17 @@
       "bb": true
     },
     {
-      "id": "bbwire-pushbutton_1794567975278_33f4qwd4g-1-12t.c",
+      "id": "bbwire-pushbutton_1794632575062_swucnh2ck-1-12t.c",
       "start": {
-        "componentId": "pushbutton_1794567975278_33f4qwd4g",
+        "componentId": "pushbutton_1794632575062_swucnh2ck",
         "pinName": "2.l",
-        "x": -157.74,
+        "x": -211.74,
         "y": -117.70000000000002
       },
       "end": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794632550183_pa0nq6sk0",
         "pinName": "12t.c",
-        "x": -157.84,
+        "x": -211.84,
         "y": -117.80000000000001
       },
       "waypoints": [],
@@ -200,17 +201,17 @@
       "bb": true
     },
     {
-      "id": "bbwire-pushbutton_1794567975278_33f4qwd4g-2-14b.h",
+      "id": "bbwire-pushbutton_1794632575062_swucnh2ck-2-14b.h",
       "start": {
-        "componentId": "pushbutton_1794567975278_33f4qwd4g",
+        "componentId": "pushbutton_1794632575062_swucnh2ck",
         "pinName": "1.r",
-        "x": -138.74,
+        "x": -192.74,
         "y": -50.70000000000002
       },
       "end": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794632550183_pa0nq6sk0",
         "pinName": "14b.h",
-        "x": -138.64,
+        "x": -192.64,
         "y": -50.60000000000002
       },
       "waypoints": [],
@@ -218,17 +219,17 @@
       "bb": true
     },
     {
-      "id": "bbwire-pushbutton_1794567975278_33f4qwd4g-3-12b.h",
+      "id": "bbwire-pushbutton_1794632575062_swucnh2ck-3-12b.h",
       "start": {
-        "componentId": "pushbutton_1794567975278_33f4qwd4g",
+        "componentId": "pushbutton_1794632575062_swucnh2ck",
         "pinName": "2.r",
-        "x": -157.74,
+        "x": -211.74,
         "y": -50.70000000000002
       },
       "end": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794632550183_pa0nq6sk0",
         "pinName": "12b.h",
-        "x": -157.84,
+        "x": -211.84,
         "y": -50.60000000000002
       },
       "waypoints": [],
@@ -236,11 +237,11 @@
       "bb": true
     },
     {
-      "id": "wire-1794567978689",
+      "id": "wire-1794632578086",
       "start": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794632550183_pa0nq6sk0",
         "pinName": "14t.a",
-        "x": -138.64,
+        "x": -192.64,
         "y": -137
       },
       "end": {
@@ -251,38 +252,38 @@
       },
       "waypoints": [
         {
-          "x": -26.240000000000038,
+          "x": -80.24000000000004,
           "y": -137
         },
         {
-          "x": -26.240000000000038,
+          "x": -80.24000000000004,
           "y": 59
         }
       ],
-      "color": "#0000cc",
+      "color": "#FF00FF",
       "autoRouted": true
     },
     {
-      "id": "wire-1794567980372",
+      "id": "wire-1794632579479",
       "start": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794632550183_pa0nq6sk0",
         "pinName": "12b.j",
-        "x": -157.84,
+        "x": -211.84,
         "y": -31.400000000000006
       },
       "end": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794632550183_pa0nq6sk0",
         "pinName": "bn.10",
-        "x": -148.2266666666667,
+        "x": -202.2266666666667,
         "y": -2.5999999999999943
       },
       "waypoints": [
         {
-          "x": -157.84,
+          "x": -211.84,
           "y": -2.5999999999999943
         }
       ],
-      "color": "#8B00FF",
+      "color": "#32CD32",
       "autoRouted": true
     }
   ],

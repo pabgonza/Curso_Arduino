@@ -1,11 +1,12 @@
 {
   "format": "velxio-project",
   "version": 1,
-  "exportedAt": "2026-11-13T11:06:14.368Z",
+  "exportedAt": "2026-11-14T05:02:54.264Z",
   "name": "sirena",
   "boards": [
     {
       "id": "arduino-uno",
+      "name": "Placa 1",
       "boardKind": "arduino-uno",
       "x": 50,
       "y": 50,
@@ -18,26 +19,26 @@
     "group-arduino-uno": [
       {
         "name": "sketch.ino",
-        "content": "// Generado desde bloques\nvoid setup() {\n  pinMode(8, OUTPUT);\n}\n\nvoid loop() {\n  tone(8, 440, 300);\n  delay(300);\n  tone(8, 659, 300);\n  delay(300);\n}\n"
+        "content": "// Generado desde bloques\nvoid setup() {\n  pinMode(8, OUTPUT);\n}\n\nvoid loop() {\n  tone(8, 440);\n  delay(300);\n  noTone(8);\n  tone(8, 659);\n  delay(300);\n  noTone(8);\n}\n"
       },
       {
         "name": "bloques.json",
-        "content": "{\"blocks\":{\"languageVersion\":0,\"blocks\":[{\"type\":\"ab_al_iniciar\",\"id\":\"a`3MUM52dbP~qt#;UUZx\",\"x\":0,\"y\":0,\"next\":{\"block\":{\"type\":\"ab_por_siempre\",\"id\":\"3E~h3+Ito`126GPKT+Nv\",\"inputs\":{\"DO\":{\"block\":{\"type\":\"ab_tocar_nota\",\"id\":\"g-1IauPZNT}daaGe`VQ/\",\"fields\":{\"NOTA\":\"440\",\"PIN\":\"8\"},\"inputs\":{\"S\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"=rE/~gcr3~bf(|Zr:Q1b\",\"fields\":{\"NUM\":0.3}}}},\"next\":{\"block\":{\"type\":\"ab_tocar_nota\",\"id\":\"J+ul(#4e?fZu=$Jpm[].\",\"fields\":{\"NOTA\":\"659\",\"PIN\":\"8\"},\"inputs\":{\"S\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"*.pZs;S1jxn8%zx.OckV\",\"fields\":{\"NUM\":0.3}}}}}}}}}}}}]}}"
+        "content": "{\"blocks\":{\"languageVersion\":0,\"blocks\":[{\"type\":\"ab_al_iniciar\",\"id\":\"JmA:gvi[[1iL%#2S9?3O\",\"x\":0,\"y\":0,\"next\":{\"block\":{\"type\":\"ab_por_siempre\",\"id\":\"tGmCR|5?v[#Y5#?T)jm^\",\"inputs\":{\"DO\":{\"block\":{\"type\":\"ab_tocar_nota\",\"id\":\"mdhoLaRIIZZDPXmkqXkT\",\"fields\":{\"NOTA\":\"440\",\"PIN\":\"8\"},\"inputs\":{\"S\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"IrGp#WoVX@@}{TI0Q)2z\",\"fields\":{\"NUM\":0.3}}}},\"next\":{\"block\":{\"type\":\"ab_tocar_nota\",\"id\":\"8zb9Y8rMvF!/,93=$2e!\",\"fields\":{\"NOTA\":\"659\",\"PIN\":\"8\"},\"inputs\":{\"S\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"Sv{MnfEhWNS;1lh/x#Ih\",\"fields\":{\"NUM\":0.3}}}}}}}}}}}}]}}"
       }
     ]
   },
   "components": [
     {
-      "id": "breadboard_1794567944413_rjrx1zg8j",
+      "id": "breadboard_1794632550183_pa0nq6sk0",
       "metadataId": "breadboard",
-      "x": -284,
+      "x": -338,
       "y": -191,
       "properties": {}
     },
     {
-      "id": "buzzer_1794567945035_3zwlcmbsm",
+      "id": "buzzer_1794632550747_sta4se2j4",
       "metadataId": "buzzer",
-      "x": -18.240000000000038,
+      "x": -72.24000000000004,
       "y": -159.8,
       "properties": {
         "hasSignal": false
@@ -46,17 +47,17 @@
   ],
   "wires": [
     {
-      "id": "bbwire-buzzer_1794567945035_3zwlcmbsm-0-30b.f",
+      "id": "bbwire-buzzer_1794632550747_sta4se2j4-0-30b.f",
       "start": {
-        "componentId": "buzzer_1794567945035_3zwlcmbsm",
+        "componentId": "buzzer_1794632550747_sta4se2j4",
         "pinName": "1",
-        "x": 14.759999999999962,
+        "x": -39.24000000000004,
         "y": -69.80000000000001
       },
       "end": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794632550183_pa0nq6sk0",
         "pinName": "30b.f",
-        "x": 14.95999999999998,
+        "x": -39.04000000000002,
         "y": -69.8
       },
       "waypoints": [],
@@ -64,17 +65,17 @@
       "bb": true
     },
     {
-      "id": "bbwire-buzzer_1794567945035_3zwlcmbsm-1-31b.f",
+      "id": "bbwire-buzzer_1794632550747_sta4se2j4-1-31b.f",
       "start": {
-        "componentId": "buzzer_1794567945035_3zwlcmbsm",
+        "componentId": "buzzer_1794632550747_sta4se2j4",
         "pinName": "2",
-        "x": 24.759999999999962,
+        "x": -29.240000000000038,
         "y": -69.80000000000001
       },
       "end": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794632550183_pa0nq6sk0",
         "pinName": "31b.f",
-        "x": 24.559999999999945,
+        "x": -29.440000000000055,
         "y": -69.8
       },
       "waypoints": [],
@@ -82,11 +83,11 @@
       "bb": true
     },
     {
-      "id": "wire-1794567948161",
+      "id": "wire-1794632553402",
       "start": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794632550183_pa0nq6sk0",
         "pinName": "30b.j",
-        "x": 14.95999999999998,
+        "x": -39.04000000000002,
         "y": -31.400000000000006
       },
       "end": {
@@ -101,38 +102,38 @@
           "y": -31.400000000000006
         }
       ],
-      "color": "#00FFFF",
-      "autoRouted": true
-    },
-    {
-      "id": "wire-1794567949897",
-      "start": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
-        "pinName": "31b.j",
-        "x": 24.559999999999945,
-        "y": -31.400000000000006
-      },
-      "end": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
-        "pinName": "bn.28",
-        "x": 62.97333333333336,
-        "y": -2.5999999999999943
-      },
-      "waypoints": [
-        {
-          "x": 24.559999999999945,
-          "y": -2.5999999999999943
-        }
-      ],
       "color": "#FFD700",
       "autoRouted": true
     },
     {
-      "id": "wire-1794567952220",
+      "id": "wire-1794632554817",
       "start": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794632550183_pa0nq6sk0",
+        "pinName": "31b.j",
+        "x": -29.440000000000055,
+        "y": -31.400000000000006
+      },
+      "end": {
+        "componentId": "breadboard_1794632550183_pa0nq6sk0",
+        "pinName": "bn.28",
+        "x": 8.973333333333358,
+        "y": -2.5999999999999943
+      },
+      "waypoints": [
+        {
+          "x": -29.440000000000055,
+          "y": -2.5999999999999943
+        }
+      ],
+      "color": "#22c55e",
+      "autoRouted": true
+    },
+    {
+      "id": "wire-1794632556258",
+      "start": {
+        "componentId": "breadboard_1794632550183_pa0nq6sk0",
         "pinName": "bn.45",
-        "x": 254.97333333333336,
+        "x": 200.97333333333336,
         "y": -2.5999999999999943
       },
       "end": {
@@ -143,7 +144,7 @@
       },
       "waypoints": [
         {
-          "x": 254.97333333333336,
+          "x": 200.97333333333336,
           "y": 241.5
         }
       ],

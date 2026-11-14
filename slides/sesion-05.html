@@ -555,7 +555,7 @@
     },
     notas: {
       t: "Las notas y sus vibraciones 🎼",
-      d: "<p>Cada nota del menú es una velocidad de vibración, en <strong>hertz</strong> (veces por segundo):</p><p>do 262 · re 294 · mi 330 · fa 349 · sol 392 · la 440 · si 494</p><p>do agudo 523 · re agudo 587 · mi agudo 659 · fa agudo 698 · sol agudo 784 · la agudo 880 · si agudo 988</p><p>¿Ves el truco? Cada nota «agudo» vibra <strong>el doble</strong> que la normal. En el código, <span class='bloque sonido'>tocar nota <span class='valor'>la</span> por <span class='valor'>0.5</span> segundos en pin <span class='valor'>8</span></span> se escribe <code>tone(8, 440, 500)</code>: pin, vibraciones y milisegundos.</p>"
+      d: "<p>Cada nota del menú es una velocidad de vibración, en <strong>hertz</strong> (veces por segundo):</p><p>do 262 · re 294 · mi 330 · fa 349 · sol 392 · la 440 · si 494</p><p>do agudo 523 · re agudo 587 · mi agudo 659 · fa agudo 698 · sol agudo 784 · la agudo 880 · si agudo 988</p><p>¿Ves el truco? Cada nota «agudo» vibra <strong>el doble</strong> que la normal. En el código, <span class='bloque sonido'>tocar nota <span class='valor'>la</span> por <span class='valor'>0.5</span> segundos en pin <span class='valor'>8</span></span> se escribe <code>tone(8, 440)</code> (pin y vibraciones), <code>delay(500)</code> (los milisegundos que suena) y <code>noTone(8)</code> (silencio).</p>"
     },
     hertz: {
       t: "Hertz (Hz): las vibraciones por segundo",
