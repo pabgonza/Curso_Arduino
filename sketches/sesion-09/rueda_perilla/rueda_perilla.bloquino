@@ -1,7 +1,7 @@
 {
   "format": "velxio-project",
   "version": 1,
-  "exportedAt": "2026-11-13T18:31:21.120Z",
+  "exportedAt": "2026-11-14T03:54:06.223Z",
   "name": "rueda_perilla",
   "boards": [
     {
@@ -19,24 +19,24 @@
     "group-arduino-uno": [
       {
         "name": "sketch.ino",
-        "content": "// Generado desde bloques\nfloat pos = 0;\nfloat tramo = 0;\n\nvoid color(float r, float g, float b) {\n  analogWrite(3, r);\n  analogWrite(5, g);\n  analogWrite(6, b);\n}\n\nvoid setup() {\n  pinMode(3, OUTPUT);\n  pinMode(5, OUTPUT);\n  pinMode(6, OUTPUT);\n}\n\nvoid loop() {\n  pos = map(analogRead(A0), 0, 1023, 0, 255);\n  if (pos < 85) {\n    // rojo → verde\n    color(255 - pos * 3, pos * 3, 0);\n  } else {\n    if (pos < 170) {\n      // verde → azul\n      tramo = pos - 85;\n      color(0, 255 - tramo * 3, tramo * 3);\n    } else {\n      // azul → rojo\n      tramo = pos - 170;\n      color(tramo * 3, 0, 255 - tramo * 3);\n    }\n  }\n}\n"
+        "content": "// Generado desde bloques\nfloat tramo = 0;\n\nvoid color(float r, float g, float b) {\n  analogWrite(3, r);\n  analogWrite(5, g);\n  analogWrite(6, b);\n}\n\nvoid rueda(float pos) {\n  if (pos < 85) {\n    // rojo → verde\n    color(255 - pos * 3, pos * 3, 0);\n  } else {\n    if (pos < 170) {\n      // verde → azul\n      tramo = pos - 85;\n      color(0, 255 - tramo * 3, tramo * 3);\n    } else {\n      // azul → rojo\n      tramo = pos - 170;\n      color(tramo * 3, 0, 255 - tramo * 3);\n    }\n  }\n}\n\nvoid setup() {\n  pinMode(3, OUTPUT);\n  pinMode(5, OUTPUT);\n  pinMode(6, OUTPUT);\n}\n\nvoid loop() {\n  rueda(map(analogRead(A0), 0, 1023, 0, 255));\n}\n"
       },
       {
         "name": "bloques.json",
-        "content": "{\"blocks\":{\"languageVersion\":0,\"blocks\":[{\"type\":\"ab_al_iniciar\",\"id\":\"]EPUB~bF~LS6sIF:mSfy\",\"x\":0,\"y\":0,\"next\":{\"block\":{\"type\":\"ab_por_siempre\",\"id\":\"xeP$(J-mCxkckECH,$}P\",\"inputs\":{\"DO\":{\"block\":{\"type\":\"variables_set\",\"id\":\"`@77LzNW0ydWh.[0yne:\",\"fields\":{\"VAR\":{\"id\":\"p\"}},\"inputs\":{\"VALUE\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"j-ZtYy5@Yo}PW$w_LkCs\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_mapear\",\"id\":\"?qcI/D%^CR;RTU|R]:BV\",\"inputs\":{\"X\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"upUEaIJDl*vDIU10wD#O\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_leer_analogico\",\"id\":\"|#3!Zlb!t@hxibom+bSU\",\"fields\":{\"PIN\":\"A0\"}}},\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"zpEw^3$b{E(g!M{E.Ox%\",\"fields\":{\"NUM\":0}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"C7lz?QnPUrR.xd5,$)Ln\",\"fields\":{\"NUM\":1023}}},\"C\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"n%[[?C/PLEvg)HTVx|i:\",\"fields\":{\"NUM\":0}}},\"D\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"V3%/u3{4zu;|i5NVd=wv\",\"fields\":{\"NUM\":255}}}}}}},\"next\":{\"block\":{\"type\":\"ab_si_sino\",\"id\":\"ADKv7a:Pkm$e*=M^_]1i\",\"inputs\":{\"COND\":{\"block\":{\"type\":\"ab_comparar\",\"id\":\"+DC#yyyp*k4e$Urf!XM}\",\"fields\":{\"OP\":\"<\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"iIH~*kts6wbTI$cU;$Hp\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"WaQM!l/$$+1%zEofGUSu\",\"fields\":{\"VAR\":{\"id\":\"p\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"Rz{liB3LaJ]/}L`9}l`~\",\"fields\":{\"NUM\":85}}}}}},\"DO\":{\"block\":{\"type\":\"ab_comentario\",\"id\":\"CZHm|uM{4yaf3kh:9BJs\",\"fields\":{\"TEXTO\":\"rojo → verde\"},\"next\":{\"block\":{\"type\":\"ab_mi_bloque\",\"id\":\":o]5wZeV/+bZFiDv#lLT\",\"extraState\":{\"definicion\":\"color\",\"partes\":[{\"tipo\":\"nombre\",\"texto\":\"color\",\"id\":\"n\"},{\"tipo\":\"numero\",\"texto\":\"r\",\"id\":\"r\"},{\"tipo\":\"numero\",\"texto\":\"g\",\"id\":\"g\"},{\"tipo\":\"numero\",\"texto\":\"b\",\"id\":\"b\"}]},\"inputs\":{\"r\":{\"shadow\":{\"type\":\"math_number\",\"id\":\",_a`v|3L/%4s}vc?)u=B\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"Pt=9bvCAKU6oh;_ex2j`\",\"fields\":{\"OP\":\"-\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"/Eaz(?|JTN?noAN,6}f}\",\"fields\":{\"NUM\":255}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"=9wdDQY1X_J{ih4KoR+A\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\")}JF#%wNt5:+DH1kvW@9\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"u[XOq2SBPOxjC!cu^t%`\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"Ilg:io!f]GvY_4*aSn_3\",\"fields\":{\"VAR\":{\"id\":\"p\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"XIy%aH:@d!G*}54Wc5}?\",\"fields\":{\"NUM\":3}}}}}}}}},\"g\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"j]|r(?_?aa[1pfWpiwq%\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"BH(y%3cQWAZ1n7jaS4K_\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"~soW*5ZU[Z!d0jKv%ID-\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"/0qnMc(g+U|DM={((#yL\",\"fields\":{\"VAR\":{\"id\":\"p\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"=8eTNd$Q/D!.XBbkcq/i\",\"fields\":{\"NUM\":3}}}}}},\"b\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"bJ1!T|qq}IIiOl;mHn3)\",\"fields\":{\"NUM\":0}}}}}}}},\"SINO\":{\"block\":{\"type\":\"ab_si_sino\",\"id\":\"H)L?M+^r2h`Ke%Q[(!od\",\"inputs\":{\"COND\":{\"block\":{\"type\":\"ab_comparar\",\"id\":\"MALNxm{T.WYjM*@(E/:)\",\"fields\":{\"OP\":\"<\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"uILscAD7fHN0#LPbBg=Q\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"Sou#pP[vN24pp4t-ONk3\",\"fields\":{\"VAR\":{\"id\":\"p\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"djt`cazb}G[Fs)$#v]#K\",\"fields\":{\"NUM\":170}}}}}},\"DO\":{\"block\":{\"type\":\"ab_comentario\",\"id\":\"f2XWj3S/AvmNTTnr}soc\",\"fields\":{\"TEXTO\":\"verde → azul\"},\"next\":{\"block\":{\"type\":\"variables_set\",\"id\":\"gu[#,?VAp~0SGFYU0Lbx\",\"fields\":{\"VAR\":{\"id\":\"t\"}},\"inputs\":{\"VALUE\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"Ovg6c:2P7qhM+j[c]VP9\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"MY^2Fv*o+v{Y?3i6i=1`\",\"fields\":{\"OP\":\"-\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"5-2Jy03oS8usLs0w|w$$\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"_*e=I)JhRGz_KgA7`DjZ\",\"fields\":{\"VAR\":{\"id\":\"p\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"VUZ.9A?pjzQ5P!ClWI@s\",\"fields\":{\"NUM\":85}}}}}}},\"next\":{\"block\":{\"type\":\"ab_mi_bloque\",\"id\":\"rvi]-%o.Z//{Z)`QC2GH\",\"extraState\":{\"definicion\":\"color\",\"partes\":[{\"tipo\":\"nombre\",\"texto\":\"color\",\"id\":\"n\"},{\"tipo\":\"numero\",\"texto\":\"r\",\"id\":\"r\"},{\"tipo\":\"numero\",\"texto\":\"g\",\"id\":\"g\"},{\"tipo\":\"numero\",\"texto\":\"b\",\"id\":\"b\"}]},\"inputs\":{\"r\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"WaBht*G}~scY=kOWsbTI\",\"fields\":{\"NUM\":0}}},\"g\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"]TJ47Uy3K|CqVGKwXQ6=\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"1a!MeY4GlO|}gGFXf(i$\",\"fields\":{\"OP\":\"-\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"eT`I=oddH|,W[;To/:7=\",\"fields\":{\"NUM\":255}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"TVt^Yf~t078ng-C@Ops}\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"S*GlKKJ:H5r}vqDGQL4t\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"^d((Iel!Rl#Vf0[Ti^AM\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"c2AR*;_1:YAG14SS9I3V\",\"fields\":{\"VAR\":{\"id\":\"t\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"5I%o7)@t)OZVpHpgsZ-,\",\"fields\":{\"NUM\":3}}}}}}}}},\"b\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"I5w_KJIF77{9U8c/e$%s\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"YqyH-$3D@Ct_fW;X(]D(\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"WPYR2nqSC?X{N#|[QYf/\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\".Q=DJ~+Xf`-_maLakU`[\",\"fields\":{\"VAR\":{\"id\":\"t\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"~62haM2ZBvqwJw#SVDjN\",\"fields\":{\"NUM\":3}}}}}}}}}}}}},\"SINO\":{\"block\":{\"type\":\"ab_comentario\",\"id\":\"5?Q%,.uMoH20{^^=UNBG\",\"fields\":{\"TEXTO\":\"azul → rojo\"},\"next\":{\"block\":{\"type\":\"variables_set\",\"id\":\"jW(j;*[3ifB-_Mz[#SJJ\",\"fields\":{\"VAR\":{\"id\":\"t\"}},\"inputs\":{\"VALUE\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"wl*SbjL^+FMfYvd%]c6n\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"P%ll0X$g4^iEYdF*TWQ%\",\"fields\":{\"OP\":\"-\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"+ShaO5VU0`/?DLG`ce(!\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"6s;h*.1c:e?Oy^2(`Go7\",\"fields\":{\"VAR\":{\"id\":\"p\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"?cuhP+KC4[oWeh$U`J1+\",\"fields\":{\"NUM\":170}}}}}}},\"next\":{\"block\":{\"type\":\"ab_mi_bloque\",\"id\":\"j.c7K8+``d,,?cu^Q3w/\",\"extraState\":{\"definicion\":\"color\",\"partes\":[{\"tipo\":\"nombre\",\"texto\":\"color\",\"id\":\"n\"},{\"tipo\":\"numero\",\"texto\":\"r\",\"id\":\"r\"},{\"tipo\":\"numero\",\"texto\":\"g\",\"id\":\"g\"},{\"tipo\":\"numero\",\"texto\":\"b\",\"id\":\"b\"}]},\"inputs\":{\"r\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"[PbPf|9B*W1MpHEH],9f\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"`ZY#gk+qsbTqfvLZAx7n\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"/`QVwVQ|c)mEMH0L(a?y\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"j8}m4h(~Dz6{z^tLF]H1\",\"fields\":{\"VAR\":{\"id\":\"t\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\")QB^z%1l`8Gn1|(!9c[B\",\"fields\":{\"NUM\":3}}}}}},\"g\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"K(Li7-]z`G|aNCQBB*`(\",\"fields\":{\"NUM\":0}}},\"b\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"Q1IC2R4]xd{PCbI|uP8;\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"|3_/eQvfes=kvQ=+xwG5\",\"fields\":{\"OP\":\"-\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"0/PW^B08{5I(UNitu7n9\",\"fields\":{\"NUM\":255}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"Jj8LdBQXk{o^spESFe8=\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"`MFm)%5oD@5HZU.Vf8]F\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"eP3tqU-neLvDiIK;Kh4+\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"|DN1H#Vgj=#Pc!1|W!]_\",\"fields\":{\"VAR\":{\"id\":\"t\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"1KUu%/}K3t(V.c6L=~r_\",\"fields\":{\"NUM\":3}}}}}}}}}}}}}}}}}}}}}}}}}}}},{\"type\":\"ab_definir\",\"id\":\")g}{_X?/#~Xy9zpAkYvX\",\"x\":925,\"y\":0,\"extraState\":{\"id\":\"color\",\"partes\":[{\"tipo\":\"nombre\",\"texto\":\"color\",\"id\":\"n\"},{\"tipo\":\"numero\",\"texto\":\"r\",\"id\":\"r\"},{\"tipo\":\"numero\",\"texto\":\"g\",\"id\":\"g\"},{\"tipo\":\"numero\",\"texto\":\"b\",\"id\":\"b\"}]},\"inputs\":{\"r\":{\"block\":{\"type\":\"ab_entrada\",\"id\":\"5VTNNCK5s++{@3|ueE|k\",\"deletable\":false,\"extraState\":{\"definicion\":\"color\",\"entrada\":\"r\",\"tipo\":\"numero\",\"texto\":\"r\"}}},\"g\":{\"block\":{\"type\":\"ab_entrada\",\"id\":\"HKd,4!il,T8cYe6zS.TQ\",\"deletable\":false,\"extraState\":{\"definicion\":\"color\",\"entrada\":\"g\",\"tipo\":\"numero\",\"texto\":\"g\"}}},\"b\":{\"block\":{\"type\":\"ab_entrada\",\"id\":\"Om?H,l5bhd9)g3;v{=HZ\",\"deletable\":false,\"extraState\":{\"definicion\":\"color\",\"entrada\":\"b\",\"tipo\":\"numero\",\"texto\":\"b\"}}}},\"next\":{\"block\":{\"type\":\"ab_pin_pwm\",\"id\":\";i5dNfd#5h!mu]wo56VI\",\"fields\":{\"PIN\":\"3\"},\"inputs\":{\"VALOR\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"`@0/ELbkYG:04oMB]?T$\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_entrada\",\"id\":\"P*17-kqiRt+rZ|^Cp_3_\",\"extraState\":{\"definicion\":\"color\",\"entrada\":\"r\",\"tipo\":\"numero\",\"texto\":\"r\"}}}},\"next\":{\"block\":{\"type\":\"ab_pin_pwm\",\"id\":\"+9uVt,aARrD,_)|7G!j(\",\"fields\":{\"PIN\":\"5\"},\"inputs\":{\"VALOR\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"Om0t*ZGkV8%o/-#?p!s(\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_entrada\",\"id\":\"yRFKS^n|H!EpZ7W*^grf\",\"extraState\":{\"definicion\":\"color\",\"entrada\":\"g\",\"tipo\":\"numero\",\"texto\":\"g\"}}}},\"next\":{\"block\":{\"type\":\"ab_pin_pwm\",\"id\":\"xz~!B3o?GN)4RsL21%8M\",\"fields\":{\"PIN\":\"6\"},\"inputs\":{\"VALOR\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"7tfT,8BB(f8D%st0z(k*\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_entrada\",\"id\":\"IwMkN,ZmCE=Cd-Q1T6+v\",\"extraState\":{\"definicion\":\"color\",\"entrada\":\"b\",\"tipo\":\"numero\",\"texto\":\"b\"}}}}}}}}}}}]},\"variables\":[{\"name\":\"pos\",\"id\":\"p\"},{\"name\":\"tramo\",\"id\":\"t\"}]}"
+        "content": "{\"blocks\":{\"languageVersion\":0,\"blocks\":[{\"type\":\"ab_al_iniciar\",\"id\":\"LR#f3g=`7lKuce:2MAZ=\",\"x\":0,\"y\":0,\"next\":{\"block\":{\"type\":\"ab_por_siempre\",\"id\":\"]:drP*g2-vE56~g8+!jc\",\"inputs\":{\"DO\":{\"block\":{\"type\":\"ab_mi_bloque\",\"id\":\"z@3}@V-N{AQIWmHmWj,r\",\"extraState\":{\"definicion\":\"rueda\",\"partes\":[{\"tipo\":\"nombre\",\"texto\":\"rueda\",\"id\":\"n\"},{\"tipo\":\"numero\",\"texto\":\"pos\",\"id\":\"pos\"}]},\"inputs\":{\"pos\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"(4#Bol*PH.DDmzu%d8;J\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_mapear\",\"id\":\"dA}_`@f?i!e:;2cB)tE[\",\"inputs\":{\"X\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"XL!.Rm0lKxswKDZ+77TM\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_leer_analogico\",\"id\":\",y#P;)^{5AJiBat(0S2i\",\"fields\":{\"PIN\":\"A0\"}}},\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"[sk/~V@?QHPm(/mxo$0/\",\"fields\":{\"NUM\":0}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"3T]vpaQ5VK^p!%D%!_Oz\",\"fields\":{\"NUM\":1023}}},\"C\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"9XqHU)aOJWW=o8I#,3d#\",\"fields\":{\"NUM\":0}}},\"D\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"n,4epz1lqXE791fhr|P4\",\"fields\":{\"NUM\":255}}}}}}}}}}}}},{\"type\":\"ab_definir\",\"id\":\"r^J0#4.CrR$h:{xjh9CL\",\"x\":0,\"y\":253,\"extraState\":{\"id\":\"rueda\",\"partes\":[{\"tipo\":\"nombre\",\"texto\":\"rueda\",\"id\":\"n\"},{\"tipo\":\"numero\",\"texto\":\"pos\",\"id\":\"pos\"}]},\"inputs\":{\"pos\":{\"block\":{\"type\":\"ab_entrada\",\"id\":\"(Ri#0,AwPnv!2;R$t8([\",\"deletable\":false,\"extraState\":{\"definicion\":\"rueda\",\"entrada\":\"pos\",\"tipo\":\"numero\",\"texto\":\"pos\"}}}},\"next\":{\"block\":{\"type\":\"ab_si_sino\",\"id\":\"wR7DEMF{qgNG]-R~vxJ9\",\"inputs\":{\"COND\":{\"block\":{\"type\":\"ab_comparar\",\"id\":\"FS3dcc`nwVvrQ28*OvLG\",\"fields\":{\"OP\":\"<\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"Vw`=lrn*lsc{|+8bG`c5\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_entrada\",\"id\":\"qP+?3|r3z*/XV:Epqp2J\",\"extraState\":{\"definicion\":\"rueda\",\"entrada\":\"pos\",\"tipo\":\"numero\",\"texto\":\"pos\"}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"GJ-tBp}(Q`3K:/BmqL[*\",\"fields\":{\"NUM\":85}}}}}},\"DO\":{\"block\":{\"type\":\"ab_comentario\",\"id\":\"yx8-]j,qo=c=5,N`X0Yo\",\"fields\":{\"TEXTO\":\"rojo → verde\"},\"next\":{\"block\":{\"type\":\"ab_mi_bloque\",\"id\":\"~B5Zed:E(B2JIZqW`rmm\",\"extraState\":{\"definicion\":\"color\",\"partes\":[{\"tipo\":\"nombre\",\"texto\":\"color\",\"id\":\"n\"},{\"tipo\":\"numero\",\"texto\":\"r\",\"id\":\"r\"},{\"tipo\":\"numero\",\"texto\":\"g\",\"id\":\"g\"},{\"tipo\":\"numero\",\"texto\":\"b\",\"id\":\"b\"}]},\"inputs\":{\"r\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"|~sRrdgrXz9?]rEH#p}D\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"ufO`=K(C3:lCuXh+;F0K\",\"fields\":{\"OP\":\"-\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"v`ZH4g,Y=e|I94TGb^e%\",\"fields\":{\"NUM\":255}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"+2O7+ur9~iWB/5r%LB_,\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"f#c*:}sai6L!4Q?L71,#\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"#MIRu,f*K}biY|cFF)S9\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_entrada\",\"id\":\"J/jl`!D_g$2n=%R-jnWd\",\"extraState\":{\"definicion\":\"rueda\",\"entrada\":\"pos\",\"tipo\":\"numero\",\"texto\":\"pos\"}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"P![i.4iNa33UZ#,RerGj\",\"fields\":{\"NUM\":3}}}}}}}}},\"g\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"3C]F@hB?pSI|OYthHOF/\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"$A+I9$XuikV3nxI52p)w\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"mAsje~tPqokJCNv4{c(k\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_entrada\",\"id\":\"|AH-5+ud/#,qzVNyve0V\",\"extraState\":{\"definicion\":\"rueda\",\"entrada\":\"pos\",\"tipo\":\"numero\",\"texto\":\"pos\"}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"9q36}`6}+cc`?53K;T`G\",\"fields\":{\"NUM\":3}}}}}},\"b\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"-b}u1]VVt84wjZCX8Biw\",\"fields\":{\"NUM\":0}}}}}}}},\"SINO\":{\"block\":{\"type\":\"ab_si_sino\",\"id\":\"Qe(7T(#tA{m@H-SHTNBB\",\"inputs\":{\"COND\":{\"block\":{\"type\":\"ab_comparar\",\"id\":\"|[h=^w/qZ6xdpbwjS2+?\",\"fields\":{\"OP\":\"<\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"qx4Pl4wG!p4tlMj$p692\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_entrada\",\"id\":\".6RI2vwGkx]yZQ0b{eB;\",\"extraState\":{\"definicion\":\"rueda\",\"entrada\":\"pos\",\"tipo\":\"numero\",\"texto\":\"pos\"}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"?n,U]m9:4J(]Vp!ct59l\",\"fields\":{\"NUM\":170}}}}}},\"DO\":{\"block\":{\"type\":\"ab_comentario\",\"id\":\"Q4z|updTI5S?Zvt~0qg=\",\"fields\":{\"TEXTO\":\"verde → azul\"},\"next\":{\"block\":{\"type\":\"variables_set\",\"id\":\"aEeE}TU{fkXi=YMvjX+!\",\"fields\":{\"VAR\":{\"id\":\"t\"}},\"inputs\":{\"VALUE\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"moOoUv$uKPcZV*T7i-Gb\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"K{u(;oRzBuJrHx^o26u=\",\"fields\":{\"OP\":\"-\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"D^2bO5@LIn{sGcJUj(ex\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_entrada\",\"id\":\"Nu9f^?3ts6g_G~l#NaU*\",\"extraState\":{\"definicion\":\"rueda\",\"entrada\":\"pos\",\"tipo\":\"numero\",\"texto\":\"pos\"}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"YrM*a)N)D+@va6i{Y!.g\",\"fields\":{\"NUM\":85}}}}}}},\"next\":{\"block\":{\"type\":\"ab_mi_bloque\",\"id\":\"=)!7*Z7hEZAt]q#EFu,)\",\"extraState\":{\"definicion\":\"color\",\"partes\":[{\"tipo\":\"nombre\",\"texto\":\"color\",\"id\":\"n\"},{\"tipo\":\"numero\",\"texto\":\"r\",\"id\":\"r\"},{\"tipo\":\"numero\",\"texto\":\"g\",\"id\":\"g\"},{\"tipo\":\"numero\",\"texto\":\"b\",\"id\":\"b\"}]},\"inputs\":{\"r\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"(Xg#i663pVn%EpM35s~V\",\"fields\":{\"NUM\":0}}},\"g\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"Pc}Ud5+)Z,nz6XfL6jkR\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"N]-`Hms+]mFv;^=JlQH=\",\"fields\":{\"OP\":\"-\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"e%4:1X]t/~E3TMHyJgO(\",\"fields\":{\"NUM\":255}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"c[Z{}laQ9y;d{9R7@7/1\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"]lP5b2~v,;Sq^Y6u}_BE\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"=Pu3sLl{X?7H2,)d}k|e\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"sVu[@xKeplv9`rwF6;K-\",\"fields\":{\"VAR\":{\"id\":\"t\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"^r|p#Z`ON9Jz2/eb!-]p\",\"fields\":{\"NUM\":3}}}}}}}}},\"b\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"{|Qe-}$$7+z]KRB!Nx!3\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"st/g?J{4rYN{#N0hpR%{\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"Sj6[9%@W(;+D81=;%Z6$\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"G8]{x(s%LQPj~)GocJuH\",\"fields\":{\"VAR\":{\"id\":\"t\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"f}TLRy;xl(h%;AcG7T[M\",\"fields\":{\"NUM\":3}}}}}}}}}}}}},\"SINO\":{\"block\":{\"type\":\"ab_comentario\",\"id\":\"}d=1TR5weVN,YoDz7+Va\",\"fields\":{\"TEXTO\":\"azul → rojo\"},\"next\":{\"block\":{\"type\":\"variables_set\",\"id\":\"U-GN:rw32UQ!@xzsAJ0b\",\"fields\":{\"VAR\":{\"id\":\"t\"}},\"inputs\":{\"VALUE\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"8Zetb6fBQH9mvL6DXw?~\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"{8h8hAlhUm_lu({1]GOE\",\"fields\":{\"OP\":\"-\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"ElItZT6.T.pgS7v`0?oc\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_entrada\",\"id\":\")x:R%]Y2RkZ~VrB=GH0C\",\"extraState\":{\"definicion\":\"rueda\",\"entrada\":\"pos\",\"tipo\":\"numero\",\"texto\":\"pos\"}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"V|P-/jwodX{HpyLgL(/r\",\"fields\":{\"NUM\":170}}}}}}},\"next\":{\"block\":{\"type\":\"ab_mi_bloque\",\"id\":\"Uk};_WCe])9%^WTuF{3^\",\"extraState\":{\"definicion\":\"color\",\"partes\":[{\"tipo\":\"nombre\",\"texto\":\"color\",\"id\":\"n\"},{\"tipo\":\"numero\",\"texto\":\"r\",\"id\":\"r\"},{\"tipo\":\"numero\",\"texto\":\"g\",\"id\":\"g\"},{\"tipo\":\"numero\",\"texto\":\"b\",\"id\":\"b\"}]},\"inputs\":{\"r\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"}lL]7?3e3]Vmea*Uv)?O\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"xPBl{*FmCWkK%WOz5,;#\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"fx12KsHtL-B|={DC=hpL\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"+:O00iuQ,C_28SeYSNxv\",\"fields\":{\"VAR\":{\"id\":\"t\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"JSRn+*-y`S{@3mR?rD-Z\",\"fields\":{\"NUM\":3}}}}}},\"g\":{\"shadow\":{\"type\":\"math_number\",\"id\":\",B2;0%%1*OL-qiCwh{+D\",\"fields\":{\"NUM\":0}}},\"b\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"Skp*]?el4kNYUPdB-ha~\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"%sGM,EylpwChetT6;3K)\",\"fields\":{\"OP\":\"-\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"%aY.0V+FgJea6v7|)PMv\",\"fields\":{\"NUM\":255}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"HH7M3-)T)P]XD)4FzJ;*\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"e,WI]Dy}eIdn`,BgIHc$\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"Hm@6`;X~S;|V6In%4^.4\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"cX^@2;lMZ6b{qXg.JEu5\",\"fields\":{\"VAR\":{\"id\":\"t\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"L4crilzD~LwA(DE8bdwN\",\"fields\":{\"NUM\":3}}}}}}}}}}}}}}}}}}}}}}},{\"type\":\"ab_definir\",\"id\":\"X{=~hw1`BwO?GbsA_NsJ\",\"x\":720,\"y\":253,\"extraState\":{\"id\":\"color\",\"partes\":[{\"tipo\":\"nombre\",\"texto\":\"color\",\"id\":\"n\"},{\"tipo\":\"numero\",\"texto\":\"r\",\"id\":\"r\"},{\"tipo\":\"numero\",\"texto\":\"g\",\"id\":\"g\"},{\"tipo\":\"numero\",\"texto\":\"b\",\"id\":\"b\"}]},\"inputs\":{\"r\":{\"block\":{\"type\":\"ab_entrada\",\"id\":\".A/)2?AL7uv}+6Mfp;ah\",\"deletable\":false,\"extraState\":{\"definicion\":\"color\",\"entrada\":\"r\",\"tipo\":\"numero\",\"texto\":\"r\"}}},\"g\":{\"block\":{\"type\":\"ab_entrada\",\"id\":\"=rLLYSI[if{k$HECA#pg\",\"deletable\":false,\"extraState\":{\"definicion\":\"color\",\"entrada\":\"g\",\"tipo\":\"numero\",\"texto\":\"g\"}}},\"b\":{\"block\":{\"type\":\"ab_entrada\",\"id\":\"9KwM))ePtZA@z?j9{4Zl\",\"deletable\":false,\"extraState\":{\"definicion\":\"color\",\"entrada\":\"b\",\"tipo\":\"numero\",\"texto\":\"b\"}}}},\"next\":{\"block\":{\"type\":\"ab_pin_pwm\",\"id\":\"cN0jrh%LpBwXrr%@_+XE\",\"fields\":{\"PIN\":\"3\"},\"inputs\":{\"VALOR\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"^D}tfT(5zx/CG?}$i=ju\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_entrada\",\"id\":\"wL,rCHrufI`pDu:vPA2E\",\"extraState\":{\"definicion\":\"color\",\"entrada\":\"r\",\"tipo\":\"numero\",\"texto\":\"r\"}}}},\"next\":{\"block\":{\"type\":\"ab_pin_pwm\",\"id\":\"EL%#I+Iixv!PkG%O?lE;\",\"fields\":{\"PIN\":\"5\"},\"inputs\":{\"VALOR\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"3`|oZ`D;mQ#K:*^p9_8^\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_entrada\",\"id\":\"fvB5N|BVG,2i}x8~U}m]\",\"extraState\":{\"definicion\":\"color\",\"entrada\":\"g\",\"tipo\":\"numero\",\"texto\":\"g\"}}}},\"next\":{\"block\":{\"type\":\"ab_pin_pwm\",\"id\":\"F}7E2iO1pNOPxNF;%EW-\",\"fields\":{\"PIN\":\"6\"},\"inputs\":{\"VALOR\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"Dfc,QKGKj-Q)vp(aO=Ok\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_entrada\",\"id\":\"eI:5acG{g8N26I0u38OE\",\"extraState\":{\"definicion\":\"color\",\"entrada\":\"b\",\"tipo\":\"numero\",\"texto\":\"b\"}}}}}}}}}}}]},\"variables\":[{\"name\":\"tramo\",\"id\":\"t\"}]}"
       }
     ]
   },
   "components": [
     {
-      "id": "breadboard_1794594624647_dqp4l18p2",
+      "id": "breadboard_1794628376760_yvrwks5ei",
       "metadataId": "breadboard",
       "x": -338,
       "y": -191,
       "properties": {}
     },
     {
-      "id": "rgb_led_1794594625239_b82wn8r4n",
+      "id": "rgb_led_1794628377423_neztwldee",
       "metadataId": "rgb-led",
       "x": -52.79000000000003,
       "y": -119.9,
@@ -47,7 +47,7 @@
       }
     },
     {
-      "id": "resistor_1794594627154_j319mihcd",
+      "id": "resistor_1794628380093_k0kdxfs1b",
       "metadataId": "resistor",
       "x": -74.39000000000001,
       "y": -100.4,
@@ -57,7 +57,7 @@
       }
     },
     {
-      "id": "resistor_1794594630505_dpbzcs49n",
+      "id": "resistor_1794628384537_msby6k7nl",
       "metadataId": "resistor",
       "x": -55.190000000000026,
       "y": -100.4,
@@ -67,7 +67,7 @@
       }
     },
     {
-      "id": "resistor_1794594633755_cv79muati",
+      "id": "resistor_1794628389173_a6pshzof8",
       "metadataId": "resistor",
       "x": -45.59,
       "y": -100.4,
@@ -77,7 +77,7 @@
       }
     },
     {
-      "id": "potentiometer_1794594639871_8h6aqlj85",
+      "id": "potentiometer_1794628397484_hh1q8r6st",
       "metadataId": "potentiometer",
       "x": -160.84,
       "y": -144.3,
@@ -91,7 +91,7 @@
       }
     },
     {
-      "id": "hc_sr04_1794594646056_i27othi9y",
+      "id": "hc_sr04_1794628406421_s05nvqxd8",
       "metadataId": "hc-sr04",
       "x": -328.14000000000004,
       "y": -170.3,
@@ -100,15 +100,15 @@
   ],
   "wires": [
     {
-      "id": "bbwire-rgb_led_1794594625239_b82wn8r4n-0-30b.f",
+      "id": "bbwire-rgb_led_1794628377423_neztwldee-0-30b.f",
       "start": {
-        "componentId": "rgb_led_1794594625239_b82wn8r4n",
+        "componentId": "rgb_led_1794628377423_neztwldee",
         "pinName": "R",
         "x": -38.29000000000003,
         "y": -69.9
       },
       "end": {
-        "componentId": "breadboard_1794594624647_dqp4l18p2",
+        "componentId": "breadboard_1794628376760_yvrwks5ei",
         "pinName": "30b.f",
         "x": -39.04000000000002,
         "y": -69.8
@@ -118,15 +118,15 @@
       "bb": true
     },
     {
-      "id": "bbwire-rgb_led_1794594625239_b82wn8r4n-1-31b.g",
+      "id": "bbwire-rgb_led_1794628377423_neztwldee-1-31b.g",
       "start": {
-        "componentId": "rgb_led_1794594625239_b82wn8r4n",
+        "componentId": "rgb_led_1794628377423_neztwldee",
         "pinName": "COM",
         "x": -28.790000000000028,
         "y": -59.900000000000006
       },
       "end": {
-        "componentId": "breadboard_1794594624647_dqp4l18p2",
+        "componentId": "breadboard_1794628376760_yvrwks5ei",
         "pinName": "31b.g",
         "x": -29.440000000000055,
         "y": -60.20000000000002
@@ -136,15 +136,15 @@
       "bb": true
     },
     {
-      "id": "bbwire-rgb_led_1794594625239_b82wn8r4n-2-32b.f",
+      "id": "bbwire-rgb_led_1794628377423_neztwldee-2-32b.f",
       "start": {
-        "componentId": "rgb_led_1794594625239_b82wn8r4n",
+        "componentId": "rgb_led_1794628377423_neztwldee",
         "pinName": "G",
         "x": -20.39000000000003,
         "y": -69.9
       },
       "end": {
-        "componentId": "breadboard_1794594624647_dqp4l18p2",
+        "componentId": "breadboard_1794628376760_yvrwks5ei",
         "pinName": "32b.f",
         "x": -19.840000000000032,
         "y": -69.8
@@ -154,15 +154,15 @@
       "bb": true
     },
     {
-      "id": "bbwire-rgb_led_1794594625239_b82wn8r4n-3-33b.f",
+      "id": "bbwire-rgb_led_1794628377423_neztwldee-3-33b.f",
       "start": {
-        "componentId": "rgb_led_1794594625239_b82wn8r4n",
+        "componentId": "rgb_led_1794628377423_neztwldee",
         "pinName": "B",
         "x": -11.090000000000025,
         "y": -69.9
       },
       "end": {
-        "componentId": "breadboard_1794594624647_dqp4l18p2",
+        "componentId": "breadboard_1794628376760_yvrwks5ei",
         "pinName": "33b.f",
         "x": -10.240000000000009,
         "y": -69.8
@@ -172,15 +172,15 @@
       "bb": true
     },
     {
-      "id": "bbwire-resistor_1794594627154_j319mihcd-0-30t.c",
+      "id": "bbwire-resistor_1794628380093_k0kdxfs1b-0-30t.c",
       "start": {
-        "componentId": "resistor_1794594627154_j319mihcd",
+        "componentId": "resistor_1794628380093_k0kdxfs1b",
         "pinName": "1",
         "x": -39.04000000000002,
         "y": -118.4
       },
       "end": {
-        "componentId": "breadboard_1794594624647_dqp4l18p2",
+        "componentId": "breadboard_1794628376760_yvrwks5ei",
         "pinName": "30t.c",
         "x": -39.04000000000002,
         "y": -117.80000000000001
@@ -190,15 +190,15 @@
       "bb": true
     },
     {
-      "id": "bbwire-resistor_1794594627154_j319mihcd-1-30b.g",
+      "id": "bbwire-resistor_1794628380093_k0kdxfs1b-1-30b.g",
       "start": {
-        "componentId": "resistor_1794594627154_j319mihcd",
+        "componentId": "resistor_1794628380093_k0kdxfs1b",
         "pinName": "2",
         "x": -39.04000000000002,
         "y": -59.60000000000001
       },
       "end": {
-        "componentId": "breadboard_1794594624647_dqp4l18p2",
+        "componentId": "breadboard_1794628376760_yvrwks5ei",
         "pinName": "30b.g",
         "x": -39.04000000000002,
         "y": -60.20000000000002
@@ -208,9 +208,9 @@
       "bb": true
     },
     {
-      "id": "wire-1794594630156",
+      "id": "wire-1794628384113",
       "start": {
-        "componentId": "breadboard_1794594624647_dqp4l18p2",
+        "componentId": "breadboard_1794628376760_yvrwks5ei",
         "pinName": "30t.a",
         "x": -39.04000000000002,
         "y": -137
@@ -227,19 +227,19 @@
           "y": -137
         }
       ],
-      "color": "#FF8C00",
+      "color": "#00FFFF",
       "autoRouted": true
     },
     {
-      "id": "bbwire-resistor_1794594630505_dpbzcs49n-0-32t.c",
+      "id": "bbwire-resistor_1794628384537_msby6k7nl-0-32t.c",
       "start": {
-        "componentId": "resistor_1794594630505_dpbzcs49n",
+        "componentId": "resistor_1794628384537_msby6k7nl",
         "pinName": "1",
         "x": -19.840000000000035,
         "y": -118.4
       },
       "end": {
-        "componentId": "breadboard_1794594624647_dqp4l18p2",
+        "componentId": "breadboard_1794628376760_yvrwks5ei",
         "pinName": "32t.c",
         "x": -19.840000000000032,
         "y": -117.80000000000001
@@ -249,15 +249,15 @@
       "bb": true
     },
     {
-      "id": "bbwire-resistor_1794594630505_dpbzcs49n-1-32b.g",
+      "id": "bbwire-resistor_1794628384537_msby6k7nl-1-32b.g",
       "start": {
-        "componentId": "resistor_1794594630505_dpbzcs49n",
+        "componentId": "resistor_1794628384537_msby6k7nl",
         "pinName": "2",
         "x": -19.84000000000003,
         "y": -59.60000000000001
       },
       "end": {
-        "componentId": "breadboard_1794594624647_dqp4l18p2",
+        "componentId": "breadboard_1794628376760_yvrwks5ei",
         "pinName": "32b.g",
         "x": -19.840000000000032,
         "y": -60.20000000000002
@@ -267,9 +267,9 @@
       "bb": true
     },
     {
-      "id": "wire-1794594633392",
+      "id": "wire-1794628388764",
       "start": {
-        "componentId": "breadboard_1794594624647_dqp4l18p2",
+        "componentId": "breadboard_1794628376760_yvrwks5ei",
         "pinName": "32t.a",
         "x": -19.840000000000032,
         "y": -137
@@ -290,19 +290,19 @@
           "y": -127.9
         }
       ],
-      "color": "#32CD32",
+      "color": "#FFD700",
       "autoRouted": true
     },
     {
-      "id": "bbwire-resistor_1794594633755_cv79muati-0-33t.c",
+      "id": "bbwire-resistor_1794628389173_a6pshzof8-0-33t.c",
       "start": {
-        "componentId": "resistor_1794594633755_cv79muati",
+        "componentId": "resistor_1794628389173_a6pshzof8",
         "pinName": "1",
         "x": -10.24000000000001,
         "y": -118.4
       },
       "end": {
-        "componentId": "breadboard_1794594624647_dqp4l18p2",
+        "componentId": "breadboard_1794628376760_yvrwks5ei",
         "pinName": "33t.c",
         "x": -10.240000000000009,
         "y": -117.80000000000001
@@ -312,15 +312,15 @@
       "bb": true
     },
     {
-      "id": "bbwire-resistor_1794594633755_cv79muati-1-33b.g",
+      "id": "bbwire-resistor_1794628389173_a6pshzof8-1-33b.g",
       "start": {
-        "componentId": "resistor_1794594633755_cv79muati",
+        "componentId": "resistor_1794628389173_a6pshzof8",
         "pinName": "2",
         "x": -10.240000000000007,
         "y": -59.60000000000001
       },
       "end": {
-        "componentId": "breadboard_1794594624647_dqp4l18p2",
+        "componentId": "breadboard_1794628376760_yvrwks5ei",
         "pinName": "33b.g",
         "x": -10.240000000000009,
         "y": -60.20000000000002
@@ -330,9 +330,9 @@
       "bb": true
     },
     {
-      "id": "wire-1794594636744",
+      "id": "wire-1794628393331",
       "start": {
-        "componentId": "breadboard_1794594624647_dqp4l18p2",
+        "componentId": "breadboard_1794628376760_yvrwks5ei",
         "pinName": "33t.a",
         "x": -10.240000000000009,
         "y": -137
@@ -353,19 +353,19 @@
           "y": -145
         }
       ],
-      "color": "#8B4513",
+      "color": "#32CD32",
       "autoRouted": true
     },
     {
-      "id": "wire-1794594638110",
+      "id": "wire-1794628395073",
       "start": {
-        "componentId": "breadboard_1794594624647_dqp4l18p2",
+        "componentId": "breadboard_1794628376760_yvrwks5ei",
         "pinName": "31b.j",
         "x": -29.440000000000055,
         "y": -31.400000000000006
       },
       "end": {
-        "componentId": "breadboard_1794594624647_dqp4l18p2",
+        "componentId": "breadboard_1794628376760_yvrwks5ei",
         "pinName": "bn.24",
         "x": -39.02666666666664,
         "y": -2.5999999999999943
@@ -376,13 +376,13 @@
           "y": -2.5999999999999943
         }
       ],
-      "color": "#8B4513",
+      "color": "#22c55e",
       "autoRouted": true
     },
     {
-      "id": "wire-1794594639509",
+      "id": "wire-1794628397067",
       "start": {
-        "componentId": "breadboard_1794594624647_dqp4l18p2",
+        "componentId": "breadboard_1794628376760_yvrwks5ei",
         "pinName": "bn.45",
         "x": 200.97333333333336,
         "y": -2.5999999999999943
@@ -403,15 +403,15 @@
       "autoRouted": true
     },
     {
-      "id": "bbwire-potentiometer_1794594639871_8h6aqlj85-0-21b.f",
+      "id": "bbwire-potentiometer_1794628397484_hh1q8r6st-0-21b.f",
       "start": {
-        "componentId": "potentiometer_1794594639871_8h6aqlj85",
+        "componentId": "potentiometer_1794628397484_hh1q8r6st",
         "pinName": "GND",
         "x": -125.84,
         "y": -69.80000000000001
       },
       "end": {
-        "componentId": "breadboard_1794594624647_dqp4l18p2",
+        "componentId": "breadboard_1794628376760_yvrwks5ei",
         "pinName": "21b.f",
         "x": -125.44000000000003,
         "y": -69.8
@@ -421,15 +421,15 @@
       "bb": true
     },
     {
-      "id": "bbwire-potentiometer_1794594639871_8h6aqlj85-1-22b.f",
+      "id": "bbwire-potentiometer_1794628397484_hh1q8r6st-1-22b.f",
       "start": {
-        "componentId": "potentiometer_1794594639871_8h6aqlj85",
+        "componentId": "potentiometer_1794628397484_hh1q8r6st",
         "pinName": "SIG",
         "x": -115.84,
         "y": -69.80000000000001
       },
       "end": {
-        "componentId": "breadboard_1794594624647_dqp4l18p2",
+        "componentId": "breadboard_1794628376760_yvrwks5ei",
         "pinName": "22b.f",
         "x": -115.84,
         "y": -69.8
@@ -439,15 +439,15 @@
       "bb": true
     },
     {
-      "id": "bbwire-potentiometer_1794594639871_8h6aqlj85-2-23b.f",
+      "id": "bbwire-potentiometer_1794628397484_hh1q8r6st-2-23b.f",
       "start": {
-        "componentId": "potentiometer_1794594639871_8h6aqlj85",
+        "componentId": "potentiometer_1794628397484_hh1q8r6st",
         "pinName": "VCC",
         "x": -105.84,
         "y": -69.80000000000001
       },
       "end": {
-        "componentId": "breadboard_1794594624647_dqp4l18p2",
+        "componentId": "breadboard_1794628376760_yvrwks5ei",
         "pinName": "23b.f",
         "x": -106.24000000000001,
         "y": -69.8
@@ -457,9 +457,9 @@
       "bb": true
     },
     {
-      "id": "wire-1794594642844",
+      "id": "wire-1794628402055",
       "start": {
-        "componentId": "breadboard_1794594624647_dqp4l18p2",
+        "componentId": "breadboard_1794628376760_yvrwks5ei",
         "pinName": "22b.j",
         "x": -115.84,
         "y": -31.400000000000006
@@ -480,15 +480,15 @@
       "autoRouted": true
     },
     {
-      "id": "wire-1794594644234",
+      "id": "wire-1794628403870",
       "start": {
-        "componentId": "breadboard_1794594624647_dqp4l18p2",
+        "componentId": "breadboard_1794628376760_yvrwks5ei",
         "pinName": "21b.i",
         "x": -125.44000000000003,
         "y": -41
       },
       "end": {
-        "componentId": "breadboard_1794594624647_dqp4l18p2",
+        "componentId": "breadboard_1794628376760_yvrwks5ei",
         "pinName": "bn.17",
         "x": -115.82666666666668,
         "y": -2.5999999999999943
@@ -499,19 +499,19 @@
           "y": -2.5999999999999943
         }
       ],
-      "color": "#8B4513",
+      "color": "#22c55e",
       "autoRouted": true
     },
     {
-      "id": "wire-1794594645667",
+      "id": "wire-1794628405707",
       "start": {
-        "componentId": "breadboard_1794594624647_dqp4l18p2",
+        "componentId": "breadboard_1794628376760_yvrwks5ei",
         "pinName": "23b.i",
         "x": -106.24000000000001,
         "y": -41
       },
       "end": {
-        "componentId": "breadboard_1794594624647_dqp4l18p2",
+        "componentId": "breadboard_1794628376760_yvrwks5ei",
         "pinName": "bp.21",
         "x": -67.82666666666671,
         "y": 7
@@ -522,19 +522,19 @@
           "y": 7
         }
       ],
-      "color": "#FF8C00",
+      "color": "#808080",
       "autoRouted": true
     },
     {
-      "id": "bbwire-hc_sr04_1794594646056_i27othi9y-0-8b.f",
+      "id": "bbwire-hc_sr04_1794628406421_s05nvqxd8-0-8b.f",
       "start": {
-        "componentId": "hc_sr04_1794594646056_i27othi9y",
+        "componentId": "hc_sr04_1794628406421_s05nvqxd8",
         "pinName": "VCC",
         "x": -250.84000000000003,
         "y": -69.80000000000001
       },
       "end": {
-        "componentId": "breadboard_1794594624647_dqp4l18p2",
+        "componentId": "breadboard_1794628376760_yvrwks5ei",
         "pinName": "8b.f",
         "x": -250.24,
         "y": -69.8
@@ -544,15 +544,15 @@
       "bb": true
     },
     {
-      "id": "bbwire-hc_sr04_1794594646056_i27othi9y-1-9b.f",
+      "id": "bbwire-hc_sr04_1794628406421_s05nvqxd8-1-9b.f",
       "start": {
-        "componentId": "hc_sr04_1794594646056_i27othi9y",
+        "componentId": "hc_sr04_1794628406421_s05nvqxd8",
         "pinName": "TRIG",
         "x": -240.84000000000003,
         "y": -69.80000000000001
       },
       "end": {
-        "componentId": "breadboard_1794594624647_dqp4l18p2",
+        "componentId": "breadboard_1794628376760_yvrwks5ei",
         "pinName": "9b.f",
         "x": -240.64000000000001,
         "y": -69.8
@@ -562,15 +562,15 @@
       "bb": true
     },
     {
-      "id": "bbwire-hc_sr04_1794594646056_i27othi9y-2-10b.f",
+      "id": "bbwire-hc_sr04_1794628406421_s05nvqxd8-2-10b.f",
       "start": {
-        "componentId": "hc_sr04_1794594646056_i27othi9y",
+        "componentId": "hc_sr04_1794628406421_s05nvqxd8",
         "pinName": "ECHO",
         "x": -230.84000000000003,
         "y": -69.80000000000001
       },
       "end": {
-        "componentId": "breadboard_1794594624647_dqp4l18p2",
+        "componentId": "breadboard_1794628376760_yvrwks5ei",
         "pinName": "10b.f",
         "x": -231.04000000000002,
         "y": -69.8
@@ -580,15 +580,15 @@
       "bb": true
     },
     {
-      "id": "bbwire-hc_sr04_1794594646056_i27othi9y-3-11b.f",
+      "id": "bbwire-hc_sr04_1794628406421_s05nvqxd8-3-11b.f",
       "start": {
-        "componentId": "hc_sr04_1794594646056_i27othi9y",
+        "componentId": "hc_sr04_1794628406421_s05nvqxd8",
         "pinName": "GND",
         "x": -220.84000000000003,
         "y": -69.80000000000001
       },
       "end": {
-        "componentId": "breadboard_1794594624647_dqp4l18p2",
+        "componentId": "breadboard_1794628376760_yvrwks5ei",
         "pinName": "11b.f",
         "x": -221.44,
         "y": -69.8
@@ -598,15 +598,15 @@
       "bb": true
     },
     {
-      "id": "wire-1794594648343",
+      "id": "wire-1794628409882",
       "start": {
-        "componentId": "breadboard_1794594624647_dqp4l18p2",
+        "componentId": "breadboard_1794628376760_yvrwks5ei",
         "pinName": "8b.j",
         "x": -250.24,
         "y": -31.400000000000006
       },
       "end": {
-        "componentId": "breadboard_1794594624647_dqp4l18p2",
+        "componentId": "breadboard_1794628376760_yvrwks5ei",
         "pinName": "bp.4",
         "x": -269.4266666666667,
         "y": 7
@@ -617,13 +617,13 @@
           "y": 7
         }
       ],
-      "color": "#8B00FF",
+      "color": "#FFD700",
       "autoRouted": true
     },
     {
-      "id": "wire-1794594649754",
+      "id": "wire-1794628411786",
       "start": {
-        "componentId": "breadboard_1794594624647_dqp4l18p2",
+        "componentId": "breadboard_1794628376760_yvrwks5ei",
         "pinName": "9b.j",
         "x": -240.64000000000001,
         "y": -31.400000000000006
@@ -644,9 +644,9 @@
       "autoRouted": true
     },
     {
-      "id": "wire-1794594651133",
+      "id": "wire-1794628413687",
       "start": {
-        "componentId": "breadboard_1794594624647_dqp4l18p2",
+        "componentId": "breadboard_1794628376760_yvrwks5ei",
         "pinName": "10b.j",
         "x": -231.04000000000002,
         "y": -31.400000000000006
@@ -667,19 +667,19 @@
           "y": 51
         }
       ],
-      "color": "#8B4513",
+      "color": "#FF00FF",
       "autoRouted": true
     },
     {
-      "id": "wire-1794594652534",
+      "id": "wire-1794628415529",
       "start": {
-        "componentId": "breadboard_1794594624647_dqp4l18p2",
+        "componentId": "breadboard_1794628376760_yvrwks5ei",
         "pinName": "11b.j",
         "x": -221.44,
         "y": -31.400000000000006
       },
       "end": {
-        "componentId": "breadboard_1794594624647_dqp4l18p2",
+        "componentId": "breadboard_1794628376760_yvrwks5ei",
         "pinName": "bn.10",
         "x": -202.2266666666667,
         "y": -2.5999999999999943
@@ -694,9 +694,9 @@
       "autoRouted": true
     },
     {
-      "id": "wire-1794594653959",
+      "id": "wire-1794628417628",
       "start": {
-        "componentId": "breadboard_1794594624647_dqp4l18p2",
+        "componentId": "breadboard_1794628376760_yvrwks5ei",
         "pinName": "bp.48",
         "x": 239.37333333333322,
         "y": 7

@@ -12,7 +12,7 @@
 await nuevo();
 await limpiar();
 const proto = await agregar('Protoboard');
-await sensorEn(proto, 10);
+await sensorDistancia(proto, 10);
 const rojo = await ledConResistencia(proto, 40, '13');
 await buzzerEn(proto, 52);
 const verde = await ledConResistencia(proto, 24, '12');

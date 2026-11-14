@@ -8,8 +8,7 @@ bloques y guarda el `.bloquino`. Usa el arnés de Playwright de Bloquino
 - `sesion-NN.js`: arma el circuito de la sesión y llama a
   `guardar('<carpeta de sketches>', [scripts], variables)` por programa. El
   comentario inicial dice en qué se aparta cada programa de su `.ino`.
-- `comun.js`: `guardar` y `sensorEn` (asienta el sensor de distancia midiendo
-  su dibujo).
+- `comun.js`: `guardar` (captura los bloques y guarda el `.bloquino`).
 - `armar.mjs`: arma los guiones y copia los resultados al curso.
 - `sesion-02-pantallazos.js`: capturas de Bloquino de la sesión 2
   (`recursos/img/pantallazos/bq-*.jpg`; se copian a mano).
