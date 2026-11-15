@@ -9,7 +9,7 @@ void setup() {
 }
 
 void loop() {
-  if (digitalRead(2) == LOW) {    // boton 1: do - mi - sol
+  if (digitalRead(4) == LOW) {    // boton 1: do - mi - sol
     tone(8, 262);
     delay(200);
     tone(8, 330);
@@ -27,7 +27,7 @@ void loop() {
     delay(400);
     noTone(8);
   }
-  if (digitalRead(4) == LOW) {    // boton 3: la sirena
+  if (digitalRead(2) == LOW) {    // boton 3: la sirena
     tone(8, 440);
     delay(150);
     tone(8, 660);

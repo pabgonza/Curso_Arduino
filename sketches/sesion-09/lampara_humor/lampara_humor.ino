@@ -1,19 +1,19 @@
 // Sesion 9 - La lampara de humor
-// HC-SR04: VCC a 5V, GND a GND, TRIG al pin 9, ECHO al pin 10.
-// Modulo LED RGB: R al pin 3, G al pin 5, B al pin 6, - a GND.
+// HC-SR04: VCC a 5V, GND a GND, TRIG al pin 10, ECHO al pin 9.
+// Modulo LED RGB: R al pin 6, G al pin 5, B al pin 3, - a GND.
 // Mano pegada = rojo, a medio camino = verde, lejos = azul.
 
 void setup() {
-  pinMode(9, OUTPUT);    // TRIG
-  pinMode(10, INPUT);    // ECHO
+  pinMode(10, OUTPUT);   // TRIG
+  pinMode(9, INPUT);     // ECHO
 }
 
 void loop() {
   // el bloque del murcielago, tal cual
-  digitalWrite(9, HIGH);
+  digitalWrite(10, HIGH);
   delayMicroseconds(10);
-  digitalWrite(9, LOW);
-  long tiempo = pulseIn(10, HIGH);
+  digitalWrite(10, LOW);
+  long tiempo = pulseIn(9, HIGH);
   int distancia = tiempo * 0.034 / 2;
 
   // recortamos: solo nos importa de 5 a 50 cm
@@ -27,9 +27,9 @@ void loop() {
 }
 
 void color(int r, int g, int b) {
-  analogWrite(3, r);
+  analogWrite(6, r);
   analogWrite(5, g);
-  analogWrite(6, b);
+  analogWrite(3, b);
 }
 
 void rueda(int pos) {

@@ -1,6 +1,7 @@
-// Sesión 9: LED RGB (R 3, G 5, B 6, patita común a GND), cada color con su
-// 220 Ω. Se suman la perilla en A0 (rueda_perilla) y el HC-SR04 con TRIG 9 y
-// ECHO 10 (lampara_humor), los dos en la protoboard con los rieles de 5 V y GND.
+// Sesión 9: LED RGB (R 6, G 5, B 3, en el orden de sus patitas; la común a
+// GND), cada color con su 220 Ω, armado como el ejemplo 08 de Bloquino. Se
+// suman la perilla en A0 (rueda_perilla) o el HC-SR04 con TRIG 10 y ECHO 9
+// (lampara_humor), a la izquierda, con los rieles de 5 V y GND.
 // Diferencias con los .ino:
 // - color(r, g, b) es un bloque propio de Mis bloques, «definir color (r) (g)
 //   (b)» con tres «fijar pin» (3, 5, 6), y sale en C++ como la función del
@@ -21,24 +22,15 @@
 // - Las variables de bloques son float; los valores son los mismos enteros.
 await nuevo();
 await limpiar();
-const proto = await agregar('Protoboard');
-const rgb = await agregar('LED RGB');
-const asiento = await asentar(rgb, 'R', proto, '30b.f');
-for (const [patita, pin] of [['R', '3'], ['G', '5'], ['B', '6']]) {
-  const col = Number(asiento[patita]?.match(/^\d+/)?.[0]);
-  const res = await agregar('Resistencia');
-  await asentar(res, '1', proto, `${col}t.c`);
-  await cable(proto, `${col}t.a`, 'uno', pin);
-}
-await cable(proto, asiento.COM.replace(/\w$/, 'j'), proto, 'bn.24');
-await cable(proto, 'bn.45', 'uno', 'GND.2');
-const pote = await agregar('Potenciómetro');
-await asentar(pote, 'SIG', proto, '22b.f');
-await cable(proto, '22b.j', 'uno', 'A0');
-await cable(proto, '21b.i', proto, 'bn.17');
-await cable(proto, '23b.i', proto, 'bp.21');
-await sensorDistancia(proto, 8);
-await cable(proto, 'bp.48', 'uno', '5V');
+// El LED RGB justo sobre sus pines. La vuelta a tierra sale de la columna
+// `colTierra`: tiene que quedar a la izquierda de todo cable que vaya a un pin.
+const soloRgb = async (colTierra) => {
+  const proto = await tablero();
+  await tierraArriba(proto, colTierra);
+  await ponerRgb(proto, 36, 6, 5, 3);
+  return proto;
+};
+let proto = await soloRgb(27);
 
 const n = (x) => (typeof x === 'number' ? num(x) : { ...num(0), block: x });
 const pwm = (PIN, x) => ({ type: 'ab_pin_pwm', fields: { PIN }, inputs: { VALOR: n(x) } });
@@ -49,7 +41,7 @@ const DEFINIR_COLOR = {
   type: 'ab_definir',
   extraState: { id: 'color', partes: COLOR },
   inputs: Object.fromEntries(['r', 'g', 'b'].map((e) => [e, { block: entrada(e, 'color', true) }])),
-  next: { block: cadena([pwm('3', entrada('r')), pwm('5', entrada('g')), pwm('6', entrada('b'))]) },
+  next: { block: cadena([pwm('6', entrada('r')), pwm('5', entrada('g')), pwm('3', entrada('b'))]) },
 };
 const color = (r, g, b) => ({ type: 'ab_mi_bloque', extraState: { definicion: 'color', partes: COLOR }, inputs: { r: n(r), g: n(g), b: n(b) } });
 const variable = (id) => ({ type: 'variables_get', fields: { VAR: { id } } });
@@ -87,17 +79,9 @@ await guardar('mezcla', [alIniciar(porSiempre(
   comentario('blanco'), color(255, 255, 255), esperarB(1),
 )), DEFINIR_COLOR]);
 await guardar('respiracion', [alIniciar(porSiempre(
-  comentario('inhala: sube el brillo'), contar(pwm('3', brillo), esperarB(0.005)),
-  comentario('exhala: lo baja'), contar(pwm('3', bajando), esperarB(0.005)),
+  comentario('inhala: sube el brillo'), contar(pwm('6', brillo), esperarB(0.005)),
+  comentario('exhala: lo baja'), contar(pwm('6', bajando), esperarB(0.005)),
 ))], BRILLO);
-await guardar('rueda_perilla', [alIniciar(porSiempre(
-  rueda(mapear({ type: 'ab_leer_analogico', fields: { PIN: 'A0' } }, 0, 1023, 0, 255)),
-)), DEFINIR_RUEDA, DEFINIR_COLOR], RUEDA);
-await guardar('lampara_humor', [alIniciar(porSiempre(
-  fijar('d', { type: 'ab_restringir', inputs: { X: n({ type: 'ab_distancia', fields: { DISPARO: '9', ECO: '10' } }), A: num(5), B: num(50) } }),
-  rueda(mapear(variable('d'), 5, 50, 0, 255)),
-  esperarB(0.03),
-)), DEFINIR_RUEDA, DEFINIR_COLOR], [{ name: 'distancia', id: 'd' }, ...RUEDA]);
 await guardar('respira_color', [alIniciar(porSiempre(
   comentario('inhala: morado (150, 0, 255) de apagado a todo'), contar(color(mapear(brillo, 0, 255, 0, 150), 0, brillo), esperarB(0.005)),
   comentario('exhala'), contar(color(mapear(bajando, 0, 255, 0, 150), 0, bajando), esperarB(0.005)),
@@ -111,3 +95,23 @@ await guardar('arcoiris', [alIniciar(porSiempre(
   { type: 'ab_si', inputs: { COND: { block: comparar(n(variable('g')), '>', num(255)) }, DO: { block: fijar('g', 0) } } },
   esperarB(0.02),
 )), DEFINIR_RUEDA, DEFINIR_COLOR], [{ name: 'giro', id: 'g' }, ...RUEDA]);
+
+// Con la perilla, a la izquierda.
+await cerrarCodigo();
+await cincoVolts(proto, 13);
+await ponerPerilla(proto);
+await guardar('rueda_perilla', [alIniciar(porSiempre(
+  rueda(mapear({ type: 'ab_leer_analogico', fields: { PIN: 'A0' } }, 0, 1023, 0, 255)),
+)), DEFINIR_RUEDA, DEFINIR_COLOR], RUEDA);
+
+// Con el sensor de distancia en vez de la perilla.
+await cerrarCodigo();
+await limpiar();
+proto = await soloRgb(17);
+await cincoVolts(proto, 13);
+await ponerSensor(proto, 19, 10, 1, 9, 2);
+await guardar('lampara_humor', [alIniciar(porSiempre(
+  fijar('d', { type: 'ab_restringir', inputs: { X: n({ type: 'ab_distancia', fields: { DISPARO: '10', ECO: '9' } }), A: num(5), B: num(50) } }),
+  rueda(mapear(variable('d'), 5, 50, 0, 255)),
+  esperarB(0.03),
+)), DEFINIR_RUEDA, DEFINIR_COLOR], [{ name: 'distancia', id: 'd' }, ...RUEDA]);

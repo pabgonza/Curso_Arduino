@@ -1,17 +1,17 @@
 // Sesion 7 - Sensor de retroceso para tu bici
-// HC-SR04: TRIG al pin 9, ECHO al pin 10. Buzzer en el pin 8.
+// HC-SR04: TRIG al pin 10, ECHO al pin 9. Buzzer en el pin 8.
 // Mientras mas cerca de la pared, mas seguido pita.
 
 void setup() {
-  pinMode(9, OUTPUT);
-  pinMode(10, INPUT);
+  pinMode(10, OUTPUT);
+  pinMode(9, INPUT);
 }
 
 void loop() {
-  digitalWrite(9, HIGH);
+  digitalWrite(10, HIGH);
   delayMicroseconds(10);
-  digitalWrite(9, LOW);
-  long tiempo = pulseIn(10, HIGH);
+  digitalWrite(10, LOW);
+  long tiempo = pulseIn(9, HIGH);
   int distancia = tiempo * 0.034 / 2;
 
   if (distancia < 100) {         // a menos de un metro, empieza a avisar

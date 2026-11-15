@@ -1,5 +1,5 @@
 // Sesion 6 - Reto: saluda solo cuando aprietas el boton
-// Servo en el pin 9 y boton entre el pin 2 y GND (INPUT_PULLUP: apretado = LOW).
+// Servo en el pin 9 y boton entre el pin 12 y GND (INPUT_PULLUP: apretado = LOW).
 
 #include <Servo.h>
 Servo brazo;
@@ -7,12 +7,12 @@ Servo brazo;
 int velocidad = 10;
 
 void setup() {
-  pinMode(2, INPUT_PULLUP);
+  pinMode(12, INPUT_PULLUP);
   brazo.attach(9);
 }
 
 void loop() {
-  if (digitalRead(2) == LOW) {    // solo si alguien aprieta
+  if (digitalRead(12) == LOW) {    // solo si alguien aprieta
     for (int a = 60; a <= 120; a++) {   // de ida
       brazo.write(a);
       delay(velocidad);

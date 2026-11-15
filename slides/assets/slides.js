@@ -191,10 +191,10 @@ function botonSVG(cx, cy) {
    protoboard — el del proyecto de S4, reusado en S6. Las etiquetas nombran
    cada mitad. Sin 5V ni resistencia: el pin 2 llega a la columna derecha del
    botón, la izquierda va con un cablecito al riel − y el pin usa INPUT_PULLUP. */
-function circuitoBotonLedSVG(etiqBoton, etiqLed) {
-  const pads = ["pin 13", "pin 2", "GND"];
+function circuitoBotonLedSVG(etiqBoton, etiqLed, pinBoton = "pin 2") {
+  const pads = ["pin 13", pinBoton, "GND"];
   const ard = arduinoSVG({ x: 6, y: 70, pads });
-  const y2 = ard.padY(pads.indexOf("pin 2")), yg = ard.padY(pads.length - 1);
+  const y2 = ard.padY(1), yg = ard.padY(pads.length - 1);
   return "<svg viewBox='0 0 640 400' style='width:100%' aria-label='Botón y LED juntos en la protoboard'>"
     + ard.svg
     + protoboardSVG({ x: 150, y: 30 })

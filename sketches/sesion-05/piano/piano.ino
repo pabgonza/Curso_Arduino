@@ -9,13 +9,13 @@ void setup() {
 }
 
 void loop() {
-  if (digitalRead(2) == LOW) {
+  if (digitalRead(4) == LOW) {
     tone(8, 262);   // do
   }
   if (digitalRead(3) == LOW) {
     tone(8, 330);   // mi
   }
-  if (digitalRead(4) == LOW) {
+  if (digitalRead(2) == LOW) {
     tone(8, 392);   // sol
   }
   if (digitalRead(2) == HIGH && digitalRead(3) == HIGH && digitalRead(4) == HIGH) {

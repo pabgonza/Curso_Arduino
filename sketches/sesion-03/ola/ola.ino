@@ -1,5 +1,5 @@
 // Sesion 3 - Reto: la ola
-// Los tres LEDs del semaforo: rojo 13, verde 12, amarillo 11.
+// Los tres LEDs del semaforo: rojo 13, amarillo 12, verde 11.
 // Se prenden uno tras otro y se apagan en el mismo orden.
 
 void setup() {

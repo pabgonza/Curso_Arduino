@@ -1,5 +1,5 @@
 // Sesion 9 - Reto: el arcoiris automatico
-// Modulo LED RGB: R al pin 3, G al pin 5, B al pin 6, - a GND.
+// Modulo LED RGB: R al pin 6, G al pin 5, B al pin 3, - a GND.
 // pos vive afuera del loop para que no se olvide; sube solo y vuelve a 0.
 
 int pos = 0;
@@ -17,9 +17,9 @@ void loop() {
 }
 
 void color(int r, int g, int b) {
-  analogWrite(3, r);
+  analogWrite(6, r);
   analogWrite(5, g);
-  analogWrite(6, b);
+  analogWrite(3, b);
 }
 
 // una vuelta al arcoiris en tres tramos: pos de 0 a 255

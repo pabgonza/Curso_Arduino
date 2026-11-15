@@ -1,5 +1,5 @@
 // Sesion 3 - Reto: el auto fantastico
-// Los tres LEDs del semaforo: rojo 13, verde 12, amarillo 11.
+// Los tres LEDs del semaforo: rojo 13, amarillo 12, verde 11.
 // La luz va 13 -> 12 -> 11 y vuelve por el 12; como el loop se repite,
 // nunca se nota donde empieza la vuelta.
 

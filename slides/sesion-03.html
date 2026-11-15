@@ -573,7 +573,7 @@
       <span class="led" id="sem-v" style="--c:var(--verde)"></span>
     </div>
     <div class="bloques-caja" style="max-height:56vh">
-      <img class="bloques" src="../recursos/img/bloques/sesion-03/semaforo.png" alt="Bloques del semáforo: al iniciar; por siempre: comentario luz roja: 3 segundos, encender LED en pin 13, esperar 3 segundos, apagar LED en pin 13; comentario luz verde: 3 segundos, encender LED en pin 12, esperar 3 segundos, apagar LED en pin 12; comentario amarilla: 1 segundo, encender LED en pin 11, esperar 1 segundos, apagar LED en pin 11">
+      <img class="bloques" src="../recursos/img/bloques/sesion-03/semaforo.png" alt="Bloques del semáforo: al iniciar; por siempre: comentario luz roja: 3 segundos, encender LED en pin 13, esperar 3 segundos, apagar LED en pin 13; comentario luz verde: 3 segundos, encender LED en pin 11, esperar 3 segundos, apagar LED en pin 11; comentario amarilla: 1 segundo, encender LED en pin 12, esperar 1 segundos, apagar LED en pin 12">
     </div>
     <div style="display:flex; flex-direction:column; gap:.5em; max-width:17em">
       <button class="boton" id="btn-sem">▶ Probar el semáforo</button>
@@ -1227,7 +1227,7 @@
     "p-circuito": {
       t: "Así se ve armado completo 🔧",
       d: "<svg viewBox='0 0 640 400' style='width:100%' aria-label='Tres LEDs con sus resistencias en la protoboard'>"
-        + arduinoSVG({ x: 6, y: 70, pads: ["pin 12", "pin 11", "pin 13", "GND"] }).svg
+        + arduinoSVG({ x: 6, y: 70, pads: ["pin 11", "pin 12", "pin 13", "GND"] }).svg
         + protoboardSVG({ x: 150, y: 30 })
         + "<text x='269' y='105' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif' font-weight='700'>rojo</text><text x='399' y='105' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif' font-weight='700'>amarillo</text><text x='529' y='105' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif' font-weight='700'>verde</text>"
         + ledSVG(269, 232, 328)
@@ -1238,7 +1238,7 @@
         + "<path d='M128 218 C 170 230, 225 246, 254 253' fill='none' stroke='#AB47BC' stroke-width='6' stroke-linecap='round'/>"
         + "<path d='M128 266 C 148 296, 160 318, 175 326' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>"
         + "<text x='250' y='298' text-anchor='end' font-size='12' fill='#5E7480' font-family='Nunito, sans-serif'>220 Ω</text></svg>"
-        + "<p>Cada LED es una copia del de hoy: pin → patita larga, y la corta con su <strong>220 Ω</strong> (rojo-rojo-café) al riel −. Ojo con el orden: <strong>pin 13 → LED rojo, pin 12 → verde, pin 11 → amarillo</strong>, igual que en el programa. Los tres <strong>comparten el riel negro</strong>, que vuelve a GND con un solo cable. 🎨</p>"
+        + "<p>Cada LED es una copia del de hoy: pin → patita larga, y la corta con su <strong>220 Ω</strong> (rojo-rojo-café) al riel −. Ojo con el orden: <strong>pin 13 → LED rojo, pin 12 → amarillo, pin 11 → verde</strong>, igual que en el programa. Los tres <strong>comparten el riel negro</strong>, que vuelve a GND con un solo cable. 🎨</p>"
     },
     "p-codigo": {
       t: "El programa completo 📋",

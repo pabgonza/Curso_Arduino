@@ -1,21 +1,21 @@
 // Sesion 7 - Reto: el semaforo de estacionamiento
-// HC-SR04: TRIG al pin 9, ECHO al pin 10.
-// LEDs del semaforo con sus resistencias: rojo 13, verde 12, amarillo 11.
+// HC-SR04: TRIG al pin 10, ECHO al pin 9.
+// LEDs del semaforo con sus resistencias: rojo 13, amarillo 12, verde 11.
 // Verde lejos, amarillo cerca, rojo ¡FRENA!
 
 void setup() {
-  pinMode(9, OUTPUT);    // TRIG
-  pinMode(10, INPUT);    // ECHO
+  pinMode(10, OUTPUT);   // TRIG
+  pinMode(9, INPUT);     // ECHO
   pinMode(13, OUTPUT);
   pinMode(12, OUTPUT);
   pinMode(11, OUTPUT);
 }
 
 void loop() {
-  digitalWrite(9, HIGH);
+  digitalWrite(10, HIGH);
   delayMicroseconds(10);
-  digitalWrite(9, LOW);
-  long tiempo = pulseIn(10, HIGH);
+  digitalWrite(10, LOW);
+  long tiempo = pulseIn(9, HIGH);
   int distancia = tiempo * 0.034 / 2;
 
   // primero apagamos los tres...
@@ -28,10 +28,10 @@ void loop() {
     digitalWrite(13, HIGH);   // rojo: ¡FRENA!
   }
   if (distancia >= 10 && distancia < 30) {
-    digitalWrite(11, HIGH);   // amarillo: cerca
+    digitalWrite(12, HIGH);   // amarillo: cerca
   }
   if (distancia >= 30) {
-    digitalWrite(12, HIGH);   // verde: lejos
+    digitalWrite(11, HIGH);   // verde: lejos
   }
   delay(100);
 }

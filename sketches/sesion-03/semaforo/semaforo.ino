@@ -1,6 +1,6 @@
 // Sesion 3 - El semaforo
 // Tres LEDs con sus resistencias de 220 ohm:
-// rojo en el pin 13, verde en el 12, amarillo en el 11.
+// rojo en el pin 13, amarillo en el 12, verde en el 11.
 // ¡Todos comparten el mismo GND!
 
 void setup() {
@@ -15,11 +15,11 @@ void loop() {
   delay(3000);
   digitalWrite(13, LOW);
   // luz verde: 3 segundos
-  digitalWrite(12, HIGH);
-  delay(3000);
-  digitalWrite(12, LOW);
-  // amarilla: 1 segundo
   digitalWrite(11, HIGH);
-  delay(1000);
+  delay(3000);
   digitalWrite(11, LOW);
+  // amarilla: 1 segundo
+  digitalWrite(12, HIGH);
+  delay(1000);
+  digitalWrite(12, LOW);
 }

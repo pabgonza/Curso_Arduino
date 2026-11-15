@@ -1,6 +1,6 @@
 // Sesion 8 - El semaforo termico
 // DHT11 con la patita S al pin 2 (libreria "DHT sensor library").
-// LEDs con sus resistencias de 220 ohm: verde en el 12, amarillo en el 11,
+// LEDs con sus resistencias de 220 ohm: verde en el 11, amarillo en el 12,
 // rojo en el 13.
 
 #include <DHT.h>
@@ -25,9 +25,9 @@ void loop() {
 
   // ...y prendemos solo el que gana
   if (t < 15) {
-    digitalWrite(12, HIGH);   // verde: ¡frio!
+    digitalWrite(11, HIGH);   // verde: ¡frio!
   } else if (t < 25) {
-    digitalWrite(11, HIGH);   // amarillo: rico
+    digitalWrite(12, HIGH);   // amarillo: rico
   } else {
     digitalWrite(13, HIGH);   // rojo: ¡calor!
   }

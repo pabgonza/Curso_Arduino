@@ -7,14 +7,12 @@
 //   digitalWrite(13, encendida) (el bloque del LED no recibe una variable).
 await nuevo();
 await limpiar();
-const proto = await agregar('Protoboard');
-await ledConResistencia(proto, 40, '13');
-const boton = await agregar('Botón');
-// Girado, el botón deja las patitas 1 en la columna 14 y las 2 en la 12.
-await asentar(boton, '1.l', proto, '14t.c');
-await cable(proto, '14t.a', 'uno', '2');
-await cable(proto, '12b.j', proto, 'bn.10');
-await cable(proto, 'bn.45', 'uno', 'GND.2');
+// El LED bajo el pin 13 y el botón a su derecha, cerca del pin 2 (como el
+// ejemplo 03 de Bloquino).
+const proto = await tablero();
+await ponerLed(proto, 28, 13);
+await ponerBoton(proto, 41, 2);
+await tierraArriba(proto, 27);
 
 const apretado = { type: 'ab_boton', fields: { PIN: '2' } };
 const texto = (TEXT) => ({ block: { type: 'text', fields: { TEXT } } });
