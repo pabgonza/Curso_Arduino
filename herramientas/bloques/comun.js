@@ -4,6 +4,16 @@
 /** Arma el resultado de un programa: lo carga, comprueba que compila y
  *  simula, captura sus bloques (scripts lado a lado) y guarda el .bloquino. */
 async function guardar(nombre, bloques, variables = []) {
+  // Cables a tierra negros y a 5 V rojos. Bloquino solo lo hace con el cable
+  // que empieza en el riel o en el pin; aquí también con el que termina ahí.
+  await page.evaluate(() => {
+    const s = window.__s.useSimulatorStore.getState();
+    for (const w of s.wires.filter((w) => !w.bb)) {
+      const pines = [w.start.pinName, w.end.pinName];
+      const color = pines.some((p) => /^([tb]n\.|GND)/.test(p)) ? '#000000' : pines.some((p) => /^([tb]p\.|5V|V\+|VCC|VDD)/.test(p)) ? '#cc0000' : w.color;
+      if (color !== w.color) s.updateWire(w.id, { color });
+    }
+  });
   const sketch = await programar(bloques, variables);
   const r = { simula: await simular() };
   await detener();

@@ -375,7 +375,7 @@
           "y": -2.5999999999999943
         }
       ],
-      "color": "#8B00FF",
+      "color": "#000000",
       "autoRouted": true
     },
     {
@@ -498,7 +498,7 @@
           "y": -2.5999999999999943
         }
       ],
-      "color": "#FF00FF",
+      "color": "#000000",
       "autoRouted": true
     },
     {
@@ -521,7 +521,7 @@
           "y": 7
         }
       ],
-      "color": "#FFD700",
+      "color": "#cc0000",
       "autoRouted": true
     },
     {
@@ -616,7 +616,7 @@
           "y": 7
         }
       ],
-      "color": "#808080",
+      "color": "#cc0000",
       "autoRouted": true
     },
     {
@@ -689,7 +689,7 @@
           "y": -2.5999999999999943
         }
       ],
-      "color": "#22c55e",
+      "color": "#000000",
       "autoRouted": true
     },
     {

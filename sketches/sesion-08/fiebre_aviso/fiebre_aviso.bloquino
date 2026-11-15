@@ -221,7 +221,7 @@
           "y": 7
         }
       ],
-      "color": "#32CD32",
+      "color": "#cc0000",
       "autoRouted": true
     },
     {
@@ -244,7 +244,7 @@
           "y": -2.5999999999999943
         }
       ],
-      "color": "#FF8C00",
+      "color": "#000000",
       "autoRouted": true
     },
     {
@@ -661,7 +661,7 @@
           "y": -31.400000000000006
         }
       ],
-      "color": "#FFD700",
+      "color": "#000000",
       "autoRouted": true
     }
   ],
