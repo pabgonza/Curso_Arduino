@@ -1,11 +1,12 @@
 {
   "format": "velxio-project",
   "version": 1,
-  "exportedAt": "2026-11-13T11:07:19.033Z",
+  "exportedAt": "2026-11-15T03:04:34.737Z",
   "name": "cancion",
   "boards": [
     {
       "id": "arduino-uno",
+      "name": "Placa 1",
       "boardKind": "arduino-uno",
       "x": 50,
       "y": 50,
@@ -22,31 +23,31 @@
       },
       {
         "name": "bloques.json",
-        "content": "{\"blocks\":{\"languageVersion\":0,\"blocks\":[{\"type\":\"ab_al_iniciar\",\"id\":\"Su4,^^to6!hgYkowLjvy\",\"x\":0,\"y\":0,\"next\":{\"block\":{\"type\":\"ab_tocar_cancion\",\"id\":\"CH#%2i-sRZ0[~5^Npu1n\",\"fields\":{\"CANCION\":\"MARIO_BROS\",\"PIN\":\"8\"}}}}]}}"
+        "content": "{\"blocks\":{\"languageVersion\":0,\"blocks\":[{\"type\":\"ab_al_iniciar\",\"id\":\"xb+P35_-ejr/HN;@U@CL\",\"x\":0,\"y\":0,\"next\":{\"block\":{\"type\":\"ab_tocar_cancion\",\"id\":\"[cUz=WRHx9O[)aR{;1qQ\",\"fields\":{\"CANCION\":\"MARIO_BROS\",\"VELOCIDAD\":\"NORMAL\",\"PIN\":\"8\"}}}}]}}"
       }
     ]
   },
   "components": [
     {
-      "id": "breadboard_1794567944413_rjrx1zg8j",
+      "id": "breadboard_1794711793136_vqku71pm2",
       "metadataId": "breadboard",
-      "x": -284,
+      "x": -338,
       "y": -191,
       "properties": {}
     },
     {
-      "id": "buzzer_1794567945035_3zwlcmbsm",
+      "id": "buzzer_1794711793723_fc0nmpjve",
       "metadataId": "buzzer",
-      "x": -18.240000000000038,
+      "x": -72.24000000000004,
       "y": -159.8,
       "properties": {
         "hasSignal": false
       }
     },
     {
-      "id": "pushbutton_1794567975278_33f4qwd4g",
+      "id": "pushbutton_1794711818978_qckpr5u0x",
       "metadataId": "pushbutton",
-      "x": -190.74,
+      "x": -244.74,
       "y": -115.70000000000002,
       "properties": {
         "color": "red",
@@ -57,9 +58,9 @@
       }
     },
     {
-      "id": "pushbutton_1794567994903_3b8pmengc",
+      "id": "pushbutton_1794711837047_iz7oo0bz3",
       "metadataId": "pushbutton",
-      "x": 58.86000000000004,
+      "x": 4.860000000000042,
       "y": -115.70000000000002,
       "properties": {
         "color": "red",
@@ -70,9 +71,9 @@
       }
     },
     {
-      "id": "pushbutton_1794568001226_wh8eo7nhc",
+      "id": "pushbutton_1794711842726_ncv76bb64",
       "metadataId": "pushbutton",
-      "x": 116.46000000000001,
+      "x": 62.46000000000001,
       "y": -115.70000000000002,
       "properties": {
         "color": "red",
@@ -85,17 +86,17 @@
   ],
   "wires": [
     {
-      "id": "bbwire-buzzer_1794567945035_3zwlcmbsm-0-30b.f",
+      "id": "bbwire-buzzer_1794711793723_fc0nmpjve-0-30b.f",
       "start": {
-        "componentId": "buzzer_1794567945035_3zwlcmbsm",
+        "componentId": "buzzer_1794711793723_fc0nmpjve",
         "pinName": "1",
-        "x": 14.759999999999962,
+        "x": -39.24000000000004,
         "y": -69.80000000000001
       },
       "end": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794711793136_vqku71pm2",
         "pinName": "30b.f",
-        "x": 14.95999999999998,
+        "x": -39.04000000000002,
         "y": -69.8
       },
       "waypoints": [],
@@ -103,17 +104,17 @@
       "bb": true
     },
     {
-      "id": "bbwire-buzzer_1794567945035_3zwlcmbsm-1-31b.f",
+      "id": "bbwire-buzzer_1794711793723_fc0nmpjve-1-31b.f",
       "start": {
-        "componentId": "buzzer_1794567945035_3zwlcmbsm",
+        "componentId": "buzzer_1794711793723_fc0nmpjve",
         "pinName": "2",
-        "x": 24.759999999999962,
+        "x": -29.240000000000038,
         "y": -69.80000000000001
       },
       "end": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794711793136_vqku71pm2",
         "pinName": "31b.f",
-        "x": 24.559999999999945,
+        "x": -29.440000000000055,
         "y": -69.8
       },
       "waypoints": [],
@@ -121,11 +122,11 @@
       "bb": true
     },
     {
-      "id": "wire-1794567948161",
+      "id": "wire-1794711796374",
       "start": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794711793136_vqku71pm2",
         "pinName": "30b.j",
-        "x": 14.95999999999998,
+        "x": -39.04000000000002,
         "y": -31.400000000000006
       },
       "end": {
@@ -140,38 +141,38 @@
           "y": -31.400000000000006
         }
       ],
-      "color": "#00FFFF",
+      "color": "#8B00FF",
       "autoRouted": true
     },
     {
-      "id": "wire-1794567949897",
+      "id": "wire-1794711797779",
       "start": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794711793136_vqku71pm2",
         "pinName": "31b.j",
-        "x": 24.559999999999945,
+        "x": -29.440000000000055,
         "y": -31.400000000000006
       },
       "end": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794711793136_vqku71pm2",
         "pinName": "bn.28",
-        "x": 62.97333333333336,
+        "x": 8.973333333333358,
         "y": -2.5999999999999943
       },
       "waypoints": [
         {
-          "x": 24.559999999999945,
+          "x": -29.440000000000055,
           "y": -2.5999999999999943
         }
       ],
-      "color": "#FFD700",
+      "color": "#000000",
       "autoRouted": true
     },
     {
-      "id": "wire-1794567952220",
+      "id": "wire-1794711799211",
       "start": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794711793136_vqku71pm2",
         "pinName": "bn.45",
-        "x": 254.97333333333336,
+        "x": 200.97333333333336,
         "y": -2.5999999999999943
       },
       "end": {
@@ -182,7 +183,7 @@
       },
       "waypoints": [
         {
-          "x": 254.97333333333336,
+          "x": 200.97333333333336,
           "y": 241.5
         }
       ],
@@ -190,17 +191,17 @@
       "autoRouted": true
     },
     {
-      "id": "bbwire-pushbutton_1794567975278_33f4qwd4g-0-14t.c",
+      "id": "bbwire-pushbutton_1794711818978_qckpr5u0x-0-14t.c",
       "start": {
-        "componentId": "pushbutton_1794567975278_33f4qwd4g",
+        "componentId": "pushbutton_1794711818978_qckpr5u0x",
         "pinName": "1.l",
-        "x": -138.74,
+        "x": -192.74,
         "y": -117.70000000000002
       },
       "end": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794711793136_vqku71pm2",
         "pinName": "14t.c",
-        "x": -138.64,
+        "x": -192.64,
         "y": -117.80000000000001
       },
       "waypoints": [],
@@ -208,17 +209,17 @@
       "bb": true
     },
     {
-      "id": "bbwire-pushbutton_1794567975278_33f4qwd4g-1-12t.c",
+      "id": "bbwire-pushbutton_1794711818978_qckpr5u0x-1-12t.c",
       "start": {
-        "componentId": "pushbutton_1794567975278_33f4qwd4g",
+        "componentId": "pushbutton_1794711818978_qckpr5u0x",
         "pinName": "2.l",
-        "x": -157.74,
+        "x": -211.74,
         "y": -117.70000000000002
       },
       "end": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794711793136_vqku71pm2",
         "pinName": "12t.c",
-        "x": -157.84,
+        "x": -211.84,
         "y": -117.80000000000001
       },
       "waypoints": [],
@@ -226,17 +227,17 @@
       "bb": true
     },
     {
-      "id": "bbwire-pushbutton_1794567975278_33f4qwd4g-2-14b.h",
+      "id": "bbwire-pushbutton_1794711818978_qckpr5u0x-2-14b.h",
       "start": {
-        "componentId": "pushbutton_1794567975278_33f4qwd4g",
+        "componentId": "pushbutton_1794711818978_qckpr5u0x",
         "pinName": "1.r",
-        "x": -138.74,
+        "x": -192.74,
         "y": -50.70000000000002
       },
       "end": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794711793136_vqku71pm2",
         "pinName": "14b.h",
-        "x": -138.64,
+        "x": -192.64,
         "y": -50.60000000000002
       },
       "waypoints": [],
@@ -244,17 +245,17 @@
       "bb": true
     },
     {
-      "id": "bbwire-pushbutton_1794567975278_33f4qwd4g-3-12b.h",
+      "id": "bbwire-pushbutton_1794711818978_qckpr5u0x-3-12b.h",
       "start": {
-        "componentId": "pushbutton_1794567975278_33f4qwd4g",
+        "componentId": "pushbutton_1794711818978_qckpr5u0x",
         "pinName": "2.r",
-        "x": -157.74,
+        "x": -211.74,
         "y": -50.70000000000002
       },
       "end": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794711793136_vqku71pm2",
         "pinName": "12b.h",
-        "x": -157.84,
+        "x": -211.84,
         "y": -50.60000000000002
       },
       "waypoints": [],
@@ -262,11 +263,11 @@
       "bb": true
     },
     {
-      "id": "wire-1794567978689",
+      "id": "wire-1794711822657",
       "start": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794711793136_vqku71pm2",
         "pinName": "14t.a",
-        "x": -138.64,
+        "x": -192.64,
         "y": -137
       },
       "end": {
@@ -277,52 +278,52 @@
       },
       "waypoints": [
         {
-          "x": -26.240000000000038,
+          "x": -80.24000000000004,
           "y": -137
         },
         {
-          "x": -26.240000000000038,
+          "x": -80.24000000000004,
           "y": 59
         }
       ],
-      "color": "#0000cc",
+      "color": "#FF8C00",
       "autoRouted": true
     },
     {
-      "id": "wire-1794567980372",
+      "id": "wire-1794711824476",
       "start": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794711793136_vqku71pm2",
         "pinName": "12b.j",
-        "x": -157.84,
+        "x": -211.84,
         "y": -31.400000000000006
       },
       "end": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794711793136_vqku71pm2",
         "pinName": "bn.10",
-        "x": -148.2266666666667,
+        "x": -202.2266666666667,
         "y": -2.5999999999999943
       },
       "waypoints": [
         {
-          "x": -157.84,
+          "x": -211.84,
           "y": -2.5999999999999943
         }
       ],
-      "color": "#8B00FF",
+      "color": "#000000",
       "autoRouted": true
     },
     {
-      "id": "bbwire-pushbutton_1794567994903_3b8pmengc-0-40t.c",
+      "id": "bbwire-pushbutton_1794711837047_iz7oo0bz3-0-40t.c",
       "start": {
-        "componentId": "pushbutton_1794567994903_3b8pmengc",
+        "componentId": "pushbutton_1794711837047_iz7oo0bz3",
         "pinName": "1.l",
-        "x": 110.86000000000004,
+        "x": 56.86000000000004,
         "y": -117.70000000000002
       },
       "end": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794711793136_vqku71pm2",
         "pinName": "40t.c",
-        "x": 110.96000000000004,
+        "x": 56.960000000000036,
         "y": -117.80000000000001
       },
       "waypoints": [],
@@ -330,17 +331,17 @@
       "bb": true
     },
     {
-      "id": "bbwire-pushbutton_1794567994903_3b8pmengc-1-38t.c",
+      "id": "bbwire-pushbutton_1794711837047_iz7oo0bz3-1-38t.c",
       "start": {
-        "componentId": "pushbutton_1794567994903_3b8pmengc",
+        "componentId": "pushbutton_1794711837047_iz7oo0bz3",
         "pinName": "2.l",
-        "x": 91.86000000000004,
+        "x": 37.86000000000004,
         "y": -117.70000000000002
       },
       "end": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794711793136_vqku71pm2",
         "pinName": "38t.c",
-        "x": 91.76000000000005,
+        "x": 37.76000000000005,
         "y": -117.80000000000001
       },
       "waypoints": [],
@@ -348,17 +349,17 @@
       "bb": true
     },
     {
-      "id": "bbwire-pushbutton_1794567994903_3b8pmengc-2-40b.h",
+      "id": "bbwire-pushbutton_1794711837047_iz7oo0bz3-2-40b.h",
       "start": {
-        "componentId": "pushbutton_1794567994903_3b8pmengc",
+        "componentId": "pushbutton_1794711837047_iz7oo0bz3",
         "pinName": "1.r",
-        "x": 110.86000000000004,
+        "x": 56.86000000000004,
         "y": -50.70000000000002
       },
       "end": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794711793136_vqku71pm2",
         "pinName": "40b.h",
-        "x": 110.96000000000004,
+        "x": 56.960000000000036,
         "y": -50.60000000000002
       },
       "waypoints": [],
@@ -366,17 +367,17 @@
       "bb": true
     },
     {
-      "id": "bbwire-pushbutton_1794567994903_3b8pmengc-3-38b.h",
+      "id": "bbwire-pushbutton_1794711837047_iz7oo0bz3-3-38b.h",
       "start": {
-        "componentId": "pushbutton_1794567994903_3b8pmengc",
+        "componentId": "pushbutton_1794711837047_iz7oo0bz3",
         "pinName": "2.r",
-        "x": 91.86000000000004,
+        "x": 37.86000000000004,
         "y": -50.70000000000002
       },
       "end": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794711793136_vqku71pm2",
         "pinName": "38b.h",
-        "x": 91.76000000000005,
+        "x": 37.76000000000005,
         "y": -50.60000000000002
       },
       "waypoints": [],
@@ -384,11 +385,11 @@
       "bb": true
     },
     {
-      "id": "wire-1794567998744",
+      "id": "wire-1794711840518",
       "start": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794711793136_vqku71pm2",
         "pinName": "40b.j",
-        "x": 110.96000000000004,
+        "x": 56.960000000000036,
         "y": -31.400000000000006
       },
       "end": {
@@ -399,7 +400,7 @@
       },
       "waypoints": [
         {
-          "x": 110.96000000000004,
+          "x": 56.960000000000036,
           "y": -10.599999999999994
         },
         {
@@ -407,44 +408,44 @@
           "y": -10.599999999999994
         }
       ],
-      "color": "#FF8C00",
+      "color": "#FF00FF",
       "autoRouted": true
     },
     {
-      "id": "wire-1794568000512",
+      "id": "wire-1794711842171",
       "start": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794711793136_vqku71pm2",
         "pinName": "38b.j",
-        "x": 91.76000000000005,
+        "x": 37.76000000000005,
         "y": -31.400000000000006
       },
       "end": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794711793136_vqku71pm2",
         "pinName": "bn.30",
-        "x": 82.17333333333329,
+        "x": 28.17333333333329,
         "y": -2.5999999999999943
       },
       "waypoints": [
         {
-          "x": 91.76000000000005,
+          "x": 37.76000000000005,
           "y": -2.5999999999999943
         }
       ],
-      "color": "#32CD32",
+      "color": "#000000",
       "autoRouted": true
     },
     {
-      "id": "bbwire-pushbutton_1794568001226_wh8eo7nhc-0-46t.c",
+      "id": "bbwire-pushbutton_1794711842726_ncv76bb64-0-46t.c",
       "start": {
-        "componentId": "pushbutton_1794568001226_wh8eo7nhc",
+        "componentId": "pushbutton_1794711842726_ncv76bb64",
         "pinName": "1.l",
-        "x": 168.46,
+        "x": 114.46000000000001,
         "y": -117.70000000000002
       },
       "end": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794711793136_vqku71pm2",
         "pinName": "46t.c",
-        "x": 168.56,
+        "x": 114.56,
         "y": -117.80000000000001
       },
       "waypoints": [],
@@ -452,17 +453,17 @@
       "bb": true
     },
     {
-      "id": "bbwire-pushbutton_1794568001226_wh8eo7nhc-1-44t.c",
+      "id": "bbwire-pushbutton_1794711842726_ncv76bb64-1-44t.c",
       "start": {
-        "componentId": "pushbutton_1794568001226_wh8eo7nhc",
+        "componentId": "pushbutton_1794711842726_ncv76bb64",
         "pinName": "2.l",
-        "x": 149.46,
+        "x": 95.46000000000001,
         "y": -117.70000000000002
       },
       "end": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794711793136_vqku71pm2",
         "pinName": "44t.c",
-        "x": 149.36,
+        "x": 95.36000000000001,
         "y": -117.80000000000001
       },
       "waypoints": [],
@@ -470,17 +471,17 @@
       "bb": true
     },
     {
-      "id": "bbwire-pushbutton_1794568001226_wh8eo7nhc-2-46b.h",
+      "id": "bbwire-pushbutton_1794711842726_ncv76bb64-2-46b.h",
       "start": {
-        "componentId": "pushbutton_1794568001226_wh8eo7nhc",
+        "componentId": "pushbutton_1794711842726_ncv76bb64",
         "pinName": "1.r",
-        "x": 168.46,
+        "x": 114.46000000000001,
         "y": -50.70000000000002
       },
       "end": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794711793136_vqku71pm2",
         "pinName": "46b.h",
-        "x": 168.56,
+        "x": 114.56,
         "y": -50.60000000000002
       },
       "waypoints": [],
@@ -488,17 +489,17 @@
       "bb": true
     },
     {
-      "id": "bbwire-pushbutton_1794568001226_wh8eo7nhc-3-44b.h",
+      "id": "bbwire-pushbutton_1794711842726_ncv76bb64-3-44b.h",
       "start": {
-        "componentId": "pushbutton_1794568001226_wh8eo7nhc",
+        "componentId": "pushbutton_1794711842726_ncv76bb64",
         "pinName": "2.r",
-        "x": 149.46,
+        "x": 95.46000000000001,
         "y": -50.70000000000002
       },
       "end": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794711793136_vqku71pm2",
         "pinName": "44b.h",
-        "x": 149.36,
+        "x": 95.36000000000001,
         "y": -50.60000000000002
       },
       "waypoints": [],
@@ -506,11 +507,11 @@
       "bb": true
     },
     {
-      "id": "wire-1794568005280",
+      "id": "wire-1794711845870",
       "start": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794711793136_vqku71pm2",
         "pinName": "46b.j",
-        "x": 168.56,
+        "x": 114.56,
         "y": -31.400000000000006
       },
       "end": {
@@ -521,7 +522,7 @@
       },
       "waypoints": [
         {
-          "x": 168.56,
+          "x": 114.56,
           "y": -18.599999999999994
         },
         {
@@ -529,30 +530,30 @@
           "y": -18.599999999999994
         }
       ],
-      "color": "#0000cc",
+      "color": "#808080",
       "autoRouted": true
     },
     {
-      "id": "wire-1794568007074",
+      "id": "wire-1794711847746",
       "start": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794711793136_vqku71pm2",
         "pinName": "44b.j",
-        "x": 149.36,
+        "x": 95.36000000000001,
         "y": -31.400000000000006
       },
       "end": {
-        "componentId": "breadboard_1794567944413_rjrx1zg8j",
+        "componentId": "breadboard_1794711793136_vqku71pm2",
         "pinName": "bn.35",
-        "x": 139.7733333333333,
+        "x": 85.77333333333331,
         "y": -2.5999999999999943
       },
       "waypoints": [
         {
-          "x": 149.36,
+          "x": 95.36000000000001,
           "y": -2.5999999999999943
         }
       ],
-      "color": "#8B00FF",
+      "color": "#000000",
       "autoRouted": true
     }
   ],
