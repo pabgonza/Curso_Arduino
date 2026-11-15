@@ -1,6 +1,7 @@
 // Sesion 9 - La rueda de colores con la perilla
 // Perilla: orillas a 5V y GND, la del medio a A0.
-// Modulo LED RGB: R al pin 6, G al pin 5, B al pin 3, - a GND.
+// LED RGB de anodo comun: la patita larga a 5V; R al pin 6, G al pin 5, B al pin 3,
+// cada color con su resistencia de 220 ohm. Se prende al reves: 0 = a todo, 255 = apagado.
 
 void setup() {
 }
@@ -11,9 +12,9 @@ void loop() {
 }
 
 void color(int r, int g, int b) {
-  analogWrite(6, r);
-  analogWrite(5, g);
-  analogWrite(3, b);
+  analogWrite(6, 255 - r);   // al reves: 255 - r prende r
+  analogWrite(5, 255 - g);
+  analogWrite(3, 255 - b);
 }
 
 // una vuelta al arcoiris en tres tramos: pos de 0 a 255

@@ -65,10 +65,10 @@
     <div style="max-width:24em; text-align:left; display:flex; flex-direction:column; gap:.5em">
       <ul class="lista">
         <li>Adentro viven <strong>tres LEDs chiquitos</strong>: uno <strong>R</strong>ojo, uno <strong>G</strong>reen (verde) y uno <strong>B</strong>lue (azul). Por eso «RGB».<button class="sm" data-sm="rgb-ojos">?</button></li>
-        <li>Tiene <strong>cuatro patitas</strong>: una por color… y una <strong>−</strong> que comparten los tres.</li>
+        <li>Tiene <strong>cuatro patitas</strong>: una por color… y una <strong>larga</strong>, la <strong>+</strong>, que comparten los tres.</li>
         <li>Si prendes los tres a la vez se <strong>mezclan</strong> y ves un solo color. ¡Así funcionan las pantallas!</li>
       </ul>
-      <p class="nota">El de tu kit viene en un <strong>módulo</strong>: una plaquita con las patitas marcadas <strong>R G B −</strong> y las resistencias ya puestas. Cero resistencias que armar. 😎</p>
+      <p class="nota">El de tu kit es de <strong>ánodo común</strong>: la patita larga va a <strong>5V</strong> y cada color lleva su resistencia de 220 Ω, como el LED de la sesión 3. Y se prende <strong>al revés</strong>… ya verás cómo lo arreglamos. 🙃<button class="sm" data-sm="anodo">?</button></p>
     </div>
   </div>
 </section>
@@ -98,10 +98,9 @@
       </div>
       <p class="tuto-num">La receta en bloques</p>
       <div class="pila" style="font-size:.9rem">
-        <span class="bloque avanzado">fijar pin <span class="valor">3</span> en <span class="valor" id="mz-cr">255</span></span>
-        <span class="bloque avanzado">fijar pin <span class="valor">5</span> en <span class="valor" id="mz-cg">120</span></span>
-        <span class="bloque avanzado">fijar pin <span class="valor">6</span> en <span class="valor" id="mz-cb">0</span></span>
+        <span class="bloque misbloques">color <span class="valor" id="mz-cr">255</span> <span class="valor" id="mz-cg">120</span> <span class="valor" id="mz-cb">0</span></span>
       </div>
+      <p class="nota" style="margin:0">«color» es un bloque que vas a crear tú en un ratito. 🧩</p>
       <p class="nota">Cada color va del <strong>0</strong> (apagado) al <strong>255</strong> (a todo). ¿Rojo + verde? Con luz da <strong>amarillo</strong>, no café.<button class="sm" data-sm="luz-pintura">?</button></p>
     </aside>
   </div>
@@ -139,9 +138,9 @@
       <div class="fila" style="gap:1.2em; align-items:flex-start; justify-content:center">
         <div class="pila" style="font-size:clamp(.9rem, 2.4vh, 1.15rem)">
           <span class="bloque misbloques definir">definir color <span class="entrada">r</span> <span class="entrada">g</span> <span class="entrada">b</span></span>
-          <span class="bloque avanzado">fijar pin <span class="valor">3</span> en <span class="entrada">r</span></span>
-          <span class="bloque avanzado">fijar pin <span class="valor">5</span> en <span class="entrada">g</span></span>
-          <span class="bloque avanzado">fijar pin <span class="valor">6</span> en <span class="entrada">b</span></span>
+          <span class="bloque avanzado">fijar pin <span class="valor">6</span> en <span class="bloque operadores"><span class="valor">255</span> − <span class="entrada">r</span></span></span>
+          <span class="bloque avanzado">fijar pin <span class="valor">5</span> en <span class="bloque operadores"><span class="valor">255</span> − <span class="entrada">g</span></span></span>
+          <span class="bloque avanzado">fijar pin <span class="valor">3</span> en <span class="bloque operadores"><span class="valor">255</span> − <span class="entrada">b</span></span></span>
         </div>
         <div class="pila" style="font-size:clamp(.9rem, 2.4vh, 1.15rem)">
           <span class="bloque avanzado">comentario <span class="valor">naranjo</span></span>
@@ -154,13 +153,14 @@
         <span class="anat"><strong>color 255 120 0</strong><br>un solo bloque<br>por color</span>
         <span class="anat"><strong>comentario</strong><br>una etiqueta para ti:<br>el Arduino no la lee</span>
       </div>
+      <p class="nota" style="max-width:30em; margin:0">¿Por qué <strong>255 − r</strong>? Tu LED se prende <strong>al revés</strong>: con 0 brilla a todo y con 255 se apaga. La resta lo da vuelta, y afuera del bloque piensas al derecho.<button class="sm" data-sm="anodo">?</button></p>
     </div>
     <aside class="tuto-panel">
       <p class="tuto-num">Cómo se crea</p>
       <ol class="tuto-texto" style="padding-left:1.2em; margin:0; display:grid; gap:.3em">
         <li>En <strong>Mis bloques</strong>, toca «Crear un bloque».</li>
         <li>Nombre: <strong>color</strong>. Agrega tres entradas de número: <strong>r</strong>, <strong>g</strong> y <strong>b</strong>.</li>
-        <li>Bajo «definir color» van los tres «fijar pin». Arrastra <strong>r</strong>, <strong>g</strong> y <strong>b</strong> desde el sombrero a sus huecos.</li>
+        <li>Bajo «definir color», tres «fijar pin» con <strong>255 −</strong> (Operadores). Arrastra <strong>r</strong>, <strong>g</strong> y <strong>b</strong> desde el sombrero.</li>
       </ol>
       <button class="boton secundario" data-sm="mezcla" style="font-size:.9rem; padding:.4em .9em">📋 Las seis recetas</button>
       <p class="nota">En C++, tu bloque es una <strong>función</strong>.<button class="sm" data-sm="funcion">?</button></p>
@@ -174,51 +174,61 @@
   <h2>Los cuatro cables del LED RGB 🔌</h2>
   <div class="tuto">
     <div class="proto-caja">
-      <svg viewBox="0 0 620 300" aria-label="Módulo LED RGB conectado al Arduino con cuatro cables">
+      <svg viewBox="0 0 620 300" aria-label="LED RGB de ánodo común conectado al Arduino: tres colores con su resistencia y la patita larga a 5V">
         <rect x="20" y="30" width="150" height="240" rx="12" fill="#00878F"/>
         <text x="95" y="60" text-anchor="middle" fill="#fff" font-family="monospace" font-size="15">ARDUINO</text>
         <rect x="32" y="78" width="126" height="26" rx="4" fill="#143642"/>
-        <text x="95" y="96" text-anchor="middle" fill="#fff" font-family="monospace" font-size="13">pin 3 ~</text>
+        <text x="95" y="96" text-anchor="middle" fill="#fff" font-family="monospace" font-size="13">pin 6 ~</text>
         <rect x="32" y="126" width="126" height="26" rx="4" fill="#143642"/>
         <text x="95" y="144" text-anchor="middle" fill="#fff" font-family="monospace" font-size="13">pin 5 ~</text>
         <rect x="32" y="174" width="126" height="26" rx="4" fill="#143642"/>
-        <text x="95" y="192" text-anchor="middle" fill="#fff" font-family="monospace" font-size="13">pin 6 ~</text>
+        <text x="95" y="192" text-anchor="middle" fill="#fff" font-family="monospace" font-size="13">pin 3 ~</text>
         <rect x="32" y="222" width="126" height="26" rx="4" fill="#143642"/>
-        <text x="95" y="240" text-anchor="middle" fill="#fff" font-family="monospace" font-size="13">GND</text>
+        <text x="95" y="240" text-anchor="middle" fill="#fff" font-family="monospace" font-size="13">5V</text>
 
-        <text x="495" y="44" text-anchor="middle" font-size="14" fill="#5E7480" font-family="Nunito, sans-serif" font-weight="700">módulo LED RGB</text>
-        <rect x="430" y="56" width="130" height="218" rx="10" fill="#1B2A4A"/>
-        <g stroke="#90A4AE" stroke-width="5" stroke-linecap="round">
-          <line x1="404" y1="91" x2="430" y2="91"/>
-          <line x1="404" y1="139" x2="430" y2="139"/>
-          <line x1="404" y1="187" x2="430" y2="187"/>
-          <line x1="404" y1="235" x2="430" y2="235"/>
+        <text x="530" y="44" text-anchor="middle" font-size="14" fill="#5E7480" font-family="Nunito, sans-serif" font-weight="700">LED RGB</text>
+        <g stroke="#90A4AE" stroke-width="5" stroke-linecap="round" fill="none">
+          <polyline points="404,91 470,91 512,150"/>
+          <polyline points="404,139 470,139 512,158"/>
+          <polyline points="404,187 470,187 512,166"/>
+          <polyline points="404,235 470,235 512,174"/>
         </g>
-        <g font-size="13" fill="#BBDEFB" font-family="monospace" font-weight="700">
-          <text x="440" y="96">R</text>
-          <text x="440" y="144">G</text>
-          <text x="440" y="192">B</text>
-          <text x="440" y="240">−</text>
+        <g font-size="13" fill="#5E7480" font-family="monospace" font-weight="700">
+          <text x="440" y="84">R</text>
+          <text x="440" y="132">G</text>
+          <text x="440" y="180">B</text>
+          <text x="440" y="228" fill="#E84855">+ larga</text>
         </g>
-        <circle cx="510" cy="160" r="36" fill="#ECEFF1" stroke="#90A4AE" stroke-width="4"/>
-        <circle cx="498" cy="150" r="8" fill="#E84855"/>
-        <circle cx="522" cy="150" r="8" fill="#46B450"/>
-        <circle cx="510" cy="172" r="8" fill="#4C7CFF"/>
+        <path d="M512 128 V 196 H 538 A 34 34 0 0 0 538 128 Z" fill="#ECEFF1" stroke="#90A4AE" stroke-width="4"/>
+        <circle cx="536" cy="150" r="7" fill="#E84855"/>
+        <circle cx="554" cy="162" r="7" fill="#46B450"/>
+        <circle cx="536" cy="174" r="7" fill="#4C7CFF"/>
 
         <path class="cable-w" d="M164 91 L 400 91" stroke="#FB8C00"/>
         <path class="cable-w" d="M164 139 L 400 139" stroke="#46B450"/>
         <path class="cable-w" d="M164 187 L 400 187" stroke="#4C7CFF"/>
-        <path class="cable-w" d="M164 235 L 400 235" stroke="#37474F"/>
+        <path class="cable-w" d="M164 235 L 400 235" stroke="#E84855"/>
+        <g stroke="#8D6E63" stroke-width="2">
+          <rect x="262" y="81" width="40" height="20" rx="5" fill="#D7B899"/>
+          <rect x="262" y="129" width="40" height="20" rx="5" fill="#D7B899"/>
+          <rect x="262" y="177" width="40" height="20" rx="5" fill="#D7B899"/>
+        </g>
+        <g>
+          <rect x="270" y="81" width="5" height="20" fill="#D32F2F"/><rect x="279" y="81" width="5" height="20" fill="#D32F2F"/><rect x="288" y="81" width="5" height="20" fill="#795548"/>
+          <rect x="270" y="129" width="5" height="20" fill="#D32F2F"/><rect x="279" y="129" width="5" height="20" fill="#D32F2F"/><rect x="288" y="129" width="5" height="20" fill="#795548"/>
+          <rect x="270" y="177" width="5" height="20" fill="#D32F2F"/><rect x="279" y="177" width="5" height="20" fill="#D32F2F"/><rect x="288" y="177" width="5" height="20" fill="#795548"/>
+        </g>
+        <text x="282" y="118" text-anchor="middle" font-size="12" fill="#5E7480" font-family="Nunito, sans-serif">220 Ω</text>
       </svg>
     </div>
     <aside class="tuto-panel">
       <p class="tuto-num">Regla de colores</p>
       <p class="tuto-texto">
-      🟠 <strong>R → pin 3</strong>: cuánto rojo.<br>
+      🟠 <strong>R → pin 6</strong>: cuánto rojo.<br>
       🟢 <strong>G → pin 5</strong>: cuánto verde.<br>
-      🔵 <strong>B → pin 6</strong>: cuánto azul.<br>
-      ⚫ <strong>− → GND</strong>: el suelo.</p>
-      <p class="nota">Los tres pines tienen <strong>~</strong>: son de los que saben hacer «medio encendido». Sin 5V: la energía sale por cada pin de color.</p>
+      🔵 <strong>B → pin 3</strong>: cuánto azul.<br>
+      🔴 <strong>+ → 5V</strong>: la patita larga.</p>
+      <p class="nota">Cada color, con su <strong>220 Ω</strong>. La energía entra por la patita larga y sale por el pin de cada color: los tres tienen <strong>~</strong>, saben hacer «medio encendido».</p>
     </aside>
   </div>
 </section>
@@ -229,18 +239,18 @@
   <h2>La respiración 🫁</h2>
   <div class="tuto">
     <div class="bloques-caja" style="flex:none; max-height:54vh">
-      <img class="bloques" src="../recursos/img/bloques/sesion-09/respiracion.png" alt="Bloques de la respiración: al iniciar; por siempre: comentario inhala: sube el brillo; contar brillo de 0 a 255: fijar pin 6 en brillo, esperar 0.005 segundos; comentario exhala: lo baja; contar brillo de 0 a 255: fijar pin 6 en 255 menos brillo, esperar 0.005 segundos">
+      <img class="bloques" src="../recursos/img/bloques/sesion-09/respiracion.png" alt="Bloques de la respiración: al iniciar; por siempre: comentario inhala: sube el brillo; contar brillo de 0 a 255: color brillo 0 0, esperar 0.005 segundos; comentario exhala: lo baja; contar brillo de 0 a 255: color 255 menos brillo 0 0, esperar 0.005 segundos. Al lado, definir color r g b">
     </div>
     <aside class="tuto-panel" style="align-items:center">
       <p class="tuto-num">Pruébala tú</p>
       <p class="tuto-texto" id="resp-txt" style="min-height:3em">«contar» (el de la sesión 6) sube el brillo de 0 a 255 pasito a pasito… y otro «contar» lo baja. El LED parece respirar.</p>
       <span class="pwm-led" id="resp-led"></span>
-      <p class="lectura">pin 3 = <strong id="resp-val">0</strong></p>
+      <p class="lectura">rojo = <strong id="resp-val">0</strong></p>
       <button class="boton" id="resp-btn">▶ Respirar</button>
       <button class="sm-grande" data-sm="sesion-09/respiracion">👀 Ver el código</button>
     </aside>
   </div>
-  <p class="nota">«contar» solo sabe subir: para bajar, el pin va en <span class="bloque operadores"><span class="valor">255</span> − <span class="bloque variables">brillo</span></span>. ¡El truco del servo de la sesión 6! Proyecto: <code>sketches/sesion-09/respiracion/respiracion.bloquino</code></p>
+  <p class="nota">«contar» solo sabe subir: para bajar, el rojo va en <span class="bloque operadores"><span class="valor">255</span> − <span class="bloque variables">brillo</span></span>. ¡El truco del servo de la sesión 6! Proyecto: <code>sketches/sesion-09/respiracion/respiracion.bloquino</code></p>
 </section>
 
 <!-- 9 · Práctica: la rueda de colores -->
@@ -325,8 +335,8 @@
       <div class="quiz-cara quiz-atras">Fijando el pin en 255 − brillo: cuando brillo sube, eso baja 🔽</div>
     </div></div>
     <div class="quiz" tabindex="0"><div class="quiz-caras">
-      <div class="quiz-cara quiz-frente">¿Qué números acepta «fijar pin … en …»?</div>
-      <div class="quiz-cara quiz-atras">Del 0 (apagado) al 255 (a todo) 🔢</div>
+      <div class="quiz-cara quiz-frente">¿Por qué tu bloque «color» hace 255 − r?</div>
+      <div class="quiz-cara quiz-atras">Porque tu LED es de ánodo común y se prende al revés: la resta lo da vuelta 🙃</div>
     </div></div>
   </div>
 </section>
@@ -460,7 +470,7 @@
         b += dir * 3;
         if (b >= 255) { b = 255; dir = -1; }
         if (b <= 0 && dir === -1) { b = 0; dir = 1; vueltas++; }
-        $("resp-txt").textContent = dir === 1 ? "Inhala: el primer «contar» sube el brillo… 🫁" : "Exhala: el segundo «contar» fija el pin en 255 − brillo, que va bajando… 😮‍💨";
+        $("resp-txt").textContent = dir === 1 ? "Inhala: el primer «contar» sube el brillo… 🫁" : "Exhala: el segundo «contar» le pasa al rojo 255 − brillo, que va bajando… 😮‍💨";
         $("resp-val").textContent = b;
         pintarLed($("resp-led"), 232, 72, 85, b / 255);
         if (vueltas === 2) {
@@ -493,33 +503,48 @@
     q.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { voltear(); e.preventDefault(); } });
   });
 
-  /* módulo LED RGB parado en la protoboard: patitas R G B − en cuatro
-     columnas vecinas (colX = centro de la primera), puntas en la fila filaY */
-  function moduloRgbSVG(colX, filaY) {
-    const cx = colX + 39, top = filaY - 98;
-    let s = `<g stroke='#B0BEC5' stroke-width='5' stroke-linecap='round'>`;
-    for (let k = 0; k < 4; k++) s += `<line x1='${colX + 26 * k}' y1='${filaY - 18}' x2='${colX + 26 * k}' y2='${filaY}'/>`;
-    s += `</g><rect x='${colX - 12}' y='${top}' width='102' height='80' rx='6' fill='#1B2A4A'/>`;
-    s += `<circle cx='${cx}' cy='${top + 30}' r='17' fill='#ECEFF1' stroke='#90A4AE' stroke-width='3'/>`;
-    s += `<circle cx='${cx - 6}' cy='${top + 25}' r='4' fill='#E84855'/><circle cx='${cx + 6}' cy='${top + 25}' r='4' fill='#46B450'/><circle cx='${cx}' cy='${top + 36}' r='4' fill='#4C7CFF'/>`;
-    ["R", "G", "B", "−"].forEach((t, k) => s += `<text x='${colX + 26 * k}' y='${top + 72}' text-anchor='middle' font-size='11' font-weight='700' fill='#BBDEFB' font-family='monospace'>${t}</text>`);
-    return s;
+  /* LED RGB de ánodo común parado arriba del canal, como en Bloquino, en el
+     tablero de (150, 90): patitas R + G B en las columnas 1 a 4 con las puntas
+     en la fila c; cada color con su 220 Ω cruzando el canal (filas e → f) y
+     la + con un cablecito rojo al otro lado y otro al riel + de abajo. */
+  const cable = (d, color) => `<path d='${d}' fill='none' stroke='${color}' stroke-width='6' stroke-linecap='round'/>`;
+  function ledRgbSVG() {
+    const x = 204, cx = x + 39;
+    let s = `<g stroke='#9aa7ad' stroke-width='4' stroke-linecap='round' fill='none'>`;
+    for (let k = 0; k < 4; k++) s += `<polyline points='${cx - 12 + 8 * k},180 ${x + 26 * k},200 ${x + 26 * k},210'/>`;
+    s += `</g><path d='M${cx - 16} 180 V 160 A 16 16 0 0 1 ${cx + 16} 160 V 180 Z' fill='#ECEFF1' stroke='#90A4AE' stroke-width='3'/>`;
+    s += `<circle cx='${cx - 6}' cy='160' r='4' fill='#E84855'/><circle cx='${cx + 6}' cy='160' r='4' fill='#46B450'/><circle cx='${cx}' cy='171' r='4' fill='#4C7CFF'/>`;
+    ["R", "+", "G", "B"].forEach((t, k) => s += `<text x='${x + 26 * k + 13}' y='207' text-anchor='middle' font-size='11' font-weight='700' fill='${k === 1 ? "#E84855" : "#5E7480"}' font-family='monospace'>${t}</text>`);
+    for (const k of [0, 2, 3]) {
+      const rx = x + 26 * k;
+      s += `<line x1='${rx}' y1='242' x2='${rx}' y2='284' stroke='#9aa7ad' stroke-width='4'/><rect x='${rx - 6}' y='249' width='12' height='28' rx='3' fill='#D7B899' stroke='#8D6E63' stroke-width='2'/>`
+        + `<rect x='${rx - 6}' y='254' width='12' height='4' fill='#D32F2F'/><rect x='${rx - 6}' y='261' width='12' height='4' fill='#D32F2F'/><rect x='${rx - 6}' y='268' width='12' height='4' fill='#795548'/>`;
+    }
+    return s + cable(`M${x + 26} 242 L ${x + 26} 284`, "#E84855") + cable(`M${x + 26} 348 L ${x + 26} 406`, "#E84855");
   }
-  const RGB_CABLES = (y3, y5, y6, yGnd) =>
-    `<path d='M128 ${y3} C 165 300, 185 314, 200 316' fill='none' stroke='#FB8C00' stroke-width='6' stroke-linecap='round'/>`
-    + `<path d='M128 ${y5} C 170 320, 200 332, 226 332' fill='none' stroke='#46B450' stroke-width='6' stroke-linecap='round'/>`
-    + `<path d='M128 ${y6} C 180 345, 220 348, 252 348' fill='none' stroke='#4C7CFF' stroke-width='6' stroke-linecap='round'/>`
-    + `<path d='M280 316 C 296 350, 296 372, 282 388' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>`
-    + `<path d='M128 ${yGnd} C 150 375, 162 386, 175 388' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>`;
+  /* Cables del Arduino al LED RGB (a la mitad de abajo, filas g, h, i), del
+     5V al riel + de arriba, de ahí por el costado al de abajo, y del GND al
+     riel − de abajo. */
+  const RGB_CABLES = (y5v, y6, y5, y3, yGnd) =>
+    cable(`M128 ${y6} L 174 ${y6} Q 184 ${y6} 184 ${y6 + 10} L 184 290 Q 184 300 194 300 L 204 300`, "#FB8C00")
+    + cable(`M128 ${y5} L 162 ${y5} Q 172 ${y5} 172 ${y5 + 10} L 172 306 Q 172 316 182 316 L 256 316`, "#46B450")
+    + cable(`M128 ${y3} L 150 ${y3} Q 160 ${y3} 160 ${y3 + 10} L 160 322 Q 160 332 170 332 L 282 332`, "#4C7CFF")
+    + cable(`M128 ${y5v} C 150 ${y5v}, 160 116, 178 116`, "#E84855")
+    + cable("M568 116 C 640 116, 640 406, 568 406", "#E84855")
+    + cable(`M128 ${yGnd} L 136 ${yGnd} Q 146 ${yGnd} 146 ${yGnd + 10} L 146 378 Q 146 388 156 388 L 178 388`, "#37474F");
 
   saberMas({
     "reto-sol": {
       t: "Las soluciones: la lámpara 🌈",
-      d: "<p class='aviso'>🔒 <strong>Recuerda hacer el desafío primero.</strong> Pelear un rato con el problema es donde más se aprende: esto es para comparar tu solución… o para destrabarte si llevas mucho rato. 💪</p><p>En las tres, cada color es un bloque «color» (el que creaste en la práctica), y el arcoíris usa el bloque «rueda» de la práctica 2.</p><p><strong>🫁 Nivel 1: respira en tu color.</strong> La receta del morado es (150, 0, 255). El azul sigue al <strong>brillo</strong>; el rojo llega solo hasta 150, así que «asignar» lo traduce de 0-255 a 0-150. El verde queda en 0.</p><img class='bloques ancha' src='../recursos/img/bloques/sesion-09/respira_color.png' alt='Bloques de respira_color: por siempre, contar brillo de 0 a 255 con color (asignar brillo del rango 0-255 al rango 0-150) (0) (brillo), esperar 0.005 segundos; luego lo mismo con 255 menos brillo. Al lado, definir color r g b con fijar pin 6, 5 y 3'><button class='sm-grande' data-sm='sesion-09/respira_color'>👀 Ver el código</button><p><strong>🎉 Nivel 2: modo fiesta.</strong> Cada entrada de «color» con su propio número al azar entre 0 y 255, y medio segundo de espera.</p><img class='bloques' src='../recursos/img/bloques/sesion-09/fiesta.png' alt='Bloques de fiesta: por siempre, color con un número al azar entre 0 y 255 en cada entrada, esperar 0.5 segundos. Al lado, definir color r g b'><button class='sm-grande' data-sm='sesion-09/fiesta'>👀 Ver el código</button><p><strong>🌈 Nivel experto: arcoíris automático.</strong> El bloque «rueda» de la práctica 2, pero ya no recibe la perilla: recibe la variable <strong>giro</strong>. Después de la rueda, «cambiar giro por 1» la sube, y un «si giro &gt; 255» la devuelve a 0 para dar otra vuelta.</p><img class='bloques ancha' src='../recursos/img/bloques/sesion-09/arcoiris.png' alt='Bloques del arcoíris: por siempre, rueda con giro, cambiar giro por 1, si giro mayor que 255 fijar giro en 0, esperar 0.02 segundos. Al lado, definir rueda pos y definir color r g b'><button class='sm-grande' data-sm='sesion-09/arcoiris'>👀 Ver el código</button><p class='nota'>Proyectos: <code>sketches/sesion-09/respira_color</code>, <code>fiesta</code> y <code>arcoiris</code> (cada uno con su <code>.bloquino</code>).</p>"
+      d: "<p class='aviso'>🔒 <strong>Recuerda hacer el desafío primero.</strong> Pelear un rato con el problema es donde más se aprende: esto es para comparar tu solución… o para destrabarte si llevas mucho rato. 💪</p><p>En las tres, cada color es un bloque «color» (el que creaste en la práctica), y el arcoíris usa el bloque «rueda» de la práctica 2.</p><p><strong>🫁 Nivel 1: respira en tu color.</strong> La receta del morado es (150, 0, 255). El azul sigue al <strong>brillo</strong>; el rojo llega solo hasta 150, así que «asignar» lo traduce de 0-255 a 0-150. El verde queda en 0.</p><img class='bloques ancha' src='../recursos/img/bloques/sesion-09/respira_color.png' alt='Bloques de respira_color: por siempre, contar brillo de 0 a 255 con color (asignar brillo del rango 0-255 al rango 0-150) (0) (brillo), esperar 0.005 segundos; luego lo mismo con 255 menos brillo. Al lado, definir color r g b con fijar pin 6, 5 y 3 en 255 menos r, g y b'><button class='sm-grande' data-sm='sesion-09/respira_color'>👀 Ver el código</button><p><strong>🎉 Nivel 2: modo fiesta.</strong> Cada entrada de «color» con su propio número al azar entre 0 y 255, y medio segundo de espera.</p><img class='bloques' src='../recursos/img/bloques/sesion-09/fiesta.png' alt='Bloques de fiesta: por siempre, color con un número al azar entre 0 y 255 en cada entrada, esperar 0.5 segundos. Al lado, definir color r g b'><button class='sm-grande' data-sm='sesion-09/fiesta'>👀 Ver el código</button><p><strong>🌈 Nivel experto: arcoíris automático.</strong> El bloque «rueda» de la práctica 2, pero ya no recibe la perilla: recibe la variable <strong>giro</strong>. Después de la rueda, «cambiar giro por 1» la sube, y un «si giro &gt; 255» la devuelve a 0 para dar otra vuelta.</p><img class='bloques ancha' src='../recursos/img/bloques/sesion-09/arcoiris.png' alt='Bloques del arcoíris: por siempre, rueda con giro, cambiar giro por 1, si giro mayor que 255 fijar giro en 0, esperar 0.02 segundos. Al lado, definir rueda pos y definir color r g b'><button class='sm-grande' data-sm='sesion-09/arcoiris'>👀 Ver el código</button><p class='nota'>Proyectos: <code>sketches/sesion-09/respira_color</code>, <code>fiesta</code> y <code>arcoiris</code> (cada uno con su <code>.bloquino</code>).</p>"
     },
     mezcla: {
       t: "Las seis recetas 🎨",
-      d: "<p>Seis colores, uno detrás de otro: cada uno con su <strong>comentario</strong>, su bloque «color» y un segundo de espera. Son las mismas recetas de los botones de «La receta de cada color». Al lado, «definir color»: lo que hace el bloque.</p><img class='bloques' src='../recursos/img/bloques/sesion-09/mezcla.png' alt='Bloques de mezcla: por siempre, seis colores (naranjo, morado, celeste, rosado, amarillo y blanco), cada uno con un comentario, color con su receta y esperar 1 segundos. Al lado, definir color r g b con fijar pin 6, 5 y 3 en r, g y b'><p class='nota'>Proyecto: <code>sketches/sesion-09/mezcla/mezcla.bloquino</code></p><button class='sm-grande' data-sm='sesion-09/mezcla'>👀 Ver el código</button>"
+      d: "<p>Seis colores, uno detrás de otro: cada uno con su <strong>comentario</strong>, su bloque «color» y un segundo de espera. Son las mismas recetas de los botones de «La receta de cada color». Al lado, «definir color»: lo que hace el bloque.</p><img class='bloques' src='../recursos/img/bloques/sesion-09/mezcla.png' alt='Bloques de mezcla: por siempre, seis colores (naranjo, morado, celeste, rosado, amarillo y blanco), cada uno con un comentario, color con su receta y esperar 1 segundos. Al lado, definir color r g b con fijar pin 6, 5 y 3 en 255 menos r, g y b'><p class='nota'>Proyecto: <code>sketches/sesion-09/mezcla/mezcla.bloquino</code></p><button class='sm-grande' data-sm='sesion-09/mezcla'>👀 Ver el código</button>"
+    },
+    anodo: {
+      t: "¿Por qué al revés? El ánodo común 🙃",
+      d: "<p>Tu LED RGB es de <strong>ánodo común</strong>: sus tres LEDs chiquitos comparten la patita larga, la <strong>+</strong>, que va a <strong>5V</strong>. La energía baja de esos 5V hacia el pin de cada color, como el agua que cae.</p><p>Si el pin está en <strong>0</strong>, la caída es grande y el color brilla <strong>a todo</strong>. Si está en <strong>255</strong> (5V), los dos lados quedan a la misma altura: no cae nada y el color se <strong>apaga</strong>. ¡Al revés de un LED normal!</p><p>Por eso tu bloque «color» escribe <strong>255 − r</strong>: si pides 255, el pin recibe 0 y brilla a todo; si pides 0, recibe 255 y se apaga. Afuera del bloque piensas al derecho, y el bloque hace la vuelta por ti. ¡Para eso sirve tener tu propio bloque! 🧩</p><p class='nota'>Hay LEDs RGB de <strong>cátodo común</strong> (la patita larga a GND) que se prenden al derecho: con ellos el bloque llevaría r, g y b solos.</p>"
     },
     "rgb-ojos": {
       t: "¿Por qué justo rojo, verde y azul? 👀",
@@ -535,7 +560,7 @@
     },
     funcion: {
       t: "En C++: tu bloque es una función 🪄",
-      d: "<p>En C++, el texto que escriben los bloques, tu bloque «color» se llama <strong>función</strong>: un pedacito de programa con nombre propio. Lo que cuelga de «definir color» se escribe una sola vez…</p><pre class='codigo'>void color(float r, float g, float b) {\n  analogWrite(3, r);   // rojo\n  analogWrite(5, g);   // verde\n  analogWrite(6, b);   // azul\n}</pre><p>…y cada bloque «color 255 120 0» se escribe <code>color(255, 120, 0);</code> ¡y listo, naranjo! Lo que va entre paréntesis son sus <strong>ingredientes</strong>, las entradas r, g y b: cada vez que la llamas le pasas tres números y ella los usa adentro.</p><p><code>float</code> quiere decir «número»: el mismo tipo de las variables de los bloques.</p><p>Tus bloques ya viven dentro de funciones: lo de adentro de «por siempre» termina dentro de una función llamada <code>loop</code>, que <strong>el Arduino llama solo</strong>, una y otra vez.</p>"
+      d: "<p>En C++, el texto que escriben los bloques, tu bloque «color» se llama <strong>función</strong>: un pedacito de programa con nombre propio. Lo que cuelga de «definir color» se escribe una sola vez…</p><pre class='codigo'>void color(float r, float g, float b) {\n  analogWrite(6, 255 - r);   // rojo\n  analogWrite(5, 255 - g);   // verde\n  analogWrite(3, 255 - b);   // azul\n}</pre><p>…y cada bloque «color 255 120 0» se escribe <code>color(255, 120, 0);</code> ¡y listo, naranjo! Lo que va entre paréntesis son sus <strong>ingredientes</strong>, las entradas r, g y b: cada vez que la llamas le pasas tres números y ella los usa adentro.</p><p><code>float</code> quiere decir «número»: el mismo tipo de las variables de los bloques.</p><p>Tus bloques ya viven dentro de funciones: lo de adentro de «por siempre» termina dentro de una función llamada <code>loop</code>, que <strong>el Arduino llama solo</strong>, una y otra vez.</p>"
     },
     "rueda-como": {
       t: "¿Cómo elige el color la rueda? 🌈",
@@ -543,41 +568,39 @@
     },
     "rueda-circuito": {
       t: "La perilla y el LED RGB en la protoboard 🔧",
-      d: "<svg viewBox='0 0 640 470' style='width:100%' aria-label='Perilla y módulo LED RGB en la protoboard'>"
+      d: "<svg viewBox='0 0 640 470' style='width:100%' aria-label='Perilla y LED RGB de ánodo común en la protoboard'>"
         + arduinoSVG({ x: 6, y: 10, pads: ["A0", "5V", "pin 6", "pin 5", "pin 3", "GND"] }).svg
         + protoboardSVG({ x: 150, y: 90 })
         + "<text x='386' y='82' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif' font-weight='700'>la perilla</text>"
         + "<line x1='360' y1='194' x2='360' y2='164' stroke='#9aa7ad' stroke-width='4'/><line x1='386' y1='194' x2='386' y2='164' stroke='#9aa7ad' stroke-width='4'/><line x1='412' y1='194' x2='412' y2='164' stroke='#9aa7ad' stroke-width='4'/>"
         + "<rect x='344' y='100' width='84' height='66' rx='8' fill='#1565C0'/><circle cx='386' cy='126' r='21' fill='#ECEFF1' stroke='#90A4AE' stroke-width='3'/><rect x='383' y='107' width='6' height='15' rx='3' fill='#37474F'/>"
         + "<text x='360' y='161' text-anchor='middle' font-size='9' fill='#fff' font-family='monospace'>5V</text><text x='386' y='161' text-anchor='middle' font-size='9' fill='#fff' font-family='monospace'>A0</text><text x='412' y='161' text-anchor='middle' font-size='9' fill='#fff' font-family='monospace'>GND</text>"
-        + moduloRgbSVG(202, 300)
-        + "<path d='M128 62 C 240 64, 330 190, 386 208' fill='none' stroke='#4C7CFF' stroke-width='6' stroke-linecap='round'/>"
-        + "<path d='M128 110 C 220 112, 310 220, 360 224' fill='none' stroke='#E84855' stroke-width='6' stroke-linecap='round'/>"
-        + "<path d='M412 242 C 560 265, 620 350, 568 386' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>"
-        + RGB_CABLES(158, 206, 254, 302)
-        + "<text x='241' y='450' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif'>el módulo LED RGB</text>"
-        + "</svg><p>La perilla, igual que en la sesión 6: orillas a <strong>5V</strong> y <strong>GND</strong>, la del medio a <strong>A0</strong>. El módulo RGB se para con sus cuatro patitas en una fila: cada cable de color llega a la <strong>misma columna</strong> de su patita (R → pin 6, G → pin 5, B → pin 3), y la patita <strong>−</strong> baja con un cablecito al <strong>riel −</strong>, donde se juntan todos los GND.</p>"
+        + ledRgbSVG()
+        + cable("M128 62 C 320 62, 300 226, 386 226", "#AB47BC")
+        + cable("M360 242 L 360 406", "#E84855") + cable("M412 242 L 412 388", "#37474F")
+        + RGB_CABLES(110, 158, 206, 254, 302)
+        + "<text x='243' y='450' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif'>el LED RGB</text>"
+        + "</svg><p>La perilla, igual que en la sesión 6: orillas al <strong>riel +</strong> y al <strong>riel −</strong>, la del medio a <strong>A0</strong>. El LED RGB se para arriba del canal con sus cuatro patitas en una fila. Cada color cruza el canal por su <strong>220 Ω</strong>, y al otro lado llega su cable (R → pin 6, G → pin 5, B → pin 3). La patita larga (<strong>+</strong>) cruza con un cablecito rojo y baja al <strong>riel +</strong>; el 5V llega al riel de arriba y da la vuelta por el costado.</p>"
     },
     "rueda-codigo": {
       t: "El programa completo 📋",
-      d: "<p>Arriba, un solo bloque: <strong>rueda</strong>, con la perilla traducida de 0 a 255 en su entrada. Abajo, «definir rueda (pos)»: tres tramos, cada uno con su comentario y su bloque «color». Al lado va «definir color», el de la slide «Tu propio bloque». ¡Un bloque tuyo puede usar otro bloque tuyo!</p><img class='bloques ancha' src='../recursos/img/bloques/sesion-09/rueda_perilla.png' alt='Bloques de rueda_perilla: por siempre, rueda con asignar leer pin analógico A0 del rango 0-1023 al rango 0-255. Abajo, definir rueda pos: si pos menor que 85, rojo a verde; si no, si pos menor que 170, verde a azul; si no, azul a rojo; cada tramo con su bloque color. Al lado, definir color r g b con fijar pin 6, 5 y 3'><p class='nota'>Proyecto: <code>sketches/sesion-09/rueda_perilla/rueda_perilla.bloquino</code></p><button class='sm-grande' data-sm='sesion-09/rueda_perilla'>👀 Ver el código</button>"
+      d: "<p>Arriba, un solo bloque: <strong>rueda</strong>, con la perilla traducida de 0 a 255 en su entrada. Abajo, «definir rueda (pos)»: tres tramos, cada uno con su comentario y su bloque «color». Al lado va «definir color», el de la slide «Tu propio bloque». ¡Un bloque tuyo puede usar otro bloque tuyo!</p><img class='bloques ancha' src='../recursos/img/bloques/sesion-09/rueda_perilla.png' alt='Bloques de rueda_perilla: por siempre, rueda con asignar leer pin analógico A0 del rango 0-1023 al rango 0-255. Abajo, definir rueda pos: si pos menor que 85, rojo a verde; si no, si pos menor que 170, verde a azul; si no, azul a rojo; cada tramo con su bloque color. Al lado, definir color r g b con fijar pin 6, 5 y 3 en 255 menos r, g y b'><p class='nota'>Proyecto: <code>sketches/sesion-09/rueda_perilla/rueda_perilla.bloquino</code></p><button class='sm-grande' data-sm='sesion-09/rueda_perilla'>👀 Ver el código</button>"
     },
     "p-circuito": {
       t: "Así se ve armado completo 🔧",
-      d: "<svg viewBox='0 0 640 470' style='width:100%' aria-label='HC-SR04 y módulo LED RGB montados en la protoboard'>"
+      d: "<svg viewBox='0 0 640 470' style='width:100%' aria-label='HC-SR04 y LED RGB de ánodo común montados en la protoboard'>"
         + arduinoSVG({ x: 6, y: 10, pads: ["pin 10", "5V", "pin 9", "pin 6", "pin 5", "pin 3", "GND"] }).svg
         + protoboardSVG({ x: 150, y: 90 })
         + "<g stroke='#B0BEC5' stroke-width='5' stroke-linecap='round'><line x1='386' y1='142' x2='386' y2='178'/><line x1='412' y1='142' x2='412' y2='178'/><line x1='438' y1='142' x2='438' y2='178'/><line x1='464' y1='142' x2='464' y2='178'/></g>"
         + "<rect x='360' y='58' width='170' height='84' rx='8' fill='#1B2A4A'/><circle cx='402' cy='94' r='24' fill='#9FB4C8' stroke='#5E7480' stroke-width='4'/><circle cx='488' cy='94' r='24' fill='#9FB4C8' stroke='#5E7480' stroke-width='4'/><text x='445' y='98' text-anchor='middle' font-size='11' fill='#BBD3E6' font-family='monospace'>HC-SR04</text>"
         + "<text x='386' y='136' text-anchor='middle' font-size='9' fill='#9FB4C8' font-family='monospace'>VCC</text><text x='412' y='136' text-anchor='middle' font-size='9' fill='#9FB4C8' font-family='monospace'>TRIG</text><text x='438' y='136' text-anchor='middle' font-size='9' fill='#9FB4C8' font-family='monospace'>ECHO</text><text x='464' y='136' text-anchor='middle' font-size='9' fill='#9FB4C8' font-family='monospace'>GND</text>"
-        + moduloRgbSVG(202, 300)
-        + "<path d='M128 62 C 250 60, 340 140, 412 191' fill='none' stroke='#AB47BC' stroke-width='6' stroke-linecap='round'/>"
-        + "<path d='M128 110 C 240 122, 330 200, 384 207' fill='none' stroke='#E84855' stroke-width='6' stroke-linecap='round'/>"
-        + "<path d='M128 158 C 280 170, 380 220, 436 224' fill='none' stroke='#F5B301' stroke-width='6' stroke-linecap='round'/>"
-        + "<path d='M464 196 C 570 220, 618 310, 572 386' fill='none' stroke='#37474F' stroke-width='6' stroke-linecap='round'/>"
-        + RGB_CABLES(206, 254, 302, 350)
-        + "<text x='241' y='450' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif'>el módulo LED RGB</text><text x='445' y='450' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif'>el murciélago, parado en la protoboard</text>"
-        + "</svg><p>El murciélago igual que en la sesión 7: parado con sus 4 patitas en una fila, cables a la <strong>misma columna</strong> de cada una (VCC → 5V, TRIG → pin 10, ECHO → pin 9). El módulo RGB abajo, también parado: R → pin 6, G → pin 5, B → pin 3. Y todos los GND se juntan en el <strong>riel −</strong>: el del sensor, el − del módulo y el cable que vuelve al Arduino.</p>"
+        + ledRgbSVG()
+        + cable("M128 62 C 330 62, 340 210, 412 210", "#AB47BC")
+        + cable("M128 158 L 186 158 Q 196 158 196 168 L 196 216 Q 196 226 206 226 L 438 226", "#F5B301")
+        + cable("M386 242 L 386 406", "#E84855") + cable("M464 242 L 464 388", "#37474F")
+        + RGB_CABLES(110, 206, 254, 302, 350)
+        + "<text x='243' y='450' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif'>el LED RGB</text><text x='445' y='450' text-anchor='middle' font-size='13' fill='#5E7480' font-family='Nunito, sans-serif'>el murciélago, parado en la protoboard</text>"
+        + "</svg><p>El murciélago igual que en la sesión 7: parado con sus 4 patitas en una fila, cables a la <strong>misma columna</strong> de cada una (VCC → 5V, TRIG → pin 10, ECHO → pin 9). VCC y GND bajan a los rieles. El LED RGB a la izquierda, igual que en la rueda: R → pin 6, G → pin 5, B → pin 3, cada uno con su 220 Ω, y la patita larga al <strong>riel +</strong>.</p>"
     },
     "p-codigo": {
       t: "El programa completo 📋",

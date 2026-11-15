@@ -56,7 +56,7 @@ Fuente: https://www.mercadolibre.cl/kit-de-inicio-completo-y-avanzado-compatible
 | Acelerómetro y giroscopio MPU6050 | 1 | No sale en la foto, pero viene en el kit. I2C |
 | Motor DC pequeño | 1 | No sale en la foto, pero viene en el kit. Necesita transistor o driver, no va directo al pin |
 | DHT11 (temperatura y humedad) en placa | 1 | El del curso, sesión 8 |
-| Módulo LED RGB (KY-016) | 1 | Sesión 9 |
+| LED RGB de ánodo común | 1 | Sesión 9. LED suelto (no el módulo KY-016): patita larga a 5V y cada color con su 220 Ω; se prende al revés |
 | Sensor de sonido con micrófono (KY-038) | 1 | Placa roja con potenciómetro de ajuste |
 | Sensor de nivel de agua (placa roja con pistas) | 1 | |
 | Joystick analógico (2 ejes + botón) | 1 | |

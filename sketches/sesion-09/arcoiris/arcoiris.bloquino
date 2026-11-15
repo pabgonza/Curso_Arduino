@@ -1,7 +1,7 @@
 {
   "format": "velxio-project",
   "version": 1,
-  "exportedAt": "2026-11-15T17:55:38.643Z",
+  "exportedAt": "2026-11-15T18:21:45.877Z",
   "name": "arcoiris",
   "boards": [
     {
@@ -19,35 +19,36 @@
     "group-arduino-uno": [
       {
         "name": "sketch.ino",
-        "content": "// Generado desde bloques\nfloat giro = 0;\nfloat tramo = 0;\n\nvoid color(float r, float g, float b) {\n  analogWrite(6, r);\n  analogWrite(5, g);\n  analogWrite(3, b);\n}\n\nvoid rueda(float pos) {\n  if (pos < 85) {\n    // rojo → verde\n    color(255 - pos * 3, pos * 3, 0);\n  } else {\n    if (pos < 170) {\n      // verde → azul\n      tramo = pos - 85;\n      color(0, 255 - tramo * 3, tramo * 3);\n    } else {\n      // azul → rojo\n      tramo = pos - 170;\n      color(tramo * 3, 0, 255 - tramo * 3);\n    }\n  }\n}\n\nvoid setup() {\n  pinMode(6, OUTPUT);\n  pinMode(5, OUTPUT);\n  pinMode(3, OUTPUT);\n}\n\nvoid loop() {\n  rueda(giro);\n  giro += 1;\n  if (giro > 255) {\n    giro = 0;\n  }\n  delay(20);\n}\n"
+        "content": "// Generado desde bloques\nfloat giro = 0;\nfloat tramo = 0;\n\nvoid color(float r, float g, float b) {\n  analogWrite(6, 255 - r);\n  analogWrite(5, 255 - g);\n  analogWrite(3, 255 - b);\n}\n\nvoid rueda(float pos) {\n  if (pos < 85) {\n    // rojo → verde\n    color(255 - pos * 3, pos * 3, 0);\n  } else {\n    if (pos < 170) {\n      // verde → azul\n      tramo = pos - 85;\n      color(0, 255 - tramo * 3, tramo * 3);\n    } else {\n      // azul → rojo\n      tramo = pos - 170;\n      color(tramo * 3, 0, 255 - tramo * 3);\n    }\n  }\n}\n\nvoid setup() {\n  pinMode(6, OUTPUT);\n  pinMode(5, OUTPUT);\n  pinMode(3, OUTPUT);\n}\n\nvoid loop() {\n  rueda(giro);\n  giro += 1;\n  if (giro > 255) {\n    giro = 0;\n  }\n  delay(20);\n}\n"
       },
       {
         "name": "bloques.json",
-        "content": "{\"blocks\":{\"languageVersion\":0,\"blocks\":[{\"type\":\"ab_al_iniciar\",\"id\":\"_EKHf:/1{!dcB5ZF`(23\",\"x\":0,\"y\":0,\"next\":{\"block\":{\"type\":\"ab_por_siempre\",\"id\":\"fSXwciuP2l66,eZS6y(*\",\"inputs\":{\"DO\":{\"block\":{\"type\":\"ab_mi_bloque\",\"id\":\"?+oi-Nh?lwGs!pqUUcx`\",\"extraState\":{\"definicion\":\"rueda\",\"partes\":[{\"tipo\":\"nombre\",\"texto\":\"rueda\",\"id\":\"n\"},{\"tipo\":\"numero\",\"texto\":\"pos\",\"id\":\"pos\"}]},\"inputs\":{\"pos\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"0op^I#Ng1zVR.:28qB5U\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"R.JJeqphx]_9E2$b*2y]\",\"fields\":{\"VAR\":{\"id\":\"g\"}}}}},\"next\":{\"block\":{\"type\":\"math_change\",\"id\":\"c?x`;*(2{HR137,q*5z$\",\"fields\":{\"VAR\":{\"id\":\"g\"}},\"inputs\":{\"DELTA\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"77iA?+`mN{m7h1:WEML-\",\"fields\":{\"NUM\":1}}}},\"next\":{\"block\":{\"type\":\"ab_si\",\"id\":\"NZRu:o,+gu[bl6$ZQ#Lr\",\"inputs\":{\"COND\":{\"block\":{\"type\":\"ab_comparar\",\"id\":\"~diJ$-)-=_Xa+W!dMrSK\",\"fields\":{\"OP\":\">\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"csrG|VWp36bK~_Mtd}ks\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"b{uYc3U`4HE1DAT*}#|y\",\"fields\":{\"VAR\":{\"id\":\"g\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"6p?P(X6q=siHU(Cx2I#,\",\"fields\":{\"NUM\":255}}}}}},\"DO\":{\"block\":{\"type\":\"variables_set\",\"id\":\"*A,4#%][8Qi3XPrrBgm`\",\"fields\":{\"VAR\":{\"id\":\"g\"}},\"inputs\":{\"VALUE\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"[c.pZ#.tWr,zREmG~mNh\",\"fields\":{\"NUM\":0}}}}}}},\"next\":{\"block\":{\"type\":\"ab_esperar\",\"id\":\"[wN{wKNHo:Q!dgmy)!J)\",\"inputs\":{\"S\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"k8tQ:uKfFx=,_-`k+P{K\",\"fields\":{\"NUM\":0.02}}}}}}}}}}}}}}}},{\"type\":\"ab_definir\",\"id\":\"|Gh_T{kvGh^2Uqw|)Y!@\",\"x\":357,\"y\":0,\"extraState\":{\"id\":\"rueda\",\"partes\":[{\"tipo\":\"nombre\",\"texto\":\"rueda\",\"id\":\"n\"},{\"tipo\":\"numero\",\"texto\":\"pos\",\"id\":\"pos\"}]},\"inputs\":{\"pos\":{\"block\":{\"type\":\"ab_entrada\",\"id\":\"8;8DGW_2c{]!vVjJyXk.\",\"deletable\":false,\"extraState\":{\"definicion\":\"rueda\",\"entrada\":\"pos\",\"tipo\":\"numero\",\"texto\":\"pos\"}}}},\"next\":{\"block\":{\"type\":\"ab_si_sino\",\"id\":\"OwN#Nh`vGAtnywR~_R]n\",\"inputs\":{\"COND\":{\"block\":{\"type\":\"ab_comparar\",\"id\":\"Oz=#:sR?9hPUn%hzFncC\",\"fields\":{\"OP\":\"<\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"gQWLvG_$}/ml1Zd(}/]M\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_entrada\",\"id\":\"F!eubw2Bh5bM^{Z*hZK+\",\"extraState\":{\"definicion\":\"rueda\",\"entrada\":\"pos\",\"tipo\":\"numero\",\"texto\":\"pos\"}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"|;ALHl1{b|=]A];*SB^j\",\"fields\":{\"NUM\":85}}}}}},\"DO\":{\"block\":{\"type\":\"ab_comentario\",\"id\":\"UPW+xt]t4b8LzV6$I@p4\",\"fields\":{\"TEXTO\":\"rojo → verde\"},\"next\":{\"block\":{\"type\":\"ab_mi_bloque\",\"id\":\"!9Lj:yv9[yixOL,qZ`R=\",\"extraState\":{\"definicion\":\"color\",\"partes\":[{\"tipo\":\"nombre\",\"texto\":\"color\",\"id\":\"n\"},{\"tipo\":\"numero\",\"texto\":\"r\",\"id\":\"r\"},{\"tipo\":\"numero\",\"texto\":\"g\",\"id\":\"g\"},{\"tipo\":\"numero\",\"texto\":\"b\",\"id\":\"b\"}]},\"inputs\":{\"r\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"8GPB6KQ4CsqI[D|AyE*f\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"Yin`oY$aQbV5Ad//xz%(\",\"fields\":{\"OP\":\"-\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"RNz]g?B)Zb[I.no|Wp0=\",\"fields\":{\"NUM\":255}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"$%`|1rH@a.[=$4KcUSke\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\".K]{xdEN;/u69rq(X-3r\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"|hYCr#.]hrk#yOaewNK#\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_entrada\",\"id\":\"fUjnVdpC2[h?{aJl(nPz\",\"extraState\":{\"definicion\":\"rueda\",\"entrada\":\"pos\",\"tipo\":\"numero\",\"texto\":\"pos\"}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"%B,I8|0|@02zH7$i7-S)\",\"fields\":{\"NUM\":3}}}}}}}}},\"g\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"f8L[1l*r(N0o%97Sx!)c\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"`ZNji%Y#0R)?}w{L0Zkk\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"$GPe*n?$`,##E90`,71g\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_entrada\",\"id\":\"$~RUU/+P=$/Vy#K4I7i1\",\"extraState\":{\"definicion\":\"rueda\",\"entrada\":\"pos\",\"tipo\":\"numero\",\"texto\":\"pos\"}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"|59RW9jaXdPZ;7ld2UvN\",\"fields\":{\"NUM\":3}}}}}},\"b\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"%E{]nCLp2Pi`u[tDRg)|\",\"fields\":{\"NUM\":0}}}}}}}},\"SINO\":{\"block\":{\"type\":\"ab_si_sino\",\"id\":\"px(GiN*9=`hw}ULn}X{/\",\"inputs\":{\"COND\":{\"block\":{\"type\":\"ab_comparar\",\"id\":\"BHtZwl5L!);dD=c1m!m-\",\"fields\":{\"OP\":\"<\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"y3][o*x`)r4So$+^tQbS\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_entrada\",\"id\":\"~n$PEjo*.1,~@#LTW)2H\",\"extraState\":{\"definicion\":\"rueda\",\"entrada\":\"pos\",\"tipo\":\"numero\",\"texto\":\"pos\"}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"Lv!GO,{fk{QKXT[Xx#@M\",\"fields\":{\"NUM\":170}}}}}},\"DO\":{\"block\":{\"type\":\"ab_comentario\",\"id\":\"/Dgc%{CPryk4{/,ND!|u\",\"fields\":{\"TEXTO\":\"verde → azul\"},\"next\":{\"block\":{\"type\":\"variables_set\",\"id\":\"DVP?slGRmGtiDYMxOQT$\",\"fields\":{\"VAR\":{\"id\":\"t\"}},\"inputs\":{\"VALUE\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"|_MALjN4AexxC#L7[2o}\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"YjST#i-/y!B=X{t71:;-\",\"fields\":{\"OP\":\"-\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"^D%8:.~`REFRE)!!9Jpp\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_entrada\",\"id\":\"R$zwon=BW{FLE@y1vhRL\",\"extraState\":{\"definicion\":\"rueda\",\"entrada\":\"pos\",\"tipo\":\"numero\",\"texto\":\"pos\"}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"0rEh1r6L(M[HdHT0;I0~\",\"fields\":{\"NUM\":85}}}}}}},\"next\":{\"block\":{\"type\":\"ab_mi_bloque\",\"id\":\"P=SP[GvR08SP0|Cm+S+u\",\"extraState\":{\"definicion\":\"color\",\"partes\":[{\"tipo\":\"nombre\",\"texto\":\"color\",\"id\":\"n\"},{\"tipo\":\"numero\",\"texto\":\"r\",\"id\":\"r\"},{\"tipo\":\"numero\",\"texto\":\"g\",\"id\":\"g\"},{\"tipo\":\"numero\",\"texto\":\"b\",\"id\":\"b\"}]},\"inputs\":{\"r\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"vo+fs;Jkvtyz[G)*04K*\",\"fields\":{\"NUM\":0}}},\"g\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"3EgU,0@^Vw-maL!y?f|p\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"z!k)I0DurF`ey7je(FoY\",\"fields\":{\"OP\":\"-\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"e-Lm?8/x/KJ++ZEr@~wl\",\"fields\":{\"NUM\":255}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"niyEEv`{nC!d50/l37em\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"?O_1Gc$F[qhI@GFe%Lt@\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"%|82TmyEuc+Ok+,s5+Ie\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"pYjc*h`[J1DmWY]O/%zc\",\"fields\":{\"VAR\":{\"id\":\"t\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"RYvg`qURWPY55Yvrl/%.\",\"fields\":{\"NUM\":3}}}}}}}}},\"b\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"+=4$5c7iYzBWRE76nA,z\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"K,PjolF)UxkR|8tUKM]:\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"eM:?{i;^~T~gTPeOO+d]\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"5@vW(Zh`Lkn01BR-,vTP\",\"fields\":{\"VAR\":{\"id\":\"t\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"#du96:+d-M{o_$FmSLI{\",\"fields\":{\"NUM\":3}}}}}}}}}}}}},\"SINO\":{\"block\":{\"type\":\"ab_comentario\",\"id\":\"S0K@Z#K[H/*`z5Z1A)e:\",\"fields\":{\"TEXTO\":\"azul → rojo\"},\"next\":{\"block\":{\"type\":\"variables_set\",\"id\":\"Iau/;!.`CrG]f$#!?{Y4\",\"fields\":{\"VAR\":{\"id\":\"t\"}},\"inputs\":{\"VALUE\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"}u+|dD^52UpKDf}6)85)\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"Ix+7e3k~9x5f?7(KiPHW\",\"fields\":{\"OP\":\"-\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"g,Rc:N!!M.{DR~4XE{(:\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_entrada\",\"id\":\"bDZNK-$?U/9BwM_Y6(^6\",\"extraState\":{\"definicion\":\"rueda\",\"entrada\":\"pos\",\"tipo\":\"numero\",\"texto\":\"pos\"}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"C3nBruV~f)g!!10D)}P1\",\"fields\":{\"NUM\":170}}}}}}},\"next\":{\"block\":{\"type\":\"ab_mi_bloque\",\"id\":\"UH`tlHkjAarX5(jAa[#b\",\"extraState\":{\"definicion\":\"color\",\"partes\":[{\"tipo\":\"nombre\",\"texto\":\"color\",\"id\":\"n\"},{\"tipo\":\"numero\",\"texto\":\"r\",\"id\":\"r\"},{\"tipo\":\"numero\",\"texto\":\"g\",\"id\":\"g\"},{\"tipo\":\"numero\",\"texto\":\"b\",\"id\":\"b\"}]},\"inputs\":{\"r\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"/[XsLA74%ob4yQvQTJ?a\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"@}$=*ty0mH$p1?7XUdJ6\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"(o~7Kv;WCSY!$?(APKW*\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"EQ.w?7pRRge^c?B5~hz,\",\"fields\":{\"VAR\":{\"id\":\"t\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"D};j/,PDLA7tq,|39oFo\",\"fields\":{\"NUM\":3}}}}}},\"g\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"#x*|+Ki!2hAle%U{[}a:\",\"fields\":{\"NUM\":0}}},\"b\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"$?9szu^0$QOW8_q%l|Cq\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"4vjwkryi7[xd0zNI;Vw,\",\"fields\":{\"OP\":\"-\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"HNO-oIFlSdW(e!Dt|al=\",\"fields\":{\"NUM\":255}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"_?LU{ZDCV75S93Qb-kmu\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"s:gtQxMG*hHv1mpV$c=e\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"S5ce#Ws0K_Ara,X*~_!)\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"5-%TK@Or0E:OQ9R=`*f]\",\"fields\":{\"VAR\":{\"id\":\"t\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"9cIe,NGfTn+Vz3z)c|ff\",\"fields\":{\"NUM\":3}}}}}}}}}}}}}}}}}}}}}}},{\"type\":\"ab_definir\",\"id\":\"=fJl~P_6?*GMs*Kncfq_\",\"x\":1077,\"y\":0,\"extraState\":{\"id\":\"color\",\"partes\":[{\"tipo\":\"nombre\",\"texto\":\"color\",\"id\":\"n\"},{\"tipo\":\"numero\",\"texto\":\"r\",\"id\":\"r\"},{\"tipo\":\"numero\",\"texto\":\"g\",\"id\":\"g\"},{\"tipo\":\"numero\",\"texto\":\"b\",\"id\":\"b\"}]},\"inputs\":{\"r\":{\"block\":{\"type\":\"ab_entrada\",\"id\":\"7~wN$,tb=[,l0SNh#Zkv\",\"deletable\":false,\"extraState\":{\"definicion\":\"color\",\"entrada\":\"r\",\"tipo\":\"numero\",\"texto\":\"r\"}}},\"g\":{\"block\":{\"type\":\"ab_entrada\",\"id\":\"~KLu*;i3udOnEDre=kfZ\",\"deletable\":false,\"extraState\":{\"definicion\":\"color\",\"entrada\":\"g\",\"tipo\":\"numero\",\"texto\":\"g\"}}},\"b\":{\"block\":{\"type\":\"ab_entrada\",\"id\":\"C%9,!.%2wiwJt^;t8=Ei\",\"deletable\":false,\"extraState\":{\"definicion\":\"color\",\"entrada\":\"b\",\"tipo\":\"numero\",\"texto\":\"b\"}}}},\"next\":{\"block\":{\"type\":\"ab_pin_pwm\",\"id\":\"lj#s98r[(`8$#3?+Yw;M\",\"fields\":{\"PIN\":\"6\"},\"inputs\":{\"VALOR\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"7{z`ioY6lAp+%G?z#0c.\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_entrada\",\"id\":\"vCX(;}TIEvT7|Cu,Z`O;\",\"extraState\":{\"definicion\":\"color\",\"entrada\":\"r\",\"tipo\":\"numero\",\"texto\":\"r\"}}}},\"next\":{\"block\":{\"type\":\"ab_pin_pwm\",\"id\":\"x9+B0$[P,n3zSAs3?8bm\",\"fields\":{\"PIN\":\"5\"},\"inputs\":{\"VALOR\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"o7B5pK3J48[lb`Of^fNO\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_entrada\",\"id\":\"m+Wcdrx9$0%M!:JF(U^+\",\"extraState\":{\"definicion\":\"color\",\"entrada\":\"g\",\"tipo\":\"numero\",\"texto\":\"g\"}}}},\"next\":{\"block\":{\"type\":\"ab_pin_pwm\",\"id\":\"g6}lZDh~?RNp^qK],s*8\",\"fields\":{\"PIN\":\"3\"},\"inputs\":{\"VALOR\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"EuDRcuWjp|#zu|nY;9QY\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_entrada\",\"id\":\"a*n/n?f-Y,tV!B:ccY/N\",\"extraState\":{\"definicion\":\"color\",\"entrada\":\"b\",\"tipo\":\"numero\",\"texto\":\"b\"}}}}}}}}}}}]},\"variables\":[{\"name\":\"giro\",\"id\":\"g\"},{\"name\":\"tramo\",\"id\":\"t\"}]}"
+        "content": "{\"blocks\":{\"languageVersion\":0,\"blocks\":[{\"type\":\"ab_al_iniciar\",\"id\":\"t70wQZGI,J*-T*y/j8F.\",\"x\":0,\"y\":0,\"next\":{\"block\":{\"type\":\"ab_por_siempre\",\"id\":\"!-)w~Mpm7t{U05n|i)U+\",\"inputs\":{\"DO\":{\"block\":{\"type\":\"ab_mi_bloque\",\"id\":\"w{U(P)LW^^J4c^(d[`!V\",\"extraState\":{\"definicion\":\"rueda\",\"partes\":[{\"tipo\":\"nombre\",\"texto\":\"rueda\",\"id\":\"n\"},{\"tipo\":\"numero\",\"texto\":\"pos\",\"id\":\"pos\"}]},\"inputs\":{\"pos\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"x6C+PY~i@9Pz=U~tA;hf\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"5ky]0cmYx!EkTTmQEo48\",\"fields\":{\"VAR\":{\"id\":\"g\"}}}}},\"next\":{\"block\":{\"type\":\"math_change\",\"id\":\"2_=w0MBxF]l!5hU;jKjN\",\"fields\":{\"VAR\":{\"id\":\"g\"}},\"inputs\":{\"DELTA\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"l.!@[,@u)kA~0hbMc[y?\",\"fields\":{\"NUM\":1}}}},\"next\":{\"block\":{\"type\":\"ab_si\",\"id\":\"V$=5MbC9w.;I@QsT$aWl\",\"inputs\":{\"COND\":{\"block\":{\"type\":\"ab_comparar\",\"id\":\"Qccyn$_{W(oT,Q+!i|T6\",\"fields\":{\"OP\":\">\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"i|l3)*vW+a.{}_X~5w{H\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"H/Jm_TafU1X?oM+*lni[\",\"fields\":{\"VAR\":{\"id\":\"g\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"4WjQY+Ps/u3@{!eP`-.{\",\"fields\":{\"NUM\":255}}}}}},\"DO\":{\"block\":{\"type\":\"variables_set\",\"id\":\"MNc,Xc;B,[-),VdeWgQt\",\"fields\":{\"VAR\":{\"id\":\"g\"}},\"inputs\":{\"VALUE\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"Mf*qpbtk]nL!,lYJiGOD\",\"fields\":{\"NUM\":0}}}}}}},\"next\":{\"block\":{\"type\":\"ab_esperar\",\"id\":\"^@:1k4JDxMn+y#Xt]@bJ\",\"inputs\":{\"S\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"|$so}90?P8A,(Y;h2.Zw\",\"fields\":{\"NUM\":0.02}}}}}}}}}}}}}}}},{\"type\":\"ab_definir\",\"id\":\".=olR^8ZpeXULIMAgRda\",\"x\":357,\"y\":0,\"extraState\":{\"id\":\"rueda\",\"partes\":[{\"tipo\":\"nombre\",\"texto\":\"rueda\",\"id\":\"n\"},{\"tipo\":\"numero\",\"texto\":\"pos\",\"id\":\"pos\"}]},\"inputs\":{\"pos\":{\"block\":{\"type\":\"ab_entrada\",\"id\":\"(fHpw~co~1BZM$r:XF51\",\"deletable\":false,\"extraState\":{\"definicion\":\"rueda\",\"entrada\":\"pos\",\"tipo\":\"numero\",\"texto\":\"pos\"}}}},\"next\":{\"block\":{\"type\":\"ab_si_sino\",\"id\":\"%kU$|SeeQQKl,cY$fENd\",\"inputs\":{\"COND\":{\"block\":{\"type\":\"ab_comparar\",\"id\":\"kJh4]qUqSIp|DM{3ajh.\",\"fields\":{\"OP\":\"<\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"QlKsp8#Te?X4`5RKW4=H\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_entrada\",\"id\":\"v90G[YYtY?Qv!feBK=1,\",\"extraState\":{\"definicion\":\"rueda\",\"entrada\":\"pos\",\"tipo\":\"numero\",\"texto\":\"pos\"}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"/]AfsFh,^+vT(-vS.lsY\",\"fields\":{\"NUM\":85}}}}}},\"DO\":{\"block\":{\"type\":\"ab_comentario\",\"id\":\"Uh$Nh55V;F-+AQUcUv+5\",\"fields\":{\"TEXTO\":\"rojo → verde\"},\"next\":{\"block\":{\"type\":\"ab_mi_bloque\",\"id\":\"sCj;xW*2xieYh0t8)%~~\",\"extraState\":{\"definicion\":\"color\",\"partes\":[{\"tipo\":\"nombre\",\"texto\":\"color\",\"id\":\"n\"},{\"tipo\":\"numero\",\"texto\":\"r\",\"id\":\"r\"},{\"tipo\":\"numero\",\"texto\":\"g\",\"id\":\"g\"},{\"tipo\":\"numero\",\"texto\":\"b\",\"id\":\"b\"}]},\"inputs\":{\"r\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"@v8f)dC64#7nh!^}?1W^\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"oS09`bz;R;cj$u/=T+Cp\",\"fields\":{\"OP\":\"-\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"{{/Jvj*Yc[e9wda7(yv}\",\"fields\":{\"NUM\":255}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"~7QZi`^LZ5:ON)kGFA%@\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"_YRk1$yl~8ySp9u}x@^7\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"^{wQkQJYCKRO`vyjy8N{\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_entrada\",\"id\":\";8{Y#}eoiIR]!l58MBWb\",\"extraState\":{\"definicion\":\"rueda\",\"entrada\":\"pos\",\"tipo\":\"numero\",\"texto\":\"pos\"}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"za`cp2.L|W,Sv!un^[2J\",\"fields\":{\"NUM\":3}}}}}}}}},\"g\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"k|+!yvl`K`HiX~nBf:IQ\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"TN[yRi2Ocgi1{mT!YNN!\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"fBG=Z-2I.EV(E-8-vg5x\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_entrada\",\"id\":\"KmVd@FzUR!9!Bzb6{_:y\",\"extraState\":{\"definicion\":\"rueda\",\"entrada\":\"pos\",\"tipo\":\"numero\",\"texto\":\"pos\"}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"Td)A{V+lJMyab8kuXvDo\",\"fields\":{\"NUM\":3}}}}}},\"b\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"d1;GUC/GBtfN)}6[,oep\",\"fields\":{\"NUM\":0}}}}}}}},\"SINO\":{\"block\":{\"type\":\"ab_si_sino\",\"id\":\"jLT(O*;xSd5mX%Q(-=s0\",\"inputs\":{\"COND\":{\"block\":{\"type\":\"ab_comparar\",\"id\":\"lvfl__8rj~m^l*oA@YcU\",\"fields\":{\"OP\":\"<\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"8k79)O]FIuSY^ehkoHF8\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_entrada\",\"id\":\"z-Do?ZO-O##Ziz1UJew4\",\"extraState\":{\"definicion\":\"rueda\",\"entrada\":\"pos\",\"tipo\":\"numero\",\"texto\":\"pos\"}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"!?zPeD9A5Qe:+V$$P.**\",\"fields\":{\"NUM\":170}}}}}},\"DO\":{\"block\":{\"type\":\"ab_comentario\",\"id\":\"mvyS;l?Y^D_oo1wrRr3(\",\"fields\":{\"TEXTO\":\"verde → azul\"},\"next\":{\"block\":{\"type\":\"variables_set\",\"id\":\".8?kfY5eKLGypY7B6|Ej\",\"fields\":{\"VAR\":{\"id\":\"t\"}},\"inputs\":{\"VALUE\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"n{u@EuNQKP6G_yc1Gbg~\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"~`*|ps0u:10D@rqI}L9j\",\"fields\":{\"OP\":\"-\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\".MBRd+!F6o]wa;+uAU(W\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_entrada\",\"id\":\"f#3f%RdOVh/:W,2%t;rQ\",\"extraState\":{\"definicion\":\"rueda\",\"entrada\":\"pos\",\"tipo\":\"numero\",\"texto\":\"pos\"}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"|mIyQ;=N*QZl,sNeFTux\",\"fields\":{\"NUM\":85}}}}}}},\"next\":{\"block\":{\"type\":\"ab_mi_bloque\",\"id\":\"GcriZG)83QhR]|fKJ8E(\",\"extraState\":{\"definicion\":\"color\",\"partes\":[{\"tipo\":\"nombre\",\"texto\":\"color\",\"id\":\"n\"},{\"tipo\":\"numero\",\"texto\":\"r\",\"id\":\"r\"},{\"tipo\":\"numero\",\"texto\":\"g\",\"id\":\"g\"},{\"tipo\":\"numero\",\"texto\":\"b\",\"id\":\"b\"}]},\"inputs\":{\"r\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"B9}D6kghk?c1+3i#Np]y\",\"fields\":{\"NUM\":0}}},\"g\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"|8SSQ66Nz@n]3w[e5fQ/\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"tFUi9J3UjZJJVzP1uC1b\",\"fields\":{\"OP\":\"-\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"e5*fL4H0l[XG9EKs?*HZ\",\"fields\":{\"NUM\":255}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"%|=:}lr0}JZ`%u68hAGw\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"WqT1^3mBL$|6;KUoNc9H\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\";TnPZzYFyv^wf/!A_U4r\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"QlBI#^pn.=U.JcpktD!I\",\"fields\":{\"VAR\":{\"id\":\"t\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"xPqO}b7~k2v1ZC[VgrzM\",\"fields\":{\"NUM\":3}}}}}}}}},\"b\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"O9yzi`);/BIN[RRNBhM[\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"h?NhyFNsrESVnM!I;Xyn\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"W7$7BXz%.!?x5TJ%BZ,3\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"(0lvO}a##RCoeBHe5,}V\",\"fields\":{\"VAR\":{\"id\":\"t\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"BCzL:{MyqD9K`o2=F#N/\",\"fields\":{\"NUM\":3}}}}}}}}}}}}},\"SINO\":{\"block\":{\"type\":\"ab_comentario\",\"id\":\"DYww$G+eKT5S$%.T?nqr\",\"fields\":{\"TEXTO\":\"azul → rojo\"},\"next\":{\"block\":{\"type\":\"variables_set\",\"id\":\"ea0T4Z~Ot.%zr$j?`4=o\",\"fields\":{\"VAR\":{\"id\":\"t\"}},\"inputs\":{\"VALUE\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"c/nyxLP;|-Y{~G|gdxl$\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"mFtmZZ`yEbmF8G?zbb:u\",\"fields\":{\"OP\":\"-\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\";l=UpF`RE:[I*M-or5H_\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_entrada\",\"id\":\";qD5xmCor/I$5EdmBlWh\",\"extraState\":{\"definicion\":\"rueda\",\"entrada\":\"pos\",\"tipo\":\"numero\",\"texto\":\"pos\"}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"8u_rPwz/byg,9+_2%7P1\",\"fields\":{\"NUM\":170}}}}}}},\"next\":{\"block\":{\"type\":\"ab_mi_bloque\",\"id\":\"~Vw,{k)]-EMF},!P=Mqd\",\"extraState\":{\"definicion\":\"color\",\"partes\":[{\"tipo\":\"nombre\",\"texto\":\"color\",\"id\":\"n\"},{\"tipo\":\"numero\",\"texto\":\"r\",\"id\":\"r\"},{\"tipo\":\"numero\",\"texto\":\"g\",\"id\":\"g\"},{\"tipo\":\"numero\",\"texto\":\"b\",\"id\":\"b\"}]},\"inputs\":{\"r\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"x/B9,z1n_Q%tno0^WAWe\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"j]Nn!)[$047|^2xEM9,c\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"%-jTi]yvRBN+AZNCw)qE\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"h*{qdy!tgkxUm.6mF@`S\",\"fields\":{\"VAR\":{\"id\":\"t\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"+_TMWTvIA#~EGPc=l5L?\",\"fields\":{\"NUM\":3}}}}}},\"g\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"Bjpr_`gP0)M1[*EK+fs!\",\"fields\":{\"NUM\":0}}},\"b\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"od#sFUSCPx^h;r^%+k5p\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"iySCWynA!z/|fUWtV{j#\",\"fields\":{\"OP\":\"-\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"dy2EB9~xrxK48.=$hkP~\",\"fields\":{\"NUM\":255}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"qo/oQfy[4Wf=cT+mi6}D\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"a8L)legZ7,B@QecbQTpD\",\"fields\":{\"OP\":\"*\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"JLF=v%2ZV@by:O99cYM$\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"variables_get\",\"id\":\"/ZxC35wnd3GPP4,PaqS,\",\"fields\":{\"VAR\":{\"id\":\"t\"}}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"*{qy=1M,l53S9H*2GbBW\",\"fields\":{\"NUM\":3}}}}}}}}}}}}}}}}}}}}}}},{\"type\":\"ab_definir\",\"id\":\"cYMwR}gjqtVn)^|GP-zl\",\"x\":1077,\"y\":0,\"extraState\":{\"id\":\"color\",\"partes\":[{\"tipo\":\"nombre\",\"texto\":\"color\",\"id\":\"n\"},{\"tipo\":\"numero\",\"texto\":\"r\",\"id\":\"r\"},{\"tipo\":\"numero\",\"texto\":\"g\",\"id\":\"g\"},{\"tipo\":\"numero\",\"texto\":\"b\",\"id\":\"b\"}]},\"inputs\":{\"r\":{\"block\":{\"type\":\"ab_entrada\",\"id\":\"g1?]2N){9QryzlFRp*AH\",\"deletable\":false,\"extraState\":{\"definicion\":\"color\",\"entrada\":\"r\",\"tipo\":\"numero\",\"texto\":\"r\"}}},\"g\":{\"block\":{\"type\":\"ab_entrada\",\"id\":\"/[/n.5lFT%2mjK1aL/ak\",\"deletable\":false,\"extraState\":{\"definicion\":\"color\",\"entrada\":\"g\",\"tipo\":\"numero\",\"texto\":\"g\"}}},\"b\":{\"block\":{\"type\":\"ab_entrada\",\"id\":\".UXdgD^2/IlDn2}QJ|Hk\",\"deletable\":false,\"extraState\":{\"definicion\":\"color\",\"entrada\":\"b\",\"tipo\":\"numero\",\"texto\":\"b\"}}}},\"next\":{\"block\":{\"type\":\"ab_pin_pwm\",\"id\":\"Z111co~B8-E92=;}Efzj\",\"fields\":{\"PIN\":\"6\"},\"inputs\":{\"VALOR\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"#)jRMz9mFO)F`W2/3i-U\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"]YQ0rViNR3DQ`1XOKrr7\",\"fields\":{\"OP\":\"-\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"Ju%txPiwp#D~W3LB#`78\",\"fields\":{\"NUM\":255}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"9Qgf3Z;8%8*q05AK+-kH\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_entrada\",\"id\":\"cS_`ELr!~/pfSn4q$0^w\",\"extraState\":{\"definicion\":\"color\",\"entrada\":\"r\",\"tipo\":\"numero\",\"texto\":\"r\"}}}}}}},\"next\":{\"block\":{\"type\":\"ab_pin_pwm\",\"id\":\"EivJ$Y@6Pw/N6ai#TL6h\",\"fields\":{\"PIN\":\"5\"},\"inputs\":{\"VALOR\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"h]#PHAsfLR2(DBm!R?V|\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\";sQi/2c@gfE^{wInW[.J\",\"fields\":{\"OP\":\"-\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"W[B{O7R5XM:tM3qslG7K\",\"fields\":{\"NUM\":255}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"$^o/TNnk[|Kh-6f-(=|G\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_entrada\",\"id\":\"U[~*5^e(Vuox(KCJXVt~\",\"extraState\":{\"definicion\":\"color\",\"entrada\":\"g\",\"tipo\":\"numero\",\"texto\":\"g\"}}}}}}},\"next\":{\"block\":{\"type\":\"ab_pin_pwm\",\"id\":\"BN3ajAYs-c(Tm.BA@g@S\",\"fields\":{\"PIN\":\"3\"},\"inputs\":{\"VALOR\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"}04J|P|_)5#RSvZ]4{5b\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_aritmetica\",\"id\":\"Fi|}!{+`E)a1QD.{WLI(\",\"fields\":{\"OP\":\"-\"},\"inputs\":{\"A\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"ln-rUwV;g.~R7G3lZ2yv\",\"fields\":{\"NUM\":255}}},\"B\":{\"shadow\":{\"type\":\"math_number\",\"id\":\"D;qu/05c7F{9HmiSmIvm\",\"fields\":{\"NUM\":0}},\"block\":{\"type\":\"ab_entrada\",\"id\":\"C*Zbz0nK[T$ii~(wpNms\",\"extraState\":{\"definicion\":\"color\",\"entrada\":\"b\",\"tipo\":\"numero\",\"texto\":\"b\"}}}}}}}}}}}}}}]},\"variables\":[{\"name\":\"giro\",\"id\":\"g\"},{\"name\":\"tramo\",\"id\":\"t\"}]}"
       }
     ]
   },
   "components": [
     {
-      "id": "breadboard_1794765281064_hpd949ngk",
+      "id": "breadboard_1794766848389_6rytg8k5h",
       "metadataId": "breadboard",
       "x": -110,
       "y": -230,
       "properties": {}
     },
     {
-      "id": "rgb_led_1794765283560_lskr2fluq",
+      "id": "rgb_led_1794766850888_6q6tqnm22",
       "metadataId": "rgb-led",
       "x": 232.81,
       "y": -226.1,
       "properties": {
         "ledRed": 0,
         "ledGreen": 0,
-        "ledBlue": 0
+        "ledBlue": 0,
+        "common": "anode"
       }
     },
     {
-      "id": "resistor_1794765285476_xvynx7hqk",
+      "id": "resistor_1794766852738_6y1iq0jma",
       "metadataId": "resistor",
       "x": 211.21,
       "y": -139.4,
@@ -57,7 +58,7 @@
       }
     },
     {
-      "id": "resistor_1794765288862_a5pvosqya",
+      "id": "resistor_1794766856107_sx1m85n77",
       "metadataId": "resistor",
       "x": 230.41000000000005,
       "y": -139.40000000000003,
@@ -67,7 +68,7 @@
       }
     },
     {
-      "id": "resistor_1794765292293_toaqs0494",
+      "id": "resistor_1794766859472_f1exuvg4y",
       "metadataId": "resistor",
       "x": 240.01000000000002,
       "y": -139.40000000000003,
@@ -79,42 +80,42 @@
   ],
   "wires": [
     {
-      "id": "wire-1794765283026",
+      "id": "wire-1794766850346",
       "start": {
-        "componentId": "breadboard_1794765281064_hpd949ngk",
-        "pinName": "bn.21",
-        "x": 160.1733333333333,
-        "y": -41.599999999999994
+        "componentId": "breadboard_1794766848389_6rytg8k5h",
+        "pinName": "bp.10",
+        "x": 25.773333333333312,
+        "y": -32
       },
       "end": {
         "componentId": "arduino-uno",
-        "pinName": "GND.1",
-        "x": 165.5,
-        "y": 59
+        "pinName": "5V",
+        "x": 210,
+        "y": 241.5
       },
       "waypoints": [
         {
-          "x": 160.1733333333333,
-          "y": 36
+          "x": 25.773333333333312,
+          "y": 269
         },
         {
-          "x": 165.5,
-          "y": 36
+          "x": 210,
+          "y": 269
         }
       ],
-      "color": "#000000",
+      "color": "#cc0000",
       "autoRouted": false
     },
     {
-      "id": "bbwire-rgb_led_1794765283560_lskr2fluq-0-36t.a",
+      "id": "bbwire-rgb_led_1794766850888_6q6tqnm22-0-36t.a",
       "start": {
-        "componentId": "rgb_led_1794765283560_lskr2fluq",
+        "componentId": "rgb_led_1794766850888_6q6tqnm22",
         "pinName": "R",
         "x": 247.31,
         "y": -176.1
       },
       "end": {
-        "componentId": "breadboard_1794765281064_hpd949ngk",
+        "componentId": "breadboard_1794766848389_6rytg8k5h",
         "pinName": "36t.a",
         "x": 246.56,
         "y": -176
@@ -124,15 +125,15 @@
       "bb": true
     },
     {
-      "id": "bbwire-rgb_led_1794765283560_lskr2fluq-1-37t.b",
+      "id": "bbwire-rgb_led_1794766850888_6q6tqnm22-1-37t.b",
       "start": {
-        "componentId": "rgb_led_1794765283560_lskr2fluq",
+        "componentId": "rgb_led_1794766850888_6q6tqnm22",
         "pinName": "COM",
         "x": 256.81,
         "y": -166.1
       },
       "end": {
-        "componentId": "breadboard_1794765281064_hpd949ngk",
+        "componentId": "breadboard_1794766848389_6rytg8k5h",
         "pinName": "37t.b",
         "x": 256.15999999999997,
         "y": -166.4
@@ -142,15 +143,15 @@
       "bb": true
     },
     {
-      "id": "bbwire-rgb_led_1794765283560_lskr2fluq-2-38t.a",
+      "id": "bbwire-rgb_led_1794766850888_6q6tqnm22-2-38t.a",
       "start": {
-        "componentId": "rgb_led_1794765283560_lskr2fluq",
+        "componentId": "rgb_led_1794766850888_6q6tqnm22",
         "pinName": "G",
         "x": 265.21,
         "y": -176.1
       },
       "end": {
-        "componentId": "breadboard_1794765281064_hpd949ngk",
+        "componentId": "breadboard_1794766848389_6rytg8k5h",
         "pinName": "38t.a",
         "x": 265.76000000000005,
         "y": -176
@@ -160,15 +161,15 @@
       "bb": true
     },
     {
-      "id": "bbwire-rgb_led_1794765283560_lskr2fluq-3-39t.a",
+      "id": "bbwire-rgb_led_1794766850888_6q6tqnm22-3-39t.a",
       "start": {
-        "componentId": "rgb_led_1794765283560_lskr2fluq",
+        "componentId": "rgb_led_1794766850888_6q6tqnm22",
         "pinName": "B",
         "x": 274.51,
         "y": -176.1
       },
       "end": {
-        "componentId": "breadboard_1794765281064_hpd949ngk",
+        "componentId": "breadboard_1794766848389_6rytg8k5h",
         "pinName": "39t.a",
         "x": 275.36,
         "y": -176
@@ -178,15 +179,15 @@
       "bb": true
     },
     {
-      "id": "bbwire-resistor_1794765285476_xvynx7hqk-0-36t.c",
+      "id": "bbwire-resistor_1794766852738_6y1iq0jma-0-36t.c",
       "start": {
-        "componentId": "resistor_1794765285476_xvynx7hqk",
+        "componentId": "resistor_1794766852738_6y1iq0jma",
         "pinName": "1",
         "x": 246.56,
         "y": -157.4
       },
       "end": {
-        "componentId": "breadboard_1794765281064_hpd949ngk",
+        "componentId": "breadboard_1794766848389_6rytg8k5h",
         "pinName": "36t.c",
         "x": 246.56,
         "y": -156.8
@@ -196,15 +197,15 @@
       "bb": true
     },
     {
-      "id": "bbwire-resistor_1794765285476_xvynx7hqk-1-36b.g",
+      "id": "bbwire-resistor_1794766852738_6y1iq0jma-1-36b.g",
       "start": {
-        "componentId": "resistor_1794765285476_xvynx7hqk",
+        "componentId": "resistor_1794766852738_6y1iq0jma",
         "pinName": "2",
         "x": 246.56,
         "y": -98.60000000000002
       },
       "end": {
-        "componentId": "breadboard_1794765281064_hpd949ngk",
+        "componentId": "breadboard_1794766848389_6rytg8k5h",
         "pinName": "36b.g",
         "x": 246.56,
         "y": -99.20000000000002
@@ -214,9 +215,9 @@
       "bb": true
     },
     {
-      "id": "wire-1794765288335",
+      "id": "wire-1794766855582",
       "start": {
-        "componentId": "breadboard_1794765281064_hpd949ngk",
+        "componentId": "breadboard_1794766848389_6rytg8k5h",
         "pinName": "36b.j",
         "x": 246.56,
         "y": -70.4
@@ -241,15 +242,15 @@
       "autoRouted": false
     },
     {
-      "id": "bbwire-resistor_1794765288862_a5pvosqya-0-38t.c",
+      "id": "bbwire-resistor_1794766856107_sx1m85n77-0-38t.c",
       "start": {
-        "componentId": "resistor_1794765288862_a5pvosqya",
+        "componentId": "resistor_1794766856107_sx1m85n77",
         "pinName": "1",
         "x": 265.76000000000005,
         "y": -157.40000000000006
       },
       "end": {
-        "componentId": "breadboard_1794765281064_hpd949ngk",
+        "componentId": "breadboard_1794766848389_6rytg8k5h",
         "pinName": "38t.c",
         "x": 265.76000000000005,
         "y": -156.8
@@ -259,15 +260,15 @@
       "bb": true
     },
     {
-      "id": "bbwire-resistor_1794765288862_a5pvosqya-1-38b.g",
+      "id": "bbwire-resistor_1794766856107_sx1m85n77-1-38b.g",
       "start": {
-        "componentId": "resistor_1794765288862_a5pvosqya",
+        "componentId": "resistor_1794766856107_sx1m85n77",
         "pinName": "2",
         "x": 265.7600000000001,
         "y": -98.60000000000008
       },
       "end": {
-        "componentId": "breadboard_1794765281064_hpd949ngk",
+        "componentId": "breadboard_1794766848389_6rytg8k5h",
         "pinName": "38b.g",
         "x": 265.76000000000005,
         "y": -99.20000000000002
@@ -277,9 +278,9 @@
       "bb": true
     },
     {
-      "id": "wire-1794765291765",
+      "id": "wire-1794766858948",
       "start": {
-        "componentId": "breadboard_1794765281064_hpd949ngk",
+        "componentId": "breadboard_1794766848389_6rytg8k5h",
         "pinName": "38b.j",
         "x": 265.76000000000005,
         "y": -70.4
@@ -304,15 +305,15 @@
       "autoRouted": false
     },
     {
-      "id": "bbwire-resistor_1794765292293_toaqs0494-0-39t.c",
+      "id": "bbwire-resistor_1794766859472_f1exuvg4y-0-39t.c",
       "start": {
-        "componentId": "resistor_1794765292293_toaqs0494",
+        "componentId": "resistor_1794766859472_f1exuvg4y",
         "pinName": "1",
         "x": 275.35999999999996,
         "y": -157.4
       },
       "end": {
-        "componentId": "breadboard_1794765281064_hpd949ngk",
+        "componentId": "breadboard_1794766848389_6rytg8k5h",
         "pinName": "39t.c",
         "x": 275.36,
         "y": -156.8
@@ -322,15 +323,15 @@
       "bb": true
     },
     {
-      "id": "bbwire-resistor_1794765292293_toaqs0494-1-39b.g",
+      "id": "bbwire-resistor_1794766859472_f1exuvg4y-1-39b.g",
       "start": {
-        "componentId": "resistor_1794765292293_toaqs0494",
+        "componentId": "resistor_1794766859472_f1exuvg4y",
         "pinName": "2",
         "x": 275.36,
         "y": -98.60000000000002
       },
       "end": {
-        "componentId": "breadboard_1794765281064_hpd949ngk",
+        "componentId": "breadboard_1794766848389_6rytg8k5h",
         "pinName": "39b.g",
         "x": 275.36,
         "y": -99.20000000000002
@@ -340,9 +341,9 @@
       "bb": true
     },
     {
-      "id": "wire-1794765295125",
+      "id": "wire-1794766862293",
       "start": {
-        "componentId": "breadboard_1794765281064_hpd949ngk",
+        "componentId": "breadboard_1794766848389_6rytg8k5h",
         "pinName": "39b.j",
         "x": 275.36,
         "y": -70.4
@@ -367,44 +368,44 @@
       "autoRouted": false
     },
     {
-      "id": "wire-1794765296669",
+      "id": "wire-1794766863849",
       "start": {
-        "componentId": "breadboard_1794765281064_hpd949ngk",
+        "componentId": "breadboard_1794766848389_6rytg8k5h",
         "pinName": "37t.e",
         "x": 256.15999999999997,
         "y": -137.60000000000002
       },
       "end": {
-        "componentId": "breadboard_1794765281064_hpd949ngk",
+        "componentId": "breadboard_1794766848389_6rytg8k5h",
         "pinName": "37b.h",
         "x": 256.15999999999997,
         "y": -89.60000000000002
       },
       "waypoints": [],
-      "color": "#000000",
+      "color": "#cc0000",
       "autoRouted": false
     },
     {
-      "id": "wire-1794765298272",
+      "id": "wire-1794766865463",
       "start": {
-        "componentId": "breadboard_1794765281064_hpd949ngk",
+        "componentId": "breadboard_1794766848389_6rytg8k5h",
         "pinName": "37b.j",
         "x": 256.15999999999997,
         "y": -70.4
       },
       "end": {
-        "componentId": "breadboard_1794765281064_hpd949ngk",
-        "pinName": "bn.30",
+        "componentId": "breadboard_1794766848389_6rytg8k5h",
+        "pinName": "bp.30",
         "x": 256.1733333333333,
-        "y": -41.599999999999994
+        "y": -32
       },
       "waypoints": [
         {
           "x": 256.15999999999997,
-          "y": -41.599999999999994
+          "y": -32
         }
       ],
-      "color": "#000000",
+      "color": "#cc0000",
       "autoRouted": false
     }
   ],

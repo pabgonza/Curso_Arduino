@@ -1,13 +1,14 @@
-// Sesión 9: LED RGB (R 6, G 5, B 3, en el orden de sus patitas; la común a
-// GND), cada color con su 220 Ω, armado como el ejemplo 08 de Bloquino. Se
-// suman la perilla en A0 (rueda_perilla) o el HC-SR04 con TRIG 10 y ECHO 9
-// (lampara_humor), a la izquierda, con los rieles de 5 V y GND.
+// Sesión 9: LED RGB de ánodo común, el del kit (R 6, G 5, B 3, en el orden de
+// sus patitas; la común a 5 V), cada color con su 220 Ω, armado como el
+// ejemplo 08 de Bloquino. Se prende al revés: «definir color» escribe 255 − r
+// en cada pin, y todos los programas pasan por «color». Se suman la perilla en
+// A0 (rueda_perilla) o el HC-SR04 con TRIG 10 y ECHO 9 (lampara_humor), a la
+// izquierda, con el riel de GND.
 // Diferencias con los .ino:
 // - color(r, g, b) es un bloque propio de Mis bloques, «definir color (r) (g)
 //   (b)» con tres «fijar pin» (3, 5, 6), y sale en C++ como la función del
 //   .ino, con float en vez de int (el bloque del LED RGB solo tiene 10 colores
 //   fijos). rueda(pos) también: «definir rueda (pos)».
-// - respiracion no usa color: presenta el «fijar pin» con un solo pin.
 // - Dentro de la rueda, la posición dentro del tramo va en la variable
 //   `tramo` (en el .ino se reusa el parámetro pos, y una entrada no se puede
 //   cambiar).
@@ -22,17 +23,19 @@
 // - Las variables de bloques son float; los valores son los mismos enteros.
 await nuevo();
 await limpiar();
-// El LED RGB justo sobre sus pines. La vuelta a tierra sale de la columna
-// `colTierra`: tiene que quedar a la izquierda de todo cable que vaya a un pin.
-const soloRgb = async (colTierra) => {
+// El LED RGB justo sobre sus pines, con su riel de 5 V. La vuelta a tierra de
+// la perilla o el sensor sale de una columna a la izquierda de todo cable que
+// vaya a un pin.
+const soloRgb = async () => {
   const proto = await tablero();
-  await tierraArriba(proto, colTierra);
+  await cincoVolts(proto, 13);
   await ponerRgb(proto, 36, 6, 5, 3);
   return proto;
 };
-let proto = await soloRgb(27);
+let proto = await soloRgb();
 
 const n = (x) => (typeof x === 'number' ? num(x) : { ...num(0), block: x });
+const op = (A, OP, B) => ({ type: 'ab_aritmetica', fields: { OP }, inputs: { A: n(A), B: n(B) } });
 const pwm = (PIN, x) => ({ type: 'ab_pin_pwm', fields: { PIN }, inputs: { VALOR: n(x) } });
 // Mis bloques: «definir color (r) (g) (b)» y sus usos.
 const COLOR = [{ tipo: 'nombre', texto: 'color', id: 'n' }, ...['r', 'g', 'b'].map((e) => ({ tipo: 'numero', texto: e, id: e }))];
@@ -41,12 +44,12 @@ const DEFINIR_COLOR = {
   type: 'ab_definir',
   extraState: { id: 'color', partes: COLOR },
   inputs: Object.fromEntries(['r', 'g', 'b'].map((e) => [e, { block: entrada(e, 'color', true) }])),
-  next: { block: cadena([pwm('6', entrada('r')), pwm('5', entrada('g')), pwm('3', entrada('b'))]) },
+  // Ánodo común: el color se prende al revés (0 = a todo, 255 = apagado).
+  next: { block: cadena([pwm('6', op(255, '-', entrada('r'))), pwm('5', op(255, '-', entrada('g'))), pwm('3', op(255, '-', entrada('b')))]) },
 };
 const color = (r, g, b) => ({ type: 'ab_mi_bloque', extraState: { definicion: 'color', partes: COLOR }, inputs: { r: n(r), g: n(g), b: n(b) } });
 const variable = (id) => ({ type: 'variables_get', fields: { VAR: { id } } });
 const fijar = (id, x) => ({ type: 'variables_set', fields: { VAR: { id } }, inputs: { VALUE: n(x) } });
-const op = (A, OP, B) => ({ type: 'ab_aritmetica', fields: { OP }, inputs: { A: n(A), B: n(B) } });
 const mapear = (X, A, B, C, D) => ({ type: 'ab_mapear', inputs: { X: n(X), A: n(A), B: n(B), C: n(C), D: n(D) } });
 const comentario = (TEXTO) => ({ type: 'ab_comentario', fields: { TEXTO } });
 const contar = (...cuerpo) => ({ type: 'ab_contar', fields: { VAR: { id: 'b' } }, inputs: { DESDE: num(0), HASTA: num(255), DO: { block: cadena(cuerpo) } } });
@@ -79,9 +82,9 @@ await guardar('mezcla', [alIniciar(porSiempre(
   comentario('blanco'), color(255, 255, 255), esperarB(1),
 )), DEFINIR_COLOR]);
 await guardar('respiracion', [alIniciar(porSiempre(
-  comentario('inhala: sube el brillo'), contar(pwm('6', brillo), esperarB(0.005)),
-  comentario('exhala: lo baja'), contar(pwm('6', bajando), esperarB(0.005)),
-))], BRILLO);
+  comentario('inhala: sube el brillo'), contar(color(brillo, 0, 0), esperarB(0.005)),
+  comentario('exhala: lo baja'), contar(color(bajando, 0, 0), esperarB(0.005)),
+)), DEFINIR_COLOR], BRILLO);
 await guardar('respira_color', [alIniciar(porSiempre(
   comentario('inhala: morado (150, 0, 255) de apagado a todo'), contar(color(mapear(brillo, 0, 255, 0, 150), 0, brillo), esperarB(0.005)),
   comentario('exhala'), contar(color(mapear(bajando, 0, 255, 0, 150), 0, bajando), esperarB(0.005)),
@@ -98,7 +101,7 @@ await guardar('arcoiris', [alIniciar(porSiempre(
 
 // Con la perilla, a la izquierda.
 await cerrarCodigo();
-await cincoVolts(proto, 13);
+await tierraArriba(proto, 27);
 await ponerPerilla(proto);
 await guardar('rueda_perilla', [alIniciar(porSiempre(
   rueda(mapear({ type: 'ab_leer_analogico', fields: { PIN: 'A0' } }, 0, 1023, 0, 255)),
@@ -107,8 +110,8 @@ await guardar('rueda_perilla', [alIniciar(porSiempre(
 // Con el sensor de distancia en vez de la perilla.
 await cerrarCodigo();
 await limpiar();
-proto = await soloRgb(17);
-await cincoVolts(proto, 13);
+proto = await soloRgb();
+await tierraArriba(proto, 17);
 await ponerSensor(proto, 19, 10, 1, 9, 2);
 await guardar('lampara_humor', [alIniciar(porSiempre(
   fijar('d', { type: 'ab_restringir', inputs: { X: n({ type: 'ab_distancia', fields: { DISPARO: '10', ECO: '9' } }), A: num(5), B: num(50) } }),

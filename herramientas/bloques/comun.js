@@ -105,9 +105,10 @@ async function ponerDht(proto, col, pin, k = 0) {
   return d;
 }
 
-/** LED RGB arriba de la protoboard, como en el ejemplo 08 de Bloquino: R en
- *  `col`, la patita común en la siguiente y G y B en las dos que siguen; cada
- *  color con su 220 Ω a caballo del canal. */
+/** LED RGB de ánodo común (el del kit) arriba de la protoboard, como en el
+ *  ejemplo 08 de Bloquino: R en `col`, la patita común en la siguiente y G y B
+ *  en las dos que siguen; cada color con su 220 Ω a caballo del canal. La
+ *  común va al riel +: necesita cincoVolts. */
 async function ponerRgb(proto, col, r, g, b) {
   const led = await agregar('LED RGB');
   const a = await asentar(led, 'R', proto, `${col}t.a`);
@@ -116,8 +117,8 @@ async function ponerRgb(proto, col, r, g, b) {
     await asentar(await agregar('Resistencia'), '1', proto, `${c}t.c`);
     await alPin(proto, c, pin, 0, color);
   }
-  await ruta(proto, `${col + 1}t.e`, proto, `${col + 1}b.h`, '[]', '#000000'); // la patita común cruza el canal: es tierra
-  await aTierra(proto, col + 1);
+  await ruta(proto, `${col + 1}t.e`, proto, `${col + 1}b.h`, '[]', '#cc0000'); // la patita común cruza el canal: es 5 V
+  await a5V(proto, col + 1);
   return led;
 }
 
