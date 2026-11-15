@@ -9,6 +9,8 @@ Estructura y propósito en [README.md](README.md). Diagramas de circuito: seguir
 - Todo programa mostrado se ve como bloques (`<img class="bloques">`, o `.bloques-caja` si es alto) con su botón «Ver el código» (`data-sm="sesion-NN/<nombre>"`, C++ de `slides/assets/codigo.js`); tiene `.bloquino` y `.ino` en `sketches/sesion-NN/<nombre>/`
 - Programa nuevo o cambiado: editarlo en `herramientas/bloques/sesion-NN.js` y regenerar (ver su README); nunca editar a mano los `.bloquino`, las imágenes de `recursos/img/bloques/` ni `codigo.js`
 - Tamaño de las imágenes de bloques: `ws.setScale(0.75)` en `herramientas/bloques/comun.js` (la `ESCALA` de Bloquino, 0,675, más un 10 %); si cambia `ESCALA` en Bloquino, ajustarla y regenerar todas las sesiones
+- Circuito de cada `.bloquino`: solo lo que muestra la sesión para ese programa, sin cruces ni cables sobre componentes, y con los mismos pines que la slide. Los pines los manda Bloquino (en la placa real el orden importa; en el diagrama de la slide no): de izquierda a derecha en la protoboard van de mayor a menor. Si un pin obliga a cruzar o alargar un cable, se cambia el pin y se actualizan `.ino`, generador y slide
+- Pines del curso: semáforo rojo 13, amarillo 12, verde 11; botón 2 (12 con el servo); buzzer 8; servo 9; HC-SR04 TRIG 10 y ECHO 9; DHT11 2; LED RGB R 6, G 5, B 3; perilla A0
 - `armar.mjs --copiar` reescribe todos los `.bloquino` aunque solo cambien los ids y la fecha: si los bloques no cambiaron, `git checkout -- sketches`
 - Una llamada del MCP de Playwright puede regenerar varias sesiones seguidas (por cada una: `goto`, `instalar` y `curso-NN`)
 - Sesión 4: las `.bq-luz` van en porcentajes sobre `espia.png` y `boton.png`; revisar que calcen después de regenerar

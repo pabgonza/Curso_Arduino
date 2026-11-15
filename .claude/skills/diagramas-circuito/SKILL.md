@@ -31,7 +31,7 @@ Nunca dibujar a mano lo que ya existe en `slides/assets/slides.js`:
 - `botonSVG(cx, cy)` — pulsador a caballito del canal; `cy = centro del canal`.
   Patitas en `cx ± 26`. Las patitas de un mismo lado (izq/der) son el mismo
   nodo: un cable puede llegar a esa columna en cualquier mitad.
-- `circuitoBotonLedSVG(etiqBoton, etiqLed)` — el circuito completo botón+LED
+- `circuitoBotonLedSVG(etiqBoton, etiqLed, pinBoton = "pin 2")` — el circuito completo botón+LED
   compartido por S4 y S6: sin 5V ni resistencia, el pin 2 llega a la columna
   derecha del botón y un cablecito negro lleva la columna izquierda al riel −.
 - Botones: siempre pull-up (botón entre pin y GND, `INPUT_PULLUP`), en todas
