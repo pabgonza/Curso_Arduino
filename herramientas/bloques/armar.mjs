@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 
 const aqui = dirname(fileURLToPath(import.meta.url));
 const curso = join(aqui, '../..');
-const bloquino = join(curso, '../Plataforma_Arduino_Bloques/repo');
+const bloquino = join(curso, '../Bloquino');
 const salida = join(bloquino, '.playwright-mcp/curso-bloques');
 const recorrido = join(bloquino, 'frontend/.recorrido');
 

@@ -1,6 +1,6 @@
 # Programas del curso en bloques
 
-Arma en Bloquino (`../Plataforma_Arduino_Bloques/repo`) cada programa del
+Arma en Bloquino (`../Bloquino`, repo en `D:/Repos/pabgonza/Bloquino`) cada programa del
 curso: circuito de la sesión + bloques, lo simula, captura la imagen de los
 bloques y guarda el `.bloquino`. Usa el arnés de Playwright de Bloquino
 (`scripts/recorrido/lib.js`).
@@ -22,11 +22,11 @@ bloques y guarda el `.bloquino`. Usa el arnés de Playwright de Bloquino
 ## Correrlo
 
 Con el frontend de Bloquino en 5173 (`npx vite` en `frontend/`) y su backend
-arriba, desde `Plataforma_Arduino_Bloques/repo`:
+arriba, desde `D:/Repos/pabgonza/Bloquino`:
 
 ```powershell
 node scripts/recorrido/conv.mjs
-node ../../Curso_Arduino/herramientas/bloques/armar.mjs 02 03 04
+node ../Curso_Arduino/herramientas/bloques/armar.mjs 02 03 04
 ```
 
 En el MCP de Playwright (`browser_run_code_unsafe`), por sesión:
@@ -47,7 +47,7 @@ Cada programa devuelve `ok <ancho>×<alto>` o el error de compilación; `notas`
 lista piezas que no se asentaron. Después:
 
 ```powershell
-node ../../Curso_Arduino/herramientas/bloques/armar.mjs --copiar
+node ../Curso_Arduino/herramientas/bloques/armar.mjs --copiar
 ```
 
 copia las imágenes a `recursos/img/bloques/sesion-NN/`, los `.bloquino` a

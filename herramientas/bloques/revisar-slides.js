@@ -3,7 +3,7 @@
 // una captura por slide. Correr con browser_run_code_unsafe tras poner SESION.
 async (page) => {
   const SESION = '02';
-  const SALIDA = 'D:/Second_Brain/Personal/Proyectos/Plataforma_Arduino_Bloques/repo/.playwright-mcp/slides-' + SESION + '/';
+  const SALIDA = 'D:/Repos/pabgonza/Bloquino/.playwright-mcp/slides-' + SESION + '/';
   await page.setViewportSize({ width: 1280, height: 720 });
   await page.goto(`http://localhost:8123/slides/sesion-${SESION}.html`);
   await page.waitForTimeout(1500);
