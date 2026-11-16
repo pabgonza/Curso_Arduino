@@ -1,6 +1,6 @@
 # Programas del curso en bloques
 
-Arma en Bloquino (`../Bloquino`, repo en `D:/Repos/pabgonza/Bloquino`) cada programa del
+Arma en Bloquino (`../Bloquino`, carpeta hermana de este repo) cada programa del
 curso: circuito de la sesión + bloques, lo simula, captura la imagen de los
 bloques y guarda el `.bloquino`. Usa el arnés de Playwright de Bloquino
 (`scripts/recorrido/lib.js`).
@@ -22,7 +22,7 @@ bloques y guarda el `.bloquino`. Usa el arnés de Playwright de Bloquino
 ## Correrlo
 
 Con el frontend de Bloquino en 5173 (`npx vite` en `frontend/`) y su backend
-arriba, desde `D:/Repos/pabgonza/Bloquino`:
+arriba, desde la carpeta de Bloquino (el MCP de Playwright también corre ahí; las rutas de los guiones son relativas a ella):
 
 ```powershell
 node scripts/recorrido/conv.mjs
